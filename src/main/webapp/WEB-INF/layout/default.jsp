@@ -75,7 +75,7 @@ div.path {
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/viewStatus">前往分享區</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/ajaxStatus">發文去</a></li>
+						href="/postArticle">發表新文章</a></li>
 
 				</ul>
 

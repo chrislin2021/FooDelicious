@@ -7,7 +7,7 @@
                     <a href="/LoginSystem" class="list-group-item list-group-item-action">會員登入</a>
                     <a href="#" class="list-group-item list-group-item-action">前往商城</a>
                     <a href="#" class="list-group-item list-group-item-action">前往分享區</a>
-                    <a href="#" class="list-group-item list-group-item-action">發文去</a>
+                    <a href="/postArticle" class="list-group-item list-group-item-action">發表新文章</a>
                 </div>
             </div>
             <div class="col-12 col-md-9">

@@ -57,7 +57,7 @@ public class Member implements Serializable {
 	private int fk_account_id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_account_id", referencedColumnName = "account_id")//
+	@JoinColumn(name="fk_account_id", referencedColumnName = "account_id")
 	private Account account;
 	
 	
