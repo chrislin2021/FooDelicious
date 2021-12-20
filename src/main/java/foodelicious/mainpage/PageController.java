@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,21 +24,29 @@ public class PageController {
 	@Autowired
 	private foodelicious.member.model.totalDaoServive totalDaoServive;
 	//首頁
-	@RequestMapping ("/")
+	@RequestMapping (value = "/",method = RequestMethod.GET)
 	public String homepage() {
-		return "frontPage";
+		return "app.home";
 	}
 	
-	//首頁內的iframe設定
-	@GetMapping("/mainMessage")
-	public String mainMessagepage() {
-		return "mainMessage";
+	@GetMapping("/LoginSystem")
+	public String toMemberPage() {
+		return "app.LoginSystem";
 	}
+	
+//	//首頁內的iframe設定
+//	@GetMapping("/mainMessage")
+//	public String mainMessagepage() {
+//		return "mainMessage";
+//	}
 	//轉換頁面用 Login->register
 	@GetMapping("/goregister")
 	public String goRegistergepage() {
-		return "RegisterPage";
+		return "app.RegisterPage";
 	}
+	
+	
+	
 	
 	@ResponseBody
 	@PostMapping("/register.controller")
@@ -63,7 +72,7 @@ public class PageController {
 			errors.put("pwd", "請輸入密碼");
 		}
 		if(errors!=null && !errors.isEmpty()) {
-			return "loginSystem";
+			return "app.LoginSystem";
 		}
 		
 		boolean resultStatus = totalDaoServive.checkLogin(new Account(account, pwd));
@@ -76,10 +85,10 @@ public class PageController {
 			session.setAttribute("userID", id);
 			
 			System.out.println("userID："+session.getAttribute("userID"));
-			return "mainMessage";
+			return "app.home";
 		}
 		
 		errors.put("msg", "Pleas Input Correct Username or Password");
-		return "loginSystem";	
+		return "app.LoginSystem";	
 	}
 }

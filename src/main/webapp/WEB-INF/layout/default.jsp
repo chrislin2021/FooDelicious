@@ -8,7 +8,7 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/css/bootstrap.min.css" rel="stylesheet" />
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -39,9 +39,16 @@ div.path {
 	margin-bottom: 10px;
 }
 
-span {
+#loginSpan {
 	color: red;
 }
+
+#registerMain {
+            margin-top: 30px;
+            border: 1px gray solid;
+            padding: 20px;
+            border-radius: 10px;
+        }
 </style>
 
 </head>
@@ -60,15 +67,15 @@ span {
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="${contextRoot}/">首頁</a></li>
+						aria-current="page" href="/">首頁</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/LoginSystem">會員登入</a></li>
+						href="/LoginSystem">會員登入</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/addStatus">新增狀態</a></li>
+						href="${contextRoot}/addStatus">前往商城</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/viewStatus">查看狀態</a></li>
+						href="${contextRoot}/viewStatus">前往分享區</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/ajaxStatus">ajax 表格</a></li>
+						href="${contextRoot}/ajaxStatus">發文去</a></li>
 
 				</ul>
 
@@ -85,7 +92,8 @@ span {
 	</div>
 
 
-	<script src="${contextRoot}/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery-3.6.0.min.js"></script>
 	<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script> -->
 
 </body>
