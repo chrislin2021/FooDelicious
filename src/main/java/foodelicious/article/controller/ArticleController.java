@@ -12,8 +12,10 @@ public class ArticleController {
 
 	@ResponseBody
 	@PostMapping("/imgArticle")
-	public String imgArticle() {
-		System.out.println("444444444444444455555555555555555");
+	public String imgArticle(@RequestBody Map<String, String> params) {
+		
+		System.out.println(params);
+		System.out.println("輸出測試");
 		return "輸出測試";
 	}
 }
