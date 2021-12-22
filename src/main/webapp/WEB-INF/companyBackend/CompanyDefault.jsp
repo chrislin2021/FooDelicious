@@ -17,13 +17,13 @@
 </head>
 <body>
 	<div class="col-fixed topBrand ">
-		<b class="brand">廠商後台系統</b>
+		<b class="brand"><a class="nav-link text-white" id="logo" href="/companyMain">廠商後台系統</a></b>
 	</div>
 
 	<div class="row">
 		<div class="navbar col-md-12 rightBrand justify-content-end">
 			<ul class="nav nav-pills ">
-				<li class="nav-item"><a class="nav-link text-white" href="#">首頁</a>
+				<li class="nav-item"><a class="nav-link text-white" href="/companyMain">首頁</a>
 				</li>
 			</ul>
 		</div>
@@ -34,29 +34,28 @@
 		<div class="photoArea">
 			<!-- 左上登入帳號照片 -->
 			<!-- <img src="img/wellcook.jpg" class="photo"> --> 
-			<span class="brandName align-middle" style="margin-left:75px">好煮意</span>
+			<span class="brandName align-middle" style="margin-left:75px;margin-top:30px">好煮意</span>
 		</div>
 
 		<ul class="list-group list-group-flush functionBar">
 
 
-			<!-- 商品管理 -->
-			<li id="ProductList" class="list-group-item funName"><a href="/companyMain/companyProduct"
+			
+			<!--商品管理 -->
+			<li id="ProductList" class="list-group-item"><a href="/companyMain/companyProduct"
 				style="text-decoration: none"> <i
 					class="text-secondary fas fa-archive"></i> <span>商品管理</span>
 			</a></li>
-
-
-
-			<!-- 訂單管理 -->
+			<!-- 問題回報-->
 			<li id="OrderList" class="list-group-item"><a href="#"
 				style="text-decoration: none"> <i
 					class="text-secondary fas fa-shopping-cart"></i> <span>訂單管理</span>
 			</a></li>
+			
 
 
 			<!-- 分析報表 -->
-			<li class="list-group-item">
+			<li class="list-group-item" id="dropdown">
 				<button class="btn btnBor" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseExample" aria-expanded="false"
 					aria-controls="collapseExample">
@@ -84,15 +83,7 @@
 					class="text-secondary fas fa-shopping-cart"></i> <span>問題回報</span>
 			</a></li>
 	</div>
-
 	
-	<!-- 這裡是右邊的區塊 -->
-	<div class="row">
-		<div class="col-md-12 rightArea">
-			<iframe id="showArea" src="" frameborder="0"
-				style="width: 100%; height: 1000px;"></iframe>
-		</div>
-	</div>
 
 	<div>
 		<tiles:insertAttribute name="content" />
@@ -100,7 +91,11 @@
 
 
 
-	<<script src="/js/bootstrap.bundle.min.js"></script> 
+	<script src="/js/bootstrap.bundle.min.js"></script> 
 	<!--<script src="js/index2.js"></script>  -->
+	<script>
+	
+	</script>
+	
 </body>
 </html>

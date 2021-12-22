@@ -10,7 +10,7 @@
     background-color: forestgreen; 
     height: 60px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 3px;
 }
 
 .brand{
@@ -67,6 +67,11 @@
     width: 280px;
     margin-top: 30px;
     text-align: center;
+}
+
+#dropdown{
+	
+	margin:0px;
 }
 
 span{
