@@ -80,15 +80,16 @@ div.path {
 			</div>
 		</div>
 	</nav>
-  <div>
+  	<div>
         <img src="img\top.jpg" class="img-fluid">
     </div>
 
 
-	<div class="container-fluid">
+	<div>
 		<tiles:insertAttribute name="content" />
 	</div>
-
+	
+	
 
 	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery-3.6.0.min.js"></script>
