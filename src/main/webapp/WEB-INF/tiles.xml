@@ -30,10 +30,10 @@
     <put-attribute name="title" value="backend main page" />
   </definition>
   
-
   <definition name="app.CompanyMain" extends ="app.CompanyDefault" >
     <put-attribute name="content" value ="/WEB-INF/companyBackend/CompanyMain.jsp" />
   </definition>
   
+ 
 
 </tiles-definitions>
