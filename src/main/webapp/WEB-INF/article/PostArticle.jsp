@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
     <link href="/css/CKEditor.css" rel="stylesheet" />
     <!-- 開工啦!!! -->
     <div class="row" id="rowSelect">
@@ -21,7 +21,7 @@
                 <textarea name="content" id="editor">           
         </textarea>
                 <p>
-                      <input type="submit" value="Submit">
+                    <input type='button' value='送出' onclick='processData()'>
                 </p>
             </form>
 
@@ -32,93 +32,83 @@
     <script src="/translations/zh.js"></script>
 
     <script type="text/javascript">
-    class MyUploadAdapter {
-        constructor( loader ) {
-            // CKEditor 5's FileLoader instance.
-            this.loader = loader;
-
-            // URL where to send files.
-            this.url = '/imgArticle';
-        }
-
-        // Starts the upload process.
-        upload() {
-            return new Promise( ( resolve, reject ) => {
-                this._initRequest();
-                this._initListeners( resolve, reject );
-                this._sendRequest();
-            } );
-        }
-
-        // Aborts the upload process.
-        abort() {
-            if ( this.xhr ) {
-                this.xhr.abort();
+        class MyUploadAdapter {
+            constructor(loader) {
+                // The file loader instance to use during the upload.
+                this.loader = loader;
             }
-        }
 
-        // Example implementation using XMLHttpRequest.
-        _initRequest() {
-            const xhr = this.xhr = new XMLHttpRequest();
+            // Starts the upload process.
+            upload() {
+                return this.loader.file
+                    .then(file => new Promise((resolve, reject) => {
+                        this._initRequest();
+                        this._sendRequest(file);
+                    }));
+            }
 
-            xhr.open( 'POST', this.url, true );
-            xhr.responseType = 'json';
-        }
-
-        // Initializes XMLHttpRequest listeners.
-        _initListeners( resolve, reject ) {
-            const xhr = this.xhr;
-            const loader = this.loader;
-            const genericErrorText = 'Couldn\'t upload file:' + ` ${ loader.file.name }.`;
-
-            xhr.addEventListener( 'error', () => reject( genericErrorText ) );
-            xhr.addEventListener( 'abort', () => reject() );
-            xhr.addEventListener( 'load', () => {
-                const response = xhr.response;
-
-                if ( !response || response.error ) {
-                    return reject( response && response.error ? response.error.message : genericErrorText );
+            // Aborts the upload process.
+            abort() {
+                if (this.xhr) {
+                    this.xhr.abort();
                 }
+            }
 
-                // If the upload is successful, resolve the upload promise with an object containing
-                // at least the "default" URL, pointing to the image on the server.
-                resolve( {
-                    default: response.url
-                } );
-            } );
+            // Initializes the XMLHttpRequest object using the URL passed to the constructor.
+            _initRequest() {
+                const xhr = this.xhr = new XMLHttpRequest();
 
-            if ( xhr.upload ) {
-                xhr.upload.addEventListener( 'progress', evt => {
-                    if ( evt.lengthComputable ) {
-                        loader.uploadTotal = evt.total;
-                        loader.uploaded = evt.loaded;
-                    }
-                } );
+                // Note that your request may look different. It is up to you and your editor
+                // integration to choose the right communication channel. This example uses
+                // a POST request with JSON as a data structure but your configuration
+                // could be different.
+                xhr.open('POST', '/imgArticle', true);
+                xhr.responseType = 'json';
+            }
+
+
+
+            // Prepares the data and sends the request.
+            _sendRequest(file) {
+                // Prepare the form data.
+                const data = new FormData();
+
+                data.append('upload', file);
+
+                // Important note: This is the right place to implement security mechanisms
+                // like authentication and CSRF protection. For instance, you can use
+                // XMLHttpRequest.setRequestHeader() to set the request headers containing
+                // the CSRF token generated earlier by your application.
+
+                // Send the request.
+                this.xhr.send(data);
             }
         }
 
-        // Prepares the data and sends the request.
-        _sendRequest() {
-            const data = new FormData();
+        // ...
 
-            data.append( 'upload', this.loader.file );
-
-            this.xhr.send( data );
+        function MyCustomUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                // Configure the URL to the upload script in your back-end here!
+                return new MyUploadAdapter(loader);
+            };
         }
-    }
 
-    function MyCustomUploadAdapterPlugin( editor ) {
-        editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-            return new MyUploadAdapter( loader );
-        };
-    }
+        // ...
 
-    ClassicEditor
-        .create( document.querySelector( '#editor' ), {
-            extraPlugins: [ MyCustomUploadAdapterPlugin ],
-            language: "zh",
-            // ...
-        }).catch(error => {
-            console.log(error);
-        });
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                extraPlugins: [MyCustomUploadAdapterPlugin],
+                language: "zh",
+                // ...
+            }).catch(error => {
+                console.log(error);
+            });
+
+        function processData() {
+            //var data = CKEDITOR.instances.content.getData();
+
+            console.log(document.getElementById("editor").innerHTML)
+                //alert(data);
+        }
     </script>
