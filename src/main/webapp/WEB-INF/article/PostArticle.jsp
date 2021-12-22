@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
+
     <link href="/css/CKEditor.css" rel="stylesheet" />
     <!-- 開工啦!!! -->
     <div class="row" id="rowSelect">
@@ -30,7 +32,9 @@
     </div>
     <script src="/js/ckeditor.js"></script>
     <script src="/translations/zh.js"></script>
-
+    <script type="module">
+        import Image from '@ckeditor/ckeditor5-image/src/image'; import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting'; import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
+    </script>
     <script type="text/javascript">
         class MyUploadAdapter {
             constructor(loader) {
@@ -99,10 +103,11 @@
         ClassicEditor
             .create(document.querySelector('#editor'), {
                 extraPlugins: [MyCustomUploadAdapterPlugin],
+                plugins: [Image, ImageResizeEditing, ImageResizeHandles],
                 language: "zh",
                 // ...
             }).catch(error => {
-                console.log(error);
+                console.log(error)
             });
 
         function processData() {
