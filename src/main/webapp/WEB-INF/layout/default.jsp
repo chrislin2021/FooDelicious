@@ -50,7 +50,7 @@ div.path {
 </style>
 
 </head>
-</head>
+
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -66,8 +66,19 @@ div.path {
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/">首頁</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/LoginSystem">會員登入</a></li>
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="true">
+    會員相關
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a class="dropdown-item" href="${contextRoot}/login">會員登入</a></li>
+    <li><a class="dropdown-item" href="${contextRoot}/register">會員註冊</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/addStatus">前往商城</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -90,9 +101,10 @@ div.path {
 	</div>
 	
 	
-
-	<script src="/js/bootstrap.min.js"></script>
 	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	 <script type="text/javascript"> window.onload=function(){ $('.dropdown-toggle').dropdown(); } </script>
+
 	<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script> -->
 
 </body>
