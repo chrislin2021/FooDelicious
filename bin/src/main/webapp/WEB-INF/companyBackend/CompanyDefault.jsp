@@ -9,11 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>好煮意廠商後台管理系統</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/index.css">
-<link href="/css/companyMain.css" rel="stylesheet">
-<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+<link href="${pageContext.request.contextPath}/css/companyMain.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap" rel="stylesheet">
-<script src="js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div class="col-fixed topBrand ">
