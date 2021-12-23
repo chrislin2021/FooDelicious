@@ -7,8 +7,7 @@
 <head>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
-<link href="/css/bootstrap.min.css" rel="stylesheet" />
+<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 
 <meta charset="UTF-8">
 <title>FooDelicious</title>
@@ -42,11 +41,11 @@ div.path {
 }
 
 #registerMain {
-            margin-top: 30px;
-            border: 1px gray solid;
-            padding: 20px;
-            border-radius: 10px;
-        }
+	margin-top: 30px;
+	border: 1px gray solid;
+	padding: 20px;
+	border-radius: 10px;
+}
 </style>
 
 </head>
@@ -66,44 +65,48 @@ div.path {
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/">首頁</a></li>
-<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="true">
-    會員相關
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a class="dropdown-item" href="${contextRoot}/login">會員登入</a></li>
-    <li><a class="dropdown-item" href="${contextRoot}/register">會員註冊</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
+
+					<li class="nav-item">
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button"
+								id="dropdownMenuButton1" data-bs-toggle="dropdown"
+								aria-expanded="false">
+								會員相關<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="${contextRoot}/login">會員登入</a></li>
+								<li><a class="dropdown-item" href="${contextRoot}/register">會員註冊</a></li>
+								<li><a class="dropdown-item" href="#">Something else
+										here</a></li>
+							</ul>
+						</div>
+					</li>
+
+
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/addStatus">前往商城</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/viewStatus">前往分享區</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/postArticle">發表新文章</a></li>
+					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
 
 				</ul>
 
 			</div>
 		</div>
 	</nav>
-  	<div>
-        <img src="img\top.jpg" class="img-fluid">
-    </div>
+	<div>
+		<img src="img\top.jpg" class="img-fluid">
+	</div>
 
 
 	<div>
 		<tiles:insertAttribute name="content" />
 	</div>
-	
-	
+
 	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
-	 <script type="text/javascript"> window.onload=function(){ $('.dropdown-toggle').dropdown(); } </script>
+
 
 	<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script> -->
 
