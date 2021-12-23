@@ -20,7 +20,7 @@ public class MainUpdateController {
 
 	@Autowired
 	private totalDaoService totalDaoService;
-	
+
 	@PostMapping("/register.controller")
 	public String registerController(@RequestBody Map<String, String> params) {
 //		System.out.println(params);
@@ -28,40 +28,37 @@ public class MainUpdateController {
 		totalDaoService.RegisterMember(params);
 		return "app.home";
 	}
-	
+
 	@PostMapping(path = "/checklogin.controller")
-	public String processAction(@RequestParam("userAccount")String account, 
-								@RequestParam("userPwd")String pwd, 
-								Model m, 
-								HttpSession session) {		
+	public String processAction(@RequestParam("userAccount") String account, @RequestParam("userPwd") String pwd,
+			Model m, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
-		
-		if(account==null || account.length()==0) {
+
+		if (account == null || account.length() == 0) {
 			errors.put("account", "請輸入帳號");
 		}
-		if(pwd==null || pwd.length()==0) {
+		if (pwd == null || pwd.length() == 0) {
 			errors.put("pwd", "請輸入密碼");
 		}
-		if(errors!=null && !errors.isEmpty()) {
+		if (errors != null && !errors.isEmpty()) {
 			return "app.LoginSystem";
 		}
-		
+
 		boolean resultStatus = totalDaoService.checkLogin(new Account(account, pwd));
-		if(resultStatus) {
+		if (resultStatus) {
 			m.addAttribute("account", account);
 			m.addAttribute("pwd", pwd);
 			int id = totalDaoService.findId(new Account(account, pwd));
 			session.setAttribute("account", account);
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", id);
-			
-			System.out.println("userID："+session.getAttribute("userID"));
+
+			System.out.println("userID：" + session.getAttribute("userID"));
 			return "app.home";
 		}
-		
-		errors.put("msg", "Pleas Input Correct Username or Password");
-		return "app.LoginSystem";	
-	}
 
+		errors.put("msg", "Pleas Input Correct Username or Password");
+		return "app.LoginSystem";
+	}
 }

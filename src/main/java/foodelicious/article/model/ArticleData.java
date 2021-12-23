@@ -19,35 +19,36 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "article_data")
 @Component
-public class ArticleData implements Serializable{
-	
+public class ArticleData implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="article_id")
+	@Column(name = "article_id")
 	private int article_id;
-	
-	@Size(min = 15, max = 255, message = "內容不得小於15個字唷")
-	@Column(name="article")
-	private String article;
-	
-	@Column(name="block_Img")
-	private String block_Img;
-	
-	@Column(name="tag_name")
-	private String tag_name;
-	
-	@Column(name="releaseOrder")
-	private int releaseOrder;//該討論串的發布順序 編號1為第一篇文章
-	
-	@Transient
-	@Column(name="fk_share_id")
-	private int fk_share_id;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_share_id", referencedColumnName = "share_id")
-	private ShareArea shareArea;
-	
-	public ArticleData() {	
-	}
 
+	@Size(min = 15, max = 255, message = "內容不得小於15個字唷")
+	@Column(name = "article")
+	private String article;
+
+	@Column(name = "block_Img")
+	private String block_Img;
+
+	@Column(name = "tag_name")
+	private String tag_name;
+
+	@Column(name = "releaseOrder")
+	private int releaseOrder;// 該討論串的發布順序 編號1為第一篇文章
+
+	@Transient
+	@Column(name = "fk_share_id")
+	private int fk_share_id;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_share_id", referencedColumnName = "share_id")
+	private ShareArea shareArea;
+
+	public ArticleData() {
+	}
 }
