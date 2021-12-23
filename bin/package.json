@@ -1,0 +1,7 @@
+{
+  "name": "FooDelicious",
+  "version": "1.0.0",
+  "dependencies": {
+    "@ckeditor/ckeditor5-image": "^31.1.0"
+  }
+}
