@@ -29,6 +29,8 @@ import foodelicious.member.model.Account;
 @Component
 public class ShareArea implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "share_id")
@@ -59,7 +61,7 @@ public class ShareArea implements Serializable {
 
 	@OneToOne(mappedBy = "shareArea")
 	private ArticleData articleData;
-	
+
 	// 多對一 這邊沒有casecade連動 所以要注意
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_account_id")
@@ -67,6 +69,4 @@ public class ShareArea implements Serializable {
 
 	public ShareArea() {
 	}
-
-	
 }

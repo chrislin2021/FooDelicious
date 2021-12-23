@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public class totalDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -34,7 +34,7 @@ public class totalDao {
 		}
 		return false;
 	}
-	
+
 	public void RegisterMember(Map<String, String> params) {
 		Session session = sessionFactory.openSession();
 		System.out.println(params);
@@ -44,27 +44,27 @@ public class totalDao {
 		mem.setMember_phone(params.get("member_phone"));
 		mem.setMember_address(params.get("member_address"));
 		mem.setUserEmail(params.get("member_mail"));
-		
+
 		Account acc = new Account();
 		acc.setAccountMake(params.get("account"));
-		acc.setPwd(params.get("pwd"));	
-		
+		acc.setPwd(params.get("pwd"));
+
 		mem.setAccount(acc);
-		
+
 		session.save(mem);
 		session.close();
 	}
-	
+
 	public int findId(Account users) {
 		Session session = sessionFactory.openSession();
-		
+
 		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
 		Query<Account> query = session.createQuery(hqlstr, Account.class);
 		query.setParameter("user", users.getAccountMake());
 		query.setParameter("pwd", users.getPwd());
-		
+
 		Account account = query.uniqueResult();
 		session.close();
-		return account.getAccount_id();		
+		return account.getAccount_id();
 	}
 }

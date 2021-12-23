@@ -26,5 +26,18 @@
     <put-attribute name="content" value="/WEB-INF/article/PostArticle.jsp" />
   </definition>
   
+  <definition name="app.CompanyDefault" template="/WEB-INF/companyBackend/CompanyDefault.jsp">
+    <put-attribute name="title" value="backend main page" />
+  </definition>
+  
+  <definition name="app.CompanyMain" extends ="app.CompanyDefault" >
+    <put-attribute name="content" value ="/WEB-INF/companyBackend/CompanyMain.jsp" />
+  </definition>
+  
+   <definition name="app.CompanyProduct" extends ="app.CompanyDefault" >
+    <put-attribute name="content" value ="/WEB-INF/companyBackend/CompanyProduct.jsp" />
+  </definition>
+  
+ 
 
 </tiles-definitions>
