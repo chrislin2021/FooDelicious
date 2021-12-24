@@ -15,27 +15,4 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	
-	@GetMapping(path = "/product")
-	public String product() {
-
-		return "app.Product";
-	}
-
-	@GetMapping(path = "/productdetail")
-	public String productdetail() {
-
-		return "app.Cproductdetail";
-	}
-	
-	@GetMapping("/product")
-	public ModelAndView viewStatus(ModelAndView mav,@RequestParam(name="p", defaultValue="1") int pageNumber) {
-		
-		Page<Product> page = productService.getPage(pageNumber);
-		mav.getModel().put("page", page);
-		
-		mav.setViewName("app.viewStatus");
-		
-		return mav;
-	}
 }
