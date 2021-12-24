@@ -34,7 +34,7 @@ public class Cart implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
-	private Product product_id;
+	private Product product;
 
 	@Column(name = "cart_quantity")
 	private Integer cart_quantity;
@@ -58,12 +58,12 @@ public class Cart implements Serializable {
 		this.member = member;
 	}
 
-	public Product getProduct_id() {
-		return product_id;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProduct_id(Product product_id) {
-		this.product_id = product_id;
+	public void setProduct_id(Product product) {
+		this.product = product;
 	}
 
 	public Integer getCart_quantity() {
