@@ -29,6 +29,7 @@
 
     </div>
 </div>
+<script src="/js/ckeditorResize/ckeditor.js"></script>
 <script src="/js/ckeditor.js"></script>
 <script src="/translations/zh.js"></script>
 
@@ -102,7 +103,7 @@
     ClassicEditor
         .create(document.querySelector('#editor'), {
             extraPlugins: [MyCustomUploadAdapterPlugin],
-            // plugins: [ Image, ImageResize],
+           // plugins: [ Image, ImageResize],
             language: "zh",
             // ...
 
