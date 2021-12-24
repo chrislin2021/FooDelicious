@@ -27,7 +27,4 @@ public class OrderService {
 		orderDao.deleteById(id);
 	}
 
-	public void updateByOrderId(Order order) {
-		orderDao.save(order);
-	}
 }

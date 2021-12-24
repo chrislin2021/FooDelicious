@@ -24,7 +24,7 @@ public class CartService {
 		return list;
 	}
 
-	public List<Cart> selectAllById(Long id) {
+	public List<Cart> findAllById(Long id) {
 		List<Cart> list = new ArrayList<Cart>();
 		list.add((Cart) cartDao.findAllById(null));
 		return list;

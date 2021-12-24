@@ -32,7 +32,7 @@ public class Order implements Serializable {
 //	建立與會員的關係
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id")
-	private Member member;
+	private Member member_id;
 
 //	建立與折價券的關係
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -60,11 +60,11 @@ public class Order implements Serializable {
 	}
 
 	public Member getMember() {
-		return member;
+		return member_id;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMember(Member member_id) {
+		this.member_id = member_id;
 	}
 
 	public Discount getDiscount_id() {
