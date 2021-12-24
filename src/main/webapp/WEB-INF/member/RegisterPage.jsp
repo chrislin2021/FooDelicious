@@ -2,25 +2,53 @@
 	pageEncoding="UTF-8"%>
 
 <div class="container" id="registerMain">
-	<h3>RegisterSystem</h3>
+	<h3>會員註冊</h3>
 	<div class="input-group mb-3">
-		<span class="input-group-text">帳號</span> <input type="text"
+		<span class="input-group-text">會員帳號：</span> <input type="text"
 			class="form-control" aria-label="Sizing example input"
 			aria-describedby="inputGroup-sizing-default" id="userAccount"
-			name="userAccount">
+			name="userAccount" >
 	</div>
 	<div class="input-group mb-3">
-		<span class="input-group-text">密碼</span> <input type="text"
+		<span class="input-group-text">會員密碼：</span> <input type="text"
 			class="form-control" aria-label="Sizing example input"
 			aria-describedby="inputGroup-sizing-default" id="userPwd"
 			name="userPwd">
 	</div>
 	<div class="input-group mb-3">
-		<span class="input-group-text">姓名</span> <input type="text"
+		<span class="input-group-text">會員姓名：</span> <input type="text"
 			class="form-control" aria-label="Sizing example input"
 			aria-describedby="inputGroup-sizing-default" id="userName"
 			name="userName">
 	</div>
+<span class="input-group-text">會員性別：</span>
+	<div class="form-check form-check-inline">
+		
+		<input class="form-check-input" type="radio" name="inlineRadioOptions"
+			id="inlineRadio1" value="option1"> <label
+			class="form-check-label" for="inlineRadio1">男</label>
+	</div>
+	<div class="form-check form-check-inline">
+		<input class="form-check-input" type="radio" name="inlineRadioOptions"
+			id="inlineRadio2" value="option2"> <label
+			class="form-check-label" for="inlineRadio2">女</label>
+	</div>
+
+
+	<div class="input-group mb-3">
+		<span class="input-group-text">會員性別：</span> <input type="radio"
+			class="form-control" aria-label="Sizing example input"
+			aria-describedby="inputGroup-sizing-default" id="member_gender"
+			name="member_gender">
+	</div>
+
+	<div class="input-group mb-3">
+		<span class="input-group-text">出生日期：</span> <input type="date"
+			class="form-control" aria-label="Sizing example input"
+			aria-describedby="inputGroup-sizing-default" id="member_birth"
+			name="member_birth">
+	</div>
+
 
 	<div class="input-group mb-3">
 		<span class="input-group-text">Email</span> <input type="email"
@@ -48,6 +76,11 @@
 			class="form-control" aria-label="Sizing example input"
 			aria-describedby="inputGroup-sizing-default" id="userAddress"
 			name="userAddress">
+	</div>
+
+	<div>
+		<label for="photoId">會員照片</label> <input type="file"
+			name="memberImage" id="photoId">
 	</div>
 
 	<button onclick="registBTN()" class="btn btn-outline-primary">註冊</button>
