@@ -38,8 +38,12 @@
     <put-attribute name="content" value ="/WEB-INF/companyBackend/CompanyProduct.jsp" />
   </definition>
   
+  <definition name="app.Product" extends ="app.default" >
+    <put-attribute name="content" value ="/WEB-INF/Product/Product.jsp" />
+  </definition>
   
+   <definition name="app.ProductDetail" extends ="app.default" >
+    <put-attribute name="content" value ="/WEB-INF/Product/ProductDetail.jsp" />
+  </definition>
   
- 
-
 </tiles-definitions>
