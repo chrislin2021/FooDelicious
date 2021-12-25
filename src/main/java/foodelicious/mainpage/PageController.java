@@ -18,6 +18,11 @@ public class PageController {
 	public String toMemberPage() {
 		return "app.LoginSystem";
 	}
+	
+	@GetMapping("/RegisterPage")
+	public String registerPage() {
+		return "app.RegisterPage";
+	}
 
 	// 轉換頁面用 Login->register
 	@GetMapping("/goregister")
