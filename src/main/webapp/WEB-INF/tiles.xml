@@ -45,5 +45,13 @@
    <definition name="app.ProductDetail" extends ="app.default" >
     <put-attribute name="content" value ="/WEB-INF/Product/ProductDetail.jsp" />
   </definition>
+
+  <definition name="app.BackendDefault" template="/WEB-INF/backend/BackendDefault.jsp">
+    <put-attribute name="title" value="backend default" />
+  </definition>
+
+  <definition name="app.BackendMain" extends ="app.BackendDefault" >
+    <put-attribute name="content" value ="/WEB-INF/backend/BackendMain.jsp" />
+  </definition>
   
 </tiles-definitions>
