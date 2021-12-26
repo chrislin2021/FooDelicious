@@ -33,8 +33,6 @@
 <script src="/translations/zh.js"></script>
 
 <script>
-    // import Image from '@ckeditor/ckeditor5-image/src/image';
-    // import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 
     class MyUploadAdapter {
         constructor(loader) {
@@ -102,7 +100,7 @@
     ClassicEditor
         .create(document.querySelector('#editor'), {
             extraPlugins: [MyCustomUploadAdapterPlugin],
-            // plugins: [ Image, ImageResize],
+           // plugins: [ Image, ImageResize],
             language: "zh",
             // ...
 
