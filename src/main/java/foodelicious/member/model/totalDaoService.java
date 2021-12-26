@@ -19,7 +19,7 @@ public class totalDaoService {
 		return totalDao.checkLogin(users);
 	}
 
-	public int findId(Account users) {
+	public Long findId(Account users) {
 		return totalDao.findId(users);
 	}
 }

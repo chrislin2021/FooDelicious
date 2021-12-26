@@ -15,37 +15,41 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.stereotype.Component;
 
 import foodelicious.article.model.ShareArea;
 
-@Entity(name = "account_data")
+@Entity
 @Table(name = "account_data")
 @Component
 public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final String Password_REG = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
 
 	@Id
 	@Column(name = "account_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int account_id;
+	private Long account_id;
 
 	@NotBlank(message = "帳號不得空白")
 	@Column(name = "account", unique = true)
 	private String accountMake;
 
-	@NotBlank(message = "密碼不得空白")
+	@Pattern(regexp= Password_REG , message="請輸入至少8個字包含一個英文及數字")
 	@Column(name = "pwd")
 	private String pwd;
 
 	@Column(name = "account_status", columnDefinition = "varchar(255) default 'normal'")
 	private String account_status;
 
-	@Transient
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "register_date")
 	private Date register_date;
 
@@ -91,7 +95,7 @@ public class Account implements Serializable {
 		this.member = member;
 	}
 
-	public int getAccount_id() {
+	public Long getAccount_id() {
 		return account_id;
 	}
 

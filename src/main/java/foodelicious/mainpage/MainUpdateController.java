@@ -49,7 +49,7 @@ public class MainUpdateController {
 		if (resultStatus) {
 			m.addAttribute("account", account);
 			m.addAttribute("pwd", pwd);
-			int id = totalDaoService.findId(new Account(account, pwd));
+			Long id = totalDaoService.findId(new Account(account, pwd));
 			session.setAttribute("account", account);
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", id);

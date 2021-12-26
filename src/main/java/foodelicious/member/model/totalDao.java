@@ -55,7 +55,7 @@ public class totalDao {
 		session.close();
 	}
 
-	public int findId(Account users) {
+	public Long findId(Account users) {
 		Session session = sessionFactory.openSession();
 
 		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
