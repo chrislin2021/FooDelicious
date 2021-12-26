@@ -98,10 +98,10 @@ div.path {
 		<img src="img\top.jpg" class="img-fluid">
 	</div>
 
-
-	<div>
-		<tiles:insertAttribute name="content" />
-	</div>
+<!--設定div class container代表標題以下是由tiles管理排版  --> 
+<div class="container">
+    <tiles:insertAttribute name="content" />
+ </div>
 
 	<script src="/js/jquery-3.6.0.min.js"></script>
 	<script src="/js/bootstrap.bundle.min.js"></script>

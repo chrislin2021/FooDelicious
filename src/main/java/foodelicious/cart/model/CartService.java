@@ -14,8 +14,7 @@ public class CartService {
 	@Resource
 	private CartDao cartDao;
 
-	public List<Cart> findByMember(Member Member_id) {
-		return cartDao.findByMember(Member_id);
+	public List<Cart> findCartListByMember(Member member) {
+		return cartDao.findCartListByMember(member);
 	}
-
 }

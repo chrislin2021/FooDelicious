@@ -12,7 +12,7 @@
 			name="userAccount">
 	</div>
 	<div class="input-group mb-3">
-		<span class="input-group-text">會員密碼：</span> <input type="text"
+		<span class="input-group-text">會員密碼：</span> <input type="password"
 			class="form-control" aria-label="Sizing example input"
 			aria-describedby="inputGroup-sizing-default" id="userPwd"
 			name="userPwd">

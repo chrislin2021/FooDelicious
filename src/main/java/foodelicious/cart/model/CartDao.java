@@ -10,5 +10,5 @@ import foodelicious.member.model.Member;
 @Repository
 public interface CartDao extends JpaRepository<Cart, Long> {
 
-	List<Cart> findByMember(Member member);
+	List<Cart> findCartListByMember(Member member);
 }

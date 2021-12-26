@@ -1,3 +1,5 @@
+
+
 :root{
     --color_darkblue: #182740;
     --color_gold: #D3B884;
@@ -6,11 +8,10 @@
 }
 
 .topBrand{
-    
-    background-color: forestgreen; 
+    background-color:forestgreen;
     height: 60px;
     text-align: center;
-    padding-top: 3px;
+    padding-top: 10px;
 }
 
 .brand{
@@ -21,8 +22,7 @@
 }
 
 .rightBrand{
-    
-    background-color:#49CE3A;
+    background-color: #49CE3A;
     height: 60px;
 }
 
@@ -46,11 +46,16 @@
     float: left;
     margin-left: 0;
     margin-right: 0;
-    width: 300px;
 }
 
 .row{
     width: calc(100% - 300px);
+}
+
+
+.col-fixed{
+    float: left;
+    width: 300px;
 }
 
 .rightArea{
@@ -58,20 +63,13 @@
 }
 
 .functionBar li{
-    background-color: transparent; 
-    border:none;   
-    margin: 5px;
+    background-color: transparent;    
 }
 
 .functionBar{
     width: 280px;
     margin-top: 30px;
     text-align: center;
-}
-
-#dropdown{
-	
-	margin:0px;
 }
 
 span{
