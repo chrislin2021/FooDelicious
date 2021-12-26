@@ -7,16 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CompanyBackEndController {
 
 	@GetMapping(path = "/companyMain")
-	public String main() {
+	public String companyMain() {
 
 		return "app.CompanyMain";
 	}
 
 	@GetMapping(path = "/companyProduct")
-	public String product() {
+	public String companyProduct() {
 
 		return "app.CompanyProduct";
 	}
+	
+	@GetMapping(path = "/companyOrder")
+	public String companyOrder() {
+
+		return "app.CompanyOrder";
+	}
+
 
 
 
