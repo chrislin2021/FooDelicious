@@ -54,4 +54,8 @@
     <put-attribute name="content" value ="/WEB-INF/backend/BackendMain.jsp" />
   </definition>
   
+  <definition name="app.CustService" extends ="app.default" >
+    <put-attribute name="content" value ="/WEB-INF/custService/CustService.jsp" />
+  </definition>
+  
 </tiles-definitions>
