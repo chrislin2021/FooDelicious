@@ -42,12 +42,12 @@
 
 			
 			<!--商品管理 -->
-			<li id="ProductList" class="list-group-item"><a href="/companyMain/companyProduct"
+			<li id="ProductList" class="list-group-item"><a href="/companyProduct"
 				style="text-decoration: none"> <i
 					class="text-secondary fas fa-archive"></i> <span>商品管理</span>
 			</a></li>
 			<!-- 問題回報-->
-			<li id="OrderList" class="list-group-item"><a href="#"
+			<li id="OrderList" class="list-group-item"><a href="/companyOrder"
 				style="text-decoration: none"> <i
 					class="text-secondary fas fa-shopping-cart"></i> <span>訂單管理</span>
 			</a></li>
