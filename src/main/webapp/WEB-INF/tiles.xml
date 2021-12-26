@@ -38,12 +38,24 @@
     <put-attribute name="content" value ="/WEB-INF/companyBackend/CompanyProduct.jsp" />
   </definition>
   
+    <definition name="app.CompanyOrder" extends ="app.CompanyDefault" >
+    <put-attribute name="content" value ="/WEB-INF/companyBackend/CompanyOrder.jsp" />
+  </definition>
+  
   <definition name="app.Product" extends ="app.default" >
     <put-attribute name="content" value ="/WEB-INF/Product/Product.jsp" />
   </definition>
   
    <definition name="app.ProductDetail" extends ="app.default" >
     <put-attribute name="content" value ="/WEB-INF/Product/ProductDetail.jsp" />
+  </definition>
+
+  <definition name="app.BackendDefault" template="/WEB-INF/backend/BackendDefault.jsp">
+    <put-attribute name="title" value="backend default" />
+  </definition>
+
+  <definition name="app.BackendMain" extends ="app.BackendDefault" >
+    <put-attribute name="content" value ="/WEB-INF/backend/BackendMain.jsp" />
   </definition>
   
 </tiles-definitions>

@@ -12,14 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import foodelicious.discount.model.Discount;
 import foodelicious.member.model.Member;
 
 @Entity
-@Table(name = "order_cart")
+@Table(name = "order")
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,11 +31,6 @@ public class Order implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id")
 	private Member member_id;
-
-//	建立與折價券的關係
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "discount_id")
-	private Discount discount_id;
 
 	@Column(name = "order_note")
 	private String order_note;
@@ -65,14 +58,6 @@ public class Order implements Serializable {
 
 	public void setMember(Member member_id) {
 		this.member_id = member_id;
-	}
-
-	public Discount getDiscount_id() {
-		return discount_id;
-	}
-
-	public void setDiscount_id(Discount discount_id) {
-		this.discount_id = discount_id;
 	}
 
 	public String getOrder_note() {

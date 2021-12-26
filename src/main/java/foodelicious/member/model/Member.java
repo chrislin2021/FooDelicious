@@ -17,6 +17,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity(name = "member_data")
 @Table(name = "member_data")
@@ -47,6 +48,9 @@ public class Member implements Serializable {
 
 	@Column(name = "member_address")
 	private String member_address;
+	
+	@Column(name = "member_discount_id")
+	private String member_discount_id;
 
 	@Column(name = "member_coin")
 	private int member_coin;
@@ -54,6 +58,10 @@ public class Member implements Serializable {
 	@Email
 	@Column(name = "member_mail")
 	private String userEmail;
+	
+	@Transient
+	@Column(name = "member_img")
+	private MultipartFile member_img;
 
 	@Transient
 	private int fk_account_id;
@@ -105,6 +113,15 @@ public class Member implements Serializable {
 		this.member_address = member_address;
 	}
 
+	
+	public String getMember_discount_id() {
+		return member_discount_id;
+	}
+
+	public void setMember_discount_id(String member_discount_id) {
+		this.member_discount_id = member_discount_id;
+	}
+
 	public int getMember_coin() {
 		return member_coin;
 	}
@@ -119,6 +136,14 @@ public class Member implements Serializable {
 
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+	
+	public MultipartFile getMember_img() {
+		return member_img;
+	}
+
+	public void setMember_img(MultipartFile member_img) {
+		this.member_img = member_img;
 	}
 
 	public Account getAccount() {

@@ -54,7 +54,7 @@ div.path {
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="${contextRoot}/">Cool App</a>
+			<a class="navbar-brand" href="${contextRoot}/">好煮意</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -74,8 +74,8 @@ div.path {
 								會員相關<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="${contextRoot}/login">會員登入</a></li>
-								<li><a class="dropdown-item" href="${contextRoot}/register">會員註冊</a></li>
+								<li><a class="dropdown-item" href="${contextRoot}/LoginSystem">會員登入</a></li>
+								<li><a class="dropdown-item" href="${contextRoot}/RegisterPage">會員註冊</a></li>
 								<li><a class="dropdown-item" href="#">Something else
 										here</a></li>
 							</ul>

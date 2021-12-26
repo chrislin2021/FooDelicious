@@ -19,8 +19,12 @@ public class OrderService {
 		return orderDao.findById(id);
 	}
 
-	public List<Order> findAll() {
+	public List<Order> findAllOrder() {
 		return orderDao.findAll();
+	}
+
+	public Order updateOrder(Order order) {
+		return orderDao.save(order);
 	}
 
 	public void deleteByOrderId(Long id) {
