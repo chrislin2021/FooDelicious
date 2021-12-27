@@ -19,12 +19,14 @@ public class Attachment {
         if(file==null || "".equals(file.getOriginalFilename().trim())) {
             return generateResult(false, "#");
         }
-        String originalName = file.getOriginalFilename();
         // generate file name
-        String localFileName = System.currentTimeMillis() + "-" + originalName;
+        String originalName = file.getOriginalFilename();
         // get project path
-        String projectRealPath = request.getSession().getServletContext().getRealPath("");
+        //System.currentTimeMillis() + "-" + 這個會自動產生系統編號 應該是可以不用沒問題 主要是怕說剛好有圖片同樣名稱
+        String localFileName = originalName;
         // get the real path to store received images
+        String projectRealPath = request.getSession().getServletContext().getRealPath("");
+        
         String realPath = projectRealPath + CK_IMAGE_PATH;
         File imageDir = new File(realPath);
         if(!imageDir.exists()) {

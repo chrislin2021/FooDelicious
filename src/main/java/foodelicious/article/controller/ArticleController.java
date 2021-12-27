@@ -21,7 +21,7 @@ public class ArticleController {
 	@RequestMapping(path = "/imgArticle", consumes = "multipart/form-data", method = RequestMethod.POST)
 	public Map<String, String> imgArticle(@RequestPart("upload") MultipartFile file, HttpServletRequest request) {
 		System.out.println("輸出測試");
-		System.out.println("file測試：" + file);
+		System.out.println("file測試：" + file.getOriginalFilename());
 
 		return new Attachment().ckEditorUploadImage(file, request);
 	}
