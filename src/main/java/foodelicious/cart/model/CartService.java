@@ -14,7 +14,11 @@ public class CartService {
 	@Resource
 	private CartDao cartDao;
 
-	public List<Cart> findCartListByMember(Member member) {
-		return cartDao.findCartListByMember(member);
+	public List<Cart> findCartListByMember(Member member_id) {
+		return cartDao.findCartListByMember(member_id);
+	}
+
+	public void delete(Long id) {
+		cartDao.deleteById(id);
 	}
 }
