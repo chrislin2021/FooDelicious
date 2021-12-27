@@ -34,16 +34,13 @@ public class Cart implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
-	private Product product_id;
+	private Product product;
 
 	@Column(name = "cart_quantity")
-	private Integer product_quantity;
+	private Integer quantity;
 
-	@Column(name = "cart_unitPrice")
-	private Integer product_unitPrice;
-
-	@Column(name = "cart_totalPrice")
-	private Integer cart_totalPrice;
+	@Column(name = "totalPrice")
+	private Integer totalPrice;
 
 	public Long getCart_id() {
 		return cart_id;
@@ -61,36 +58,28 @@ public class Cart implements Serializable {
 		this.member = member;
 	}
 
-	public Product getProduct_id() {
-		return product_id;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProduct_id(Product product_id) {
-		this.product_id = product_id;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public Integer getProduct_quantity() {
-		return product_quantity;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-	public void setProduct_quantity(Integer product_quantity) {
-		this.product_quantity = product_quantity;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
-	public Integer getProduct_unitPrice() {
-		return product_unitPrice;
+	public Integer getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setProduct_unitPrice(Integer product_unitPrice) {
-		this.product_unitPrice = product_unitPrice;
-	}
-
-	public Integer getCart_totalPrice() {
-		return cart_totalPrice;
-	}
-
-	public void setCart_totalPrice(Integer cart_totalPrice) {
-		this.cart_totalPrice = cart_totalPrice;
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }
