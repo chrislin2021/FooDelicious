@@ -27,12 +27,12 @@
 	<div class="form-check form-check-inline">
 		<span class="input-group-text">會員性別：</span> <input
 			class="form-check-input" type="radio" name="member_gender"
-			id="member_birth" value="male"> <label
+			id="member_gender_m" value="male"> <label
 			class="form-check-label" for="inlineRadio1">男</label>
 	</div>
 	<div class="form-check form-check-inline">
 		<input class="form-check-input" type="radio" name="member_gender"
-			id="member_birth" value="female"> <label
+			id="member_gender_f" value="female"> <label
 			class="form-check-label" for="inlineRadio2">女</label>
 	</div>
 
@@ -79,10 +79,13 @@
 			account : $("#userAccount").val(),
 			pwd : $("#userPwd").val(),
 			member_name : $("#userName").val(),
+			member_gender : $("#member_gender_m").val(),
+			member_gender : $("#member_gender_f").val(),
 			member_birth : $("#userBirth").val(),
 			member_phone : $("#userPhone").val(),
 			member_address : $("#userAddress").val(),
 			member_mail : $("#userEmail").val()
+			member_img : $("#photoId").val()
 		};
 		$.ajax({
 			url : "/register.controller",

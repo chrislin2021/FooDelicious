@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public class totalDao {
+public class TotalDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;

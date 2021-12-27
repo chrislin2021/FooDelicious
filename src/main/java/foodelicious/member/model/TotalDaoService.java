@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class totalDaoService {
+public class TotalDaoService {
 
 	@Autowired
-	private totalDao totalDao;
+	private TotalDao totalDao;
 
 	public void RegisterMember(Map<String, String> params) {
 		totalDao.RegisterMember(params);
