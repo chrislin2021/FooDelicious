@@ -20,14 +20,16 @@
 			<input type="text" class="form-control" placeholder="請輸入文章標題..."
 				aria-label="Recipient's username">
 		</div>
-		<form action="#" method="post" enctype="multipart/form-data">
-			<textarea name="content" id="editor">      
+<!-- 		<form action="#" method="post" enctype="multipart/form-data"> -->
+<!-- 			<textarea name="content" id="editor">       -->
                      
-        </textarea>
-			<p>
-				<input type='button' value='送出' id="submit">
-			</p>
-		</form>
+<!--         </textarea> -->
+<!-- 			<p> -->
+<!-- 				<input type='button' value='送出' id="submit"> -->
+<!-- 			</p> -->
+<!-- 		</form> -->
+		<div id="editor"></div>
+		<input type='button' value='送出' id="submit">
 
 
 	</div>
@@ -48,6 +50,7 @@
             return this.loader.file
                 .then(file => new Promise((resolve, reject) => {
                     this._initRequest();
+                    this. _initListeners( resolve, reject, file );
                     this._sendRequest(file);
                 }));
         }
