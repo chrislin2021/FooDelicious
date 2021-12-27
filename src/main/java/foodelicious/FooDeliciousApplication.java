@@ -34,11 +34,11 @@ public class FooDeliciousApplication {
 		return tilesViewResolver;
 	}
 	
-	@Bean
-	public MultipartResolver multipartResolver() throws IOException {
-		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-		resolver.setUploadTempDir(new FileSystemResource("Image/"));
-		resolver.setMaxUploadSize(600000000);
-		return resolver;
-	}
+//	@Bean
+//	public MultipartResolver multipartResolver() throws IOException {
+//		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+//		resolver.setUploadTempDir(new FileSystemResource("Image/"));
+//		resolver.setMaxUploadSize(600000000);
+//		return resolver;
+//	}
 }

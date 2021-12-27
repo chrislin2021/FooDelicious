@@ -1,5 +1,9 @@
 package foodelicious.article.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,15 +12,17 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import foodelicious.article.model.Attachment;
+
 @Controller
 public class ArticleController {
 
 	@ResponseBody
-	@RequestMapping(path = "/imgArticle", consumes = "multipart/form-data",method = RequestMethod.POST)
-	public String imgArticle(@RequestPart("upload") MultipartFile file) {
+	@RequestMapping(path = "/imgArticle", consumes = "multipart/form-data", method = RequestMethod.POST)
+	public Map<String, String> imgArticle(@RequestPart("upload") MultipartFile file, HttpServletRequest request) {
 		System.out.println("輸出測試");
-		System.out.println("file測試："+file);
+		System.out.println("file測試：" + file.getOriginalFilename());
 
-		return "111";
+		return new Attachment().ckEditorUploadImage(file, request);
 	}
 }
