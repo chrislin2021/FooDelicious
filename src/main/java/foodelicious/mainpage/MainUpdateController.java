@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import foodelicious.member.model.totalDaoService;
+import foodelicious.member.model.TotalDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import foodelicious.member.model.Account;
 public class MainUpdateController {
 
 	@Autowired
-	private totalDaoService totalDaoService;
+	private TotalDaoService totalDaoService;
 
 	@PostMapping("/register.controller")
 	public String registerController(@RequestBody Map<String, String> params) {

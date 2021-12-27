@@ -14,12 +14,12 @@
 			<form action="checklogin.controller" method="post">
             <div class="form-outline mb-4">
               <input type="text" id="account" class="form-control form-control-lg" name="userAccount" placeholder="Account" />
-              <label class="form-label" for="account">請輸入帳號</label><span id="loginSpan">${errors.account}</span>
+              <label class="form-label" for="account"></label><span id="loginSpan">${errors.account}</span>
             </div>
 
             <div class="form-outline mb-4">
               <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="userPwd" placeholder="Password" />
-              <label class="form-label" for="typePasswordX-2">請輸入密碼</label><span id="loginSpan">${errors.pwd}</span>
+              <label class="form-label" for="typePasswordX-2"></label><span id="loginSpan">${errors.pwd}</span>
             </div>
 
             <!-- Checkbox -->
