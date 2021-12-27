@@ -84,7 +84,7 @@ div.path {
 
 
 					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/addStatus">前往商城</a></li>
+						href="/Product">前往商城</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/viewStatus">前往分享區</a></li>
 					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
