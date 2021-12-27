@@ -56,12 +56,12 @@
 
 	<definition name="app.Product" extends="app.default">
 		<put-attribute name="content"
-			value="/WEB-INF/Product/Product.jsp" />
+			value="/WEB-INF/product/Product.jsp" />
 	</definition>
 
 	<definition name="app.ProductDetail" extends="app.default">
 		<put-attribute name="content"
-			value="/WEB-INF/Product/ProductDetail.jsp" />
+			value="/WEB-INF/product/ProductDetail.jsp" />
 	</definition>
 
 	<definition name="app.BackendDefault"

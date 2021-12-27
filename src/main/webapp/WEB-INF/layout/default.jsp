@@ -16,30 +16,24 @@
 	width: 100%;
 	height: 250px;
 }
-
 div.path {
 	background-color: rgb(209, 203, 203);
 }
-
 #rowSelect {
 	margin-top: 30px;
 }
-
 #mainDiv {
 	margin-top: 30px;
 	border: 1px black solid;
 	padding: 20px;
 	border-radius: 10px;
 }
-
 #passwordDiv {
 	margin-bottom: 10px;
 }
-
 #loginSpan {
 	color: red;
 }
-
 #registerMain {
 	margin-top: 30px;
 	border: 1px gray solid;
@@ -68,7 +62,7 @@ div.path {
 
 					<li class="nav-item">
 						<div class="dropdown">
-							<button class="nav-link dropdown-toggle" type="button"
+							<button class="btn btn-default dropdown-toggle" type="button"
 								id="dropdownMenuButton1" data-bs-toggle="dropdown"
 								aria-expanded="false">
 								會員相關<span class="caret"></span>
@@ -82,13 +76,12 @@ div.path {
 						</div>
 					</li>
 
-					<li class="nav-item"><a class="nav-link dropdown-toggle"
-						href="${contextRoot}/addStatus">前往商城</a></li>
-					<li class="nav-item"><a class="nav-link dropdown-toggle"
+
+					<li class="nav-item"><a class="nav-link"
+						href="/Product">前往商城</a></li>
+					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/viewStatus">前往分享區</a></li>
-					<li class="nav-item"><a class="nav-link dropdown-toggle" href="/postArticle">發表新文章</a></li>
-
-
+					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
 
 				</ul>
 

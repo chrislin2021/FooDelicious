@@ -34,4 +34,14 @@ public class PageController {
 	public String goPostArticle() {
 		return "app.PostArticle";
 	}
+	
+	@GetMapping("/Product")
+	public String productpage() {
+		return "app.Product";
+	}
+	
+	@GetMapping("/ProductDetail")
+	public String productDetailpage() {
+		return "app.ProductDetail";
+	}
 }
