@@ -40,16 +40,20 @@ public class ShareArea implements Serializable {
 	@Size(min = 3, max = 255, message = "最少要輸入3個字喔")
 	@Column(name = "article_title")
 	private String article_title;
-
+	
+	// 文章分類
 	@Column(name = "article_clallify")
-	private String article_clallify;// 文章分類
-
+	private String article_clallify;
+	
+	//觀看數
 	@Column(name = "viewNum")
 	private int viewNum;
 
+	//喜歡or收藏文章數
 	@Column(name = "article_likes")
 	private int article_likes;
 
+	//自動生成 別寫
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "postTime")

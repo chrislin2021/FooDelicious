@@ -39,7 +39,7 @@ public class TotalDao {
 
 	public void RegisterMember(Map<String, String> params) {
 		Session session = sessionFactory.openSession();
-		System.out.println(params);
+//		System.out.println(params);
 		Member mem = new Member();
 		mem.setUserName(params.get("member_name"));
 		mem.setMember_birth(params.get("member_birth"));

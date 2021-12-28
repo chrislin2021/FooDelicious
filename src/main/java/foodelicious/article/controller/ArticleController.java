@@ -3,6 +3,7 @@ package foodelicious.article.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import foodelicious.article.model.ArticleDAO;
 import foodelicious.article.model.Attachment;
 
 @Controller
@@ -28,11 +30,12 @@ public class ArticleController {
 	}
 	
 	@PostMapping("/postarticle.controller")
-	public String postArticle(@RequestBody Map<String, String> params) {
+	public void postArticle(@RequestBody Map<String, String> params, HttpSession session) {
+		ArticleDAO articleDAO =new ArticleDAO();
 		System.out.println(params);
 		System.out.println(params.get("article"));
 		System.out.println(params.get("classify"));
-		
-		return "app.ShareArea";
+		Long id = (Long) session.getAttribute("userID");
+		articleDAO.pushArticle(params, id);
 	}
 }

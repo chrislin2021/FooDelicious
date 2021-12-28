@@ -32,12 +32,15 @@ public class ArticleData implements Serializable {
 	@Column(name = "article")
 	private String article;
 
+	//目前沒用到
 	@Column(name = "block_Img")
 	private String block_Img;
-
+	
+	//目前沒用到
 	@Column(name = "tag_name")
 	private String tag_name;
 
+	//沒用到 但先寫
 	@Column(name = "releaseOrder")
 	private int releaseOrder;// 該討論串的發布順序 編號1為第一篇文章
 
