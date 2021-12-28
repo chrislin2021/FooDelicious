@@ -57,7 +57,7 @@ public class TotalDao {
 		session.close();
 	}
 
-	public Long findId(Account users) {
+	public int findId(Account users) {
 		Session session = sessionFactory.openSession();
 
 		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
@@ -67,7 +67,7 @@ public class TotalDao {
 
 		Account account = query.uniqueResult();
 		session.close();
-		return (long) account.getAccount_id();
+		return (int) account.getAccount_id();
 	}
 
 	// overload checkLogin

@@ -50,7 +50,7 @@ public class MainUpdateController {
 		if (resultStatus) {
 			m.addAttribute("account", account);
 			m.addAttribute("pwd", pwd);
-			Long id = totalDaoService.findId(new Account(account, pwd));
+			int id = totalDaoService.findId(new Account(account, pwd));
 			session.setAttribute("account", account);
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", id);
@@ -85,7 +85,7 @@ public class MainUpdateController {
 		if (exist) {
 			model.addAttribute("account", username);
 			model.addAttribute("pwd", pwd);
-			Long id = totalDaoService.findId(new Account(username, pwd));
+			int id = totalDaoService.findId(new Account(username, pwd));
 			session.setAttribute("account", username);
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", id);

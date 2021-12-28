@@ -11,17 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "customer_service")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class CustomerService implements Serializable {
 
 	private static final long serialVersionUID = 1L;

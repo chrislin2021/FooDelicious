@@ -54,4 +54,50 @@ public class ArticleData implements Serializable {
 
 	public ArticleData() {
 	}
+
+	public String getArticle() {
+		return article;
+	}
+
+	public void setArticle(String article) {
+		this.article = article;
+	}
+
+	public String getBlock_Img() {
+		return block_Img;
+	}
+
+	public void setBlock_Img(String block_Img) {
+		this.block_Img = block_Img;
+	}
+
+	public String getTag_name() {
+		return tag_name;
+	}
+
+	public void setTag_name(String tag_name) {
+		this.tag_name = tag_name;
+	}
+
+	public int getReleaseOrder() {
+		return releaseOrder;
+	}
+
+	public void setReleaseOrder(int releaseOrder) {
+		this.releaseOrder = releaseOrder;
+	}
+
+	public ShareArea getShareArea() {
+		return shareArea;
+	}
+
+	public void setShareArea(ShareArea shareArea) {
+		this.shareArea = shareArea;
+	}
+
+	public int getArticle_id() {
+		return article_id;
+	}
+	
+	
 }

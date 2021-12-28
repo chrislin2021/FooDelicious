@@ -5,24 +5,24 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+//import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-import foodelicious.member.model.Account;
+//import foodelicious.member.model.Account;
 
 @Entity
 @Table(name = "share_area")
@@ -59,18 +59,79 @@ public class ShareArea implements Serializable {
 	@Column(name = "postTime")
 	private Date postTime;
 
-	@Column(name = "fk_account_id")
-	@Transient
+	@Column(name = "fk_account_id")	
 	private int fk_account_id;
 
 	@OneToOne(mappedBy = "shareArea")
 	private ArticleData articleData;
 
 	// 多對一 這邊沒有casecade連動 所以要注意
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_account_id")
-	private Account account;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "fk_account_id")
+//	private Account account;
 
 	public ShareArea() {
 	}
+
+	public String getArticle_title() {
+		return article_title;
+	}
+
+	public void setArticle_title(String article_title) {
+		this.article_title = article_title;
+	}
+
+	public String getArticle_clallify() {
+		return article_clallify;
+	}
+
+	public void setArticle_clallify(String article_clallify) {
+		this.article_clallify = article_clallify;
+	}
+
+	public int getViewNum() {
+		return viewNum;
+	}
+
+	public void setViewNum(int viewNum) {
+		this.viewNum = viewNum;
+	}
+
+	public int getArticle_likes() {
+		return article_likes;
+	}
+
+	public void setArticle_likes(int article_likes) {
+		this.article_likes = article_likes;
+	}
+
+	public int getFk_account_id() {
+		return fk_account_id;
+	}
+
+	public void setFk_account_id(int fk_account_id) {
+		this.fk_account_id = fk_account_id;
+	}
+
+	public ArticleData getArticleData() {
+		return articleData;
+	}
+
+	public void setArticleData(ArticleData articleData) {
+		this.articleData = articleData;
+	}
+
+//	public Account getAccount() {
+//		return account;
+//	}
+//
+//	public void setAccount(Account account) {
+//		this.account = account;
+//	}
+
+	public int getShare_id() {
+		return share_id;
+	}
+	
+	
 }
