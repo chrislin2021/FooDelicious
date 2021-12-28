@@ -63,6 +63,7 @@ public class MainUpdateController {
 		return "app.LoginSystem";
 	}
 	
+<<<<<<< HEAD
 	//檢查 1.帳號有沒有存在 2.是會員還是廠商 3. 導向不同的頁面
 	@RequestMapping("/checklogin2.controller")
 	public String checkLogin(@RequestParam(name="userAccount") String username, @RequestParam(name="userPwd") String pwd, Model model, HttpSession session) {
@@ -101,4 +102,7 @@ public class MainUpdateController {
 			return "app.LoginSystem";
 		}
 	}
+=======
+
+>>>>>>> 1fb1fc695ba2cfe9f78c7075f34d3c9fd8c80301
 }
