@@ -15,6 +15,7 @@ import foodelicious.member.model.TotalDaoService;
 @Controller
 public class memberController {
 
+
 //	@GetMapping("/LoginSystem")
 //	public String toMemberPage() {
 //		return "app.LoginSystem";

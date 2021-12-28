@@ -67,7 +67,7 @@ public class TotalDao {
 
 		Account account = query.uniqueResult();
 		session.close();
-		return account.getAccount_id();
+		return (long) account.getAccount_id();
 	}
 
 	// overload checkLogin
