@@ -31,7 +31,10 @@ public class Product implements Serializable {
 
 	@Column(name = "product_stock")
 	private String product_stock;
-
+	
+	@Column(name="product_company")
+	private String product_company;
+	
 	@Column(name = "product_sales_figures")
 	private Integer product_sales_figures;
 
