@@ -36,8 +36,11 @@ public class Cart implements Serializable {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
-	@Column(name = "cart_quantity")
+	@Column(name = "quantity")
 	private Integer quantity;
+
+	@Column(name = "unitPrice")
+	private Integer unitPrice;
 
 	@Column(name = "totalPrice")
 	private Integer totalPrice;
@@ -72,6 +75,14 @@ public class Cart implements Serializable {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public Integer getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(Integer unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 	public Integer getTotalPrice() {

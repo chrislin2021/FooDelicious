@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import foodelicious.member.model.Member;
+import foodelicious.product.model.ProductDao;
 
 @Service
 public class CartService {
@@ -14,11 +14,27 @@ public class CartService {
 	@Resource
 	private CartDao cartDao;
 
-	public List<Cart> findCartListByMember(Member member_id) {
+	@Resource
+	private ProductDao productDao;
+
+	public List<Cart> findCartListByMember(Long member_id) {
 		return cartDao.findCartListByMember(member_id);
 	}
 
-	public void delete(Long id) {
-		cartDao.deleteById(id);
+	public List<Cart> findAll() {
+		return cartDao.findAll();
 	}
+
+	public void deleteById(Long product_id) {
+		cartDao.deleteById(product_id);
+	}
+
+	public void save() {
+		cartDao.save(null);
+	}
+
+	public Integer total(Integer quantity, Integer price) {
+		return quantity * price;
+	}
+
 }

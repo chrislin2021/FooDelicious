@@ -64,16 +64,17 @@
 			name="userEmail">
 	</div>	
 
-	<div>
-		<label for="photoId">會員照片</label> <input type="file"
-			name="memberImage" id="photoId"><br><br>
+<!-- 	<div> -->
+<!-- 		<label for="photoId">會員照片</label> <input type="file" -->
+<!-- 			name="memberImage" id="photoId"><br><br> -->
 			
-	</div>
-	<button onclick="registBTN()" class="btn btn-outline-primary">註冊</button>
+<!-- 	</div> -->
+	<button onclick="registBTN()" class="btn btn-outline-primary" va>註冊</button>
 	<input  type="reset" class="btn btn-outline-primary" value="重設"  >
 </div>
 
 <script>
+<<<<<<< HEAD
         function registBTN() {
             var postData = {
                 account: $("#userAccount").val(),
@@ -92,4 +93,29 @@
             });
         }
     </script>
+=======
+	function registBTN() {
+		
+		var postData = {
+			account : $("#userAccount").val(),
+			pwd : $("#userPwd").val(),
+			member_name : $("#userName").val(),
+			member_gender : $("#member_gender_m").val(),
+			member_gender : $("#member_gender_f").val(),
+			member_birth : $("#userBirth").val(),
+			member_phone : $("#userPhone").val(),
+			member_address : $("#userAddress").val(),
+			member_mail : $("#userEmail").val()
+// 			member_img : $("#photoId").val()
+		};
+		$.ajax({
+			url : "/register.controller",
+			data : JSON.stringify(postData),
+			type : "POST",
+			contentType : "application/json;charset=utf-8",
+		});
+		
+	}
+</script> 
+>>>>>>> 5b4ff7caaa5058d99429d71b6a0ef95b62ed3234
 </body>

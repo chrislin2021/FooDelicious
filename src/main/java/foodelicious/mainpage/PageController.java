@@ -35,6 +35,11 @@ public class PageController {
 		return "app.PostArticle";
 	}
 	
+	@GetMapping("/goShareArea")
+	public String goShareArea() {
+		return "app.ShareArea";
+	}
+	
 	@GetMapping("/Product")
 	public String productpage() {
 		return "app.Product";

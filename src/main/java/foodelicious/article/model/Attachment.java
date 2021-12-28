@@ -45,10 +45,10 @@ public class Attachment {
         }
         String imageContextPath = request.getContextPath() + "/uploadImage" + "/" + localFileName;
         // log here + 
-        System.out.println("received file original name: " + originalName);
-        System.out.println("stored local file name: " + localFileName);
-        System.out.println("file stored path: " + localFilePath);
-        System.out.println("returned url: " + imageContextPath);
+//        System.out.println("received file original name: " + originalName);
+//        System.out.println("stored local file name: " + localFileName);
+//        System.out.println("file stored path: " + localFilePath);
+//        System.out.println("returned url: " + imageContextPath);
         // log here -
         return generateResult(true, imageContextPath);
     }
