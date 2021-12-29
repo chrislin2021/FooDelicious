@@ -89,4 +89,10 @@
 			value="/WEB-INF/custService/CustService.jsp" />
 	</definition>
 
+	<definition name="app.BackendProductAdd"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/BackendProductAdd.jsp" />
+	</definition>
+
 </tiles-definitions>
