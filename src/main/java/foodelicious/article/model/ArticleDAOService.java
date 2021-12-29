@@ -16,7 +16,7 @@ public class ArticleDAOService {
 	
 //	private static ArticleDAOService articleDAOService;
 	
-	public void pushArticle(Map<String, String> params, int id) {
+	public void pushArticle(Map<String, String> params, Long id) {
 		articleDAO.pushArticle(params, id);
 	}
 	

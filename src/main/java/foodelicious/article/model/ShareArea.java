@@ -12,6 +12,7 @@ import javax.persistence.Id;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,7 +27,6 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "share_area")
-@Component
 public class ShareArea implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -59,8 +59,15 @@ public class ShareArea implements Serializable {
 	@Column(name = "postTime")
 	private Date postTime;
 
+	@PrePersist // 設定物件轉換為 Persistent 以前執行
+	private void onCreate() {
+		if(postTime == null) {
+			postTime = new Date();
+		}
+	}
+	
 	@Column(name = "fk_account_id")	
-	private int fk_account_id;
+	private Long fk_account_id;
 
 	@OneToOne(mappedBy = "shareArea")
 	private ArticleData articleData;
@@ -105,11 +112,11 @@ public class ShareArea implements Serializable {
 		this.article_likes = article_likes;
 	}
 
-	public int getFk_account_id() {
+	public Long getFk_account_id() {
 		return fk_account_id;
 	}
 
-	public void setFk_account_id(int fk_account_id) {
+	public void setFk_account_id(Long fk_account_id) {
 		this.fk_account_id = fk_account_id;
 	}
 

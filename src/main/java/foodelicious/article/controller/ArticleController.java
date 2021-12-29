@@ -40,7 +40,7 @@ public class ArticleController {
 		System.out.println(params);
 		System.out.println(params.get("article"));
 		System.out.println(params.get("classify"));
-		int id = (int) session.getAttribute("userID");
+		Long id = (Long) session.getAttribute("userID");
 		
 		System.out.println(id);
 		articleService.pushArticle(params, id);

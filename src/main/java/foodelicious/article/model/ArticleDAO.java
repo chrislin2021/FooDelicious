@@ -19,7 +19,7 @@ public class ArticleDAO {
 	
 //	private static ArticleDAO articleDAO;
 	
-	public void pushArticle(Map<String, String> params, int id) {
+	public void pushArticle(Map<String, String> params, Long id) {
 		Session session = sessionFactory.openSession();
 		ArticleData articleData = new ArticleData();
 		articleData.setArticle(params.get("article"));

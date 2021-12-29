@@ -27,22 +27,19 @@ public class ArticleData implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "article_id")
 	private int article_id;
-
+	
 	@Size(min = 15, max = 255, message = "內容不得小於15個字唷")
 	@Column(name = "article")
 	private String article;
 
-	//目前沒用到
-	@Column(name = "block_Img")
-	private String block_Img;
-	
+
 	//目前沒用到
 	@Column(name = "tag_name")
 	private String tag_name;
 
 	//沒用到 但先寫
-	@Column(name = "releaseOrder")
-	private int releaseOrder;// 該討論串的發布順序 編號1為第一篇文章
+//	@Column(name = "releaseOrder")
+//	private int releaseOrder;// 該討論串的發布順序 編號1為第一篇文章
 
 	@Transient
 	@Column(name = "fk_share_id")
@@ -63,14 +60,6 @@ public class ArticleData implements Serializable {
 		this.article = article;
 	}
 
-	public String getBlock_Img() {
-		return block_Img;
-	}
-
-	public void setBlock_Img(String block_Img) {
-		this.block_Img = block_Img;
-	}
-
 	public String getTag_name() {
 		return tag_name;
 	}
@@ -79,13 +68,13 @@ public class ArticleData implements Serializable {
 		this.tag_name = tag_name;
 	}
 
-	public int getReleaseOrder() {
-		return releaseOrder;
-	}
-
-	public void setReleaseOrder(int releaseOrder) {
-		this.releaseOrder = releaseOrder;
-	}
+//	public int getReleaseOrder() {
+//		return releaseOrder;
+//	}
+//
+//	public void setReleaseOrder(int releaseOrder) {
+//		this.releaseOrder = releaseOrder;
+//	}
 
 	public ShareArea getShareArea() {
 		return shareArea;
