@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +22,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import foodelicious.article.model.ShareArea;
@@ -47,9 +49,20 @@ public class Account implements Serializable{
 	@Column(name = "account_status",columnDefinition = "varchar(255) default 'normal'")
 	private String account_status;
 
-	@Transient
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "register_date")
 	private Date register_date;
+	
+	@PrePersist // 設定物件轉換為 Persistent 以前執行
+	private void onCreate() {
+		if(register_date == null) {
+			register_date = new Date();
+		}
+		if(account_status == null) {
+			account_status = "normal";
+		}
+	}
 
 	@OneToOne(mappedBy = "account")
 	private Member member;

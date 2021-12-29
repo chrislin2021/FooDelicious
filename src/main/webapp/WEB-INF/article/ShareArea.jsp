@@ -1,32 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+    <style>
+        .topDIV {
+            margin-top: 16px;
+        }
+    </style>
+    <div class="topDIV">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">全部文章</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">廚具開箱</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">食譜分享</a></li>
+        </ul>
+
+    </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        $.ajax[{
+            URL: '/'
+        }];
+    </script>
