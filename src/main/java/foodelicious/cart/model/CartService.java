@@ -12,16 +12,12 @@ public class CartService {
 	@Resource
 	private CartRepository cartRepository;
 
-	public CartBean insertItem(CartBean cartBean) {
+	public CartBean insertAndUpdateItem(CartBean cartBean) {
 		return cartRepository.save(cartBean);
 	}
 
 	public void deleteItem(Long cartId) {
 		cartRepository.deleteById(cartId);
-	}
-
-	public CartBean updateItem(CartBean cartBean) {
-		return cartRepository.save(cartBean);
 	}
 
 	public List<CartBean> selectItem(Long memberId) {
