@@ -12,7 +12,7 @@ import foodelicious.orders.model.OrdersService;
 
 @RestController
 @RequestMapping("/Order")
-public class OrderController {
+public class OrdersController {
 
 	@Resource
 	private OrdersService orderService;
