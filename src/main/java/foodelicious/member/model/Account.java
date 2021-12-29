@@ -33,7 +33,7 @@ public class Account implements Serializable{
 	@Id 
 	@Column(name = "account_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int account_id;
+	private Long account_id;
 
 
 	@NotBlank(message = "帳號不得空白")
@@ -89,7 +89,7 @@ public class Account implements Serializable{
 		this.member = member;
 	}
 
-	public int getAccount_id() {
+	public Long getAccount_id() {
 		return account_id;
 	}
 
