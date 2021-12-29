@@ -26,7 +26,7 @@
     <div class="navbar col-md-12 rightBrand justify-content-end">
         <ul class="nav nav-pills ">
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">首頁</a>
+                <a class="nav-link text-white" href="/">首頁</a>
             </li>
         </ul>
     </div>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import foodelicious.member.model.Admin;
 import foodelicious.member.model.TotalDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,8 +56,18 @@ public class MainUpdateController {
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", id);
 
-			System.out.println("userID：" + session.getAttribute("userID"));
-			return "app.home";
+			//查詢成功登入的會員身份
+			String level = totalDaoService.findId2(id);
+			System.out.println("level：" + level);
+			if(level.equals("admin")){
+				return "app.BackendMain";
+			}else if(level.equals("company")){
+				return "app.CompanyMain";
+			}else{
+				System.out.println("userID：" + session.getAttribute("userID"));
+				return "app.home";
+			}
+
 		}
 
 		errors.put("msg", "Pleas Input Correct Username or Password");
