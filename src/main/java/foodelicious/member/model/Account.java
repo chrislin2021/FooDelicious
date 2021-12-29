@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -24,41 +25,34 @@ import org.springframework.stereotype.Component;
 
 import foodelicious.article.model.ShareArea;
 
-@Entity
-@Table(name = "account_data")
+@Entity(name="account_data")
+@Table(name="account_data")
 @Component
-public class Account implements Serializable {
+public class Account implements Serializable{
 
-	private static final long serialVersionUID = 1L;
-	
-	public static final String Password_REG = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
-
-	@Id
+	@Id 
 	@Column(name = "account_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long account_id;
+
 
 	@NotBlank(message = "帳號不得空白")
 	@Column(name = "account", unique = true)
 	private String accountMake;
 
-	@Pattern(regexp= Password_REG , message="請輸入至少8個字包含一個英文及數字")
+	@NotBlank(message = "密碼不得空白")
 	@Column(name = "pwd")
 	private String pwd;
 
-	@Column(name = "account_status", columnDefinition = "varchar(255) default 'normal'")
+	@Column(name = "account_status",columnDefinition = "varchar(255) default 'normal'")
 	private String account_status;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Transient
 	@Column(name = "register_date")
 	private Date register_date;
 
 	@OneToOne(mappedBy = "account")
 	private Member member;
-
-	// 一對多 cascade負責處理連動
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL)
-	private Set<ShareArea> shareAreas = new LinkedHashSet<ShareArea>();
 
 	public Account() {
 	}
@@ -108,5 +102,6 @@ public class Account implements Serializable {
 		this.accountMake = accountMake;
 		this.pwd = pwd;
 	}
+
 
 }

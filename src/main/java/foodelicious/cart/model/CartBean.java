@@ -28,13 +28,13 @@ public class CartBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cart_id")
-	private Long cart_id;
+	private Long cartId;
 
 	@Column(name = "member_id")
-	private Long member_id;
+	private Long memberId;
 
 	@Column(name = "product_id")
-	private Long product_id;
+	private Long productId;
 
 	@Column(name = "quantity")
 	private Integer quantity;
@@ -47,28 +47,28 @@ public class CartBean implements Serializable {
 	@JoinColumn(name = "product_id", insertable = false, updatable = false)
 	private Product product;
 
-	public Long getCart_id() {
-		return cart_id;
+	public Long getCartId() {
+		return cartId;
 	}
 
-	public void setCart_id(Long cart_id) {
-		this.cart_id = cart_id;
+	public void setCartId(Long cartId) {
+		this.cartId = cartId;
 	}
 
-	public Long getMember_id() {
-		return member_id;
+	public Long getMemberId() {
+		return memberId;
 	}
 
-	public void setMember_id(Long member_id) {
-		this.member_id = member_id;
+	public void setMemberId(Long memberId) {
+		this.memberId = memberId;
 	}
 
-	public Long getProduct_id() {
-		return product_id;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setProduct_id(Long product_id) {
-		this.product_id = product_id;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 	public Integer getQuantity() {

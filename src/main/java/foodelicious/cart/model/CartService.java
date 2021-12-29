@@ -3,15 +3,10 @@ package foodelicious.cart.model;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import foodelicious.member.model.Member;
-import foodelicious.product.model.ProductDao;
-
 @Service
-@Transactional
 public class CartService {
 
 	@Resource
@@ -21,16 +16,16 @@ public class CartService {
 		return cartRepository.save(cartBean);
 	}
 
-	public void deleteItem(Long cart_id) {
-		cartRepository.deleteById(cart_id);
+	public void deleteItem(Long cartId) {
+		cartRepository.deleteById(cartId);
 	}
 
 	public CartBean updateItem(CartBean cartBean) {
 		return cartRepository.save(cartBean);
 	}
 
-	public List<CartBean> selectItem(Long member_id) {
-		return cartRepository.findAllByMemberId(member_id);
+	public List<CartBean> selectItem(Long memberId) {
+		return cartRepository.findAllByMemberId(memberId);
 	}
 
 }
