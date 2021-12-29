@@ -45,4 +45,9 @@ public class ArticleController {
 		System.out.println(id);
 		articleService.pushArticle(params, id);
 	}
+	
+	@PostMapping("/totalArticleData")
+	public void totalArticleData() {
+		
+	}
 }
