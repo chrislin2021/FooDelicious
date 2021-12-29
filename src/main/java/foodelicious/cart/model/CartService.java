@@ -3,38 +3,34 @@ package foodelicious.cart.model;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import foodelicious.member.model.Member;
 import foodelicious.product.model.ProductDao;
 
 @Service
+@Transactional
 public class CartService {
 
 	@Resource
-	private CartDao cartDao;
+	private CartRepository cartRepository;
 
-	@Resource
-	private ProductDao productDao;
-
-	public List<Cart> findCartListByMember(Long member_id) {
-		return cartDao.findCartListByMember(member_id);
+	public CartBean insertItem(CartBean cartBean) {
+		return cartRepository.save(cartBean);
 	}
 
-	public List<Cart> findAll() {
-		return cartDao.findAll();
+	public void deleteItem(Long cart_id) {
+		cartRepository.deleteById(cart_id);
 	}
 
-	public void deleteById(Long product_id) {
-		cartDao.deleteById(product_id);
+	public CartBean updateItem(CartBean cartBean) {
+		return cartRepository.save(cartBean);
 	}
 
-	public void save() {
-		cartDao.save(null);
-	}
-
-	public Integer total(Integer quantity, Integer price) {
-		return quantity * price;
+	public List<CartBean> selectItem(Long member_id) {
+		return cartRepository.findAllByMemberId(member_id);
 	}
 
 }

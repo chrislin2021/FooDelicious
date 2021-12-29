@@ -2,7 +2,6 @@ package foodelicious.cart.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,12 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import foodelicious.member.model.Member;
 import foodelicious.product.model.Product;
 
 @Entity
 @Table(name = "shopping_cart")
-public class Cart implements Serializable {
+@Component
+public class CartBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,22 +30,22 @@ public class Cart implements Serializable {
 	@Column(name = "cart_id")
 	private Long cart_id;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "member_id")
-	private Member member;
+	@Column(name = "member_id")
+	private Long member_id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "product_id")
-	private Product product;
+	@Column(name = "product_id")
+	private Long product_id;
 
 	@Column(name = "quantity")
 	private Integer quantity;
 
-	@Column(name = "unitPrice")
-	private Integer unitPrice;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "member_id", insertable = false, updatable = false)
+	private Member member;
 
-	@Column(name = "totalPrice")
-	private Integer totalPrice;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_id", insertable = false, updatable = false)
+	private Product product;
 
 	public Long getCart_id() {
 		return cart_id;
@@ -51,6 +53,30 @@ public class Cart implements Serializable {
 
 	public void setCart_id(Long cart_id) {
 		this.cart_id = cart_id;
+	}
+
+	public Long getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(Long member_id) {
+		this.member_id = member_id;
+	}
+
+	public Long getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(Long product_id) {
+		this.product_id = product_id;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Member getMember() {
@@ -67,30 +93,6 @@ public class Cart implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-	public Integer getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(Integer unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-
-	public Integer getTotalPrice() {
-		return totalPrice;
-	}
-
-	public void setTotalPrice(Integer totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 }

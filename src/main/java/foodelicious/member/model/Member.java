@@ -23,17 +23,17 @@ import org.springframework.stereotype.Component;
 public class Member implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String PHONE_REG = "09[0-9]{8}$";
-	
-	public static final String NAME_REG =	"^[\u4E00-\u9FA5]{2,}$";
+
+	public static final String NAME_REG = "^[\u4E00-\u9FA5]{2,}$";
 
 	@Id
 	@Column(name = "member_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long member_id;
 
-	@Pattern(regexp= NAME_REG , message="請輸入2個字以上繁體中文")
+	@Pattern(regexp = NAME_REG, message = "請輸入2個字以上繁體中文")
 	@Column(name = "member_name")
 	private String userName;
 
@@ -44,16 +44,16 @@ public class Member implements Serializable {
 	@Column(name = "member_birth")
 	private String member_birth;
 
-	@Pattern(regexp= PHONE_REG , message="請輸入正確手機號碼")
+	@Pattern(regexp = PHONE_REG, message = "請輸入正確手機號碼")
 	@Column(name = "member_phone")
 	private String member_phone;
 
 	@Column(name = "member_address")
 	private String member_address;
-	
+
 	@Column(name = "member_discount_id")
 	private String member_discount_id;
-	
+
 	@Column(name = "member_img")
 	private byte[] member_img;
 
@@ -63,7 +63,6 @@ public class Member implements Serializable {
 	@Email(message = "必須是形式完整的電子郵件")
 	@Column(name = "member_mail")
 	private String userEmail;
-	
 
 	@Transient
 	private int fk_account_id;
@@ -115,7 +114,6 @@ public class Member implements Serializable {
 		this.member_address = member_address;
 	}
 
-	
 	public String getMember_discount_id() {
 		return member_discount_id;
 	}
@@ -136,10 +134,14 @@ public class Member implements Serializable {
 		return userEmail;
 	}
 
+	public void setMember_id(Long member_id) {
+		this.member_id = member_id;
+	}
+
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	
+
 	public byte[] getMember_img() {
 		return member_img;
 	}

@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartDao extends JpaRepository<Cart, Long> {
+public interface CartRepository extends JpaRepository<CartBean, Long> {
 
-	List<Cart> findCartListByMember(Long member_id);
+	List<CartBean> findAllByMemberId(Long memberId);
 
 }
