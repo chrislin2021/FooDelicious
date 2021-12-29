@@ -1,6 +1,4 @@
-package foodelicious.order.controller;
-
-import java.util.Optional;
+package foodelicious.orders.controller;
 
 import javax.annotation.Resource;
 
@@ -9,19 +7,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import foodelicious.order.model.Order;
-import foodelicious.order.model.OrderService;
+import foodelicious.orders.model.OrdersBean;
+import foodelicious.orders.model.OrdersService;
 
 @RestController
 @RequestMapping("/Order")
 public class OrderController {
 
 	@Resource
-	private OrderService orderService;
+	private OrdersService orderService;
 
-	@GetMapping("/Order/{id}")
-	public Optional<Order> getOrderById(@PathVariable Long id) {
-		return orderService.findByOrderId(id);
+	@GetMapping("/Temp")
+	public OrdersBean temp(@PathVariable Long id) {
+		return null;
 	}
 
 }
