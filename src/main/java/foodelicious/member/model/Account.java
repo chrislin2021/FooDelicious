@@ -67,6 +67,10 @@ public class Account implements Serializable{
 	@OneToOne(mappedBy = "account")
 	private Member member;
 
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL)
+	private Set<ShareArea> shareAreas = new LinkedHashSet<ShareArea>();
+	
 	public Account() {
 	}
 

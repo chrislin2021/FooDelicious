@@ -5,23 +5,24 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-//import javax.persistence.FetchType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-//import javax.persistence.Transient;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
+
+import foodelicious.member.model.Account;
 
 //import foodelicious.member.model.Account;
 
@@ -66,6 +67,7 @@ public class ShareArea implements Serializable {
 		}
 	}
 	
+	@Transient
 	@Column(name = "fk_account_id")	
 	private Long fk_account_id;
 
@@ -73,9 +75,9 @@ public class ShareArea implements Serializable {
 	private ArticleData articleData;
 
 	// 多對一 這邊沒有casecade連動 所以要注意
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "fk_account_id")
-//	private Account account;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_account_id")
+	private Account account;
 
 	public ShareArea() {
 	}
@@ -128,13 +130,13 @@ public class ShareArea implements Serializable {
 		this.articleData = articleData;
 	}
 
-//	public Account getAccount() {
-//		return account;
-//	}
-//
-//	public void setAccount(Account account) {
-//		this.account = account;
-//	}
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
 	public int getShare_id() {
 		return share_id;
