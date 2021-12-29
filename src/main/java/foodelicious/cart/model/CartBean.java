@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import foodelicious.member.model.Member;
 import foodelicious.product.model.Product;
 
@@ -39,6 +41,7 @@ public class CartBean implements Serializable {
 	@Column(name = "quantity")
 	private Integer quantity;
 
+	@JsonIgnore // 不寫會互相對應變成無限迴圈
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
