@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface CartRepository extends JpaRepository<CartBean, Long> {
 
 //	JPA自定義方法不能有底線都把底線去除
-	List<CartBean> findAllByMemberId(Long member_id);
+	List<CartBean> findAllByMemberId(Long memberId);
 
 }

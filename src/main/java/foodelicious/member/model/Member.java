@@ -28,11 +28,7 @@ public class Member implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int member_id;
 
-<<<<<<< HEAD
-	@Size(min = 2, max = 255, message = "名子不得低於兩個字")
-=======
 	@Size(min=2, max = 255, message = "名子不得低於兩個字")
->>>>>>> origin/master
 	@Column(name = "member_name")
 	private String userName;
 
@@ -61,11 +57,7 @@ public class Member implements Serializable {
 	private int fk_account_id;
 
 	@OneToOne(cascade = CascadeType.ALL)
-<<<<<<< HEAD
-	@JoinColumn(name = "fk_account_id", referencedColumnName = "account_id") //
-=======
 	@JoinColumn(name="fk_account_id", referencedColumnName = "account_id")//
->>>>>>> origin/master
 	private Account account;
 
 
@@ -122,10 +114,7 @@ public class Member implements Serializable {
 		this.member_address = member_address;
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 	public int getMember_coin() {
 		return member_coin;
 	}
@@ -144,10 +133,7 @@ public class Member implements Serializable {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 
 	public Account getAccount() {
 		return account;
