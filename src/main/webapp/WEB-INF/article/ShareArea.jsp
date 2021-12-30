@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <style>
         .topDIV {
             margin-top: 16px;
@@ -17,12 +17,19 @@
 
     <table class="table">
         <tbody>
+            
+            <c:forEach var="statusUpdate" items="${TotalData}">
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
+            	<th scope="row">${statusUpdate.share_id}</th>
+            	<td>${statusUpdate.article_clallify}</td>
+            	<td>${statusUpdate.article_title}</td>
+            	</tr>
+            </c:forEach>
+<!--                 <th scope="row">1</th> -->
+<!--                 <td>Mark</td> -->
+<!--                 <td>Otto</td> -->
+<!--                 <td>@mdo</td> -->
+            
         </tbody>
     </table>
 

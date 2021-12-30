@@ -1,5 +1,6 @@
 package foodelicious.article.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,9 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import foodelicious.article.dao.container.ShareAreaRowMapper;
 import foodelicious.article.model.ArticleData;
 import foodelicious.article.model.ShareArea;
 import foodelicious.article.service.ArticleUseEMDaoService;
@@ -25,8 +28,11 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 	
 	ShareAreaRepository shareAreaRepository;
 	
-	public ArticleUseEMDao(ShareAreaRepository shareAreaRepository) {
+	NamedParameterJdbcTemplate namedParameterJdbcTemplate;	
+	
+	public ArticleUseEMDao(ShareAreaRepository shareAreaRepository, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.shareAreaRepository = shareAreaRepository;
+		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 	
 	public void pushArticle(Map<String, String> params, Long id) {
@@ -58,8 +64,14 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 	}
 	
 	public List<ShareArea> findAll(){	
-		return shareAreaRepository.findAll();		
-//		return shareAreaRepository.findAll(Sort.by("share_id").descending());		
+		
+		String hql = "SELECT * FROM share_area  ORDER BY share_id DESC";
+		
+		Map<String, Object> AllData = new HashMap<>();
+		
+		List<ShareArea> list = namedParameterJdbcTemplate.query(hql, AllData, new ShareAreaRowMapper());
+		
+		return list;			
 	}
 	
 }

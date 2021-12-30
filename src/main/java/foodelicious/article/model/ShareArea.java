@@ -141,6 +141,18 @@ public class ShareArea implements Serializable {
 	public int getShare_id() {
 		return share_id;
 	}
+
+	public Date getPostTime() {
+		return postTime;
+	}
+
+	public void setPostTime(Date postTime) {
+		this.postTime = postTime;
+	}
+
+	public void setShare_id(int share_id) {
+		this.share_id = share_id;
+	}
 	
 	
 }
