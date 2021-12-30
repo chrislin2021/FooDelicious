@@ -16,18 +16,22 @@ public class CartServiceImpl implements CartService {
 	@Resource
 	private CartRepository cartRepository;
 
+	@Override
 	public CartBean insertItem(CartBean cartBean) {
 		return cartRepository.save(cartBean);
 	}
 
+	@Override
 	public void deleteItem(Long productId) {
 		cartRepository.deleteById(productId);
 	}
 
+	@Override
 	public CartBean updateItem(CartBean cartBean) {
 		return cartRepository.save(cartBean);
 	}
 
+	@Override
 	public List<CartBean> selectItem(Long memberId) {
 		return cartRepository.findAllByMemberId(memberId);
 	}
