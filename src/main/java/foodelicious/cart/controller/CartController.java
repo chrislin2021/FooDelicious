@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import foodelicious.cart.model.CartBean;
-import foodelicious.cart.model.CartService;
+import foodelicious.cart.service.CartService;
 
 @RestController
 public class CartController {
@@ -28,7 +28,7 @@ public class CartController {
 
 	@GetMapping("/shoppingCart/{id}")
 	public List<CartBean> showCart(@PathVariable Long id, Model m) {
-		ArrayList<CartBean> carts = (ArrayList<CartBean>) cartService.selectItem(id);
+		var carts = (ArrayList<CartBean>) cartService.selectItem(id);
 		m.addAttribute("carts", carts);
 		return carts;
 	}
