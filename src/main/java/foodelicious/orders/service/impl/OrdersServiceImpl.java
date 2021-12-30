@@ -2,8 +2,6 @@ package foodelicious.orders.service.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 
 import foodelicious.orders.model.OrdersBean;
@@ -13,8 +11,12 @@ import foodelicious.orders.service.OrdersService;
 @Service
 public class OrdersServiceImpl implements OrdersService {
 
-	@Resource
 	private OrdersRepository ordersRepository;
+
+	public OrdersServiceImpl(OrdersRepository ordersRepository) {
+		super();
+		this.ordersRepository = ordersRepository;
+	}
 
 	@Override
 	public OrdersBean insertOrders(OrdersBean ordersBean) {

@@ -50,6 +50,20 @@ public class CartBean implements Serializable {
 	@JoinColumn(name = "product_id", insertable = false, updatable = false)
 	private Product product;
 
+	public CartBean() {
+		super();
+	}
+
+	public CartBean(Long cartId, Long memberId, Long productId, Integer quantity, Member member, Product product) {
+		super();
+		this.cartId = cartId;
+		this.memberId = memberId;
+		this.productId = productId;
+		this.quantity = quantity;
+		this.member = member;
+		this.product = product;
+	}
+
 	public Long getCartId() {
 		return cartId;
 	}
@@ -96,6 +110,12 @@ public class CartBean implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	@Override
+	public String toString() {
+		return "CartBean [cartId=" + cartId + ", memberId=" + memberId + ", productId=" + productId + ", quantity="
+				+ quantity + ", member=" + member + ", product=" + product + "]";
 	}
 
 }

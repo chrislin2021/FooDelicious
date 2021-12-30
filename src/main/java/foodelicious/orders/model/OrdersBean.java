@@ -46,6 +46,22 @@ public class OrdersBean implements Serializable {
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
 
+	public OrdersBean() {
+		super();
+	}
+
+	public OrdersBean(Long ordersId, Long memberId, String ordersNote, LocalDateTime ordersDate, Integer ordersTotal,
+			String ordersState, Member member) {
+		super();
+		this.ordersId = ordersId;
+		this.memberId = memberId;
+		this.ordersNote = ordersNote;
+		this.ordersDate = ordersDate;
+		this.ordersTotal = ordersTotal;
+		this.ordersState = ordersState;
+		this.member = member;
+	}
+
 	public Long getOrdersId() {
 		return ordersId;
 	}
@@ -100,6 +116,13 @@ public class OrdersBean implements Serializable {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	@Override
+	public String toString() {
+		return "OrdersBean [ordersId=" + ordersId + ", memberId=" + memberId + ", ordersNote=" + ordersNote
+				+ ", ordersDate=" + ordersDate + ", ordersTotal=" + ordersTotal + ", ordersState=" + ordersState
+				+ ", member=" + member + "]";
 	}
 
 }

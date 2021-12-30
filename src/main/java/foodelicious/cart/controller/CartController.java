@@ -3,8 +3,6 @@ package foodelicious.cart.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +16,12 @@ import foodelicious.cart.service.CartService;
 @RestController
 public class CartController {
 
-	@Resource
 	private CartService cartService;
+
+	public CartController(CartService cartService) {
+		super();
+		this.cartService = cartService;
+	}
 
 	@GetMapping("/shoppingCart")
 	public String shoppingCart() {

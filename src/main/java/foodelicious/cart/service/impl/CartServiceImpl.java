@@ -2,19 +2,22 @@ package foodelicious.cart.service.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.repository.CartRepository;
 import foodelicious.cart.service.CartService;
 
 @Service
+@Transactional
 public class CartServiceImpl implements CartService {
 
-	@Resource
 	private CartRepository cartRepository;
+
+	public CartServiceImpl(CartRepository cartRepository) {
+		this.cartRepository = cartRepository;
+	}
 
 	@Override
 	public CartBean insertItem(CartBean cartBean) {
