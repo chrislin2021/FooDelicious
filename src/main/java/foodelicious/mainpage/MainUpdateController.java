@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import foodelicious.member.model.Admin;
 import foodelicious.member.model.TotalDaoService;
+import foodelicious.member.model.TotalUseEMDaoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +24,16 @@ public class MainUpdateController {
 
 	@Autowired
 	private TotalDaoService totalDaoService;
+	
+	//測試
+	@Autowired
+	TotalUseEMDaoService EMDaoService;
 
 	@PostMapping("/register.controller")
 	public String registerController(@RequestBody Map<String, String> params) {
 //		System.out.println(params);
 //		System.out.println(params.get("account"));
-		totalDaoService.RegisterMember(params);
+		EMDaoService.RegisterMember(params);
 		return "app.home";
 	}
 
@@ -47,17 +53,21 @@ public class MainUpdateController {
 			return "app.LoginSystem";
 		}
 
-		boolean resultStatus = totalDaoService.checkLogin(new Account(account, pwd));
+		boolean resultStatus = EMDaoService.checkLogin(new Account(account, pwd));
 		if (resultStatus) {
 			m.addAttribute("account", account);
 			m.addAttribute("pwd", pwd);
-			Long id = totalDaoService.findId(new Account(account, pwd));
+//			Long id = totalDaoService.findId(new Account(account, pwd));
+			Long EMid = EMDaoService.findId(new Account(account, pwd));
 			session.setAttribute("account", account);
 			session.setAttribute("pwd", pwd);
-			session.setAttribute("userID", id);
+			session.setAttribute("userID", EMid);
+			
+			
+			System.out.println("EMid："+EMid);
 
 			//查詢成功登入的會員身份
-			String level = totalDaoService.findId2(id);
+			String level = EMDaoService.findId2(EMid);
 			System.out.println("level：" + level);
 			if(level.equals("admin")){
 				return "app.BackendMain";

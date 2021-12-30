@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 //import foodelicious.article.model.ArticleDAO;
 import foodelicious.article.model.ArticleDAOService;
+import foodelicious.article.model.ArticleUseEMDaoService;
 import foodelicious.article.model.Attachment;
 
 @Controller
@@ -24,6 +25,8 @@ public class ArticleController {
 	
 	@Autowired
 	public ArticleDAOService articleService;
+	@Autowired
+	ArticleUseEMDaoService articleEMDaoService;
 
 	@ResponseBody
 	@RequestMapping(path = "/imgArticle", consumes = "multipart/form-data", method = RequestMethod.POST)
@@ -43,7 +46,7 @@ public class ArticleController {
 		Long id = (Long) session.getAttribute("userID");
 		
 		System.out.println(id);
-		articleService.pushArticle(params, id);
+		articleEMDaoService.pushArticle(params, id);
 	}
 	
 	@PostMapping("/totalArticleData")

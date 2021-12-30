@@ -2,29 +2,27 @@ package foodelicious.article.model;
 
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import foodelicious.member.model.Account;
 
 @Repository
 @Transactional
-public class ArticleDAO {
+public class ArticleUseEMDao {
 	
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	EntityManager em;
 	
 //	EntityManager
 //	private static ArticleDAO articleDAO;
 	
 	public void pushArticle(Map<String, String> params, Long id) {
-		Session session = sessionFactory.openSession();
 		//用session.get的方法 用id 去找到對應的Account.class 並且將其命名為 account 參數
-		Account account = session.get(Account.class, id);
+		Account account = em.find(Account.class, id);
 
 //		System.out.println("一對多測試：" + account.getAccount_id());
 		
@@ -46,8 +44,8 @@ public class ArticleDAO {
 		articleData.setShareArea(shareArea);
 		
 		//儲存
-		session.save(articleData);
-		session.close();
+		em.persist(articleData);
+		em.close();
 	}
 //	@PostConstruct
 //	public void init() {
