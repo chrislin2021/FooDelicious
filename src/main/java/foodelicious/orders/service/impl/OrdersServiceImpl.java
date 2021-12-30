@@ -33,6 +33,10 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersRepository.findAllByMemberId(memberId);
 	}
 
+	public OrdersBean selectOrdersId(Long ordersId) {
+		return ordersRepository.findByOrdersId(ordersId);
+	}
+
 	@Override
 	public List<OrdersBean> selectAll() {
 		return ordersRepository.findAll();

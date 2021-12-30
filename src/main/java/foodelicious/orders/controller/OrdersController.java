@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import foodelicious.cart.service.CartService;
 import foodelicious.orders.model.OrdersBean;
 import foodelicious.orders.service.OrdersService;
 
@@ -14,9 +15,12 @@ public class OrdersController {
 
 	private OrdersService orderService;
 
-	public OrdersController(OrdersService orderService) {
+	private CartService cartService;
+
+	public OrdersController(OrdersService orderService, CartService cartService) {
 		super();
 		this.orderService = orderService;
+		this.cartService = cartService;
 	}
 
 //	暫時寫的

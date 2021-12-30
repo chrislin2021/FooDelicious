@@ -12,6 +12,8 @@ public interface OrdersService {
 
 	List<OrdersBean> selectOrders(Long memberId);
 
+	OrdersBean selectOrdersId(Long ordersId);
+
 	List<OrdersBean> selectAll();
 
 }

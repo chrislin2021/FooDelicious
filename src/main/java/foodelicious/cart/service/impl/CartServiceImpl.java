@@ -3,14 +3,12 @@ package foodelicious.cart.service.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.repository.CartRepository;
 import foodelicious.cart.service.CartService;
 
 @Service
-@Transactional
 public class CartServiceImpl implements CartService {
 
 	private CartRepository cartRepository;
