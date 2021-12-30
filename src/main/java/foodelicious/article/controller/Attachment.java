@@ -1,4 +1,4 @@
-package foodelicious.article.model;
+package foodelicious.article.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service("attachment")
 public class Attachment {
-
+	//這邊是給CKEditor用的 建構資料夾&圖片
     private static final String CK_IMAGE_PATH = File.separator + "uploadImage";
 
     public Map<String, String> ckEditorUploadImage(MultipartFile file, HttpServletRequest request) {

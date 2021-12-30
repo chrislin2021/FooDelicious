@@ -1,30 +1,37 @@
-package foodelicious.article.model;
+package foodelicious.article.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
+import foodelicious.article.model.ArticleData;
+import foodelicious.article.model.ShareArea;
+import foodelicious.article.service.ArticleUseEMDaoService;
 import foodelicious.member.model.Account;
+import foodelicious.article.repository.ShareAreaRepository;
 
-@Repository
+@Service
 @Transactional
-public class ArticleDAO {
+public class ArticleUseEMDao implements ArticleUseEMDaoService{
 	
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	EntityManager em;
 	
-//	EntityManager
-//	private static ArticleDAO articleDAO;
+	ShareAreaRepository shareAreaRepository;
+	
+	public ArticleUseEMDao(ShareAreaRepository shareAreaRepository) {
+		this.shareAreaRepository = shareAreaRepository;
+	}
 	
 	public void pushArticle(Map<String, String> params, Long id) {
-		Session session = sessionFactory.openSession();
 		//用session.get的方法 用id 去找到對應的Account.class 並且將其命名為 account 參數
-		Account account = session.get(Account.class, id);
+		Account account = em.find(Account.class, id);
 
 //		System.out.println("一對多測試：" + account.getAccount_id());
 		
@@ -46,13 +53,13 @@ public class ArticleDAO {
 		articleData.setShareArea(shareArea);
 		
 		//儲存
-		session.save(articleData);
-		session.close();
+		em.persist(articleData);
+		em.close();
 	}
-//	@PostConstruct
-//	public void init() {
-//		articleDAO = this;
-//		articleDAO.sessionFactory = this.sessionFactory;
-//	}
+	
+	public List<ShareArea> findAll(){	
+		return shareAreaRepository.findAll();		
+//		return shareAreaRepository.findAll(Sort.by("share_id").descending());		
+	}
 	
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,19 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-//import foodelicious.article.model.ArticleDAO;
-import foodelicious.article.model.ArticleDAOService;
-import foodelicious.article.model.ArticleUseEMDaoService;
-import foodelicious.article.model.Attachment;
+import foodelicious.article.service.ArticleUseEMDaoService;
 
 @Controller
 public class ArticleController {
 	
 	@Autowired
-	public ArticleDAOService articleService;
-	@Autowired
-	ArticleUseEMDaoService articleEMDaoService;
+	public ArticleUseEMDaoService articleEMDaoService;
+	
+	
 
 	@ResponseBody
 	@RequestMapping(path = "/imgArticle", consumes = "multipart/form-data", method = RequestMethod.POST)
@@ -44,13 +43,14 @@ public class ArticleController {
 		System.out.println(params.get("article"));
 		System.out.println(params.get("classify"));
 		Long id = (Long) session.getAttribute("userID");
-		
+		System.out.println(articleEMDaoService.findAll());
 		System.out.println(id);
 		articleEMDaoService.pushArticle(params, id);
 	}
 	
 	@PostMapping("/totalArticleData")
-	public void totalArticleData() {
-		
+	public ModelAndView totalArticleData(ModelAndView mav) {
+		articleEMDaoService.findAll();
+		return null;
 	}
 }
