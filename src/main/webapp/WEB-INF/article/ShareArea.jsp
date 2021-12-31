@@ -46,18 +46,18 @@
                 $("#articleArea").html(ArticleData);
 
                 var paginationStr = "";
-                paginationStr += "<li class='page-item' id='Previous'>";
-                paginationStr += " <button class='page-link' id='Previous' aria-label='Previous'>";
-                paginationStr += "<span aria-hidden='true'>&laquo;</span></button></li>";
+                //paginationStr += "<li class='page-item' id='Previous'>";
+                //paginationStr += " <button class='page-link' id='Previous' aria-label='Previous'>";
+                //paginationStr += "<span aria-hidden='true'>&laquo;</span></button></li>";
 
                 for (let i = 1; i <= page; i++) {
                     paginationStr += "<li class='page-item'><button class='page-link' value='" + i + "'>" + i + "</button></li>";
                 }
-                paginationStr += "<li class='page-item' id='Next'>";
-                paginationStr += "<button class='page-link'  aria-label='Next'>";
-                paginationStr += "<span aria-hidden='true'>&raquo;</span></button></li>";
+                //paginationStr += "<li class='page-item' id='Next'>";
+                //paginationStr += "<button class='page-link'  aria-label='Next'>";
+                //paginationStr += "<span aria-hidden='true'>&raquo;</span></button></li>";
                 $("#ulArea").html(paginationStr);
-                $("#Previous").prop("class", "page-item disabled");
+                //$("#Previous").prop("class", "page-item disabled");
             });
 
             function liButtonClick() {
@@ -69,24 +69,41 @@
                         success: function(articles) {
                             page = Math.ceil(articles.length / 10);
                             pageTotal = articles.length;
-                            finPage = (thisPage == page) ? pageTotal : thisPage * 10;
+                            finPage = (thisPage+1 == page) ? pageTotal : (thisPage+1) * 10;
 
+                            console.log('thisPage：' + thisPage);
+                            rule(articles, (thisPage) * 10, finPage); //這邊是處理文章內容的function
 
-                            let ArticleData = "";
-                            for (let i = (thisPage - 1) * 10; i < finPage; i++) {
-                                ArticleData += "<tr>";
-                                ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
-                                ArticleData += "<td>" + articles[i].article_clallify + "</td>";
-                                ArticleData += "<td><a href='/intIDFindAll/" + articles[i].share_id + "'>" + articles[i].article_title + "</a></td>";
-                                ArticleData += "</tr>";
-                            }
-                            $("#articleArea").html(ArticleData);
-                            (thisPage == 1) ? $("#Previous").prop("class", "page-item disabled"): $("#Previous").prop("class", "page-item");
-                            (thisPage == page) ? $("#Next").prop("class", "page-item disabled"): $("#Next").prop("class", "page-item");
+                            //if (thisPage == 0) {
+                            //rule(articles, (thisPage - 1) * 10, finPage);
+                            //} else if (thisPage == page + 1) {
+                            //rule(articles, (thisPage - 1) * 10, finPage);
+                            //} else {
 
+                            //}
 
                         }
                     }) //ajax結束
+
+
             }
+
+            function rule(articles, firstpage, lastpage) {
+                console.log('firstpage：' + firstpage);
+                console.log('lastpage' + lastpage);
+                let ArticleData = "";
+                for (let i = firstpage; i < lastpage; i++) {
+                    ArticleData += "<tr>";
+                    ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
+                    ArticleData += "<td>" + articles[i].article_clallify + "</td>";
+                    ArticleData += "<td><a href='/intIDFindAll/" + articles[i].share_id + "'>" + articles[i].article_title + "</a></td>";
+                    ArticleData += "</tr>";
+                }
+                $("#articleArea").html(ArticleData);
+                //(thisPage == 1) ? $("#Previous").prop("class", "page-item disabled"): $("#Previous").prop("class", "page-item");
+                //(thisPage == page) ? $("#Next").prop("class", "page-item disabled"): $("#Next").prop("class", "page-item");
+
+            }
+
             $("body").on("click", "#ulArea li", liButtonClick)
         </script>
