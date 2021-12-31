@@ -17,7 +17,7 @@ public class BkMember implements Serializable {
     private String memberName;
 
     @Column(name = "member_gender")
-    private String memberGrander;
+    private String memberGender;
 
     @Column(name = "member_birth")
     private String memberBirth;
@@ -35,18 +35,14 @@ public class BkMember implements Serializable {
     private String memberMail;
 
     @Column(name = "member_discount_id")
-    private Integer discount;
+    private String discount;
 
     @Column(name = "member_img")
     private String memberPic;
 
-    @Column(name = "fk_account_id")
-    @Transient
-    private Integer fkAccountId;
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_account_id", referencedColumnName = "account_id")
-//    private BkAccount bkAccount;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_account_id")
+    private BkAccount bkAccount;
 
     public Integer getMemberId() {
         return memberId;
@@ -60,12 +56,12 @@ public class BkMember implements Serializable {
         this.memberName = memberName;
     }
 
-    public String getMemberGrander() {
-        return memberGrander;
+    public String getMemberGender() {
+        return memberGender;
     }
 
-    public void setMemberGrander(String memberGrander) {
-        this.memberGrander = memberGrander;
+    public void setMemberGender(String memberGrander) {
+        this.memberGender = memberGrander;
     }
 
     public String getMemberBirth() {
@@ -108,11 +104,11 @@ public class BkMember implements Serializable {
         this.memberMail = memberMail;
     }
 
-    public Integer getDiscount() {
+    public String getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(String discount) {
         this.discount = discount;
     }
 
@@ -124,19 +120,11 @@ public class BkMember implements Serializable {
         this.memberPic = memberPic;
     }
 
-    public Integer getFkAccountId() {
-        return fkAccountId;
+    public BkAccount getBkAccount() {
+        return bkAccount;
     }
 
-    public void setFkAccountId(Integer fkAccountId) {
-        this.fkAccountId = fkAccountId;
+    public void setBkAccount(BkAccount bkAccount) {
+        this.bkAccount = bkAccount;
     }
-
-//    public BkAccount getBkAccount() {
-//        return bkAccount;
-//    }
-//
-//    public void setBkAccount(BkAccount bkAccount) {
-//        this.bkAccount = bkAccount;
-//    }
 }

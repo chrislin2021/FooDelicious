@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class BkMemberService implements BkMemberServiceInterface {
 
-    @Autowired
-    private BkMemberDaoInterface bkMemberDaoInterface;
+    private final BkMemberDaoInterface bkMemberDaoInterface;
+
+    public BkMemberService(BkMemberDaoInterface bkMemberDaoInterface) {
+        this.bkMemberDaoInterface = bkMemberDaoInterface;
+    }
 
     @Override
     public List<BkMember> getAllData() {

@@ -11,8 +11,11 @@ import java.util.List;
 @RestController
 public class BkMemberController {
 
-    @Autowired
-    private BkMemberServiceInterface bkMemberServiceInterface;
+    private final BkMemberServiceInterface bkMemberServiceInterface;
+
+    public BkMemberController(final BkMemberServiceInterface bkMemberServiceInterface) {
+        this.bkMemberServiceInterface = bkMemberServiceInterface;
+    }
 
     @GetMapping("/bkmembers")
     public List<BkMember> getAllData(){

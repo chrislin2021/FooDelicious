@@ -70,7 +70,7 @@ public class MainUpdateController {
 			String level = EMDaoService.findId2(EMid);
 			System.out.println("level：" + level);
 			if(level.equals("admin")){
-				return "app.BackendMain";
+				return "app.BackendMember";
 			}else if(level.equals("company")){
 				return "app.CompanyMain";
 			}else{

@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
-
+import foodelicious.member.model.Admin;
 import foodelicious.backend.memberpage.model.AdminRowMapper;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
+
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -112,7 +112,7 @@ public class TotalDao {
 		Map<String, Object> map = new HashMap<>();
 		map.put("accountId", id);
 
-		List<foodelicious.member.model.Admin> list = namedParameterJdbcTemplate.query(sql, map, new AdminRowMapper());
+		List<Admin> list = namedParameterJdbcTemplate.query(sql, map, new AdminRowMapper());
 		if(list.size() > 0){
 			String adminLevel = list.get(0).getPermission_level();
 			return adminLevel;

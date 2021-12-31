@@ -8,7 +8,7 @@ public class BkPageController {
 
     @GetMapping("/backend")
     public String main(){
-        return "app.BackendMain";
+        return "app.BackendMember";
     }
 
     @GetMapping("/backend/ProductAdd")
@@ -16,7 +16,10 @@ public class BkPageController {
         return "app.BackendProductAdd";
     }
 
-
+    @GetMapping("/backend/member")
+    public String backendMember(){
+        return "app.BackendMember";
+    }
 
 
 
