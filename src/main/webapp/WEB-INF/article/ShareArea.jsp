@@ -17,18 +17,19 @@
 </div>
 
 <table class="table">
-	<tbody id="articleArea">
-		<c:forEach var="statusUpdate" items="${TotalData}">
-			<tr>
-				<th scope="row">${statusUpdate.share_id}</th>
-				<td>${statusUpdate.article_clallify}</td>
-				<td>${statusUpdate.article_title}</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
+	<tbody id="articleArea"> </table>
+	
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script>
-	totalArticleData2
-	
+	$.getJSON("/totalArticleData2", function(articles) {
+		let ArticleData = "";
+		for (let i = 0; i < articles.length; i++) {
+			ArticleData += "<tr>";
+			ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
+			ArticleData += "<td>" + articles[i].article_clallify + "</td>";
+			ArticleData += "<td>" + articles[i].article_title + "</td>";
+			ArticleData += "</tr>";
+		}
+		$("#articleArea").html(ArticleData);
+	});
 </script>
