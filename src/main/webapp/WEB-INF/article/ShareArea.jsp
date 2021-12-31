@@ -29,19 +29,28 @@
 
             $.getJSON("/totalArticleData", function(articles) {
                 let ArticleData = "";
-                let pageTotal = articles.length;
-                let page = Math.ceil(articles.length / 10);
+                let pageTotal = articles.title.length;
+                let page = Math.ceil(articles.title.length / 10);
 
                 let finPage = (pageTotal < 10) ? pageTotal : 10;
-
-                //console.log(finPage);
+				
+                console.log("userID："+articles.session);
 
                 for (let i = 0; i < finPage; i++) {
                     ArticleData += "<tr>";
                     ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
-                    ArticleData += "<td>" + articles[i].article_clallify + "</td>";
-                    ArticleData += "<td><a href='/intIDFindAll/" + articles[i].share_id + "'>" + articles[i].article_title + "</a></td>";
+                    ArticleData += "<td>" + articles.title[i].article_clallify + "</td>";
+                    ArticleData += "<td><a href='/intIDFindAll/" + articles.title[i].share_id + "'>" + articles.title[i].article_title + "</a></td>";
+                    ArticleData += "<td>";
+                    if(articles.session == articles.title[i].fk_account_id){                    	
+                    	ArticleData += "<a onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
+                    	
+                    }else{
+                    	ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
+                    }
+                    ArticleData += "</td>";
                     ArticleData += "</tr>";
+               
                 }
                 $("#articleArea").html(ArticleData);
 
@@ -67,9 +76,9 @@
                         url: "/totalArticleData",
                         type: "GET",
                         success: function(articles) {
-                            page = Math.ceil(articles.length / 10);
-                            pageTotal = articles.length;
-                            finPage = (thisPage+1 == page) ? pageTotal : (thisPage+1) * 10;
+                            page = Math.ceil(articles.title.length / 10);
+                            pageTotal = articles.title.length;
+                            finPage = (thisPage + 1 == page) ? pageTotal : (thisPage + 1) * 10;
 
                             console.log('thisPage：' + thisPage);
                             rule(articles, (thisPage) * 10, finPage); //這邊是處理文章內容的function
@@ -89,20 +98,28 @@
             }
 
             function rule(articles, firstpage, lastpage) {
-                console.log('firstpage：' + firstpage);
-                console.log('lastpage' + lastpage);
+//                 console.log('firstpage：' + firstpage);
+//                 console.log('lastpage' + lastpage);
                 let ArticleData = "";
                 for (let i = firstpage; i < lastpage; i++) {
                     ArticleData += "<tr>";
                     ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
-                    ArticleData += "<td>" + articles[i].article_clallify + "</td>";
-                    ArticleData += "<td><a href='/intIDFindAll/" + articles[i].share_id + "'>" + articles[i].article_title + "</a></td>";
+                    ArticleData += "<td>" + articles.title[i].article_clallify + "</td>";
+                    ArticleData += "<td><a href='/intIDFindAll/" + articles.title[i].share_id + "'>" + articles.title[i].article_title + "</a></td>";
+                    ArticleData += "<td>";
+                    if(articles.session == articles.title[i].fk_account_id){                    	
+                    	ArticleData += "<a onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
+                    	
+                    }else{
+                    	ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
+                    }
+                    ArticleData += "</td>";
                     ArticleData += "</tr>";
                 }
                 $("#articleArea").html(ArticleData);
                 //(thisPage == 1) ? $("#Previous").prop("class", "page-item disabled"): $("#Previous").prop("class", "page-item");
                 //(thisPage == page) ? $("#Next").prop("class", "page-item disabled"): $("#Next").prop("class", "page-item");
-
+             
             }
 
             $("body").on("click", "#ulArea li", liButtonClick)

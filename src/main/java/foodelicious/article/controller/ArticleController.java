@@ -62,8 +62,11 @@ public class ArticleController {
 	
 	@ResponseBody
 	@GetMapping("/totalArticleData")
-	public List<ShareArea> totalArticleData2() {
-		return articleEMDaoService.findAll();			
+	public Map<String, Object> totalArticleData(HttpSession session) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("session", session.getAttribute("userID"));
+		data.put("title", articleEMDaoService.findAll());
+		return data;			
 	}
 	
 	@ResponseBody
