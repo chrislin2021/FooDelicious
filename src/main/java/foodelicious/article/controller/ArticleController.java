@@ -57,4 +57,10 @@ public class ArticleController {
 		mav.setViewName("app.ShareArea");
 		return mav;
 	}
+	
+	@ResponseBody
+	@GetMapping("/totalArticleData2")
+	public List<ShareArea> totalArticleData2() {
+		return articleEMDaoService.findAll();			
+	}
 }
