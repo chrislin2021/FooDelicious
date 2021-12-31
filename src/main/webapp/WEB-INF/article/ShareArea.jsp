@@ -26,6 +26,7 @@
         <script>
             let thisPage = 1;
             let finPage = 0;
+            
             $.getJSON("/totalArticleData", function(articles) {
                 let ArticleData = "";
                 let pageTotal = articles.length;
@@ -56,6 +57,7 @@
                 paginationStr += "<button class='page-link'  aria-label='Next'>";
                 paginationStr += "<span aria-hidden='true'>&raquo;</span></button></li>";
                 $("#ulArea").html(paginationStr);
+                $("#Previous").prop("class", "page-item disabled");
             });
 
             function liButtonClick() {
@@ -65,8 +67,6 @@
                         url: "/totalArticleData",
                         type: "GET",
                         success: function(articles) {
-                            //console.log(articles.length)
-                            console.log(thisPage);
                             page = Math.ceil(articles.length / 10);
                             pageTotal = articles.length;
                             finPage = (thisPage == page) ? pageTotal : thisPage * 10;
@@ -82,13 +82,11 @@
                                 }
                                 $("#articleArea").html(ArticleData);
                                 (thisPage == 1) ? $("#Previous").prop("class", "page-item disabled"): $("#Previous").prop("class", "page-item");
-                                (thisPage == $("li").size() - 2) ? $("#Next").prop("class", "page-item disabled"): $("#Next").prop("class", "page-item");
+                                (thisPage == page) ? $("#Next").prop("class", "page-item disabled"): $("#Next").prop("class", "page-item");
 
                             }
                         }
                     }) //ajax結束
-
-            }
-
+            }           
             $("body").on("click", "#ulArea li", liButtonClick)
         </script>
