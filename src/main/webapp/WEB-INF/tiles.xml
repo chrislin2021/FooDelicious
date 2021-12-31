@@ -100,4 +100,10 @@
 					   value="/WEB-INF/backend/BackendProductAdd.jsp" />
 	</definition>
 
+	<definition name="app.BackendMember"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/BackendMember.jsp" />
+	</definition>
+
 </tiles-definitions>

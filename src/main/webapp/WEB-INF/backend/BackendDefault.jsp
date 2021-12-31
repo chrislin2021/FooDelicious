@@ -44,7 +44,7 @@
 
         <!-- 會員列表 -->
         <li id="member" class="list-group-item funName">
-            <a href="#" style="text-decoration: none">
+            <a href="/backend/member" style="text-decoration: none">
                 <i class="text-secondary far fa-address-card"></i>
                 <span>會員管理</span>
             </a>

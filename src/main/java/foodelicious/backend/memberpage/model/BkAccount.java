@@ -25,8 +25,7 @@ public class BkAccount implements Serializable {
     @Column(name = "register_date")
     private Timestamp registerDate;
 
-//    @OneToOne(mappedBy = "bkAccount")
-//    private BkMember bkMember;
+
 
     public Integer getAccountId() {
         return accountId;
@@ -64,11 +63,4 @@ public class BkAccount implements Serializable {
         this.registerDate = registerDate;
     }
 
-//    public BkMember getBkMember() {
-//        return bkMember;
-//    }
-//
-//    public void setBkMember(BkMember bkMember) {
-//        this.bkMember = bkMember;
-//    }
 }
