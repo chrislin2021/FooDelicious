@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import foodelicious.article.dao.container.ArticleRowMapper;
 import foodelicious.article.dao.container.ShareAreaRowMapper;
 import foodelicious.article.model.ArticleData;
 import foodelicious.article.model.ShareArea;
@@ -35,6 +36,7 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 	
+	@Override
 	public void pushArticle(Map<String, String> params, Long id) {
 		//用session.get的方法 用id 去找到對應的Account.class 並且將其命名為 account 參數
 		Account account = em.find(Account.class, id);
@@ -63,6 +65,7 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 		em.close();
 	}
 	
+	@Override
 	public List<ShareArea> findAll(){	
 		
 		String hql = "SELECT * FROM share_area  ORDER BY share_id DESC";
@@ -73,5 +76,26 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 		
 		return list;			
 	}
+	
+	
+	@Override
+	public List<ShareArea> useIdFindShareArea(int id){
+		String hql = "SELECT * FROM share_area WHERE share_id = :id";
+		Map<String, Object> AllData = new HashMap<>();
+		AllData.put("id", id);
+		List<ShareArea> list = namedParameterJdbcTemplate.query(hql, AllData, new ShareAreaRowMapper());
+		
+		return list;		
+	} 
+	
+	@Override
+	public List<ArticleData> useIdFindArticleArea(int id){
+		String hql = "SELECT * FROM article_data WHERE fk_share_id = :id";
+		Map<String, Object> AllData = new HashMap<>();
+		AllData.put("id", id);
+		List<ArticleData> list = namedParameterJdbcTemplate.query(hql, AllData, new ArticleRowMapper());
+		
+		return list;		
+	} 
 	
 }

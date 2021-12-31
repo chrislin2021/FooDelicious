@@ -31,6 +31,11 @@
 			value="/WEB-INF/article/PostArticle.jsp" />
 	</definition>
 	
+	<definition name="app.ShowAtricle" extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/article/ShowAtricle.jsp" />
+	</definition>
+	
 	<definition name="app.ShareArea" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/article/ShareArea.jsp" />

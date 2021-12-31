@@ -1,5 +1,6 @@
 package foodelicious.article.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,16 +53,26 @@ public class ArticleController {
 		articleEMDaoService.pushArticle(params, id);
 	}
 	
+//	@GetMapping("/totalArticleData")
+//	public ModelAndView totalArticleData(ModelAndView mav) {
+//		mav.getModel().put("TotalData", articleEMDaoService.findAll());
+//		mav.setViewName("app.ShareArea");
+//		return mav;
+//	}
+	
+	@ResponseBody
 	@GetMapping("/totalArticleData")
-	public ModelAndView totalArticleData(ModelAndView mav) {
-		mav.getModel().put("TotalData", articleEMDaoService.findAll());
-		mav.setViewName("app.ShareArea");
-		return mav;
+	public List<ShareArea> totalArticleData2() {
+		return articleEMDaoService.findAll();			
 	}
 	
 	@ResponseBody
-	@GetMapping("/totalArticleData2")
-	public List<ShareArea> totalArticleData2() {
-		return articleEMDaoService.findAll();			
+	@GetMapping("/intIDFindAll/{id}")
+	public Map<String, Object> useIdFinfAll(@PathVariable(value = "id", required = false) Integer id){
+		Map<String, Object> data = new HashMap<>();
+		data.put("title", articleEMDaoService.useIdFindShareArea(id));
+		data.put("article", articleEMDaoService.useIdFindArticleArea(id));
+		
+		return data;		
 	}
 }

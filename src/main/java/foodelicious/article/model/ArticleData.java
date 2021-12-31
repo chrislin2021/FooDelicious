@@ -87,6 +87,18 @@ public class ArticleData implements Serializable {
 	public int getArticle_id() {
 		return article_id;
 	}
+
+	public int getFk_share_id() {
+		return fk_share_id;
+	}
+
+	public void setFk_share_id(int fk_share_id) {
+		this.fk_share_id = fk_share_id;
+	}
+
+	public void setArticle_id(int article_id) {
+		this.article_id = article_id;
+	}
 	
 	
 }
