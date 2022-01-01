@@ -89,7 +89,7 @@ div.path {
 		</div>
 	</nav>
 	<div>
-		<img src="img\top.jpg" class="img-fluid">
+		<img src="${contextRoot}\img\top.jpg" class="img-fluid">
 	</div>
 
 <!--設定div class container代表標題以下是由tiles管理排版  --> 

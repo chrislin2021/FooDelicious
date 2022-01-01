@@ -108,8 +108,7 @@
                     ArticleData += "<td><a href='/intIDFindAll/" + articles.title[i].share_id + "'>" + articles.title[i].article_title + "</a></td>";
                     ArticleData += "<td>";
                     if(articles.session == articles.title[i].fk_account_id){                    	
-                    	ArticleData += "<a onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
-                    	
+                    	ArticleData += "<a onclick='return confirm('確認刪除?');' href='#'>刪除</a>"                    	
                     }else{
                     	ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
                     }
