@@ -33,8 +33,8 @@
                 let page = Math.ceil(articles.title.length / 10);
 
                 let finPage = (pageTotal < 10) ? pageTotal : 10;
-				
-                console.log("userID："+articles.session);
+
+                console.log("userID：" + articles.session);
 
                 for (let i = 0; i < finPage; i++) {
                     ArticleData += "<tr>";
@@ -42,15 +42,16 @@
                     ArticleData += "<td>" + articles.title[i].article_clallify + "</td>";
                     ArticleData += "<td><a href='/intIDFindAll/" + articles.title[i].share_id + "'>" + articles.title[i].article_title + "</a></td>";
                     ArticleData += "<td>";
-                    if(articles.session == articles.title[i].fk_account_id){                    	
-                    	ArticleData += "<a onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
-                    	
-                    }else{
-                    	ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
+                    if (articles.session == articles.title[i].fk_account_id) {
+                        //ArticleData += "<a onclick='return confirm('確認刪除?');' href='/deleteData?id=" + articles.title[i].share_id + "'>刪除</a>"
+                        //ArticleData += "<a onclick='return confirm('確認刪除?');' href='#' onclick='delfun()'>刪除</a>"
+                        ArticleData += "<button onclick='delfun(" + articles.title[i].share_id + ")'>刪除</button>"
+                    } else {
+                        ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
                     }
                     ArticleData += "</td>";
                     ArticleData += "</tr>";
-               
+
                 }
                 $("#articleArea").html(ArticleData);
 
@@ -68,6 +69,26 @@
                 $("#ulArea").html(paginationStr);
                 //$("#Previous").prop("class", "page-item disabled");
             });
+            //
+            function delfun(id) {
+
+                if (confirm("確定刪除此筆紀錄嗎 ?")) {
+                    //var form = document.forms[0];
+                    //form.action = "<c:url value='/deleteData/' />" + articles.title[i].share_id;
+                    //form.submit();
+                    console.log("id：" + id);
+                    $.ajax({
+                        url: "/deleteData/" + id,
+                        type: "DELETE",
+                        //data: {
+                        //   id: id
+                        //},
+                        //contentType: "application/json;charset=utf-8",
+                        //dataType: 'json',
+                    })
+                }
+
+            }
 
             function liButtonClick() {
                 thisPage = $(this).index();
@@ -98,8 +119,8 @@
             }
 
             function rule(articles, firstpage, lastpage) {
-//                 console.log('firstpage：' + firstpage);
-//                 console.log('lastpage' + lastpage);
+                //                 console.log('firstpage：' + firstpage);
+                //                 console.log('lastpage' + lastpage);
                 let ArticleData = "";
                 for (let i = firstpage; i < lastpage; i++) {
                     ArticleData += "<tr>";
@@ -107,10 +128,10 @@
                     ArticleData += "<td>" + articles.title[i].article_clallify + "</td>";
                     ArticleData += "<td><a href='/intIDFindAll/" + articles.title[i].share_id + "'>" + articles.title[i].article_title + "</a></td>";
                     ArticleData += "<td>";
-                    if(articles.session == articles.title[i].fk_account_id){                    	
-                    	ArticleData += "<a onclick='return confirm('確認刪除?');' href='#'>刪除</a>"                    	
-                    }else{
-                    	ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
+                    if (articles.session == articles.title[i].fk_account_id) {
+                        ArticleData += "<a onclick='return confirm('確認刪除?');' href='/deleteData?id=" + articles.title[i].share_id + "'>刪除</a>"
+                    } else {
+                        ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
                     }
                     ArticleData += "</td>";
                     ArticleData += "</tr>";
@@ -118,7 +139,7 @@
                 $("#articleArea").html(ArticleData);
                 //(thisPage == 1) ? $("#Previous").prop("class", "page-item disabled"): $("#Previous").prop("class", "page-item");
                 //(thisPage == page) ? $("#Next").prop("class", "page-item disabled"): $("#Next").prop("class", "page-item");
-             
+
             }
 
             $("body").on("click", "#ulArea li", liButtonClick)

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,12 +46,12 @@ public class ArticleController {
 	@PostMapping("/postarticle.controller")
 	public void postArticle(@RequestBody Map<String, String> params, HttpSession session) {
 
-		System.out.println(params);
-		System.out.println(params.get("article"));
-		System.out.println(params.get("classify"));
+//		System.out.println(params);
+//		System.out.println(params.get("article"));
+//		System.out.println(params.get("classify"));
 		Long id = (Long) session.getAttribute("userID");
-		System.out.println(articleEMDaoService.findAll());
-		System.out.println(id);
+//		System.out.println(articleEMDaoService.findAll());
+//		System.out.println(id);
 		articleEMDaoService.pushArticle(params, id);
 	}
 	
@@ -86,5 +87,12 @@ public class ArticleController {
 		session.setAttribute("ArticleId", id);
 		//System.out.println("ArticleId：　" + id);
 		return "app.ShowAtricle";
+	}
+	@ResponseBody
+	 @RequestMapping(value = "/deleteData/{id}", method = RequestMethod.DELETE)
+	public void deleteAtricle(@PathVariable(value="id", required = false ) Integer id) {
+		System.out.println(id);
+		//forward:/members
+		//return params.get("id");
 	}
 }
