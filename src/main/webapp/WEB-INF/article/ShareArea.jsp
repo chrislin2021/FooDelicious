@@ -15,7 +15,7 @@
 
         </div>
 
-        <table class="table">
+        <table class="table table-hover">
             <tbody id="articleArea"> </tbody>
         </table>
 
