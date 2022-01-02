@@ -12,7 +12,8 @@
     <div class="row" id="rowSelect">
         <div class="col-12 col-md-2">
             <br>
-            <a id="updateBTN" class="btn btn-primary btn-lg" role="button" data-bs-toggle="button">修改</a>
+
+            <button type="button" id="updateBTN" class="btn btn-primary btn-lg" role="button" data-bs-toggle="button">修改</button>
         </div>
 
         <div class="col-12 col-md-9">
@@ -27,36 +28,53 @@
 
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script>
+        var articleId = "";
         let clallifyAndTitle = "";
         $.ajax({
             url: "/responseArticle",
             type: "Get",
             success: function(data) {
 
-                //                     console.log("data：" + data);
-                //                     console.log("title" + data.title[0].length);
-                //                     console.log("article" + data.article[0]);
-                //$("#clallifyArea").val(data.title[0].article_clallify);
-                //$("#titleArea").val(data.title[0].article_title);
                 let accId = data.title[0].fk_account_id;
                 let loginId = data.LoginId;
-                console.log("accId: " + accId);
-                console.log("loginId " + loginId);
-                console.log(accId == loginId);
+                articleId = data.title[0].share_id
+                    //console.log("accId: " + accId);
+                console.log("articleId: " + articleId);
+                //console.log("loginId " + loginId);
+                //console.log(accId == loginId);
                 clallifyAndTitle += "<tr>";
                 clallifyAndTitle += "<th>" + data.title[0].article_clallify + "</th>";
                 clallifyAndTitle += "<th>" + data.title[0].article_title + "</th>";
                 clallifyAndTitle += "</tr>";
                 $("#clallifyAndTitle").html(clallifyAndTitle);
                 $(".textArea").html(data.article[0].article);
-
                 (loginId == accId) ? $("#updateBTN").prop("class", "btn btn-primary btn-lg"): $("#updateBTN").prop("class", "btn btn-primary btn-lg disabled");
+                //$("#updateBTN").prop("href", "test");
 
-                //if (loginId == accId) {
-                //    $("#updateBTN").prop("calss", "btn btn-primary btn-lg")
-                //} else {
-                //    $("#updateBTN").prop("calss", "btn btn-primary btn-lg disabled");
-                // }
+
+
             }
+        })
+
+        function goUpdate(articleId) {
+            $.ajax({
+                url: "/UpdateArticle",
+                type: "PUT",
+                data: "id=" + articleId
+            })
+        };
+        $("#updateBTN").click(function() {
+            console.log(articleId)
+            var postData = {
+                "articleId": articleId
+            };
+
+            $.ajax({
+                url: "/UpdateArticle",
+                type: "POST",
+                data: JSON.stringify(postData),
+                contentType: "application/json;charset=utf-8",
+            })
+
         })
     </script>
