@@ -1,4 +1,4 @@
-package foodelicious.article.model;
+package foodelicious.article.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service("attachment")
 public class Attachment {
-
+	//這邊是給CKEditor用的 建構資料夾&圖片
     private static final String CK_IMAGE_PATH = File.separator + "uploadImage";
 
     public Map<String, String> ckEditorUploadImage(MultipartFile file, HttpServletRequest request) {
@@ -45,10 +45,10 @@ public class Attachment {
         }
         String imageContextPath = request.getContextPath() + "/uploadImage" + "/" + localFileName;
         // log here + 
-        System.out.println("received file original name: " + originalName);
-        System.out.println("stored local file name: " + localFileName);
-        System.out.println("file stored path: " + localFilePath);
-        System.out.println("returned url: " + imageContextPath);
+//        System.out.println("received file original name: " + originalName);
+//        System.out.println("stored local file name: " + localFileName);
+//        System.out.println("file stored path: " + localFilePath);
+//        System.out.println("returned url: " + imageContextPath);
         // log here -
         return generateResult(true, imageContextPath);
     }

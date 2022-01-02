@@ -8,6 +8,9 @@ class FooDeliciousApplicationTests {
 
 	@Test
 	void contextLoads() {
+		//reflection
+		Class<Integer> in1 = Integer.class;
+		
 	}
 
 }

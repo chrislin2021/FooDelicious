@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
     <div class="navbar col-md-12 rightBrand justify-content-end">
         <ul class="nav nav-pills ">
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">首頁</a>
+                <a class="nav-link text-white" href="/">首頁</a>
             </li>
         </ul>
     </div>
@@ -43,7 +44,7 @@
 
         <!-- 會員列表 -->
         <li id="member" class="list-group-item funName">
-            <a href="#" style="text-decoration: none">
+            <a href="/backend/member" style="text-decoration: none">
                 <i class="text-secondary far fa-address-card"></i>
                 <span>會員管理</span>
             </a>
@@ -55,6 +56,14 @@
             <a href="#" style="text-decoration: none">
                 <i class="text-secondary fas fa-archive"></i>
                 <span>商品管理</span>
+            </a>
+        </li>
+
+        <!-- 商品新增 -->
+        <li id="ProductAdd" class="list-group-item funName">
+            <a href="/backend/ProductAdd" style="text-decoration: none">
+                <i class="text-secondary fas fa-gift"></i>
+                <span>增加商品</span>
             </a>
         </li>
 

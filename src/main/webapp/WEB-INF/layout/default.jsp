@@ -80,7 +80,7 @@ div.path {
 
 					<li class="nav-item"><a class="nav-link dropdown-toggle"
 						href="/Product">前往商城</a></li>
-					<li class="nav-item"><a class="nav-link" href="/viewStatus">前往分享區</a></li>
+					<li class="nav-item"><a class="nav-link" href="/goShareArea">前往分享區</a></li>
 					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
 					<li class="nav-item"><a class="nav-link" href="/custService">客服中心</a></li>
 
@@ -90,7 +90,7 @@ div.path {
 		</div>
 	</nav>
 	<div>
-		<img src="img\top.jpg" class="img-fluid">
+		<img src="${contextRoot}\img\top.jpg" class="img-fluid">
 	</div>
 
 <!--設定div class container代表標題以下是由tiles管理排版  --> 

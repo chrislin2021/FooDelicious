@@ -12,6 +12,7 @@
     height: 60px;
     text-align: center;
     padding-top: 10px;
+    
 }
 
 .brand{
@@ -28,7 +29,9 @@
 
 .leftBar{
     background-color: #23651C;
-    height: 1000px;
+    height: 800px;
+    text-align:center;
+
 }
 
 .photo{
@@ -40,23 +43,24 @@
     color: var(--color_gold);
     font-size: 30px;
     font-family: 'Zen Maru Gothic', sans-serif;
-    padding-left: 20px;
+    
 }
 .col-fixed{
     float: left;
     margin-left: 0;
     margin-right: 0;
+    width: 300px;
+}
+
+.list-group-item{
+	margin-top:10px;
+	border:none;
 }
 
 .row{
     width: calc(100% - 300px);
 }
 
-
-.col-fixed{
-    float: left;
-    width: 300px;
-}
 
 .rightArea{
     background-color: white;
@@ -92,3 +96,50 @@ span:hover{
 .ulArea{
     margin-left: 80px;
 }
+
+.bg-modal {
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+.logoutIcon{
+	
+	margin-top:130%;
+}
+
+.modal-contents {
+	height: 600px;
+	width: 600px;
+	background-color: white;
+	text-align: center;
+	padding: 20px;
+	position: relative;
+	border-radius: 4px;
+}
+
+input {
+	margin: 15px auto;
+	display: block;
+	width: 50%;
+	padding: 8px;
+	border: 1px solid gray;
+}
+
+.close {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 42px;
+	color: #333;
+	transform: rotate(45deg);
+	cursor: pointer;
+	
+}
+
+

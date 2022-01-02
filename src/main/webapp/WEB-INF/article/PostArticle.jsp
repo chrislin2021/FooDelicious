@@ -11,14 +11,14 @@
 	<div div class="col-12 col-md-9">
 		<h3>發表新文章</h3>
 		<select class="form-select selectpicker" aria-label="Default select"
-			data-width="300px">
+			data-width="300px" id="classify">
 			<option selected>請選擇分類</option>
 			<option>食譜分享</option>
 			<option>廚具開箱</option>
 		</select>
 		<div style="margin: 10px 0px;">
 			<input type="text" class="form-control" placeholder="請輸入文章標題..."
-				aria-label="Recipient's username">
+				aria-label="Recipient's username" id="titleArea">
 		</div>
 <!-- 		<form action="#" method="post" enctype="multipart/form-data"> -->
 <!-- 			<textarea name="content" id="editor">       -->
@@ -165,7 +165,21 @@
 
     document.querySelector( '#submit' ).addEventListener( 'click', () => {
         const editorData = editor.getData();
-        console.log(editorData);
-
+        
+        var postData = {
+    			title : $("#titleArea").val(),
+    			classify : $("#classify").val(),
+    			article : editorData
+    		};
+        
+        $.ajax({
+			url : "/postarticle.controller",
+			data : JSON.stringify(postData),
+			type : "POST",
+			contentType : "application/json;charset=utf-8",
+		});
+        
+        window.location.href="/goShareArea";
     } );
+    
 </script>

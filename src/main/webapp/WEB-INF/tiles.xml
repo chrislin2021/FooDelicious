@@ -30,6 +30,16 @@
 		<put-attribute name="content"
 			value="/WEB-INF/article/PostArticle.jsp" />
 	</definition>
+	
+	<definition name="app.ShowAtricle" extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/article/ShowAtricle.jsp" />
+	</definition>
+	
+	<definition name="app.ShareArea" extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/article/ShareArea.jsp" />
+	</definition>
 
 	<definition name="app.CompanyDefault"
 		template="/WEB-INF/companyBackend/CompanyDefault.jsp">
@@ -82,6 +92,18 @@
 	<definition name="app.CustService" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/custService/CustService.jsp" />
+	</definition>
+
+	<definition name="app.BackendProductAdd"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/BackendProductAdd.jsp" />
+	</definition>
+
+	<definition name="app.BackendMember"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/BackendMember.jsp" />
 	</definition>
 
 </tiles-definitions>
