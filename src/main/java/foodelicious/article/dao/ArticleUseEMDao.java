@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -97,5 +96,12 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 		
 		return list;		
 	} 
-	
+		
+	@Override
+	public void useArticleIdDelete(int id) {
+		
+		ArticleData articleData = em.find(ArticleData.class, id);
+		//System.out.println(articleData.getArticle());		
+		em.remove(articleData);
+	}
 }

@@ -90,9 +90,10 @@ public class ArticleController {
 	}
 	@ResponseBody
 	 @RequestMapping(value = "/deleteData/{id}", method = RequestMethod.DELETE)
-	public void deleteAtricle(@PathVariable(value="id", required = false ) Integer id) {
+	public String deleteAtricle(@PathVariable(value="id", required = false ) Integer id) {
 		System.out.println(id);
+		articleEMDaoService.useArticleIdDelete(id);
 		//forward:/members
-		//return params.get("id");
+		return "forward:/responseArticle";
 	}
 }

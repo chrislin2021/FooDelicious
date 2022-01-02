@@ -16,4 +16,6 @@ public interface ArticleUseEMDaoService {
 	List<ShareArea> useIdFindShareArea(int id);
 
 	List<ArticleData> useIdFindArticleArea(int id);
+	
+	void useArticleIdDelete(int id);
 }
