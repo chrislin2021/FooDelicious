@@ -87,7 +87,7 @@
                         //dataType: 'json',
                     })
                 }
-
+                window.location.href="/goShareArea";
             }
 
             function liButtonClick() {
