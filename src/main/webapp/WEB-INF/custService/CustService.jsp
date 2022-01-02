@@ -44,7 +44,7 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
+  float: center;
 }
 
 input[type=submit]:hover {
@@ -88,7 +88,7 @@ input[type=submit]:hover {
 <body>
 
 <h2>客戶反應中心</h2>
-<p>請於下方留下您的問題與敘述，我們會於24小時內回覆給您</p>
+<p>請留下您的問題與敘述，我們會於24小時內回覆給您</p>
 
 <div class="container">
   <form action="/action_page.php">
@@ -97,7 +97,7 @@ input[type=submit]:hover {
       <label for="name">姓名</label>
     </div>
     <div class="col-75">
-      <input type="text" id="name" name="name" placeholder="Your name">
+      <input type="text" id="name" name="name" placeholder="輸入您的姓名" required>
     </div>
   </div>
   <div class="row">
@@ -105,7 +105,7 @@ input[type=submit]:hover {
       <label for="email">聯絡Email或電話</label>
     </div>
     <div class="col-75">
-      <input type="text" id="email" name="email" placeholder="Your email">
+      <input type="text" id="email" name="email" placeholder="輸入您的email" required>
     </div>
   </div>
   <div class="row">
@@ -116,6 +116,7 @@ input[type=submit]:hover {
       <select id="country" name="country">
         <option value="">訂單問題</option>
         <option value="">商品問題</option>
+        <option value="">投訴</option>
         <option value="">其他</option>
       </select>
     </div>
@@ -130,9 +131,9 @@ input[type=submit]:hover {
   </div>
   <br>
   <div class="row">
-    <input type="submit" value="送出">
-    <input type="button" value="清除" onclick="clearText();">
-    <input type="submit" value="一鍵輸入">
+    <input type="submit" value="送出" style="height:50px;width:100px">
+    <input type="button" value="清除" onclick="clearText();" style="height:50px;width:100px">
+    <input type="submit" value="一鍵輸入" style="height:50px;width:100px">
   </div>
   </form>
 </div>
