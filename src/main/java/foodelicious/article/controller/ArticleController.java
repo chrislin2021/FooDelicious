@@ -88,12 +88,13 @@ public class ArticleController {
 		//System.out.println("ArticleId：　" + id);
 		return "app.ShowAtricle";
 	}
-	@ResponseBody
-	 @RequestMapping(value = "/deleteData/{id}", method = RequestMethod.DELETE)
+	//@ResponseBody
+	//@RequestMapping(value = "/deleteData/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping("/deleteData/{id}")
 	public String deleteAtricle(@PathVariable(value="id", required = false ) Integer id) {
 		System.out.println(id);
 		articleEMDaoService.useArticleIdDelete(id);
 		//forward:/members
-		return "forward:/responseArticle";
+		return "app.goShareArea";
 	}
 }

@@ -34,8 +34,8 @@ public class PageController {
 	public String goPostArticle() {
 		return "app.PostArticle";
 	}
-	
-	@GetMapping("/goShareArea")
+		
+	@RequestMapping(value="/goShareArea", method= {RequestMethod.GET, RequestMethod.DELETE})
 	public String goShareArea() {
 		return "app.ShareArea";
 	}
