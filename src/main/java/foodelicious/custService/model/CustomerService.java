@@ -41,4 +41,56 @@ public class CustomerService implements Serializable {
 	@Column(name="block_Img")
 	private String block_Img;
 
+	public Long getCstm_Id() {
+		return cstm_Id;
+	}
+
+	public void setCstm_Id(Long cstm_Id) {
+		this.cstm_Id = cstm_Id;
+	}
+
+	public Long getVendor_Id() {
+		return vendor_Id;
+	}
+
+	public void setVendor_Id(Long vendor_Id) {
+		this.vendor_Id = vendor_Id;
+	}
+
+	public String getProblem_Title() {
+		return problem_Title;
+	}
+
+	public void setProblem_Title(String problem_Title) {
+		this.problem_Title = problem_Title;
+	}
+
+	public String getProblem_Text() {
+		return problem_Text;
+	}
+
+	public void setProblem_Text(String problem_Text) {
+		this.problem_Text = problem_Text;
+	}
+
+	public LocalDateTime getProblem_postTime() {
+		return problem_postTime;
+	}
+
+	public void setProblem_postTime(LocalDateTime problem_postTime) {
+		this.problem_postTime = problem_postTime;
+	}
+
+	public String getBlock_Img() {
+		return block_Img;
+	}
+
+	public void setBlock_Img(String block_Img) {
+		this.block_Img = block_Img;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 }

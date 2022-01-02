@@ -82,6 +82,7 @@ div.path {
 						href="/Product">前往商城</a></li>
 					<li class="nav-item"><a class="nav-link" href="/goShareArea">前往分享區</a></li>
 					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
+					<li class="nav-item"><a class="nav-link" href="/custService">客服中心</a></li>
 
 				</ul>
 
