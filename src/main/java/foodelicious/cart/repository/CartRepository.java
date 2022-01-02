@@ -10,7 +10,6 @@ import foodelicious.cart.model.CartBean;
 @Repository
 public interface CartRepository extends JpaRepository<CartBean, Long> {
 
-//	JPA自定義方法不能有底線把底線去除
 	List<CartBean> findAllByMemberId(Long memberId);
 
 }

@@ -18,18 +18,13 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartBean insertItem(CartBean cartBean) {
+	public CartBean insertAndUpdateItem(CartBean cartBean) {
 		return cartRepository.save(cartBean);
 	}
 
 	@Override
 	public void deleteItem(Long productId) {
 		cartRepository.deleteById(productId);
-	}
-
-	@Override
-	public CartBean updateItem(CartBean cartBean) {
-		return cartRepository.save(cartBean);
 	}
 
 	@Override

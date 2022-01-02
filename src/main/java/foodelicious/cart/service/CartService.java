@@ -6,11 +6,9 @@ import foodelicious.cart.model.CartBean;
 
 public interface CartService {
 
-	CartBean insertItem(CartBean cartBean);
+	CartBean insertAndUpdateItem(CartBean cartBean);
 
 	void deleteItem(Long cartId);
-
-	CartBean updateItem(CartBean cartBean);
 
 	List<CartBean> selectItem(Long memberId);
 

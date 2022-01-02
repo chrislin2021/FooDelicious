@@ -13,7 +13,7 @@ public class CartItemBean implements Serializable {
 	@Resource
 	private Product product;
 
-	private Integer itemQuantity;
+	private Integer Quantity;
 
 	public Product getProduct() {
 		return product;
@@ -23,12 +23,12 @@ public class CartItemBean implements Serializable {
 		this.product = product;
 	}
 
-	public Integer getItemQuantity() {
-		return itemQuantity;
+	public Integer getQuantity() {
+		return Quantity;
 	}
 
-	public void setItemQuantity(Integer itemQuantity) {
-		this.itemQuantity = itemQuantity;
+	public void setQuantity(Integer quantity) {
+		Quantity = quantity;
 	}
 
 }
