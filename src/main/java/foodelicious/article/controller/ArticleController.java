@@ -77,6 +77,7 @@ public class ArticleController {
 		int id = (int) session.getAttribute("ArticleId");
 		//System.out.println("ArticleId2：　" + id);
 		Map<String, Object> data = new HashMap<>();
+		data.put("LoginId", session.getAttribute("userID"));
 		data.put("title", articleEMDaoService.useIdFindShareArea(id));
 		data.put("article", articleEMDaoService.useIdFindArticleArea(id));
 		
@@ -95,6 +96,8 @@ public class ArticleController {
 		System.out.println(id);
 		articleEMDaoService.useArticleIdDelete(id);
 		//forward:/members
+		
+		//return目前失敗 要找em有沒有forward類似技術
 		return "app.goShareArea";
 	}
 }
