@@ -31,50 +31,40 @@
         var articleId = "";
         let clallifyAndTitle = "";
         $.ajax({
-            url: "/responseArticle",
-            type: "Get",
-            success: function(data) {
+                url: "/responseArticle",
+                type: "Get",
+                success: function(data) {
 
-                let accId = data.title[0].fk_account_id;
-                let loginId = data.LoginId;
-                articleId = data.title[0].share_id
-                    //console.log("accId: " + accId);
-                console.log("articleId: " + articleId);
-                //console.log("loginId " + loginId);
-                //console.log(accId == loginId);
-                clallifyAndTitle += "<tr>";
-                clallifyAndTitle += "<th>" + data.title[0].article_clallify + "</th>";
-                clallifyAndTitle += "<th>" + data.title[0].article_title + "</th>";
-                clallifyAndTitle += "</tr>";
-                $("#clallifyAndTitle").html(clallifyAndTitle);
-                $(".textArea").html(data.article[0].article);
-                (loginId == accId) ? $("#updateBTN").prop("class", "btn btn-primary btn-lg"): $("#updateBTN").prop("class", "btn btn-primary btn-lg disabled");
-                //$("#updateBTN").prop("href", "test");
+                    let accId = data.title[0].fk_account_id;
+                    let loginId = data.LoginId;
+                    articleId = data.title[0].share_id
+                    clallifyAndTitle += "<tr>";
+                    clallifyAndTitle += "<th>" + data.title[0].article_clallify + "</th>";
+                    clallifyAndTitle += "<th>" + data.title[0].article_title + "</th>";
+                    clallifyAndTitle += "</tr>";
+                    $("#clallifyAndTitle").html(clallifyAndTitle);
+                    $(".textArea").html(data.article[0].article);
+                    (loginId == accId) ? $("#updateBTN").prop("class", "btn btn-primary btn-lg"): $("#updateBTN").prop("class", "btn btn-primary btn-lg disabled");
+                    //$("#updateBTN").prop("href", "test");
 
 
 
-            }
-        })
-
-        function goUpdate(articleId) {
-            $.ajax({
-                url: "/UpdateArticle",
-                type: "PUT",
-                data: "id=" + articleId
+                }
             })
-        };
+            //修改按鈕功能 這邊好像不太需要呢
         $("#updateBTN").click(function() {
-            console.log(articleId)
-            var postData = {
-                "articleId": articleId
-            };
+            //             console.log(articleId)
+            //             var postData = {
+            //                 "articleId": articleId
+            //             };
 
-            $.ajax({
-                url: "/UpdateArticle",
-                type: "POST",
-                data: JSON.stringify(postData),
-                contentType: "application/json;charset=utf-8",
-            })
-
+            //             $.ajax({
+            //                 url: "/takeArticleData",
+            //                 type: "POST",
+            //                 data: JSON.stringify(postData),
+            //                 contentType: "application/json;charset=utf-8",
+            //                 cache: false
+            //             }).done()
+            window.location.href = "/goUpdatePage"
         })
     </script>

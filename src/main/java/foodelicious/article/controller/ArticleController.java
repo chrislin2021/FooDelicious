@@ -56,14 +56,7 @@ public class ArticleController {
 //		System.out.println(id);
 		articleEMDaoService.pushArticle(params, id);
 	}
-	
-//	@GetMapping("/totalArticleData")
-//	public ModelAndView totalArticleData(ModelAndView mav) {
-//		mav.getModel().put("TotalData", articleEMDaoService.findAll());
-//		mav.setViewName("app.ShareArea");
-//		return mav;
-//	}
-	
+
 	@ResponseBody
 	@GetMapping("/totalArticleData")
 	public Map<String, Object> totalArticleData(HttpSession session) {
@@ -83,8 +76,10 @@ public class ArticleController {
 		data.put("title", articleEMDaoService.useIdFindShareArea(id));
 		data.put("article", articleEMDaoService.useIdFindArticleArea(id));
 		
+		
 		return data;		
 	}
+	//儲存ArticleId
 	@GetMapping("/intIDFindAll/{id}")
 	public String goSpecifyArticle(HttpSession session,@PathVariable(value = "id", required = false) Integer id) {
 		session.setAttribute("ArticleId", id);
@@ -103,10 +98,19 @@ public class ArticleController {
 		return "app.goShareArea";
 	}
 	
-	@PostMapping("/UpdateArticle")
-	public String goUpdateArticle(@RequestBody Map<String, String> params) {
-		System.out.println(params.get("articleId"));
-		
+//	@PostMapping("/takeArticleData")
+//	public void takeArticleData(@RequestBody Map<String, String> params) {
+//
+//		
+//		//return "app.UpdateArticle";
+//	}
+	@GetMapping("/goUpdatePage")
+	public String goUpdatePage(HttpSession session, Model model) {
+		int id = (int) session.getAttribute("ArticleId");
+		model.addAttribute("LoginId", session.getAttribute("userID"));
+		model.addAttribute("title", articleEMDaoService.useIdFindShareArea(id));
+		model.addAttribute("article", articleEMDaoService.useIdFindArticleArea(id));
+		model.addAttribute("article", articleEMDaoService.useIdFindArticleArea(id));
 		return "app.UpdateArticle";
 	}
 }
