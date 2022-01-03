@@ -46,9 +46,10 @@ public class MemberCreateController {
 			mem.setMemberBirth(formData.get("memberBirth"));;
 			mem.setMemberPhone(formData.get("memberPhone"));
 			mem.setMemberAddress(formData.get("memberAddress"));
-			mem.setMember_status("normal");
+			mem.setMember_status("customer");
 			mem.setMemberCoin(0);
-			if(memberService.save(mem)) {
+			mem.setMemberDiscountId("null");
+			if(memberService.save(mem)) {	
 				model.addAttribute("message","註冊成功");
 				System.out.println("=================================");
 //				redirect.addFlashAttribute("message","註冊成功");

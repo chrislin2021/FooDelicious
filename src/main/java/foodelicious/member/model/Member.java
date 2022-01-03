@@ -42,27 +42,35 @@ public class Member implements Serializable {
 	@Column(name = "member_mail", unique = true)
 	@Email
 	private String memberMail;
-
+	
+	@Column(name = "pwd")
 	@Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
 	@NotBlank(message = "密碼不得空白")
 	private String pwd;
-
+	
+	@Column(name = "member_name")
 	@Pattern(regexp = NAME_REG, message = "請輸入2個字以上繁體中文")
 	@Size(min = 2, max = 255, message = "名子不得低於兩個字")
 	private String memberName;
-
+	
+	@Column(name = "member_gender")
 	private String memberGender;
-
+	
+	@Column(name = "member_birth")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private String memberBirth;
-
+	
+	@Column(name = "member_phone")
 	@Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤")
 	private String memberPhone;
-
+	
+	@Column(name = "member_address")
 	private String memberAddress;
 	
+	@Column(name = "member_discount_id")
 	private String memberDiscountId;
-
+	
+	@Column(name = "member_coin")
 	private Integer memberCoin;
 
 	@Column(name = "member_status", columnDefinition = "varchar(255) default 'normal'")
