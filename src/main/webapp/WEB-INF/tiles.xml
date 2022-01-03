@@ -110,5 +110,11 @@
 		<put-attribute name="content"
 					   value="/WEB-INF/backend/BackendMember.jsp" />
 	</definition>
+	
+	<definition name="app.CashflowList"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/cashflow/GetAllProject.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -111,6 +111,7 @@ public class ArticleController {
 		model.addAttribute("title", articleEMDaoService.useIdFindShareArea(id));
 		model.addAttribute("article", articleEMDaoService.useIdFindArticleArea(id));
 		model.addAttribute("article", articleEMDaoService.useIdFindArticleArea(id));
+		
 		return "app.UpdateArticle";
 	}
 	
