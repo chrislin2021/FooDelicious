@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html>
+<style>
+	.productbody {
+		text-align: center;
+	}
+	.tablebody,th {
+		margin: auto;
+		vertical-align: middle;
+  		text-align: center;
+  		border: 1px solid black ;
+	}
+</style>
 <div class="row" id="rowSelect">
 	<div class="col-12 col-md-2">
 		<div class="list-group">
@@ -10,13 +24,45 @@
 			<a href="/postArticle" class="list-group-item list-group-item-action">發表新文章</a>
 		</div>
 	</div>
-	<div class="card" style="width: 18rem;">
-		<img src="https://picsum.photos/300/200?random=1" class="card-img-top" alt="...">
-		<div class="card-body">
-			<h5 class="card-title">Card title</h5>
-			<p class="card-text">Some quick example text to build on the card
-				title and make up the bulk of the card's content.</p>
-			<a href="/ProductDetail" class="btn btn-primary">商品詳情</a>
-		</div>
-	</div>
 </div>
+	<div class="productbody">
+		<header>
+			<h1>商品列表</h1>
+		</header>
+		<br>
+		<table class="tablebody">
+			<tr style="background-color: #FF8040">
+				<th>商品編號
+				<th>商品圖片
+				<th>商品公司
+				<th>商品名稱
+				<th>商品價格
+				<th>編輯 
+			</tr>
+			<c:forEach items="${pros}" var="pro">
+				<tr>
+					<td>${pro.productId}
+					<td>${pro.productPics}
+					<td>${pro.productCompany}
+					<td>${pro.productName}
+					<td>${pro.productPrice}
+					<td>
+						<a href="edit/${pro.productId}">edit</a>
+						<a href="del?id=${pro.productId}">delete</a></td>
+						
+				</tr>		
+			</c:forEach>
+			  
+		</table>
+		<br>
+	</div>
+	<script type="text/javascript">
+		function check(productId) {
+			if (confirm("確定刪除?")) {
+				window.location.href = "DeletePro?productId=" + productId;
+			} else {
+			}
+		}
+	</script>
+</body>
+</html>
