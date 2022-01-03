@@ -5,7 +5,7 @@
 
 <h1>${account}</h1>
 
-<!-- 抓不到session的值 -->
+
 
 <c:forEach items="${account}" var="session">
 ${session}

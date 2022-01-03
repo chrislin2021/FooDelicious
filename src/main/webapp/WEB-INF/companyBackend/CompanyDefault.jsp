@@ -68,6 +68,9 @@
 					<i class="text-secondary fas fa-archive"></i> <span>商品管理</span>
 					<div class="collapse ulArea" id="collapseExample">
 						<ul id="" class="accordion-collapse collapse show">
+						<li id="addProduct" class="colLi funName"><a class="colLi"
+								href="/companyProduct" style="text-decoration: none"><i
+									class="fa fa-circle-o">查詢商品</i></a></li>
 							<li id="addProduct" class="colLi funName"><a class="colLi"
 								href="" style="text-decoration: none"><i
 									class="fa fa-circle-o"></i>新增商品</a></li>
@@ -91,7 +94,7 @@
 					<div class="collapse ulArea" id="collapseExample">
 						<ul id="collapseOne" class="accordion-collapse collapse show">
 							<li id="addProduct" class="colLi funName"><a class="colLi"
-								href="" style="text-decoration: none"><i
+								href="/companyProduct" style="text-decoration: none"><i
 									class="fa fa-circle-o"></i>查詢訂單</a></li>
 							<li id="editProduct" class="colLi"><a class="colLi" href=""
 								style="text-decoration: none"><i class="fa fa-circle-o"></i>修改訂單</a></li>
