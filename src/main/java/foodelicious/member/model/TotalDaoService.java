@@ -27,9 +27,9 @@ public class TotalDaoService {
 		return totalDao.checkLogin(user, pwd);
 	}
 	
-	public boolean checkPermission(Long id) {
-		return totalDao.checkPermission(id);
-	}
+//	public boolean checkPermission(Long id) {
+//		return totalDao.checkPermission(id);
+//	}
 
 	public String findId2(Long id) { return totalDao.findId2(id);}
 	
