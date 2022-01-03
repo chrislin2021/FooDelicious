@@ -83,7 +83,7 @@ public class ArticleController {
 	@GetMapping("/intIDFindAll/{id}")
 	public String goSpecifyArticle(HttpSession session,@PathVariable(value = "id", required = false) Integer id) {
 		session.setAttribute("ArticleId", id);
-		//System.out.println("ArticleId：　" + id);
+		System.out.println("ArticleId：　" + id);
 		return "app.ShowAtricle";
 	}
 	//@ResponseBody
@@ -112,5 +112,14 @@ public class ArticleController {
 		model.addAttribute("article", articleEMDaoService.useIdFindArticleArea(id));
 		model.addAttribute("article", articleEMDaoService.useIdFindArticleArea(id));
 		return "app.UpdateArticle";
+	}
+	
+	@PostMapping("/articleUpdate")
+	public void updateArticle(@RequestBody Map<String, String> params, HttpSession session) {
+		int id = (int) session.getAttribute("ArticleId");
+		
+		
+		System.out.println("article："+params.get("article"));
+		articleEMDaoService.UpdateArticle(params, id);
 	}
 }

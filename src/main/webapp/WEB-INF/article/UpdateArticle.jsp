@@ -1,41 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link href="/css/CKEditor.css" rel="stylesheet" />
-<div class="row" id="rowSelect">
-	<!--版面配置左方-->
-	<div div class="col-12 col-md-2"></div>
-	<!--版面配置右方-->
-	<div div class="col-12 col-md-9">
-		<h3>文章修改</h3>
-		<div class="input-group mb-3">
-			<span class="input-group-text" id="inputGroup-sizing-default">分類</span>
-			<input type="text" class="form-control" readonly
-				aria-label="Sizing example input"
-				aria-describedby="inputGroup-sizing-default" value="" id="classify">
-		</div>
-		<hr>
-		<div class="input-group mb-3">
-			<span class="input-group-text" id="inputGroup-sizing-default">標題</span>
-			<input type="text" class="form-control" readonly
-				aria-label="Sizing example input"
-				aria-describedby="inputGroup-sizing-default" value="" id="title">
-		</div>
-		<hr>
-		<div id="editor">
-			<c:forEach var="article" items="${article}">
-				${article.article}
-			</c:forEach>
-		</div>
-		<br> <input type='button' value='送出' id="submit">
-	</div>
-</div>
-<script src="/js/ckeditor.js"></script>
-<script src="/js/jquery-3.6.0.min.js"></script>
-<script src="/translations/zh.js"></script>
+        <link href="/css/CKEditor.css" rel="stylesheet" />
+        <div class="row" id="rowSelect">
+            <!--版面配置左方-->
+            <div div class="col-12 col-md-2"></div>
+            <!--版面配置右方-->
+            <div div class="col-12 col-md-9">
+                <h3>文章修改</h3>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">分類</span>
+                    <input type="text" class="form-control" readonly aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="" id="classify">
+                </div>
+                <hr>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">標題</span>
+                    <input type="text" class="form-control" readonly aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="" id="title">
+                </div>
+                <hr>
+                <div id="editor">
+                    <c:forEach var="article" items="${article}">
+                        ${article.article}
+                    </c:forEach>
+                </div>
+                <br> <input type='button' value='確認修改' id="submit">
+            </div>
+        </div>
+        <script src="/js/ckeditor.js"></script>
+        <script src="/js/jquery-3.6.0.min.js"></script>
+        <script src="/translations/zh.js"></script>
 
-<script>
+        <script>
             //歡樂的CKEditor圖片固定區域
             class MyUploadAdapter {
                 constructor(loader) {
@@ -177,7 +173,7 @@
                 window.location.href = "/goShareArea";
             });
 
-            //從SQL尋找資料 並且顯示於畫面上
+            //從SQL尋找資料 並且顯示於畫面上 這邊只有顯示title和分類
             $.ajax({
                 url: "/responseArticle",
                 type: "Get",
@@ -188,4 +184,21 @@
                     $("#title").val(data.title[0].article_title);
                 }
             })
+            document.querySelector('#submit').addEventListener('click', () => {
+                const editorData = editor.getData();
+
+                var postData = {
+                    title: $("#titleArea").val(),
+                    classify: $("#classify").val(),
+                    article: editorData
+                };
+
+                $.ajax({
+                    url: "/articleUpdate",
+                    data: JSON.stringify(postData),
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                });
+                window.location.href = "/goShareArea"
+            });
         </script>

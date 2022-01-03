@@ -18,4 +18,6 @@ public interface ArticleUseEMDaoService {
 	List<ArticleData> useIdFindArticleArea(int id);
 	
 	void useArticleIdDelete(int id);
+	
+	void UpdateArticle(Map<String, String> params ,int id);
 }

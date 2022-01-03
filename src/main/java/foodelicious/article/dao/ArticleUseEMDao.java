@@ -104,4 +104,17 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 		//System.out.println(articleData.getArticle());		
 		em.remove(articleData);
 	}
+	
+	@Override
+	public void UpdateArticle(Map<String, String> params ,int id) {
+		//先對應到外來件資料 id的部份有primary限制
+		ArticleData updateArticle = em.find(ArticleData.class, id);
+		updateArticle.setArticle(params.get("article"));
+		
+//		ShareArea shareArea = new ShareArea();
+//		shareArea.setArticle_title(params.get("title"));
+//		updateArticle.setShareArea(shareArea);
+		
+		em.merge(updateArticle);
+	}
 }
