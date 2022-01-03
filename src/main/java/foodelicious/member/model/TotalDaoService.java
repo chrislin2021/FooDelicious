@@ -22,7 +22,7 @@ public class TotalDaoService {
 	public Long findId(Account users) {
 		return totalDao.findId(users);
 	}
-	
+
 	public boolean checkLogin(String user, String pwd) {
 		return totalDao.checkLogin(user, pwd);
 	}
@@ -30,6 +30,13 @@ public class TotalDaoService {
 //		return totalDao.checkPermission(id);
 //	}
 
-	public String findId2(Long id) { return totalDao.findId2(id);}
-	
+
+//	public boolean checkPermission(Long id) {
+//		return totalDao.checkPermission(id);
+//	}
+
+	public String findId2(Long id) {
+		return totalDao.findId2(id);
+	}
+
 }

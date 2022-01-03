@@ -3,6 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
 
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -94,8 +95,8 @@
 					<div class="collapse ulArea" id="collapseExample">
 						<ul id="collapseOne" class="accordion-collapse collapse show">
 							<li id="addProduct" class="colLi funName"><a class="colLi"
-								href="/companyProduct" style="text-decoration: none"><i
-									class="fa fa-circle-o"></i>查詢訂單</a></li>
+								href="/companyOrder" style="text-decoration: none"><i
+									class="fa fa-circle-o">查詢訂單</i></a></li>
 							<li id="editProduct" class="colLi"><a class="colLi" href=""
 								style="text-decoration: none"><i class="fa fa-circle-o"></i>修改訂單</a></li>
 
@@ -127,6 +128,8 @@
 					</div>
 				</button>
 			</li>
+			
+			
 
 			<!-- inbox -->
 			<li id="BanList" class="list-group-item funName"><a href="#"
@@ -143,7 +146,7 @@
 
 			<!-- 登出 -->
 			<li id="" class="list-group-item logoutIcon"><a href="/"
-				style="color: white" onclick="logout()"> <i
+				style="color: white" onclick="logout('${account}')"> <i
 					class="fas fa-sign-out-alt fa-lg"></i>
 			</a></li>
 
@@ -193,12 +196,15 @@
 
 	<!-- 登出 -->
 	<script>
-		function logout() {
+		function logout(account) {
 			
 			if (confirm("確定要登出嗎") == true) {
-				
-				
-				
+				session.removeAttribute("account");//我這裡是先取出httpsession中的account屬性
+				session.removeAttribute("pwd");
+				session.removeAttribute("userID");
+		        session.invalidate();  //然後是讓httpsession失效
+
+				sessionStatus.setComplete();
 			}
 		}
 	</script>
