@@ -1,154 +1,238 @@
 package foodelicious.member.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-@Entity(name = "member_data")
-@Table(name = "member_data")
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@Entity
+@Table(name = "member_data2")
 @Component
 public class Member implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	public static final String PHONE_REG = "09[0-9]{8}$";
+	public static final String PERSONID_REG = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
+	public static final String Password_REG = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*\\W).{8,}$";
+	public static final String NAME_REG = "^[\u4E00-\u9FA5]{2,}$";
 
 	@Id
 	@Column(name = "member_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int member_id;
+	private Long memberId;
 
-	@Size(min=2, max = 255, message = "名子不得低於兩個字")
-	@Column(name = "member_name")
-	private String userName;
+	@Column(name = "member_mail", unique = true)
+	@Email
+	private String memberMail;
 
-	@Column(name = "member_gender")
-	private String member_gender;
+	@Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
+	@NotBlank(message = "密碼不得空白")
+	private String pwd;
 
-	//格式不確定這個是不是最佳的 要改
-	@Column(name = "member_birth")
-	private String member_birth;
+	@Pattern(regexp = NAME_REG, message = "請輸入2個字以上繁體中文")
+	@Size(min = 2, max = 255, message = "名子不得低於兩個字")
+	private String memberName;
+
+	private String memberGender;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	private String memberBirth;
 
 	@Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤")
-	@Column(name = "member_phone")
-	private String member_phone;
+	private String memberPhone;
 
-	@Column(name = "member_address")
-	private String member_address;
+	private String memberAddress;
+	
+	private String memberDiscountId;
 
-	@Column(name = "member_coin")
-	private int member_coin;
+	private Integer memberCoin;
 
-	@Email
-	@Column(name = "member_mail")
-	private String userEmail;
+	@Column(name = "member_status", columnDefinition = "varchar(255) default 'normal'")
+	private String member_status;
 
-	@Transient
-	private int fk_account_id;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name = "register_date")
+	private Date register_date;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_account_id", referencedColumnName = "account_id")//
-	private Account account;
+	@PrePersist // 設定物件轉換為 Persistent 以前執行
+	private void onCreate() {
+		if (register_date == null) {
+			register_date = new Date();
+		}
+	}
 
+	public Member(String memberMail, String pwd) {
+		this.memberMail = memberMail;
+		this.pwd = pwd;
+	}
 
 	public Member() {
+		
 	}
 
-
-	public String getUserName() {
-		return userName;
+	public Member(Long memberId, @Email String memberMail,
+			@Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*\\W).{8,}$", message = "請輸入至少8個字包含一個英文及數字") @NotBlank(message = "密碼不得空白") String pwd,
+			@Pattern(regexp = "^[一-龥]{2,}$", message = "請輸入2個字以上繁體中文") @Size(min = 2, max = 255, message = "名子不得低於兩個字") String memberName,
+			String memberGender, String memberBirth,
+			@Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤") String memberPhone, String memberAddress,
+			String memberDiscountId, Integer memberCoin, String member_status, Date register_date) {
+		super();
+		this.memberId = memberId;
+		this.memberMail = memberMail;
+		this.pwd = pwd;
+		this.memberName = memberName;
+		this.memberGender = memberGender;
+		this.memberBirth = memberBirth;
+		this.memberPhone = memberPhone;
+		this.memberAddress = memberAddress;
+		this.memberDiscountId = memberDiscountId;
+		this.memberCoin = memberCoin;
+		this.member_status = member_status;
+		this.register_date = register_date;
 	}
 
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public Long getMemberId() {
+		return memberId;
 	}
 
-
-	public String getMember_gender() {
-		return member_gender;
+	public void setMemberId(Long memberId) {
+		this.memberId = memberId;
 	}
 
-
-	public void setMember_gender(String member_gender) {
-		this.member_gender = member_gender;
+	public String getMemberMail() {
+		return memberMail;
 	}
 
-
-	public String getMember_birth() {
-		return member_birth;
+	public void setMemberMail(String memberMail) {
+		this.memberMail = memberMail;
 	}
 
-
-	public void setMember_birth(String member_birth) {
-		this.member_birth = member_birth;
+	public String getPwd() {
+		return pwd;
 	}
 
-
-	public String getMember_phone() {
-		return member_phone;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
-
-	public void setMember_phone(String member_phone) {
-		this.member_phone = member_phone;
+	public String getMemberName() {
+		return memberName;
 	}
 
-
-	public String getMember_address() {
-		return member_address;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
-
-	public void setMember_address(String member_address) {
-		this.member_address = member_address;
+	public String getMemberGender() {
+		return memberGender;
 	}
 
-
-	public int getMember_coin() {
-		return member_coin;
+	public void setMemberGender(String memberGender) {
+		this.memberGender = memberGender;
 	}
 
-
-	public void setMember_coin(int member_coin) {
-		this.member_coin = member_coin;
+	public String getMemberBirth() {
+		return memberBirth;
 	}
 
-
-	public String getUserEmail() {
-		return userEmail;
+	public void setMemberBirth(String memberBirth) {
+		this.memberBirth = memberBirth;
 	}
 
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public String getMemberPhone() {
+		return memberPhone;
 	}
 
-
-	public Account getAccount() {
-		return account;
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
 	}
 
-
-	public void setAccount(Account account) {
-		this.account = account;
+	public String getMemberAddress() {
+		return memberAddress;
 	}
 
-
-	public int getMember_id() {
-		return member_id;
+	public void setMemberAddress(String memberAddress) {
+		this.memberAddress = memberAddress;
 	}
 
+	public String getMemberDiscountId() {
+		return memberDiscountId;
+	}
 
+	public void setMemberDiscountId(String memberDiscountId) {
+		this.memberDiscountId = memberDiscountId;
+	}
 
+	public Integer getMemberCoin() {
+		return memberCoin;
+	}
+
+	public void setMemberCoin(Integer memberCoin) {
+		this.memberCoin = memberCoin;
+	}
+
+	public String getMember_status() {
+		return member_status;
+	}
+
+	public void setMember_status(String member_status) {
+		this.member_status = member_status;
+	}
+
+	public Date getRegister_date() {
+		return register_date;
+	}
+
+	public void setRegister_date(Date register_date) {
+		this.register_date = register_date;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static String getPhoneReg() {
+		return PHONE_REG;
+	}
+
+	public static String getPersonidReg() {
+		return PERSONID_REG;
+	}
+
+	public static String getPasswordReg() {
+		return Password_REG;
+	}
+
+	public static String getNameReg() {
+		return NAME_REG;
+	}
+
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", memberMail=" + memberMail + ", pwd=" + pwd + ", memberName="
+				+ memberName + ", memberGender=" + memberGender + ", memberBirth=" + memberBirth + ", memberPhone="
+				+ memberPhone + ", memberAddress=" + memberAddress + ", memberDiscountId=" + memberDiscountId
+				+ ", memberCoin=" + memberCoin + ", member_status=" + member_status + ", register_date=" + register_date
+				+ "]";
+	}
+
+	
 }

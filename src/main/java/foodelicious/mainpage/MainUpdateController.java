@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import foodelicious.member.model.Admin;
+import foodelicious.member.model.Member;
 import foodelicious.member.model.TotalDaoService;
 import foodelicious.member.model.TotalUseEMDaoService;
 
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import foodelicious.member.model.Account;
 
 @Controller
 public class MainUpdateController {
@@ -29,21 +29,21 @@ public class MainUpdateController {
 	@Autowired
 	TotalUseEMDaoService EMDaoService;
 
-	@PostMapping("/register.controller")
-	public String registerController(@RequestBody Map<String, String> params) {
-//		System.out.println(params);
-//		System.out.println(params.get("account"));
-		EMDaoService.RegisterMember(params);
-		return "app.home";
-	}
+//	@PostMapping("/register.controller")
+//	public String registerController(@RequestBody Map<String, String> params) {
+////		System.out.println(params);
+////		System.out.println(params.get("account"));
+//		EMDaoService.RegisterMember(params);
+//		return "app.home";
+//	}
 
 	@PostMapping(path = "/checklogin.controller")
-	public String processAction(@RequestParam("userAccount") String account, @RequestParam("userPwd") String pwd,
+	public String processAction(@RequestParam("memberMail") String memberMail, @RequestParam("pwd") String pwd,
 			Model m, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 
-		if (account == null || account.length() == 0) {
+		if (memberMail == null || memberMail.length() == 0) {
 			errors.put("account", "請輸入帳號");
 		}
 		if (pwd == null || pwd.length() == 0) {
@@ -53,13 +53,13 @@ public class MainUpdateController {
 			return "app.LoginSystem";
 		}
 
-		boolean resultStatus = EMDaoService.checkLogin(new Account(account, pwd));
+		boolean resultStatus = EMDaoService.checkLogin(new Member(memberMail, pwd));
 		if (resultStatus) {
-			m.addAttribute("account", account);
+			m.addAttribute("memberMail", memberMail);
 			m.addAttribute("pwd", pwd);
 //			Long id = totalDaoService.findId(new Account(account, pwd));
-			Long EMid = EMDaoService.findId(new Account(account, pwd));
-			session.setAttribute("account", account);
+			Long EMid = EMDaoService.findId(new Member(memberMail, pwd));
+			session.setAttribute("memberMail", memberMail);
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", EMid);
 			

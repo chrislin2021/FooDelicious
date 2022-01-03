@@ -43,25 +43,25 @@ public class TotalDao {
 		return false;
 	}
 
-	public void RegisterMember(Map<String, String> params) {
-		Session session = sessionFactory.openSession();
-//		System.out.println(params);
-		Member mem = new Member();
-		mem.setUserName(params.get("member_name"));
-		mem.setMember_birth(params.get("member_birth"));
-		mem.setMember_phone(params.get("member_phone"));
-		mem.setMember_address(params.get("member_address"));
-		mem.setUserEmail(params.get("member_mail"));
-
-		Account acc = new Account();
-		acc.setAccountMake(params.get("account"));
-		acc.setPwd(params.get("pwd"));
-
-		mem.setAccount(acc);
-
-		session.save(mem);
-		session.close();
-	}
+//	public void RegisterMember(Map<String, String> params) {
+//		Session session = sessionFactory.openSession();
+////		System.out.println(params);
+//		Member mem = new Member();
+//		mem.setUserName(params.get("member_name"));
+//		mem.setMember_birth(params.get("member_birth"));
+//		mem.setMember_phone(params.get("member_phone"));
+//		mem.setMember_address(params.get("member_address"));
+//		mem.setUserEmail(params.get("member_mail"));
+//
+//		Account acc = new Account();
+//		acc.setAccountMake(params.get("account"));
+//		acc.setPwd(params.get("pwd"));
+//
+//		mem.setAccount(acc);
+//
+//		session.save(mem);
+//		session.close();
+//	}
 
 	public Long findId(Account users) {
 		Session session = sessionFactory.openSession();

@@ -29,14 +29,14 @@ public class TotalUseEMDao {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	// 管理登入
-	public boolean checkLogin(Account users) {
-		TypedQuery<Account> account = null;
+	public boolean checkLogin(Member users) {
+		TypedQuery<Member> account = null;
 		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
-		account = em.createQuery(hqlstr, Account.class)
-				    .setParameter("user", users.getAccountMake())
+		account = em.createQuery(hqlstr, Member.class)
+				    .setParameter("user", users.getMemberMail())
 					.setParameter("pwd", users.getPwd());
 		
-		List<Account> accountData = account.getResultList();
+		List<Member> accountData = account.getResultList();
 		if (accountData != null) {
 			em.close();
 			return true;
@@ -45,34 +45,34 @@ public class TotalUseEMDao {
 		return false;
 	}
 
-	public void RegisterMember(Map<String, String> params) {
-		Member mem = new Member();
-		mem.setUserName(params.get("member_name"));
-		mem.setMember_birth(params.get("member_birth"));
-		mem.setMember_phone(params.get("member_phone"));
-		mem.setMember_address(params.get("member_address"));
-		mem.setUserEmail(params.get("member_mail"));
+//	public void RegisterMember(Map<String, String> params) {
+//		Member mem = new Member();
+//		mem.setMemberName(params.get("member_name"));
+//		mem.setMemberBirth(params.get("member_birth"));
+//		mem.setMemberPhone(params.get("member_phone"));
+//		mem.setMemberAddress(params.get("member_address"));
+//		mem.setUserEmail(params.get("member_mail"));
+//
+//		Account acc = new Account();
+//		acc.setAccountMake(params.get("account"));
+//		acc.setPwd(params.get("pwd"));
+//
+//		mem.setAccount(acc);
+//		//em.persist是新增用的(Insert)
+//		em.persist(mem);
+//		em.close();
+//	}
 
-		Account acc = new Account();
-		acc.setAccountMake(params.get("account"));
-		acc.setPwd(params.get("pwd"));
-
-		mem.setAccount(acc);
-		//em.persist是新增用的(Insert)
-		em.persist(mem);
-		em.close();
-	}
-
-	public Long findId(Account users) {
-		TypedQuery<Account> query = null;
+	public Long findId(Member users) {
+		TypedQuery<Member> query = null;
 		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
-		query = em.createQuery(hqlstr, Account.class);
-		query.setParameter("user", users.getAccountMake());
+		query = em.createQuery(hqlstr, Member.class);
+		query.setParameter("user", users.getMemberMail());
 		query.setParameter("pwd", users.getPwd());
 
-		Account account =  query.getSingleResult();
+		Member account =  query.getSingleResult();
 		em.close();
-		return account.getAccount_id();
+		return account.getMemberId();
 	}
 
 //	// overload checkLogin
