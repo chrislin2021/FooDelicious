@@ -14,21 +14,22 @@ public class PageController {
 		return "app.home";
 	}
 
-	@GetMapping("/LoginSystem")
-	public String toMemberPage() {
-		return "app.LoginSystem";
-	}
+//=========與memberController還有MemberCreateController的mapping重複===========
+//	@GetMapping("/LoginSystem")
+//	public String toMemberPage() {
+//		return "app.LoginSystem";
+//	}
 	
-	@GetMapping("/RegisterPage")
-	public String registerPage() {
-		return "app.RegisterPage";
-	}
+//	@GetMapping("/RegisterPage")
+//	public String registerPage() {
+//		return "app.RegisterPage";
+//	}
 
 	// 轉換頁面用 Login->register
-	@GetMapping("/goregister")
-	public String goRegistergepage() {
-		return "app.RegisterPage";
-	}
+//	@GetMapping("/goregister")
+//	public String goRegistergepage() {
+//		return "app.RegisterPage";
+//	}
 
 	@GetMapping("/postArticle")
 	public String goPostArticle() {

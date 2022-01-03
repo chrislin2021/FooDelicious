@@ -49,7 +49,7 @@ public class CartController {
 
 		Member member = (Member) m.getAttribute("cart");
 
-		List<CartBean> carts = cartService.selectItem(member.getMember_id());
+		List<CartBean> carts = cartService.selectItem(member.getMemberId());
 
 		for (CartBean cart : carts) {
 			if (cart.getProductId() == productId) {

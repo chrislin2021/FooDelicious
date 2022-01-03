@@ -1,17 +1,27 @@
 package foodelicious.backend.memberpage.model;
 
-import foodelicious.member.model.Account;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name = "member_data")
+@Table(name = "member_data2")
 public class BkMember implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Integer memberId;
+
+    @Column(name = "member_mail")
+    private String memberMail;
+
+    @Column(name = "pwd")
+    private String pwd;
+
+    @Column(name = "member_status")
+    private String memberStatus;
 
     @Column(name = "member_name")
     private String memberName;
@@ -28,24 +38,45 @@ public class BkMember implements Serializable {
     @Column(name = "member_address")
     private String memberAddress;
 
-    @Column(name = "member_coin")
-    private Integer memberCoin;
-
-    @Column(name = "member_mail")
-    private String memberMail;
-
     @Column(name = "member_discount_id")
     private String discount;
 
-    @Column(name = "member_img")
-    private String memberPic;
+    @Column(name = "member_coin")
+    private Integer memberCoin;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_account_id")
-    private BkAccount bkAccount;
+    @Column(name = "register_date")
+    private Date registerDate;
 
     public Integer getMemberId() {
         return memberId;
+    }
+
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getMemberMail() {
+        return memberMail;
+    }
+
+    public void setMemberMail(String memberMail) {
+        this.memberMail = memberMail;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getMemberStatus() {
+        return memberStatus;
+    }
+
+    public void setMemberStatus(String memberStatus) {
+        this.memberStatus = memberStatus;
     }
 
     public String getMemberName() {
@@ -60,8 +91,8 @@ public class BkMember implements Serializable {
         return memberGender;
     }
 
-    public void setMemberGender(String memberGrander) {
-        this.memberGender = memberGrander;
+    public void setMemberGender(String memberGender) {
+        this.memberGender = memberGender;
     }
 
     public String getMemberBirth() {
@@ -88,22 +119,6 @@ public class BkMember implements Serializable {
         this.memberAddress = memberAddress;
     }
 
-    public Integer getMemberCoin() {
-        return memberCoin;
-    }
-
-    public void setMemberCoin(Integer memberCoin) {
-        this.memberCoin = memberCoin;
-    }
-
-    public String getMemberMail() {
-        return memberMail;
-    }
-
-    public void setMemberMail(String memberMail) {
-        this.memberMail = memberMail;
-    }
-
     public String getDiscount() {
         return discount;
     }
@@ -112,19 +127,19 @@ public class BkMember implements Serializable {
         this.discount = discount;
     }
 
-    public String getMemberPic() {
-        return memberPic;
+    public Integer getMemberCoin() {
+        return memberCoin;
     }
 
-    public void setMemberPic(String memberPic) {
-        this.memberPic = memberPic;
+    public void setMemberCoin(Integer memberCoin) {
+        this.memberCoin = memberCoin;
     }
 
-    public BkAccount getBkAccount() {
-        return bkAccount;
+    public Date getRegisterDate() {
+        return registerDate;
     }
 
-    public void setBkAccount(BkAccount bkAccount) {
-        this.bkAccount = bkAccount;
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 }

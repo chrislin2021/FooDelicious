@@ -26,22 +26,23 @@ public class TotalDao {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	// 管理登入
-	public boolean checkLogin(Account users) {
-		Session session = sessionFactory.openSession();
-		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
-		Query<Account> query = session.createQuery(hqlstr, Account.class);
-		query.setParameter("user", users.getAccountMake());
-		query.setParameter("pwd", users.getPwd());
-
-		Account account = query.uniqueResult();
-
-		session.close();
-
-		if (account != null) {
-			return true;
-		}
-		return false;
-	}
+	//=========引用到舊的Account先註解===========
+//	public boolean checkLogin(Account users) {
+//		Session session = sessionFactory.openSession();
+//		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
+//		Query<Account> query = session.createQuery(hqlstr, Account.class);
+//		query.setParameter("user", users.getAccountMake());
+//		query.setParameter("pwd", users.getPwd());
+//
+//		Account account = query.uniqueResult();
+//
+//		session.close();
+//
+//		if (account != null) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 //	public void RegisterMember(Map<String, String> params) {
 //		Session session = sessionFactory.openSession();
@@ -63,36 +64,37 @@ public class TotalDao {
 //		session.close();
 //	}
 
-	public Long findId(Account users) {
-		Session session = sessionFactory.openSession();
-
-		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
-		Query<Account> query = session.createQuery(hqlstr, Account.class);
-		query.setParameter("user", users.getAccountMake());
-		query.setParameter("pwd", users.getPwd());
-
-		Account account = query.uniqueResult();
-		session.close();
-		return (Long) account.getAccount_id();
-	}
-
-	// overload checkLogin
-	public boolean checkLogin(String user, String pwd) {
-		Session session = sessionFactory.openSession();
-		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
-		Query<Account> query = session.createQuery(hqlstr, Account.class);
-		query.setParameter("user", user);
-		query.setParameter("pwd", pwd);
-
-		Account account = query.uniqueResult();
-
-		session.close();
-
-		if (account != null) {
-			return true;
-		}
-		return false;
-	}
+	//=========引用到舊的Account先註解===========
+//	public Long findId(Account users) {
+//		Session session = sessionFactory.openSession();
+//
+//		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
+//		Query<Account> query = session.createQuery(hqlstr, Account.class);
+//		query.setParameter("user", users.getAccountMake());
+//		query.setParameter("pwd", users.getPwd());
+//
+//		Account account = query.uniqueResult();
+//		session.close();
+//		return (Long) account.getAccount_id();
+//	}
+//
+//	// overload checkLogin
+//	public boolean checkLogin(String user, String pwd) {
+//		Session session = sessionFactory.openSession();
+//		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
+//		Query<Account> query = session.createQuery(hqlstr, Account.class);
+//		query.setParameter("user", user);
+//		query.setParameter("pwd", pwd);
+//
+//		Account account = query.uniqueResult();
+//
+//		session.close();
+//
+//		if (account != null) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 
 	public String findId2(Long id) {

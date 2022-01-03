@@ -20,4 +20,7 @@ public class BkMemberService implements BkMemberServiceInterface {
     public List<BkMember> getAllData() {
         return bkMemberDaoInterface.getAllData();
     }
+
+    @Override
+    public List<BkMember> findByEmail(String searchEmail){return bkMemberDaoInterface.findByEmail(searchEmail);};
 }

@@ -10,10 +10,10 @@
     會員列表
     <span class="littleName">Member List</span>
 </h1>
-<form action="" method="post">
+<form action="">
     <div class="col-sm-2">
-        <input class="keyWord keyWord1" type="text" name="accKeyWord" placeholder="請輸入帳號關鍵字...">
-        <input class="keyWord btn btn-outline-secondary" type="submit" value="查詢" />
+        <input class="keyWord keyWord1" type="text" name="accKeyWord" placeholder="請輸入Email關鍵字...">
+        <input id="searchAcc" class="keyWord btn btn-outline-secondary" type="button" value="查詢" />
     </div>
 </form>
 
@@ -23,17 +23,15 @@
                 <thead>
                 <tr>
                     <th class="col col1 table-primary">會員編號</th>
-                    <th class="col col2 table-primary">會員帳號</th>
-                    <th class="col col3 table-primary">會員照片</th>
+                    <th class="col col2 table-primary">會員email</th>
                     <th class="col col4 table-primary">帳號狀態</th>
                     <th class="col col5 table-primary">會員姓名</th>
                     <th class="col col6 table-primary">會員性別</th>
-                    <th class="col col7 table-primary">會員coin</th>
-                    <th class="col col8 table-primary">會員折扣</th>
-                    <th class="col col9 table-primary">會員email</th>
+                    <th class="col col12 table-primary">會員生日</th>
                     <th class="col col10 table-primary">會員電話</th>
                     <th class="col col11 table-primary">會員地址</th>
-                    <th class="col col12 table-primary">會員生日</th>
+                    <th class="col col8 table-primary">會員折扣</th>
+                    <th class="col col7 table-primary">會員coin</th>
                     <th class="col col13 table-primary">註冊日期</th>
                     <th class="col col14 table-primary">更新</th>
                     <th class="col col15 table-primary">刪除</th>
@@ -54,8 +52,26 @@
 <%--        }--%>
 <%--    }--%>
 <%--</script>--%>
+<script>
+    //查詢功能
+    $("#searchAcc").on("click",function(){
+       data = $(".keyWord1").val();
+
+       $.ajax({
+           url:"http://localhost:8080/bkmembers/"+data,
+           type: "GET",
+           success:function(accountAll){
+               let num = accountAll.length;
+               showData(0, num);
+           }
+       })
+
+    });
+</script>
+
 
 <script>
+    //顯示頁面和分頁
     const memberUrl = "http://localhost:8080/bkmembers"
     let memberData;
 
@@ -110,7 +126,12 @@
                 //計算是否是最後一頁
                 if((nowPage)+1 >= maxPage){
                     startItem = nowPage * maxItems;
-                    endItem = startItem + (memberAll.length % maxItems);
+                    if(memberAll.length % maxItems == 0){
+                        endItem = startItem + maxItems
+                    }else{
+                        endItem = startItem + memberAll.length % maxItems;
+                    }
+
                 }else{
                     startItem = nowPage * maxItems;
                     endItem = startItem + maxItems;
@@ -158,7 +179,11 @@
                 if(page >= (maxPage-1)){
                     $(".next").prop("class", "page-item next disabled")
                     startItem = page * maxItems;
-                    endItem = startItem + (memberAll.length % maxItems);
+                    if(memberAll.length % maxItems == 0){
+                        endItem = startItem + maxItems
+                    }else{
+                        endItem = startItem + memberAll.length % maxItems;
+                    }
                 }else{
                     startItem = page * maxItems;
                     endItem = startItem + maxItems;
@@ -166,16 +191,6 @@
                 showData(startItem, endItem);
                 nowPage = page;
             });
-
-
-
-
-
-
-
-
-
-
 
         }
     });
@@ -186,28 +201,27 @@
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
             txt += "<td class='align-middle'>"+memberData[i].memberId+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].bkAccount.account+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberPic+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].bkAccount.accountStatus+"</td>"
+            txt += "<td class='align-middle'>"+memberData[i].memberMail+"</td>"
+            txt += "<td class='align-middle'>"+memberData[i].memberStatus+"</td>"
             txt += "<td class='align-middle'>"+memberData[i].memberName+"</td>"
             txt += "<td class='align-middle'>"+memberData[i].memberGender+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberCoin+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].discount+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberMail+"</td>"
+            txt += "<td class='align-middle'>"+memberData[i].memberBirth+"</td>"
             txt += "<td class='align-middle'>"+memberData[i].memberPhone+"</td>"
             txt += "<td class='align-middle'>"+memberData[i].memberAddress+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberBirth+"</td>"
-            let newDate = new Date(memberData[i].bkAccount.registerDate);
+
+            txt += "<td class='align-middle'>"+memberData[i].memberCoin+"</td>"
+            txt += "<td class='align-middle'>"+memberData[i].discount+"</td>"
+            let newDate = new Date(memberData[i].registerDate);
             let register = newDate.toLocaleString();
             txt += "<td class='align-middle'>"+register+"</td>"
             txt += '<td class="align-middle">'+
-                '<form method="post" action="MemUpdate">'+
+                '<form method="" >'+
                 '<input type="hidden" type="text" name="memupd" value=?>'+
-                '<input id="updateBtn" class="btn btn-outline-primary" type="submit" value="更新">'+
+                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新">'+
                 '</form>'+
                 '</td>'
             txt += '<td class="mdata">'+
-                '<form method="post" action="">'+
+                '<form method="" action="">'+
                 '<input type="hidden" type="text" name="empdel" value=?>'+
                 '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" onclick="">'+
                 '</form>'+
@@ -215,10 +229,6 @@
         }
         $("#members").html(txt);
     }
-
-
-
-
 
 </script>
 </body>

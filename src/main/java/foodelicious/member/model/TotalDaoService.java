@@ -15,17 +15,18 @@ public class TotalDaoService {
 //		totalDao.RegisterMember(params);
 //	}
 
-	public boolean checkLogin(Account users) {
-		return totalDao.checkLogin(users);
-	}
-
-	public Long findId(Account users) {
-		return totalDao.findId(users);
-	}
-
-	public boolean checkLogin(String user, String pwd) {
-		return totalDao.checkLogin(user, pwd);
-	}
+	//=========引用到舊的Account先註解===========
+//	public boolean checkLogin(Account users) {
+//		return totalDao.checkLogin(users);
+//	}
+//
+//	public Long findId(Account users) {
+//		return totalDao.findId(users);
+//	}
+//
+//	public boolean checkLogin(String user, String pwd) {
+//		return totalDao.checkLogin(user, pwd);
+//	}
 //	public boolean checkPermission(Long id) {
 //		return totalDao.checkPermission(id);
 //	}
