@@ -1,6 +1,7 @@
 package foodelicious.product.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "productNum")
@@ -18,72 +24,155 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
-	private Integer product_id;
+	private Integer productId;
 
 	@Column(name = "categories")
-	private Short product_categories;
+	private Short productCategories;
+	
+	@Column(name = "product_categories_name")
+	private String productCategoriesName;
 
 	@Column(name = "product_name")
-	private String product_name;
-
-	@Column(name = "product_price")
-	private Integer product_price;
-
-	@Column(name = "product_stock")
-	private String product_stock;
+	private String productName;
 	
 	@Column(name="product_company")
-	private String product_company;
+	private String productCompany;
+
+	@Column(name = "product_price")
+	private Integer productPrice;
+
+	@Column(name = "product_pics")
+	private byte[] productPics;
+	
+	@NotBlank(message = "內容不可空白")
+	@Size(min = 3, max = 255, message = "請輸入最少5個字的敘述")
+	@Column(name = "product_content")
+	private String productContent;
+	
+	@Column(name = "product_stock")
+	private String productStock;
+	
+	@Column(name = "product_status")
+	private String productStatus;
+	
+	@Column(name = "product_keywords")
+	private String productKeywords;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "product_insert_date")
+	private Date productInsertDate;
 	
 	@Column(name = "product_sales_figures")
-	private Integer product_sales_figures;
+	private Integer productSalesFigures;
 
-	public Integer getProduct_id() {
-		return product_id;
+	public Product() {
+		super();
+	}
+	
+	public Integer getProductId() {
+		return productId;
 	}
 
-	public void setProduct_id(Integer product_id) {
-		this.product_id = product_id;
+	public void setProductId(Integer productId) {
+		this.productId = productId;
 	}
 
-	public Short getProduct_categories() {
-		return product_categories;
+	public Short getProductCategories() {
+		return productCategories;
 	}
 
-	public void setProduct_categories(Short product_categories) {
-		this.product_categories = product_categories;
+	public void setProductCategories(Short productCategories) {
+		this.productCategories = productCategories;
 	}
 
-	public String getProduct_name() {
-		return product_name;
+	public String getProductCategories_name() {
+		return productCategoriesName;
 	}
 
-	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+	public void setProductCategories_name(String productCategories_name) {
+		this.productCategoriesName = productCategories_name;
 	}
 
-	public Integer getProduct_price() {
-		return product_price;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setProduct_price(Integer product_price) {
-		this.product_price = product_price;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public String getProduct_stock() {
-		return product_stock;
+	public String getProductCompany() {
+		return productCompany;
 	}
 
-	public void setProduct_stock(String product_stock) {
-		this.product_stock = product_stock;
+	public void setProductCompany(String productCompany) {
+		this.productCompany = productCompany;
 	}
 
-	public Integer getProduct_sales_figures() {
-		return product_sales_figures;
+	public Integer getProductPrice() {
+		return productPrice;
 	}
 
-	public void setProduct_sales_figures(Integer product_sales_figures) {
-		this.product_sales_figures = product_sales_figures;
+	public void setProductPrice(Integer productPrice) {
+		this.productPrice = productPrice;
 	}
 
+	public byte[] getProductPics() {
+		return productPics;
+	}
+
+	public void setProductPics(byte[] productPics) {
+		this.productPics = productPics;
+	}
+
+	public String getProductContent() {
+		return productContent;
+	}
+
+	public void setProductContent(String productContent) {
+		this.productContent = productContent;
+	}
+
+	public String getProductStock() {
+		return productStock;
+	}
+
+	public void setProductStock(String productStock) {
+		this.productStock = productStock;
+	}
+
+	public String getProductStatus() {
+		return productStatus;
+	}
+
+	public void setProductStatus(String productStatus) {
+		this.productStatus = productStatus;
+	}
+
+	public String getProductKeywords() {
+		return productKeywords;
+	}
+
+	public void setProductKeywords(String productKeywords) {
+		this.productKeywords = productKeywords;
+	}
+
+	public Date getProductInsertDate() {
+		return productInsertDate;
+	}
+
+	public void setProductInsertDate(Date productInsertDate) {
+		this.productInsertDate = productInsertDate;
+	}
+
+	public Integer getProductSalesFigures() {
+		return productSalesFigures;
+	}
+
+	public void setProductSalesFigures(Integer productSalesFigures) {
+		this.productSalesFigures = productSalesFigures;
+	}
+
+	
+	
 }
