@@ -3,5 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-This is main page
+<h1>${account}</h1>
 
+<!-- 抓不到session的值 -->
+
+<c:forEach items="${account}" var="session">
+${session}
+</c:forEach>
+
+<c:set var="account" value="${account}"/>
+${account}
