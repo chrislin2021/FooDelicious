@@ -26,7 +26,14 @@ public class CartController {
 	}
 
 	@GetMapping("/shoppingCart")
-	public String shoppingCart() {
+	public String shoppingCart(Model m) {
+		Long id = 3L;
+
+		List<CartBean> list = cartService.selectItem(id);
+		System.out.println(list.size());
+
+		m.addAttribute("carts", list);
+
 		return "app.ShoppingCart";
 	}
 
@@ -55,7 +62,7 @@ public class CartController {
 	}
 
 	@GetMapping("/insert")
-	@ResponseBody	
+	@ResponseBody
 	public List<CartBean> insertProductToCart(HttpSession session, Model m) {
 		List<CartBean> carts = (List<CartBean>) cartService.selectItem(2L);
 		m.addAttribute("carts", carts);

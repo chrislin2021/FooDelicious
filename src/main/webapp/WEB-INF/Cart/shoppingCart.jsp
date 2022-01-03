@@ -15,13 +15,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="cart" items="${CartController}">
+		<c:forEach var="carts" items="${carts}">
 			<tr>
 				<th scope="row"><input type="checkbox"></th>
-				<td>${cart.product.productName}</td>
-				<td>${cart.product.productPrice}</td>
-				<td>${cart.quantity}</td>
-				<td>${cart.product.productPrice*cart.quantity}</td>
+				<td>${carts.product.productName}</td>
+				<td>${carts.product.productPrice}</td>
+				<td>${carts.quantity}</td>
+				<td>${carts.product.productPrice*cart.quantity}</td>
 				<td><button value="">刪除</button></td>
 			</tr>
 		</c:forEach>
