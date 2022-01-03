@@ -23,6 +23,11 @@ public class CompanyBackEndController {
 
 		return "app.CompanyOrder";
 	}
+	
+	@GetMapping(path ="/companyAddProduct")
+	public String companyAddProduct() {
+		return "app.CompanyAddProduct";
+	}
 
 
 

@@ -26,13 +26,7 @@ public class TotalDaoService {
 	public boolean checkLogin(String user, String pwd) {
 		return totalDao.checkLogin(user, pwd);
 	}
-<<<<<<< HEAD
-=======
-	
-//	public boolean checkPermission(Long id) {
-//		return totalDao.checkPermission(id);
-//	}
->>>>>>> c80e2fac799990216a55b860345ea3aa0683513e
+
 
 	public String findId2(Long id) { return totalDao.findId2(id);}
 	

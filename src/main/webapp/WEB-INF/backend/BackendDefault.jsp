@@ -61,7 +61,7 @@
 
         <!-- 商品新增 -->
         <li id="ProductAdd" class="list-group-item funName">
-            <a href="/backend/ProductAdd" style="text-decoration: none">
+            <a href="/companyAddProduct" style="text-decoration: none">
                 <i class="text-secondary fas fa-gift"></i>
                 <span>增加商品</span>
             </a>
