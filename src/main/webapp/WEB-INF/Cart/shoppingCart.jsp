@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
@@ -21,7 +20,7 @@
 				<td>${carts.product.productName}</td>
 				<td>${carts.product.productPrice}</td>
 				<td>${carts.quantity}</td>
-				<td>${carts.product.productPrice*cart.quantity}</td>
+				<td>${carts.product.productPrice*carts.quantity}</td>
 				<td><button value="">刪除</button></td>
 			</tr>
 		</c:forEach>
