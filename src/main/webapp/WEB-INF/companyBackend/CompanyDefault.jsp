@@ -26,7 +26,8 @@
 </head>
 <body>
 	<div class="col-fixed topBrand ">
-	<a style="color: white; text-decoration: none" href="/companyMain"><span class="brandName align-middle">好煮意</span>admin</a>
+		<a style="color: white; text-decoration: none" href="/companyMain"><span
+			class="brandName align-middle">好煮意</span>admin</a>
 		<!-- <b class="align-middle brand"><a
 			style="color: white; text-decoration: none" href="/companyMain">廠商後台管理系統</b> -->
 	</div>
@@ -58,7 +59,7 @@
 
 
 
-			
+
 			<!--商品管理  -->
 			<li id="ProductList" class="list-group-item funName">
 				<button class="btn btnBor" type="button" data-bs-toggle="collapse"
@@ -67,12 +68,12 @@
 					<i class="text-secondary fas fa-archive"></i> <span>商品管理</span>
 					<div class="collapse ulArea" id="collapseExample">
 						<ul id="" class="accordion-collapse collapse show">
-							<li id="addProduct" class="colLi funName"><a
-								class="colLi" href="" style="text-decoration: none"><i
+							<li id="addProduct" class="colLi funName"><a class="colLi"
+								href="" style="text-decoration: none"><i
 									class="fa fa-circle-o"></i>新增商品</a></li>
 							<li id="editProduct" class="colLi"><a class="colLi" href=""
 								style="text-decoration: none"><i class="fa fa-circle-o"></i>修改商品</a></li>
-						
+
 
 						</ul>
 					</div>
@@ -80,7 +81,7 @@
 			</li>
 
 
-			
+
 			<!--訂單管理  -->
 			<li id="OrderList" class="list-group-item">
 				<button class="btn btnBor" type="button" data-bs-toggle="collapse"
@@ -89,12 +90,12 @@
 					<i class="text-secondary fas fa-shopping-cart"></i> <span>訂單管理</span>
 					<div class="collapse ulArea" id="collapseExample">
 						<ul id="collapseOne" class="accordion-collapse collapse show">
-							<li id="addProduct" class="colLi funName"><a
-								class="colLi" href="" style="text-decoration: none"><i
+							<li id="addProduct" class="colLi funName"><a class="colLi"
+								href="" style="text-decoration: none"><i
 									class="fa fa-circle-o"></i>查詢訂單</a></li>
 							<li id="editProduct" class="colLi"><a class="colLi" href=""
 								style="text-decoration: none"><i class="fa fa-circle-o"></i>修改訂單</a></li>
-						
+
 
 						</ul>
 					</div>
@@ -123,10 +124,11 @@
 					</div>
 				</button>
 			</li>
-			
+
 			<!-- inbox -->
 			<li id="BanList" class="list-group-item funName"><a href="#"
-				style="color:grey;text-decoration:none" > <i class="fas fa-inbox"></i> <span>訊息</span>
+				style="color: grey; text-decoration: none"> <i
+					class="fas fa-inbox"></i> <span>訊息</span>
 			</a></li>
 
 
@@ -137,8 +139,8 @@
 			</a></li>
 
 			<!-- 登出 -->
-			<li id="" class="list-group-item logoutIcon"><a
-				href="/" style="color:white"> <i
+			<li id="" class="list-group-item logoutIcon"><a href="/"
+				style="color: white" onclick="logout()"> <i
 					class="fas fa-sign-out-alt fa-lg"></i>
 			</a></li>
 
@@ -152,19 +154,15 @@
 
 			<div class="close">+</div>
 
+			<div>
+				<form action=""></form>
 
-			<form action="">
-				<input type="text" placeholder="Name"> <input type="email"
-					placeholder="E-Mail"> <a href="#" class="button">Submit</a>
-			</form>
+
+
+			</div>
 
 		</div>
 	</div>
-
-
-
-
-
 
 
 
@@ -177,8 +175,9 @@
 
 	<script
 		src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
-		
-	<script> //問題回報跳出視窗		
+
+	<script>
+		//問題回報跳出視窗		
 		document.getElementById('button').addEventListener("click", function() {
 			document.querySelector('.bg-modal').style.display = "flex";
 		});
@@ -186,6 +185,19 @@
 		document.querySelector('.close').addEventListener("click", function() {
 			document.querySelector('.bg-modal').style.display = "none";
 		});
+	</script>
+
+
+	<!-- 登出 -->
+	<script>
+		function logout() {
+			
+			if (confirm("確定要登出嗎") == true) {
+				
+				
+				
+			}
+		}
 	</script>
 </body>
 </html>

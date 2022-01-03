@@ -84,42 +84,5 @@ public class MainUpdateController {
 		return "app.LoginSystem";
 	}
 	
-	//檢查 1.帳號有沒有存在 2.是會員還是廠商 3. 導向不同的頁面
-	@RequestMapping("/checklogin2.controller")
-	public String checkLogin(@RequestParam(name="userAccount") String username, @RequestParam(name="userPwd") String pwd, Model model, HttpSession session) {
-		
-		Map <String,String> errors = new HashMap<>();
-		
-		model.addAttribute("errors", errors);
-
-		if (username == null || username.length() == 0) {
-			errors.put("account", "請輸入帳號");
-		}
-		if (pwd == null || pwd.length() == 0) {
-			errors.put("pwd", "請輸入密碼");
-		}
-		if (errors != null && !errors.isEmpty()) {
-			return "app.LoginSystem";
-		}
-		
-		boolean exist = totalDaoService.checkLogin(username,pwd);
-		if (exist) {
-			model.addAttribute("account", username);
-			model.addAttribute("pwd", pwd);
-			Long id = totalDaoService.findId(new Account(username, pwd));
-			session.setAttribute("account", username);
-			session.setAttribute("pwd", pwd);
-			session.setAttribute("userID", id);
-			
-			//boolean permission = totalDaoService.checkPermission(id);
-			
-			return null;
-
-			
-		}
-		else {
-			errors.put("incorrect", "帳號或密碼不正確,請重新輸入");
-			return "app.LoginSystem";
-		}
-	}
+	
 }

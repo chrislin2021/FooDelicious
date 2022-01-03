@@ -94,19 +94,7 @@ public class TotalDao {
 		return false;
 	}
 
-	//hql 的 join 好像不是這樣寫的....
-	public boolean checkPermission(Long id) {
-		Session session = sessionFactory.openSession();
-		String hqlstr = "FROM admin_data LEFT JOIN account_data.account_id WHERE account_id = :id";
-		Query<Admin> query = session.createQuery(hqlstr);
-		query.setParameter("id", id);
-		List result = query.list();
-		
-		session.close();
-	
-		return false;
-	
- }
+
 	public String findId2(Long id) {
 		String sql = "SELECT permission_level FROM admin_data WHERE fk_admin_id =:accountId";
 		Map<String, Object> map = new HashMap<>();
