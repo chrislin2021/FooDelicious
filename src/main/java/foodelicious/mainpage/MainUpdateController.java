@@ -45,7 +45,6 @@ public class MainUpdateController {
 		if (resultStatus) {
 			m.addAttribute("memberMail", memberMail);
 			m.addAttribute("pwd", pwd);
-//			Long id = totalDaoService.findId(new Account(account, pwd));
 			Long EMid = EMDaoService.findId(new Member(memberMail, pwd));
 			session.setAttribute("memberMail", memberMail);
 			session.setAttribute("pwd", pwd);

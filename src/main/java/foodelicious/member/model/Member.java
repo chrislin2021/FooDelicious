@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import foodelicious.article.model.ShareArea;
 
-@Entity
+@Entity(name = "member_data2")
 @Table(name = "member_data2")
 @Component
 public class Member implements Serializable {
