@@ -27,3 +27,13 @@
 	width: 230px;
 	box-shadow: 2px 2px 2px 2px gray
 }
+
+.discount {
+	margin-left: 20%;
+	float: left;
+}
+
+.goToPay {
+	margin-left: 60%;
+	text-align: left;
+}

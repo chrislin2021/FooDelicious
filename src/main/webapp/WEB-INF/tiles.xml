@@ -96,9 +96,9 @@
 			value="/WEB-INF/backend/BackendMain.jsp" />
 	</definition>
 
-	<definition name="app.ShoppingCart" extends="app.default">
-		<put-attribute name="content"
-			value="/WEB-INF/cart/shoppingCart.jsp" />
+	<definition name="app.ShoppingCart" template="/WEB-INF/cart/shoppingCart.jsp">
+		<put-attribute name="title"
+			value="/shoppingCart" />
 	</definition>
 	
 	<definition name="app.CustService" extends="app.default">
