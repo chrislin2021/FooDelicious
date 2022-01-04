@@ -44,18 +44,18 @@ public class Product implements Serializable {
 	@Column(name = "product_company")
 	private String productCompany;
 	
-<<<<<<< Updated upstream
+
 	
 	//join member table
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_company_id")
 	private Member member;
 	
-=======
-	@Column(name = "product_company_id")
-	private Integer productCompanyId;
+//
+//	@Column(name = "product_company_id")
+//	private Integer productCompanyId;
 
->>>>>>> Stashed changes
+
 	@Column(name = "product_price")
 	private Integer productPrice;
 
