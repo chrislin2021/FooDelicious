@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -86,20 +87,13 @@ public class CartController {
 		return "app.ShoppingCart";
 	}
 
-	@ResponseBody
-	@DeleteMapping("/shoppingCart/{id}")
-	public String deleteItem(Long productId, Model m) {
+	@GetMapping("/shoppingCart/{id}")
+	public String deleteItem(@PathVariable(name = "id") Long productId, Model m) {
 
-		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+		cartService.deleteItem(productId);
 
-		for (CartBean cart : carts) {
-			if (cart.getProductId() == productId) {
-				cartService.deleteItem(cart.getCartId());
-				break;
-			}
-		}
+		return "redirect:/shoppingCart";
 
-		return "app.ShoppingCart";
 	}
 
 	@ResponseBody

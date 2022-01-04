@@ -14,20 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class MainUpdateController {
 
-	
-	
-	//測試
+	// 測試
 	@Autowired
 	TotalUseEMDaoService EMDaoService;
 
-
 	@PostMapping(path = "/checklogin.controller")
-	public String processAction(@RequestParam("memberMail") String memberMail, @RequestParam("pwd") String pwd,
-			Model m, HttpSession session) {
+	public String processAction(@RequestParam("memberMail") String memberMail, @RequestParam("pwd") String pwd, Model m,
+			HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 
@@ -49,18 +45,17 @@ public class MainUpdateController {
 			session.setAttribute("memberMail", memberMail);
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", EMid);
-			
-			
-			System.out.println("EMid："+EMid);
 
-			//查詢成功登入的會員身份
+			System.out.println("EMid：" + EMid);
+
+			// 查詢成功登入的會員身份
 			String level = EMDaoService.findId2(EMid);
 			System.out.println("level：" + level);
-			if(level.equals("admin")){
+			if (level.equals("admin")) {
 				return "app.BackendMember";
-			}else if(level.equals("company")){
+			} else if (level.equals("company")) {
 				return "app.CompanyMain";
-			}else{
+			} else {
 				System.out.println("userID：" + session.getAttribute("userID"));
 				return "app.home";
 			}
@@ -70,7 +65,5 @@ public class MainUpdateController {
 		errors.put("msg", "Pleas Input Correct Username or Password");
 		return "app.LoginSystem";
 	}
-	
 
-	
 }
