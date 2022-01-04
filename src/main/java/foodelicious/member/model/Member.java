@@ -2,12 +2,17 @@ package foodelicious.member.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,7 +28,9 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
+import foodelicious.article.model.ShareArea;
+
+@Entity(name = "member_data2")
 @Table(name = "member_data2")
 @Component
 public class Member implements Serializable {
@@ -81,6 +88,10 @@ public class Member implements Serializable {
 	@Column(name = "register_date")
 	private Date register_date;
 
+	//與ShareArea是一對多關係
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<ShareArea> shareAreas = new LinkedHashSet<ShareArea>();
+	
 	@PrePersist // 設定物件轉換為 Persistent 以前執行
 	private void onCreate() {
 		if (register_date == null) {

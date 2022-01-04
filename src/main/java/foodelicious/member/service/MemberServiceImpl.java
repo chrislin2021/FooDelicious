@@ -30,6 +30,31 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
+	@Override
+	public Member checkLogin(String member) {
+		return memberRepository.checkLogin(member);
+	}
+
+
+	@Override
+	public  Member findId(String memberMail) {
+		return memberRepository.findByMemberMail(memberMail);
+	}
+
+//	@Override
+//	public Member findByMemberStatus(String memberStatus) {
+//		return memberRepository.findByMemberStatus(memberStatus);
+//	}
+
+
+	@Override
+	public Member findByMemberMailAndPwd(String memberMail, String pwd) {
+		return memberRepository.findByMemberMailAndPwd(memberMail, pwd);
+	}
+
+
+
+
 //	@Override
 //	public boolean checkLogin(Member member) {
 //		return memberRepository.checkLogin(member);

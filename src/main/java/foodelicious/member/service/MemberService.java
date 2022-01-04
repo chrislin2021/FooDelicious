@@ -6,13 +6,15 @@ public interface MemberService {
 
 
 	Boolean save(Member member);
+	
+	Member checkLogin(String member);
 
-//	boolean checkLogin(Member member);
-//
-//	Long findId(Member member);
+	Member findId(String memberMail);
 
+//	Member findByMemberStatus(Member eMid);
 
-
+	Member findByMemberMailAndPwd(String memberMail, String pwd);
+	
 	
 
 

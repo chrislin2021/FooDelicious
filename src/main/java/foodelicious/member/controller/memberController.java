@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class memberController {
+public class MemberController {
 	//登入頁面
 	@GetMapping("/LoginSystem")
 	public String toMemberPage() {

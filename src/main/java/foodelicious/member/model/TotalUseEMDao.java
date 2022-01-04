@@ -30,13 +30,13 @@ public class TotalUseEMDao {
 	
 	// 管理登入
 	public boolean checkLogin(Member users) {
-		TypedQuery<Member> account = null;
-		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
-		account = em.createQuery(hqlstr, Member.class)
+		TypedQuery<Member> member = null;
+		String hqlstr = "FROM member_data2 WHERE member_mail =:user AND pwd = :pwd";
+		member = em.createQuery(hqlstr, Member.class)
 				    .setParameter("user", users.getMemberMail())
 					.setParameter("pwd", users.getPwd());
 		
-		List<Member> accountData = account.getResultList();
+		List<Member> accountData = member.getResultList();
 		if (accountData != null) {
 			em.close();
 			return true;
@@ -65,7 +65,7 @@ public class TotalUseEMDao {
 
 	public Long findId(Member users) {
 		TypedQuery<Member> query = null;
-		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
+		String hqlstr = "FROM member_data2 WHERE member_mail =:user AND pwd = :pwd";
 		query = em.createQuery(hqlstr, Member.class);
 		query.setParameter("user", users.getMemberMail());
 		query.setParameter("pwd", users.getPwd());

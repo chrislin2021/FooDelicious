@@ -17,12 +17,12 @@
             <h3 class="mb-5">會員登入</h3>
 			<form action="checklogin.controller" method="post">
             <div class="form-outline mb-4">
-              <input type="text" id="memberMail" class="form-control form-control-lg" name="memberMail" placeholder="memberMail" />
+              <input type="text" id="memberMail" class="form-control form-control-lg" name="memberMail" placeholder="memberMail" required="required" />
               <label class="form-label" for="memberMail"></label><span id="loginSpan">${errors.memberMail}</span>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="pwd" placeholder="pwd" />
+              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="pwd" placeholder="pwd" required="required" />
               <label class="form-label" for="typePasswordX-2"></label><span id="loginSpan">${errors.pwd}</span>
             </div>
 
