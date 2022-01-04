@@ -65,20 +65,54 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-				<tfoot>
-					<tr>
-						<td>
-							<input type="text" class="form-control" placeholder="請輸入賣場折扣碼"
-								aria-label="Example text with button addon" aria-describedby="button-addon1">
-						</td>
-					</tr>
-					<tr>
-						<td>滿$1000，貨到付款，免運費！！</td>
-					</tr>
-				</tfoot>
 			</table>
 
-			<table></table>
+			<table class="discount">
+				<thead>
+					<tr>
+						<th scope="col">
+							<div class="input-group mb-3">
+								<button class="btn btn-outline-secondary" type="button" id="button-addon1">使用</button>
+								<input type="text" class="form-control" placeholder="請輸入折價券"
+									aria-label="Example text with button addon" aria-describedby="button-addon1">
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">滿$1000，貨到付款，免運費！！<a href="#" class="tip">了解更多<span class="popbox">
+									<table class="table" id="p">
+										<thead>
+											<tr>
+												<th scope="col">低消</th>
+												<th scope="col">運費</th>
+												<th scope="col">物流選項</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th>$0</th>
+												<td>$60</td>
+												<td>宅配到府</td>
+											</tr>
+											<tr>
+												<th>$1000</th>
+												<td>$0</td>
+												<td>宅配到府</td>
+											</tr>
+										</tbody>
+									</table>
+								</span>
+							</a>
+						</th>
+					</tr>
+				</tbody>
+			</table>
+
+
+
+
 
 
 

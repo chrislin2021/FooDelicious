@@ -1,52 +1,29 @@
 @charset "UTF-8";
 
-table {
+.table {
 	text-align: center;
 }
 
-legend {
-	margin: 10px;
-	font-size: 1.5em;
-}
-
-.circle {
-	width: 40px;
-	height: 40px;
-	border-radius: 40px;
-	text-align: center;
-	line-height: 40px;
-	overflow: hidden;
-	border: 1.5px solid black;
-}
-
-.line {
+.tip {
+	color: blue;
+	text-decoration: none;
 	position: relative;
-	top: 20px;
-	width: 400px;
-	height: 0px;
-	border: 1.5px solid black;
 }
 
-.flow-chart {
-	margin-top: 50px;
-	display: flex;
-	justify-content: center;
+.tip span {
+	display: none;
 }
 
-.active {
-	background-color: rgb(0, 0, 0, 0.5)
+.tip:hover .popbox {
+	display: block;
+	position: absolute;
+	top: 30px;
+	left: -50px;
+	width: auto;
+	padding: 5px;
 }
 
-.circle-outter {
-	margin-right: -6px;
-	padding: 0px;
-}
-
-.circle-inner {
-	position: relative;
-	right: 5px;
-}
-
-.shift-line {
-	margin-right: -22px;
+#p {
+	width: 230px;
+	box-shadow: 2px 2px 2px 2px gray
 }
