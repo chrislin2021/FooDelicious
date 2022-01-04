@@ -20,4 +20,8 @@ public interface ArticleUseEMDaoService {
 	void useArticleIdDelete(int id);
 	
 	void UpdateArticle(Map<String, String> params ,int id);
+
+	List<ShareArea> findRecipe();
+	
+	List<ShareArea> findKitchenware();
 }

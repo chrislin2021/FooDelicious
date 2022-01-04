@@ -70,8 +70,8 @@ div.path {
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 								<li><a class="dropdown-item" href="${contextRoot}/LoginSystem">會員登入</a></li>
 								<li><a class="dropdown-item" href="${contextRoot}/RegisterPage">會員註冊</a></li>
-								<li><a class="dropdown-item" href="#">Something else
-										here</a></li>
+								<li><a class="dropdown-item" href="${contextRoot}/RegisterPage">暫時放訂單 || 還沒寫頁面</a></li>
+								<li><a class="dropdown-item" href="#">Something else here</a></li>
 										
 							</ul>
 						</div>
