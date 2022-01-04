@@ -22,6 +22,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import foodelicious.member.model.Member;
+
 
 
 //import foodelicious.member.model.Account;
@@ -77,9 +79,9 @@ public class ShareArea implements Serializable {
 	// 多對一 這邊沒有casecade連動 所以要注意
 
 	//=========引用到舊的Account先註解===========
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "fk_account_id")
-//	private Account account;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_account_id")
+	private Member member;
 
 	public ShareArea() {
 	}
@@ -132,14 +134,14 @@ public class ShareArea implements Serializable {
 		this.articleData = articleData;
 	}
 
-	//=========引用到舊的Account先註解===========
-//	public Account getAccount() {
-//		return account;
-//	}
-//
-//	public void setAccount(Account account) {
-//		this.account = account;
-//	}
+	
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
 	public int getShare_id() {
 		return share_id;

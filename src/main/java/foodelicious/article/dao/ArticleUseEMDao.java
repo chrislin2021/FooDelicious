@@ -16,7 +16,7 @@ import foodelicious.article.dao.container.ShareAreaRowMapper;
 import foodelicious.article.model.ArticleData;
 import foodelicious.article.model.ShareArea;
 import foodelicious.article.service.ArticleUseEMDaoService;
-
+import foodelicious.member.model.Member;
 import foodelicious.article.repository.ShareAreaRepository;
 
 @Service
@@ -39,7 +39,7 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 	public void pushArticle(Map<String, String> params, Long id) {
 		//用session.get的方法 用id 去找到對應的Account.class 並且將其命名為 account 參數
 		//=========引用到舊的Account先註解===========
-//		Account account = em.find(Account.class, id);
+		Member member = em.find(Member.class, id);
 
 //		System.out.println("一對多測試：" + account.getAccount_id());
 		

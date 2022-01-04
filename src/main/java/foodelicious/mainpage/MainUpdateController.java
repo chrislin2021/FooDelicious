@@ -5,38 +5,25 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import foodelicious.member.model.Admin;
 import foodelicious.member.model.Member;
-import foodelicious.member.model.TotalDaoService;
 import foodelicious.member.model.TotalUseEMDaoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
 public class MainUpdateController {
 
-	@Autowired
-	private TotalDaoService totalDaoService;
+	
 	
 	//測試
 	@Autowired
 	TotalUseEMDaoService EMDaoService;
 
-//	@PostMapping("/register.controller")
-//	public String registerController(@RequestBody Map<String, String> params) {
-////		System.out.println(params);
-////		System.out.println(params.get("account"));
-//		EMDaoService.RegisterMember(params);
-//		return "app.home";
-//	}
 
 	@PostMapping(path = "/checklogin.controller")
 	public String processAction(@RequestParam("memberMail") String memberMail, @RequestParam("pwd") String pwd,
