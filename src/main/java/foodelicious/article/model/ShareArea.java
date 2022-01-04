@@ -76,7 +76,7 @@ public class ShareArea implements Serializable {
 	@OneToOne(mappedBy = "shareArea")
 	private ArticleData articleData;
 
-	// 多對一 這邊沒有casecade連動 所以要注意
+	// 多對一 這邊沒有cascade連動 所以要注意
 
 	//=========引用到舊的Account先註解===========
 	@ManyToOne(fetch = FetchType.EAGER)

@@ -5,7 +5,6 @@
 
 <link rel="stylesheet" href="css/cart.css">
 
-
 <div class="container-shoppingCart">
 	<div class="flow-chart">
 		<div class="circle-outter">
@@ -24,6 +23,13 @@
 		</div>
 	</div>
 </div>
+<br>
+
+<!-- <div class="progress"> -->
+<!-- 	<div class="progress-bar progress-bar-striped progress-bar-animated" -->
+<!-- 		role="progressbar" aria-valuenow="75" aria-valuemin="0" -->
+<!-- 		aria-valuemax="100" style="width: 33%"></div> -->
+<!-- </div> -->
 
 <br>
 
@@ -44,9 +50,9 @@
 				<th scope="row"><input type="checkbox"></th>
 				<td>${carts.product.productName}</td>
 				<td>${carts.product.productPrice}</td>
-				<td>${carts.quantity}</td>
+				<td><input type="number" value="${carts.quantity}" min=1 max=${carts.product.productStock }></td>
 				<td>${carts.product.productPrice*carts.quantity}</td>
-				<td><button value="">刪除</button></td>
+				<td><a onclick="return confirm('確定刪除嗎?')" href="/shoppingCart/${carts.cartId}" class="link-dark"> 刪除</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

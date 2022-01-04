@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -25,10 +26,10 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import foodelicious.article.model.ShareArea;
+import foodelicious.product.model.Product;
 
 @Entity(name = "member_data2")
 @Table(name = "member_data2")
@@ -49,34 +50,34 @@ public class Member implements Serializable {
 	@Column(name = "member_mail", unique = true)
 	@Email
 	private String memberMail;
-	
+
 	@Column(name = "pwd")
 	@Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
 	@NotBlank(message = "密碼不得空白")
 	private String pwd;
-	
+
 	@Column(name = "member_name")
 	@Pattern(regexp = NAME_REG, message = "請輸入2個字以上繁體中文")
 	@Size(min = 2, max = 255, message = "名子不得低於兩個字")
 	private String memberName;
-	
+
 	@Column(name = "member_gender")
 	private String memberGender;
-	
+
 	@Column(name = "member_birth")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private String memberBirth;
-	
+
 	@Column(name = "member_phone")
 	@Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤")
 	private String memberPhone;
-	
+
 	@Column(name = "member_address")
 	private String memberAddress;
-	
+
 	@Column(name = "member_discount_id")
 	private String memberDiscountId;
-	
+
 	@Column(name = "member_coin")
 	private Integer memberCoin;
 
@@ -88,10 +89,15 @@ public class Member implements Serializable {
 	@Column(name = "register_date")
 	private Date register_date;
 
-	//與ShareArea是一對多關係
+	// 與ShareArea是一對多關係
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
 	private Set<ShareArea> shareAreas = new LinkedHashSet<ShareArea>();
+
 	
+	//Join Product 的 table
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<Product> products = new LinkedHashSet<Product>();
+
 	@PrePersist // 設定物件轉換為 Persistent 以前執行
 	private void onCreate() {
 		if (register_date == null) {
@@ -105,7 +111,7 @@ public class Member implements Serializable {
 	}
 
 	public Member() {
-		
+
 	}
 
 	public Member(Long memberId, @Email String memberMail,
@@ -254,5 +260,4 @@ public class Member implements Serializable {
 				+ "]";
 	}
 
-	
 }

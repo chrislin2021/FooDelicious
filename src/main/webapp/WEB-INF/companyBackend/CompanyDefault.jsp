@@ -199,12 +199,7 @@
 		function logout(account) {
 			
 			if (confirm("確定要登出嗎") == true) {
-				session.removeAttribute("account");//我這裡是先取出httpsession中的account屬性
-				session.removeAttribute("pwd");
-				session.removeAttribute("userID");
-		        session.invalidate();  //然後是讓httpsession失效
-
-				sessionStatus.setComplete();
+				
 			}
 		}
 	</script>
