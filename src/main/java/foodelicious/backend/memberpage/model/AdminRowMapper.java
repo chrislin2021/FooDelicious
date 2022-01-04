@@ -4,20 +4,20 @@ package foodelicious.backend.memberpage.model;
 
 
 import foodelicious.member.model.Admin;
+import foodelicious.member.model.Member;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AdminRowMapper implements RowMapper<Admin> {
+public class AdminRowMapper implements RowMapper<Member> {
 
     @Override
-    public Admin mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Admin admin = new Admin();
+    public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Member member = new Member();
 
-        admin.setPermission_level(rs.getString("permission_level"));
+        member.setMember_status(rs.getString("member_status"));
 
-
-        return admin;
+        return member;
     }
 }

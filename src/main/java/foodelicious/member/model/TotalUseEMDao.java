@@ -107,14 +107,14 @@ public class TotalUseEMDao {
 //	
 // }
 	public String findId2(Long id) {
-		String sql = "SELECT permission_level FROM admin_data WHERE fk_admin_id =:accountId";
+		String sql = "SELECT member_status FROM member_data2 WHERE member_id =:memberId";
 		Map<String, Object> map = new HashMap<>();
-		map.put("accountId", id);
+		map.put("memberId", id);
 
-		List<foodelicious.member.model.Admin> list = namedParameterJdbcTemplate.query(sql, map, new AdminRowMapper());
+		List<Member> list = namedParameterJdbcTemplate.query(sql, map, new AdminRowMapper());
 		if(list.size() > 0){
-			String adminLevel = list.get(0).getPermission_level();
-			return adminLevel;
+			String memberStatus = list.get(0).getMember_status();
+			return memberStatus;
 		}else{
 			return "null";		}
 
