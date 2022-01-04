@@ -3,6 +3,9 @@ package foodelicious.backend.memberpage.model;
 
 
 import javax.persistence.*;
+
+import foodelicious.product.model.Product;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -41,11 +44,13 @@ public class BkMember implements Serializable {
     @Column(name = "member_discount_id")
     private String discount;
 
-    @Column(name = "member_coin")
+    @Column(name = "member_coin")	
     private Integer memberCoin;
 
     @Column(name = "register_date")
     private Date registerDate;
+    
+
 
     public Integer getMemberId() {
         return memberId;
