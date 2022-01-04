@@ -98,7 +98,7 @@
 
 	<definition name="app.ShoppingCart" extends="app.default">
 		<put-attribute name="content"
-			value="/WEB-INF/Cart/shoppingCart.jsp" />
+			value="/WEB-INF/cart/shoppingCart.jsp" />
 	</definition>
 	
 	<definition name="app.CustService" extends="app.default">

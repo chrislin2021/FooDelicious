@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "productNum")
 public class Product implements Serializable {
@@ -28,14 +27,14 @@ public class Product implements Serializable {
 
 	@Column(name = "categories")
 	private Short productCategories;
-	
+
 	@Column(name = "product_categories_name")
 	private String productCategoriesName;
 
 	@Column(name = "product_name")
 	private String productName;
-	
-	@Column(name="product_company")
+
+	@Column(name = "product_company")
 	private String productCompany;
 
 	@Column(name = "product_price")
@@ -43,32 +42,32 @@ public class Product implements Serializable {
 
 	@Column(name = "product_pics")
 	private byte[] productPics;
-	
+
 	@NotBlank(message = "內容不可空白")
 	@Size(min = 3, max = 255, message = "請輸入最少5個字的敘述")
 	@Column(name = "product_content")
 	private String productContent;
-	
+
 	@Column(name = "product_stock")
-	private String productStock;
-	
+	private Integer productStock;
+
 	@Column(name = "product_status")
 	private String productStatus;
-	
+
 	@Column(name = "product_keywords")
 	private String productKeywords;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "product_insert_date")
 	private Date productInsertDate;
-	
+
 	@Column(name = "product_sales_figures")
 	private Integer productSalesFigures;
 
 	public Product() {
 		super();
 	}
-	
+
 	public Integer getProductId() {
 		return productId;
 	}
@@ -133,11 +132,11 @@ public class Product implements Serializable {
 		this.productContent = productContent;
 	}
 
-	public String getProductStock() {
+	public Integer getProductStock() {
 		return productStock;
 	}
 
-	public void setProductStock(String productStock) {
+	public void setProductStock(Integer productStock) {
 		this.productStock = productStock;
 	}
 
@@ -173,6 +172,4 @@ public class Product implements Serializable {
 		this.productSalesFigures = productSalesFigures;
 	}
 
-	
-	
 }
