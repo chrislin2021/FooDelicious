@@ -51,13 +51,12 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService{
 		ShareArea shareArea = new ShareArea();
 		shareArea.setArticle_clallify(params.get("classify"));
 		shareArea.setArticle_title(params.get("title"));
-//		shareArea.setFk_account_id(id);
 		
 		//Account 與 ShareArea 的關係是一對多
 		//在ArticleData與 ShareArea資料傳輸給SQL前 還要設定好一對多的部分
 
 		//=========引用到舊的Account先註解===========
-//		shareArea.setAccount(account);
+		shareArea.setMember(member);
 		
 		//ShareArea 與 Account的關係明確後 最後再與ArticleData的關係做明確的設定
 		articleData.setShareArea(shareArea);
