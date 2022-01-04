@@ -24,7 +24,7 @@
 <script src="../../js/bootstrap.bundle.min.js"></script>
 <script>
 
-$("#page").html("this is sum bullshit");
+$("#page").html("this is sum hotcakes");
 
 </script>
 </body >

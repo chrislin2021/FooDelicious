@@ -14,8 +14,6 @@ public class BkMemberDao implements BkMemberDaoInterface {
 
 
 
-
-
     @Override
     public List<BkMember> getAllData() {
         List<BkMember> members = (List<BkMember>) bkcrud.findAll();

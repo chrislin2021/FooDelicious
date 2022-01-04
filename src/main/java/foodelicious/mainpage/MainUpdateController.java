@@ -62,7 +62,7 @@ public class MainUpdateController {
 
 		}
 
-		errors.put("msg", "Pleas Input Correct Username or Password");
+		errors.put("msg", "Please Input Correct Username or Password");
 		return "app.LoginSystem";
 	}
 
