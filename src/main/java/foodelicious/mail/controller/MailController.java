@@ -15,7 +15,7 @@ public class MailController {
 	@GetMapping("/mailto")
 	@ResponseBody
 	public String hello() {
-		mailService.prepareAndSend("xc1zt1x2005@gmail.com", "Sample mail subject");
+		mailService.prepareAndSend("xc1zt1x2005@gmail.com","title" ,"Sample mail subject");
 		return "Mail sent";
 	}
 }

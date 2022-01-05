@@ -16,12 +16,12 @@ public class MailService {
     public MailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
-	public void prepareAndSend(String recipient, String message) {
+	public void prepareAndSend(String recipient, String title, String message) {
 		 MimeMessagePreparator messagePreparator = mimeMessage -> {
              MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
              messageHelper.setFrom("FooDelicious.eeit13702@gmail.com");
              messageHelper.setTo(recipient);
-             messageHelper.setSubject(message);
+             messageHelper.setSubject(title);
              messageHelper.setText(message);
          };
          try {
