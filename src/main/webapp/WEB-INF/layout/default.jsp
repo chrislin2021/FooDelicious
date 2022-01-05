@@ -84,6 +84,8 @@ div.path {
 					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
 					<li class="nav-item"><a class="nav-link" href="/custService">客服中心</a></li>
 					<li class="nav-item"><a class="nav-link" href="/shoppingCart">暫時的購物車擺放位置</a></li>
+					<li class="nav-item"><a class="nav-link" href="/backend/member">暫時的後台連結</a></li>
+
 				</ul>
 
 			</div>

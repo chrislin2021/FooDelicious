@@ -21,6 +21,12 @@ public class BkPageController {
         return "app.BackendMember";
     }
 
+    @GetMapping("/backend/memberUpdate")
+    public String backendMemberUpdate(){
+        return "app.BackendMemberUpdate";
+    }
+
+
 
 
 }

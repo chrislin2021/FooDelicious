@@ -30,8 +30,8 @@
                     <th class="col col12 table-primary">會員生日</th>
                     <th class="col col10 table-primary">會員電話</th>
                     <th class="col col11 table-primary">會員地址</th>
-                    <th class="col col8 table-primary">會員折扣</th>
-                    <th class="col col7 table-primary">會員coin</th>
+                    <th class="col col8 table-primary">會員coin</th>
+                    <th class="col col7 table-primary">會員折扣</th>
                     <th class="col col13 table-primary">註冊日期</th>
                     <th class="col col14 table-primary">更新</th>
                     <th class="col col15 table-primary">刪除</th>
@@ -45,33 +45,74 @@
     </div>
 </section>
 </div>
-<%--<script language="javascript" type="text/javascript">--%>
-<%--    function delConfirm(memid) {--%>
-<%--        if(confirm("確定要刪除嗎")){--%>
-<%--            window.location.href="MemDelete?memid="+memid;--%>
-<%--        }--%>
-<%--    }--%>
-<%--</script>--%>
 <script>
-    //查詢功能
-    $("#searchAcc").on("click",function(){
-       data = $(".keyWord1").val();
+    //=============刪除確認=============
 
+    $("#members").on("click","#delBtn",function() {
+        let deleteId = $(this).data("id");
+
+        if (confirm("確定要刪除嗎")) {
+            $.ajax({
+                url: "/bkmembers/delete/"+deleteId,
+                type: "DELETE",
+                success: function(msg){
+                    alert(msg);
+                    window.location.href="/backend/member";
+                }
+            });
+        }
+    })
+</script>
+<script>
+    //=============E-mail關鍵字查詢功能=============
+    $("#searchAcc").on("click",function(){
+       let data = $(".keyWord1").val();
        $.ajax({
            url:"http://localhost:8080/bkmembers/"+data,
            type: "GET",
            success:function(accountAll){
                let num = accountAll.length;
-               showData(0, num);
+               let accountData = accountAll;
+               //載入顯示功能
+               showData(0, num, accountData);
+
+               //載入分頁功能
+               if(num>=10){
+                   pages(10, accountAll);
+               }else{
+                   pages(num, accountAll);
+               }
            }
        })
 
     });
 </script>
 
+<script>
+    //=============更新會員資料功能=============
+
+    //更新前先查詢出資料
+    $("#members").on("click","#updateBtn",function(){
+        let data = $(this).data("id");
+        // alert("data："+data)
+        $.ajax({
+            url:"http://localhost:8080/bkmembers/update/"+data,
+            type: "GET",
+            success:function(accountAll){
+                //將json字串化
+                let memberString = JSON.stringify(accountAll);
+                //將資料存到localStorage，給另一個頁面使用
+                localStorage.setItem("memberData",memberString);
+                //跳轉頁面
+                window.location.href="http://localhost:8080/backend/memberUpdate";
+            }
+        })
+
+    });
+</script>
 
 <script>
-    //顯示頁面和分頁
+    //=============顯示所有會員資料=============
     const memberUrl = "http://localhost:8080/bkmembers"
     let memberData;
 
@@ -81,149 +122,157 @@
         success: function(memberAll){
             //將值傳到全域
             memberData = memberAll;
-
-            //=================分頁功能================
-            //最大頁數
-            var maxPage;
-            //目前顯示頁數
-            let nowPage = 0;
-            //每頁最大筆數
-            let maxItems = 4;
-            //設定起始編號
-            let startItem = 0;
-            //設定結束編號
-            let endItem = maxItems;
-
-            //讀回資料時就先顯示
-            showData(startItem, endItem);
-
-            //計算出最大頁數。
-            if(memberAll.length % maxItems == 0){
-                maxPage = Math.floor(memberAll.length / maxItems);
-            }else{
-                maxPage = (Math.floor(memberAll.length / maxItems))+1;
-            }
-            // alert("最大頁數：" + maxPage);
-            //動態生成頁數
-            let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
-            for(let i=0; i<maxPage; i++){
-                let pageNum = i+1;
-                pageHtml += `<li id=`+ i +` class="page-item page pageNum pageMove"><a class="page-link">`+ pageNum +`</a></li>`;
-            };
-            pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
-            $("#page").html(pageHtml);
-
-            //綁定click事件
-            $("#page").on("click",".page", function(){
-                nowPage = ($(this).prop("id"))*1;//強制轉成數字型態
-                $(".pageNum").prop("class","page-item page pageNum")
-                $(this).prop("class","page-item page pageNum active")
-                // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
-                //恢復上、下頁的功能
-                $(".previous").prop("class", "page-item previous");
-                $(".next").prop("class", "page-item next");
-                // alert("nowPage："+nowPage+"maxPage："+maxPage);
-                //計算是否是最後一頁
-                if((nowPage)+1 >= maxPage){
-                    startItem = nowPage * maxItems;
-                    if(memberAll.length % maxItems == 0){
-                        endItem = startItem + maxItems
-                    }else{
-                        endItem = startItem + memberAll.length % maxItems;
-                    }
-
-                }else{
-                    startItem = nowPage * maxItems;
-                    endItem = startItem + maxItems;
-                }
-                // alert("開始："+startItem+"結束："+endItem);
-                showData(startItem, endItem);
-            });
-
-            //=======上一頁設定========
-            $("#page").on("click", ".previous", function (){
-
-                //恢復下一頁的功能
-                $(".next").prop("class", "page-item next");
-
-                let page = nowPage-1;
-
-                $(".pageNum").prop("class","page-item page pageNum")
-                $("#"+page).prop("class","page-item page pageNum active")
-
-                //判斷是否已經是第一頁了，取消上一頁功能
-                if(page <= 0 ){
-                    $(".previous").prop("class", "page-item previous disabled");
-                    startItem = 0 * maxItems;
-                    endItem = startItem + maxItems;
-                }else{
-                    startItem = page * maxItems;
-                    endItem = startItem + maxItems;
-                }
-                showData(startItem, endItem);
-                nowPage = page;
-            });
-
-            //========下一頁設定============
-            $("#page").on("click", ".next", function(){
-
-                //恢復上一頁的功能
-                $(".previous").prop("class", "page-item previous");
-
-                let page = nowPage + 1;
-
-                $(".pageNum").prop("class","page-item page pageNum")
-                $("#"+page).prop("class","page-item page pageNum active")
-
-                //計算是否是最後一頁，並取消下一頁功能
-                if(page >= (maxPage-1)){
-                    $(".next").prop("class", "page-item next disabled")
-                    startItem = page * maxItems;
-                    if(memberAll.length % maxItems == 0){
-                        endItem = startItem + maxItems
-                    }else{
-                        endItem = startItem + memberAll.length % maxItems;
-                    }
-                }else{
-                    startItem = page * maxItems;
-                    endItem = startItem + maxItems;
-                }
-                showData(startItem, endItem);
-                nowPage = page;
-            });
-
+            //載入分頁功能
+            pages(10,memberData);
         }
     });
+</script>
 
+<script>
+    //=============分頁程式=============
+    function pages(maxNum, dataSource){ //輸入單頁最大筆數和資料來源
+        //=================分頁功能================
+        //最大頁數
+        var maxPage;
+        //目前顯示頁數
+        let nowPage = 0;
+        //每頁最大筆數
+        let maxItems = maxNum;
+        //設定起始編號
+        let startItem = 0;
+        //設定結束編號
+        let endItem = maxItems;
 
-    //顯示資料用
-    function showData(startItem,endItem){
+        //讀回資料時就先顯示
+        showData(startItem, endItem, dataSource);
+
+        //計算出最大頁數。
+        if(dataSource.length % maxItems == 0){
+            maxPage = Math.floor(dataSource.length / maxItems);
+            // alert("最大頁數1：" + maxPage);
+        }else{
+            maxPage = (Math.floor(dataSource.length / maxItems))+1;
+            // alert("最大頁數2：" + maxPage);
+        }
+        // alert("最大頁數：" + maxPage);
+        //動態生成頁數
+        let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+        for(let i=0; i<maxPage; i++){
+            let pageNum = i+1;
+            pageHtml += `<li id=`+ i +` class="page-item page pageNum pageMove"><a class="page-link">`+ pageNum +`</a></li>`;
+        };
+        pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+        $("#page").html(pageHtml);
+
+        //綁定click事件
+        $("#page").on("click",".page", function(){
+            nowPage = ($(this).prop("id"))*1;//強制轉成數字型態
+            $(".pageNum").prop("class","page-item page pageNum")
+            $(this).prop("class","page-item page pageNum active")
+            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+            //恢復上、下頁的功能
+            $(".previous").prop("class", "page-item previous");
+            $(".next").prop("class", "page-item next");
+            // alert("nowPage："+nowPage+"maxPage："+maxPage);
+            //計算是否是最後一頁
+            if((nowPage)+1 >= maxPage){
+                startItem = nowPage * maxItems;
+                if(dataSource.length % maxItems == 0){
+                    endItem = startItem + maxItems
+                }else{
+                    endItem = startItem + dataSource.length % maxItems;
+                }
+
+            }else{
+                startItem = nowPage * maxItems;
+                endItem = startItem + maxItems;
+            }
+            // alert("開始："+startItem+"結束："+endItem);
+            showData(startItem, endItem, dataSource);
+        });
+
+        //=======上一頁設定========
+        $("#page").on("click", ".previous", function (){
+
+            //恢復下一頁的功能
+            $(".next").prop("class", "page-item next");
+
+            let page = nowPage-1;
+
+            $(".pageNum").prop("class","page-item page pageNum")
+            $("#"+page).prop("class","page-item page pageNum active")
+
+            //判斷是否已經是第一頁了，取消上一頁功能
+            if(page <= 0 ){
+                $(".previous").prop("class", "page-item previous disabled");
+                startItem = 0 * maxItems;
+                endItem = startItem + maxItems;
+            }else{
+                startItem = page * maxItems;
+                endItem = startItem + maxItems;
+            }
+            showData(startItem, endItem, dataSource);
+            nowPage = page;
+        });
+
+        //=============下一頁設定=============
+        $("#page").on("click", ".next", function(){
+
+            //恢復上一頁的功能
+            $(".previous").prop("class", "page-item previous");
+
+            let page = nowPage + 1;
+
+            $(".pageNum").prop("class","page-item page pageNum")
+            $("#"+page).prop("class","page-item page pageNum active")
+
+            //計算是否是最後一頁，並取消下一頁功能
+            if(page >= (maxPage-1)){
+                $(".next").prop("class", "page-item next disabled")
+                startItem = page * maxItems;
+                if(dataSource.length % maxItems == 0){
+                    endItem = startItem + maxItems
+                }else{
+                    endItem = startItem + dataSource.length % maxItems;
+                }
+            }else{
+                startItem = page * maxItems;
+                endItem = startItem + maxItems;
+            }
+            showData(startItem, endItem, dataSource);
+            nowPage = page;
+        });
+    }
+</script>
+
+<script>
+    //=============顯示功能=============
+    function showData(startItem,endItem,dataSource){
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
-            txt += "<td class='align-middle'>"+memberData[i].memberId+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberMail+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberStatus+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberName+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberGender+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberBirth+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberPhone+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].memberAddress+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberId+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberMail+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberStatus+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberName+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberGender+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberBirth+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberPhone+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberAddress+"</td>"
 
-            txt += "<td class='align-middle'>"+memberData[i].memberCoin+"</td>"
-            txt += "<td class='align-middle'>"+memberData[i].discount+"</td>"
-            let newDate = new Date(memberData[i].registerDate);
+            txt += "<td class='align-middle'>"+dataSource[i].memberCoin+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].discount+"</td>"
+            let newDate = new Date(dataSource[i].registerDate);
             let register = newDate.toLocaleString();
             txt += "<td class='align-middle'>"+register+"</td>"
             txt += '<td class="align-middle">'+
                 '<form method="" >'+
-                '<input type="hidden" type="text" name="memupd" value=?>'+
-                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新">'+
+                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].memberId+'>'+
                 '</form>'+
                 '</td>'
             txt += '<td class="mdata">'+
                 '<form method="" action="">'+
                 '<input type="hidden" type="text" name="empdel" value=?>'+
-                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" onclick="">'+
+                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].memberId+'>'+
                 '</form>'+
                 '</td></tr>'
         }

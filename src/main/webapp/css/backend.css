@@ -70,10 +70,10 @@
     text-align: center;
 }
 
-span{
+.listName{
     color: white;
 }
-span:hover{
+.listName:hover{
     color:var(--color_gold)
 }
 
