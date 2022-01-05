@@ -1,0 +1,16 @@
+.pageMove:hover{
+    background: skyblue;
+    transform: translate(3px,3px);
+}
+
+th{
+    font-size: 18px;
+}
+
+td{
+    font-size: 14px;
+}
+
+.littleName{
+    color: #D3B884;
+}
