@@ -1,4 +1,4 @@
-package foodelicious.article.dao.container;
+package foodelicious.article.container;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
