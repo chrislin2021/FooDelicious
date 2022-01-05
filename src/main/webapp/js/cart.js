@@ -5,3 +5,16 @@ function check_all(obj, cName) {
 	}
 }
 
+function deleteItem(productId) {
+	var deleteData = { "productId": productId };
+	$.ajax({
+		url: "/shoppingCart/" + productId,
+		data: JSON.stringify(deleteData),
+		type: "DELETE",
+		contentType: "application/json;charset=utf-8",
+		success: function() {
+			window.location.reload();
+		}
+
+	})
+}

@@ -6,11 +6,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
@@ -29,21 +33,25 @@ public class CartController {
 		this.cartService = cartService;
 	}
 
-//	購物車主頁面
 	@GetMapping("/shoppingCart")
-	public String shoppingCart(Model m) {
+	public String showCart(Model m) {
 
-//		沒登入就給我滾去登入
 		if (!checkLogin()) {
 			return "app.LoginSystem";
 		}
 
-//		從Session抓到登入的使用者後，把存在持久層的資料都拉出來
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
-		totalAmount();
+		Integer priceTotal = 0;
+
+		for (CartBean cart : carts) {
+			if (!CollectionUtils.isEmpty(carts)) {
+				priceTotal += cart.getProduct().getProductPrice() * cart.getQuantity();
+			}
+		}
 
 		m.addAttribute("carts", carts);
+		m.addAttribute("priceTotal", priceTotal);
 
 		return "app.ShoppingCart";
 	}
@@ -79,7 +87,7 @@ public class CartController {
 				break;
 			}
 		}
-		
+
 //		暫時先做到這商品還沒新增
 		if (judge != true) {
 			CartBean cartBean = new CartBean();
@@ -92,8 +100,8 @@ public class CartController {
 	}
 
 //	刪除商品
-	@GetMapping("/shoppingCart/{id}")
-	public String deleteItem(@PathVariable(name = "id") Long productId, Model m) {
+	@DeleteMapping("/shoppingCart/{productId}")
+	public String deleteItem(@RequestParam Long productId, Model m) {
 
 //		沒登入就給我滾去登入
 		if (!checkLogin()) {
@@ -117,9 +125,7 @@ public class CartController {
 	@PutMapping("/shoppingCart/")
 	public List<CartBean> updateItem(Model m) {
 
-		Long member = (Long) session.getAttribute("userID");
-
-		List<CartBean> carts = cartService.selectItem(member);
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		m.addAttribute("carts", carts);
 		return carts;
@@ -132,21 +138,21 @@ public class CartController {
 		return member != null;
 	}
 
-//	購物車總金額
-	public void totalAmount() {
-
-		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-
-		Integer totalAmount = 0;
-
-		for (CartBean cart : carts) {
-			Product product = cart.getProduct();
-			totalAmount += product.getProductPrice() * cart.getQuantity();
-		}
-
-		session.setAttribute("totalAmount", totalAmount);
-
-//		return totalAmount;
-	}
+////	購物車總金額
+//	public void totalAmount() {
+//
+//		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+//
+//		Integer totalAmount = 0;
+//
+//		for (CartBean cart : carts) {
+//			Product product = cart.getProduct();
+//			totalAmount += product.getProductPrice() * cart.getQuantity();
+//		}
+//
+//		session.setAttribute("totalAmount", totalAmount);
+//
+////		return totalAmount;
+//	}
 
 }
