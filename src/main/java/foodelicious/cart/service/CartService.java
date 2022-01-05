@@ -8,7 +8,7 @@ public interface CartService {
 
 	CartBean insertAndUpdateItem(CartBean cartBean);
 
-	void deleteItem(Long cartId);
+	void deleteItem(Long productId);
 
 	List<CartBean> selectItem(Long memberId);
 

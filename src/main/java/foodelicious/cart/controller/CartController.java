@@ -2,7 +2,6 @@ package foodelicious.cart.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -20,21 +19,14 @@ import foodelicious.product.model.Product;
 @Controller
 public class CartController {
 
-	@Resource
 	private HttpSession session;
 
 	private CartService cartService;
 
-	public CartController(CartService cartService) {
+	public CartController(HttpSession session, CartService cartService) {
 		super();
+		this.session = session;
 		this.cartService = cartService;
-	}
-
-//	檢查使用者有沒有登入
-	public Boolean checkLogin() {
-		Object member = session.getAttribute("userID");
-
-		return member != null;
 	}
 
 //	購物車主頁面
@@ -49,46 +41,73 @@ public class CartController {
 //		從Session抓到登入的使用者後，把存在持久層的資料都拉出來
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
+		totalAmount();
+
 		m.addAttribute("carts", carts);
 
 		return "app.ShoppingCart";
 	}
 
+//	使用者新增商品至購物車
 	@ResponseBody
 	@PostMapping("/shoppingCart/insertProduct")
 	public String insertItem(Model m, Long productId) {
 
-		Boolean exist = false;
+//		判斷購物車是否有重複商品
+		Boolean judge = false;
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
 			if (productId == cart.getProductId()) {
 //				暫時增加一個商品，因為商品還沒做到這
-				Integer quantity = cart.getQuantity() + 1;
+				Integer sum = cart.getQuantity() + 1;
 				Product product = cart.getProduct();
-				if (quantity > product.getProductStock()) {
-
+				if (sum > product.getProductStock()) {
+					return "{\"ans\":\"已經到達庫存最大數量了\\n (目前庫存共有 " + product.getProductStock() + " 件)" + "\"}";
 				}
-//				垃圾JPA更新如果不給他全部值，會變NULL
+
+//				垃圾JPA更新如果不給他全部值，更新外的會變NULL
 				cart.setCartId(cart.getCartId());
 				cart.setMemberId(cart.getMemberId());
 				cart.setProductId(cart.getProductId());
-				cart.setQuantity(quantity);
+				cart.setQuantity(sum);
 
 				cartService.insertAndUpdateItem(cart);
-				exist = true;
+
+				judge = true;
 				break;
 			}
 		}
+		
+//		暫時先做到這商品還沒新增
+		if (judge != true) {
+			CartBean cartBean = new CartBean();
+			cartBean.setMemberId((Long) session.getAttribute("userID"));
+			cartBean.setProductId(null);
+			cartBean.setQuantity(null);
+		}
 
-		return "app.ShoppingCart";
+		return "{\"ans\":\"" + "此項商品數量 " + null + " 個已加入購物車" + "\"}";
 	}
 
+//	刪除商品
 	@GetMapping("/shoppingCart/{id}")
-	public String deleteItem(@PathVariable(name = "id") Long cartId, Model m) {
+	public String deleteItem(@PathVariable(name = "id") Long productId, Model m) {
 
-		cartService.deleteItem(cartId);
+//		沒登入就給我滾去登入
+		if (!checkLogin()) {
+			return "app.LoginSystem";
+		}
+
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
+		for (CartBean cart : carts) {
+			if (cart.getProductId() == productId) {
+				cartService.deleteItem(cart.getCartId());
+				break;
+			}
+		}
 
 		return "redirect:/shoppingCart";
 
@@ -98,10 +117,36 @@ public class CartController {
 	@PutMapping("/shoppingCart/")
 	public List<CartBean> updateItem(Model m) {
 
-		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+		Long member = (Long) session.getAttribute("userID");
+
+		List<CartBean> carts = cartService.selectItem(member);
 
 		m.addAttribute("carts", carts);
 		return carts;
+	}
+
+//	檢查使用者有沒有登入
+	public Boolean checkLogin() {
+		Object member = session.getAttribute("userID");
+
+		return member != null;
+	}
+
+//	購物車總金額
+	public void totalAmount() {
+
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
+		Integer totalAmount = 0;
+
+		for (CartBean cart : carts) {
+			Product product = cart.getProduct();
+			totalAmount += product.getProductPrice() * cart.getQuantity();
+		}
+
+		session.setAttribute("totalAmount", totalAmount);
+
+//		return totalAmount;
 	}
 
 }
