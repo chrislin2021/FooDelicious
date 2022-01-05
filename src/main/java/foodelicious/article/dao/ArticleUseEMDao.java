@@ -69,9 +69,9 @@ public class ArticleUseEMDao implements ArticleUseEMDaoService {
 
 	@Override
 	public List<ShareArea> findAll() {
-
+		//這寫法要用傳統SQL寫法
 		String hql = "SELECT * FROM share_area  ORDER BY share_id DESC";
-
+		
 		Map<String, Object> AllData = new HashMap<>();
 
 		List<ShareArea> list = namedParameterJdbcTemplate.query(hql, AllData, new ShareAreaRowMapper());

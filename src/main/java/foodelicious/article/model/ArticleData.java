@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "article_data")
-@Component
 public class ArticleData implements Serializable {
 
 	private static final long serialVersionUID = 1L;

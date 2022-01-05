@@ -58,6 +58,22 @@ public class ArticleController {
 	}
 
 	@ResponseBody
+	@GetMapping("/totalRecipeData")
+	public Map<String, Object> totalRecipeData(HttpSession session) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("session", session.getAttribute("userID"));
+		data.put("title", articleEMDaoService.findRecipe());
+		return data;			
+	}
+	@ResponseBody
+	@GetMapping("/totalKitchenwareData")
+	public Map<String, Object> totalKitchenwareData(HttpSession session) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("session", session.getAttribute("userID"));
+		data.put("title", articleEMDaoService.findKitchenware());
+		return data;			
+	}
+	@ResponseBody
 	@GetMapping("/totalArticleData")
 	public Map<String, Object> totalArticleData(HttpSession session) {
 		Map<String, Object> data = new HashMap<>();
@@ -86,8 +102,7 @@ public class ArticleController {
 		System.out.println("ArticleId：　" + id);
 		return "app.ShowAtricle";
 	}
-	//@ResponseBody
-	//@RequestMapping(value = "/deleteData/{id}", method = RequestMethod.DELETE)
+	
 	@DeleteMapping("/deleteData/{id}")
 	public String deleteAtricle(@PathVariable(value="id", required = false ) Integer id) {
 		System.out.println(id);

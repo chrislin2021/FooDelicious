@@ -1,145 +1,190 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-        <style>
-            .topDIV {
-                margin-top: 16px;
-            }
-        </style>
-        <div class="topDIV">
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page" href="#">全部文章</button></li>
-                <li class="nav-item"><button id="" type="button" class="nav-link" onclick="">廚具開箱</button></li>
-                <li class="nav-item"><button id="" type="button" class="nav-link" href="#">食譜分享</button></li>
-            </ul>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <style>
+        .topDIV {
+            margin-top: 16px;
+        }
+    </style>
+    <div class="topDIV">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page"
+                    href="#">全部文章</button></li>
+            <li class="nav-item"><button id="navKitchenware" type="button" class="nav-link" onclick="">廚具開箱</button></li>
+            <li class="nav-item"><button id="navRecipe" type="button" class="nav-link" href="#">食譜分享</button></li>
+        </ul>
 
-        </div>
+    </div>
 
-        <table class="table table-hover">
-            <tbody id="articleArea"> </tbody>
-        </table>
+    <table class="table table-hover">
+        <tbody id="articleArea"> </tbody>
+    </table>
 
-        <nav aria-label="Page navigation">
-            <ul class="pagination" id="ulArea"></ul>
-        </nav>
-        <script src="/js/jquery-3.6.0.min.js"></script>
-        <script>
-            let thisPage = 1;
-            let finPage = 0;
+    <nav aria-label="Page navigation example ">
+        <ul id="page" class="pagination justify-content-center"></ul>
+    </nav>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script>
+        //將值傳到全域
+        let ShareData;
+        //最大頁數
+        var maxPage;
+        //目前顯示頁數
+        let nowPage = 0;
+        //每頁最大筆數
+        let maxItems = 10;
+        //設定起始編號
+        let startItem = 0;
+        //設定結束編號
+        //let endItem = maxItems;
+        let endItem;
+        searchShareDate("/totalArticleData");
+        function searchShareDate(url) {
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (articles) {
+                    ShareData = articles
+                    //得到格式：{session: null, title: Array(18)}        
+                    //console.log(ShareData)
+                    //=================分頁功能================
+                    endItem = (articles.title.length <= 10)?articles.title.length:10;
+                    //讀回資料時就先顯示
+                    showData(startItem, endItem);
+                    //計算出最大頁數。
+                    maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
 
-            $.getJSON("/totalArticleData", function(articles) {
-                let ArticleData = "";
-                let pageTotal = articles.title.length;
-                let page = Math.ceil(articles.title.length / 10);
-
-                let finPage = (pageTotal < 10) ? pageTotal : 10;
-
-                console.log("userID：" + articles.session);
-
-                for (let i = 0; i < finPage; i++) {
-                    ArticleData += "<tr>";
-                    ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
-                    ArticleData += "<td>" + articles.title[i].article_clallify + "</td>";
-                    ArticleData += "<td><a href='/intIDFindAll/" + articles.title[i].share_id + "'>" + articles.title[i].article_title + "</a></td>";
-                    ArticleData += "<td>";
-                    if (articles.session == articles.title[i].fk_account_id) {
-                        //ArticleData += "<a onclick='return confirm('確認刪除?');' href='/deleteData?id=" + articles.title[i].share_id + "'>刪除</a>"
-                        //ArticleData += "<a onclick='return confirm('確認刪除?');' href='#' onclick='delfun()'>刪除</a>"
-                        ArticleData += "<button onclick='delfun(" + articles.title[i].share_id + ")'>刪除</button>"
-                    } else {
-                        ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
-                    }
-                    ArticleData += "</td>";
-                    ArticleData += "</tr>";
+                    //動態生成頁數
+                    let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+                    for (let i = 0; i < maxPage; i++) {
+                        let pageNum = i + 1;
+                        pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
+                    };
+                    pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+                    $("#page").html(pageHtml);
 
                 }
-                $("#articleArea").html(ArticleData);
-
-                var paginationStr = "";
-                //paginationStr += "<li class='page-item' id='Previous'>";
-                //paginationStr += " <button class='page-link' id='Previous' aria-label='Previous'>";
-                //paginationStr += "<span aria-hidden='true'>&laquo;</span></button></li>";
-
-                for (let i = 1; i <= page; i++) {
-                    paginationStr += "<li class='page-item'><button class='page-link' value='" + i + "'>" + i + "</button></li>";
-                }
-                //paginationStr += "<li class='page-item' id='Next'>";
-                //paginationStr += "<button class='page-link'  aria-label='Next'>";
-                //paginationStr += "<span aria-hidden='true'>&raquo;</span></button></li>";
-                $("#ulArea").html(paginationStr);
-                //$("#Previous").prop("class", "page-item disabled");
             });
-            //
-            function delfun(id) {
+        };
 
-                if (confirm("確定刪除此筆紀錄嗎 ?")) {
-                    //var form = document.forms[0];
-                    //form.action = "<c:url value='/deleteData/' />" + articles.title[i].share_id;
-                    //form.submit();
-                    console.log("id：" + id);
-                    $.ajax({
-                        url: "/deleteData/" + id,
-                        type: "DELETE",
-                        //data: {
-                        //   id: id
-                        //},
-                        //contentType: "application/json;charset=utf-8",
-                        //dataType: 'json',
-                    })
+        //顯示資料用
+        function showData(startItem, endItem) {
+            let ArticleData = "";
+            //console.log(ShareData);
+            console.log("endItem："+ endItem);
+            console.log(ShareData.title);
+            for (let i = startItem; i < endItem; i++) {
+                console.log(ShareData.title[i].article_clallify);
+                ArticleData += "<tr>";
+                ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
+                ArticleData += "<td>" + ShareData.title[i].article_clallify + "</td>";
+                ArticleData += "<td><a href='/intIDFindAll/" + ShareData.title[i].share_id + "'>" + ShareData.title[i].article_title + "</a></td>";
+                ArticleData += "<td>";
+                if (ShareData.session == ShareData.title[i].fk_account_id) {
+                    ArticleData += "<button onclick='delfun(" + ShareData.title[i].share_id + ")'>刪除</button>"
+                } else {
+                    ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
                 }
-                window.location.href="/goShareArea";
+                ArticleData += "</td>";
+                ArticleData += "</tr>";
             }
+            $("#articleArea").html(ArticleData);
+        }
 
-            function liButtonClick() {
-                thisPage = $(this).index();
-
-                $.ajax({
-                        url: "/totalArticleData",
-                        type: "GET",
-                        success: function(articles) {
-                            page = Math.ceil(articles.title.length / 10);
-                            pageTotal = articles.title.length;
-                            finPage = (thisPage + 1 == page) ? pageTotal : (thisPage + 1) * 10;
-
-                            console.log('thisPage：' + thisPage);
-                            rule(articles, (thisPage) * 10, finPage); //這邊是處理文章內容的function
-
-                            //if (thisPage == 0) {
-                            //rule(articles, (thisPage - 1) * 10, finPage);
-                            //} else if (thisPage == page + 1) {
-                            //rule(articles, (thisPage - 1) * 10, finPage);
-                            //} else {
-
-                            //}
-
-                        }
-                    }) //ajax結束
-
-
-            }
-
-            function rule(articles, firstpage, lastpage) {
-                //                 console.log('firstpage：' + firstpage);
-                //                 console.log('lastpage' + lastpage);
-                let ArticleData = "";
-                for (let i = firstpage; i < lastpage; i++) {
-                    ArticleData += "<tr>";
-                    ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
-                    ArticleData += "<td>" + articles.title[i].article_clallify + "</td>";
-                    ArticleData += "<td><a href='/intIDFindAll/" + articles.title[i].share_id + "'>" + articles.title[i].article_title + "</a></td>";
-                    ArticleData += "<td>";
-                    if (articles.session == articles.title[i].fk_account_id) {
-                        ArticleData += "<a onclick='return confirm('確認刪除?');' href='/deleteData?id=" + articles.title[i].share_id + "'>刪除</a>"
-                    } else {
-                        ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
-                    }
-                    ArticleData += "</td>";
-                    ArticleData += "</tr>";
+        //綁定click事件
+        $("#page").on("click", ".page", function () {
+            //alert(ShareData);
+            nowPage = ($(this).prop("id")) * 1;//強制轉成數字型態
+            $(".pageNum").prop("class", "page-item page pageNum")
+            $(this).prop("class", "page-item page pageNum active")
+            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+            //恢復上、下頁的功能
+            $(".previous").prop("class", "page-item previous");
+            $(".next").prop("class", "page-item next");
+            // alert("nowPage："+nowPage+"maxPage："+maxPage);
+            //計算是否是最後一頁
+            if ((nowPage) + 1 >= maxPage) {
+                startItem = nowPage * maxItems;
+                if (ShareData.title.length % maxItems == 0) {
+                    endItem = startItem + maxItems
+                } else {
+                    endItem = startItem + ShareData.title.length % maxItems;
                 }
-                $("#articleArea").html(ArticleData);
-                //(thisPage == 1) ? $("#Previous").prop("class", "page-item disabled"): $("#Previous").prop("class", "page-item");
-                //(thisPage == page) ? $("#Next").prop("class", "page-item disabled"): $("#Next").prop("class", "page-item");
 
+            } else {
+                startItem = nowPage * maxItems;
+                endItem = startItem + maxItems;
             }
+            // alert("開始："+startItem+"結束："+endItem);
+            showData(startItem, endItem);
+        });
+        //=======上一頁設定========
+        $("#page").on("click", ".previous", function () {
 
-            $("body").on("click", "#ulArea li", liButtonClick)
-        </script>
+            //恢復下一頁的功能
+            $(".next").prop("class", "page-item next");
+
+            let page = nowPage - 1;
+
+            $(".pageNum").prop("class", "page-item page pageNum")
+            $("#" + page).prop("class", "page-item page pageNum active")
+
+            //判斷是否已經是第一頁了，取消上一頁功能
+            if (page <= 0) {
+                $(".previous").prop("class", "page-item previous disabled");
+                startItem = 0 * maxItems;
+                endItem = startItem + maxItems;
+            } else {
+                startItem = page * maxItems;
+                endItem = startItem + maxItems;
+            }
+            showData(startItem, endItem);
+            nowPage = page;
+        });
+
+        //========下一頁設定============
+        $("#page").on("click", ".next", function () {
+
+            //恢復上一頁的功能
+            $(".previous").prop("class", "page-item previous");
+
+            let page = nowPage + 1;
+
+            $(".pageNum").prop("class", "page-item page pageNum")
+            $("#" + page).prop("class", "page-item page pageNum active")
+
+            //計算是否是最後一頁，並取消下一頁功能
+            if (page >= (maxPage - 1)) {
+                $(".next").prop("class", "page-item next disabled")
+                startItem = page * maxItems;
+                if (ShareData.title.length % maxItems == 0) {
+                    endItem = startItem + maxItems
+                } else {
+                    endItem = startItem + ShareData.title.length % maxItems;
+                }
+            } else {
+                startItem = page * maxItems;
+                endItem = startItem + maxItems;
+            }
+            showData(startItem, endItem);
+            nowPage = page;
+        });
+        
+        //上面分類選擇器
+        $("#navTotal").click(function(){
+            searchShareDate("/totalArticleData");
+            $("#navTotal").prop("class","nav-link active")
+            $("#navKitchenware").prop("class","nav-link")
+            $("#navRecipe").prop("class","nav-link")
+        })
+        $("#navKitchenware").click(function(){
+            searchShareDate("/totalKitchenwareData");
+            $("#navTotal").prop("class","nav-link")
+            $("#navKitchenware").prop("class","nav-link active")
+            $("#navRecipe").prop("class","nav-link")
+        })
+        $("#navRecipe").click(function(){
+            searchShareDate("/totalRecipeData");
+            $("#navTotal").prop("class","nav-link")
+            $("#navKitchenware").prop("class","nav-link")
+            $("#navRecipe").prop("class","nav-link active")
+        })
+    </script>
