@@ -15,7 +15,7 @@ public class BkMember implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private Integer memberId;
+    private Long memberId;
 
     @Column(name = "member_mail")
     private String memberMail;
@@ -52,11 +52,11 @@ public class BkMember implements Serializable {
     
 
 
-    public Integer getMemberId() {
+    public Long getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Integer memberId) {
+    public void setMemberId(Long memberId) {
         this.memberId = memberId;
     }
 
