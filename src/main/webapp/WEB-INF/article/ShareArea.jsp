@@ -171,18 +171,24 @@
         //上面分類選擇器
         $("#navTotal").click(function(){
             searchShareDate("/totalArticleData");
+            nowPage = 0;
+            startItem = 0;
             $("#navTotal").prop("class","nav-link active")
             $("#navKitchenware").prop("class","nav-link")
             $("#navRecipe").prop("class","nav-link")
         })
         $("#navKitchenware").click(function(){
             searchShareDate("/totalKitchenwareData");
+            nowPage = 0;
+            startItem = 0;
             $("#navTotal").prop("class","nav-link")
             $("#navKitchenware").prop("class","nav-link active")
             $("#navRecipe").prop("class","nav-link")
         })
         $("#navRecipe").click(function(){
             searchShareDate("/totalRecipeData");
+            nowPage = 0;
+            startItem = 0;
             $("#navTotal").prop("class","nav-link")
             $("#navKitchenware").prop("class","nav-link")
             $("#navRecipe").prop("class","nav-link active")
