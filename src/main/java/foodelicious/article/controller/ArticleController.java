@@ -1,6 +1,7 @@
 package foodelicious.article.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import foodelicious.article.repository.ShareAreaCrudRepository;
+import foodelicious.article.model.ShareArea;
 import foodelicious.article.service.ArticleService;
 
 @Controller
@@ -29,11 +30,10 @@ public class ArticleController {
 	
 	ArticleService articleService;
 	HttpSession session;
-	ShareAreaCrudRepository shareAreaCrud;
-	public ArticleController(ArticleService articleService, HttpSession session, ShareAreaCrudRepository shareAreaCrud) {
+	
+	public ArticleController(ArticleService articleService, HttpSession session) {
 		this.articleService = articleService;
 		this.session = session;
-		this.shareAreaCrud = shareAreaCrud;
 	}
 	//圖像綁定使用 用於CKEditor
 	@ResponseBody
@@ -133,10 +133,20 @@ public class ArticleController {
 	//文章更新用
 	@PutMapping("/articleUpdate/{id}")
 	public void updateArticle(@RequestBody Map<String, String> params,
-								@PathVariable("id")Integer shareId) {
-		
+								@PathVariable("id")Integer shareId) {		
 		articleService.UpdateArticle(params, shareId);
 	}
 	
+	@ResponseBody
+	@PostMapping("/fuzzySearch")
+	public Map<String, Object> FuzzySearch(@RequestBody Map<String, String> params) {
+		Map<String, Object> data = new HashMap<>();
+		System.out.println("clasify："+params.get("clasify"));
+		System.out.println("AssociateString："+params.get("AssociateString"));
+		
+		data.put("session", session.getAttribute("userID"));
+		data.put("title", articleService.articleFuzzySearch(params.get("clasify"), params.get("AssociateString")));
+		return data;
+	}
 	
 }

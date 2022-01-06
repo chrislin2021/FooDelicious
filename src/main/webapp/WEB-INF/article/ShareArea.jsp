@@ -16,8 +16,7 @@
 
     <div class="w-50 p-3 input-group mb-3">
         <select class="w-0 form-select dropdown-toggle" id="clasify">
-            <option selected hidden>請選擇分類</option>
-            <option>全部文章</option>
+            <option selected >全部文章</option>
             <option>廚具開箱</option>
             <option>食譜分享</option>
           </select>
@@ -60,12 +59,13 @@
         //設定結束編號
         //let endItem = maxItems;
         let endItem;
-        searchShareDate("/totalArticleData");
+        searchShareDate("/totalArticleData", "GET");
 
-        function searchShareDate(url) {
+        function searchShareDate(url, type) {
             $.ajax({
                 url: url,
-                type: "GET",
+                type: type,
+                contentType: "application/json; charset=utf-8",
                 success: function(articles) {
                     ShareData = articles
                         //得到格式：{session: null, title: Array(18)}        
@@ -94,10 +94,10 @@
         function showData(startItem, endItem) {
             let ArticleData = "";
             //console.log(ShareData);
-            console.log("endItem：" + endItem);
-            console.log(ShareData.title);
+            //console.log("endItem：" + endItem);
+            //console.log(ShareData.title);
             for (let i = startItem; i < endItem; i++) {
-                console.log(ShareData.title[i].article_clallify);
+                //console.log(ShareData.title[i].article_clallify);
                 ArticleData += "<tr>";
                 ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
                 ArticleData += "<td>" + ShareData.title[i].article_clallify + "</td>";
@@ -198,7 +198,7 @@
                 //var form = document.forms[0];
                 //form.action = "<c:url value='/deleteData/' />" + articles.title[i].share_id;
                 //form.submit();
-                console.log("id：" + id);
+                //console.log("id：" + id);
                 $.ajax({
                     url: "/deleteData/" + id,
                     type: "DELETE",
@@ -207,11 +207,10 @@
                     }
                 })
             }
-            //window.location.href = "/goShareArea";
         }
         //上面分類選擇器
         $("#navTotal").click(function() {
-            searchShareDate("/totalArticleData");
+            searchShareDate("/totalArticleData", "GET");
             nowPage = 0;
             startItem = 0;
             $("#navTotal").prop("class", "nav-link active")
@@ -219,7 +218,7 @@
             $("#navRecipe").prop("class", "nav-link")
         })
         $("#navKitchenware").click(function() {
-            searchShareDate("/totalKitchenwareData");
+            searchShareDate("/totalKitchenwareData", "GET");
             nowPage = 0;
             startItem = 0;
             $("#navTotal").prop("class", "nav-link")
@@ -227,7 +226,7 @@
             $("#navRecipe").prop("class", "nav-link")
         })
         $("#navRecipe").click(function() {
-            searchShareDate("/totalRecipeData");
+            searchShareDate("/totalRecipeData", "GET");
             nowPage = 0;
             startItem = 0;
             $("#navTotal").prop("class", "nav-link")
@@ -239,9 +238,43 @@
     <script>
         //==================模糊搜尋==================
         $("#articleSearch").on("click", function() {
-            let clasify = $(clasify).val();
-            console.log(clasify)
+            let clasify = $("#clasify").val();
+            //console.log(clasify)
             let titleKeyWord = $("#titleKeyWord").val()
-            console.log(titleKeyWord)
+                //console.log(titleKeyWord)
+
+            //searchShareDate("/fuzzySearch/" + clasify + "/" + titleKeyWord, "GET")
+            let fuzzySearch = {
+                "clasify": clasify,
+                "AssociateString": titleKeyWord
+            }
+
+            $.ajax({
+                url: "/fuzzySearch",
+                type: "POST",
+                data: JSON.stringify(fuzzySearch),
+                contentType: "application/json; charset=utf-8",
+                success: function(articles) {
+                    ShareData = articles
+                        //得到格式：{session: null, title: Array(18)}        
+                        //console.log(ShareData)
+                        //=================分頁功能================
+                    endItem = (articles.title.length <= 10) ? articles.title.length : 10;
+                    //讀回資料時就先顯示
+                    showData(startItem, endItem);
+                    //計算出最大頁數。
+                    maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
+
+                    //動態生成頁數
+                    let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+                    for (let i = 0; i < maxPage; i++) {
+                        let pageNum = i + 1;
+                        pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
+                    };
+                    pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+                    $("#page").html(pageHtml);
+                }
+            })
+
         })
     </script>

@@ -24,4 +24,8 @@ public interface ArticleRepository {
 
 	List<ShareArea> findKitchenware();
 
+	List<ShareArea> articleFuzzySearch(String clasify, String associateString);
+
+	List<ShareArea> OneArticleFuzzySearch(String associateString);
+
 }
