@@ -99,9 +99,8 @@ div.path {
 <div class="container">
     <tiles:insertAttribute name="content" />
  </div>
-
+<script src="/js/popper.min.js"></script>
 	<script src="/js/jquery-3.6.0.min.js"></script>
-	<script src="/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

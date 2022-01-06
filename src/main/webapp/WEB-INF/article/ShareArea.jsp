@@ -1,9 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
     <style>
         .topDIV {
             margin-top: 16px;
         }
+        
+        #inputGroupSelect01 {
+            width: 1em;
+        }
     </style>
+
+    <br/>
+
+    <div class="input-group mb-3">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+    </div>
+
+    <div class="w-50 p-3 input-group mb-3">
+        <select class="form-select" id="inputGroupSelect01">
+            <option selected hidden>請選擇分類</option>
+            <option>全部文章</option>
+            <option>廚具開箱</option>
+            <option>食譜分享</option>
+          </select>
+
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+        <button class="btn btn-outline-secondary" type="button">查詢文章標題</button>
+    </div>
+
+
     <div class="topDIV">
         <ul class="nav nav-tabs">
             <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page" href="#">全部文章</button></li>
@@ -14,12 +49,14 @@
     </div>
 
     <table class="table table-hover">
-        <tbody id="articleArea"> </tbody>
+        <tbody id="articleArea">
+        </tbody>
     </table>
 
     <nav aria-label="Page navigation example ">
         <ul id="page" class="pagination justify-content-center"></ul>
     </nav>
+    <script src="/js/popper.min.js"></script>
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script>
         //將值傳到全域
