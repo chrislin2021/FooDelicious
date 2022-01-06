@@ -37,12 +37,8 @@
 	<div class="row">
 		<div class="navbar col-md-12 rightBrand justify-content-end">
 			<ul class="nav nav-pills ">
-				<i class="far fa-bell fa-lg"></i>
-				<a class="nav-link text-white" href="#"></a>
-			</ul>
-			<ul class="nav nav-pills ">
-				<i class="far fa-user-circle fa-lg"></i>
-				<a class="nav-link text-white" href="#"></a>
+				
+				<a class="nav-link text-white" href="#"><i class="far fa-user-circle fa-lg"></i></a>
 			</ul>
 
 		</div>

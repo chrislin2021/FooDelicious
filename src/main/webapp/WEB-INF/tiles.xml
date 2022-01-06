@@ -45,6 +45,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/article/UpdateArticle.jsp" />
 	</definition>
+	
+	<definition name="app.Test"
+		template="/WEB-INF/companyBackend/Test.jsp">
+		<put-attribute name="title" value="testing" />
+	</definition>
 
 	<definition name="app.CompanyDefault"
 		template="/WEB-INF/companyBackend/CompanyDefault.jsp">
@@ -69,11 +74,19 @@
 			value="/WEB-INF/companyBackend/CompanyOrder.jsp" />
 	</definition>
 	
+	<definition name="app.CompanyTest"
+		extends="app.CompanyDefault">
+		<put-attribute name="content"
+			value="/WEB-INF/companyBackend/CompanyTest.jsp" />
+	</definition>
+	
 		<definition name="app.CompanyAddProduct"
 		extends="app.CompanyDefault">
 		<put-attribute name="content"
 			value="/WEB-INF/companyBackend/CompanyAddProduct.jsp" />
 	</definition>
+	
+	
 
 	<definition name="app.Product" extends="app.default">
 		<put-attribute name="content"
