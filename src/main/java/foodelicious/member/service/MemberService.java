@@ -1,19 +1,29 @@
 package foodelicious.member.service;
 
+import java.util.List;
+
+import foodelicious.backend.memberpage.model.BkMember;
 import foodelicious.member.model.Member;
 
 public interface MemberService {
 
-
-	Boolean save(Member member);
 	
-	Member checkLogin(String member);
+//	Member checkLogin(String member);
+//
+//	Member findId(String memberMail);
+//
+//
+//	Member findByMemberMailAndPwd(String memberMail, String pwd);
 
-	Member findId(String memberMail);
+	Member findByMemberMail(String memberMail);
 
-//	Member findByMemberStatus(Member eMid);
+//	boolean save(Member member);
+	
+	Member save(Member member);
 
-	Member findByMemberMailAndPwd(String memberMail, String pwd);
+	List<Member> findAll();
+
+	
 	
 	
 
