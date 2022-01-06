@@ -1,8 +1,8 @@
-package foodelicious.backend.memberPage.service;
-
-import foodelicious.backend.memberPage.model.BkMember;
+package foodelicious.backend.memberpage.service;
 
 import java.util.List;
+
+import foodelicious.backend.memberpage.model.BkMember;
 
 public interface BkMemberService {
 
