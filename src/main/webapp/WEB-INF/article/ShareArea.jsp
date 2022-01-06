@@ -248,11 +248,12 @@
                 "clasify": clasify,
                 "AssociateString": titleKeyWord
             }
+            console.log(fuzzySearch)
 
             $.ajax({
-                url: "/fuzzySearch",
-                type: "POST",
-                data: JSON.stringify(fuzzySearch),
+                url: "/fuzzySearch/" + clasify + "/" + titleKeyWord,
+                type: "GET",
+                //data: JSON.stringify(fuzzySearch),
                 contentType: "application/json; charset=utf-8",
                 success: function(articles) {
                     ShareData = articles

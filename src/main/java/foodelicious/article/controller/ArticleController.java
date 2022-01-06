@@ -138,15 +138,17 @@ public class ArticleController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/fuzzySearch")
-	public Map<String, Object> FuzzySearch(@RequestBody Map<String, String> params) {
+	@GetMapping("/fuzzySearch/{clasify}/{AssociateString}")
+	public Map<String, Object> FuzzySearch(@PathVariable("clasify")String clasify,
+										   @PathVariable("AssociateString")String AssociateString) {
 		Map<String, Object> data = new HashMap<>();
-		System.out.println("clasify："+params.get("clasify"));
-		System.out.println("AssociateString："+params.get("AssociateString"));
-		
+//		System.out.println("clasify："+params.get("clasify"));
+//		System.out.println("AssociateString："+params.get("AssociateString"));
+		System.out.println(clasify+"&"+AssociateString);
 		data.put("session", session.getAttribute("userID"));
-		data.put("title", articleService.articleFuzzySearch(params.get("clasify"), params.get("AssociateString")));
+//		data.put("title", articleService.articleFuzzySearch(params.get("clasify"), params.get("AssociateString")));
+		data.put("title", articleService.articleFuzzySearch(clasify, AssociateString));
 		return data;
 	}
-	
+	//@RequestBody Map<String, String> params
 }
