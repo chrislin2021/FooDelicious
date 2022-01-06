@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import foodelicious.backend.memberpage.model.BkMember;
 import foodelicious.compbackend.model.CBKOrderDaoInterface;
 import foodelicious.compbackend.model.CBKProductDaoInterface;
 import foodelicious.orders.model.OrdersBean;
@@ -23,17 +24,7 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 		this.cbkOrderDaoInterface = cbkOrderDaoInterface;
 	}
 	
-	@Override
-	public List<Product> getAllProducts() {
-		List <Product> products = cbkProductDaoInterface.getAllProducts();
-		return products;
-	}
 
-	@Override
-	public List<OrdersBean> getAllOrders() {
-		List<OrdersBean> orders = cbkOrderDaoInterface.getAllOrders();
-		return orders;
-	}
 	
 	
 

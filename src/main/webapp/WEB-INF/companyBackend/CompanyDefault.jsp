@@ -23,6 +23,7 @@
 	href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap"
 	rel="stylesheet">
 
+
 <script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -69,12 +70,12 @@
 					<i class="text-secondary fas fa-archive"></i> <span>商品管理</span>
 					<div class="collapse ulArea" id="collapseExample">
 						<ul id="" class="accordion-collapse collapse show">
-						<li id="addProduct" class="colLi funName"><a class="colLi"
+							<li id="addProduct" class="colLi funName"><a class="colLi"
 								href="/companyProduct" style="text-decoration: none"><i
 									class="fa fa-circle-o">查詢商品</i></a></li>
 							<li id="addProduct" class="colLi funName"><a class="colLi"
-								href="" style="text-decoration: none"><i
-									class="fa fa-circle-o"></i>新增商品</a></li>
+								href="/companyAddProduct" style="text-decoration: none"><i
+									class="fa fa-circle-o">新增商品</i></a></li>
 							<li id="editProduct" class="colLi"><a class="colLi" href=""
 								style="text-decoration: none"><i class="fa fa-circle-o"></i>修改商品</a></li>
 
@@ -128,8 +129,8 @@
 					</div>
 				</button>
 			</li>
-			
-			
+
+
 
 			<!-- inbox -->
 			<li id="BanList" class="list-group-item funName"><a href="#"
@@ -197,9 +198,9 @@
 	<!-- 登出 -->
 	<script>
 		function logout(account) {
-			
+
 			if (confirm("確定要登出嗎") == true) {
-				
+				window.location.href="/logout";
 			}
 		}
 	</script>

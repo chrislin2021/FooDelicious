@@ -46,14 +46,14 @@ public class Product implements Serializable {
 	
 
 	
-	//join member table
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "product_company_id")
-	private Member member;
+//	//join member table
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "product_company_id")
+//	private Member member;
 	
-//
-//	@Column(name = "product_company_id")
-//	private Integer productCompanyId;
+
+	@Column(name = "product_company_id")
+	private Long productCompanyId;
 
 
 	@Column(name = "product_price")
