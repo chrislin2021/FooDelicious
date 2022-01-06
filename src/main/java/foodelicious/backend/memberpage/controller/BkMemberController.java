@@ -1,30 +1,54 @@
 package foodelicious.backend.memberpage.controller;
 
 import foodelicious.backend.memberpage.model.BkMember;
-import foodelicious.backend.memberpage.service.BkMemberServiceInterface;
+import foodelicious.backend.memberpage.repository.BkCrudRepository;
+import foodelicious.backend.memberpage.service.BkMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BkMemberController {
 
-    private final BkMemberServiceInterface bkMemberServiceInterface;
+    private BkMemberService bkMemberService;
 
-    public BkMemberController(final BkMemberServiceInterface bkMemberServiceInterface) {
-        this.bkMemberServiceInterface = bkMemberServiceInterface;
+    @Autowired
+    private BkCrudRepository bkCrudRepository;
+
+    public BkMemberController(BkMemberService bkMemberService) {
+        this.bkMemberService = bkMemberService;
     }
 
     @GetMapping("/bkmembers")
     public List<BkMember> getAllData(){
-        return bkMemberServiceInterface.getAllData();
+        return bkMemberService.getAllData();
     }
 
     @GetMapping("/bkmembers/{searchEmail}")
     public List<BkMember> getAllByAcc(@PathVariable String searchEmail){
-        return bkMemberServiceInterface.findByEmail(searchEmail);
+        return bkMemberService.findByEmail(searchEmail);
     }
+
+    @GetMapping("/bkmembers/update/{memberId}")
+    public BkMember findById(@PathVariable Long memberId){
+        return bkMemberService.findById(memberId);
+    }
+
+    @PutMapping("/bkmembers/update/{memberId}")
+    public String update(@PathVariable Long memberId,
+                         @RequestBody BkMember bkMember){
+        return bkMemberService.update(memberId, bkMember);
+    }
+
+    @DeleteMapping("/bkmembers/delete/{memberId}")
+    public String delete(@PathVariable Long memberId){
+        return bkMemberService.delete(memberId);
+    }
+
 }

@@ -6,8 +6,7 @@
     </style>
     <div class="topDIV">
         <ul class="nav nav-tabs">
-            <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page"
-                    href="#">全部文章</button></li>
+            <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page" href="#">全部文章</button></li>
             <li class="nav-item"><button id="navKitchenware" type="button" class="nav-link" onclick="">廚具開箱</button></li>
             <li class="nav-item"><button id="navRecipe" type="button" class="nav-link" href="#">食譜分享</button></li>
         </ul>
@@ -37,16 +36,17 @@
         //let endItem = maxItems;
         let endItem;
         searchShareDate("/totalArticleData");
+
         function searchShareDate(url) {
             $.ajax({
                 url: url,
                 type: "GET",
-                success: function (articles) {
+                success: function(articles) {
                     ShareData = articles
-                    //得到格式：{session: null, title: Array(18)}        
-                    //console.log(ShareData)
-                    //=================分頁功能================
-                    endItem = (articles.title.length <= 10)?articles.title.length:10;
+                        //得到格式：{session: null, title: Array(18)}        
+                        //console.log(ShareData)
+                        //=================分頁功能================
+                    endItem = (articles.title.length <= 10) ? articles.title.length : 10;
                     //讀回資料時就先顯示
                     showData(startItem, endItem);
                     //計算出最大頁數。
@@ -69,7 +69,7 @@
         function showData(startItem, endItem) {
             let ArticleData = "";
             //console.log(ShareData);
-            console.log("endItem："+ endItem);
+            console.log("endItem：" + endItem);
             console.log(ShareData.title);
             for (let i = startItem; i < endItem; i++) {
                 console.log(ShareData.title[i].article_clallify);
@@ -90,13 +90,13 @@
         }
 
         //綁定click事件
-        $("#page").on("click", ".page", function () {
+        $("#page").on("click", ".page", function() {
             //alert(ShareData);
-            nowPage = ($(this).prop("id")) * 1;//強制轉成數字型態
+            nowPage = ($(this).prop("id")) * 1; //強制轉成數字型態
             $(".pageNum").prop("class", "page-item page pageNum")
             $(this).prop("class", "page-item page pageNum active")
-            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
-            //恢復上、下頁的功能
+                // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+                //恢復上、下頁的功能
             $(".previous").prop("class", "page-item previous");
             $(".next").prop("class", "page-item next");
             // alert("nowPage："+nowPage+"maxPage："+maxPage);
@@ -117,7 +117,7 @@
             showData(startItem, endItem);
         });
         //=======上一頁設定========
-        $("#page").on("click", ".previous", function () {
+        $("#page").on("click", ".previous", function() {
 
             //恢復下一頁的功能
             $(".next").prop("class", "page-item next");
@@ -141,7 +141,7 @@
         });
 
         //========下一頁設定============
-        $("#page").on("click", ".next", function () {
+        $("#page").on("click", ".next", function() {
 
             //恢復上一頁的功能
             $(".previous").prop("class", "page-item previous");
@@ -167,30 +167,48 @@
             showData(startItem, endItem);
             nowPage = page;
         });
-        
+        //資料刪除
+        function delfun(id) {
+            if (confirm("確定刪除此筆紀錄嗎 ?")) {
+                //var form = document.forms[0];
+                //form.action = "<c:url value='/deleteData/' />" + articles.title[i].share_id;
+                //form.submit();
+                console.log("id：" + id);
+                $.ajax({
+                    url: "/deleteData/" + id,
+                    type: "DELETE",
+                    //data: {
+                    //   id: id
+                    //},
+                    //contentType: "application/json;charset=utf-8",
+                    //dataType: 'json',
+                })
+            }
+            window.location.href = "/goShareArea";
+        }
         //上面分類選擇器
-        $("#navTotal").click(function(){
+        $("#navTotal").click(function() {
             searchShareDate("/totalArticleData");
             nowPage = 0;
             startItem = 0;
-            $("#navTotal").prop("class","nav-link active")
-            $("#navKitchenware").prop("class","nav-link")
-            $("#navRecipe").prop("class","nav-link")
+            $("#navTotal").prop("class", "nav-link active")
+            $("#navKitchenware").prop("class", "nav-link")
+            $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navKitchenware").click(function(){
+        $("#navKitchenware").click(function() {
             searchShareDate("/totalKitchenwareData");
             nowPage = 0;
             startItem = 0;
-            $("#navTotal").prop("class","nav-link")
-            $("#navKitchenware").prop("class","nav-link active")
-            $("#navRecipe").prop("class","nav-link")
+            $("#navTotal").prop("class", "nav-link")
+            $("#navKitchenware").prop("class", "nav-link active")
+            $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navRecipe").click(function(){
+        $("#navRecipe").click(function() {
             searchShareDate("/totalRecipeData");
             nowPage = 0;
             startItem = 0;
-            $("#navTotal").prop("class","nav-link")
-            $("#navKitchenware").prop("class","nav-link")
-            $("#navRecipe").prop("class","nav-link active")
+            $("#navTotal").prop("class", "nav-link")
+            $("#navKitchenware").prop("class", "nav-link")
+            $("#navRecipe").prop("class", "nav-link active")
         })
     </script>

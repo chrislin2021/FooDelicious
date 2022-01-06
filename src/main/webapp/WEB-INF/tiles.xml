@@ -124,4 +124,10 @@
 					   value="/WEB-INF/cashflow/GetAllProject.jsp" />
 	</definition>
 
+	<definition name="app.BackendMemberUpdate"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/BackendMemberUpdate.jsp" />
+	</definition>
+
 </tiles-definitions>

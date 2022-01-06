@@ -46,7 +46,7 @@
         <li id="member" class="list-group-item funName">
             <a href="/backend/member" style="text-decoration: none">
                 <i class="text-secondary far fa-address-card"></i>
-                <span>會員管理</span>
+                <span class="listName">會員管理</span>
             </a>
         </li>
 
@@ -55,7 +55,7 @@
         <li id="ProductList" class="list-group-item funName">
             <a href="#" style="text-decoration: none">
                 <i class="text-secondary fas fa-archive"></i>
-                <span>商品管理</span>
+                <span class="listName">商品管理</span>
             </a>
         </li>
 
@@ -63,7 +63,7 @@
         <li id="ProductAdd" class="list-group-item funName">
             <a href="/companyAddProduct" style="text-decoration: none">
                 <i class="text-secondary fas fa-gift"></i>
-                <span>增加商品</span>
+                <span class="listName">增加商品</span>
             </a>
         </li>
 
@@ -73,7 +73,7 @@
         <li id="OrderList" class="list-group-item">
             <a href="#" style="text-decoration: none">
                 <i class="text-secondary fas fa-shopping-cart"></i>
-                <span>訂單管理</span>
+                <span class="listName">訂單管理</span>
             </a>
         </li>
 
@@ -82,7 +82,7 @@
         <li id="ArticleList" class="list-group-item funName">
             <a href="#" style="text-decoration: none">
                 <i class="text-secondary fas fa-scroll"></i>
-                <span>文章管理</span>
+                <span class="listName">文章管理</span>
             </a>
         </li>
 
@@ -91,13 +91,33 @@
         <li class="list-group-item">
             <button class="btn btnBor" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <i class="text-secondary fas fa-chart-bar"></i>
-                <span>分析報表</span>
+                <span class="listName">分析報表</span>
                 <div class="collapse ulArea" id="collapseExample">
                     <ul id="collapseOne" class="accordion-collapse collapse show">
-                        <li id="AgeDistribution" class="colLi funName"><a class="colLi" href="" style="text-decoration: none"><i class="fa fa-circle-o"></i>年齡層分析</a></li>
-                        <li id="1" class="colLi"><a class="colLi" href="" style="text-decoration: none"><i class="fa fa-circle-o"></i>暢銷商品</a></li>
-                        <li id="ArticleTop10" class="colLi funName"><a class="colLi" href="" style="text-decoration: none"><i class="fa fa-circle-o"></i>熱門文章</a></li>
-                        <li id="" class="colLi"><a class="colLi" href="" style="text-decoration: none"><i class="fa fa-circle-o"></i>猶豫商品</a></li>
+                        <li id="AgeDistribution" class="colLi funName">
+                            <a class="colLi" href="" style="text-decoration: none">
+                                <i class="fa fa-circle-o"></i>
+                                <span class="listName">年齡層分析</span>
+                            </a>
+                        </li>
+                        <li id="1" class="colLi">
+                            <a class="colLi" href="" style="text-decoration: none">
+                                <i class="fa fa-circle-o"></i>
+                                <span class="listName">暢銷商品</span>
+                            </a>
+                        </li>
+                        <li id="ArticleTop10" class="colLi funName">
+                            <a class="colLi" href="" style="text-decoration: none">
+                                <i class="fa fa-circle-o"></i>
+                                <span class="listName">熱門文章</span>
+                            </a>
+                        </li>
+                        <li id="" class="colLi">
+                            <a class="colLi" href="" style="text-decoration: none">
+                                <i class="fa fa-circle-o"></i>
+                                <span class="listName">猶豫商品</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </button>
@@ -107,7 +127,7 @@
         <!-- 停權名單 -->
         <li id="BanList" class="list-group-item funName">
             <a href="#" style="text-decoration: none">
-                <i class="text-secondary fas fa-ban"></i> <span>停權名單</span>
+                <i class="text-secondary fas fa-ban"></i> <span class="listName">停權名單</span>
             </a>
         </li>
     </ul>

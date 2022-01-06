@@ -1,30 +1,16 @@
 package foodelicious.backend.memberpage.model;
 
-import foodelicious.backend.memberpage.repository.BkCrudRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-@Repository
-public class BkMemberDao implements BkMemberDaoInterface {
+public interface BkMemberDao {
 
-    @Autowired
-    private BkCrudRepository bkcrud;
+    public List<BkMember> getAllData();
 
+    public List<BkMember> findByEmail(String searchEmail);
 
+    public BkMember findById(Long memberId);
 
-    @Override
-    public List<BkMember> getAllData() {
-        List<BkMember> members = (List<BkMember>) bkcrud.findAll();
-        return members;
-    }
+    public String update(Long memberId, BkMember bkMember);
 
-    @Override
-    public List<BkMember> findByEmail(String searchEmail){
-
-        List<BkMember> accounts = bkcrud.findByEmail(searchEmail);
-
-        return accounts;
-    }
+    public String delete(Long memberId);
 }

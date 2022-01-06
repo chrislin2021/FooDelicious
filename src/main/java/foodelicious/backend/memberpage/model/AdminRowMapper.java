@@ -3,7 +3,6 @@ package foodelicious.backend.memberpage.model;
 
 
 
-import foodelicious.member.model.Admin;
 import foodelicious.member.model.Member;
 import org.springframework.jdbc.core.RowMapper;
 
