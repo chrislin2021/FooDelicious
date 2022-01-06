@@ -1,4 +1,4 @@
-package foodelicious.backend.mamagerPage.repository;
+package foodelicious.backend.managerPage.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

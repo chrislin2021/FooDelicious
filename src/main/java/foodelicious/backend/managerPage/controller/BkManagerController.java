@@ -1,4 +1,4 @@
-package foodelicious.backend.mamagerPage.controller;
+package foodelicious.backend.managerPage.controller;
 
 import org.springframework.stereotype.Controller;
 
