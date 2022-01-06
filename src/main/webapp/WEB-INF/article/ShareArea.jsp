@@ -12,30 +12,18 @@
 
     <br/>
 
-    <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
-        </ul>
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
-    </div>
+
 
     <div class="w-50 p-3 input-group mb-3">
-        <select class="form-select" id="inputGroupSelect01">
+        <select class="w-0 form-select dropdown-toggle" id="clasify">
             <option selected hidden>請選擇分類</option>
             <option>全部文章</option>
             <option>廚具開箱</option>
             <option>食譜分享</option>
           </select>
 
-        <input type="text" class="form-control" aria-label="Text input with dropdown button">
-        <button class="btn btn-outline-secondary" type="button">查詢文章標題</button>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
+        <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
     </div>
 
 
@@ -56,8 +44,8 @@
     <nav aria-label="Page navigation example ">
         <ul id="page" class="pagination justify-content-center"></ul>
     </nav>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/jquery-3.6.0.min.js"></script>
+
+    <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
     <script>
         //將值傳到全域
         let ShareData;
@@ -214,14 +202,12 @@
                 $.ajax({
                     url: "/deleteData/" + id,
                     type: "DELETE",
-                    //data: {
-                    //   id: id
-                    //},
-                    //contentType: "application/json;charset=utf-8",
-                    //dataType: 'json',
+                    success: function() {
+                        searchShareDate("/totalArticleData");
+                    }
                 })
             }
-            window.location.href = "/goShareArea";
+            //window.location.href = "/goShareArea";
         }
         //上面分類選擇器
         $("#navTotal").click(function() {
@@ -247,5 +233,15 @@
             $("#navTotal").prop("class", "nav-link")
             $("#navKitchenware").prop("class", "nav-link")
             $("#navRecipe").prop("class", "nav-link active")
+        })
+    </script>
+
+    <script>
+        //==================模糊搜尋==================
+        $("#articleSearch").on("click", function() {
+            let clasify = $(clasify).val();
+            console.log(clasify)
+            let titleKeyWord = $("#titleKeyWord").val()
+            console.log(titleKeyWord)
         })
     </script>
