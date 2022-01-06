@@ -11,6 +11,10 @@ td{
     font-size: 14px;
 }
 
+table{
+    box-shadow: 2px 5px 15px 5px gray;
+}
+
 .littleName{
     color: #D3B884;
 }

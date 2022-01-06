@@ -1,6 +1,7 @@
-package foodelicious.backend.memberpage.model;
+package foodelicious.backend.memberPage.model;
 
 import java.util.List;
+
 
 public interface BkMemberDao {
 

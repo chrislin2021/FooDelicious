@@ -136,6 +136,12 @@
 					   value="/WEB-INF/backend/managerPage/BackendManager.jsp" />
 	</definition>
 
+	<definition name="app.BackendManagerUpdate"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/managerPage/BackendManagerUpdate.jsp" />
+	</definition>
+
 
 
 </tiles-definitions>

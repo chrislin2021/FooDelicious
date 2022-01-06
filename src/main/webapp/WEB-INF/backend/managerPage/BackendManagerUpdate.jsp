@@ -8,8 +8,8 @@
 <body>
 <div>
     <h1 class="tableName">
-        會員列表
-        <span class="littleName">Member List</span>
+        管理員列表
+        <span class="littleName">Manager List</span>
     </h1>
 
     <section class="content">
@@ -17,19 +17,16 @@
             <table id="" class='table table-striped table-hover'>
                 <thead>
                 <tr>
-                    <th class="col col1 table-primary">會員編號</th>
-                    <th class="col col2 table-primary">會員email</th>
-                    <th class="col col4 table-primary">帳號狀態</th>
-                    <th class="col col5 table-primary">會員姓名</th>
-                    <th class="col col6 table-primary">會員性別</th>
-                    <th class="col col12 table-primary">會員生日</th>
-                    <th class="col col10 table-primary">會員電話</th>
-                    <th class="col col11 table-primary">會員地址</th>
-                    <th class="col col8 table-primary">會員coin</th>
-                    <th class="col col7 table-primary">會員折扣</th>
-                    <th class="col col13 table-primary">註冊日期</th>
-                    <th class="col col14 table-primary">更新</th>
-                    <th class="col col15 table-primary">取消</th>
+                    <th class="col col1 table-danger">管理員編號</th>
+                    <th class="col col2 table-danger">帳號Email</th>
+                    <th class="col col4 table-danger">權限狀態</th>
+                    <th class="col col5 table-danger">管理員姓名</th>
+                    <th class="col col10 table-danger">管理員電話</th>
+                    <th class="col col11 table-danger">管理員地址</th>
+                    <th class="col col8 table-danger">管理員coin</th>
+                    <th class="col col13 table-danger">註冊日期</th>
+                    <th class="col col14 table-danger">更新</th>
+                    <th class="col col15 table-danger">取消</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,16 +50,6 @@
                                 <input class="upInput" type="text" value="" id="memberName">
                             </td>
                             <td class='align-middle'>
-                                <select id="memberGender" class="form-select upInput upInputMd">
-                                    <option value="" id="gender" selected></option>
-                                    <option value="MALE">MALE</option>
-                                    <option value="FEMALE">FEMALE</option>
-                                </select>
-                            </td>
-                            <td class='align-middle'>
-                                <input class="upInput" type="text" value="" id="memberBirth">
-                            </td>
-                            <td class='align-middle'>
                                 <input class="upInput" type="text" value="" id="memberPhone">
                             </td>
                             <td class='align-middle'>
@@ -70,9 +57,6 @@
                             </td>
                             <td class='align-middle'>
                                 <input class="upInput" type="text" value="" id="memberCoin">
-                            </td>
-                            <td class='align-middle'>
-                                <input class="upInput" type="text" value="" id="discount">
                             </td>
                             <td class='align-middle'>
                                 <input class="upInput upInputBig readonly" type="text" value="" readonly id="registerDate">
@@ -91,57 +75,50 @@
 </div>
 <script>
     //=============抓取另一頁傳來的資料=============
-    let memberString = localStorage.getItem("memberData")
+    let managerString = localStorage.getItem("managerData")
     //將字串json化
-    let memberData = JSON.parse(memberString);
+    let managerData = JSON.parse(managerString);
     //填入資料
-    $("#memberId").val(memberData.memberId);
-    $("#memberMail").val(memberData.memberMail);
-    $("#status").text(memberData.memberStatus);
-    $("#status").val(memberData.memberStatus);
-    $("#memberName").val(memberData.memberName);
-    $("#gender").val(memberData.memberGender);
-    $("#gender").text(memberData.memberGender);
-    $("#memberBirth").val(memberData.memberBirth);
-    $("#memberPhone").val(memberData.memberPhone);
-    $("#memberAddress").val(memberData.memberAddress);
-    $("#memberCoin").val(memberData.memberCoin);
-    $("#discount").val(memberData.discount);
-    let newDate = new Date(memberData.registerDate);
+    $("#memberId").val(managerData.memberId);
+    $("#memberMail").val(managerData.memberMail);
+    $("#status").text(managerData.memberStatus);
+    $("#status").val(managerData.memberStatus);
+    $("#memberName").val(managerData.memberName);
+    $("#memberPhone").val(managerData.memberPhone);
+    $("#memberAddress").val(managerData.memberAddress);
+    $("#memberCoin").val(managerData.memberCoin);
+    let newDate = new Date(managerData.registerDate);
     let register = newDate.toLocaleString();
     $("#registerDate").val(register);
 </script>
 <script>
     //=============跳回首頁=============
     function cancel(){
-        window.location.href="/backend/member";
+        window.location.href="/backend/manager";
     }
 </script>
 <script>
     //=============更新資料=============
     $("#updateBtn").on("click",function(){
-        let memberID = $("#memberId").val();
-        let memberObj = {
+        let managerID = $("#memberId").val();
+        let managerObj = {
             "memberStatus": $("#memberStatus").val(),
             "memberName": $("#memberName").val(),
-            "memberGender": $("#memberGender").val(),
-            "memberBirth": $("#memberBirth").val(),
             "memberPhone": $("#memberPhone").val(),
             "memberAddress": $("#memberAddress").val(),
             "memberCoin": $("#memberCoin").val(),
-            "discount": $("#discount").val()
         };
-        let memberString = JSON.stringify(memberObj);
+        let managerString = JSON.stringify(managerObj);
         // alert(memberString);
 
         $.ajax({
-            url:"http://localhost:8080/bkmembers/update/"+memberID,
+            url:"http://localhost:8080/bkmanagers/update/"+managerID,
             type:"PUT",
             contentType:'application/json; charset=UTF-8',
-            data: memberString,
+            data: managerString,
             success:function(msg){
                 alert(msg)
-                window.location.href="/backend/member";
+                window.location.href="/backend/manager";
             }
         })
     })

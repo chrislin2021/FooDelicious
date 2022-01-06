@@ -26,13 +26,11 @@
                     <th class="col col2 table-danger">帳號Email</th>
                     <th class="col col4 table-danger">權限狀態</th>
                     <th class="col col5 table-danger">管理員姓名</th>
-                    <th class="col col6 table-danger">管理員性別</th>
                     <th class="col col10 table-danger">管理員電話</th>
                     <th class="col col11 table-danger">管理員地址</th>
                     <th class="col col8 table-danger">管理員coin</th>
                     <th class="col col13 table-danger">註冊日期</th>
                     <th class="col col14 table-danger">更新</th>
-                    <th class="col col15 table-danger">刪除</th>
                 </tr>
                 </thead>
                 <tbody id="members"></tbody>
@@ -44,41 +42,22 @@
 </section>
 </div>
 <script>
-    //=============刪除確認=============
-
-    $("#members").on("click","#delBtn",function() {
-        let deleteId = $(this).data("id");
-
-        if (confirm("確定要刪除嗎")) {
-            $.ajax({
-                url: "/bkmembers/delete/"+deleteId,
-                type: "DELETE",
-                success: function(msg){
-                    alert(msg);
-                    window.location.href="/backend/member";
-                }
-            });
-        }
-    })
-</script>
-<script>
     //=============E-mail關鍵字查詢功能=============
     $("#searchAcc").on("click",function(){
        let data = $(".keyWord1").val();
        $.ajax({
-           url:"http://localhost:8080/bkmembers/"+data,
+           url:"http://localhost:8080/bkmanagers/"+data,
            type: "GET",
-           success:function(accountAll){
-               let num = accountAll.length;
-               let accountData = accountAll;
+           success:function(managers){
+               let num = managers.length;
                //載入顯示功能
-               showData(0, num, accountData);
+               showData(0, num, managers);
 
                //載入分頁功能
                if(num>=10){
-                   pages(10, accountAll);
+                   pages(10, managers);
                }else{
-                   pages(num, accountAll);
+                   pages(num, managers);
                }
            }
        })
@@ -94,15 +73,15 @@
         let data = $(this).data("id");
         // alert("data："+data)
         $.ajax({
-            url:"http://localhost:8080/bkmembers/update/"+data,
+            url:"http://localhost:8080/bkmanagers/update/"+data,
             type: "GET",
-            success:function(accountAll){
+            success:function(manager){
                 //將json字串化
-                let memberString = JSON.stringify(accountAll);
+                let managerString = JSON.stringify(manager);
                 //將資料存到localStorage，給另一個頁面使用
-                localStorage.setItem("memberData",memberString);
+                localStorage.setItem("managerData",managerString);
                 //跳轉頁面
-                window.location.href="http://localhost:8080/backend/memberUpdate";
+                window.location.href="/backend/manager/update";
             }
         })
 
@@ -111,17 +90,21 @@
 
 <script>
     //=============顯示所有會員資料=============
-    const memberUrl = "http://localhost:8080/bkmembers"
-    let memberData;
+    const managerUrl = "http://localhost:8080/bkmanagers"
+    let managerData;
 
     $.ajax({
-        url: memberUrl,
+        url: managerUrl,
         type: "GET",
-        success: function(memberAll){
+        success: function(managerAll){
             //將值傳到全域
-            memberData = memberAll;
-            //載入分頁功能
-            pages(10,memberData);
+            managerData = managerAll;
+            let num = managerAll.length;
+            if(num >= 10){
+                pages(10,managerData);
+            }else{
+                pages(num,managerData);
+            }
         }
     });
 </script>
@@ -252,7 +235,6 @@
             txt += "<td class='align-middle'>"+dataSource[i].memberMail+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberStatus+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberName+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].memberGender+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberPhone+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberAddress+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberCoin+"</td>"
@@ -262,12 +244,6 @@
             txt += '<td class="align-middle">'+
                 '<form method="" >'+
                 '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].memberId+'>'+
-                '</form>'+
-                '</td>'
-            txt += '<td class="mdata">'+
-                '<form method="" action="">'+
-                '<input type="hidden" type="text" name="empdel" value=?>'+
-                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].memberId+'>'+
                 '</form>'+
                 '</td></tr>'
         }

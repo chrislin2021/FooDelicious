@@ -1,0 +1,50 @@
+package foodelicious.backend.managerPage.model;
+
+import foodelicious.backend.managerPage.repository.BkManagerRepository;
+import foodelicious.backend.memberPage.model.BkMember;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class BkManagerDaoImpl implements BkManagerDao{
+
+    private BkManagerRepository bkManagerRepository;
+
+    public BkManagerDaoImpl(BkManagerRepository bkManagerRepository) {
+        this.bkManagerRepository = bkManagerRepository;
+    }
+
+    @Override
+    public List<BkMember> findAllManager(){
+        List<BkMember> managers = bkManagerRepository.findAllManager();
+        return managers;
+    }
+
+    @Override
+    public List<BkMember> findByMail(String mail) {
+        List<BkMember> managers = bkManagerRepository.findByMail(mail);
+        return managers;
+    }
+
+    @Override
+    public BkMember findById(Long memberId) {
+        BkMember manager = bkManagerRepository.findById(memberId).orElse(null);
+        return manager;
+    }
+
+    @Override
+    public String update(Long memberId,BkMember bkMember) {
+        BkMember manager = bkManagerRepository.findById(memberId).orElse(null);
+        if(manager != null){
+            manager.setMemberStatus(bkMember.getMemberStatus());
+            manager.setMemberName(bkMember.getMemberName());
+            manager.setMemberPhone(bkMember.getMemberPhone());
+            manager.setMemberAddress(bkMember.getMemberAddress());
+            manager.setMemberCoin(bkMember.getMemberCoin());
+            bkManagerRepository.save(manager);
+        }
+
+        return "更新資料成功";
+    }
+}

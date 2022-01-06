@@ -1,14 +1,14 @@
-package foodelicious.backend.memberpage.repository;
+package foodelicious.backend.memberPage.repository;
 
 
 
 import java.util.List;
 import java.util.Optional;
 
+import foodelicious.backend.memberPage.model.BkMember;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import foodelicious.backend.memberpage.model.BkMember;
 
 public interface BkCrudRepository extends CrudRepository<BkMember, Long> {
 
