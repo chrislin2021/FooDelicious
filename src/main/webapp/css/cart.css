@@ -50,13 +50,15 @@ div.path {
 }
 
 .tip:hover .popbox {
+	border-radius: 15px;
 	display: block;
 	position: absolute;
 	top: 30px;
 	left: -50px;
-	background-color: gray;
+	background-color: white;
 	width: auto;
 	padding: 5px;
+	display: block;
 }
 
 #p {
