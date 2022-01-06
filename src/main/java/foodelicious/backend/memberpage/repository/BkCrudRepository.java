@@ -1,7 +1,7 @@
-package foodelicious.backend.memberpage.repository;
+package foodelicious.backend.memberPage.repository;
 
 
-import foodelicious.backend.memberpage.model.BkMember;
+import foodelicious.backend.memberPage.model.BkMember;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,6 +16,6 @@ public interface BkCrudRepository extends CrudRepository<BkMember, Long> {
     @Query(value="SELECT * FROM member_data2 WHERE member_id = ?", nativeQuery = true)
     Optional<BkMember> findById(Long memberId);
 
-//    @Query(value="DELETE FROM member_data WHERE member_id = ?", nativeQuery = true)
+//    @Query(value="DELETE FROM member_data WHERE member_id = ?1", nativeQuery = true)
 //    void deleteById(Long memberId);
 }

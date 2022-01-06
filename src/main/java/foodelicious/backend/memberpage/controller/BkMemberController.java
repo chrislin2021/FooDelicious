@@ -1,17 +1,12 @@
-package foodelicious.backend.memberpage.controller;
+package foodelicious.backend.memberPage.controller;
 
-import foodelicious.backend.memberpage.model.BkMember;
-import foodelicious.backend.memberpage.repository.BkCrudRepository;
-import foodelicious.backend.memberpage.service.BkMemberService;
+import foodelicious.backend.memberPage.model.BkMember;
+import foodelicious.backend.memberPage.repository.BkCrudRepository;
+import foodelicious.backend.memberPage.service.BkMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class BkMemberController {

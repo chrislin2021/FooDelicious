@@ -109,13 +109,13 @@
 	<definition name="app.BackendProductAdd"
 				extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/BackendProductAdd.jsp" />
+					   value="/WEB-INF/backend/productPage/BackendProductAdd.jsp" />
 	</definition>
 
 	<definition name="app.BackendMember"
 				extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/BackendMember.jsp" />
+					   value="/WEB-INF/backend/memberPage/BackendMember.jsp" />
 	</definition>
 	
 	<definition name="app.CashflowList"
@@ -127,7 +127,15 @@
 	<definition name="app.BackendMemberUpdate"
 				extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/BackendMemberUpdate.jsp" />
+					   value="/WEB-INF/backend/memberPage/BackendMemberUpdate.jsp" />
 	</definition>
+
+	<definition name="app.BackendManager"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/managerPage/BackendManager.jsp" />
+	</definition>
+
+
 
 </tiles-definitions>
