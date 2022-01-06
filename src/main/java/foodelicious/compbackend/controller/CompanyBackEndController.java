@@ -1,5 +1,7 @@
 package foodelicious.compbackend.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -27,6 +29,11 @@ public class CompanyBackEndController {
 	@GetMapping(path ="/companyAddProduct")
 	public String companyAddProduct() {
 		return "app.CompanyAddProduct";
+	}
+	@GetMapping(path ="/logout")
+	public String companyLogout(HttpSession session) {
+		session.invalidate();
+		return "app.home";
 	}
 
 

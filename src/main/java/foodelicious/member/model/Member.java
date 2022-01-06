@@ -94,9 +94,9 @@ public class Member implements Serializable {
 	private Set<ShareArea> shareAreas = new LinkedHashSet<ShareArea>();
 
 	
-	//Join Product 的 table
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
-	private Set<Product> products = new LinkedHashSet<Product>();
+	//Join Product table
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+//	private Set<Product> products = new LinkedHashSet<Product>();
 
 	@PrePersist // 設定物件轉換為 Persistent 以前執行
 	private void onCreate() {

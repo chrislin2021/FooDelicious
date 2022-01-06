@@ -6,9 +6,7 @@ import foodelicious.product.model.Product;
 
 
 public interface CompanyBackEndServiceInterface {
+
 	
-	public List<Product> getAllProducts();
-	
-	public List<OrdersBean> getAllOrders();
 
 }

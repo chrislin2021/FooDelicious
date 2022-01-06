@@ -47,6 +47,7 @@ public class MainUpdateController {
 			session.setAttribute("userID", EMid);
 
 			System.out.println("EMid：" + EMid);
+			System.out.println("EMid：" + session.getAttribute("userID"));
 
 			// 查詢成功登入的會員身份
 			String level = EMDaoService.findId2(EMid);

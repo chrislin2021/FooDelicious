@@ -6,8 +6,10 @@ import java.util.List;
 import foodelicious.product.model.Product;
 
 public interface CBKProductDaoInterface {
-	public List<Product> getAllProducts();
 	
+	
+
+	List<Product> getAllProducts(Long id);
 	
 	
 
