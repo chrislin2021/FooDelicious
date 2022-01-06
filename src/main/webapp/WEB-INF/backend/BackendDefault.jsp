@@ -124,10 +124,10 @@
         </li>
 
 
-        <!-- 停權名單 -->
+        <!-- 管理員名單 -->
         <li id="BanList" class="list-group-item funName">
-            <a href="#" style="text-decoration: none">
-                <i class="text-secondary fas fa-ban"></i> <span class="listName">停權名單</span>
+            <a href="/backend/manager" style="text-decoration: none">
+                <i class="text-secondary fas fa-crown"></i> <span class="listName">管理名單</span>
             </a>
         </li>
     </ul>

@@ -126,4 +126,27 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
 		return list;
 	}
+
+	@Override
+	public List<ShareArea> articleFuzzySearch(String clasify, String associateString) {
+		if(clasify.equals("全部文章")) {
+			System.out.println("全部文章導入");
+			return OneArticleFuzzySearch(associateString);
+		}
+		String hql = "SELECT * FROM share_area WHERE article_clallify = :clallify AND article_title LIKE :title";
+		Map<String, Object> AllData = new HashMap<>();		
+		AllData.put("clallify", clasify);
+		AllData.put("title", '%'+associateString+'%');
+		List<ShareArea> list = namedParameterJdbcTemplate.query(hql, AllData, new ShareAreaRowMapper());
+		return list;		
+	}
+	@Override
+	public List<ShareArea> OneArticleFuzzySearch(String associateString){
+		String hql = "SELECT * FROM share_area WHERE article_title LIKE :title";
+		Map<String, Object> AllData = new HashMap<>();		
+		AllData.put("title", '%'+associateString+'%');
+		List<ShareArea> list = namedParameterJdbcTemplate.query(hql, AllData, new ShareAreaRowMapper());
+		System.out.println(list);
+		return list;		
+	}
 }

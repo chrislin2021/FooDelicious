@@ -23,4 +23,8 @@ public interface ArticleService {
 	List<ShareArea> findRecipe();
 
 	List<ShareArea> findKitchenware();
+
+	List<ShareArea> articleFuzzySearch(String clasify, String associateString);
+	
+	List<ShareArea> OneArticleFuzzySearch(String associateString);
 }

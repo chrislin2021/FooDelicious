@@ -6,8 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import foodelicious.backend.memberpage.model.BkMember;
 import foodelicious.compbackend.model.CBKOrderDaoInterface;
 import foodelicious.compbackend.model.CBKProductDaoInterface;
 import foodelicious.orders.model.OrdersBean;

@@ -62,6 +62,16 @@ public class ArticleServiceImpl implements ArticleService{
 	public List<ShareArea> findKitchenware() {
 		return articleRepository.findKitchenware();
 	}
+
+	@Override
+	public List<ShareArea> articleFuzzySearch(String clasify, String associateString) {
+		return articleRepository.articleFuzzySearch(clasify, associateString);		
+	}
+
+	@Override
+	public List<ShareArea> OneArticleFuzzySearch(String associateString) {
+		return articleRepository.OneArticleFuzzySearch(associateString);
+	}
 	
 	
 }

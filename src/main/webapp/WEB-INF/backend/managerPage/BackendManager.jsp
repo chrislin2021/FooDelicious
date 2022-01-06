@@ -3,12 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <head>
-    <link rel="stylesheet" href="../../css/BackendMember.css">
+    <link rel="stylesheet" href="../../../css/backendManager.css">
 </head>
 <body>
 <h1 class="tableName">
-    會員列表
-    <span class="littleName">Member List</span>
+    管理員列表
+    <span class="littleName">Manager List</span>
 </h1>
 <form action="">
     <div class="col-sm-2">
@@ -22,19 +22,17 @@
             <table id="" class='table table-striped table-hover '>
                 <thead>
                 <tr>
-                    <th class="col col1 table-primary">會員編號</th>
-                    <th class="col col2 table-primary">會員email</th>
-                    <th class="col col4 table-primary">帳號狀態</th>
-                    <th class="col col5 table-primary">會員姓名</th>
-                    <th class="col col6 table-primary">會員性別</th>
-                    <th class="col col12 table-primary">會員生日</th>
-                    <th class="col col10 table-primary">會員電話</th>
-                    <th class="col col11 table-primary">會員地址</th>
-                    <th class="col col8 table-primary">會員coin</th>
-                    <th class="col col7 table-primary">會員折扣</th>
-                    <th class="col col13 table-primary">註冊日期</th>
-                    <th class="col col14 table-primary">更新</th>
-                    <th class="col col15 table-primary">刪除</th>
+                    <th class="col col1 table-danger">管理員編號</th>
+                    <th class="col col2 table-danger">帳號Email</th>
+                    <th class="col col4 table-danger">權限狀態</th>
+                    <th class="col col5 table-danger">管理員姓名</th>
+                    <th class="col col6 table-danger">管理員性別</th>
+                    <th class="col col10 table-danger">管理員電話</th>
+                    <th class="col col11 table-danger">管理員地址</th>
+                    <th class="col col8 table-danger">管理員coin</th>
+                    <th class="col col13 table-danger">註冊日期</th>
+                    <th class="col col14 table-danger">更新</th>
+                    <th class="col col15 table-danger">刪除</th>
                 </tr>
                 </thead>
                 <tbody id="members"></tbody>
@@ -44,7 +42,7 @@
             </nav>
     </div>
 </section>
-
+</div>
 <script>
     //=============刪除確認=============
 
@@ -255,12 +253,9 @@
             txt += "<td class='align-middle'>"+dataSource[i].memberStatus+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberName+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberGender+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].memberBirth+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberPhone+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberAddress+"</td>"
-
             txt += "<td class='align-middle'>"+dataSource[i].memberCoin+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].discount+"</td>"
             let newDate = new Date(dataSource[i].registerDate);
             let register = newDate.toLocaleString();
             txt += "<td class='align-middle'>"+register+"</td>"

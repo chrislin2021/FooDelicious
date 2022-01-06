@@ -1,10 +1,9 @@
-package foodelicious.backend.memberpage.model;
+package foodelicious.backend.memberPage.model;
 
-import foodelicious.backend.memberpage.repository.BkCrudRepository;
+import foodelicious.backend.memberPage.repository.BkCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.HashMap;
 import java.util.List;
