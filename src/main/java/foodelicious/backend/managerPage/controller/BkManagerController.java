@@ -1,8 +1,7 @@
 package foodelicious.backend.managerPage.controller;
 
 import foodelicious.backend.managerPage.service.BkManagerService;
-import foodelicious.backend.memberPage.model.BkMember;
-import org.springframework.stereotype.Controller;
+import foodelicious.backend.memberpage.model.BkMember;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

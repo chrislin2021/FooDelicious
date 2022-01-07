@@ -1,7 +1,7 @@
 package foodelicious.backend.managerPage.model;
 
 import foodelicious.backend.managerPage.repository.BkManagerRepository;
-import foodelicious.backend.memberPage.model.BkMember;
+import foodelicious.backend.memberpage.model.BkMember;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

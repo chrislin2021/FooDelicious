@@ -1,10 +1,10 @@
-package foodelicious.backend.memberPage.controller;
+package foodelicious.backend.memberpage.controller;
 
 import java.util.List;
 
-import foodelicious.backend.memberPage.model.BkMember;
-import foodelicious.backend.memberPage.repository.BkCrudRepository;
-import foodelicious.backend.memberPage.service.BkMemberService;
+import foodelicious.backend.memberpage.model.BkMember;
+import foodelicious.backend.memberpage.repository.BkCrudRepository;
+import foodelicious.backend.memberpage.service.BkMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

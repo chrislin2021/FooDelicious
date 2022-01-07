@@ -1,4 +1,4 @@
-package foodelicious.backend.memberPage.model;
+package foodelicious.backend.memberpage.model;
 
 import java.util.List;
 
