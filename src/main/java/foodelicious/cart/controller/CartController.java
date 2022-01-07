@@ -130,8 +130,9 @@ public class CartController {
 
 	@ResponseBody
 	@GetMapping("/showCart")
-	public List<CartBean> showCart() {
+	public List<CartBean> showCart(Model m) {
 		List<CartBean> origin = cartService.selectItem((Long) session.getAttribute("userID"));
+		m.addAttribute("totalPrice", totalAmount());
 		return origin;
 	}
 
