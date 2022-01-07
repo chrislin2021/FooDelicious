@@ -376,9 +376,15 @@
                             'from': chatId.value,
                             'text': text
                         }));
+                        messageData += "<p>" + chatId.value + " : " + text + "</p>";
+                        $(".messageArea").html(messageData);
                     }
                     //console.log("=====================================================")
                     //console.log('from：' + chatId.value + "/n" + 'text' + text)
+
+
+
+                    //$(".messageArea").html(messageData);
                 }
             };
             btnSendToChatRoom2.onclick = function() {
@@ -389,9 +395,10 @@
                         'from': chatId.value,
                         'text': text
                     }));
+                    messageData += "<p>" + chatId.value + " : " + text + "</p>";
+                    $(".messageArea").html(messageData);
                 }
             };
-            chatId.focus();
         });
 
         function showMessageOutput(messageOutput) {
@@ -400,11 +407,8 @@
             //console.log(JSON.stringify(messageOutput));
             //line += JSON.stringify(messageOutput) + "\n";
             /* 更新聊天訊息顯示區 */
-            console.log("測試" + messageOutput.from)
-            console.log("測試" + JSONData.from)
-                //responseArea.value += "" + line;
-            messageData += "<p>" + chatId.value + "：</p>";
-            messageData += "<p>" + text + "：</p>";
-            $(".messageArea").html(messageData);
+
+            //responseArea.value += "" + line;
+
         }
     </script>

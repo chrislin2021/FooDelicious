@@ -39,6 +39,7 @@ public class MessageController {
 	@MessageMapping("/chat/{chatId}")
 	@SendTo({"/topic/messages"})
 	public  OutputMessage processChatRoomMessage(Message message) {
+		System.out.println(message);
 		String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
 		return new OutputMessage(message.getFrom(), message.getText(), time);
 	}
