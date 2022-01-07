@@ -1,7 +1,12 @@
 package foodelicious.backend.managerPage.service;
 
+<<<<<<< HEAD
 import java.util.List;
 
+=======
+import foodelicious.backend.managerPage.model.BkManagerDao;
+import foodelicious.backend.memberpage.model.BkMember;
+>>>>>>> origin/master
 import org.springframework.stereotype.Service;
 
 import foodelicious.backend.managerPage.model.BkManagerDao;

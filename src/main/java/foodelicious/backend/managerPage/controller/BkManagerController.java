@@ -1,5 +1,12 @@
 package foodelicious.backend.managerPage.controller;
 
+<<<<<<< HEAD
+=======
+import foodelicious.backend.managerPage.service.BkManagerService;
+import foodelicious.backend.memberpage.model.BkMember;
+import org.springframework.web.bind.annotation.*;
+
+>>>>>>> origin/master
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
