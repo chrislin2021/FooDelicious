@@ -208,7 +208,8 @@
 
 /* 主要內容 */
 .main-section{
-  margin: 14px;
+  padding-left:12px;
+  padding-right:12px;
   position: relative;
   background: white;
   height: fit-content;
@@ -298,14 +299,34 @@
 
 /* companyProduct 樣式 */
 
-.tableName{
-	color:grey;
-	font-size:38px;
+
+
+.pageMove:hover{
+    background: skyblue;
+    transform: translate(3px,3px);
+}
+
+th{
+    font-size: 18px;
+}
+
+td{
+    font-size: 14px;
+}
+
+table{
+    box-shadow: 2px 5px 20px 5px gray;
 }
 
 .smallFont{
     color: #D3B884;
-    font-size:28px;
 }
+
+.keyWord{
+    height: 35px;
+    margin-bottom: 5px;
+}
+
+
 
 

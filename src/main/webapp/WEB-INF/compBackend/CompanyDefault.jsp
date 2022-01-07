@@ -9,8 +9,10 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
+
 <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
 <link rel="stylesheet" href="../../css/Test.css">
+
 <!-- Boxiocns CDN Link -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
 	  rel='stylesheet'>
@@ -19,6 +21,7 @@
 	rel="stylesheet">
 
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 
 
 

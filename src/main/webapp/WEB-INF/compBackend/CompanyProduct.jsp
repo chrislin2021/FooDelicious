@@ -5,12 +5,12 @@
 
 <body>
 	
-	<h1 class="tableName">
+	<h1 class="tableName" style="">
 		商品列表<span class="smallFont">Product List</span>
 	</h1>
 
-	<table class="table table-hover">
-		<thead class="table-dark">
+	<table class="table table-hover" style='text-align:center'>
+		<thead class="table-primary">
 			<tr>
 <!-- 				<th class="col col1 ">商品圖片</th> -->
 				<th class="col col2 ">商品名稱</th>
@@ -30,12 +30,13 @@
 		</tbody>
 
 	</table>
-	<span id="productTotal">
+	
+	<span id="total">
+	
 	
 	</span>
-		<nav aria-label="Page navigation example ">
-		<ul id="page" class="pagination justify-content-center"></ul>
-	</nav>
+	
+		
 	
 	<c:set var="userID" value="${userID}"/>
 	${userID}
@@ -76,6 +77,7 @@
     
         //顯示資料用
         function showData(startItem,endItem){
+        	
             let txt = "<tr>";
             for (let i = startItem; i < endItem; i++) {
                 txt += "<td class='align-middle'>"+productData[i].productName+"</td>"
@@ -101,7 +103,10 @@
                                 
                  
             }
+           
             $("#products").html(txt);
+            let total = '<h1>共'+endItem+'個商品</h1>';
+            $("#total").html(total);
    
         }
     
