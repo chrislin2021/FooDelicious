@@ -12,16 +12,15 @@
 		<form:form class="form" method="POST" modelAttribute="member">
 		
 		<div class="input-group mb-3">
-			<span class="input-group-text">會員帳號：</span> <form:input type="text" 
-				class="form-control" aria-label="Sizing example input"	
-				aria-describedby="inputGroup-sizing-default" id="memberMail"
-				path ="memberMail" />
+			<span class="input-group-text">會員帳號：</span> 
+			<form:input type="text" class="form-control" aria-label="Sizing example input"	
+				aria-describedby="inputGroup-sizing-default" id="memberMail" path ="memberMail" />
 		</div>
 
 		<div class="input-group mb-3">
-			<span class="input-group-text">會員密碼：</span> <input type="password"
-				class="form-control" aria-label="Sizing example input"
-				aria-describedby="inputGroup-sizing-default" id="pwd" name="pwd">
+			<span class="input-group-text">會員密碼：</span> 
+			<form:input type="password" class="form-control" aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" id="pwd" path="pwd" />
 		</div>
 		
 		<div class="input-group mb-3">

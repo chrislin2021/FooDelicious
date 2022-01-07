@@ -49,7 +49,7 @@
 	      </c:choose>
 
 	        <tr bgcolor="${colorVar}">
-	            <td><a href="<c:url value='/members' />?MemberId=${member.memberId}">${member.memberMail}</a></td>
+	            <td><a href="<c:url value='/members' />?MemberId=${member.memberId}">${member.memberId}</a></td>
 	            <td>${member.memberMail} </td>
 	            <td>${member.pwd} </td>
 	            <td>${member.memberName}</td>
@@ -61,7 +61,7 @@
 	            <td>${member.memberCoin} </td>
 	            <td>${member.member_status} </td>
 	            <td>${member.register_date} </td>
-	            <td><button id="delbtn" onclick="delfun('${member.memberId}, '${member.memberMail}')">刪除</button></td>
+	            <td><button id="delbtn" onclick="delfun('${member.memberId}, '${member.memberId}')">刪除</button></td>
 	        </tr>
 	        <c:if test="${statusX.last}" >
 	             <c:out value="</table>" escapeXml="false" />
