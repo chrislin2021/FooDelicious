@@ -5,9 +5,9 @@
         <link href="/css/CKEditor.css" rel="stylesheet" />
         <div class="row" id="rowSelect">
             <!--版面配置左方-->
-            <div div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-2"></div>
             <!--版面配置右方-->
-            <div div class="col-12 col-md-9">
+            <div class="col-12 col-md-9">
                 <h3>文章修改</h3>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">分類</span>
@@ -26,6 +26,7 @@
                 </div>
                 <br> <input type='button' value='確認修改' id="submit">
             </div>
+
         </div>
         <script src="${contextRoot}/js/ckeditor.js"></script>
         <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>

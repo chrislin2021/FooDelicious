@@ -3,7 +3,6 @@ package foodelicious.websocket.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -11,8 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
 import foodelicious.websocket.model.Greeting;
-import foodelicious.websocket.model.OutputMessage;
 import foodelicious.websocket.model.Message;
+import foodelicious.websocket.model.OutputMessage;
 
 @Controller
 public class MessageController {
