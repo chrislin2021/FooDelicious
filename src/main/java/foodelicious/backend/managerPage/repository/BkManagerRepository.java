@@ -1,12 +1,12 @@
 package foodelicious.backend.managerPage.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import foodelicious.backend.memberPage.model.BkMember;
-
-import java.util.List;
+import foodelicious.backend.memberpage.model.BkMember;
 
 @Repository
 public interface BkManagerRepository extends CrudRepository<BkMember, Long> {

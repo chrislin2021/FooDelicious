@@ -1,13 +1,14 @@
-package foodelicious.backend.memberPage.model;
+package foodelicious.backend.memberpage.model;
 
 
 
-
-import foodelicious.member.model.Member;
-import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import foodelicious.member.model.Member;
 
 public class AdminRowMapper implements RowMapper<Member> {
 

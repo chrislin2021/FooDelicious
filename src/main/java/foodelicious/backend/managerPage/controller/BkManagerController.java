@@ -1,11 +1,15 @@
 package foodelicious.backend.managerPage.controller;
 
-import foodelicious.backend.managerPage.service.BkManagerService;
-import foodelicious.backend.memberPage.model.BkMember;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import foodelicious.backend.managerPage.service.BkManagerService;
+import foodelicious.backend.memberpage.model.BkMember;
 
 @RestController
 public class BkManagerController {
