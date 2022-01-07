@@ -11,24 +11,24 @@
     <span class="littleName">Product List</span>
 </h1>
 <div class="searchArea">
-    <select class="form-select selectBox" aria-label="Default select example">
+    <select id="selectVal" class="form-select selectBox" aria-label="Default select example">
         <option selected>全部商品</option>
-        <option value="1">食材</option>
-        <option value="2">廚具</option>
+        <option value="食材">食材</option>
+        <option value="廚具">廚具</option>
     </select>
     <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入名稱關鍵字...">
     <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="查詢" />
 </div>
 
-<ul class="nav nav-tabs">
+<ul id="selectPage" class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">全部商品</a>
+        <a id="all" class="nav-link active" aria-current="page" href="#">全部商品</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">食材</a>
+        <a id="food" class="nav-link" href="#">食材</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">廚具</a>
+        <a id="tool" class="nav-link" href="#">廚具</a>
     </li>
 </ul>
 <section class="content">
@@ -59,22 +59,34 @@
     </div>
 </section>
 <script>
-    //=============E-mail關鍵字查詢功能=============
+    //=============名稱關鍵字查詢功能=============
     $("#searchAcc").on("click",function(){
-       let data = $(".keyWord1").val();
+       let inputData = $(".keyWord1").val();
+       let selectVal = $("#selectVal").val();
+       let urlData = "";
+       // alert("inputData："+inputData+", selectVal"+selectVal);
+       if(selectVal === "全部商品"){
+           urlData = "http://localhost:8080/bkproducts/"+inputData;
+       }else if(selectVal === "廚具"){
+           selectVal = 0;
+           urlData = "http://localhost:8080/bkproducts/"+inputData+"/"+selectVal;
+       }else{
+           selectVal = 1;
+           urlData = "http://localhost:8080/bkproducts/"+inputData+"/"+selectVal;
+       }
        $.ajax({
-           url:"http://localhost:8080/bkmanagers/"+data,
+           url: urlData,
            type: "GET",
-           success:function(managers){
-               let num = managers.length;
+           success:function(products){
+               let num = products.length;
                //載入顯示功能
-               showData(0, num, managers);
+               showData(0, num, products);
 
                //載入分頁功能
                if(num>=10){
-                   pages(10, managers);
+                   pages(10, products);
                }else{
-                   pages(num, managers);
+                   pages(num, products);
                }
            }
        })
@@ -124,6 +136,71 @@
             }
         }
     });
+</script>
+
+<script>
+    //=============顯示分頁設定=============
+    let urlString = "";
+    $("#all").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#all").prop("class","nav-link active");
+        urlString = "http://localhost:8080/bkproducts";
+        // alert(urlString);
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(productAll){
+                //將值傳到全域
+                productData = productAll;
+                let num = productAll.length;
+                if(num >= 10){
+                    pages(10,productData);
+                }else{
+                    pages(num,productData);
+                }
+            }
+        });
+    })
+    $("#food").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#food").prop("class","nav-link active");
+        urlString = "http://localhost:8080/bkproducts/search/1";
+        // alert(urlString);
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(productAll){
+                //將值傳到全域
+                productData = productAll;
+                let num = productAll.length;
+                if(num >= 10){
+                    pages(10,productData);
+                }else{
+                    pages(num,productData);
+                }
+            }
+        });
+    })
+    $("#tool").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#tool").prop("class","nav-link active");
+        urlString = "http://localhost:8080/bkproducts/search/0";
+        // alert(urlString);
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(productAll){
+                //將值傳到全域
+                productData = productAll;
+                let num = productAll.length;
+                if(num >= 10){
+                    pages(10,productData);
+                }else{
+                    pages(num,productData);
+                }
+            }
+        });
+    })
 </script>
 
 <script>

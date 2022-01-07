@@ -8,4 +8,10 @@ public interface BkProductService {
 
     public List<BkProduct> findAllProduct();
 
+    public List<BkProduct> findAllByName(String productName);
+
+    public List<BkProduct> findByNameAndType(String productName,Integer categories);
+
+    public List<BkProduct> findByType(Integer categories);
+
 }

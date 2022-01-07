@@ -22,4 +22,27 @@ public class BkProductDaoImpl implements BkProductDao{
 
         return products;
     }
+
+    @Override
+    public List<BkProduct> findAllByName(String productName) {
+
+        List<BkProduct> products = bkProductRepository.findByName(productName);
+
+        return products;
+    }
+
+    @Override
+    public List<BkProduct> findByNameAndType(String productName, Integer categories) {
+
+        List<BkProduct> products = bkProductRepository.findByNameAndType(productName, categories);
+
+        return products;
+    }
+
+    @Override
+    public List<BkProduct> findByType(Integer categories) {
+
+        List<BkProduct> products = bkProductRepository.findByType(categories);
+        return products;
+    }
 }
