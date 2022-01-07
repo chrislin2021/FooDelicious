@@ -43,7 +43,7 @@ public class MemberCreateController {
 		
 		model.addAttribute("membersForJSP",members);//屬性物件的識別字串，等同於servlet(HSR)的request.setAttribute
 		model.addAttribute(members);//預設的識別字串
-		return "listAllMembers";
+		return "app.ListAllMembers";
 	}
 
 	// 註冊頁面

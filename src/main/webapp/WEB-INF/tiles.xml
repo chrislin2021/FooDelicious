@@ -161,6 +161,10 @@
 			value="/WEB-INF/backend/managerPage/BackendManagerUpdate.jsp" />
 	</definition>
 
-
+	<definition name="app.ListAllMembers"
+		extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/member/listAllMembers.jsp" />
+	</definition>
 
 </tiles-definitions>
