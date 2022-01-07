@@ -32,6 +32,7 @@
 .photo{
     padding: 10px;
     width: 120px;
+    border-radius: 20px;
 }
 
 .brandName{
@@ -89,4 +90,8 @@
 
 .ulArea{
     margin-left: 80px;
+}
+
+.fork{
+    font-size: 32px;
 }

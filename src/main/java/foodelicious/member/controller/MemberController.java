@@ -15,11 +15,11 @@ public class MemberController {
 	
 
 
-	// 轉換頁面用 Login->register
-	@GetMapping("/goregister")
-	public String goRegistergepage() {
-		return "app.RegisterPage";
-	}
+//	// 轉換頁面用 Login->register
+//	@GetMapping("/Regi")
+//	public String goRegistergepage() {
+//		return "app.RegisterPage";
+//	}
 
 
 	

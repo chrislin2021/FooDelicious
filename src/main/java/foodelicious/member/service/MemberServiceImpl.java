@@ -1,70 +1,63 @@
 package foodelicious.member.service;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.member.model.Member;
-import foodelicious.member.repository.MemberSDJpaRepository;
+import foodelicious.member.repository.MemberRepository;
 
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService {
-	
-	MemberSDJpaRepository memberRepository;
-	
-	
-	
-	@Autowired
-	public MemberServiceImpl(MemberSDJpaRepository memberRepository) {
+
+	MemberRepository memberRepository;
+
+//	@Autowired
+	public MemberServiceImpl(MemberRepository memberRepository) {
+		super();
 		this.memberRepository = memberRepository;
 	}
 
-
 	@Override
-	public Boolean save(Member member) {
-		memberRepository.save(member);
-		return true;
-//		System.out.println("memberService" + member);
+	public Member save(Member member) {
+		return memberRepository.save(member);
 	}
 
+//	@Override
+//	public boolean save(Member member) {
+//		memberRepository.save(member);
+//		return true;
+////		System.out.println("memberService" + member);
+//	}
+
+//	@Override
+//	public Member checkLogin(String member) {
+//		return memberRepository.checkLogin(member);
+//	}
+//
+//
+//	@Override
+//	public  Member findId(String memberMail) {
+//		return memberRepository.findByMemberMail(memberMail);
+//	}
+//
+//	@Override
+//	public Member findByMemberMailAndPwd(String memberMail, String pwd) {
+//		return memberRepository.findByMemberMailAndPwd(memberMail, pwd);
+//	}
 
 	@Override
-	public Member checkLogin(String member) {
-		return memberRepository.checkLogin(member);
-	}
-
-
-	@Override
-	public  Member findId(String memberMail) {
+	public Member findByMemberMail(String memberMail) {
 		return memberRepository.findByMemberMail(memberMail);
 	}
 
-//	@Override
-//	public Member findByMemberStatus(String memberStatus) {
-//		return memberRepository.findByMemberStatus(memberStatus);
-//	}
-
-
 	@Override
-	public Member findByMemberMailAndPwd(String memberMail, String pwd) {
-		return memberRepository.findByMemberMailAndPwd(memberMail, pwd);
+	public List<Member> findAll() {
+		return memberRepository.findAll();
 	}
 
 
-
-
-//	@Override
-//	public boolean checkLogin(Member member) {
-//		return memberRepository.checkLogin(member);
-//	}
-
-
-//	@Override
-//	public Long findId(Member member) {
-//		return memberRepository.findId(member);
-	}
-
-
-
+}

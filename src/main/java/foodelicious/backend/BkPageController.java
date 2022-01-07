@@ -29,5 +29,6 @@ public class BkPageController {
     @GetMapping("backend/manager")
     public String BackendManager(){ return "app.BackendManager";}
 
-
+    @GetMapping("backend/manager/update")
+    public String BackendManagerUpdate(){ return "app.BackendManagerUpdate";}
 }

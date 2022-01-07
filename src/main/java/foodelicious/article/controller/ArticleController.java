@@ -35,6 +35,12 @@ public class ArticleController {
 		this.articleService = articleService;
 		this.session = session;
 	}
+	//測試中
+	@GetMapping("/websocket")
+	public String webSocket() {
+		return "app.websocket";
+	}
+	
 	//圖像綁定使用 用於CKEditor
 	@ResponseBody
 	@RequestMapping(path = "/imgArticle", consumes = "multipart/form-data", method = RequestMethod.POST)

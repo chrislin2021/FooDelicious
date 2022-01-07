@@ -5,16 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
@@ -34,40 +31,26 @@ public class CartController {
 	}
 
 	@GetMapping("/shoppingCart")
-	public String showCart(Model m) {
+	public String shoppingCart() {
 
-		if (!checkLogin()) {
+		if (session.getAttribute("userID") != null) {
+			return "app.ShoppingCart";
+		} else {
 			return "app.LoginSystem";
 		}
-
-		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-
-		Integer priceTotal = 0;
-
-		for (CartBean cart : carts) {
-			if (!CollectionUtils.isEmpty(carts)) {
-				priceTotal += cart.getProduct().getProductPrice() * cart.getQuantity();
-			}
-		}
-
-		m.addAttribute("carts", carts);
-		m.addAttribute("priceTotal", priceTotal);
-
-		return "app.ShoppingCart";
 	}
 
-//	使用者新增商品至購物車
 	@ResponseBody
 	@PostMapping("/shoppingCart/insertProduct")
-	public String insertItem(Model m, Long productId) {
+	public String insertItem(@RequestBody String structuredData) {
 
 //		判斷購物車是否有重複商品
-		Boolean judge = false;
+		Boolean same = false;
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
-			if (productId == cart.getProductId()) {
+			if (null == cart.getProductId()) {
 //				暫時增加一個商品，因為商品還沒做到這
 				Integer sum = cart.getQuantity() + 1;
 				Product product = cart.getProduct();
@@ -83,13 +66,13 @@ public class CartController {
 
 				cartService.insertAndUpdateItem(cart);
 
-				judge = true;
+				same = true;
 				break;
 			}
 		}
 
 //		暫時先做到這商品還沒新增
-		if (judge != true) {
+		if (same != true) {
 			CartBean cartBean = new CartBean();
 			cartBean.setMemberId((Long) session.getAttribute("userID"));
 			cartBean.setProductId(null);
@@ -99,14 +82,9 @@ public class CartController {
 		return "{\"ans\":\"" + "此項商品數量 " + null + " 個已加入購物車" + "\"}";
 	}
 
-//	刪除商品
-	@DeleteMapping("/shoppingCart/{productId}")
-	public String deleteItem(@RequestParam Long productId, Model m) {
-
-//		沒登入就給我滾去登入
-		if (!checkLogin()) {
-			return "app.LoginSystem";
-		}
+	@ResponseBody
+	@DeleteMapping("/shoppingCart/{id}")
+	public void deleteItem(@PathVariable(name = "id") Long productId) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -116,43 +94,49 @@ public class CartController {
 				break;
 			}
 		}
-
-		return "redirect:/shoppingCart";
-
 	}
 
 	@ResponseBody
 	@PutMapping("/shoppingCart/")
-	public List<CartBean> updateItem(Model m) {
+	public Integer updateItem(@RequestBody String structuredData) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
-		m.addAttribute("carts", carts);
+		for (CartBean cart : carts) {
+			if (null == cart.getProductId()) {
+				cart.setQuantity(null);
+				cartService.insertAndUpdateItem(cart);
+				break;
+			}
+		}
+		return totalAmount();
+	}
+
+	public List<CartBean> selectItem() {
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 		return carts;
 	}
-
 //	檢查使用者有沒有登入
-	public Boolean checkLogin() {
-		Object member = session.getAttribute("userID");
-
-		return member != null;
-	}
-
-////	購物車總金額
-//	public void totalAmount() {
+//	public Boolean checkLogin() {
+//		Object member = session.getAttribute("userID");
 //
-//		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-//
-//		Integer totalAmount = 0;
-//
-//		for (CartBean cart : carts) {
-//			Product product = cart.getProduct();
-//			totalAmount += product.getProductPrice() * cart.getQuantity();
-//		}
-//
-//		session.setAttribute("totalAmount", totalAmount);
-//
-////		return totalAmount;
+//		return member != null;
 //	}
 
+//	public String showCart() {
+//		List<CartBean> original = cartService.selectItem((Long) session.getAttribute("userID"));
+//		String carts = new Gson().toJson(original);
+//		return carts;
+//	}
+
+//	購物車總金額
+	public Integer totalAmount() {
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+		Integer totalAmount = 0;
+		for (CartBean cart : carts) {
+			Product product = cart.getProduct();
+			totalAmount += product.getProductPrice() * cart.getQuantity();
+		}
+		return totalAmount;
+	}
 }

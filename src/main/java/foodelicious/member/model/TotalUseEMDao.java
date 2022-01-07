@@ -9,10 +9,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-import foodelicious.backend.memberPage.model.AdminRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import foodelicious.backend.memberpage.model.AdminRowMapper;
 
 @Repository
 @Transactional

@@ -29,7 +29,7 @@
                     <th class="col col7 table-primary">會員折扣</th>
                     <th class="col col13 table-primary">註冊日期</th>
                     <th class="col col14 table-primary">更新</th>
-                    <th class="col col15 table-primary">刪除</th>
+                    <th class="col col15 table-primary">取消</th>
                 </tr>
                 </thead>
                 <tbody>

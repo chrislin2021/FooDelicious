@@ -1,10 +1,12 @@
-package foodelicious.backend.memberPage.service;
+package foodelicious.backend.memberpage.service;
 
-import foodelicious.backend.memberPage.model.BkMember;
-import foodelicious.backend.memberPage.model.BkMemberDao;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import foodelicious.backend.memberpage.model.BkMember;
+import foodelicious.backend.memberpage.model.BkMemberDao;
 
 @Service
 public class BkMemberServiceImpl implements BkMemberService {
