@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    
+    <link rel='stylesheet' href="../../css/websocketstyle.css" />
     <style>
         .topDIV {
             margin-top: 16px;
@@ -8,32 +8,30 @@
         #inputGroupSelect01 {
             width: 1em;
         }
-        .messageArea{
-            border: 1px rgb(165, 162, 162) solid;
-            width: 100%;
-            height: 415px;
-            padding: 10px;
-            border-radius: 10px;
-        }
     </style>
 
     <br />
-    <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
-        <select class="btn btn-outline-secondary dropdown" id="clasify">
-            <option selected>全部文章</option>
-            <option>廚具開箱</option>
-            <option>食譜分享</option>
-        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button"
-            id="titleKeyWord">
-        <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-2">
-                <!--版面配置左方-->
-            </div>
-            <div class="col-12 col-md-6">
-                
+
+   
+
+
+    <div class="container-fluid row">
+         <div class="row" id="rowSelect"> 
+            <!--版面配置左方-->
+            <div class="col-12 col-md-1">111111</div>
+
+            <div class="col-12 col-md-9">
+                <div class="w-50 p-3 input-group mb-3">
+                    <select class="w-0 form-select dropdown-toggle" id="clasify">
+                        <option selected>全部文章</option>
+                        <option>廚具開箱</option>
+                        <option>食譜分享</option>
+                    </select> <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                        id="titleKeyWord">
+                    <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
+                </div>
+
+
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
                         <li class="nav-item"><button id="navTotal" type="button" class="nav-link active"
@@ -49,17 +47,15 @@
                     <tbody id="articleArea">
                     </tbody>
                 </table>
+
             </div>
             <div class="col">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="請輸入聊天內容" aria-label="請輸入聊天內容" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-                </div>
-                <div class="messageArea">
-
-                </div>
+                1111
             </div>
-        </div>
+
+
+
+         </div> 
 
     </div>
 
@@ -69,7 +65,6 @@
     <script src="/websocket/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/websocket/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
-    
     <script>
         //使用者ID
         let UserId;

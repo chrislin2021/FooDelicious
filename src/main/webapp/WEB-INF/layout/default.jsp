@@ -95,9 +95,9 @@ div.path {
 	<div>
 		<img src="${contextRoot}\img\top.jpg" class="img-fluid">
 	</div>
-
+<!-- -fluid -->
 <!--設定div class container代表標題以下是由tiles管理排版  --> 
-<div class="container">
+<div class="container" id="tilesContainer">
     <tiles:insertAttribute name="content" />
  </div>
 
