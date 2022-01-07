@@ -14,6 +14,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -23,6 +24,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
+import foodelicious.member.validator.MemberValidator;
 
 @Controller
 public class MemberCreateController {
@@ -30,13 +32,17 @@ public class MemberCreateController {
 
 	@Autowired
 	MemberService memberService;
+	
+	MemberValidator memberValidator;
 
-//		@Autowired
-	public MemberCreateController(MemberService memberService) {
+//	@Autowired
+	public MemberCreateController(MemberService memberService, MemberValidator memberValidator) {
+		super();
 		this.memberService = memberService;
+		this.memberValidator = memberValidator;
 	}
 
-	@GetMapping("/listAllMembers")
+	@GetMapping({"/listAllMembers", "/members"})
 	public String listAllMembers(Model model) {
 		List<Member> members = memberService.findAll();
 		System.out.println("members=" + members);
@@ -61,10 +67,27 @@ public class MemberCreateController {
 	public String saveMember(@Valid @ModelAttribute Member member, BindingResult result) {//此為表單綁定
 		System.out.println("member= "+ member);
 		
+		List<ObjectError> errors = result.getAllErrors();
+		for(ObjectError oe : errors) {
+//			System.out.println(oe.getCode()+"," + oe.getDefaultMessage() + "," + oe.getObjectName());
+			System.out.println("oe=>" + oe);
+		}
+		memberValidator.validate(member, result);//bindingResult的父介面就是Errors
+		if(result.hasErrors()) {
+			return "app.RegisterPage";
+		}
+		
+		member.setMemberDiscountId("none");
+		member.setMemberCoin(0);
+		member.setMember_status("customer");
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		member.setRegister_date(now);
-		memberService.save(member);
-		return "redirect:/LoginSystem";
+		if(!result.hasErrors()) {
+			memberService.save(member);
+			return "redirect:/LoginSystem";
+		}
+		return "app.RegisterPage";
+		
 	}
 
 //		===========================================

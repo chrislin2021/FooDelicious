@@ -23,6 +23,8 @@ public interface MemberService {
 
 	List<Member> findAll();
 
+	Member findByMemberId(Long memberId);
+
 	
 	
 	

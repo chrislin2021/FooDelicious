@@ -42,24 +42,6 @@ public class TotalUseEMDao {
 		return false;
 	}
 
-//	public void RegisterMember(Map<String, String> params) {
-//		Member mem = new Member();
-//		mem.setMemberName(params.get("member_name"));
-//		mem.setMemberBirth(params.get("member_birth"));
-//		mem.setMemberPhone(params.get("member_phone"));
-//		mem.setMemberAddress(params.get("member_address"));
-//		mem.setUserEmail(params.get("member_mail"));
-//
-//		Account acc = new Account();
-//		acc.setAccountMake(params.get("account"));
-//		acc.setPwd(params.get("pwd"));
-//
-//		mem.setAccount(acc);
-//		//em.persist是新增用的(Insert)
-//		em.persist(mem);
-//		em.close();
-//	}
-
 	public Long findId(Member users) {
 		TypedQuery<Member> query = null;
 		String hqlstr = "FROM member_data2 WHERE member_mail =:user AND pwd = :pwd";
@@ -72,37 +54,6 @@ public class TotalUseEMDao {
 		return account.getMemberId();
 	}
 
-//	// overload checkLogin
-//	public boolean checkLogin(String user, String pwd) {
-//		Session session = sessionFactory.openSession();
-//		String hqlstr = "FROM account_data WHERE account =:user AND pwd = :pwd";
-//		Query<Account> query = session.createQuery(hqlstr, Account.class);
-//		query.setParameter("user", user);
-//		query.setParameter("pwd", pwd);
-//
-//		Account account = query.uniqueResult();
-//
-//		session.close();
-//
-//		if (account != null) {
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	//hql 的 join 好像不是這樣寫的....
-//	public boolean checkPermission(Long id) {
-//		Session session = sessionFactory.openSession();
-//		String hqlstr = "FROM admin_data LEFT JOIN account_data.account_id WHERE account_id = :id";
-//		Query<Admin> query = session.createQuery(hqlstr);
-//		query.setParameter("id", id);
-//		List result = query.list();
-//		
-//		session.close();
-//	
-//		return false;
-//	
-// }
 	public String findId2(Long id) {
 		String sql = "SELECT member_status FROM member_data2 WHERE member_id =:memberId";
 		Map<String, Object> map = new HashMap<>();

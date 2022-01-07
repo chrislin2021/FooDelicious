@@ -59,5 +59,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.findAll();
 	}
 
+	@Override
+	public Member findByMemberId(Long memberId) {
+		return memberRepository.findByMemberId(memberId);
+	}
+
 
 }

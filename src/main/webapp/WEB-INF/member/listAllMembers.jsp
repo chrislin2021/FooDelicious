@@ -6,8 +6,8 @@
 <html>
 <head>
 <script type="text/javascript">
-	function delfun(pk, name) {
-		if (confirm("確定刪除此筆紀錄(會員姓名: " + name + ") ?")) {
+	function delfun(memberId, memberName) {
+		if (confirm("確定刪除此筆紀錄(會員姓名: " + memberName + ") ?")) {
 			var form = document.forms[0];
 			form.action = "<c:url value='/members/' />" + pk;
 			form.submit();
@@ -37,7 +37,7 @@
 	            <th colspan='7'>會員基本資料</th>
 	         </tr>
 
-	         <c:out value="<tr bgcolor='#ff9333'><th width='90px'>會員編號</th><th  width='100px'>帳號</th><th  width='140px'>密碼</th><th  width='120px'>姓名</th><th  width='260px'>性別</th><th  width='100px'>生日</th><th  width='100px'>電話</th><th  width='100px'>地址</th><th  width='100px'>折扣</th><th  width='100px'>幣</th><th  width='100px'>身分別</th><th  width='100px'>註冊時間</th><th width='48px'>刪除</th></tr>" escapeXml='false'/>
+	         <c:out value="<tr bgcolor='#ff9333'><th width='90px'>會員編號</th><th  width='100px'>帳號</th><th  width='140px'>密碼</th><th  width='120px'>姓名</th><th  width='100px'>性別</th><th  width='200px'>生日</th><th  width='100px'>電話</th><th  width='1000px'>地址</th><th  width='100px'>折扣</th><th  width='100px'>幣</th><th  width='100px'>身分別</th><th  width='100px'>註冊時間</th><th width='48px'>刪除</th></tr>" escapeXml='false'/>
 	      </c:if>		         
 	      <c:choose>
 	         <c:when test="${ statusX.count % 2 == 0 }">
@@ -49,7 +49,7 @@
 	      </c:choose>
 
 	        <tr bgcolor="${colorVar}">
-	            <td><a href="<c:url value='/members' />?MemberId=${member.memberId}">${member.memberId}</a></td>
+	            <td><a href="<c:url value='/updatePage' />?MemberId=${member.memberId}">${member.memberId}</a></td>
 	            <td>${member.memberMail} </td>
 	            <td>${member.pwd} </td>
 	            <td>${member.memberName}</td>
@@ -61,7 +61,7 @@
 	            <td>${member.memberCoin} </td>
 	            <td>${member.member_status} </td>
 	            <td>${member.register_date} </td>
-	            <td><button id="delbtn" onclick="delfun('${member.memberId}, '${member.memberId}')">刪除</button></td>
+	            <td><button id="delbtn" onclick="delfun('${member.memberId}, '${member.memberName}')">刪除</button></td>
 	        </tr>
 	        <c:if test="${statusX.last}" >
 	             <c:out value="</table>" escapeXml="false" />

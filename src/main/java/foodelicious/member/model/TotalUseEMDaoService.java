@@ -14,9 +14,7 @@ public class TotalUseEMDaoService {
 	public boolean checkLogin(Member users) {
 		return totalUseEMDao.checkLogin(users);
 	}
-//	public void RegisterMember(Map<String, String> params) {
-//		totalUseEMDao.RegisterMember(params);
-//	}
+	
 	public Long findId(Member users) {
 		return totalUseEMDao.findId(users);
 	}

@@ -13,14 +13,4 @@ public class MemberController {
 		return "app.LoginSystem";
 	}
 	
-
-
-//	// 轉換頁面用 Login->register
-//	@GetMapping("/Regi")
-//	public String goRegistergepage() {
-//		return "app.RegisterPage";
-//	}
-
-
-	
 }

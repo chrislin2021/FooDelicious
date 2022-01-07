@@ -12,6 +12,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import foodelicious.backend.memberpage.model.BkMember;
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
+import foodelicious.product.model.Product;
 
 @Controller
 public class MemberUpdateController {
@@ -32,8 +34,11 @@ public class MemberUpdateController {
 	}	
 	
 	@GetMapping("/updatePage")//和網址相同
-	public String updatePage(Model model) {
-		model.addAttribute("member", new Member());
+	public String updatePage(Model model, 
+			@RequestParam(value = ("MemberId"),required=true) Long memberId) {//spring會讀三種： 請求參數、路徑變數、表單綁定
+		Member member= memberService.findByMemberId(memberId);
+		model.addAttribute("member", member);
+		
 		return "app.updatePage";//首字小寫是視圖的邏輯名稱
 	}
 	

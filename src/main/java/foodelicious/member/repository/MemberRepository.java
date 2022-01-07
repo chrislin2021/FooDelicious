@@ -12,7 +12,6 @@ public interface MemberRepository {
 
 	List<Member> findAll();
 
-//	void save(Member member);
-
+	Member findByMemberId(Long memberId);
 
 }

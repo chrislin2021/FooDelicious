@@ -39,9 +39,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 		return members;
 	}
 
-//	@Override
-//	public void save(Member member) {
-//		em.persist(member);		
-//	}
+	@Override
+	public Member findByMemberId(Long memberId) {
+		return em.find(Member.class, memberId);
+	}
 
 }

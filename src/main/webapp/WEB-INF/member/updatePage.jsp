@@ -8,8 +8,11 @@
 <div align='center'>
 		<h3>更新會員資料</h3>
 		    <c:set var='updateurl' value='${pageContext.request.contextPath}/members/${id}' />
-		<form:form class="form" method="POST" action="${contextRoot}/updatePage" modelAttribute="member">
-		
+		<form:form class="form" method="POST" modelAttribute="member">
+			
+			<input type='hidden' name='_method' value="PUT" ><br>
+			<form:input type='hidden' path="memberId"/><br>
+			
 		<div class="input-group mb-3">
 			<span class="input-group-text">會員帳號：</span> <form:input type="text" readonly="true"
 				class="form-control" aria-label="Sizing example input"	
@@ -29,18 +32,18 @@
 				 aria-describedby="inputGroup-sizing-default" id="memberName" path="memberName" />
 		</div>
 		
-<!-- 		<div class="form-check form-check-inline"> -->
-<!-- 				<span class="input-group-text">會員性別：</span>  -->
-<%-- 				<form:input class="form-check-input" type="radio" path="memberGender" --%>
-<%-- 			id="member_gender_m" value="male" />   --%>
-<!-- 				<label class="form-check-label" for="inlineRadio1">男</label> -->
-<!-- 		</div> -->
+		<div class="form-check form-check-inline">
+				<span class="input-group-text">會員性別：</span> 
+				<form:radiobutton class="form-check-input" path="memberGender"
+			id="member_gender_m" value="male" /> 
+				<label class="form-check-label" for="inlineRadio1">男</label>
+		</div>
 		
-<!-- 		<div class="form-check form-check-inline"> -->
-<%-- 				<form:input class="form-check-input" type="radio" path="memberGender" --%>
-<%-- 				id="member_gender_f" value="female" />   --%>
-<!-- 				<label class="form-check-label" for="inlineRadio2">女</label> -->
-<!-- 		</div> -->
+		<div class="form-check form-check-inline">
+				<form:radiobutton class="form-check-input" path="memberGender"
+			id="member_gender_f" value="female" />  
+				<label class="form-check-label" for="inlineRadio2">女</label>
+		</div>
 
 		<div class="input-group mb-3">
 			<span class="input-group-text">出生日期：</span> 
