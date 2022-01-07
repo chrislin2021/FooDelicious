@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +32,12 @@ public class CartController {
 	}
 
 	@GetMapping("/shoppingCart")
-	public String shoppingCart() {
+	public String shoppingCart(Model m) {
 
 		if (session.getAttribute("userID") != null) {
+			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+			m.addAttribute("carts", carts);
+			m.addAttribute("priceTotal", totalAmount());
 			return "app.ShoppingCart";
 		} else {
 			return "app.LoginSystem";
@@ -84,7 +88,7 @@ public class CartController {
 
 	@ResponseBody
 	@DeleteMapping("/shoppingCart/{id}")
-	public void deleteItem(@PathVariable(name = "id") Long productId) {
+	public void deleteItem(@PathVariable(name = "id") Long productId, Model m) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -94,10 +98,11 @@ public class CartController {
 				break;
 			}
 		}
+		m.addAttribute(carts);
 	}
 
 	@ResponseBody
-	@PutMapping("/shoppingCart/")
+	@PutMapping("/shoppingCart/aa")
 	public Integer updateItem(@RequestBody String structuredData) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
@@ -123,11 +128,12 @@ public class CartController {
 //		return member != null;
 //	}
 
-//	public String showCart() {
-//		List<CartBean> original = cartService.selectItem((Long) session.getAttribute("userID"));
-//		String carts = new Gson().toJson(original);
-//		return carts;
-//	}
+	@ResponseBody
+	@GetMapping("/showCart")
+	public List<CartBean> showCart() {
+		List<CartBean> origin = cartService.selectItem((Long) session.getAttribute("userID"));
+		return origin;
+	}
 
 //	購物車總金額
 	public Integer totalAmount() {
@@ -139,4 +145,5 @@ public class CartController {
 		}
 		return totalAmount;
 	}
+
 }
