@@ -1,0 +1,292 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<head>
+    <link rel="stylesheet" href="../../../css/backendProduct.css">
+</head>
+<body>
+<h1 class="tableName">
+    商品列表
+    <span class="littleName">Product List</span>
+</h1>
+<div class="searchArea">
+    <select class="form-select selectBox" aria-label="Default select example">
+        <option selected>全部商品</option>
+        <option value="1">食材</option>
+        <option value="2">廚具</option>
+    </select>
+    <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入名稱關鍵字...">
+    <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="查詢" />
+</div>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">全部商品</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">食材</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">廚具</a>
+    </li>
+</ul>
+<section class="content">
+    <div class="col-xs-12">
+        <table id="" class='table table-striped table-hover '>
+            <thead>
+                <tr>
+                    <th class="col table-success">商品編號</th>
+                    <th class="col table-success">商品類別</th>
+                    <th class="col table-success">商品公司</th>
+                    <th class="col table-success">上架狀態</th>
+                    <th class="col table-success">商品名稱</th>
+                    <th class="col table-success">商品概述</th>
+                    <th class="col table-success">商品價格</th>
+                    <th class="col table-success">商品庫存</th>
+                    <th class="col table-success">商品銷售量</th>
+                    <th class="col table-success">查詢關鍵字</th>
+                    <th class="col table-success">新增日期</th>
+                    <th class="col table-success">更新</th>
+                    <th class="col table-success">刪除</th>
+                </tr>
+            </thead>
+            <tbody id="products"></tbody>
+        </table>
+        <nav aria-label="Page navigation example ">
+            <ul id="page" class="pagination justify-content-center"></ul>
+        </nav>
+    </div>
+</section>
+<script>
+    //=============E-mail關鍵字查詢功能=============
+    $("#searchAcc").on("click",function(){
+       let data = $(".keyWord1").val();
+       $.ajax({
+           url:"http://localhost:8080/bkmanagers/"+data,
+           type: "GET",
+           success:function(managers){
+               let num = managers.length;
+               //載入顯示功能
+               showData(0, num, managers);
+
+               //載入分頁功能
+               if(num>=10){
+                   pages(10, managers);
+               }else{
+                   pages(num, managers);
+               }
+           }
+       })
+
+    });
+</script>
+
+<script>
+    //=============更新會員資料功能=============
+
+    //更新前先查詢出資料
+    $("#members").on("click","#updateBtn",function(){
+        let data = $(this).data("id");
+        // alert("data："+data)
+        $.ajax({
+            url:"http://localhost:8080/bkmanagers/update/"+data,
+            type: "GET",
+            success:function(manager){
+                //將json字串化
+                let managerString = JSON.stringify(manager);
+                //將資料存到localStorage，給另一個頁面使用
+                localStorage.setItem("managerData",managerString);
+                //跳轉頁面
+                window.location.href="/backend/manager/update";
+            }
+        })
+
+    });
+</script>
+
+<script>
+    //=============顯示所有商品資料=============
+    const productUrl = "http://localhost:8080/bkproducts"
+    let productData;
+
+    $.ajax({
+        url: productUrl,
+        type: "GET",
+        success: function(productAll){
+            //將值傳到全域
+            productData = productAll;
+            let num = productAll.length;
+            if(num >= 10){
+                pages(10,productData);
+            }else{
+                pages(num,productData);
+            }
+        }
+    });
+</script>
+
+<script>
+    //=============分頁程式=============
+    function pages(maxNum, dataSource){ //輸入單頁最大筆數和資料來源
+        //=================分頁功能================
+        //最大頁數
+        var maxPage;
+        //目前顯示頁數
+        let nowPage = 0;
+        //每頁最大筆數
+        let maxItems = maxNum;
+        //設定起始編號
+        let startItem = 0;
+        //設定結束編號
+        let endItem = maxItems;
+
+        //讀回資料時就先顯示
+        showData(startItem, endItem, dataSource);
+
+        //計算出最大頁數。
+        if(dataSource.length % maxItems == 0){
+            maxPage = Math.floor(dataSource.length / maxItems);
+            // alert("最大頁數1：" + maxPage);
+        }else{
+            maxPage = (Math.floor(dataSource.length / maxItems))+1;
+            // alert("最大頁數2：" + maxPage);
+        }
+        // alert("最大頁數：" + maxPage);
+        //動態生成頁數
+        let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+        for(let i=0; i<maxPage; i++){
+            let pageNum = i+1;
+            pageHtml += `<li id=`+ i +` class="page-item page pageNum pageMove"><a class="page-link">`+ pageNum +`</a></li>`;
+        };
+        pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+        $("#page").html(pageHtml);
+
+        //綁定click事件
+        $("#page").on("click",".page", function(){
+            nowPage = ($(this).prop("id"))*1;//強制轉成數字型態
+            $(".pageNum").prop("class","page-item page pageNum")
+            $(this).prop("class","page-item page pageNum active")
+            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+            //恢復上、下頁的功能
+            $(".previous").prop("class", "page-item previous");
+            $(".next").prop("class", "page-item next");
+            // alert("nowPage："+nowPage+"maxPage："+maxPage);
+            //計算是否是最後一頁
+            if((nowPage)+1 >= maxPage){
+                startItem = nowPage * maxItems;
+                if(dataSource.length % maxItems == 0){
+                    endItem = startItem + maxItems
+                }else{
+                    endItem = startItem + dataSource.length % maxItems;
+                }
+
+            }else{
+                startItem = nowPage * maxItems;
+                endItem = startItem + maxItems;
+            }
+            // alert("開始："+startItem+"結束："+endItem);
+            showData(startItem, endItem, dataSource);
+        });
+
+        //=======上一頁設定========
+        $("#page").on("click", ".previous", function (){
+
+            //恢復下一頁的功能
+            $(".next").prop("class", "page-item next");
+
+            let page = nowPage-1;
+
+            $(".pageNum").prop("class","page-item page pageNum")
+            $("#"+page).prop("class","page-item page pageNum active")
+
+            //判斷是否已經是第一頁了，取消上一頁功能
+            if(page <= 0 ){
+                $(".previous").prop("class", "page-item previous disabled");
+                startItem = 0 * maxItems;
+                endItem = startItem + maxItems;
+            }else{
+                startItem = page * maxItems;
+                endItem = startItem + maxItems;
+            }
+            showData(startItem, endItem, dataSource);
+            nowPage = page;
+        });
+
+        //=============下一頁設定=============
+        $("#page").on("click", ".next", function(){
+
+            //恢復上一頁的功能
+            $(".previous").prop("class", "page-item previous");
+
+            let page = nowPage + 1;
+
+            $(".pageNum").prop("class","page-item page pageNum")
+            $("#"+page).prop("class","page-item page pageNum active")
+
+            //計算是否是最後一頁，並取消下一頁功能
+            if(page >= (maxPage-1)){
+                $(".next").prop("class", "page-item next disabled")
+                startItem = page * maxItems;
+                if(dataSource.length % maxItems == 0){
+                    endItem = startItem + maxItems
+                }else{
+                    endItem = startItem + dataSource.length % maxItems;
+                }
+            }else{
+                startItem = page * maxItems;
+                endItem = startItem + maxItems;
+            }
+            showData(startItem, endItem, dataSource);
+            nowPage = page;
+        });
+    }
+</script>
+
+<script>
+    //=============顯示功能=============
+    function showData(startItem,endItem,dataSource){
+        let txt = "<tr>";
+        for (let i = startItem; i < endItem; i++) {
+            txt += "<td class='align-middle'>"+dataSource[i].productId+"</td>"
+            let cate = dataSource[i].categories;
+            let type = ""
+            if( cate == 0){type = "廚具";
+            }else{ type = "食材";}
+            txt += "<td class='align-middle'>"+type+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].productCompany+"</td>"
+            let st = dataSource[i].product_status;
+            let status = ""
+            if( st == 1){
+                status = "上架中";
+            }else{
+                status = "下架中";
+            }
+            txt += "<td class='align-middle'>"+status+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].productName+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].productContent+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].productPrice+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].productStock+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].productSalesFigures+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].productKeywords+"</td>"
+            let newDate = new Date(dataSource[i].productInsertDate);
+            let register = newDate.toLocaleString();
+            txt += "<td class='align-middle'>"+register+"</td>"
+            txt += '<td class="align-middle">'+
+                '<form method="" >'+
+                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].memberId+'>'+
+                '</form>'+
+                '</td>'
+            txt += '<td class="mdata">'+
+                '<form method="" action="">'+
+                '<input type="hidden" type="text" name="empdel" value=?>'+
+                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].memberId+'>'+
+                '</form>'+
+                '</td></tr>'
+        }
+        $("#products").html(txt);
+    }
+
+</script>
+</body>
+

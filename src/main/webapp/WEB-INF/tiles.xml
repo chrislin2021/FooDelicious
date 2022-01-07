@@ -191,4 +191,10 @@
 			value="/WEB-INF/member/listAllMembers.jsp" />
 	</definition>
 
+	<definition name="app.BackendProduct"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/productPage/BackendProduct.jsp" />
+	</definition>
+
 </tiles-definitions>

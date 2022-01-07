@@ -53,7 +53,7 @@
 
         <!-- 商品管理 -->
         <li id="ProductList" class="list-group-item funName">
-            <a href="#" style="text-decoration: none">
+            <a href="/backend/product" style="text-decoration: none">
                 <i class="text-secondary fas fa-archive"></i>
                 <span class="listName">商品管理</span>
             </a>
