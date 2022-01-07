@@ -75,6 +75,8 @@ window.addEventListener('load', function() {
 					'text' : text
 				}));
 			}
+			console.log("=====================================================")
+			console.log('from：'+chatId.value +"/n" +'text'+ text)
 		}
 	}
 	

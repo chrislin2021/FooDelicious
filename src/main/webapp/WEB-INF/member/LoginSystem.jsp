@@ -36,7 +36,7 @@
               />
               <label class="form-check-label" for="form1Example3">記住密碼</label>
             </div>
-			 <a href="goregister" class="link-info">立即註冊</a><br>
+			 <a href="RegisterPage" class="link-info">立即註冊</a><br>
             <button class="btn btn-primary btn-lg btn-block" type="submit">送出</button>
            
             <hr class="my-4">

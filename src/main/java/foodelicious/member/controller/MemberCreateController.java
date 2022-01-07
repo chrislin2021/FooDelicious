@@ -36,15 +36,15 @@ public class MemberCreateController {
 		this.memberService = memberService;
 	}
 
-//	@GetMapping("/listAllMembers")
-//	public String listAllMembers(Model model) {
-//		List<Member> members = memberService.findAll();
-//		System.out.println("members=" + members);
-//		
-//		model.addAttribute("membersForJSP",members);//屬性物件的識別字串，等同於servlet(HSR)的request.setAttribute
-//		model.addAttribute(members);//預設的識別字串
-//		return "listAllMembers";
-//	}
+	@GetMapping("/listAllMembers")
+	public String listAllMembers(Model model) {
+		List<Member> members = memberService.findAll();
+		System.out.println("members=" + members);
+		
+		model.addAttribute("membersForJSP",members);//屬性物件的識別字串，等同於servlet(HSR)的request.setAttribute
+		model.addAttribute(members);//預設的識別字串
+		return "app.ListAllMembers";
+	}
 
 	// 註冊頁面
 	@GetMapping("/RegisterPage")
@@ -67,9 +67,8 @@ public class MemberCreateController {
 		return "redirect:/LoginSystem";
 	}
 
-
 //		===========================================
-//				//註冊頁面
+//				//註冊頁面 舊寫法
 //				@GetMapping("/RegisterPage")
 //				public String registerPage() {
 //					System.out.println("=1111111111111=======");
@@ -103,8 +102,6 @@ public class MemberCreateController {
 //			System.out.println("==========" + mem);
 //			return "app.LoginSystem";
 //		}
-
-	
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder, WebRequest request) {
