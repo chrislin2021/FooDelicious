@@ -2,6 +2,8 @@ package foodelicious.compbackend.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import foodelicious.compbackend.model.CBKOrderDaoInterface;
@@ -22,6 +24,10 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 		this.cbkOrderDaoInterface = cbkOrderDaoInterface;
 	}
 	
+	public List<Product> getAllProducts(HttpSession session){
+		List<Product> products = cbkProductDaoInterface.getAllProducts(session);
+		return products;
+	}
 
 	
 	

@@ -50,9 +50,16 @@
 		<put-attribute name="content"
 			value="/WEB-INF/article/UpdateArticle.jsp" />
 	</definition>
+<<<<<<< HEAD
+	
+	<definition name="app.Test"
+		template="/WEB-INF/companyBackend/Test.jsp">
+		<put-attribute name="title" value="testing" />
+=======
 	<definition name="app.websocket" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/article/websocket.jsp" />
+>>>>>>> f57b3869de1080035bdfc6faf76c2be248104784
 	</definition>
 
 	<definition name="app.CompanyDefault"
@@ -78,11 +85,19 @@
 			value="/WEB-INF/companyBackend/CompanyOrder.jsp" />
 	</definition>
 	
+	<definition name="app.CompanyTest"
+		extends="app.CompanyDefault">
+		<put-attribute name="content"
+			value="/WEB-INF/companyBackend/CompanyTest.jsp" />
+	</definition>
+	
 		<definition name="app.CompanyAddProduct"
 		extends="app.CompanyDefault">
 		<put-attribute name="content"
 			value="/WEB-INF/companyBackend/CompanyAddProduct.jsp" />
 	</definition>
+	
+	
 
 	<definition name="app.Product" extends="app.default">
 		<put-attribute name="content"

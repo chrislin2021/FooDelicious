@@ -27,43 +27,46 @@ public class CBKProductDao implements CBKProductDaoInterface{
 	@PersistenceContext
 	EntityManager em;
 
-//	@Autowired
-//	private CBKProductRepository cbkProdRepository;
-//	
+	@Autowired
+	private CBKProductRepository cbkProdRepository;
 	
-	
-	public List<Product> getAllProducts(Long id,HttpSession session){
-		Query query = null;
-		id = (Long)session.getAttribute("userID");
-		System.out.println(id);
-		//Long 轉換 int
-		String hqlstr = "FROM Product WHERE product_company_id=?1";
-		System.out.println(hqlstr);
-		query = em.createQuery(hqlstr)
-			    .setParameter("1", id);
+	public List<Product> getAllProducts(HttpSession session) {
+		Long id = (Long) session.getAttribute("userID");
+		List<Product> products = cbkProdRepository.findAllByProductCompanyId(id);
+		return products;
 		
-		List<Product> productData = query.getResultList();
-		System.out.println(productData);
-		em.close();
-		
-		if(productData != null) {
-			
-			return productData;
-		}
-				
-
-		return null;
 	}
 
+	
+	
+//	public List<Product> getAllProducts(Long id,HttpSession session){
+//		Query query = null;
+//		id = (Long)session.getAttribute("userID");
+//		System.out.println(id);
+//		//Long 轉換 int
+//		String hqlstr = "FROM Product WHERE product_company_id=?1";
+//		System.out.println(hqlstr);
+//		query = em.createQuery(hqlstr)
+//			    .setParameter("1", id);
+//		
+//		List<Product> productData = query.getResultList();
+//		System.out.println(productData);
+//		em.close();
+//		
+//		if(productData != null) {
+//			
+//			return productData;
+//		}
+//				
+//
+//		return null;
+//	}
+
 
 
 
 	
-	@Override
-	public List<Product> getAllProducts(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 

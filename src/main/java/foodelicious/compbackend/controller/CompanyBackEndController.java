@@ -35,6 +35,14 @@ public class CompanyBackEndController {
 		session.invalidate();
 		return "app.home";
 	}
+	
+	@GetMapping(path="/test")
+	public String test() {
+		
+		return "app.Test";
+	}
+	
+
 
 
 

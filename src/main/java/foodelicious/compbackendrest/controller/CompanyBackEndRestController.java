@@ -16,7 +16,7 @@ import foodelicious.product.model.Product;
 @RestController
 public class CompanyBackEndRestController {
 	
-	// forgot why we're using interface instead of class? 
+	
 	private final CompanyBackEndServiceInterface cbkServiceInterface;
 	
 	
@@ -34,34 +34,28 @@ public class CompanyBackEndRestController {
 		this.cbkProductDao = cbkProductDao;
     }
 	
+
 	
 //	@GetMapping("/companyProducts") // Important! /companyProduct is controller, /companyProducts is RESTController
 //	public List<Product> findAllProducts(HttpSession session) { 
 //		Long id =(Long) session.getAttribute("userID");
-//		System.out.println(id);
-//		List<Product> products = cbkProductDao.getAllProducts(id);
+//		//System.out.println(id);
+//		List<Product> products = cbk.findAllByProductCompanyId(id);
 //		return products;
 //		
 //	}
 	
 	@GetMapping("/companyProducts") // Important! /companyProduct is controller, /companyProducts is RESTController
 	public List<Product> findAllProducts(HttpSession session) { 
-		Long id =(Long) session.getAttribute("userID");
-		System.out.println(id);
-		List<Product> products = cbk.findAllByProductCompanyId(id);
+		
+		List<Product> products = cbkServiceInterface.getAllProducts(session);
 		return products;
 		
 	}
 	
-	// 不是要這個 但抓的到資料
-//	@GetMapping("/companyProducts") 
-//	public List<Product> findAllProduct() { 
-//		List<Product> products = cbk.findAll();
-//		return products;
-//		
-//	}
-//	
 	
+	
+
 	
 	
 	@GetMapping("/companyOrders")
