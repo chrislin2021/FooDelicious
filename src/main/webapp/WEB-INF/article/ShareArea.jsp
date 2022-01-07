@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    
+
     <style>
         .topDIV {
             margin-top: 16px;
         }
-
+        
         #inputGroupSelect01 {
             width: 1em;
         }
-        .messageArea{
+        
+        .messageArea {
             border: 1px rgb(165, 162, 162) solid;
             width: 100%;
             height: 415px;
@@ -23,8 +24,7 @@
             <option selected>全部文章</option>
             <option>廚具開箱</option>
             <option>食譜分享</option>
-        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button"
-            id="titleKeyWord">
+        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
         <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
     </div>
     <div class="container-fluid">
@@ -33,11 +33,10 @@
                 <!--版面配置左方-->
             </div>
             <div class="col-12 col-md-6">
-                
+
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active"
-                                aria-current="page">全部文章</button></li>
+                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page">全部文章</button></li>
                         <li class="nav-item"><button id="navKitchenware" type="button" class="nav-link">廚具開箱</button>
                         </li>
                         <li class="nav-item"><button id="navRecipe" type="button" class="nav-link">食譜分享</button></li>
@@ -50,10 +49,16 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col">
+            <!--聊天室區域-->
+            <div class="col" id="messageDIV">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="請輸入聊天內容" aria-label="請輸入聊天內容" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                    <button class="btn btn-outline-secondary" type="button" id="btnConnect">確認</button>
+                    <input type="text" class="form-control" id="chatId" placeholder="暱稱" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                    <div style="height: 30px;" id='promptArea'>&nbsp;</div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="sendToChatRoom2">傳送</button>
                 </div>
                 <div class="messageArea">
 
@@ -66,10 +71,10 @@
     <nav aria-label="Page navigation example ">
         <ul id="page" class="pagination justify-content-center"></ul>
     </nav>
-    <script src="/websocket/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/websocket/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="../../js/sockjs.min.js"></script>
+    <script src="../../js/stomp.min.js"></script>
     <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
-    
+
     <script>
         //使用者ID
         let UserId;
@@ -93,9 +98,12 @@
                 url: url,
                 type: type,
                 contentType: "application/json; charset=utf-8",
-                success: function (articles) {
+                success: function(articles) {
                     ShareData = articles
+
                     UserId = articles.session;
+                    document.getElementById("messageDIV").style.visibility = (UserId != null) ? 'visible' : 'hidden';
+
                     //得到格式：{session: null, title: Array(18)}        
                     //console.log(ShareData)
                     //=================分頁功能================
@@ -143,13 +151,13 @@
         }
 
         //綁定click事件
-        $("#page").on("click", ".page", function () {
+        $("#page").on("click", ".page", function() {
             //alert(ShareData);
             nowPage = ($(this).prop("id")) * 1; //強制轉成數字型態
             $(".pageNum").prop("class", "page-item page pageNum")
             $(this).prop("class", "page-item page pageNum active")
-            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
-            //恢復上、下頁的功能
+                // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+                //恢復上、下頁的功能
             $(".previous").prop("class", "page-item previous");
             $(".next").prop("class", "page-item next");
             // alert("nowPage："+nowPage+"maxPage："+maxPage);
@@ -170,7 +178,7 @@
             showData(startItem, endItem);
         });
         //=======上一頁設定========
-        $("#page").on("click", ".previous", function () {
+        $("#page").on("click", ".previous", function() {
 
             //恢復下一頁的功能
             $(".next").prop("class", "page-item next");
@@ -194,7 +202,7 @@
         });
 
         //========下一頁設定============
-        $("#page").on("click", ".next", function () {
+        $("#page").on("click", ".next", function() {
 
             //恢復上一頁的功能
             $(".previous").prop("class", "page-item previous");
@@ -230,14 +238,14 @@
                 $.ajax({
                     url: "/deleteData/" + id,
                     type: "DELETE",
-                    success: function () {
+                    success: function() {
                         searchShareDate("/totalArticleData");
                     }
                 })
             }
         }
         //上面分類選擇器
-        $("#navTotal").click(function () {
+        $("#navTotal").click(function() {
             searchShareDate("/totalArticleData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -245,7 +253,7 @@
             $("#navKitchenware").prop("class", "nav-link")
             $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navKitchenware").click(function () {
+        $("#navKitchenware").click(function() {
             searchShareDate("/totalKitchenwareData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -253,7 +261,7 @@
             $("#navKitchenware").prop("class", "nav-link active")
             $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navRecipe").click(function () {
+        $("#navRecipe").click(function() {
             searchShareDate("/totalRecipeData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -265,11 +273,11 @@
 
     <script>
         //==================模糊搜尋==================
-        $("#articleSearch").on("click", function () {
+        $("#articleSearch").on("click", function() {
             let clasify = $("#clasify").val();
             //console.log(clasify)
             let titleKeyWord = $("#titleKeyWord").val()
-            //console.log(titleKeyWord)
+                //console.log(titleKeyWord)
 
             //searchShareDate("/fuzzySearch/" + clasify + "/" + titleKeyWord, "GET")
             let fuzzySearch = {
@@ -283,11 +291,11 @@
                 type: "GET",
                 //data: JSON.stringify(fuzzySearch),
                 contentType: "application/json; charset=utf-8",
-                success: function (articles) {
+                success: function(articles) {
                     ShareData = articles
-                    //得到格式：{session: null, title: Array(18)}        
-                    //console.log(ShareData)
-                    //=================分頁功能================
+                        //得到格式：{session: null, title: Array(18)}        
+                        //console.log(ShareData)
+                        //=================分頁功能================
                     endItem = (articles.title.length <= 10) ? articles.title.length : 10;
                     //讀回資料時就先顯示
                     showData(startItem, endItem);
@@ -307,8 +315,96 @@
 
         })
     </script>
-    <!--WebSocket區域-->
-    <script type="text/javascript">
 
+    <script>
+        //======================WebSocket區域======================
+        let stompClient = null;
+        let url = "http://" + window.location.host + '/websocket/chatting';
+        let chatId = null; // 聊天代號
+        let to = null; // 
+        let responseArea = null; // 聊天訊息顯示區
+        let inputMessageArea = null; // 聊天訊息輸入區
+        let btnConnect = null;
+        let btnDisconnect = null;
+        let promptArea = null; // 系統訊息提示區	
+        let messageData = "";
+        let btnSendToChatRoom2 = null;
 
+        window.addEventListener('load', function() {
+            //暱稱位置
+            chatId = document.getElementById('chatId');
+            //暱稱區域確認BTN
+            btnConnect = document.getElementById('btnConnect');
+            //離開聊天室用
+            //btnDisconnect = document.getElementById('btnDisconnect');
+            //這個是老師用於textarea的位置
+            //responseArea = document.getElementById('responseArea');     
+            promptArea = document.getElementById('promptArea');
+            //輸入聊天訊息區域
+            inputMessageArea = document.getElementById('inputMessageArea');
+            //傳送訊息BTN
+            btnSendToChatRoom2 = document.getElementById('sendToChatRoom2');
+
+            btnConnect.onclick = function() {
+                let chatIdValue = chatId.value;
+                if (chatIdValue == null || chatIdValue == "") {
+                    promptArea.innerHTML = "<font size='-1' color='red'>必須先輸入聊天代號才能加入聊天室</font>";
+                    return;
+                } else {
+                    promptArea.innerHTML = "";
+                }
+                var socket = new SockJS(url);
+                stompClient = Stomp.over(socket);
+                stompClient.connect({}, function(frame) {
+                    inputMessageArea.focus();
+                    console.log('Connected: ' + frame);
+                    stompClient.subscribe('/topic/messages', function(messageOutput) {
+                        console.log("messageOutput" + messageOutput);
+                        alert(messageOutput);
+                        showMessageOutput(JSON.parse(messageOutput.body));
+
+                    });
+                });
+            };
+
+            inputMessageArea.onkeyup = function() {
+                if (event.keyCode === 13) {
+                    let text = inputMessageArea.value;
+                    if (text.length > 0) {
+                        //console.log(text.length);
+                        stompClient.send("/app/chat", {}, JSON.stringify({
+                            'from': chatId.value,
+                            'text': text
+                        }));
+                    }
+                    //console.log("=====================================================")
+                    //console.log('from：' + chatId.value + "/n" + 'text' + text)
+                }
+            };
+            btnSendToChatRoom2.onclick = function() {
+                let text = inputMessageArea.value;
+                if (text.length > 0) {
+                    //console.log(text.length);
+                    stompClient.send("/app/chat", {}, JSON.stringify({
+                        'from': chatId.value,
+                        'text': text
+                    }));
+                }
+            };
+            chatId.focus();
+        });
+
+        function showMessageOutput(messageOutput) {
+            let line = "";
+            JSONData = JSON.stringify(messageOutput);
+            //console.log(JSON.stringify(messageOutput));
+            //line += JSON.stringify(messageOutput) + "\n";
+            /* 更新聊天訊息顯示區 */
+            console.log("測試" + messageOutput.from)
+            console.log("測試" + JSONData.from)
+                //responseArea.value += "" + line;
+            messageData += "<p>" + chatId.value + "：</p>";
+            messageData += "<p>" + text + "：</p>";
+            $(".messageArea").html(messageData);
+        }
     </script>
