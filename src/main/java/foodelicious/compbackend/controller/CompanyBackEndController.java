@@ -13,11 +13,23 @@ public class CompanyBackEndController {
 
 		return "app.CompanyMain";
 	}
+	
+	@GetMapping(path = "/companyMain2")
+	public String companyMain2() {
+
+		return "app.CompanyMain2";
+	}
 
 	@GetMapping(path = "/companyProduct")
 	public String companyProduct() {
 
 		return "app.CompanyProduct";
+	}
+	
+	@GetMapping(path = "/companyProduct2")
+	public String companyProduct2() {
+
+		return "app.CompanyProduct2";
 	}
 	
 	@GetMapping(path = "/companyOrder")

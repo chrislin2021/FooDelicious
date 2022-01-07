@@ -56,11 +56,6 @@ public class CompanyBackEndRestController {
 	
 	
 
-	
-	
-	@GetMapping("/companyOrders")
-	public List<OrdersBean> findAllOrders() {
-		return null;
-	}
+
 
 }

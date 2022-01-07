@@ -13,23 +13,31 @@
 <link rel="stylesheet" href="../../css/Test.css">
 <!-- Boxiocns CDN Link -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
-	rel='stylesheet'>
+	  rel='stylesheet'>
+<link
+	href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap"
+	rel="stylesheet">
+
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<div class="sidebar close">
 		<div class="logo-details"></div>
 		<ul class="nav-links">
-			<li><a href="#"> <i class='bx bx-grid-alt'></i> <span
-					class="link_name">Dashboard</span>
+			<li><a href="#"> <i class='bx bx-user-circle'></i> <span
+					class="link_name">管理員</span>
 			</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="#">Category</a></li>
+					<li><a class="link_name" href="#">管理員</a></li>
 				</ul></li>
 			<li>
 				<div class="iocn-link">
-					<a href="#"> <i class='bx bx-basket'></i> <span
-						class="link_name">Products</span>
+					<a href="#"> <i class='bx bx-cart'></i> <span
+						class="link_name">商品管理</span>
 					</a> <i class='bx bxs-chevron-down arrow'></i>
 				</div>
 				<ul class="sub-menu">
@@ -42,7 +50,7 @@
 			<li>
 				<div class="iocn-link">
 					<a href="#"> <i class='bx bx-book-alt'></i> <span
-						class="link_name">Orders</span>
+						class="link_name">訂單管理</span>
 					</a> <i class='bx bxs-chevron-down arrow'></i>
 				</div>
 				<ul class="sub-menu">
@@ -54,7 +62,7 @@
 			<li>
 				<div class="iocn-link">
 					<a href="#"> <i class='bx bx-bar-chart-alt-2'></i> <span
-						class="link_name">Analytics</span>
+						class="link_name">分析報表</span>
 					</a> <i class='bx bxs-chevron-down arrow'></i>
 				</div>
 				<ul class="sub-menu">
@@ -64,27 +72,27 @@
 					<li><a href="#">銷售總額</a></li>
 				</ul>
 			</li>
-			<li><a href="#" > <i class='bx bx-compass'></i> <span
-					class="link_name">Report</span>
+			<li><a href="#"> <i class='bx bx-error-alt'></i> <span
+					class="link_name">問題回報</span>
 			</a>
 				<ul class="sub-menu blank">
 					<li><a class="link_name" href="#" id="problem">問題回報</a></li>
 				</ul></li>
 
-			<li><a href="#"> <i class='bx bx-cog'></i> <span
-					class="link_name">Setting</span>
+			<li><a href="#"> <i class='bx bxs-inbox'></i> <span 
+					class="link_name">訊息</span>
 			</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="#">Setting</a></li>
+					<li><a class="link_name" href="#">訊息</a></li>
 				</ul></li>
 			<li>
 				<div class="profile-details">
-					
+
 					<div class="profile-content">
-						
-						<i class='bx bxs-log-out onclick="logout('${account}')"'></i>
+
+						<i class='bx bxs-log-out' onclick="logout('${account}')"></i>
 					</div>
-					<div class="name-job"></div>
+					
 
 				</div>
 			</li>
@@ -92,12 +100,17 @@
 	</div>
 	<section class="home-section">
 		<div class="home-content">
-			<i class='bx bx-menu'></i> <span class="text">好煮意<small>admin</small></span>
+			<i class='bx bx-menu'></i> <span class="text brandName" style="color:EFF966">好煮意<small style="color:black">admin</small></span>
 		</div>
 	</section>
-	
+
+	<section class="main-section">
+		<tiles:insertAttribute name="content" />
+
+	</section>
+
 	<!-- 問題回報地跳出視窗 -->
-	
+
 	<div class="bg-modal">
 		<div class="modal-contents">
 
@@ -112,7 +125,9 @@
 
 		</div>
 	</div>
-	
+
+
+
 	<!-- 登出 -->
 	<script>
 		function logout(account) {
@@ -122,8 +137,8 @@
 			}
 		}
 	</script>
-	
-<!-- 問題回報跳出視窗 -->
+
+	<!-- 問題回報跳出視窗 -->
 	<script>
 				
 		document.getElementById('problem').addEventListener("click", function() {

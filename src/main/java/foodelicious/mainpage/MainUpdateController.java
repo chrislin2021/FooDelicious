@@ -55,7 +55,7 @@ public class MainUpdateController {
 			if (level.equals("admin")) {
 				return "app.BackendMember";
 			} else if (level.equals("company")) {
-				return "app.CompanyMain";
+				return "app.CompanyMain2";
 			} else {
 				System.out.println("userID：" + session.getAttribute("userID"));
 				return "app.home";
