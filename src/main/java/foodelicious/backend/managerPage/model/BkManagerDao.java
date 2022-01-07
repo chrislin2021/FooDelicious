@@ -1,10 +1,6 @@
 package foodelicious.backend.managerPage.model;
 
-<<<<<<< HEAD
-=======
-import foodelicious.backend.memberpage.model.BkMember;
 
->>>>>>> origin/master
 import java.util.List;
 
 import foodelicious.backend.memberpage.model.BkMember;

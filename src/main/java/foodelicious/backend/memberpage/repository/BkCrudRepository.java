@@ -1,14 +1,8 @@
 package foodelicious.backend.memberpage.repository;
 
-
-
 import java.util.List;
 import java.util.Optional;
 
-<<<<<<< HEAD
-=======
-import foodelicious.backend.memberpage.model.BkMember;
->>>>>>> origin/master
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

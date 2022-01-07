@@ -1,9 +1,4 @@
 package foodelicious.backend.memberpage.service;
-<<<<<<< HEAD
-=======
-
-import foodelicious.backend.memberpage.model.BkMember;
->>>>>>> origin/master
 
 import java.util.List;
 

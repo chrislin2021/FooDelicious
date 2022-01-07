@@ -1,12 +1,8 @@
 package foodelicious.backend.managerPage.model;
 
-<<<<<<< HEAD
+
 import java.util.List;
 
-=======
-import foodelicious.backend.managerPage.repository.BkManagerRepository;
-import foodelicious.backend.memberpage.model.BkMember;
->>>>>>> origin/master
 import org.springframework.stereotype.Repository;
 
 import foodelicious.backend.managerPage.repository.BkManagerRepository;

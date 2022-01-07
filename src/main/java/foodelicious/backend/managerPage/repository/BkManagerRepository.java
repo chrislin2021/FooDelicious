@@ -7,11 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import foodelicious.backend.memberpage.model.BkMember;
-<<<<<<< HEAD
-=======
-
-import java.util.List;
->>>>>>> origin/master
 
 @Repository
 public interface BkManagerRepository extends CrudRepository<BkMember, Long> {
