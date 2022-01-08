@@ -44,4 +44,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 		return em.find(Member.class, memberId);
 	}
 
+	@Override
+	public void update(Member member) {
+		em.merge(member);
+	}
+
 }

@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
@@ -34,13 +37,23 @@ public class MemberUpdateController {
 	}	
 	
 	@GetMapping("/updatePage")//和網址相同
-	public String updatePage(Model model, 
+	public String sendMemberDataToModified(Model model, 
 			@RequestParam(value = ("MemberId"),required=true) Long memberId) {//spring會讀三種： 請求參數、路徑變數、表單綁定
 		Member member= memberService.findByMemberId(memberId);
 		model.addAttribute("member", member);
+		model.addAttribute("memberId", memberId);
 		
-		return "app.updatePage";//首字小寫是視圖的邏輯名稱
+		return "app.updatePage";
 	}
+	
+	@PutMapping("/members/{memberId}")//{}為路徑變數
+	public String updateMemberData(@ModelAttribute("member") Member member, BindingResult result, Model model, 
+			@PathVariable Long memberId) {//spring會讀三種： 請求參數、路徑變數、表單綁定
+		
+		memberService.update(member);
+		return "redirect:/members";
+	}
+	
 	
 	
 	

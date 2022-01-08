@@ -64,5 +64,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.findByMemberId(memberId);
 	}
 
+	@Override
+	public void update(Member member) {
+		memberRepository.update(member);
+	}
+
 
 }

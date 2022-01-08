@@ -7,12 +7,18 @@
 
 <div align='center'>
 		<h3>更新會員資料</h3>
-		    <c:set var='updateurl' value='${pageContext.request.contextPath}/members/${id}' />
-		<form:form class="form" method="POST" modelAttribute="member">
+		<c:set var='updateurl' value='${pageContext.request.contextPath}/members/${memberId}' />
+		<form:form method="POST" action="${updateurl}" class="form"  modelAttribute="member">
 			
 			<input type='hidden' name='_method' value="PUT" ><br>
 			<form:input type='hidden' path="memberId"/><br>
-			
+		
+		<div class="input-group mb-3">
+			<span class="input-group-text">會員編號：</span> 
+		<form:input type="text"	class="form-control" aria-label="Sizing example input" readonly="true"
+				aria-describedby="inputGroup-sizing-default"  path="memberId" />
+		</div>
+		
 		<div class="input-group mb-3">
 			<span class="input-group-text">會員帳號：</span> <form:input type="text" readonly="true"
 				class="form-control" aria-label="Sizing example input"	
@@ -62,6 +68,31 @@
 			<form:input type="text"	class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id="memberAddress"	path="memberAddress" />
 		</div>
+		
+		<div class="input-group mb-3">
+			<span class="input-group-text">折扣：</span> 
+		<form:input type="text"	class="form-control" aria-label="Sizing example input" readonly="true"
+				aria-describedby="inputGroup-sizing-default"  path="memberDiscountId" />
+		</div>
+		
+		<div class="input-group mb-3">
+			<span class="input-group-text">幣：</span> 
+		<form:input type="text"	class="form-control" aria-label="Sizing example input" readonly="true"
+				aria-describedby="inputGroup-sizing-default"  path="memberCoin" />
+		</div>
+		
+		<div class="input-group mb-3">
+			<span class="input-group-text">身份：</span> 
+		<form:input type="text"	class="form-control" aria-label="Sizing example input" readonly="true"
+				aria-describedby="inputGroup-sizing-default"  path="member_status" />
+		</div>
+		
+			<div class="input-group mb-3">
+			<span class="input-group-text">註冊時間：</span> 
+		<form:input type="text"	class="form-control" aria-label="Sizing example input" readonly="true"
+				aria-describedby="inputGroup-sizing-default"  path="register_date" />
+		</div>
+		
 
 <!-- 			<div> -->
 <!--  				<label for="photoId">會員照片</label>  -->
@@ -71,7 +102,7 @@
 		<button type="submit" class="btn btn-outline-primary" id='sendData'>確認更改</button>
 		
 	</form:form> 
-	<a href="<c:url value='/'/> ">回前頁</a>
+	<a href="<c:url value='/listAllMembers'/> ">回前頁</a>
 	</div>
 	
 	
