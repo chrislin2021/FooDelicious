@@ -5,8 +5,6 @@ function check_all(obj, cName) {
 	}
 }
 
-//showItem();
-
 function showItem() {
 	$.ajax({
 		url: "/showCart",
@@ -18,7 +16,6 @@ function showItem() {
 				$(".table tbody").empty();
 				var str = "";
 				for (let cart of carts) {
-					//					alert(cart.quantity);
 					str += '<tr>';
 					str += '<th scope="row"><input type="checkbox" name="c"></th>';
 					str += '<td>' + cart.product.productName + '</td>';
@@ -34,13 +31,6 @@ function showItem() {
 	})
 }
 
-//function insertItem() {
-//	$.ajax({
-//		url:
-//			type:
-//	})
-//}
-
 function deleteItem(productId) {
 	$.ajax({
 		url: "/shoppingCart/" + productId,
@@ -49,4 +39,5 @@ function deleteItem(productId) {
 			showItem();
 		}
 	})
+
 }

@@ -37,7 +37,7 @@ public class CartController {
 		if (session.getAttribute("userID") != null) {
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 			m.addAttribute("carts", carts);
-			m.addAttribute("priceTotal", totalAmount());
+			m.addAttribute("priceTotal", priceTotal());
 			return "app.ShoppingCart";
 		} else {
 			return "app.LoginSystem";
@@ -45,8 +45,15 @@ public class CartController {
 	}
 
 	@ResponseBody
-	@PostMapping("/shoppingCart/insertProduct")
-	public String insertItem(@RequestBody String structuredData) {
+	@GetMapping("/showCart")
+	public List<CartBean> showCart() {
+		List<CartBean> origin = cartService.selectItem((Long) session.getAttribute("userID"));
+		return origin;
+	}
+
+	@ResponseBody
+	@PostMapping("/shoppingCart/insert")
+	public String insertItem(@RequestBody Long productId, @RequestBody Integer quantity) {
 
 //		判斷購物車是否有重複商品
 		Boolean same = false;
@@ -54,9 +61,9 @@ public class CartController {
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
-			if (null == cart.getProductId()) {
+			if (cart.getProductId() == productId) {
 //				暫時增加一個商品，因為商品還沒做到這
-				Integer sum = cart.getQuantity() + 1;
+				Integer sum = cart.getQuantity() + quantity;
 				Product product = cart.getProduct();
 				if (sum > product.getProductStock()) {
 					return "{\"ans\":\"已經到達庫存最大數量了\\n (目前庫存共有 " + product.getProductStock() + " 件)" + "\"}";
@@ -79,16 +86,16 @@ public class CartController {
 		if (same != true) {
 			CartBean cartBean = new CartBean();
 			cartBean.setMemberId((Long) session.getAttribute("userID"));
-			cartBean.setProductId(null);
-			cartBean.setQuantity(null);
+			cartBean.setProductId(productId);
+			cartBean.setQuantity(quantity);
 		}
 
-		return "{\"ans\":\"" + "此項商品數量 " + null + " 個已加入購物車" + "\"}";
+		return "{\"ans\":\"" + "此項商品數量 " + quantity + " 個已加入購物車" + "\"}";
 	}
 
 	@ResponseBody
 	@DeleteMapping("/shoppingCart/{id}")
-	public void deleteItem(@PathVariable(name = "id") Long productId, Model m) {
+	public String deleteItem(@PathVariable(name = "id") Long productId, Model m) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -98,53 +105,36 @@ public class CartController {
 				break;
 			}
 		}
-		m.addAttribute(carts);
+		return "{\"ans\":\"已成功刪除編號 " + productId + "號 商品\"}";
 	}
 
 	@ResponseBody
-	@PutMapping("/shoppingCart/aa")
-	public Integer updateItem(@RequestBody String structuredData) {
+	@PutMapping("/shoppingCart/update")
+	public Integer updateItem(@RequestBody Long productId, @RequestBody Integer quantity) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
-			if (null == cart.getProductId()) {
-				cart.setQuantity(null);
+			if (cart.getProductId() == productId) {
+				cart.setQuantity(quantity);
 				cartService.insertAndUpdateItem(cart);
 				break;
 			}
 		}
-		return totalAmount();
+
+		Integer priceTotal = priceTotal();
+
+		return priceTotal();
 	}
 
-	public List<CartBean> selectItem() {
+	public Integer priceTotal() {
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-		return carts;
-	}
-//	檢查使用者有沒有登入
-//	public Boolean checkLogin() {
-//		Object member = session.getAttribute("userID");
-//
-//		return member != null;
-//	}
-
-	@ResponseBody
-	@GetMapping("/showCart")
-	public List<CartBean> showCart(Model m) {
-		List<CartBean> origin = cartService.selectItem((Long) session.getAttribute("userID"));
-		m.addAttribute("totalPrice", totalAmount());
-		return origin;
-	}
-
-//	購物車總金額
-	public Integer totalAmount() {
-		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-		Integer totalAmount = 0;
+		Integer priceTotal = 0;
 		for (CartBean cart : carts) {
 			Product product = cart.getProduct();
-			totalAmount += product.getProductPrice() * cart.getQuantity();
+			priceTotal += product.getProductPrice() * cart.getQuantity();
 		}
-		return totalAmount;
+		return priceTotal;
 	}
 
 }
