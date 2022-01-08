@@ -53,12 +53,12 @@
             </div>
             <!--聊天室區域-->
             <div class="col" id="messageDIV" style="visibility:hidden ">
-                <div class="input-group mb-3">
+                <!--<div class="input-group mb-3">
                     <button class="btn btn-outline-secondary" type="button" id="btnConnect">確認</button>
                     <input type="text" class="form-control" id="chatId" placeholder="暱稱"
                         aria-label="Example text with button addon" aria-describedby="button-addon1">
                     <div style="height: 30px;" id='promptArea'>&nbsp;</div>
-                </div>
+                </div>-->
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容"
                         aria-describedby="button-addon2">
@@ -80,6 +80,16 @@
     <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
 
     <script>
+        //websocket設定
+        let stompClient = null;
+        let url = "http://" + window.location.host + '/websocket/chatting';
+        // 聊天訊息輸入區
+        let inputMessageArea = null;
+        //傳送訊息用
+        let btnSendToChatRoom2 = null;
+        //聊天室內容
+        let messageData = "";
+
         //使用者ID
         let UserId;
         //將值傳到全域
@@ -98,12 +108,16 @@
         //螢幕載入時 先執行的區域
         window.addEventListener('load', function () {
             document.getElementById("messageDIV").style.visibility = 'hidden';
-             searchShareDate("/totalArticleData", "GET");
+            searchShareDate("/totalArticleData", "GET");
         })
 
-       
+
 
         function searchShareDate(url, type) {
+            //輸入聊天訊息區域
+            inputMessageArea = document.getElementById('inputMessageArea');
+            //傳送訊息BTN
+            btnSendToChatRoom2 = document.getElementById('sendToChatRoom2');
             $.ajax({
                 url: url,
                 type: type,
@@ -132,6 +146,42 @@
                     pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
                     $("#page").html(pageHtml);
 
+                    //======================== websocked ========================
+                    var socket = new SockJS(url);
+                    stompClient = Stomp.over(socket);
+                    stompClient.connect({}, function (frame) {
+                        inputMessageArea.focus();
+                        console.log('Connected: ' + frame);
+                        stompClient.subscribe('/topic/messages', function (messageOutput) {
+                            showMessageOutput(JSON.parse(messageOutput.body));
+                        });
+                    });
+                    inputMessageArea.onkeyup = function () {
+                        if (event.keyCode === 13) {
+                            let text = inputMessageArea.value;
+                            if (text.length > 0) {
+                                //console.log(text.length);
+                                stompClient.send("/app/chat", {}, JSON.stringify({
+                                    'from': articles.userName,
+                                    'text': text
+                                }));
+                                messageData += "<p>" + articles.userName + " : " + text + "</p>";
+                                $(".messageArea").html(messageData);
+                            }
+                        }
+                    };
+                    btnSendToChatRoom2.onclick = function () {
+                        let text = inputMessageArea.value;
+                        if (text.length > 0) {
+                            //console.log(text.length);
+                            stompClient.send("/app/chat", {}, JSON.stringify({
+                                'from': articles.userName,
+                                'text': text
+                            }));
+                            messageData += "<p>" + articles.userName + " : " + text + "</p>";
+                            $(".messageArea").html(messageData);
+                        }
+                    };
                 }
             });
         };
@@ -287,9 +337,13 @@
             let clasify = $("#clasify").val();
             //console.log(clasify)
             let titleKeyWord = $("#titleKeyWord").val()
-            //console.log(titleKeyWord)
+            //console.log(titleKeyWord.length == 0)
 
-            //searchShareDate("/fuzzySearch/" + clasify + "/" + titleKeyWord, "GET")
+            if (titleKeyWord == "" || titleKeyWord.length == 0) {
+                console.log("請輸入資料喔")
+                return;
+            }
+
             let fuzzySearch = {
                 "clasify": clasify,
                 "AssociateString": titleKeyWord
@@ -324,93 +378,6 @@
             })
 
         })
-    </script>
-
-    <script>
-        //======================WebSocket區域======================
-        let stompClient = null;
-        let url = "http://" + window.location.host + '/websocket/chatting';
-        let chatId = null; // 聊天代號
-        let to = null; // 
-        let responseArea = null; // 聊天訊息顯示區
-        let inputMessageArea = null; // 聊天訊息輸入區
-        let btnConnect = null;
-        let btnDisconnect = null;
-        let promptArea = null; // 系統訊息提示區	
-        let messageData = "";
-        let btnSendToChatRoom2 = null;
-
-        window.addEventListener('load', function () {
-            //暱稱位置
-            chatId = document.getElementById('chatId');
-            //暱稱區域確認BTN
-            btnConnect = document.getElementById('btnConnect');
-            //離開聊天室用
-            //btnDisconnect = document.getElementById('btnDisconnect');
-            //這個是老師用於textarea的位置
-            //responseArea = document.getElementById('responseArea');     
-            promptArea = document.getElementById('promptArea');
-            //輸入聊天訊息區域
-            inputMessageArea = document.getElementById('inputMessageArea');
-            //傳送訊息BTN
-            btnSendToChatRoom2 = document.getElementById('sendToChatRoom2');
-
-            btnConnect.onclick = function () {
-                let chatIdValue = chatId.value;
-                if (chatIdValue == null || chatIdValue == "") {
-                    promptArea.innerHTML = "<font size='-1' color='red'>必須先輸入聊天代號才能加入聊天室</font>";
-                    return;
-                } else {
-                    promptArea.innerHTML = "";
-                }
-                var socket = new SockJS(url);
-                stompClient = Stomp.over(socket);
-                stompClient.connect({}, function (frame) {
-                    inputMessageArea.focus();
-                    console.log('Connected: ' + frame);
-                    stompClient.subscribe('/topic/messages', function (messageOutput) {
-                        console.log("messageOutput" + messageOutput);
-
-                        showMessageOutput(JSON.parse(messageOutput.body));
-
-                    });
-                });
-            };
-
-            inputMessageArea.onkeyup = function () {
-                if (event.keyCode === 13) {
-                    let text = inputMessageArea.value;
-                    if (text.length > 0) {
-                        //console.log(text.length);
-                        stompClient.send("/app/chat", {}, JSON.stringify({
-                            'from': chatId.value,
-                            'text': text
-                        }));
-                        messageData += "<p>" + chatId.value + " : " + text + "</p>";
-                        $(".messageArea").html(messageData);
-                    }
-                    //console.log("=====================================================")
-                    //console.log('from：' + chatId.value + "/n" + 'text' + text)
-
-
-
-                    //$(".messageArea").html(messageData);
-                }
-            };
-            btnSendToChatRoom2.onclick = function () {
-                let text = inputMessageArea.value;
-                if (text.length > 0) {
-                    //console.log(text.length);
-                    stompClient.send("/app/chat", {}, JSON.stringify({
-                        'from': chatId.value,
-                        'text': text
-                    }));
-                    messageData += "<p>" + chatId.value + " : " + text + "</p>";
-                    $(".messageArea").html(messageData);
-                }
-            };
-        });
-
         function showMessageOutput(messageOutput) {
             let line = "";
             JSONData = JSON.stringify(messageOutput);

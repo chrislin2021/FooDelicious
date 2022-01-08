@@ -88,6 +88,7 @@ public class ArticleController {
 	public Map<String, Object> totalArticleData() {
 		Map<String, Object> data = new HashMap<>();
 		data.put("session", session.getAttribute("userID"));
+		data.put("userName", session.getAttribute("userName"));
 		data.put("title", articleService.findAll());
 		return data;
 	}

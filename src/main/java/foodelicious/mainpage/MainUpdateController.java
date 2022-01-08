@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import foodelicious.member.model.Member;
 import foodelicious.member.model.TotalUseEMDaoService;
+import foodelicious.member.service.MemberService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainUpdateController {
 
-	// 測試
-	@Autowired
 	TotalUseEMDaoService EMDaoService;
+	
+	MemberService memberService;
+	
+	
+
+	public MainUpdateController(TotalUseEMDaoService eMDaoService, MemberService memberService) {
+		this.EMDaoService = eMDaoService;
+		this.memberService = memberService;
+	}
+
+
 
 	@PostMapping(path = "/checklogin.controller")
 	public String processAction(@RequestParam("memberMail") String memberMail, @RequestParam("pwd") String pwd, Model m,
@@ -44,20 +54,20 @@ public class MainUpdateController {
 			Long EMid = EMDaoService.findId(new Member(memberMail, pwd));
 			session.setAttribute("memberMail", memberMail);
 			session.setAttribute("pwd", pwd);
-			session.setAttribute("userID", EMid);
-
-			System.out.println("EMid：" + EMid);
-			System.out.println("EMid：" + session.getAttribute("userID"));
+			session.setAttribute("userID", EMid);//findByMemberId
+			session.setAttribute("userName", memberService.findByMemberId(EMid).getMemberName());
+//			System.out.println("userName：" + session.getAttribute("userName"));
+//			System.out.println("EMid：" + session.getAttribute("userID"));
 
 			// 查詢成功登入的會員身份
 			String level = EMDaoService.findId2(EMid);
-			System.out.println("level：" + level);
+//			System.out.println("level：" + level);
 			if (level.equals("admin")) {
 				return "app.BackendMember";
 			} else if (level.equals("company")) {
 				return "app.CompanyMain2";
 			} else {
-				System.out.println("userID：" + session.getAttribute("userID"));
+//				System.out.println("userID：" + session.getAttribute("userID"));
 				return "app.home";
 			}
 
