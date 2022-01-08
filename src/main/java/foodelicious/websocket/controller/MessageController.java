@@ -41,6 +41,7 @@ public class MessageController {
 	public  OutputMessage processChatRoomMessage(Message message) {
 		System.out.println(message);
 		String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
+		System.out.println(time);
 		return new OutputMessage(message.getFrom(), message.getText(), time);
 	}
 	
