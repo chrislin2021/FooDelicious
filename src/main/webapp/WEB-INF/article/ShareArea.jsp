@@ -19,6 +19,7 @@
     </style>
 
     <br />
+    <div id="liveAlertPlaceholder"></div>
     <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
         <select class="btn btn-outline-secondary dropdown" id="clasify">
             <option selected>全部文章</option>
@@ -53,12 +54,7 @@
             </div>
             <!--聊天室區域-->
             <div class="col" id="messageDIV" style="visibility:hidden ">
-                <!--<div class="input-group mb-3">
-                    <button class="btn btn-outline-secondary" type="button" id="btnConnect">確認</button>
-                    <input type="text" class="form-control" id="chatId" placeholder="暱稱"
-                        aria-label="Example text with button addon" aria-describedby="button-addon1">
-                    <div style="height: 30px;" id='promptArea'>&nbsp;</div>
-                </div>-->
+
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容"
                         aria-describedby="button-addon2">
@@ -82,7 +78,7 @@
     <script>
         //websocket設定
         let stompClient = null;
-        let url = "http://" + window.location.host + '/websocket/chatting';
+        let webSocketUrl = "http://" + window.location.host + '/websocket/chatting';
         // 聊天訊息輸入區
         let inputMessageArea = null;
         //傳送訊息用
@@ -147,10 +143,9 @@
                     $("#page").html(pageHtml);
 
                     //======================== websocked ========================
-                    var socket = new SockJS(url);
+                    var socket = new SockJS(webSocketUrl);
                     stompClient = Stomp.over(socket);
                     stompClient.connect({}, function (frame) {
-                        inputMessageArea.focus();
                         console.log('Connected: ' + frame);
                         stompClient.subscribe('/topic/messages', function (messageOutput) {
                             showMessageOutput(JSON.parse(messageOutput.body));
@@ -333,6 +328,9 @@
 
     <script>
         //==================模糊搜尋==================
+        var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+        var alertTrigger = document.getElementById('articleSearch')
+        
         $("#articleSearch").on("click", function () {
             let clasify = $("#clasify").val();
             //console.log(clasify)
@@ -340,8 +338,12 @@
             //console.log(titleKeyWord.length == 0)
 
             if (titleKeyWord == "" || titleKeyWord.length == 0) {
-                console.log("請輸入資料喔")
+                //console.log("請輸入資料喔")
+                alertMsg('搜尋內容不能空白喔', 'success')
                 return;
+            }else{
+                //document.createElement('div').innerHTML="";
+                $("#liveAlertPlaceholder").html("");
             }
 
             let fuzzySearch = {
@@ -381,11 +383,13 @@
         function showMessageOutput(messageOutput) {
             let line = "";
             JSONData = JSON.stringify(messageOutput);
-            //console.log(JSON.stringify(messageOutput));
             line += JSON.stringify(messageOutput) + "\n";
-            /* 更新聊天訊息顯示區 */
+        }
+        //模糊搜尋報錯
+        function alertMsg(message, type) {
+            var wrapper = document.createElement('div')
+            wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
 
-            //responseArea.value += "" + line;
-
+            alertPlaceholder.append(wrapper)
         }
     </script>
