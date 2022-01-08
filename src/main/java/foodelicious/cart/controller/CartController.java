@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
 import foodelicious.product.model.Product;
@@ -94,8 +97,8 @@ public class CartController {
 	}
 
 	@ResponseBody
-	@DeleteMapping("/shoppingCart/{id}")
-	public String deleteItem(@PathVariable(name = "id") Long productId, Model m) {
+	@DeleteMapping("/shoppingCart/{productId}")
+	public void deleteItem(@PathVariable Long productId, Model m) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -105,18 +108,17 @@ public class CartController {
 				break;
 			}
 		}
-		return "{\"ans\":\"已成功刪除編號 " + productId + "號 商品\"}";
 	}
 
 	@ResponseBody
-	@PutMapping("/shoppingCart/update")
-	public Integer updateItem(@RequestBody Long productId, @RequestBody Integer quantity) {
+	@GetMapping("/shoppingCart/{id}/{qty}")
+	public Integer updateItem(@PathVariable Long id, @PathVariable Integer qty) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
-			if (cart.getProductId() == productId) {
-				cart.setQuantity(quantity);
+			if (cart.getProductId() == id) {
+				cart.setQuantity(qty);
 				cartService.insertAndUpdateItem(cart);
 				break;
 			}

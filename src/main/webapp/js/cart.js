@@ -13,7 +13,7 @@ function showItem() {
 		success: function(carts) {
 
 			if (carts != null) {
-				$(".table tbody").empty();
+				$("#cartList").empty();
 				var str = "";
 				for (let cart of carts) {
 					str += '<tr>';
@@ -31,11 +31,49 @@ function showItem() {
 	})
 }
 
+function changeAddNum(add) {
+	alert("1");
+	var quantity = $(add).prev().val();
+	alert(quantity);
+	quantity++;
+	alert(quantity);
+	var productId = $(add).parent().siblings(":eq(0)").children(":eq(0)").val();
+	alert(productId);
+
+	let dataObj = {
+		"methods": "addNum",
+		"productId": productId,
+		"quantity": quantity
+	}
+
+	let dataString = JSON.stringify(dataObj);
+	$.ajax({
+		url: "/shoppingCart/" + productId + "/" + quantity,
+		type: "	GET",
+		data: dataString,
+		success: function(result) {
+			alert("5");
+			if (result) {
+				alert("6");
+				$(add).prev().val(quantity);
+				//				var productPrice = parseInt($(add).parent().prev().html());
+				//				$(add).parent().next().html(productPrice * quantity);
+				//				$("#total").html(parseInt($("#total").html()) + productPrice);
+			}
+		}
+	});
+}
+
 function deleteItem(productId) {
 	$.ajax({
 		url: "/shoppingCart/" + productId,
 		type: "DELETE",
 		success: function() {
+			Swal.fire(
+				"刪除成功!",
+				"(((ﾟдﾟ)))",
+				"success"
+			)
 			showItem();
 		}
 	})
