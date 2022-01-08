@@ -122,8 +122,12 @@ public class CartController {
 
 		for (CartBean cart : carts) {
 			if (cart.getProductId() == id) {
-				cart.setQuantity(qty);
-				cartService.insertAndUpdateItem(cart);
+				cart.setQuantity(cart.getQuantity() + qty);
+				if (cart.getQuantity() > 0) {
+					cartService.insertAndUpdateItem(cart);
+				} else {
+					cart.setQuantity(1);
+				}
 				break;
 			}
 		}
