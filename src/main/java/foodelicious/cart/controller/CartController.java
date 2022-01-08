@@ -111,8 +111,12 @@ public class CartController {
 	}
 
 	@ResponseBody
-	@GetMapping("/shoppingCart/{id}/{qty}")
-	public Integer updateItem(@PathVariable Long id, @PathVariable Integer qty) {
+	@PutMapping("/shoppingCart/{pid}/{pqty}")
+	public Integer updateItem(@PathVariable String pid, @PathVariable String pqty) {
+
+		Long id = Long.parseLong(pid);
+
+		Integer qty = Integer.parseInt(pqty);
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
