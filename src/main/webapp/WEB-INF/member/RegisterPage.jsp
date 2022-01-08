@@ -17,7 +17,8 @@
 <body>
 <div align='center'>
 <h3>註冊會員</h3>
-		    <c:set var='updateurl' value='${pageContext.request.contextPath}/members/${id}' />
+		
+		<c:set var='updateurl' value='${pageContext.request.contextPath}/members/${id}' />
 		<form:form class="form" method="POST" modelAttribute="member">
 		
 		<div class="input-group mb-3">

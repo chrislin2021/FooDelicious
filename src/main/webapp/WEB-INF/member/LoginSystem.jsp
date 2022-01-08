@@ -4,7 +4,7 @@
 
 <body>
 <div align="center" >
-<h2><b style="color:brown"> ${message} </b></h2>
+<font color='red'>&nbsp;${insertSuccess}</font>
 </div>
 
 <section class="vh-100" style="background-color: #508bfc;">
