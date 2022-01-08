@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
@@ -64,7 +65,7 @@ public class MemberCreateController {
 	}
 	
 	@PostMapping("/RegisterPage")//和網址相同
-	public String saveMember(@Valid @ModelAttribute Member member, BindingResult result) {//此為表單綁定
+	public String saveMember(@Valid @ModelAttribute Member member, BindingResult result, RedirectAttributes ra) {//此為表單綁定
 		System.out.println("member= "+ member);
 		
 		List<ObjectError> errors = result.getAllErrors();
@@ -84,6 +85,7 @@ public class MemberCreateController {
 		member.setRegister_date(now);
 		if(!result.hasErrors()) {
 			memberService.save(member);
+			ra.addFlashAttribute("insertSuccess", "註冊成功");
 			return "redirect:/LoginSystem";
 		}
 		return "app.RegisterPage";

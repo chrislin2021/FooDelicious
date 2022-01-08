@@ -4,11 +4,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.validation.Valid;
+
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -16,47 +18,62 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
-
-import foodelicious.backend.memberpage.model.BkMember;
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
-import foodelicious.product.model.Product;
+import foodelicious.member.validator.MemberValidator;
 
 @Controller
 public class MemberUpdateController {
-	
+
 	MemberService memberService;
-	
-	@Autowired
-	public MemberUpdateController(MemberService memberService) {
+
+	MemberValidator memberValidator;
+
+//	@Autowired
+	public MemberUpdateController(MemberService memberService, MemberValidator memberValidator) {
 		this.memberService = memberService;
-	}	
-	
-	@GetMapping("/updatePage")//和網址相同
-	public String sendMemberDataToModified(Model model, 
-			@RequestParam(value = ("MemberId"),required=true) Long memberId) {//spring會讀三種： 請求參數、路徑變數、表單綁定
-		Member member= memberService.findByMemberId(memberId);
+		this.memberValidator = memberValidator;
+	}
+
+	@GetMapping("/updatePage") // 和網址相同
+	public String sendMemberDataToModified(Model model,
+			@RequestParam(value = ("MemberId"), required = true) Long memberId) {// spring會讀三種： 請求參數、路徑變數、表單綁定
+		Member member = memberService.findByMemberId(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("memberId", memberId);
-		
+
 		return "app.updatePage";
 	}
-	
-	@PutMapping("/members/{memberId}")//{}為路徑變數
-	public String updateMemberData(@ModelAttribute("member") Member member, BindingResult result, Model model, 
-			@PathVariable Long memberId) {//spring會讀三種： 請求參數、路徑變數、表單綁定
-		
-		memberService.update(member);
-		return "redirect:/members";
+
+	@PutMapping("/members/{memberId}") // {}為路徑變數
+	public String updateMemberData(@Valid @ModelAttribute Member member, BindingResult result, Model model,
+			RedirectAttributes ra, @PathVariable Long memberId) {// spring會讀三種： 請求參數、路徑變數、表單綁定
+		System.out.println("pmember=" + member);
+
+		List<ObjectError> errors = result.getAllErrors();
+		for (ObjectError oe : errors) {
+			System.out.println(oe.getCode() + "," + oe.getDefaultMessage() + "," + oe.getObjectName());
+			System.out.println("oe=>" + oe);
+		}
+
+		System.out.println("==============================");
+
+		memberValidator.validate(member, result);// bindingResult的父介面就是Errors
+		if (result.hasErrors()) {
+			return "app.updatePage";
+		}
+		if (!result.hasErrors()) {
+			memberService.update(member);
+			ra.addFlashAttribute("insertSuccess", "更新成功");
+			return "redirect:/members";
+		}
+		return "app.updatePage";
 	}
-	
-	
-	
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder, WebRequest request) {
 		// java.util.Date
@@ -70,5 +87,15 @@ public class MemberUpdateController {
 		CustomDateEditor ce2 = new CustomDateEditor(dateFormat2, true);
 		binder.registerCustomEditor(java.sql.Date.class, ce2);
 	}
-		
+
+	@ModelAttribute("member")
+	public void findMember(@PathVariable(required = false) Long memberId, Model model) {// 為避免有15個欄位但只有6個更新且剩9個變成null，所以可使用此方法做前置，
+//		先用pathVariable去讀所有欄位，用這個讀取的物件去接前端的6個更新欄位
+		Member member;
+		if (memberId != null) {
+			member = memberService.findByMemberId(memberId);
+		} else {
+			member = new Member();
+		}
+	}
 }

@@ -1,17 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isErrorPage="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
+<style>
+	.error {
+		color: red;
+		display: inline-block;
+		font-size: 8pt;
+	}
+	
+</style>
+
 <div align='center'>
 		<h3>更新會員資料</h3>
+		<font color='darkgreen'>&nbsp;${insertSuccess}</font>
 		<c:set var='updateurl' value='${pageContext.request.contextPath}/members/${memberId}' />
 		<form:form method="POST" action="${updateurl}" class="form"  modelAttribute="member">
 			
-			<input type='hidden' name='_method' value="PUT" ><br>
-			<form:input type='hidden' path="memberId"/><br>
+			<input type='hidden' name='_method' value='PUT'> <br><!-- put一定要有底線_method -->
+		    <form:input type='hidden' path='memberId' /><br>&nbsp;
 		
 		<div class="input-group mb-3">
 			<span class="input-group-text">會員編號：</span> 
@@ -67,6 +77,7 @@
 			<span class="input-group-text">會員地址：</span> 
 			<form:input type="text"	class="form-control" aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id="memberAddress"	path="memberAddress" />
+			<form:errors path="memberAddress" cssClass="error" />
 		</div>
 		
 		<div class="input-group mb-3">
