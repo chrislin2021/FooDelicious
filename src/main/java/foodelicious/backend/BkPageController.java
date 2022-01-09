@@ -41,4 +41,9 @@ public class BkPageController {
     public String BackendProductUpdate(){
         return "app.BackendProductUpdate";
     }
+
+    @GetMapping("backend/report/age")
+    public String BackendReportAge(){
+        return "app.BackendReportAge";
+    }
 }

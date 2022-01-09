@@ -202,4 +202,10 @@
 					   value="/WEB-INF/backend/productPage/BackendProductUpdate.jsp" />
 	</definition>
 
+	<definition name="app.BackendReportAge"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/reportPage/AgeDistribution.jsp" />
+	</definition>
+
 </tiles-definitions>

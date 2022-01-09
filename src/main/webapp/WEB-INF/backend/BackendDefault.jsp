@@ -95,7 +95,7 @@
                 <div class="collapse ulArea" id="collapseExample">
                     <ul id="collapseOne" class="accordion-collapse collapse show">
                         <li id="AgeDistribution" class="colLi funName">
-                            <a class="colLi" href="" style="text-decoration: none">
+                            <a class="colLi" href="/backend/report/age" style="text-decoration: none">
                                 <i class="fa fa-circle-o"></i>
                                 <span class="listName">年齡層分析</span>
                             </a>
