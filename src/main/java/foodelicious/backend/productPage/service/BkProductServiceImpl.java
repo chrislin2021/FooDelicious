@@ -34,4 +34,19 @@ public class BkProductServiceImpl implements BkProductService{
     public List<BkProduct> findByType(Integer categories) {
         return bkProductDao.findByType(categories);
     }
+
+    @Override
+    public BkProduct findById(Integer productId) {
+        return bkProductDao.findById(productId);
+    }
+
+    @Override
+    public String update(Integer productId, BkProduct bkProduct) {
+        return bkProductDao.update(productId, bkProduct);
+    }
+
+    @Override
+    public String delete(Integer productId) {
+        return bkProductDao.delete(productId);
+    }
 }

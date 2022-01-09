@@ -3,13 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <head>
-    <link rel="stylesheet" href="../../../css/BackendMemberUpdate.css">
+    <link rel="stylesheet" href="../../../css/BackendProductUpdate.css">
 </head>
 <body>
 <div>
     <h1 class="tableName">
-        管理員列表
-        <span class="littleName">Manager List</span>
+        商品列表
+        <span class="littleName">Product List</span>
     </h1>
 
     <section class="content">
@@ -17,46 +17,61 @@
             <table id="" class='table table-striped table-hover'>
                 <thead>
                 <tr>
-                    <th class="col col1 table-danger">管理員編號</th>
-                    <th class="col col2 table-danger">帳號Email</th>
-                    <th class="col col4 table-danger">權限狀態</th>
-                    <th class="col col5 table-danger">管理員姓名</th>
-                    <th class="col col10 table-danger">管理員電話</th>
-                    <th class="col col11 table-danger">管理員地址</th>
-                    <th class="col col8 table-danger">管理員coin</th>
-                    <th class="col col13 table-danger">註冊日期</th>
-                    <th class="col col14 table-danger">更新</th>
-                    <th class="col col15 table-danger">取消</th>
+                    <th class="col table-success">商品編號</th>
+                    <th class="col table-success">商品類別</th>
+                    <th class="col table-success">商品公司</th>
+                    <th class="col table-success">上架狀態</th>
+                    <th class="col table-success">商品名稱</th>
+                    <th class="col table-success">商品概述</th>
+                    <th class="col table-success">商品價格</th>
+                    <th class="col table-success">商品庫存</th>
+                    <th class="col table-success">銷售量</th>
+                    <th class="col table-success">關鍵字</th>
+                    <th class="col table-success">新增日期</th>
+                    <th class="col table-success">更新</th>
+                    <th class="col table-success">取消</th>
                 </tr>
                 </thead>
                 <tbody>
                     <form>
                         <tr>
                             <td class='align-middle'>
-                                <input class="upInput readonly text-middle upInputSm" type="text" value="" readonly id="memberId">
+                                <input class="upInput readonly text-middle upInputSm" type="text" value="" readonly id="productId">
                             </td>
                             <td class='align-middle'>
-                                <input class="upInput upInputBig readonly" type="text" value="" readonly id="memberMail">
-                            </td>
-                            <td class='align-middle'>
-                                <select id="memberStatus" class="form-select upInput text-middle upInputMd">
-                                    <option value="" id="status" selected></option>
-                                    <option value="admin">admin</option>
-                                    <option value="company">company</option>
-                                    <option value="customer">customer</option>
+                                <select id="categories" class="form-select upInput text-middle upInputMd">
+                                    <option value="" id="cate" selected></option>
+                                    <option value="1">食材</option>
+                                    <option value="0">廚具</option>
                                 </select>
                             </td>
                             <td class='align-middle'>
-                                <input class="upInput" type="text" value="" id="memberName">
+                                <input class="upInput upInputMd" type="text" value="" id="productCompany">
                             </td>
                             <td class='align-middle'>
-                                <input class="upInput" type="text" value="" id="memberPhone">
+                                <select id="productStatus" class="form-select upInput text-middle upInputMd">
+                                    <option value="" id="status" selected></option>
+                                    <option value="0">下架中</option>
+                                    <option value="1">上架中</option>
+                                </select>
                             </td>
                             <td class='align-middle'>
-                                <input class="upInput" type="text" value="" id="memberAddress">
+                                <input class="upInputBig" type="text" value="" id="productName">
                             </td>
                             <td class='align-middle'>
-                                <input class="upInput" type="text" value="" id="memberCoin">
+                                <input class="upInputBig" type="text" value="" id="productContent">
+                            </td>
+                            <td class='align-middle'>
+                                <input class="upInputSm" type="text" value="" id="productPrice">
+                            </td>
+                            <td class='align-middle'>
+                                <input class="upInputSm" type="text" value="" id="productStock">
+                            </td>
+                            <td class='align-middle'>
+                                <input class="upInputSm" type="text" value="" id="productSalesFigures">
+                            </td>
+                            <td class='align-middle'>
+                                <input class="upInputSm" type="text" value="" id="productKeywords">
                             </td>
                             <td class='align-middle'>
                                 <input class="upInput upInputBig readonly" type="text" value="" readonly id="registerDate">
@@ -75,50 +90,70 @@
 </div>
 <script>
     //=============抓取另一頁傳來的資料=============
-    let managerString = localStorage.getItem("managerData")
+    let productString = localStorage.getItem("productData")
     //將字串json化
-    let managerData = JSON.parse(managerString);
+    let productData = JSON.parse(productString);
     //填入資料
-    $("#memberId").val(managerData.memberId);
-    $("#memberMail").val(managerData.memberMail);
-    $("#status").text(managerData.memberStatus);
-    $("#status").val(managerData.memberStatus);
-    $("#memberName").val(managerData.memberName);
-    $("#memberPhone").val(managerData.memberPhone);
-    $("#memberAddress").val(managerData.memberAddress);
-    $("#memberCoin").val(managerData.memberCoin);
-    let newDate = new Date(managerData.registerDate);
+    $("#productId").val(productData.productId);
+    //轉換數字成中文
+    let cate = productData.categories;
+    let type = ""
+    if( cate == 0){type = "廚具";
+    }else{ type = "食材";}
+    $("#cate").val(cate);
+    $("#cate").text(type);
+
+    $("#productCompany").val(productData.productCompany);
+    let st = productData.product_status;
+    let status = ""
+    if( st == 1){
+        status = "上架中";
+    }else{
+        status = "下架中";
+    }
+    $("#status").val(st);
+    $("#status").text(status);
+    $("#productName").val(productData.productName);
+    $("#productContent").val(productData.productContent);
+    $("#productPrice").val(productData.productPrice);
+    $("#productStock").val(productData.productStock);
+    $("#productSalesFigures").val(productData.productSalesFigures);
+    $("#productKeywords").val(productData.productKeywords);
+    let newDate = new Date(productData.productInsertDate);
     let register = newDate.toLocaleString();
     $("#registerDate").val(register);
 </script>
 <script>
     //=============跳回首頁=============
     function cancel(){
-        window.location.href="/backend/manager";
+        window.location.href="/backend/product";
     }
 </script>
 <script>
     //=============更新資料=============
     $("#updateBtn").on("click",function(){
-        let managerID = $("#memberId").val();
-        let managerObj = {
-            "memberStatus": $("#memberStatus").val(),
-            "memberName": $("#memberName").val(),
-            "memberPhone": $("#memberPhone").val(),
-            "memberAddress": $("#memberAddress").val(),
-            "memberCoin": $("#memberCoin").val(),
+        let productId = $("#productId").val();
+        let productObj = {
+            "categories": $("#categories").val(),
+            "productCompany": $("#productCompany").val(),
+            "product_status": $("#productStatus").val(),
+            "productName": $("#productName").val(),
+            "productContent": $("#productContent").val(),
+            "productPrice": $("#productPrice").val(),
+            "productStock": $("#productStock").val(),
+            "productSalesFigures": $("#productSalesFigures").val(),
+            "productKeywords": $("#productKeywords").val()
         };
-        let managerString = JSON.stringify(managerObj);
-        // alert(memberString);
+        let productString = JSON.stringify(productObj);
 
         $.ajax({
-            url:"http://localhost:8080/bkmanagers/update/"+managerID,
+            url:"http://localhost:8080/bkproducts/update/"+productId,
             type:"PUT",
             contentType:'application/json; charset=UTF-8',
-            data: managerString,
+            data: productString,
             success:function(msg){
                 alert(msg)
-                window.location.href="/backend/manager";
+                window.location.href="/backend/product";
             }
         })
     })

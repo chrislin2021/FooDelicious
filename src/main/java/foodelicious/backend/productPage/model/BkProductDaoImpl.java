@@ -45,4 +45,37 @@ public class BkProductDaoImpl implements BkProductDao{
         List<BkProduct> products = bkProductRepository.findByType(categories);
         return products;
     }
+
+    @Override
+    public BkProduct findById(Integer productId) {
+
+        BkProduct product = bkProductRepository.findById(productId).orElse(null);
+        return product;
+    }
+
+    @Override
+    public String update(Integer productId, BkProduct bkProduct) {
+        BkProduct product = bkProductRepository.findById(productId).orElse(null);
+        if(product != null){
+            product.setCategories(bkProduct.getCategories());
+            product.setProductCompany(bkProduct.getProductCompany());
+            product.setProduct_status(bkProduct.getProduct_status());
+            product.setProductName(bkProduct.getProductName());
+            product.setProductContent(bkProduct.getProductContent());
+            product.setProductPrice(bkProduct.getProductPrice());
+            product.setProductStock(bkProduct.getProductStock());
+            product.setProductSalesFigures(bkProduct.getProductSalesFigures());
+            product.setProductKeywords(bkProduct.getProductKeywords());
+            bkProductRepository.save(product);
+            return "資料更新成功";
+        }else{
+            return "資料更新失敗";
+        }
+    }
+
+    @Override
+    public String delete(Integer productId) {
+        bkProductRepository.deleteById(productId);
+        return "資料刪除成功";
+    }
 }

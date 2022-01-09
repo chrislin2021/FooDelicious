@@ -196,4 +196,10 @@
 					   value="/WEB-INF/backend/productPage/BackendProduct.jsp" />
 	</definition>
 
+	<definition name="app.BackendProductUpdate"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/productPage/BackendProductUpdate.jsp" />
+	</definition>
+
 </tiles-definitions>

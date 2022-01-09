@@ -14,4 +14,10 @@ public interface BkProductService {
 
     public List<BkProduct> findByType(Integer categories);
 
+    public BkProduct findById(Integer productId);
+
+    public String  update(Integer productId, BkProduct bkProduct);
+
+    public String  delete(Integer productId);
+
 }

@@ -59,6 +59,23 @@
     </div>
 </section>
 <script>
+    //=============刪除確認=============
+
+    $("#products").on("click","#delBtn",function() {
+        let deleteId = $(this).data("id");
+        if (confirm("確定要刪除嗎")) {
+            $.ajax({
+                url: "/bkproducts/delete/"+deleteId,
+                type: "DELETE",
+                success: function(msg){
+                    alert(msg);
+                    window.location.href="/backend/product";
+                }
+            });
+        }
+    })
+</script>
+<script>
     //=============名稱關鍵字查詢功能=============
     $("#searchAcc").on("click",function(){
        let inputData = $(".keyWord1").val();
@@ -95,22 +112,22 @@
 </script>
 
 <script>
-    //=============更新會員資料功能=============
+    //=============更新商品資料功能=============
 
     //更新前先查詢出資料
-    $("#members").on("click","#updateBtn",function(){
+    $("#products").on("click","#updateBtn",function(){
         let data = $(this).data("id");
         // alert("data："+data)
         $.ajax({
-            url:"http://localhost:8080/bkmanagers/update/"+data,
+            url:"/bkproducts/find/"+data,
             type: "GET",
-            success:function(manager){
+            success:function(product){
                 //將json字串化
-                let managerString = JSON.stringify(manager);
+                let productString = JSON.stringify(product);
                 //將資料存到localStorage，給另一個頁面使用
-                localStorage.setItem("managerData",managerString);
+                localStorage.setItem("productData",productString);
                 //跳轉頁面
-                window.location.href="/backend/manager/update";
+                window.location.href="/backend/product/update";
             }
         })
 
@@ -341,7 +358,9 @@
             }
             txt += "<td class='align-middle'>"+status+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].productName+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productContent+"</td>"
+            let contentObj = new String(dataSource[i].productContent);
+            let context = contentObj.substring(0,10);
+            txt += "<td class='align-middle'>"+context+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].productPrice+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].productStock+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].productSalesFigures+"</td>"
@@ -351,13 +370,12 @@
             txt += "<td class='align-middle'>"+register+"</td>"
             txt += '<td class="align-middle">'+
                 '<form method="" >'+
-                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].memberId+'>'+
+                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].productId+'>'+
                 '</form>'+
                 '</td>'
             txt += '<td class="mdata">'+
                 '<form method="" action="">'+
-                '<input type="hidden" type="text" name="empdel" value=?>'+
-                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].memberId+'>'+
+                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].productId+'>'+
                 '</form>'+
                 '</td></tr>'
         }
