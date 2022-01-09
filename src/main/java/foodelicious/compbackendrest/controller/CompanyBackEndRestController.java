@@ -57,12 +57,13 @@ public class CompanyBackEndRestController {
 	}
 
 	@GetMapping("companyProducts/update/{productId}")
-	public Product findByProductId(@PathVariable Long productId) {
+	public Product findByProductId(@PathVariable Integer productId) {
+		//return cbkServiceInterface.findByProductId(productId);
 		return cbkServiceInterface.findByProductId(productId);
 	}
 
 	@PutMapping("/companyProducts/update/{productId}")
-	public String updateProduct(@PathVariable Long productId, @RequestBody Product product) {
+	public String updateProduct(@PathVariable Integer productId, @RequestBody Product product) {
 		return cbkProductDao.updateProduct(productId,product);
 	}
 

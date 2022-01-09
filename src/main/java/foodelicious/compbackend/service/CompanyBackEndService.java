@@ -30,13 +30,13 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 	}
 
 	@Override
-	public Product findByProductId(Long productId) {
+	public Product findByProductId(Integer productId) {
 		Product product = cbkProductDaoInterface.findByProductId(productId);
 		return product;
 	}
 
 	@Override
-	public String updateProduct(Long productId, Product product) {
+	public String updateProduct(Integer productId, Product product) {
 		
 		return null;
 	}

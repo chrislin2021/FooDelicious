@@ -13,9 +13,9 @@ public interface CompanyBackEndServiceInterface {
 	
 	public List<Product> getAllProducts(HttpSession session);
 
-	public Product findByProductId(Long productId);
+	public Product findByProductId(Integer productId);
 	
-	public String updateProduct(Long productId, Product product);
+	public String updateProduct(Integer productId, Product product);
 
 
 }

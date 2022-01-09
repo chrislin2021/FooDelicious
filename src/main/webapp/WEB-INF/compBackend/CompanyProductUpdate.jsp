@@ -12,15 +12,14 @@
 	<table class="table table-hover" style='text-align: center'>
 		<thead class="table table-dark table-striped">
 			<tr>
-				<th class="col col2 ">商品編號</th>
-				<th class="col col1 ">商品類別</th>
-				<th class="col col3 ">商品公司</th>
+				<th class="col col2 ">編號</th>
+				<th class="col col1 ">類別</th>
+				<th class="col col3 ">公司</th>
 				<th class="col col5 ">上架狀態</th>
 				<th class="col col5 ">商品名稱</th>
 				<th class="col col6 ">商品概述</th>
 				<th class="col col7">價格</th>
 				<th class="col col6 ">庫存</th>
-				<th class="col col7">銷售總量</th>
 				<th class="col col8">新增日期</th>
 
 
@@ -33,12 +32,16 @@
 				<tr>
 					<td class='align-middle'><input
 						class="upInput readonly text-middle upInputSm" type="text"
-						value="" readonly id="productId"></td>
+						value="" readonly id="productId" style="width:50px"></td>
+						
+					<td class='align-middle'><input class="upInput" type="text"
+						value="" readonly id="productCat" style="width:50px"></td>
 
 					<td class='align-middle'><input class="upInput" type="text"
-						value="" readonly id="productCompany"></td>
+						value="" id="productCompany" style="width:80px"></td>
 						
-					<td class="align-middle"><select id="productStatus"
+					<td class="align-middle">
+					<select id="productStatus"
 						class="form-select upInput text-middle upInputMd">
 							<option value="" id="productStatus" selected></option>
 							<option value="1">上架</option>
@@ -46,22 +49,20 @@
 
 					</select></td>
 					<td class='align-middle'><input class="upInput" type="text"
-						value="" id="productName"></td>
+						value="" id="productName" style="width:80px"></td>
 						
 					<td class='align-middle'><input class="upInput" type="text"
-						value="" id="productContent"></td>
+						value="" id="productContent" style="width:140px"></td>
 						
 					<td class='align-middle'><input class="upInput" type="text"
-						value="" id="productPrice"></td>
+						value="" id="productPrice" style="width:50px"></td>
 						
 					<td class='align-middle'><input class="upInput" type="text"
-						value="" id="productStock"></td>
+						value="" id="productStock" style="width:50px"></td>
 						
 					<td class='align-middle'><input class="upInput" type="text"
 						value="" id="productDate"></td>
 						
-					<td class='align-middle'><input class="upInput" type="text"
-						value="" id="productSalesFigures"></td>
 				
 					<td class="align-middle"><input id="updateBtn"
 						class="btn btn-outline-primary" type="button" value="更新">
@@ -140,7 +141,7 @@
 		let product = JSON.parse(productString);
 		//填入資料
 		$("#productId").val(product.productId);
-		$("#productCat").val(product.productCategories);
+		$("#productCat").val(product.productCategories_name);
 		$("#productStatus").text(product.productStatus);
 		$("#productStatus").val(product.productStatus);
 		$("#productName").val(product.productName);
@@ -247,7 +248,7 @@
 
 			$("#comProducts").html(txt);
 			let total = '<h1>共' + endItem + '個商品</h1>';
-			$("#total").html(total);
+			
 
 		}
 	</script>

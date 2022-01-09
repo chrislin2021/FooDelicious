@@ -15,9 +15,11 @@ import foodelicious.product.model.Product;
 @Repository
 public interface CBKProductRepository extends JpaRepository<Product, Long>{
 
-	List<Product> findAllByProductCompanyId(Long id);
+	List<Product> findAllByProductCompanyId(Long companyId);
 	
-	Product findByProductId(Long id);
+	Product findByProductId(Integer productId);
+	
+
 	
 
 

@@ -40,17 +40,14 @@
 	</span>
 	
 		
-	
-<%-- 	<c:set var="userID" value="${userID}"/> --%>
-<%-- 	${userID} --%>
+
 
 
 <script>
     //=============刪除商品確認=============
 
     $("#comProducts").on("click","#delBtnCom",function() {
-        let deleteProductId = $(this).attr("data-id")
-        alert(deleteProductId);
+        let deleteProductId = $(this).attr("data-id");
 
         if (confirm("確定要刪除嗎")) {
             $.ajax({
@@ -70,24 +67,33 @@
 
 <script>
     //=============更新商品資料=============
-
-    //更新前先查詢出資料
-    $("#comProducts").on("click","#updateBtn",function(){
-        let data = $(this).attr("data-id")
-        $.ajax({
-            url:"http://localhost:8080/companyProducts/update/"+data,
-            type: "GET",
-            success:function(product){
-                //將json字串化
-                let productString = JSON.stringify(product);
+    	
+    	$("#comProducts").on("click","#updateBtnCom",function(){
+    		let productId = $(this).data("id");
+    		alert(productId);
+    		
+    		$.ajax({
+    			
+            	url:"http://localhost:8080/companyProducts/update/"+productId,
+            	type: "GET",
+            	success:function(product){
+            		
+               	 	//將json字串化
+                	let productString = JSON.stringify(product);
                 //將資料存到localStorage，給另一個頁面使用
-                localStorage.setItem("productData",memberString);
+               		localStorage.setItem("productData",productString);
                 //跳轉頁面
-                window.location.href="http://localhost:8080/companyProduct2/update";
-            }
+                	window.location.href="http://localhost:8080/companyProduct2/update";
+            	},
+            	error:function(){
+            		alert("fail");
+            	}
+    			
         })
 
-    });
+    })
+
+    
 </script>
 	
 	
@@ -161,8 +167,8 @@
               
                 txt += '<td class="align-middle">'+
                     '<form method="" >'+
-                    '<input type="hidden" type="text" name="memupd" value=?>'+
-                    '<input id="updateBtnCom" class="btn btn-secondary btn-sm" type="button" value="更新" data-id='+productData[i].productId+'>'+
+                    '<input type="hidden" type="text" name="prodUpdateCom" value=?>'+
+                    '<input id="updateBtnCom" class="btn btn-success btn-sm" type="button" value="更新" data-id='+productData[i].productId+'>'+
                     '</form>'+
                     '</td>'
                 txt += '<td class="mdata">'+
@@ -182,45 +188,6 @@
    
         }
 
-// function showData(startItem,endItem,dataSource){
-//         let txt = "<tr>";
-//         for (let i = startItem; i < endItem; i++) {
-//             txt += "<td class='align-middle'>"+dataSource[i].productId+"</td>"
-//             let cate = dataSource[i].categories;
-//             let type = ""
-//             if( cate == 0){type = "廚具";
-//             }else{ type = "食材";}
-//             txt += "<td class='align-middle'>"+type+"</td>"
-//             txt += "<td class='align-middle'>"+dataSource[i].productCompany+"</td>"
-//             let st = dataSource[i].product_status;
-//             let status = ""
-//             if( st == 1){
-//                 status = "上架中";
-//             }else{
-//                 status = "下架中";
-//             }
-//             txt += "<td class='align-middle'>"+status+"</td>"
-//             txt += "<td class='align-middle'>"+dataSource[i].productName+"</td>"
-//             txt += "<td class='align-middle'>"+dataSource[i].productContent+"</td>"
-//             txt += "<td class='align-middle'>"+dataSource[i].productPrice+"</td>"
-//             txt += "<td class='align-middle'>"+dataSource[i].productStock+"</td>"
-//             let newDate = new Date(dataSource[i].productInsertDate);
-//             let register = newDate.toLocaleString();
-//             txt += "<td class='align-middle'>"+register+"</td>"
-//             txt += '<td class="align-middle">'+
-//                 '<form method="" >'+
-//                 '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].memberId+'>'+
-//                 '</form>'+
-//                 '</td>'
-//             txt += '<td class="mdata">'+
-//                 '<form method="" action="">'+
-//                 '<input type="hidden" type="text" name="empdel" value=?>'+
-//                 '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].memberId+'>'+
-//                 '</form>'+
-//                 '</td></tr>'
-//         }
-//         $("#comProducts").html(txt);
-//     }
 
     
     </script>

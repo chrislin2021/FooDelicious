@@ -38,31 +38,48 @@ public class CBKProductDao implements CBKProductDaoInterface {
 
 	}
 	
+	
 	@Override
-	public Product findByProductId(Long productId) {
-		
-		return null;
+	public Product findByProductId(Integer productId) {
+		Product product = em.find(Product.class, productId);
+		return product;
 	}
 
 
-	public String updateProduct(Long productId, Product product) {
-		Product newProduct = cbkProdRepository.findById(productId).orElse(null);
-		if (newProduct != null) {
+	public String updateProduct(Integer productId, Product product) {
+		Product newProduct = cbkProdRepository.findByProductId(productId);
+		if(newProduct != null) {
+			newProduct.setProductCompany(product.getProductCompany());
 			newProduct.setProductName(product.getProductName());
-			newProduct.setProductContent(product.getProductContent());
+			newProduct.setProductCategories_name(product.getProductCategories_name());
 			newProduct.setProductPrice(product.getProductPrice());
-			newProduct.setProductStatus(product.getProductStatus());
+			newProduct.setProductContent(product.getProductContent());
 			newProduct.setProductStock(product.getProductStock());
-			
-			
+			newProduct.setProductStock(product.getProductStock());
+			newProduct.setProductKeywords(product.getProductKeywords());
 			cbkProdRepository.save(newProduct);
-			return "商品更新成功!!";
-		} else {
-			return "資料更新失敗，查無此筆資料";
+			return "Product update successful!";
+		}else {
+			
+			return "Product update unsuccessful!";
 		}
+		
+		
+		
 	}
 
 
+
+	
+	@Override
+	public String deleteProduct(Integer id) {
+		Product product = em.find(Product.class, id);
+		em.remove(product);
+		return "刪除成功吧";
+	}
+	
+	
+	
 	// 刪除商品 (好像跟某個table有衝突 無法刪除)
 //	@Override
 //	public String deleteProduct(Long productId) {
@@ -72,13 +89,6 @@ public class CBKProductDao implements CBKProductDaoInterface {
 //		namedParameterJdbcTemplate.update(sql, map);
 //		return "刪除資料成功";
 //	}
-	
-	@Override
-	public String deleteProduct(Integer id) {
-		Product product = em.find(Product.class, id);
-		em.remove(product);
-		return "刪除成功吧";
-	}
 	
 
 	
