@@ -9,7 +9,7 @@
 	function delfun(memberId, memberName) {
 		if (confirm("確定刪除此筆紀錄(會員姓名: " + memberName + ") ?")) {
 			var form = document.forms[0];
-			form.action = "<c:url value='/members/' />" + pk;
+			form.action = "<c:url value='/members/' />" + memberId;
 			form.submit();
 		}
 
@@ -61,7 +61,7 @@
 	            <td>${member.memberCoin} </td>
 	            <td>${member.member_status} </td>
 	            <td>${member.register_date} </td>
-	            <td><button id="delbtn" onclick="delfun('${member.memberId}, '${member.memberName}')">刪除</button></td>
+	            <td><button id="delbtn" onclick="delfun('${member.memberId}', '${member.memberName}')">刪除</button></td>
 	        </tr>
 	        <c:if test="${statusX.last}" >
 	             <c:out value="</table>" escapeXml="false" />

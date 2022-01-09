@@ -56,7 +56,8 @@ public class Member implements Serializable {
 	private String pwd;
 
 	@Column(name = "member_name")
-	@Pattern(regexp = NAME_REG, message = "請輸入2個字以上繁體中文")
+//	@NotBlank(message = "姓名欄不可為空白")
+//	@Pattern(regexp = NAME_REG, message = "請輸入2個字以上繁體中文")
 	private String memberName;
 
 	@Column(name = "member_gender")
@@ -74,7 +75,7 @@ public class Member implements Serializable {
 	private String memberPhone;
 
 	@Column(name = "member_address")
-	@NotBlank(message = "地址不得空白")
+//	@NotBlank(message = "地址不得空白")
 	private String memberAddress;
 
 	@Column(name = "member_discount_id")

@@ -2,9 +2,9 @@ package foodelicious.member.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.validation.Valid;
+import java.util.Map;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -12,13 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,7 +39,16 @@ public class MemberUpdateController {
 		this.memberService = memberService;
 		this.memberValidator = memberValidator;
 	}
-
+	
+	
+	//刪除會員
+		@DeleteMapping("/members/{memberId}")
+		public String deleteById(@PathVariable(value="memberId", required = false ) Long memberId) {
+			memberService.deleteByMemberId(memberId);
+			return "redirect:/members";
+		}
+		
+		
 	@GetMapping("/updatePage") // 和網址相同
 	public String sendMemberDataToModified(Model model,
 			@RequestParam(value = ("MemberId"), required = true) Long memberId) {// spring會讀三種： 請求參數、路徑變數、表單綁定
@@ -48,30 +58,38 @@ public class MemberUpdateController {
 
 		return "app.updatePage";
 	}
-
+    
+	//更新會員
 	@PutMapping("/members/{memberId}") // {}為路徑變數
-	public String updateMemberData(@Valid @ModelAttribute Member member, BindingResult result, Model model,
-			RedirectAttributes ra, @PathVariable Long memberId) {// spring會讀三種： 請求參數、路徑變數、表單綁定
+	public String updateMemberData(
+			@ModelAttribute Member member, 
+			BindingResult result, 
+			@PathVariable Long memberId,
+			Model model,
+			RedirectAttributes ra) {
 		System.out.println("pmember=" + member);
 
 		List<ObjectError> errors = result.getAllErrors();
 		for (ObjectError oe : errors) {
 			System.out.println(oe.getCode() + "," + oe.getDefaultMessage() + "," + oe.getObjectName());
-			System.out.println("oe=>" + oe);
 		}
 
 		System.out.println("==============================");
 
 		memberValidator.validate(member, result);// bindingResult的父介面就是Errors
+		errors = result.getAllErrors();
+		for(ObjectError oe: errors) {
+//			System.out.println(oe.getCode()+ "," + oe.getDefaultMessage()+ ","+ oe.getObjectName());
+			System.out.println("oe=>" + oe);
+		}
 		if (result.hasErrors()) {
+			System.out.println("XXXXXXXXXXXXXXx");
 			return "app.updatePage";
 		}
-		if (!result.hasErrors()) {
 			memberService.update(member);
+			System.out.println("OOOOOOOOOOOOOOOOOOO");
 			ra.addFlashAttribute("insertSuccess", "更新成功");
 			return "redirect:/members";
-		}
-		return "app.updatePage";
 	}
 
 	@InitBinder

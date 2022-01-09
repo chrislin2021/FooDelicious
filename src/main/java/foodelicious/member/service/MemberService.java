@@ -27,6 +27,10 @@ public interface MemberService {
 
 	void update(Member member);
 
+	void deleteByMemberId(Long memberId);
+
+
+
 	
 	
 	

@@ -69,5 +69,12 @@ public class MemberServiceImpl implements MemberService {
 		memberRepository.update(member);
 	}
 
+	@Override
+	public void deleteByMemberId(Long memberId) {
+		memberRepository.deleteByMemberId(memberId);
+	}
+
+
+
 
 }

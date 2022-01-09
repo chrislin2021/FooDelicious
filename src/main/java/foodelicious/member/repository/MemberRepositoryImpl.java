@@ -48,5 +48,11 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public void update(Member member) {
 		em.merge(member);
 	}
+	
+	@Override
+	public void deleteByMemberId(Long memberId) {
+		Member member = em.find(Member.class, memberId);
+		em.remove(member);
+	}
 
 }

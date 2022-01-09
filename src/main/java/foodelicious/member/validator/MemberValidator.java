@@ -25,7 +25,7 @@ public class MemberValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberMail", "member.memberMail.empty", "帳號欄不能為空白");
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pwd", "member.pwd.empty", "密碼欄不能為空白");
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberBirth", "member.memberBirth.empty", "生日欄不能為空白");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberAddress", "member.memberAddress.empty", "地址欄不能為空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberAddress", "member.memberAddress.empty", "地址欄不能為空白");
 		
 		if (!errors.hasFieldErrors("memberMail")) {
 			if (member.getMemberMail() != null && member.getMemberMail().length() <= 3) {
@@ -33,9 +33,9 @@ public class MemberValidator implements Validator {
 			}
 		}
 		if (!errors.hasFieldErrors("memberName")) {
-//			if (member.getMemberName() != null && member.getMemberName().length() < 2) {
-//				errors.rejectValue("memberName", "member.memberName.length", "姓名欄長度必須大於等於二");
-//			}
+			if (member.getMemberName() != null && member.getMemberName().length() < 2) {
+				errors.rejectValue("memberName", "member.memberName.length", "姓名欄長度必須大於等於二");
+			}
 		}
 	}
 //還要考慮到跨欄位檢查，如：輸入密碼、再次確認密碼
