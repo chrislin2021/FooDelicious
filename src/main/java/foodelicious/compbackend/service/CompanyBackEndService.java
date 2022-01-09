@@ -29,6 +29,18 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 		return products;
 	}
 
+	@Override
+	public Product findByProductId(Long productId) {
+		Product product = cbkProductDaoInterface.findByProductId(productId);
+		return product;
+	}
+
+	@Override
+	public String updateProduct(Long productId, Product product) {
+		
+		return null;
+	}
+
 	
 	
 

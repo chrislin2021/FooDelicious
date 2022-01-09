@@ -31,11 +31,11 @@
 	<div class="sidebar close">
 		<div class="logo-details"></div>
 		<ul class="nav-links">
-			<li><a href="#"> <i class='bx bx-user-circle'></i> <span
+			<li><a href="/companyMain2"> <i class='bx bx-user-circle'></i> <span
 					class="link_name">管理員</span>
 			</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="#">管理員</a></li>
+					<li><a class="link_name" href="/companyMain2">管理員</a></li>
 				</ul></li>
 			<li>
 				<div class="iocn-link">
@@ -45,7 +45,7 @@
 				</div>
 				<ul class="sub-menu">
 					<li><a class="link_name" href="#">商品管理</a></li>
-					<li><a href="#">所有商品</a></li>
+					<li><a href="/companyProduct2">所有商品</a></li>
 					<li><a href="#">新增商品</a></li>
 
 				</ul>

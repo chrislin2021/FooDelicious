@@ -10,6 +10,10 @@ public interface CBKProductDaoInterface {
 	
 
 	List<Product> getAllProducts(HttpSession session);
+
+	String deleteProduct(Long productId);
+
+	Product findByProductId(Long productId);
 	
 	
 

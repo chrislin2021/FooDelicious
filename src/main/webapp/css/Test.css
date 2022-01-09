@@ -208,8 +208,8 @@
 
 /* 主要內容 */
 .main-section{
-  padding-left:12px;
-  padding-right:12px;
+  padding-left:25px;
+  padding-right:25px;
   position: relative;
   background: white;
   height: fit-content;
@@ -230,6 +230,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+  background-color:none;
 }
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
