@@ -23,17 +23,17 @@ public class DiscountBean implements Serializable {
 	@Column(name = "member_id")
 	private Long memberId;
 
-	@Column(name = "discount_serial_number")
-	private String discountSerialNumber;
+	@Column(name = "discount_name")
+	private String discountName;
 
 	@Column(name = "discount_content")
 	private Integer discountContent;
 
-	public DiscountBean(Long discountId, Long memberId, String discountSerialNumber, Integer discountContent) {
+	public DiscountBean(Long discountId, Long memberId, String discountName, Integer discountContent) {
 		super();
 		this.discountId = discountId;
 		this.memberId = memberId;
-		this.discountSerialNumber = discountSerialNumber;
+		this.discountName = discountName;
 		this.discountContent = discountContent;
 	}
 
@@ -53,12 +53,12 @@ public class DiscountBean implements Serializable {
 		this.memberId = memberId;
 	}
 
-	public String getDiscountSerialNumber() {
-		return discountSerialNumber;
+	public String getDiscountName() {
+		return discountName;
 	}
 
-	public void setDiscountSerialNumber(String discountSerialNumber) {
-		this.discountSerialNumber = discountSerialNumber;
+	public void setDiscountName(String discountName) {
+		this.discountName = discountName;
 	}
 
 	public Integer getDiscountContent() {

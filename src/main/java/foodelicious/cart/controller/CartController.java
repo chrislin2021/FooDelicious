@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
+import foodelicious.discount.model.DiscountBean;
+import foodelicious.discount.service.DiscountService;
 import foodelicious.product.model.Product;
 
 @Controller
@@ -25,10 +27,13 @@ public class CartController {
 
 	private CartService cartService;
 
-	public CartController(HttpSession session, CartService cartService) {
+	private DiscountService discountService;
+
+	public CartController(HttpSession session, CartService cartService, DiscountService discountService) {
 		super();
 		this.session = session;
 		this.cartService = cartService;
+		this.discountService = discountService;
 	}
 
 	@GetMapping("/shoppingCart")
@@ -123,27 +128,29 @@ public class CartController {
 			}
 		}
 
-//		Integer priceTotal = priceTotal();
-
-		return null;
+		return priceTotal();
 	}
 
 	@ResponseBody
 	@GetMapping("/shoppingCart/show")
 	public List<CartBean> selectItem() {
+
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
 		return carts;
 	}
 
-	@ResponseBody
-	@GetMapping("/shoppingCart/priceTotal/{discount}/{coin}")
-	public Integer priceTotal(String discount, String coin) {
+	public Integer priceTotal() {
+
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
 		Integer priceTotal = 0;
+
 		for (CartBean cart : carts) {
 			Product product = cart.getProduct();
 			priceTotal += product.getProductPrice() * cart.getQuantity();
 		}
+
 		return priceTotal;
 	}
 

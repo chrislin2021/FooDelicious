@@ -82,3 +82,13 @@ div.path {
 	border: none;
 	background-color: transparent;
 }
+
+#empty {
+	display: flex;
+	justify-content: center;
+}
+
+#gogoPower {
+	display: flex;
+	justify-content: center;
+}
