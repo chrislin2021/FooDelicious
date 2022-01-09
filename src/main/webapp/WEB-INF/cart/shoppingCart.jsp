@@ -144,7 +144,7 @@
 				<tr>
 					<th scope="col">
 						<div class="input-group mb-3">
-							<button class="btn btn-outline-secondary" type="button" id="button-addon1">使用</button>
+							<button class="btn btn-outline-secondary" type="submit" id="button-addon1">使用</button>
 							<input type="text" class="form-control" placeholder="請輸入折價券" aria-label="Example text with button addon" aria-describedby="button-addon1">
 						</div>
 					</th>
@@ -152,8 +152,8 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row">滿$1000，宅配到府，免運費！！<a href="#" class="tip">了解更多<span
-							class="popbox"><table class="table" id="p">
+					<th scope="row">滿$1000，宅配到府，免運費！！<a href="#" class="tip">了解更多<span class="popbox">
+								<table class="table" id="p">
 									<thead>
 										<tr>
 											<th scope="col">低消</th>
@@ -187,8 +187,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td colspan="2">折扣金幣：<input type="number" value=0 min=0 max=10>個
+				<tr>					
+					<td colspan="2">折扣金幣：<input type="number" value=0 min=0 max="10">個
 					</td>
 				</tr>
 				<tr>
@@ -196,9 +196,7 @@
 					<c:if test="${priceTotal >= 1000}"><del style="color: red;">運費: 100 元</del>&nbsp;&nbsp;<span>運費:0 元</span></c:if></td>
 				</tr>
 				<tr>
-					<td colspan="2">總金額：<c:if test="${priceTotal < 1000}"><span>${priceTotal+100}&nbsp;</span></c:if>
-					<c:if test="${priceTotal >= 1000}"><span>${priceTotal}&nbsp;</span></c:if>
-						<button type="button" class="btn btn-warning">去買單</button></td>
+					<td colspan="2"><input class="fw-bold totalPriceArea" id="pay" type="text" readonly="readonly" 	value="NT$: ${totalPrice} 元" />&nbsp;<button type="button" class="btn btn-warning">去買單</button></td>
 				</tr>
 			</tbody>
 		</table>

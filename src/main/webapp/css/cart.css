@@ -92,3 +92,10 @@ div.path {
 	display: flex;
 	justify-content: center;
 }
+
+#pay {
+	width:50%;
+	border: none;
+	text-align: left;
+	background-color: transparent;
+}

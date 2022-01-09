@@ -39,9 +39,6 @@ function changeNum(productId, quantity) {
 		success: function(result) {
 			if (result) {
 				showItem();
-				//				var productPrice = parseInt($(add).parent().prev().html());
-				//				$(add).parent().next().html(productPrice * quantity);
-				//								$("#total").html(parseInt($("#total").html()) + productPrice);
 			}
 		}
 	});

@@ -41,7 +41,7 @@ public class CartController {
 		if (session.getAttribute("userID") != null) {
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 			m.addAttribute("carts", carts);
-//			m.addAttribute("priceTotal", priceTotal());
+			m.addAttribute("priceTotal", priceTotal());
 			return "app.ShoppingCart";
 		} else {
 			return "app.LoginSystem";
@@ -52,6 +52,10 @@ public class CartController {
 	@PostMapping("/shoppingCart/insert")
 	public String insertItem(@RequestBody Long productId, @RequestBody Integer quantity) {
 
+		if (session.getAttribute("userID") == null) {
+			return "{\"ans\":\"請先登入會員!!\"}";
+		}
+
 //		判斷購物車是否有重複商品
 		Boolean same = false;
 
@@ -59,14 +63,12 @@ public class CartController {
 
 		for (CartBean cart : carts) {
 			if (cart.getProductId() == productId) {
-//				暫時增加一個商品，因為商品還沒做到這
 				Integer sum = cart.getQuantity() + quantity;
 				Product product = cart.getProduct();
 				if (sum > product.getProductStock()) {
 					return "{\"ans\":\"已經到達庫存最大數量了\\n (目前庫存共有 " + product.getProductStock() + " 件)" + "\"}";
 				}
 
-//				垃圾JPA更新如果不給他全部值，更新外的會變NULL
 				cart.setCartId(cart.getCartId());
 				cart.setMemberId(cart.getMemberId());
 				cart.setProductId(cart.getProductId());
@@ -79,7 +81,6 @@ public class CartController {
 			}
 		}
 
-//		暫時先做到這商品還沒新增
 		if (same != true) {
 			CartBean cartBean = new CartBean();
 			cartBean.setMemberId((Long) session.getAttribute("userID"));
@@ -127,7 +128,6 @@ public class CartController {
 				break;
 			}
 		}
-
 		return priceTotal();
 	}
 
@@ -137,8 +137,37 @@ public class CartController {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
+		session.setAttribute("totalPrice", priceTotal());
+
 		return carts;
 	}
+
+//	@ResponseBody
+//	@GetMapping("/shoppingCart/priceTotal/{discountName}")
+//	public Integer priceTotal(@PathVariable String discountName) {
+//
+//		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+//
+//		List<DiscountBean> discounts = discountService.selectItem((Long) session.getAttribute("userID"));
+//
+//		Integer priceTotal = priceTotal();
+//
+//		for (CartBean cart : carts) {
+//			Product product = cart.getProduct();
+//			priceTotal += product.getProductPrice() * cart.getQuantity();
+//		}
+//
+//		if (discountName != null) {
+//			for (DiscountBean discount : discounts) {
+//				if (discount.getDiscountName() == discountName) {
+//					priceTotal -= discount.getDiscountContent();
+//					break;
+//				}
+//			}
+//		}
+//
+//		return priceTotal;
+//	}
 
 	public Integer priceTotal() {
 

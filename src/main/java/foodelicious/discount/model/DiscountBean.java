@@ -29,6 +29,10 @@ public class DiscountBean implements Serializable {
 	@Column(name = "discount_content")
 	private Integer discountContent;
 
+	public DiscountBean() {
+		super();
+	}
+
 	public DiscountBean(Long discountId, Long memberId, String discountName, Integer discountContent) {
 		super();
 		this.discountId = discountId;
