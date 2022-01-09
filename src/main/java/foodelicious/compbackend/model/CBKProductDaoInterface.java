@@ -11,9 +11,11 @@ public interface CBKProductDaoInterface {
 
 	List<Product> getAllProducts(HttpSession session);
 
-	String deleteProduct(Long productId);
+//	String deleteProduct(Long productId);
 
 	Product findByProductId(Long productId);
+
+	String deleteProduct(Integer id);
 	
 	
 

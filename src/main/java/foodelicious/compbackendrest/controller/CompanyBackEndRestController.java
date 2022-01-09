@@ -67,7 +67,7 @@ public class CompanyBackEndRestController {
 	}
 
 	@DeleteMapping("/companyProducts/delete/{productId}")
-	public String deleteProduct(@PathVariable Long productId) {
+	public String deleteProduct(@PathVariable Integer productId) {
 
 		return cbkProductDao.deleteProduct(productId);
 	}

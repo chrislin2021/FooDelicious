@@ -64,14 +64,22 @@ public class CBKProductDao implements CBKProductDaoInterface {
 
 
 	// 刪除商品 (好像跟某個table有衝突 無法刪除)
+//	@Override
+//	public String deleteProduct(Long productId) {
+//		String sql = "DELETE FROM productNum WHERE product_id = :productId";
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("productId", productId);
+//		namedParameterJdbcTemplate.update(sql, map);
+//		return "刪除資料成功";
+//	}
+	
 	@Override
-	public String deleteProduct(Long productId) {
-		String sql = "DELETE FROM productNum WHERE product_id = :productId";
-		Map<String, Object> map = new HashMap<>();
-		map.put("productId", productId);
-		namedParameterJdbcTemplate.update(sql, map);
-		return "刪除資料成功";
+	public String deleteProduct(Integer id) {
+		Product product = em.find(Product.class, id);
+		em.remove(product);
+		return "刪除成功吧";
 	}
+	
 
 	
 	
