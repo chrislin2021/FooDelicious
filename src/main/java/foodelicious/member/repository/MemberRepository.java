@@ -16,4 +16,6 @@ public interface MemberRepository {
 
 	void update(Member member);
 
+	void deleteByMemberId(Long memberId);
+
 }
