@@ -96,9 +96,8 @@
 					<th scope="row"><input type="checkbox" name="c"></th>
 					<td>${carts.product.productName}</td>
 					<td>${carts.product.productPrice}</td>
-					<td><input type="hidden" value="${carts.quantity}">
-							<button type="button" class="btn btn-secondary btn-sm" onclick="changeNum(${carts.productId},${-1})" id="minus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button> 
-							<input class="" [type="number1"]  style="width: 2.5rem;text-align: center;border: none;background-color: transparent;" readonly="readonly" value="${carts.quantity}" />
+					<td><button type="button" class="btn btn-secondary btn-sm" onclick="changeNum(${carts.productId},${-1})" id="minus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button> 
+							<input class="num" [type="number"]  readonly="readonly" value="${carts.quantity}" />
 							<button type="button" class="btn btn-primary btn-sm" onclick="changeNum(${carts.productId},${1})"  id="add" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button></td>
 					<td>${carts.product.productPrice*carts.quantity}</td>
 					<td><button onclick="deleteItem(${carts.product.productId})" class="link-dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></td>

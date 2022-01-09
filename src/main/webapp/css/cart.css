@@ -76,12 +76,9 @@ div.path {
 	text-align: left;
 }
 
-/* #reduce { */
-/* 	width:30px; */
-/* 	height:30px;	 */
-/* } */
-
-/* #plus{ */
-/* 	width:30px; */
-/* 	height:30px; */
-/* } */
+.num {
+	width: 2.5rem;
+	text-align: center;
+	border: none;
+	background-color: transparent;
+}

@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
 import foodelicious.product.model.Product;
@@ -36,22 +33,14 @@ public class CartController {
 
 	@GetMapping("/shoppingCart")
 	public String shoppingCart(Model m) {
-
 		if (session.getAttribute("userID") != null) {
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 			m.addAttribute("carts", carts);
-			m.addAttribute("priceTotal", priceTotal());
+//			m.addAttribute("priceTotal", priceTotal());
 			return "app.ShoppingCart";
 		} else {
 			return "app.LoginSystem";
 		}
-	}
-
-	@ResponseBody
-	@GetMapping("/showCart")
-	public List<CartBean> showCart() {
-		List<CartBean> origin = cartService.selectItem((Long) session.getAttribute("userID"));
-		return origin;
 	}
 
 	@ResponseBody
@@ -123,7 +112,9 @@ public class CartController {
 		for (CartBean cart : carts) {
 			if (cart.getProductId() == id) {
 				cart.setQuantity(cart.getQuantity() + qty);
-				if (cart.getQuantity() > 0) {
+				if (cart.getQuantity() > cart.getProduct().getProductStock()) {
+					cart.setQuantity(cart.getProduct().getProductStock());
+				} else if (cart.getQuantity() > 0) {
 					cartService.insertAndUpdateItem(cart);
 				} else {
 					cart.setQuantity(1);
@@ -132,12 +123,21 @@ public class CartController {
 			}
 		}
 
-		Integer priceTotal = priceTotal();
+//		Integer priceTotal = priceTotal();
 
-		return priceTotal();
+		return null;
 	}
 
-	public Integer priceTotal() {
+	@ResponseBody
+	@GetMapping("/shoppingCart/show")
+	public List<CartBean> selectItem() {
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+		return carts;
+	}
+
+	@ResponseBody
+	@GetMapping("/shoppingCart/priceTotal/{discount}/{coin}")
+	public Integer priceTotal(String discount, String coin) {
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 		Integer priceTotal = 0;
 		for (CartBean cart : carts) {
