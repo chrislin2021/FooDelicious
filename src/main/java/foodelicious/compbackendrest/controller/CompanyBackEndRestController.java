@@ -53,7 +53,7 @@ public class CompanyBackEndRestController {
 
 	@PutMapping("/companyProducts/update/{productId}")
 	public String updateProduct(@PathVariable Integer productId, @RequestBody Product product) {
-		return cbkProductDao.updateProduct(productId,product);
+		return cbkServiceInterface.updateProduct(productId,product);
 	}
 
 	@DeleteMapping("/companyProducts/delete/{productId}")

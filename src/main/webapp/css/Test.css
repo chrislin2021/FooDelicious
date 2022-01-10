@@ -322,6 +322,15 @@ table{
 
 .smallFont{
     color: #D3B884;
+    font-size:25px;
+    margin:9px;
+    font-weight:light;
+}
+
+h1.tableName{
+	font-size:30px;
+	margin: 8px;
+	font-weight:bold;
 }
 
 .keyWord{

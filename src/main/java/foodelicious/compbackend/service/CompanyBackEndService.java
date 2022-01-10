@@ -38,7 +38,7 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 	@Override
 	public String updateProduct(Integer productId, Product product) {
 		
-		return null;
+		return cbkProductDaoInterface.updateProduct(productId, product);
 	}
 
 	

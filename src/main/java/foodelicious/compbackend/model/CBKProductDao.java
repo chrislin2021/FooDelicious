@@ -62,7 +62,7 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			return "Product update successful!";
 		}else {
 			
-			return "Product update unsuccessful!";
+			return "Product update unsuccessful! Please try again.";
 		}
 	
 	}
@@ -70,8 +70,14 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	@Override
 	public String deleteProduct(Integer id) {
 		Product product = em.find(Product.class, id);
-		em.remove(product);
-		return "刪除成功吧";
+		if (product != null) {
+			em.remove(product);
+			return "Product deletion successful!";
+		}
+		else {
+			return "Product not found. Please try again.";
+		}
+		
 	}
 	
 	

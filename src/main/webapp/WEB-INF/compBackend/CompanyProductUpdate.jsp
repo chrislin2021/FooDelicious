@@ -148,7 +148,6 @@
         let updatedProduct = {
             "categories": $("#comProdCategories").val(),
             "productCompany": $("#comProductCompany").val(),
-            "productStatus": $("#comProductStatus").text(),
             "productName": $("#comProductName").val(),
             "productContent": $("#comProductContent").val(),
             "productPrice": $("#comProductPrice").val(),
@@ -156,6 +155,8 @@
             "productSalesFigures": $("#comProductSalesFigures").val(),
             "productKeywords": $("#comProductKeywords").val()
         };
+        
+        //When sending data to a web server, the data has to be a string.
         let newProductString = JSON.stringify(updatedProduct);
 
         $.ajax({
