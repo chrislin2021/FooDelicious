@@ -12,16 +12,16 @@
 	<table class="table table-hover" style='text-align:center'>
 		<thead class="table table-dark table-striped">
 			<tr>
-				<th class="col col2 ">商品編號</th>
-				<th class="col col1 ">商品類別</th>
-				<th class="col col3 ">商品公司</th>
-				<th class="col col5 ">上架狀態</th>
-				<th class="col col5 ">商品名稱</th>
-				<th class="col col6 ">商品概述</th>
-				<th class="col col7">價格</th>
-				<th class="col col6 ">庫存</th>
-				<th class="col col7">銷售總量</th>
-				<th class="col col8">新增日期</th>
+				<th class="col col2 sm">編號</th>
+				<th class="col col1 sm">類別</th>
+				<th class="col col3 md">商品公司</th>
+				<th class="col col5 md">上架狀態</th>
+				<th class="col col5 lg">商品名稱</th>
+				<th class="col col6 lg">商品概述</th>
+				<th class="col col7 sm">價格</th>
+				<th class="col col6 sm">庫存</th>
+				<th class="col col7 sm">銷售總量</th>
+				<th class="col col8 lg">新增日期</th>
 
 
 				<th class="col col8">更新</th>
@@ -81,7 +81,7 @@
                	 	//將json字串化
                 	let productString = JSON.stringify(product);
                 //將資料存到localStorage，給另一個頁面使用
-               		localStorage.setItem("productData",productString);
+               		localStorage.setItem("comProductData",productString);
                 //跳轉頁面
                 	window.location.href="http://localhost:8080/companyProduct2/update";
             	},
@@ -171,7 +171,7 @@
                     '<input id="updateBtnCom" class="btn btn-success btn-sm" type="button" value="更新" data-id='+productData[i].productId+'>'+
                     '</form>'+
                     '</td>'
-                txt += '<td class="mdata">'+
+                txt += '<td class="align-middle">'+
                     '<form method="" action="">'+
                     '<input type="hidden" type="text" name="empdel" value=?>'+
                     '<input id="delBtnCom" class="btn btn-danger btn-sm" type="button" value="刪除" data-id='+productData[i].productId+'>'+

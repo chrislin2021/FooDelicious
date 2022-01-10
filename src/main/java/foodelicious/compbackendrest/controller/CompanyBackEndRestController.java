@@ -37,17 +37,6 @@ public class CompanyBackEndRestController {
 		this.cbkProductDao = cbkProductDao;
 	}
 
-	// 測試用可不可以抓到值得寫法
-
-//	@GetMapping("/companyProducts") // Important! /companyProduct is controller, /companyProducts is RESTController
-//	public List<Product> findAllProducts(HttpSession session) { 
-//		Long id =(Long) session.getAttribute("userID");
-//		//System.out.println(id);
-//		List<Product> products = cbk.findAllByProductCompanyId(id);
-//		return products;
-//		
-//	}
-
 	@GetMapping("/companyProducts") // Important! /companyProduct is controller, /companyProducts is RESTController
 	public List<Product> findAllProducts(HttpSession session) {
 

@@ -51,7 +51,8 @@ public class CBKProductDao implements CBKProductDaoInterface {
 		if(newProduct != null) {
 			newProduct.setProductCompany(product.getProductCompany());
 			newProduct.setProductName(product.getProductName());
-			newProduct.setProductCategories_name(product.getProductCategories_name());
+			newProduct.setProductCategories_name(newProduct.getProductCategories_name());
+			newProduct.setProductCategories(newProduct.getProductCategories());
 			newProduct.setProductPrice(product.getProductPrice());
 			newProduct.setProductContent(product.getProductContent());
 			newProduct.setProductStock(product.getProductStock());
@@ -63,13 +64,8 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			
 			return "Product update unsuccessful!";
 		}
-		
-		
-		
+	
 	}
-
-
-
 	
 	@Override
 	public String deleteProduct(Integer id) {
@@ -77,6 +73,11 @@ public class CBKProductDao implements CBKProductDaoInterface {
 		em.remove(product);
 		return "刪除成功吧";
 	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -91,8 +92,6 @@ public class CBKProductDao implements CBKProductDaoInterface {
 //	}
 	
 
-	
-	
 	
 //	public List<Product> getAllProducts(Long id,HttpSession session){
 //		Query query = null;
