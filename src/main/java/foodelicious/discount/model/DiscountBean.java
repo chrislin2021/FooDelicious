@@ -4,10 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import foodelicious.member.model.Member;
 
 @Entity
 @Table(name = "discount")
@@ -29,16 +34,21 @@ public class DiscountBean implements Serializable {
 	@Column(name = "discount_content")
 	private Integer discountContent;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "member_id", insertable = false, updatable = false)
+	private Member member;
+
 	public DiscountBean() {
 		super();
 	}
 
-	public DiscountBean(Long discountId, Long memberId, String discountName, Integer discountContent) {
+	public DiscountBean(Long discountId, Long memberId, String discountName, Integer discountContent, Member member) {
 		super();
 		this.discountId = discountId;
 		this.memberId = memberId;
 		this.discountName = discountName;
 		this.discountContent = discountContent;
+		this.member = member;
 	}
 
 	public Long getDiscountId() {
@@ -71,6 +81,14 @@ public class DiscountBean implements Serializable {
 
 	public void setDiscountContent(Integer discountContent) {
 		this.discountContent = discountContent;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 }

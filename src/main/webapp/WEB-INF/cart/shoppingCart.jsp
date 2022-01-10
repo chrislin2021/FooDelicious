@@ -128,12 +128,11 @@
 						<th scope="row"><input type="checkbox" name="c"></th>
 						<td>${carts.product.productName}</td>
 						<td>${carts.product.productPrice}</td>
-						<td><button type="button" class="btn btn-secondary btn-sm" onclick="changeNum(${carts.productId},${-1})" id="minus"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-							<input class="num" [type="number" ] readonly="readonly" value="${carts.quantity}" />
+						<td><button id="m" type="button" class="btn btn-secondary btn-sm" onclick="changeNum(${carts.productId},${-1})" id="minus"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+							<input class="num" [type="number"] readonly="readonly" value="${carts.quantity}" />
 							<button type="button" class="btn btn-primary btn-sm" onclick="changeNum(${carts.productId},${1})" id="add"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button></td>
 						<td>${carts.product.productPrice*carts.quantity}</td>
-						<td><button onclick="deleteItem(${carts.product.productId})" class="link-dark">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></td>
+						<td><button onclick="deleteItem(${carts.product.productId})" class="link-dark"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -145,7 +144,7 @@
 					<th scope="col">
 						<div class="input-group mb-3">
 							<button class="btn btn-outline-secondary" type="submit" id="button-addon1">使用</button>
-							<input type="text" class="form-control" placeholder="請輸入折價券" aria-label="Example text with button addon" aria-describedby="button-addon1">
+							<input type="text" id="ds" class="form-control" placeholder="請輸入折價券" aria-label="Example text with button addon" aria-describedby="button-addon1">
 						</div>
 					</th>
 				</tr>
@@ -185,18 +184,18 @@
 				<tr>
 					<th scope="col">結帳囉</th>
 				</tr>
-			</thead>
-			<tbody>
 				<tr>					
 					<td colspan="2">折扣金幣：<input type="number" value=0 min=0 max="10">個
 					</td>
-				</tr>
+					</tr>
+			</thead>
+			<tbody id="total">				
 				<tr>
 					<td colspan="2">運費：<c:if test="${priceTotal < 1000}"><span>運費: 100 元</span></c:if>
 					<c:if test="${priceTotal >= 1000}"><del style="color: red;">運費: 100 元</del>&nbsp;&nbsp;<span>運費:0 元</span></c:if></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input class="fw-bold totalPriceArea" id="pay" type="text" readonly="readonly" 	value="NT$: ${totalPrice} 元" />&nbsp;<button type="button" class="btn btn-warning">去買單</button></td>
+					<td colspan="2"><input class="fw-bold totalPriceArea" id="pay" type="text" readonly="readonly" 	value="NT$: ${priceTotal} 元" />&nbsp;<button type="button" class="btn btn-warning">去買單</button></td>
 				</tr>
 			</tbody>
 		</table>
@@ -216,8 +215,9 @@
 		</footer>
 	</div>
 
-	<script src="../../js/cart.js"></script>
+	
 	<script src="/js/jquery-3.6.0.min.js"></script>
+	<script src="../../js/cart.js"></script>
 	<script src="../../js/bootstrap.bundle.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

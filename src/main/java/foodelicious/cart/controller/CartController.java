@@ -41,7 +41,7 @@ public class CartController {
 		if (session.getAttribute("userID") != null) {
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 			m.addAttribute("carts", carts);
-			m.addAttribute("priceTotal", priceTotal());
+			m.addAttribute("priceTotal", originTotal());
 			return "app.ShoppingCart";
 		} else {
 			return "app.LoginSystem";
@@ -128,7 +128,7 @@ public class CartController {
 				break;
 			}
 		}
-		return priceTotal();
+		return originTotal();
 	}
 
 	@ResponseBody
@@ -137,50 +137,50 @@ public class CartController {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
-		session.setAttribute("totalPrice", priceTotal());
+		session.setAttribute("priceTotal", originTotal());
 
 		return carts;
 	}
 
-//	@ResponseBody
-//	@GetMapping("/shoppingCart/priceTotal/{discountName}")
-//	public Integer priceTotal(@PathVariable String discountName) {
-//
-//		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-//
-//		List<DiscountBean> discounts = discountService.selectItem((Long) session.getAttribute("userID"));
-//
-//		Integer priceTotal = priceTotal();
-//
-//		for (CartBean cart : carts) {
-//			Product product = cart.getProduct();
-//			priceTotal += product.getProductPrice() * cart.getQuantity();
-//		}
-//
-//		if (discountName != null) {
-//			for (DiscountBean discount : discounts) {
-//				if (discount.getDiscountName() == discountName) {
-//					priceTotal -= discount.getDiscountContent();
-//					break;
-//				}
-//			}
-//		}
-//
-//		return priceTotal;
-//	}
-
-	public Integer priceTotal() {
+	@ResponseBody
+	@GetMapping("/shoppingCart/priceTotal/{discountName}")
+	public Integer discountTotal(@PathVariable(required = false) String discountName) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
-		Integer priceTotal = 0;
+		List<DiscountBean> discounts = discountService.selectItem((Long) session.getAttribute("userID"));
+
+		Integer discountTotal = 0;
 
 		for (CartBean cart : carts) {
 			Product product = cart.getProduct();
-			priceTotal += product.getProductPrice() * cart.getQuantity();
+			discountTotal += product.getProductPrice() * cart.getQuantity();
 		}
 
-		return priceTotal;
+		if (discountName != null) {
+			for (DiscountBean discount : discounts) {
+				if (discount.getDiscountName().equals(discountName)) {
+					discountTotal -= discount.getDiscountContent();
+					break;
+				}
+			}
+		}
+		session.setAttribute("priceTotal", discountTotal);
+		return discountTotal;
+	}
+
+	public Integer originTotal() {
+
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
+		Integer originTotal = 0;
+
+		for (CartBean cart : carts) {
+			Product product = cart.getProduct();
+			originTotal += product.getProductPrice() * cart.getQuantity();
+		}
+
+		return originTotal;
 	}
 
 }
