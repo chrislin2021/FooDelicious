@@ -38,7 +38,7 @@ public class MainUpdateController {
 		m.addAttribute("errors", errors);
 
 		if (memberMail == null || memberMail.length() == 0) {
-			errors.put("account", "請輸入帳號");
+			errors.put("memberMail", "請輸入帳號");
 		}
 		if (pwd == null || pwd.length() == 0) {
 			errors.put("pwd", "請輸入密碼");

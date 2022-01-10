@@ -33,18 +33,15 @@
 	   <c:forEach var="member"  varStatus="statusX" items="${membersForJSP}">
 	      <c:if test="${statusX.first}" >
 	         <c:out value="<table border='1' cellspacing='5' cellpadding='5' >" escapeXml="false"/>
-	    	 <tr bgcolor="CCCC00">
-	            <th colspan='7'>會員基本資料</th>
-	         </tr>
 
-	         <c:out value="<tr bgcolor='#ff9333'><th width='90px'>會員編號</th><th  width='100px'>帳號</th><th  width='140px'>密碼</th><th  width='120px'>姓名</th><th  width='100px'>性別</th><th  width='200px'>生日</th><th  width='100px'>電話</th><th  width='1000px'>地址</th><th  width='100px'>折扣</th><th  width='100px'>幣</th><th  width='100px'>身分別</th><th  width='100px'>註冊時間</th><th width='48px'>刪除</th></tr>" escapeXml='false'/>
+	         <c:out value="<tr bgcolor='#CA8EC2'><th>員編</th><th>帳號</th><th>密碼</th><th>姓名</th><th>性別</th><th>生日</th><th>電話</th><th>地址</th><th>折扣</th><th>幣</th><th>身分別</th><th>註冊時間</th><th>刪除</th></tr>" escapeXml='false'/>
 	      </c:if>		         
 	      <c:choose>
 	         <c:when test="${ statusX.count % 2 == 0 }">
-	            <c:set var="colorVar" value="99ddff" />
+	            <c:set var="colorVar" value="#F1E1FF" />
 	         </c:when>
 	         <c:otherwise>
-	            <c:set var="colorVar" value="88dd00" />
+	            <c:set var="colorVar" value="#FFFFFF" />
 	         </c:otherwise>
 	      </c:choose>
 
@@ -74,7 +71,7 @@
 	<small><a href="<c:url value='/' />">回首頁</a></small>
 	</div>
 	<form method='POST'>
-	  <input type='hidden' name='_method'  value='DELETE' >
+	  <input type='hidden' name='_method'  value='GET' >
 	</form>
 </body>
 </html>
