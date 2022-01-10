@@ -38,9 +38,11 @@ public class CartController {
 
 	@GetMapping("/shoppingCart")
 	public String shoppingCart(Model m) {
+
 		if (session.getAttribute("userID") != null) {
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 			m.addAttribute("carts", carts);
+			m.addAttribute("coin", getGoldCoin());
 			m.addAttribute("priceTotal", originTotal());
 			return "app.ShoppingCart";
 		} else {
@@ -107,7 +109,7 @@ public class CartController {
 
 	@ResponseBody
 	@PutMapping("/shoppingCart/{pid}/{pqty}")
-	public Integer updateItem(@PathVariable String pid, @PathVariable String pqty) {
+	public void updateItem(@PathVariable String pid, @PathVariable String pqty, Model m) {
 
 		Long id = Long.parseLong(pid);
 
@@ -128,47 +130,46 @@ public class CartController {
 				break;
 			}
 		}
-		return originTotal();
 	}
 
 	@ResponseBody
 	@GetMapping("/shoppingCart/show")
-	public List<CartBean> selectItem() {
+	public List<CartBean> selectItem(Model m) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-
-		session.setAttribute("priceTotal", originTotal());
 
 		return carts;
 	}
 
 	@ResponseBody
-	@GetMapping("/shoppingCart/priceTotal/{discountName}")
+	@GetMapping("/shoppingCart/discountTotal/{discountName}")
 	public Integer discountTotal(@PathVariable(required = false) String discountName) {
-
-		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		List<DiscountBean> discounts = discountService.selectItem((Long) session.getAttribute("userID"));
 
-		Integer discountTotal = 0;
-
-		for (CartBean cart : carts) {
-			Product product = cart.getProduct();
-			discountTotal += product.getProductPrice() * cart.getQuantity();
-		}
+		Integer originTotal = originTotal();
 
 		if (discountName != null) {
 			for (DiscountBean discount : discounts) {
 				if (discount.getDiscountName().equals(discountName)) {
-					discountTotal -= discount.getDiscountContent();
+					originTotal -= discount.getDiscountContent();
 					break;
 				}
 			}
+		} else {
+			originTotal = originTotal();
 		}
-		session.setAttribute("priceTotal", discountTotal);
-		return discountTotal;
+
+		if (originTotal < 0) {
+			originTotal = 0;
+		}
+
+		session.setAttribute("priceTotal", originTotal);
+
+		return originTotal;
 	}
 
+//	顯示初始金額
 	public Integer originTotal() {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
@@ -181,6 +182,19 @@ public class CartController {
 		}
 
 		return originTotal;
+	}
+
+	public Integer getGoldCoin() {
+		Integer coin = 0;
+		if (session.getAttribute("userID") != null) {
+			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+			for (CartBean cart : carts) {
+				coin = cart.getMember().getMemberCoin();
+			}
+			return coin;
+		} else {
+			return 0;
+		}
 	}
 
 }

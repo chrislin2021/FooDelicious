@@ -30,17 +30,17 @@ public class OrdersBean implements Serializable {
 	@Column(name = "member_id")
 	private Long memberId;
 
-	@Column(name = "orders_note")
-	private String ordersNote;
-
 	@Column(name = "orders_date")
 	private LocalDateTime ordersDate;
 
-	@Column(name = "orders_total")
-	private Integer ordersTotal;
+	@Column(name = "orders_note")
+	private String ordersNote;
 
 	@Column(name = "orders_state")
 	private String ordersState;
+
+	@Column(name = "orders_total")
+	private Integer ordersTotal;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
@@ -50,15 +50,15 @@ public class OrdersBean implements Serializable {
 		super();
 	}
 
-	public OrdersBean(Long ordersId, Long memberId, String ordersNote, LocalDateTime ordersDate, Integer ordersTotal,
-			String ordersState, Member member) {
+	public OrdersBean(Long ordersId, Long memberId, LocalDateTime ordersDate, String ordersNote, String ordersState,
+			Integer ordersTotal, Member member) {
 		super();
 		this.ordersId = ordersId;
 		this.memberId = memberId;
-		this.ordersNote = ordersNote;
 		this.ordersDate = ordersDate;
-		this.ordersTotal = ordersTotal;
+		this.ordersNote = ordersNote;
 		this.ordersState = ordersState;
+		this.ordersTotal = ordersTotal;
 		this.member = member;
 	}
 
@@ -78,14 +78,6 @@ public class OrdersBean implements Serializable {
 		this.memberId = memberId;
 	}
 
-	public String getOrdersNote() {
-		return ordersNote;
-	}
-
-	public void setOrdersNote(String ordersNote) {
-		this.ordersNote = ordersNote;
-	}
-
 	public LocalDateTime getOrdersDate() {
 		return ordersDate;
 	}
@@ -94,12 +86,12 @@ public class OrdersBean implements Serializable {
 		this.ordersDate = ordersDate;
 	}
 
-	public Integer getOrdersTotal() {
-		return ordersTotal;
+	public String getOrdersNote() {
+		return ordersNote;
 	}
 
-	public void setOrdersTotal(Integer ordersTotal) {
-		this.ordersTotal = ordersTotal;
+	public void setOrdersNote(String ordersNote) {
+		this.ordersNote = ordersNote;
 	}
 
 	public String getOrdersState() {
@@ -110,19 +102,20 @@ public class OrdersBean implements Serializable {
 		this.ordersState = ordersState;
 	}
 
+	public Integer getOrdersTotal() {
+		return ordersTotal;
+	}
+
+	public void setOrdersTotal(Integer ordersTotal) {
+		this.ordersTotal = ordersTotal;
+	}
+
 	public Member getMember() {
 		return member;
 	}
 
 	public void setMember(Member member) {
 		this.member = member;
-	}
-
-	@Override
-	public String toString() {
-		return "OrdersBean [ordersId=" + ordersId + ", memberId=" + memberId + ", ordersNote=" + ordersNote
-				+ ", ordersDate=" + ordersDate + ", ordersTotal=" + ordersTotal + ", ordersState=" + ordersState
-				+ ", member=" + member + "]";
 	}
 
 }

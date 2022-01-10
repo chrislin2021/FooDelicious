@@ -94,8 +94,13 @@ div.path {
 }
 
 #pay {
-	width:50%;
+	width: 50%;
 	border: none;
 	text-align: left;
 	background-color: transparent;
+}
+
+.numC {
+	width: 5rem;
+	text-align: center;
 }
