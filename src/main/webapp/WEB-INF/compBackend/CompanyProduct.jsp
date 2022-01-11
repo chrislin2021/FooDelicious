@@ -77,39 +77,29 @@
 	<script>
 		//=============更新商品資料=============
 
-		$("#comProducts")
-				.on(
-						"click",
-						"#updateBtnCom",
-						function() {
-							let productId = $(this).data("id");
-							alert(productId);
+		$("#comProducts").on("click","#updateBtnCom",function() {
+			let productId = $(this).data("id");
+			alert(productId);
 
-							$
-									.ajax({
+			$.ajax({
 
-										url : "http://localhost:8080/companyProducts/update/"
-												+ productId,
-										type : "GET",
-										success : function(product) {
+				url : "http://localhost:8080/companyProducts/update/"+ productId,
+				type : "GET",
+				success : function(product) {
 
-											//將json字串化
-											let productString = JSON
-													.stringify(product);
-											//將資料存到localStorage，給另一個頁面使用
-											localStorage.setItem(
-													"comProductData",
-													productString);
-											//跳轉頁面
-											window.location.href = "http://localhost:8080/companyProduct2/update";
-										},
-										error : function() {
-											alert("fail");
-										}
+				 //將json字串化
+				 let productString = JSON.stringify(product);
+				 //將資料存到localStorage，給另一個頁面使用
+				 localStorage.setItem("comProductData",productString);
+				 //跳轉頁面
+				 window.location.href = "http://localhost:8080/companyProduct2/update";
+				 },
+				 error : function() {
+						alert("fail");
+				 }
 
-									})
-
-						})
+			})
+});
 	</script>
 
 

@@ -230,12 +230,12 @@
   height: 60px;
   display: flex;
   align-items: center;
-  background-color:none;
+  background-color:black;
   max-width:100%;
 }
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
-  color: #11101d;
+  color: rgb(255, 255, 255);
   font-size: 35px;
 }
 .home-section .home-content .bx-menu{
@@ -254,7 +254,7 @@
 
 
 /* problem pop-up */
-.bg-modal {
+.popup-modal {
 	background-color: rgba(0, 0, 0, 0.5);
 	width: 100%;
 	height: 100%;
@@ -266,9 +266,9 @@
 }
 
 
-.modal-contents {
+.popup-modal-contents {
 	height: 600px;
-	width: 600px;
+	width: 1000px;
 	background-color: white;
 	text-align: center;
 	padding: 20px;
@@ -278,7 +278,7 @@
 
 
 
-.closing {
+.popup-closing {
 	position: absolute;
 	top: 0;
 	right: 10px;

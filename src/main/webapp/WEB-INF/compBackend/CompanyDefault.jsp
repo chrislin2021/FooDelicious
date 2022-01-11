@@ -75,11 +75,11 @@
 					<li><a href="#">銷售總額</a></li>
 				</ul>
 			</li>
-			<li><a href="#"> <i class='bx bx-error-alt'></i> <span
+			<li><a href="#" class="problem"> <i class='bx bx-error-alt'></i> <span
 					class="link_name">問題回報</span>
 			</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="#" id="problem">問題回報</a></li>
+					<li><a class="problem" href="#" >問題回報</a></li>
 				</ul></li>
 
 			<li><a href="#"> <i class='bx bxs-inbox'></i> <span 
@@ -114,20 +114,85 @@
 
 	<!-- 問題回報地跳出視窗 -->
 
-	<div class="bg-modal">
-		<div class="modal-contents">
+	<div class="popup-modal">
+		<div class="popup-modal-contents">
 
-			<div class="closing">+</div>
+			<div class="popup-closing">+</div>
 
 			<div>
-				<form action=""></form>
+				<h3 style="text-align:center"><strong>問題回報</strong></h3>
+				<form style="text-align:left;margin:5px">
+					<h6 style="margin:5px">問題類型:</h6>
+					<select id="problemsCat" class="form-select upInput text-middle upInputMd" style="width:20%">
+                                    <option value="" id="comStatus" selected></option>
+                                    <option value="0">商品</option>
+                                    <option value="1">訂單</option>
+                                    <option value="2">系統</option>
+                                    <option value="3">會員</option>
+                                    <option value="4">其他</option>
+                     </select>
+                     
+					 <h6 style="margin:5px;margin-top:10px;">問題描述:</h6>  
+					 <textarea name="problem-description" rows="8" cols="70" placeholder="please write here" id="problem-description">
+					 
+					 </textarea>                 
+					 
+<!-- 					 <span style="margin:4px;margin-top:10px;margin-bottom:10px">檔案上傳:</span> </br> -->
+<!-- 					 <input type="file" id="fileUpload" accept="application/msword"> -->
 
-
+					</br>
+					</br></br></br></br></br></br>
+					<c:set var="userID" value="${userID}"/>
+					<input type="text" hidden id="companyId" value='${userID}'>
+					 <input type="submit" name="Submit" onclick="submitComplete()" id="submitComplete">
+				</form>
 
 			</div>
 
 		</div>
 	</div>
+	<!-- 確認問題回報單沒有空白 -->
+	<script>
+// 		function submitComplete(){
+// 			alert("Submit complete");
+// 			setTimeout(function(){
+// 				window.location.href="/companyMain2";
+// 			},2000);
+// 		}
+	
+	
+	</script>
+	
+	<script>
+//     =============傳送問題回報資料=============
+    	<!-- 確認問題回報單沒有空白 -->
+    $("#submitComplete").on("click",function(){
+ 
+        let problemReport = {
+        	"companyId":$("#companyId").val(),
+            "problemCategory": $("#problemsCat").val(),
+            "problemContent": $("#problem-description").val(),
+          
+        };
+        
+        //When sending data to a web server, the data has to be a string.
+        let problemString = JSON.stringify(problemReport);
+
+        $.ajax({
+            url:"http://localhost:8080/companyProblemReport",
+            type:"GET",
+            contentType:'application/json; charset=UTF-8',
+            data: problemString,
+            success:function(msg){
+                alert(msg);
+                window.location.href="/companyMain2;
+            },
+            error: function(){
+            	alert("fail!");
+            }
+        })
+    })
+</script>
 
 
 
@@ -144,12 +209,12 @@
 	<!-- 問題回報跳出視窗 -->
 	<script>
 				
-		document.getElementById('problem').addEventListener("click", function() {
-			document.querySelector('.bg-modal').style.display = "flex";
+		document.querySelector('.problem').addEventListener("click", function() {
+			document.querySelector('.popup-modal').style.display = "flex";
 		});
 
-		document.querySelector('.closing').addEventListener("click", function() {
-			document.querySelector('.bg-modal').style.display = "none";
+		document.querySelector('.popup-closing').addEventListener("click", function() {
+			document.querySelector('.popup-modal').style.display = "none";
 		});
 	</script>
 
