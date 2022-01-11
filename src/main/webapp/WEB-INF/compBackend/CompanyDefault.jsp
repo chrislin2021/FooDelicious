@@ -133,7 +133,7 @@
                      </select>
                      
 					 <h6 style="margin:5px;margin-top:10px;">問題描述:</h6>  
-					 <textarea name="problem-description" rows="8" cols="70" placeholder="please write here" id="problem-description" form="problemform">
+					 <textarea name="problem-content" rows="8" cols="70" placeholder="please write here" id="problem-content" form="problemform">
 					 
 					 </textarea>                 
 					 
@@ -142,9 +142,9 @@
 
 					</br>
 					</br></br></br></br></br></br>
-					<c:set var="userID" value="${userID}"/>
-					<input type="text" hidden id="companyId" value='${userID}'>
-					 <input type="submit" name="Submit" onclick="submitComplete()" id="submitComplete">
+					 <c:set var="userID" value="${userID}"/>
+					 <input type="text" hidden id="companyId" value='${userID}'>
+					 <input type="button" id="submitComplete" class="btn btn-outline-danger" value="submit">
 				</form>
 
 			</div>
@@ -167,32 +167,38 @@
 //     =============傳送問題回報資料=============
     	<!-- 確認問題回報單沒有空白 -->
     $("#submitComplete").on("click",function(){
+    	event.preventDefault();
     	alert("here");
- 
+    	//alert($("#problemsCat").val());
+ 		let companyId = $("#companyId").val();
         let problemReport = {
         	"companyId":$("#companyId").val(),
             "problemCategory": $("#problemsCat").val(),
-            "problemContent": $("#problem-description").val(),
+            "problemContent": $("#problem-content").val(),
           
         };
-        
-        //When sending data to a web server, the data has to be a string.
         let problemString = JSON.stringify(problemReport);
-
+        
         $.ajax({
-            url:'http://localhost:8080/companyProblemReport',
-            type:"PUT",
-            contentType:'application/json; charset=UTF-8',
-            data: problemString,
-            success:function(msg){
-                alert(msg);
-                window.location.href="/companyMain2;
-            },
-            error: function(){
-            	alert("fail!");
-            }
+        	url:"/companyProblemReport/"+companyId,
+        	type:"PUT",
+        	contentType:"application/json; charset=UTF-8",
+        	data: problemString,
+        	success:function(msg){
+        		alert("success");
+        		setTimeout(function(){
+     				window.location.href="/companyMain2";
+     			},2000);
+        	}, error: function(){
+        		alert("fail");
+        		setTimeout(function(){
+     				window.location.href="/companyMain2";
+     			},1500);
+        	}
         })
-    })
+        
+
+  })
 </script>
 
 

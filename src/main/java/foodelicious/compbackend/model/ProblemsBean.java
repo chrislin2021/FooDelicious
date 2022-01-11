@@ -22,7 +22,7 @@ import foodelicious.member.model.Member;
 public class ProblemsBean implements Serializable {
 	
 	@Id
-	@Column(name = "problem_id ")
+	@Column(name = "problem_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer problemId;
 	

@@ -45,9 +45,9 @@ public class MailService {
 	
 	try {
         mailSender.send(messagePreparator);
-        return "問題發送成功";
+        return "信件發送成功";
     } catch (MailException e) {
-        return "問題發送失敗";
+        return "信件發送失敗";
     }
 
   }

@@ -160,7 +160,7 @@
         let newProductString = JSON.stringify(updatedProduct);
 
         $.ajax({
-            url:"http://localhost:8080/companyProducts/update/"+comProductId,
+            url:"/companyProducts/update/"+comProductId,
             type:"PUT",
             contentType:'application/json; charset=UTF-8',
             data: newProductString,
