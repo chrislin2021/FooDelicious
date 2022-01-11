@@ -142,10 +142,13 @@ public class CartController {
 	}
 
 	@ResponseBody
-	@GetMapping("/shoppingCart/discountTotal/{discountName}")
-	public Integer discountTotal(@PathVariable(required = false) String discountName) {
+	@GetMapping("/shoppingCart/discountTotal/{discountName}/{coin}")
+	public Integer discountTotal(@PathVariable(required = false) String discountName,
+			@PathVariable(required = false) String coin) {
 
 		List<DiscountBean> discounts = discountService.selectItem((Long) session.getAttribute("userID"));
+
+		Integer currentCoin = Integer.parseInt(coin);
 
 		Integer originTotal = originTotal();
 
@@ -156,8 +159,10 @@ public class CartController {
 					break;
 				}
 			}
-		} else {
-			originTotal = originTotal();
+		}
+
+		if (currentCoin != 0) {
+			originTotal -= currentCoin;
 		}
 
 		if (originTotal < 0) {
@@ -191,10 +196,8 @@ public class CartController {
 			for (CartBean cart : carts) {
 				coin = cart.getMember().getMemberCoin();
 			}
-			return coin;
-		} else {
-			return 0;
 		}
+		return coin;
 	}
 
 }
