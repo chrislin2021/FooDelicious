@@ -40,9 +40,8 @@ public class ProblemsBean implements Serializable {
 	@Column(name = "problem_status")
 	private String problemStatus;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_company_id", insertable = false, updatable = false)
-	private Member member; // member here means company
+	@Column(name = "company_id")
+	private Long companyId;
 
 	public Integer getProblemId() {
 		return problemId;
@@ -84,13 +83,15 @@ public class ProblemsBean implements Serializable {
 		this.problemStatus = problemStatus;
 	}
 
-	public Member getMember() {
-		return member;
+	public Long getCompanyId() {
+		return companyId;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
 	}
+
+	
 	
 	
 

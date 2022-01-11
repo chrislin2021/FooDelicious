@@ -121,10 +121,10 @@
 
 			<div>
 				<h3 style="text-align:center"><strong>問題回報</strong></h3>
-				<form style="text-align:left;margin:5px">
+				<form style="text-align:left;margin:5px" id="problemform">
 					<h6 style="margin:5px">問題類型:</h6>
 					<select id="problemsCat" class="form-select upInput text-middle upInputMd" style="width:20%">
-                                    <option value="" id="comStatus" selected></option>
+                                    <option value="" id="probStatus" selected></option>
                                     <option value="0">商品</option>
                                     <option value="1">訂單</option>
                                     <option value="2">系統</option>
@@ -133,7 +133,7 @@
                      </select>
                      
 					 <h6 style="margin:5px;margin-top:10px;">問題描述:</h6>  
-					 <textarea name="problem-description" rows="8" cols="70" placeholder="please write here" id="problem-description">
+					 <textarea name="problem-description" rows="8" cols="70" placeholder="please write here" id="problem-description" form="problemform">
 					 
 					 </textarea>                 
 					 
@@ -151,7 +151,7 @@
 
 		</div>
 	</div>
-	<!-- 確認問題回報單沒有空白 -->
+	
 	<script>
 // 		function submitComplete(){
 // 			alert("Submit complete");
@@ -167,6 +167,7 @@
 //     =============傳送問題回報資料=============
     	<!-- 確認問題回報單沒有空白 -->
     $("#submitComplete").on("click",function(){
+    	alert("here");
  
         let problemReport = {
         	"companyId":$("#companyId").val(),
@@ -179,8 +180,8 @@
         let problemString = JSON.stringify(problemReport);
 
         $.ajax({
-            url:"http://localhost:8080/companyProblemReport",
-            type:"GET",
+            url:'http://localhost:8080/companyProblemReport',
+            type:"PUT",
             contentType:'application/json; charset=UTF-8',
             data: problemString,
             success:function(msg){

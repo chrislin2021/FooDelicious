@@ -67,13 +67,12 @@ public class CompanyBackEndRestController {
 	}
 	
 	
-	@GetMapping(path="/companyProblemReport")
+	@PutMapping(path="/companyProblemReport")
 	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {
 		 String sender = (String)session.getAttribute("memberMail");
 		 String companyName = (String)session.getAttribute("userName");
-		 Long companyId = (Long)session.getAttribute("userID");
-		 String mailSent = mailService.receiveProblemReports(sender,companyName);
-		 return cbkProblemDao.insertProblem(problem,companyId);
+		 String mailSentStatus = mailService.receiveProblemReports(sender,companyName);
+		 return cbkProblemDao.insertProblem(problem);
 	}
 
 

@@ -3,12 +3,13 @@ package foodelicious.compbackend.model;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.compbackend.repository.CBKProblemRepository;
-import foodelicious.member.model.Member;
 
 @Repository
 @Transactional
@@ -20,16 +21,9 @@ public class CBKProblemDao {
 	@Autowired
 	private CBKProblemRepository cbkProblemRepository;
 	
-	public String insertProblem(ProblemsBean problem, Long companyId) {
+	public String insertProblem(ProblemsBean problem) {
 		 if(problem != null) {
-			 String content = problem.getProblemContent();
-			 em.createNativeQuery("INSERT INTO problem_report ('problem_category','problem_content','fk_company_id')"
-			 		+ " VALUES (?,?,?)")
-			 		.setParameter(1, problem.getProblemCategory())
-			 		.setParameter(2,problem.getProblemContent())
-			 		.setParameter(3, companyId)
-			 		.executeUpdate();
-			 
+			 cbkProblemRepository.saveAndFlush(problem);
 			 return "Problem insert successful!";
 		 }else {
 			 
