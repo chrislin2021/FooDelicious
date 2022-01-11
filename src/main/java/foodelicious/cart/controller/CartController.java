@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +18,7 @@ import foodelicious.cart.service.CartService;
 import foodelicious.discount.model.DiscountBean;
 import foodelicious.discount.service.DiscountService;
 import foodelicious.product.model.Product;
+import foodelicious.product.model.ProductService;
 
 @Controller
 public class CartController {
@@ -27,23 +27,28 @@ public class CartController {
 
 	private CartService cartService;
 
+	private ProductService productService;
+
 	private DiscountService discountService;
 
-	public CartController(HttpSession session, CartService cartService, DiscountService discountService) {
+	public CartController(HttpSession session, CartService cartService, ProductService productService,
+			DiscountService discountService) {
 		super();
 		this.session = session;
 		this.cartService = cartService;
+		this.productService = productService;
 		this.discountService = discountService;
 	}
 
+//	購物車主頁
 	@GetMapping("/shoppingCart")
-	public String shoppingCart(Model m) {
+	public String shoppingCart() {
 
 		if (session.getAttribute("userID") != null) {
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-			m.addAttribute("carts", carts);
-			m.addAttribute("coin", getGoldCoin());
-			m.addAttribute("priceTotal", originTotal());
+			session.setAttribute("carts", carts);
+			session.setAttribute("coin", getGoldCoin());
+			session.setAttribute("priceTotal", originTotal());
 			return "app.ShoppingCart";
 		} else {
 			return "app.LoginSystem";
@@ -95,7 +100,7 @@ public class CartController {
 
 	@ResponseBody
 	@DeleteMapping("/shoppingCart/{productId}")
-	public void deleteItem(@PathVariable Long productId, Model m) {
+	public void deleteItem(@PathVariable Long productId) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -109,7 +114,7 @@ public class CartController {
 
 	@ResponseBody
 	@PutMapping("/shoppingCart/{pid}/{pqty}")
-	public void updateItem(@PathVariable String pid, @PathVariable String pqty, Model m) {
+	public void updateItem(@PathVariable String pid, @PathVariable String pqty) {
 
 		Long id = Long.parseLong(pid);
 
@@ -134,7 +139,7 @@ public class CartController {
 
 	@ResponseBody
 	@GetMapping("/shoppingCart/show")
-	public List<CartBean> selectItem(Model m) {
+	public List<CartBean> selectItem() {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -150,28 +155,28 @@ public class CartController {
 
 		Integer currentCoin = Integer.parseInt(coin);
 
-		Integer originTotal = originTotal();
+		Integer discountTotal = originTotal();
 
 		if (discountName != null) {
 			for (DiscountBean discount : discounts) {
 				if (discount.getDiscountName().equals(discountName)) {
-					originTotal -= discount.getDiscountContent();
+					discountTotal -= discount.getDiscountContent();
 					break;
 				}
 			}
 		}
 
 		if (currentCoin != 0) {
-			originTotal -= currentCoin;
+			discountTotal -= currentCoin;
 		}
 
-		if (originTotal < 0) {
-			originTotal = 0;
+		if (discountTotal < 0) {
+			discountTotal = 0;
 		}
 
-		session.setAttribute("priceTotal", originTotal);
+		session.setAttribute("priceTotal", discountTotal);
 
-		return originTotal;
+		return discountTotal;
 	}
 
 //	顯示初始金額
@@ -189,6 +194,7 @@ public class CartController {
 		return originTotal;
 	}
 
+//	獲取使用者的金幣
 	public Integer getGoldCoin() {
 		Integer coin = 0;
 		if (session.getAttribute("userID") != null) {

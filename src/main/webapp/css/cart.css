@@ -61,7 +61,7 @@ div.path {
 	display: block;
 }
 
-#p {
+#modal {
 	width: 230px;
 	box-shadow: 2px 2px 2px 2px gray
 }
@@ -88,7 +88,7 @@ div.path {
 	justify-content: center;
 }
 
-#gogoPower {
+#ProductPage {
 	display: flex;
 	justify-content: center;
 }
@@ -100,7 +100,7 @@ div.path {
 	background-color: transparent;
 }
 
-.numC {
+.numCoin {
 	width: 2rem;
 	text-align: center;
 	border: none;

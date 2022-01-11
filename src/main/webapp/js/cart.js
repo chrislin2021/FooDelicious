@@ -14,7 +14,6 @@ function showItem() {
 			if (carts != null) {
 				$("#cartList").empty();
 				var str = "";
-				var num = 0;
 				for (let cart of carts) {
 					str += '<tr>';
 					str += '<th scope="row"><input type="checkbox" name="c"></th>';
@@ -27,7 +26,7 @@ function showItem() {
 					str += '<td><button onclick="deleteItem(' + cart.product.productId + ')"class="btn btn-dark btn-sm"</td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>';
 					str += '</tr>';
 				}
-				num = discountTotal();
+				discountTotal();
 				$("#cartList").html(str);
 			}
 		}
@@ -71,7 +70,11 @@ function minusNum() {
 
 function addNum() {
 	var coin = $("#goldCoin").val();
+	var limit = $("#hiddenCoin").val();
 	coin++;
+	if (coin > limit) {
+		coin = limit;
+	}
 	$("#goldCoin").attr("value", coin);
 	discountTotal();
 }
@@ -83,11 +86,6 @@ $("#button-addon1").click(function() {
 function discountTotal() {
 	var discounts = $("#discount").val();
 	var coin = $("#goldCoin").val();
-	if (coin != 0) {
-		coin = coin;
-	} else {
-		coin = 0;
-	}
 	if (discounts != "") {
 		disocunts = discounts;
 	} else {
@@ -100,13 +98,13 @@ function discountTotal() {
 			var str = "";
 			if (priceTotal < 1000) {
 				$("#freight").empty();
-				str += '運費：<span>100 元</span>';
+				str += ' 運費：<span>100 元</span>';
 				$("#freight").append(str);
 				priceTotal += 100;
 				$("#pay").attr("value", "NT$: " + priceTotal + " 元");
 			} else {
 				$("#freight").empty();
-				str += '運費：<del style="color: red;">100 元</del>&nbsp;&nbsp;<span>0 元</span>';
+				str += '運費：<del style="color: red;"> 100 元</del>&nbsp;&nbsp;<span>0 元</span>';
 				$("#freight").append(str);
 				$("#pay").attr("value", "NT$: " + priceTotal + " 元");
 			}
