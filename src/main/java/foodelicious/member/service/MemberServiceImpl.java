@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.member.model.Member;
+import foodelicious.member.repository.MemberJpaRepository;
 import foodelicious.member.repository.MemberRepository;
 
 @Service
@@ -14,6 +15,9 @@ import foodelicious.member.repository.MemberRepository;
 public class MemberServiceImpl implements MemberService {
 
 	MemberRepository memberRepository;
+	
+	@Autowired
+	MemberJpaRepository jpa;
 
 //	@Autowired
 	public MemberServiceImpl(MemberRepository memberRepository) {
@@ -50,11 +54,6 @@ public class MemberServiceImpl implements MemberService {
 //	}
 
 	@Override
-	public Member findByMemberMail(String memberMail) {
-		return memberRepository.findByMemberMail(memberMail);
-	}
-
-	@Override
 	public List<Member> findAll() {
 		return memberRepository.findAll();
 	}
@@ -72,6 +71,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteByMemberId(Long memberId) {
 		memberRepository.deleteByMemberId(memberId);
+	}
+
+	@Override
+	public Member findByMemberMail(String memberMail) {
+		return memberRepository.findByMemberMail(memberMail);
 	}
 
 

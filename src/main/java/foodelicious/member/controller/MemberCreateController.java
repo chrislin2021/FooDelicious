@@ -68,15 +68,22 @@ public class MemberCreateController {
 	public String saveMember(@Valid @ModelAttribute Member member, BindingResult result, RedirectAttributes ra) {//此為表單綁定
 		System.out.println("member= "+ member);
 		
-		List<ObjectError> errors = result.getAllErrors();
-		for(ObjectError oe : errors) {
-//			System.out.println(oe.getCode()+"," + oe.getDefaultMessage() + "," + oe.getObjectName());
-			System.out.println("oe=>" + oe);
-		}
+		
 		memberValidator.validate(member, result);//bindingResult的父介面就是Errors
+		
+		if(memberService.findByMemberMail(member.getMemberMail())!=null){
+			result.rejectValue("memberMail", "member.memberMail.duplicated","帳號已經存在，請重新輸入");
+		}
+		
 		if(result.hasErrors()) {
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError oe : errors) {
+//				System.out.println(oe.getCode()+"," + oe.getDefaultMessage() + "," + oe.getObjectName());
+				System.out.println("oe=>" + oe);
+			}
 			return "app.RegisterPage";
 		}
+
 		
 		member.setMemberDiscountId("none");
 		member.setMemberCoin(0);

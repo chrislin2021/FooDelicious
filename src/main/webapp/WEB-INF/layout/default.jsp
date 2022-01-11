@@ -38,7 +38,7 @@
             <li><a class="dropdown-item" href="${contextRoot}/RegisterPage">會員註冊</a></li>
             <li><a class="dropdown-item" href="${contextRoot}/listAllMembers">修改會員資料(暫放)</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">會員登出</a></li>
+            <li><a class="dropdown-item" href="normallogout">會員登出</a></li>
           </ul>
         </div>
       </div>

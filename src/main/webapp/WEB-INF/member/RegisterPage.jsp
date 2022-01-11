@@ -18,8 +18,12 @@
 		<h3>註冊會員</h3>
 
 		<c:set var='updateurl'
-			value='${pageContext.request.contextPath}/members/${id}' />
+			value='${pageContext.request.contextPath}/members/${memberId}' />
 		<form:form class="form" method="POST" modelAttribute="member">
+		
+		<form:input type="hidden" class="form-control"
+				aria-label="Sizing example input"
+				aria-describedby="inputGroup-sizing-default" path="memberId" />
 
 			<div class="input-group mb-3">
 				<span class="input-group-text">會員帳號：</span>

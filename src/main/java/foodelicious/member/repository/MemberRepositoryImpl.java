@@ -21,11 +21,6 @@ public class MemberRepositoryImpl implements MemberRepository {
 	MemberJpaRepository jpaa;
 
 	@Override
-	public Member findByMemberMail(String memberMail) {
-		return em.find(Member.class, memberMail);
-	}
-
-	@Override
 	public Member save(Member member) {
 		em.persist(member);
 		return em.find(Member.class, member.getMemberId());
@@ -48,11 +43,28 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public void update(Member member) {
 		em.merge(member);
 	}
-	
+
 	@Override
 	public void deleteByMemberId(Long memberId) {
 		Member member = em.find(Member.class, memberId);
 		em.remove(member);
 	}
+
+	@Override
+	public Member findByMemberMail(String memberMail) {
+		String hql ="FROM member_data2 m WHERE m.memberMail = :mail";
+		List<Member> members = em.createQuery(hql, Member.class)
+				.setParameter("mail", memberMail)
+		.getResultList();
+		
+		if(members.size() > 0) {
+			System.out.println(members.get(0));
+			return members.get(0);
+			
+		}else {
+			return null;
+		}
+	}
+	
 
 }

@@ -70,7 +70,6 @@ public class MainUpdateController {
 //				System.out.println("userID：" + session.getAttribute("userID"));
 				return "app.home";
 			}
-
 		}
 
 		errors.put("msg", "Please Input Correct Username or Password");

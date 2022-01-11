@@ -9,6 +9,9 @@ import foodelicious.member.model.Member;
 
 @Component
 public class MemberValidator implements Validator {
+	
+//	@Autowired
+//	MemberService memberService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {//如果方法執行不是Member的子子孫孫就不行
@@ -30,7 +33,8 @@ public class MemberValidator implements Validator {
 		if (!errors.hasFieldErrors("memberMail")) {
 			if (member.getMemberMail() != null && member.getMemberMail().length() <= 3) {
 				errors.rejectValue("memberMail", "member.memberMail.length", "帳號欄必須為有效mail");
-			}
+					}
+			
 		}
 		if (!errors.hasFieldErrors("memberName")) {
 			if (member.getMemberName() != null && member.getMemberName().length() < 2) {

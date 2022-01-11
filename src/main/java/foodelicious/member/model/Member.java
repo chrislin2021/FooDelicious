@@ -33,7 +33,6 @@ import foodelicious.product.model.Product;
 
 @Entity(name = "member_data2")
 @Table(name = "member_data2")
-@Component
 public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
 
