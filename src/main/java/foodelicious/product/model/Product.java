@@ -1,6 +1,7 @@
 package foodelicious.product.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -50,7 +51,6 @@ public class Product implements Serializable {
 //	@ManyToOne(fetch = FetchType.EAGER)
 //	@JoinColumn(name = "product_company_id")
 //	private Member member;
-	
 
 	@Column(name = "product_company_id")
 	private Long productCompanyId;
@@ -60,7 +60,7 @@ public class Product implements Serializable {
 	private Integer productPrice;
 
 	@Column(name = "product_pics")
-	private byte[] productPics;
+	private String productPics;
 
 	@NotBlank(message = "內容不可空白")
 	@Size(min = 3, max = 255, message = "請輸入最少5個字的敘述")
@@ -76,7 +76,7 @@ public class Product implements Serializable {
 	@Column(name = "product_keywords")
 	private String productKeywords;
 
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "product_insert_date")
 	private Date productInsertDate;
 
@@ -127,6 +127,14 @@ public class Product implements Serializable {
 		this.productCompany = productCompany;
 	}
 
+	public Long getProductCompanyId() {
+		return productCompanyId;
+	}
+
+	public void setProductCompanyId(Long productCompanyId) {
+		this.productCompanyId = productCompanyId;
+	}
+
 	public Integer getProductPrice() {
 		return productPrice;
 	}
@@ -135,11 +143,11 @@ public class Product implements Serializable {
 		this.productPrice = productPrice;
 	}
 
-	public byte[] getProductPics() {
+	public String getProductPics() {
 		return productPics;
 	}
 
-	public void setProductPics(byte[] productPics) {
+	public void setProductPics(String productPics) {
 		this.productPics = productPics;
 	}
 
@@ -189,6 +197,17 @@ public class Product implements Serializable {
 
 	public void setProductSalesFigures(Integer productSalesFigures) {
 		this.productSalesFigures = productSalesFigures;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productCategories=" + productCategories
+				+ ", productCategoriesName=" + productCategoriesName + ", productName=" + productName
+				+ ", productCompany=" + productCompany + ",  productPrice=" + productPrice
+				+ ", productPics=" + productPics + ", productContent=" + productContent
+				+ ", productStock=" + productStock + ", productStatus=" + productStatus + ", productKeywords="
+				+ productKeywords + ", productInsertDate=" + productInsertDate + ", productSalesFigures="
+				+ productSalesFigures + "]";
 	}
 
 }
