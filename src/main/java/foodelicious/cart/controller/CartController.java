@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
+import foodelicious.cart.service.SearchService;
 import foodelicious.discount.model.DiscountBean;
 import foodelicious.discount.service.DiscountService;
 import foodelicious.product.model.Product;
-import foodelicious.product.model.ProductService;
 
 @Controller
 public class CartController {
@@ -27,16 +27,16 @@ public class CartController {
 
 	private CartService cartService;
 
-	private ProductService productService;
+	private SearchService searchService;
 
 	private DiscountService discountService;
 
-	public CartController(HttpSession session, CartService cartService, ProductService productService,
+	public CartController(HttpSession session, CartService cartService, SearchService searchService,
 			DiscountService discountService) {
 		super();
 		this.session = session;
 		this.cartService = cartService;
-		this.productService = productService;
+		this.searchService = searchService;
 		this.discountService = discountService;
 	}
 
@@ -177,6 +177,14 @@ public class CartController {
 		session.setAttribute("priceTotal", discountTotal);
 
 		return discountTotal;
+	}
+
+	@ResponseBody
+	@GetMapping("/searchProduct/{name}")
+	public List<Product> searchProduct(@PathVariable(name = "name") String productName) {
+		List<Product> productPolymers = searchService.findByProductNameLike("%" + productName + "%");
+
+		return productPolymers;
 	}
 
 //	顯示初始金額

@@ -48,11 +48,22 @@ function deleteItem(productId) {
 		url: "/shoppingCart/" + productId,
 		type: "DELETE",
 		success: function() {
-			Swal.fire(
-				"刪除成功!",
-				"(((ﾟдﾟ)))",
-				"success"
-			)
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			})
+
+			Toast.fire({
+				icon: 'success',
+				title: '刪除成功！！！'
+			})
 			showItem();
 		}
 	})
@@ -111,3 +122,20 @@ function discountTotal() {
 		}
 	})
 }
+
+function searchProduct() {
+	var name = $("#appleNoSale").val();
+	$.ajax({
+		url: "/searchProduct/" + name,
+		type: "GET",
+		contentType: "application/json; charset=utf-8",
+		success: function(productPolymers) {
+			var temp = "";
+			if (productPolymers != null) {
+				for (let productPolymer of productPolymers) {
+					temp += '<table>' + productPolymer.productName  + '</table>';
+				}
+			}
+		}
+	})
+};

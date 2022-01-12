@@ -19,7 +19,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
 import foodelicious.member.model.Member;
 
 @Entity
@@ -44,13 +43,9 @@ public class Product implements Serializable {
 
 	@Column(name = "product_company")
 	private String productCompany;
-	
-
-
 
 	@Column(name = "product_company_id")
 	private Long productCompanyId;
-
 
 	@Column(name = "product_price")
 	private Integer productPrice;
@@ -81,6 +76,28 @@ public class Product implements Serializable {
 
 	public Product() {
 		super();
+	}
+
+	public Product(Long productId, Short productCategories, String productCategoriesName, String productName,
+			String productCompany, Long productCompanyId, Integer productPrice, String productPics,
+			@NotBlank(message = "內容不可空白") @Size(min = 3, max = 255, message = "請輸入最少5個字的敘述") String productContent,
+			Integer productStock, String productStatus, String productKeywords, Date productInsertDate,
+			Integer productSalesFigures) {
+		super();
+		this.productId = productId;
+		this.productCategories = productCategories;
+		this.productCategoriesName = productCategoriesName;
+		this.productName = productName;
+		this.productCompany = productCompany;
+		this.productCompanyId = productCompanyId;
+		this.productPrice = productPrice;
+		this.productPics = productPics;
+		this.productContent = productContent;
+		this.productStock = productStock;
+		this.productStatus = productStatus;
+		this.productKeywords = productKeywords;
+		this.productInsertDate = productInsertDate;
+		this.productSalesFigures = productSalesFigures;
 	}
 
 	public Long getProductId() {
@@ -199,11 +216,10 @@ public class Product implements Serializable {
 	public String toString() {
 		return "Product [productId=" + productId + ", productCategories=" + productCategories
 				+ ", productCategoriesName=" + productCategoriesName + ", productName=" + productName
-				+ ", productCompany=" + productCompany + ",  productPrice=" + productPrice
-				+ ", productPics=" + productPics + ", productContent=" + productContent
-				+ ", productStock=" + productStock + ", productStatus=" + productStatus + ", productKeywords="
-				+ productKeywords + ", productInsertDate=" + productInsertDate + ", productSalesFigures="
-				+ productSalesFigures + "]";
+				+ ", productCompany=" + productCompany + ",  productPrice=" + productPrice + ", productPics="
+				+ productPics + ", productContent=" + productContent + ", productStock=" + productStock
+				+ ", productStatus=" + productStatus + ", productKeywords=" + productKeywords + ", productInsertDate="
+				+ productInsertDate + ", productSalesFigures=" + productSalesFigures + "]";
 	}
 
 }
