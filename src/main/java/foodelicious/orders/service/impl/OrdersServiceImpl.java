@@ -29,12 +29,13 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public List<OrdersBean> selectOrders(Long memberId) {
-		return ordersRepository.findAllByMemberId(memberId);
-	}
-
 	public OrdersBean selectOrdersId(Long ordersId) {
 		return ordersRepository.findByOrdersId(ordersId);
+	}
+
+	@Override
+	public List<OrdersBean> selectOrders(Long memberId) {
+		return ordersRepository.findAllByMemberId(memberId);
 	}
 
 	@Override

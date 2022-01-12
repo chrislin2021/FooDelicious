@@ -33,6 +33,20 @@ function showItem() {
 	})
 }
 
+function addToCart(productId) {
+	var quantity = $("#pdQty").val();
+	var postData = { "pid": productId, "qty": quantity };
+	$.ajax({
+		url: "/shoppingCart/insert",
+		type: "POST",
+		data: JSON.stringify(postData),
+		contentType: "application/json; charset=utf-8",
+		success: function() {
+			showItem();
+		}
+	})
+}
+
 function changeNum(productId, quantity) {
 	$.ajax({
 		url: "/shoppingCart/" + productId + "/" + quantity,
@@ -131,18 +145,20 @@ function searchProduct() {
 			type: "GET",
 			contentType: "application/json; charset=utf-8",
 			success: function(productPolymers) {
-				var temp = "";
+				var product = "";
 				if (productPolymers != null) {
+					$(".productInformation").empty();
 					for (let productPolymer of productPolymers) {
-						temp += '<tr>';
-						temp += '<td>' + productPolymer.productPics + '</td>';
-						temp += '<td>' + productPolymer.productName + '</td>';
-						temp += '<td>' + productPolymer.productPrice + '</td>';
-						temp += '<td><input type="number" ></td>';
-						temp += '<td><button type="button" class="btn btn-success" onclick="addToCart()">加入購物車</button></td>';
+						product += '<tr>';
+						product += '<td><img src=' + productPolymer.productproductPics + '></td>';
+						product += '<td>' + productPolymer.productName + '</td>';
+						product += '<td>NT$:' + productPolymer.productPrice + '元</td>';
+						product += '<td><input id="pdQty" type="number" value = 1 min=1 max=' + productPolymer.productStock + '></td>';
+						product += '<td><button type="button" class="btn btn-danger btn-sm" onclick="addToCart(' + productPolymer.productId  + ')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></button></td>';
+						product += '</tr>';
 					}
 				}
-				alert(temp);
+				$(".productInformation").html(product);
 			}
 		})
 	}

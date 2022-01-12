@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
 import foodelicious.cart.service.SearchService;
 import foodelicious.discount.model.DiscountBean;
 import foodelicious.discount.service.DiscountService;
+import foodelicious.orders.model.OrdersBean;
 import foodelicious.product.model.Product;
 
 @Controller
@@ -57,12 +61,18 @@ public class CartController {
 
 	@ResponseBody
 	@PostMapping("/shoppingCart/insert")
-	public String insertItem(@RequestBody Long productId, @RequestBody Integer quantity) {
+	public String insertItem(@RequestBody String jS) {
+
+		JSONObject obj = JSON.parseObject(jS);
+		Object pid = obj.get("pid");
+		Object qty = obj.get("qty");
+		String pidTemp = "" + pid;
+		Long productId = Long.parseLong(pidTemp);
+		Integer quantity = Integer.parseInt((String) qty);
 
 		if (session.getAttribute("userID") == null) {
 			return "{\"ans\":\"請先登入會員!!\"}";
 		}
-
 //		判斷購物車是否有重複商品
 		Boolean same = false;
 
@@ -73,6 +83,8 @@ public class CartController {
 				Integer sum = cart.getQuantity() + quantity;
 				Product product = cart.getProduct();
 				if (sum > product.getProductStock()) {
+					sum = product.getProductStock();
+
 					return "{\"ans\":\"已經到達庫存最大數量了\\n (目前庫存共有 " + product.getProductStock() + " 件)" + "\"}";
 				}
 
@@ -80,7 +92,6 @@ public class CartController {
 				cart.setMemberId(cart.getMemberId());
 				cart.setProductId(cart.getProductId());
 				cart.setQuantity(sum);
-
 				cartService.insertAndUpdateItem(cart);
 
 				same = true;
@@ -93,6 +104,7 @@ public class CartController {
 			cartBean.setMemberId((Long) session.getAttribute("userID"));
 			cartBean.setProductId(productId);
 			cartBean.setQuantity(quantity);
+			cartService.insertAndUpdateItem(cartBean);
 		}
 
 		return "{\"ans\":\"" + "此項商品數量 " + quantity + " 個已加入購物車" + "\"}";
@@ -146,6 +158,24 @@ public class CartController {
 		return carts;
 	}
 
+	@GetMapping("/orders")
+	public String orders(@RequestBody String jS) {
+
+		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
+		OrdersBean ordersBean = new OrdersBean();
+
+		for (CartBean cart : carts) {
+			ordersBean.setMemberId(cart.getMemberId());
+			ordersBean.setOrderName(cart.getMember().getMemberName());
+			ordersBean.setOrderPhone(cart.getMember().getMemberPhone());
+			ordersBean.setOrderAddress(cart.getMember().getMemberAddress());
+		}
+		session.setAttribute("orders", ordersBean);
+
+		return "app.Orders";
+	}
+
 	@ResponseBody
 	@GetMapping("/shoppingCart/discountTotal/{discountName}/{coin}")
 	public Integer discountTotal(@PathVariable(required = false) String discountName,
@@ -182,6 +212,7 @@ public class CartController {
 	@ResponseBody
 	@GetMapping("/searchProduct/{name}")
 	public List<Product> searchProduct(@PathVariable(name = "name") String productName) {
+
 		List<Product> productPolymers = searchService.findByProductNameLike("%" + productName + "%");
 
 		return productPolymers;
