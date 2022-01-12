@@ -72,7 +72,7 @@
 						<line x1="3" y1="6" x2="21" y2="6"></line>	<path d="M16 10a4 4 0 0 1-8 0"></path></svg> 好煮意｜購物車</a>
 				<form class="d-flex">
         			<input class="form-control me-2" type="search" id="appleNoSale" placeholder="蘋果，沒有打折！！" aria-label="Search" value="">
-					<button class="btn btn-outline-success" type="submit" onclick="searchProduct()">Search</button>					
+					<button class="btn btn-secondary" type="submit" onclick="searchProduct()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>					
 				</form>
 			</div>
 		</nav>

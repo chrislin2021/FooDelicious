@@ -125,17 +125,25 @@ function discountTotal() {
 
 function searchProduct() {
 	var name = $("#appleNoSale").val();
-	$.ajax({
-		url: "/searchProduct/" + name,
-		type: "GET",
-		contentType: "application/json; charset=utf-8",
-		success: function(productPolymers) {
-			var temp = "";
-			if (productPolymers != null) {
-				for (let productPolymer of productPolymers) {
-					temp += '<table>' + productPolymer.productName  + '</table>';
+	if (name != null) {
+		$.ajax({
+			url: "/searchProduct/" + name,
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			success: function(productPolymers) {
+				var temp = "";
+				if (productPolymers != null) {
+					for (let productPolymer of productPolymers) {
+						temp += '<tr>';
+						temp += '<td>' + productPolymer.productPics + '</td>';
+						temp += '<td>' + productPolymer.productName + '</td>';
+						temp += '<td>' + productPolymer.productPrice + '</td>';
+						temp += '<td><input type="number" ></td>';
+						temp += '<td><button type="button" class="btn btn-success" onclick="addToCart()">加入購物車</button></td>';
+					}
 				}
+				alert(temp);
 			}
-		}
-	})
-};
+		})
+	}
+}
