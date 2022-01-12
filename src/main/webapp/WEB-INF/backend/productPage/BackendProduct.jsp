@@ -136,23 +136,25 @@
 
 <script>
     //=============顯示所有商品資料=============
-    const productUrl = "http://localhost:8080/bkproducts"
-    let productData;
+    window.onload=function(){
+        const productUrl = "http://localhost:8080/bkproducts"
 
-    $.ajax({
-        url: productUrl,
-        type: "GET",
-        success: function(productAll){
-            //將值傳到全域
-            productData = productAll;
-            let num = productAll.length;
-            if(num >= 10){
-                pages(10,productData);
-            }else{
-                pages(num,productData);
+        $.ajax({
+            url: productUrl,
+            type: "GET",
+            success: function(productData){
+                $("#products").html("");
+                $("#page").html("");
+                let num = productData.length;
+                if(num >= 10){
+                    pages(10,productData);
+                }else{
+                    pages(num,productData);
+                }
             }
-        }
-    });
+        });
+    }
+
 </script>
 
 <script>
@@ -167,13 +169,13 @@
             url: urlString,
             type: "GET",
             success: function(productAll){
-                //將值傳到全域
-                productData = productAll;
+                $("#products").html("");
+                $("#page").html("");
                 let num = productAll.length;
                 if(num >= 10){
-                    pages(10,productData);
+                    pages(10,productAll);
                 }else{
-                    pages(num,productData);
+                    pages(num,productAll);
                 }
             }
         });
@@ -186,14 +188,14 @@
         $.ajax({
             url: urlString,
             type: "GET",
-            success: function(productAll){
-                //將值傳到全域
-                productData = productAll;
-                let num = productAll.length;
+            success: function(productFood){
+                $("#products").html("");
+                $("#page").html(" ");
+                let num = productFood.length;
                 if(num >= 10){
-                    pages(10,productData);
+                    pages(10,productFood);
                 }else{
-                    pages(num,productData);
+                    pages(num,productFood);
                 }
             }
         });
@@ -206,14 +208,14 @@
         $.ajax({
             url: urlString,
             type: "GET",
-            success: function(productAll){
-                //將值傳到全域
-                productData = productAll;
-                let num = productAll.length;
+            success: function(productTool){
+                $("#products").html("");
+                $("#page").html("");
+                let num = productTool.length;
                 if(num >= 10){
-                    pages(10,productData);
+                    pages(10,productTool);
                 }else{
-                    pages(num,productData);
+                    pages(num,productTool);
                 }
             }
         });
@@ -225,7 +227,7 @@
     function pages(maxNum, dataSource){ //輸入單頁最大筆數和資料來源
         //=================分頁功能================
         //最大頁數
-        var maxPage;
+        let maxPage;
         //目前顯示頁數
         let nowPage = 0;
         //每頁最大筆數
@@ -247,6 +249,8 @@
             // alert("最大頁數2：" + maxPage);
         }
         // alert("最大頁數：" + maxPage);
+        //生成前先清空
+        $("#page").html(" ");
         //動態生成頁數
         let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
         for(let i=0; i<maxPage; i++){
@@ -256,6 +260,8 @@
         pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
         $("#page").html(pageHtml);
 
+        //綁定前先清除綁定事件
+        $("#page").unbind("click");
         //綁定click事件
         $("#page").on("click",".page", function(){
             nowPage = ($(this).prop("id"))*1;//強制轉成數字型態

@@ -71,7 +71,7 @@
 
         <!-- 訂單管理 -->
         <li id="OrderList" class="list-group-item">
-            <a href="#" style="text-decoration: none">
+            <a href="/backend/order" style="text-decoration: none">
                 <i class="text-secondary fas fa-shopping-cart"></i>
                 <span class="listName">訂單管理</span>
             </a>
@@ -128,6 +128,13 @@
         <li id="BanList" class="list-group-item funName">
             <a href="/backend/manager" style="text-decoration: none">
                 <i class="text-secondary fas fa-crown"></i> <span class="listName">管理名單</span>
+            </a>
+        </li>
+
+        <!-- 問題回報 -->
+        <li id="BanList" class="list-group-item funName">
+            <a href="" style="text-decoration: none">
+                <i class="text-secondary fas fa-question-circle"></i> <span class="listName">問題回報</span>
             </a>
         </li>
     </ul>

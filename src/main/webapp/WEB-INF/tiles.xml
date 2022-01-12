@@ -219,4 +219,10 @@
 					   value="/WEB-INF/backend/reportPage/AgeDistribution.jsp" />
 	</definition>
 
+	<definition name="app.BackendOrder"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/orderPage/BackendOrder.jsp" />
+	</definition>
+
 </tiles-definitions>

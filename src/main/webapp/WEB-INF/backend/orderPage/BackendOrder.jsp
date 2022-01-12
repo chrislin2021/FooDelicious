@@ -3,49 +3,43 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <head>
-    <link rel="stylesheet" href="../../../css/backendProduct.css">
+    <link rel="stylesheet" href="../../../css/backendOrder.css">
 </head>
 <body>
 <h1 class="tableName">
-    商品列表
-    <span class="littleName">Product List</span>
+    訂單列表
+    <span class="littleName">Order List</span>
 </h1>
 <div class="searchArea">
-    <select id="selectVal" class="form-select selectBox" aria-label="Default select example">
-        <option selected>全部商品</option>
-        <option value="食材">食材</option>
-        <option value="廚具">廚具</option>
-    </select>
     <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入名稱關鍵字...">
     <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="查詢" />
 </div>
 
 <ul id="selectPage" class="nav nav-tabs">
     <li class="nav-item">
-        <a id="all" class="nav-link active" aria-current="page" href="#">全部商品</a>
+        <a id="all" class="nav-link active" aria-current="page" href="#">全部訂單</a>
     </li>
     <li class="nav-item">
-        <a id="food" class="nav-link" href="#">食材</a>
+        <a id="success" class="nav-link" href="#">完成</a>
     </li>
     <li class="nav-item">
-        <a id="tool" class="nav-link" href="#">廚具</a>
+        <a id="handling" class="nav-link" href="#">處理中</a>
+    </li>
+    <li class="nav-item">
+        <a id="failed" class="nav-link" href="#">失敗</a>
     </li>
 </ul>
+
 <section class="content">
     <div class="col-xs-12">
         <table id="" class='table table-striped table-hover '>
             <thead>
                 <tr>
-                    <th class="col table-success">商品編號</th>
-                    <th class="col table-success">商品類別</th>
-                    <th class="col table-success">商品公司</th>
-                    <th class="col table-success">上架狀態</th>
-                    <th class="col table-success">商品名稱</th>
-                    <th class="col table-success">商品概述</th>
-                    <th class="col table-success">商品價格</th>
-                    <th class="col table-success">商品庫存</th>
-                    <th class="col table-success">商品銷售量</th>
-                    <th class="col table-success">查詢關鍵字</th>
+                    <th class="col table-success">訂單編號</th>
+                    <th class="col table-success">會員帳號</th>
+                    <th class="col table-success">訂單內容</th>
+                    <th class="col table-success">訂單狀態</th>
+                    <th class="col table-success">訂單金額</th>
                     <th class="col table-success">新增日期</th>
                     <th class="col table-success">更新</th>
                     <th class="col table-success">刪除</th>
@@ -58,6 +52,28 @@
         </nav>
     </div>
 </section>
+
+<script>
+    //=============顯示所有商品資料=============
+    window.onload=function(){
+        const productUrl = "http://localhost:8080/bkorders"
+
+        $.ajax({
+            url: productUrl,
+            type: "GET",
+            success: function(productData){
+                let num = productData.length;
+                if(num >= 10){
+                    pages(10,productData);
+                }else{
+                    pages(num,productData);
+                }
+            }
+        });
+    }
+
+</script>
+
 <script>
     //=============刪除確認=============
 
@@ -132,29 +148,6 @@
         })
 
     });
-</script>
-
-<script>
-    //=============顯示所有商品資料=============
-    window.onload=function(){
-        const productUrl = "http://localhost:8080/bkproducts"
-
-        $.ajax({
-            url: productUrl,
-            type: "GET",
-            success: function(productData){
-                $("#products").html("");
-                $("#page").html("");
-                let num = productData.length;
-                if(num >= 10){
-                    pages(10,productData);
-                }else{
-                    pages(num,productData);
-                }
-            }
-        });
-    }
-
 </script>
 
 <script>
@@ -348,30 +341,12 @@
     function showData(startItem,endItem,dataSource){
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
-            txt += "<td class='align-middle'>"+dataSource[i].productId+"</td>"
-            let cate = dataSource[i].categories;
-            let type = ""
-            if( cate == 0){type = "廚具";
-            }else{ type = "食材";}
-            txt += "<td class='align-middle'>"+type+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productCompany+"</td>"
-            let st = dataSource[i].product_status;
-            let status = ""
-            if( st == 1){
-                status = "上架中";
-            }else{
-                status = "下架中";
-            }
-            txt += "<td class='align-middle'>"+status+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productName+"</td>"
-            let contentObj = new String(dataSource[i].productContent);
-            let context = contentObj.substring(0,10);
-            txt += "<td class='align-middle'>"+context+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productPrice+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productStock+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productSalesFigures+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productKeywords+"</td>"
-            let newDate = new Date(dataSource[i].productInsertDate);
+            txt += "<td class='align-middle'>"+dataSource[i].ordersId+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].memberId+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].ordersNote+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].ordersState+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].ordersTotal+"</td>"
+            let newDate = new Date(dataSource[i].ordersDate);
             let register = newDate.toLocaleString();
             txt += "<td class='align-middle'>"+register+"</td>"
             txt += '<td class="align-middle">'+

@@ -8,7 +8,7 @@ public class BkPageController {
 
     @GetMapping("/backend")
     public String main(){
-        return "app.BackendMember";
+        return "app.BackendMain";
     }
 
     @GetMapping("/backend/ProductAdd")
@@ -26,24 +26,29 @@ public class BkPageController {
         return "app.BackendMemberUpdate";
     }
 
-    @GetMapping("backend/manager")
+    @GetMapping("/backend/manager")
     public String BackendManager(){ return "app.BackendManager";}
 
-    @GetMapping("backend/manager/update")
+    @GetMapping("/backend/manager/update")
     public String BackendManagerUpdate(){ return "app.BackendManagerUpdate";}
 
-    @GetMapping("backend/product")
+    @GetMapping("/backend/product")
     public String BackendProduct(){
         return "app.BackendProduct";
     }
 
-    @GetMapping("backend/product/update")
+    @GetMapping("/backend/product/update")
     public String BackendProductUpdate(){
         return "app.BackendProductUpdate";
     }
 
-    @GetMapping("backend/report/age")
+    @GetMapping("/backend/report/age")
     public String BackendReportAge(){
         return "app.BackendReportAge";
+    }
+
+    @GetMapping("/backend/order")
+    public String BackendOrder(){
+        return "app.BackendOrder";
     }
 }
