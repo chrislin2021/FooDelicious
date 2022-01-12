@@ -13,9 +13,13 @@ public interface CompanyBackEndServiceInterface {
 	
 	public List<Product> getAllProducts(HttpSession session);
 
-	public Product findByProductId(Integer productId);
+	public String deleteProduct(Long productId);
+
+	public String updateProduct(Long productId, Product product);
+
+	public Product findByProductId(Long productId);
+
 	
-	public String updateProduct(Integer productId, Product product);
 
 
 }

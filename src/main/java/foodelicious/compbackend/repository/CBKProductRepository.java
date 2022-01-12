@@ -17,7 +17,7 @@ public interface CBKProductRepository extends JpaRepository<Product, Long>{
 
 	List<Product> findAllByProductCompanyId(Long companyId);
 	
-	Product findByProductId(Integer productId);
+	Product findByProductId(Long productId);
 	
 
 	

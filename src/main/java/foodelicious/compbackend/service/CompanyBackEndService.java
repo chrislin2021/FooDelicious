@@ -6,9 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import foodelicious.cart.service.CartService;
 import foodelicious.compbackend.model.CBKOrderDaoInterface;
 import foodelicious.compbackend.model.CBKProductDaoInterface;
-import foodelicious.orders.model.OrdersBean;
 import foodelicious.product.model.Product;
 
 @Service
@@ -19,9 +20,12 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 	
 	private CBKOrderDaoInterface cbkOrderDaoInterface;
 	
-	public CompanyBackEndService (final CBKProductDaoInterface cbkProductDaoInterface,CBKOrderDaoInterface cbkOrderDaoInterface) {
+	private CartService cartService;
+	
+	public CompanyBackEndService (final CBKProductDaoInterface cbkProductDaoInterface,CBKOrderDaoInterface cbkOrderDaoInterface, CartService cartService) {
 		this.cbkProductDaoInterface = cbkProductDaoInterface;
 		this.cbkOrderDaoInterface = cbkOrderDaoInterface;
+		this.cartService = cartService;
 	}
 	
 	public List<Product> getAllProducts(HttpSession session){
@@ -29,17 +33,29 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 		return products;
 	}
 
+	
 	@Override
-	public Product findByProductId(Integer productId) {
+	public Product findByProductId(Long productId) {
 		Product product = cbkProductDaoInterface.findByProductId(productId);
 		return product;
 	}
 
 	@Override
-	public String updateProduct(Integer productId, Product product) {
+	public String updateProduct(Long productId, Product product) {
 		
 		return cbkProductDaoInterface.updateProduct(productId, product);
 	}
+	
+	
+	@Override
+	public String deleteProduct(Long productId) {
+		
+		return cbkProductDaoInterface.deleteProduct(productId);
+		
+	}
+	
+	
+	
 
 	
 	

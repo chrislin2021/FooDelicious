@@ -40,13 +40,13 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	
 	
 	@Override
-	public Product findByProductId(Integer productId) {
+	public Product findByProductId(Long productId) {
 		Product product = em.find(Product.class, productId);
 		return product;
 	}
 
 
-	public String updateProduct(Integer productId, Product product) {
+	public String updateProduct(Long productId, Product product) {
 		Product newProduct = cbkProdRepository.findByProductId(productId);
 		if(newProduct != null) {
 			newProduct.setProductCompany(product.getProductCompany());
@@ -68,8 +68,8 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	}
 	
 	@Override
-	public String deleteProduct(Integer id) {
-		Product product = em.find(Product.class, id);
+	public String deleteProduct(Long productId) {
+		Product product = em.find(Product.class, productId);
 		if (product != null) {
 			em.remove(product);
 			return "Product deletion successful!";

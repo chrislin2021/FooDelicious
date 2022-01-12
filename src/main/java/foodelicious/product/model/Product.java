@@ -31,7 +31,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
-	private Integer productId;
+	private Long productId;
 
 	@Column(name = "categories")
 	private Short productCategories;
@@ -46,11 +46,7 @@ public class Product implements Serializable {
 	private String productCompany;
 	
 
-	
-//	//join member table
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "product_company_id")
-//	private Member member;
+
 
 	@Column(name = "product_company_id")
 	private Long productCompanyId;
@@ -87,11 +83,11 @@ public class Product implements Serializable {
 		super();
 	}
 
-	public Integer getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 

@@ -42,12 +42,12 @@ public class CompanyBackEndRestController {
 	// use the final method instead of @autowired. it's the GOOD Way of writing it
 	// 跟spring DI有關 Search for spring DI 好的 壞的 醜的
 	public CompanyBackEndRestController(final CompanyBackEndServiceInterface cbkServiceInterface,
-			CBKProductRepository cbk, CBKProductDao cbkProductDao, CBKProblemRepository cpk) {
+			CBKProductRepository cbk, CBKProductDao cbkProductDao, CBKProblemRepository cpk, CBKProblemDao cbkProblemDao) {
 		this.cbkServiceInterface = cbkServiceInterface;
 		this.cbk = cbk;
 		this.cpk = cpk;
 		this.cbkProductDao = cbkProductDao;
-		this.cbkProblemDao = new CBKProblemDao();
+		this.cbkProblemDao = cbkProblemDao;
 	}
 
 	@GetMapping("/companyProducts") // Important! /companyProduct is controller, /companyProducts is RESTController
@@ -59,13 +59,13 @@ public class CompanyBackEndRestController {
 	}
 
 	@GetMapping("companyProducts/update/{productId}")
-	public Product findByProductId(@PathVariable Integer productId) {
+	public Product findByProductId(@PathVariable Long productId) {
 		//return cbkServiceInterface.findByProductId(productId);
 		return cbkServiceInterface.findByProductId(productId);
 	}
 
 	@PutMapping("/companyProducts/update/{productId}")
-	public String updateProduct(@PathVariable Integer productId, @RequestBody Product product) {
+	public String updateProduct(@PathVariable Long productId, @RequestBody Product product) {
 		return cbkServiceInterface.updateProduct(productId,product);
 	}
 	
@@ -77,15 +77,15 @@ public class CompanyBackEndRestController {
 		 String companyName = (String)session.getAttribute("userName");
 		 String mailSentStatus = mailService.receiveProblemReports(sender,companyName);
 		//System.out.println(mailSentStatus);
-		 cpk.save(problem);
-		 return "問題發送成功";
+		 //cpk.save(problem);
+		 return cbkProblemDao.insertProblem(problem);
 	}
 
 
 	@DeleteMapping("/companyProducts/delete/{productId}")
-	public String deleteProduct(@PathVariable Integer productId) {
+	public String deleteProduct(@PathVariable Long productId) {
 		
-		return cbkProductDao.deleteProduct(productId);
+		return cbkServiceInterface.deleteProduct(productId);
 	}
 
 }

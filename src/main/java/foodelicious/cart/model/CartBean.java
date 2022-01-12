@@ -2,6 +2,7 @@ package foodelicious.cart.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,7 +47,7 @@ public class CartBean implements Serializable {
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "product_id", insertable = false, updatable = false)
 	private Product product;
 

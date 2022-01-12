@@ -70,7 +70,6 @@
 				</div>
 				<ul class="sub-menu">
 					<li><a class="link_name" href="#">分析報表</a></li>
-					<li><a href="#">年齡層分析</a></li>
 					<li><a href="#">暢銷商品</a></li>
 					<li><a href="#">銷售總額</a></li>
 				</ul>
@@ -133,15 +132,19 @@
                      </select>
                      
 					 <h6 style="margin:5px;margin-top:10px;">問題描述:</h6>  
-					 <textarea name="problem-content" rows="8" cols="70" placeholder="please write here" id="problem-content" form="problemform">
-					 
-					 </textarea>                 
+					 <textarea name="problem-content" rows="8" cols="70" placeholder="please write here" id="problem-content" form="problemform"></textarea>                 
 					 
 <!-- 					 <span style="margin:4px;margin-top:10px;margin-bottom:10px">檔案上傳:</span> </br> -->
 <!-- 					 <input type="file" id="fileUpload" accept="application/msword"> -->
-
-					</br>
-					</br></br></br></br></br></br>
+					 <select id="prodProb" class="form-select upInput text-middle upInputMd" style="width:20%">
+                                    <option value="" id="probStatus" selected></option>
+                                    <option value="0">商品</option>
+                                    <option value="1">訂單</option>
+                                    <option value="2">系統</option>
+                                    <option value="3">會員</option>
+                                    <option value="4">其他</option>
+                     </select>
+					 </br></br></br></br></br></br></br>
 					 <c:set var="userID" value="${userID}"/>
 					 <input type="text" hidden id="companyId" value='${userID}'>
 					 <input type="button" id="submitComplete" class="btn btn-outline-danger" value="submit">
@@ -168,9 +171,14 @@
     	<!-- 確認問題回報單沒有空白 -->
     $("#submitComplete").on("click",function(){
     	event.preventDefault();
-    	//alert("here");
     	let now = new Date();
- 		let companyId = $("#companyId").val();
+    	
+    	//依照問題分類 顯示不同的問題
+ 		switch($("#problemsCat").val()){
+ 			case 0:
+ 		
+ 		
+ 		}
         let problemReport = {
         	"companyId":$("#companyId").val(),
             "problemCategory": $("#problemsCat").val(),
