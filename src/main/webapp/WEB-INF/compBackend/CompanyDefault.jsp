@@ -136,14 +136,7 @@
 					 
 <!-- 					 <span style="margin:4px;margin-top:10px;margin-bottom:10px">檔案上傳:</span> </br> -->
 <!-- 					 <input type="file" id="fileUpload" accept="application/msword"> -->
-					 <select id="prodProb" class="form-select upInput text-middle upInputMd" style="width:20%">
-                                    <option value="" id="probStatus" selected></option>
-                                    <option value="0">商品</option>
-                                    <option value="1">訂單</option>
-                                    <option value="2">系統</option>
-                                    <option value="3">會員</option>
-                                    <option value="4">其他</option>
-                     </select>
+					
 					 </br></br></br></br></br></br></br>
 					 <c:set var="userID" value="${userID}"/>
 					 <input type="text" hidden id="companyId" value='${userID}'>
@@ -172,19 +165,12 @@
     $("#submitComplete").on("click",function(){
     	event.preventDefault();
     	let now = new Date();
-    	
-    	//依照問題分類 顯示不同的問題
- 		switch($("#problemsCat").val()){
- 			case 0:
- 		
- 		
- 		}
+    	let companyId = $("#companyId").val();
         let problemReport = {
         	"companyId":$("#companyId").val(),
             "problemCategory": $("#problemsCat").val(),
             "problemContent": $("#problem-content").val(),
-            "problemStatus": 'unresolved',
-            "problemSubmitDate" : now,
+            "problemStatus": "unresolved",
           
         };
         let problemString = JSON.stringify(problemReport);

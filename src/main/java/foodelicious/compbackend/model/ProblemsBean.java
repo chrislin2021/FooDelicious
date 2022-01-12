@@ -28,7 +28,7 @@ public class ProblemsBean implements Serializable {
 	@Column(name = "problem_content")
 	private String problemContent;
 	
-	
+	@Transient
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "problem_submit_time")
 	private Date problemSubmitDate;
