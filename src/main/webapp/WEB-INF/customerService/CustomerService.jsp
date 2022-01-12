@@ -37,7 +37,7 @@ label {
   display: inline-block;
 }
 
-input[type=submit] {
+input[type=button] {
   background-color: #4CAF50;
   color: white;
   padding: 12px 20px;
@@ -45,28 +45,33 @@ input[type=submit] {
   border-radius: 4px;
   cursor: pointer;
   float: center;
+  margin-left:5px;
+  position:center;
 }
 
-input[type=submit]:hover {
+input[type=button]:hover {
   background-color: #45a049;
 }
 
 .container {
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #ffe599;
   padding: 20px;
+  position:center;
 }
 
 .col-25 {
   float: left;
   width: 25%;
   margin-top: 6px;
+  position:center;
 }
 
 .col-75 {
   float: left;
   width: 75%;
   margin-top: 6px;
+  position:center;
 }
 
 /* Clear floats after the columns */
@@ -88,10 +93,12 @@ input[type=submit]:hover {
 <body>
 
 <h2>客戶反應中心</h2>
-<p>請留下您的問題與敘述，我們會於24小時內回覆給您</p>
+<p>請留下您的寶貴建議，我們會將盡速與您聯繫，謝謝您!</p>
 
 <div class="container">
-  <form action="/action_page.php">
+     <div class="required">
+     </div>
+  <form:form class="form" method="POST" modelAttribute="customerService"> <!--  customerService是物件的型別-->
   <div class="row">
     <div class="col-25">
       <label for="name">姓名</label>
@@ -102,7 +109,7 @@ input[type=submit]:hover {
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="email">聯絡Email或電話</label>
+      <label for="email">聯絡Email</label>
     </div>
     <div class="col-75">
       <input type="text" id="email" name="email" placeholder="輸入您的email" required>
@@ -123,20 +130,36 @@ input[type=submit]:hover {
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="subject">問題(請盡量詳述)</label>
+      <label for="subject">反應事項</label>
     </div>
     <div class="col-75">
-      <textarea id="subject" name="subject" placeholder="請描述您的問題" style="height:200px"></textarea>
+      <form:textarea class="form-control" id="subject" name="subject" placeholder="請描述您的問題" style="height:200px" required="" path="problem_Text"></form:textarea>
+    <c:out value="${requestObject.problem_Text}"/>
     </div>
   </div>
   <br>
-  <div class="row">
-    <input type="submit" value="送出" style="height:50px;width:100px">
-    <input type="button" value="清除" onclick="clearText();" style="height:50px;width:100px">
-    <input type="submit" value="一鍵輸入" style="height:50px;width:100px">
+  <div class="row justify-content-md-center">
+    <input type="button" color="#3CB371" value="送出" onclick="submit();" style="height:50px;width:100px">
+    <input type="button" color="#FAF0E6" value="清除" onclick="clearText();" style="height:50px;width:100px">
+    <input type="button" color="#FFD700" value="一鍵輸入" onclick="enter();" style="height:50px;width:100px">
   </div>
-  </form>
+  </form:form>
 </div>
+
+<script>
+	function enter(){
+		$("#name").val("王小明");
+		$("#email").val("mingming11@gmail.com")
+		$("#subject").val("服務真方便，期待回購!")
+	}
+	function clearText(){
+		$("#name").val(" ");
+		$("#email").val(" ")
+		$("#subject").val(" ")
+	}
+
+</script>
 
 </body>
 </html>
+
