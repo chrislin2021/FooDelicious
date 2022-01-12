@@ -14,14 +14,15 @@
 </style>
 
 <body>
+
 	<div align='center'>
 		<h3>註冊會員</h3>
 
 		<c:set var='updateurl'
 			value='${pageContext.request.contextPath}/members/${memberId}' />
 		<form:form class="form" method="POST" modelAttribute="member">
-		
-		<form:input type="hidden" class="form-control"
+
+			<form:input type="hidden" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" path="memberId" />
 
@@ -112,6 +113,25 @@
 			<button type="submit" class="btn btn-outline-primary"
 				value="register">註冊</button>
 		</form:form>
+		
 	</div>
+		<button class="C1" style="width: 100px; height: 30px;" id="button">一鍵送出</button> 
 
 </body>
+<script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
+<script src="${contextRoot}/js/jquery-ui.js"></script>
+<script type="text/javascript">
+	//自動填入資料
+	$(document).ready(function() {
+		$(".C1").click(function() {
+			$("#memberMail").val('eeit13711@gmail.com');
+			$("#pwd").val('$$$$happy13711');
+			$("#memberName").val('石六六');
+			$("#member_gender_m").val('男');
+			$("#memberBirth").val('2011-11-29');
+			$("#memberPhone").val('0911222666');
+			$("#memberAddress").val('台北市大安區信義路100號');
+		})
+	});
+
+</script>

@@ -7,12 +7,15 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
@@ -72,7 +75,9 @@ public class MemberLoginController {
 //		 }
 
 	@GetMapping("/normallogout")
-	public String logout(HttpSession session) {
+	public String logout(HttpServletRequest request, HttpServletResponse response, SessionStatus status) {
+		HttpSession session = request.getSession();
+		status.setComplete();
 		session.invalidate(); // session.invalidate()讓SESSION失效.
 
 		return "redirect:/";

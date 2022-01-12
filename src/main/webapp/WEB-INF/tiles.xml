@@ -30,6 +30,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/member/updatePage.jsp" />
 	</definition>
+	
+	<definition name="app.loginSuccess" extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/member/loginSuccess.jsp" />
+	</definition>
 
 	<definition name="app.PostArticle" extends="app.default">
 		<put-attribute name="content"

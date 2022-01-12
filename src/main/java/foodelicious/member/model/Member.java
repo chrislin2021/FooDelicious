@@ -117,6 +117,15 @@ public class Member implements Serializable {
 		this.memberMail = memberMail;
 		this.pwd = pwd;
 	}
+	
+
+
+	public Member(@Email String memberMail, String memberName, Date register_date) {
+		super();
+		this.memberMail = memberMail;
+		this.memberName = memberName;
+		this.register_date = register_date;
+	}
 
 	public Member() {
 
