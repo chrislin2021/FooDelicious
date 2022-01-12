@@ -2,19 +2,26 @@ package foodelicious.CustomerService.model;
 
 import org.springframework.stereotype.Repository;
 
+import foodelicious.CustomerService.repository.CustomerServiceRepository;
+
 @Repository
-public class CustomerServiceDao {
-	
-//	public void addCustomerService(CustomerService customerService);
-//	 
-//	public void editCustomerService(CustomerService customerService, int problem_Id);
-// 
-//	public void deleteMovie(int movieId);
-// 
-//	public void deleteAll();
-// 
-//	public Movie find(int movieId);
-// 
-//	public List<Movie> findAll();
-//	
+public class CustomerServiceDao implements CustomerServiceDaoInterface {
+
+	public CustomerServiceDao(CustomerServiceRepository customerServiceRepository) {
+		csrep = customerServiceRepository;
+	}
+
+	CustomerServiceRepository csrep;
+
+	public boolean addProblem(CustomerService customerService) {
+		var isSuccess = true;
+		try {
+			csrep.save(customerService);
+		} catch (Exception e) {
+			isSuccess = false;
+		} 
+		return isSuccess;
+		
+	}
+
 }
