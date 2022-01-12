@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import foodelicious.compbackend.model.ProblemsBean;
 
 @Repository
-public interface CBKProblemRepository extends JpaRepository<ProblemsBean, Long> {
+public interface CBKProblemRepository extends JpaRepository<ProblemsBean, Integer> {
 
 }

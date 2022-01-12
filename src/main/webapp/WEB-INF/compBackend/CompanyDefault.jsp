@@ -168,13 +168,15 @@
     	<!-- 確認問題回報單沒有空白 -->
     $("#submitComplete").on("click",function(){
     	event.preventDefault();
-    	alert("here");
-    	//alert($("#problemsCat").val());
+    	//alert("here");
+    	let now = new Date();
  		let companyId = $("#companyId").val();
         let problemReport = {
         	"companyId":$("#companyId").val(),
             "problemCategory": $("#problemsCat").val(),
             "problemContent": $("#problem-content").val(),
+            "problemStatus": 'unresolved',
+            "problemSubmitDate" : now,
           
         };
         let problemString = JSON.stringify(problemReport);
@@ -185,15 +187,15 @@
         	contentType:"application/json; charset=UTF-8",
         	data: problemString,
         	success:function(msg){
-        		alert("success");
+        		alert(msg);
         		setTimeout(function(){
      				window.location.href="/companyMain2";
-     			},2000);
+     			},1000);
         	}, error: function(){
         		alert("fail");
         		setTimeout(function(){
      				window.location.href="/companyMain2";
-     			},1500);
+     			},1000);
         	}
         })
         

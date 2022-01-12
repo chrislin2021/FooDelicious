@@ -3,26 +3,22 @@ package foodelicious.compbackend.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import foodelicious.member.model.Member;
 
 @Entity
 @Table(name="problem_report")
 public class ProblemsBean implements Serializable {
 	
 	@Id
-	@Column(name = "problem_id")
+	@Column(name = "problem_id ")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer problemId;
 	
@@ -31,6 +27,7 @@ public class ProblemsBean implements Serializable {
 	
 	@Column(name = "problem_content")
 	private String problemContent;
+	
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "problem_submit_time")
@@ -90,6 +87,8 @@ public class ProblemsBean implements Serializable {
 	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
+
+	
 
 	
 	

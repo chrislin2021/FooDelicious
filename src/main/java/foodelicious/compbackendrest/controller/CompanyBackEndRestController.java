@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import foodelicious.compbackend.model.CBKProblemDao;
 import foodelicious.compbackend.model.CBKProductDao;
 import foodelicious.compbackend.model.ProblemsBean;
+import foodelicious.compbackend.repository.CBKProblemRepository;
 import foodelicious.compbackend.repository.CBKProductRepository;
 import foodelicious.compbackend.service.CompanyBackEndServiceInterface;
 import foodelicious.mail.service.MailService;
@@ -28,6 +28,8 @@ public class CompanyBackEndRestController {
 
 	// 測試 記得最後輸入的是service interface
 	private final CBKProductRepository cbk;
+	
+	private final CBKProblemRepository cpk;
 
 	// 測試 記得最後輸入的是service interface
 	private final CBKProductDao cbkProductDao;
@@ -40,9 +42,10 @@ public class CompanyBackEndRestController {
 	// use the final method instead of @autowired. it's the GOOD Way of writing it
 	// 跟spring DI有關 Search for spring DI 好的 壞的 醜的
 	public CompanyBackEndRestController(final CompanyBackEndServiceInterface cbkServiceInterface,
-			CBKProductRepository cbk, CBKProductDao cbkProductDao) {
+			CBKProductRepository cbk, CBKProductDao cbkProductDao, CBKProblemRepository cpk) {
 		this.cbkServiceInterface = cbkServiceInterface;
 		this.cbk = cbk;
+		this.cpk = cpk;
 		this.cbkProductDao = cbkProductDao;
 		this.cbkProblemDao = new CBKProblemDao();
 	}
@@ -74,7 +77,8 @@ public class CompanyBackEndRestController {
 		 String companyName = (String)session.getAttribute("userName");
 		 String mailSentStatus = mailService.receiveProblemReports(sender,companyName);
 		//System.out.println(mailSentStatus);
-		 return cbkProblemDao.insertProblem();
+		 cpk.save(problem);
+		 return "問題發送成功";
 	}
 
 

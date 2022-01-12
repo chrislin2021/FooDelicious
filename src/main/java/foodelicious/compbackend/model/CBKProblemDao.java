@@ -1,5 +1,7 @@
 package foodelicious.compbackend.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -44,13 +46,13 @@ public class CBKProblemDao {
 			 ProblemsBean insertProb = new ProblemsBean();
 			 insertProb.setProblemCategory(1);
 			 insertProb.setProblemContent("a lot of things");
-			 insertProb.setCompanyId(22L);
-			 Date now = new Date();
+			 insertProb.setCompanyId(1L);
+			 Date now= new Date();
 			 insertProb.setProblemSubmitDate(now);
 			 System.out.println("hereeeeeeeeeeeeeeee");
 			 //insertProb 好像是空的
 			 cbkProblemRepository.saveAndFlush(insertProb);
-			 
+			 System.out.println("在這裡嗎?");
 			 return "Problem insert successful!";
 		 }
 		 
