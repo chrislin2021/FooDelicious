@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import foodelicious.article.model.ShareArea;
+import foodelicious.cashflow.model.CashflowAddressBean;
 import foodelicious.product.model.Product;
 
 @Entity(name = "member_data2")
@@ -90,6 +91,11 @@ public class Member implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "register_date")
 	private Date register_date;
+	
+	// 與CashflowAddressBean是一對多關係
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<CashflowAddressBean> CashflowAddressBeans = new LinkedHashSet<CashflowAddressBean>();	
+
 
 	// 與ShareArea是一對多關係
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)

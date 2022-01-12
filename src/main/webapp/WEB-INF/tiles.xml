@@ -159,11 +159,17 @@
 		<put-attribute name="content"
 			value="/WEB-INF/backend/memberPage/BackendMember.jsp" />
 	</definition>
-
+	
 	<definition name="app.CashflowList"
-		extends="app.BackendDefault">
-		<put-attribute name="content"
-			value="/WEB-INF/cashflow/GetAllProject.jsp" />
+		template="/WEB-INF/cashflow/CashflowList.jsp">		
+		<put-attribute name="title"
+			value="/CashflowList" />
+	</definition>
+
+	<definition name="app.CashFlowAddress" 		
+		template="/WEB-INF/cashflow/CashflowList.jsp">		
+		<put-attribute name="title"
+			value="/CashflowList" />
 	</definition>
 
 	<definition name="app.BackendMemberUpdate"
