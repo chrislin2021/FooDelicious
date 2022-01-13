@@ -51,4 +51,9 @@ public class BkPageController {
     public String BackendOrder(){
         return "app.BackendOrder";
     }
+
+    @GetMapping("/backend/article")
+    public String BackendArticle(){
+        return "app.BackendArticle";
+    }
 }

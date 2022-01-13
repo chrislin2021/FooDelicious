@@ -210,6 +210,25 @@ public class CartController {
 	}
 
 	@ResponseBody
+	@GetMapping("/getContent/{discountName}")
+	public Integer getDiscountContent(@PathVariable(required = false) String discountName) {
+
+		List<DiscountBean> discounts = discountService.selectItem((Long) session.getAttribute("userID"));
+
+		Integer Temp = 0;
+
+		if (discountName != null) {
+			for (DiscountBean discount : discounts) {
+				if (discount.getDiscountName().equals(discountName)) {
+					Temp += discount.getDiscountContent();
+					break;
+				}
+			}
+		}
+		return Temp;
+	}
+
+	@ResponseBody
 	@GetMapping("/searchProduct/{name}")
 	public List<Product> searchProduct(@PathVariable(name = "name") String productName) {
 

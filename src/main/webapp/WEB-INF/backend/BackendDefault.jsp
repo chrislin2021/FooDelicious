@@ -80,7 +80,7 @@
 
         <!-- 文章管理 -->
         <li id="ArticleList" class="list-group-item funName">
-            <a href="#" style="text-decoration: none">
+            <a href="/backend/article" style="text-decoration: none">
                 <i class="text-secondary fas fa-scroll"></i>
                 <span class="listName">文章管理</span>
             </a>

@@ -225,4 +225,10 @@
 					   value="/WEB-INF/backend/orderPage/BackendOrder.jsp" />
 	</definition>
 
+	<definition name="app.BackendArticle"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/articlePage/BackendArticle.jsp" />
+	</definition>
+
 </tiles-definitions>

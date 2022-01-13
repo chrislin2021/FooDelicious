@@ -17,6 +17,13 @@ public interface CBKProductDaoInterface {
 	
 	String updateProduct(Long productId, Product product);
 
+	// 商品分類搜尋 (not using search box)
 	List<Product> findByType(Integer category, Long productCompanyId);
+
+	
+	//using search box
+	List<Product> findByName(String productName);
+
+	
 
 }
