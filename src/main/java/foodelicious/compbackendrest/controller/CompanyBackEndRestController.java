@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.compbackend.model.CBKProblemDao;
 import foodelicious.compbackend.model.CBKProductDao;
 import foodelicious.compbackend.model.ProblemsBean;
@@ -28,21 +29,22 @@ public class CompanyBackEndRestController {
 
 	// 測試 記得最後輸入的是service interface
 	private final CBKProductRepository cbk;
-	
+
 	private final CBKProblemRepository cpk;
 
 	// 測試 記得最後輸入的是service interface
 	private final CBKProductDao cbkProductDao;
-	
+
 	private final CBKProblemDao cbkProblemDao;
-	
+
 	@Autowired
 	private MailService mailService;
 
 	// use the final method instead of @autowired. it's the GOOD Way of writing it
 	// 跟spring DI有關 Search for spring DI 好的 壞的 醜的
 	public CompanyBackEndRestController(final CompanyBackEndServiceInterface cbkServiceInterface,
-			CBKProductRepository cbk, CBKProductDao cbkProductDao, CBKProblemRepository cpk, CBKProblemDao cbkProblemDao) {
+			CBKProductRepository cbk, CBKProductDao cbkProductDao, CBKProblemRepository cpk,
+			CBKProblemDao cbkProblemDao) {
 		this.cbkServiceInterface = cbkServiceInterface;
 		this.cbk = cbk;
 		this.cpk = cpk;
@@ -58,33 +60,36 @@ public class CompanyBackEndRestController {
 
 	}
 
+	@GetMapping("/companyProducts/search/{categories}")
+	public List<Product> findAllByName(@PathVariable Integer categories, HttpSession session) {
+		Long productCompanyId = (Long) session.getAttribute("userID");
+		return cbkServiceInterface.findByType(categories, productCompanyId);
+	}
+
 	@GetMapping("companyProducts/update/{productId}")
 	public Product findByProductId(@PathVariable Long productId) {
-		//return cbkServiceInterface.findByProductId(productId);
+		// return cbkServiceInterface.findByProductId(productId);
 		return cbkServiceInterface.findByProductId(productId);
 	}
 
 	@PutMapping("/companyProducts/update/{productId}")
 	public String updateProduct(@PathVariable Long productId, @RequestBody Product product) {
-		return cbkServiceInterface.updateProduct(productId,product);
-	}
-	
-	
-	@PutMapping("/companyProblemReport/{companyId}")
-	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {
-		 //System.out.println("in rest controller");
-		 String sender = (String)session.getAttribute("memberMail");
-		 String companyName = (String)session.getAttribute("userName");
-		 String mailSentStatus = mailService.receiveProblemReports(sender,companyName);
-		//System.out.println(mailSentStatus);
-		 //cpk.save(problem);
-		 return cbkProblemDao.insertProblem(problem);
+		return cbkServiceInterface.updateProduct(productId, product);
 	}
 
+	@PutMapping("/companyProblemReport/{companyId}")
+	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {
+		// System.out.println("in rest controller");
+		String sender = (String) session.getAttribute("memberMail");
+		String companyName = (String) session.getAttribute("userName");
+		String mailSentStatus = mailService.receiveProblemReports(sender, companyName);
+
+		return cbkProblemDao.insertProblem(problem);
+	}
 
 	@DeleteMapping("/companyProducts/delete/{productId}")
 	public String deleteProduct(@PathVariable Long productId) {
-		
+
 		return cbkServiceInterface.deleteProduct(productId);
 	}
 

@@ -7,7 +7,7 @@
 <title>登入成功</title>
 </head>
 <body>
-${param.name }/你好<br>
+${param.memberName}/你好<br>
 
 </body>
 </html>

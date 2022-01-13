@@ -17,8 +17,6 @@ public interface MemberService {
 
 	Member findByMemberMail(String memberMail);
 
-//	boolean save(Member member);
-	
 	Member save(Member member);
 
 	List<Member> findAll();

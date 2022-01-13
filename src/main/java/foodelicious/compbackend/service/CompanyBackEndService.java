@@ -39,6 +39,13 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 		Product product = cbkProductDaoInterface.findByProductId(productId);
 		return product;
 	}
+	
+	@Override
+	public List<Product> findByType(Integer categories, Long productCompanyId) {
+		List <Product> catProd = cbkProductDaoInterface.findByType(categories, productCompanyId);
+		return catProd;
+	}
+	
 
 	@Override
 	public String updateProduct(Long productId, Product product) {
@@ -53,6 +60,7 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface{
 		return cbkProductDaoInterface.deleteProduct(productId);
 		
 	}
+
 	
 	
 	

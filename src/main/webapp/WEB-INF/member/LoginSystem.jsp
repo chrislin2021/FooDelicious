@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <meta name="google-signin-client_id"
 	content="676062096-mh4b0oa5ekomddrromhcdjkgl1it3mkv.apps.googleusercontent.com">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -21,17 +22,17 @@
 							<h3 class="mb-5">會員登入</h3>
 							<form action="checklogin.controller" method="post">
 								<div class="form-outline mb-4">
-									<input type="text" id="memberMail"
-										class="form-control form-control-lg" name="memberMail"
-										placeholder="memberMail" required="required" /> <label
+									<input type="text" 
+										class="form-control form-control-lg" name="memberMail" 
+										placeholder="memberMail" /> <label
 										class="form-label" for="memberMail"></label><span
 										id="loginSpan">${errors.memberMail}</span>
 								</div>
 
 								<div class="form-outline mb-4">
 									<input type="password" id="typePasswordX-2"
-										class="form-control form-control-lg" name="pwd"
-										placeholder="pwd" required="required" /> <label
+										class="form-control form-control-lg" name="pwd" 
+										placeholder="pwd" /> <label
 										class="form-label" for="typePasswordX-2"></label><span
 										id="loginSpan">${errors.pwd}</span>
 								</div>
@@ -61,9 +62,6 @@
 								<input type="hidden" id="memberMail" name="memberMail">
 								
 							</form>
-
-
-
 						</div>
 					</div>
 				</div>

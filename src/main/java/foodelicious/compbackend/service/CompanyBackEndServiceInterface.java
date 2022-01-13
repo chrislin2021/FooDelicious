@@ -19,6 +19,8 @@ public interface CompanyBackEndServiceInterface {
 
 	public Product findByProductId(Long productId);
 
+	public List<Product> findByType(Integer categories, Long productCompanyId);
+
 	
 
 
