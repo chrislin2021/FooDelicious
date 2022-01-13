@@ -1,5 +1,8 @@
 package foodelicious.backend.orderPage.model;
 
+import foodelicious.backend.memberpage.model.BkMember;
+import foodelicious.member.model.Member;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,13 +14,19 @@ public class BkOrder implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orders_id")
-    private Integer ordersId;
+    private Long ordersId;
 
     @Column(name = "member_id")
     private Long memberId;
 
-    @Column(name = "orders_note")
-    private String ordersNote;
+    @Column(name = "orders_name")
+    private String ordersName;
+
+    @Column(name = "orders_phone")
+    private String ordersPhone;
+
+    @Column(name = "orders_address")
+    private String ordersAddress;
 
     @Column(name = "orders_state")
     private String ordersState;
@@ -28,11 +37,23 @@ public class BkOrder implements Serializable {
     @Column(name = "orders_date")
     private Date ordersDate;
 
-    public Integer getOrdersId() {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_id",insertable = false, updatable = false)
+    private BkMember bkMember;
+
+    public BkMember getBkMember() {
+        return bkMember;
+    }
+
+    public void setBkMember(BkMember bkMember) {
+        this.bkMember = bkMember;
+    }
+
+    public Long getOrdersId() {
         return ordersId;
     }
 
-    public void setOrdersId(Integer ordersId) {
+    public void setOrdersId(Long ordersId) {
         this.ordersId = ordersId;
     }
 
@@ -44,12 +65,28 @@ public class BkOrder implements Serializable {
         this.memberId = memberId;
     }
 
-    public String getOrdersNote() {
-        return ordersNote;
+    public String getOrdersName() {
+        return ordersName;
     }
 
-    public void setOrdersNote(String ordersNote) {
-        this.ordersNote = ordersNote;
+    public void setOrdersName(String ordersName) {
+        this.ordersName = ordersName;
+    }
+
+    public String getOrdersPhone() {
+        return ordersPhone;
+    }
+
+    public void setOrdersPhone(String ordersPhone) {
+        this.ordersPhone = ordersPhone;
+    }
+
+    public String getOrdersAddress() {
+        return ordersAddress;
+    }
+
+    public void setOrdersAddress(String ordersAddress) {
+        this.ordersAddress = ordersAddress;
     }
 
     public String getOrdersState() {

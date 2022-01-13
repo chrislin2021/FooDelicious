@@ -58,3 +58,8 @@ h1{
 .smalW{
     width: 100px;
 }
+
+.readonly{
+
+    background-color: rgb(228, 225, 225);
+}

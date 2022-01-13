@@ -56,4 +56,9 @@ public class BkPageController {
     public String BackendArticle(){
         return "app.BackendArticle";
     }
+
+    @GetMapping("/backend/order/update")
+    public String BackendOrderUpdate(){
+        return "app.BackendOrderUpdate";
+    }
 }

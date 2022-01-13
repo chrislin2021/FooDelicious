@@ -11,7 +11,7 @@
     <span class="littleName">Order List</span>
 </h1>
 <div class="searchArea">
-    <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入名稱關鍵字...">
+    <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入正確訂單編號">
     <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="查詢" />
 </div>
 
@@ -35,17 +35,18 @@
         <table id="" class='table table-striped table-hover '>
             <thead>
                 <tr>
-                    <th class="col table-success">訂單編號</th>
-                    <th class="col table-success">會員帳號</th>
-                    <th class="col table-success">訂單內容</th>
-                    <th class="col table-success">訂單狀態</th>
-                    <th class="col table-success">訂單金額</th>
-                    <th class="col table-success">新增日期</th>
-                    <th class="col table-success">更新</th>
-                    <th class="col table-success">刪除</th>
+                    <th class="col table-warning smalW">訂單編號</th>
+                    <th class="col table-warning midW">會員帳號</th>
+                    <th class="col table-warning midW">收件人姓名</th>
+                    <th class="col table-warning midW">收件人電話</th>
+                    <th class="col table-warning large">收件人地址</th>
+                    <th class="col table-warning smalW">訂單狀態</th>
+                    <th class="col table-warning smalW">訂單金額</th>
+                    <th class="col table-warning midW">新增日期</th>
+                    <th class="col table-warning smalW">更新</th>
                 </tr>
             </thead>
-            <tbody id="products"></tbody>
+            <tbody id="orders"></tbody>
         </table>
         <nav aria-label="Page navigation example ">
             <ul id="page" class="pagination justify-content-center"></ul>
@@ -56,10 +57,8 @@
 <script>
     //=============顯示所有商品資料=============
     window.onload=function(){
-        const productUrl = "http://localhost:8080/bkorders"
-
         $.ajax({
-            url: productUrl,
+            url: "/bkorders",
             type: "GET",
             success: function(productData){
                 let num = productData.length;
@@ -74,52 +73,37 @@
 
 </script>
 
-<script>
-    //=============刪除確認=============
 
-    $("#products").on("click","#delBtn",function() {
-        let deleteId = $(this).data("id");
-        if (confirm("確定要刪除嗎")) {
-            $.ajax({
-                url: "/bkproducts/delete/"+deleteId,
-                type: "DELETE",
-                success: function(msg){
-                    alert(msg);
-                    window.location.href="/backend/product";
-                }
-            });
-        }
-    })
-</script>
 <script>
-    //=============名稱關鍵字查詢功能=============
+    //=============訂單編號查詢功能=============
     $("#searchAcc").on("click",function(){
-       let inputData = $(".keyWord1").val();
-       let selectVal = $("#selectVal").val();
-       let urlData = "";
-       // alert("inputData："+inputData+", selectVal"+selectVal);
-       if(selectVal === "全部商品"){
-           urlData = "http://localhost:8080/bkproducts/"+inputData;
-       }else if(selectVal === "廚具"){
-           selectVal = 0;
-           urlData = "http://localhost:8080/bkproducts/"+inputData+"/"+selectVal;
-       }else{
-           selectVal = 1;
-           urlData = "http://localhost:8080/bkproducts/"+inputData+"/"+selectVal;
-       }
+        let orderId = $(".keyWord1").val();
        $.ajax({
-           url: urlData,
+           url: "/bkorders/"+orderId,
            type: "GET",
-           success:function(products){
-               let num = products.length;
-               //載入顯示功能
-               showData(0, num, products);
+           success:function(order){
+               if(order){
+                   let txt = "<tr>";
+                   txt += "<td class='align-middle'>"+order.ordersId+"</td>";
+                   txt += "<td class='align-middle'>"+order.bkMember.memberMail+"</td>";
+                   txt += "<td class='align-middle'>"+order.ordersName+"</td>";
+                   txt += "<td class='align-middle'>"+order.ordersPhone+"</td>";
+                   txt += "<td class='align-middle'>"+order.ordersAddress+"</td>";
+                   txt += "<td class='align-middle'>"+order.ordersState+"</td>";
+                   txt += "<td class='align-middle'>"+order.ordersTotal+"</td>";
+                   let newDate = new Date(order.ordersDate);
+                   let register = newDate.toLocaleString();
+                   txt += "<td class='align-middle'>"+register+"</td>"
+                   txt += '<td class="align-middle">'+
+                       '<form method="" >'+
+                       '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+order.ordersId+'>'+
+                       '</form>'+
+                       '</td></tr>'
+                   $("#orders").html(txt);
+                   $("#page").html("");
 
-               //載入分頁功能
-               if(num>=10){
-                   pages(10, products);
                }else{
-                   pages(num, products);
+                   alert("查無此訂單資料，請再次確認訂單編號是否正確");
                }
            }
        })
@@ -131,19 +115,19 @@
     //=============更新商品資料功能=============
 
     //更新前先查詢出資料
-    $("#products").on("click","#updateBtn",function(){
+    $("#orders").on("click","#updateBtn",function(){
         let data = $(this).data("id");
         // alert("data："+data)
         $.ajax({
-            url:"/bkproducts/find/"+data,
+            url:"/bkorders/"+data,
             type: "GET",
-            success:function(product){
+            success:function(order){
                 //將json字串化
-                let productString = JSON.stringify(product);
+                let orderString = JSON.stringify(order);
                 //將資料存到localStorage，給另一個頁面使用
-                localStorage.setItem("productData",productString);
+                localStorage.setItem("orderData",orderString);
                 //跳轉頁面
-                window.location.href="/backend/product/update";
+                window.location.href="/backend/order/update";
             }
         })
 
@@ -152,18 +136,16 @@
 
 <script>
     //=============顯示分頁設定=============
+    //=============全部訂單=============
     let urlString = "";
     $("#all").on("click",function(){
         $("#selectPage a").prop("class","nav-link");
         $("#all").prop("class","nav-link active");
-        urlString = "http://localhost:8080/bkproducts";
-        // alert(urlString);
+        urlString = "/bkorders";
         $.ajax({
             url: urlString,
             type: "GET",
             success: function(productAll){
-                $("#products").html("");
-                $("#page").html("");
                 let num = productAll.length;
                 if(num >= 10){
                     pages(10,productAll);
@@ -173,42 +155,68 @@
             }
         });
     })
-    $("#food").on("click",function(){
+
+    //=============完成=============
+    $("#success").on("click",function(){
         $("#selectPage a").prop("class","nav-link");
-        $("#food").prop("class","nav-link active");
-        urlString = "http://localhost:8080/bkproducts/search/1";
+        $("#success").prop("class","nav-link active");
+        urlString = "/bkorders/pages/完成";
         // alert(urlString);
         $.ajax({
             url: urlString,
             type: "GET",
-            success: function(productFood){
+            success: function(success){
                 $("#products").html("");
                 $("#page").html(" ");
-                let num = productFood.length;
+                let num = success.length;
                 if(num >= 10){
-                    pages(10,productFood);
+                    pages(10,success);
                 }else{
-                    pages(num,productFood);
+                    pages(num,success);
                 }
             }
         });
     })
-    $("#tool").on("click",function(){
+
+    //=============處理中=============
+    $("#handling").on("click",function(){
         $("#selectPage a").prop("class","nav-link");
-        $("#tool").prop("class","nav-link active");
-        urlString = "http://localhost:8080/bkproducts/search/0";
+        $("#handling").prop("class","nav-link active");
+        urlString = "/bkorders/pages/訂單處理中/待出貨/運送中";
         // alert(urlString);
         $.ajax({
             url: urlString,
             type: "GET",
-            success: function(productTool){
+            success: function(handling){
                 $("#products").html("");
                 $("#page").html("");
-                let num = productTool.length;
+                let num = handling.length;
                 if(num >= 10){
-                    pages(10,productTool);
+                    pages(10,handling);
                 }else{
-                    pages(num,productTool);
+                    pages(num,handling);
+                }
+            }
+        });
+    })
+
+    //=============失敗=============
+    $("#failed").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#failed").prop("class","nav-link active");
+        urlString = "/bkorders/pages/失敗";
+        // alert(urlString);
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(failed){
+                $("#products").html("");
+                $("#page").html("");
+                let num = failed.length;
+                if(num >= 10){
+                    pages(10,failed);
+                }else{
+                    pages(num,failed);
                 }
             }
         });
@@ -342,8 +350,10 @@
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
             txt += "<td class='align-middle'>"+dataSource[i].ordersId+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].memberId+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].ordersNote+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].bkMember.memberMail+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].ordersName+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].ordersPhone+"</td>"
+            txt += "<td class='align-middle'>"+dataSource[i].ordersAddress+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].ordersState+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].ordersTotal+"</td>"
             let newDate = new Date(dataSource[i].ordersDate);
@@ -351,16 +361,11 @@
             txt += "<td class='align-middle'>"+register+"</td>"
             txt += '<td class="align-middle">'+
                 '<form method="" >'+
-                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].productId+'>'+
-                '</form>'+
-                '</td>'
-            txt += '<td class="mdata">'+
-                '<form method="" action="">'+
-                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].productId+'>'+
+                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].ordersId+'>'+
                 '</form>'+
                 '</td></tr>'
         }
-        $("#products").html(txt);
+        $("#orders").html(txt);
     }
 
 </script>

@@ -2,15 +2,16 @@ package foodelicious.backend.memberpage.model;
 
 
 
+import foodelicious.article.model.ShareArea;
+import foodelicious.backend.orderPage.model.BkOrder;
+import foodelicious.cashflow.model.CashflowAddressBean;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "member_data2")
@@ -52,8 +53,6 @@ public class BkMember implements Serializable {
 
     @Column(name = "register_date")
     private Date registerDate;
-    
-
 
     public Long getMemberId() {
         return memberId;

@@ -19,4 +19,24 @@ public class BkOrderServiceImpl implements BkOrderService{
     public List<BkOrder> findAllOrder() {
         return bkOrderDao.findAllOrder();
     }
+
+    @Override
+    public BkOrder findById(Long orderId) {
+        return bkOrderDao.findById(orderId);
+    }
+
+    @Override
+    public String update(Long orderId, BkOrder bkOrder) {
+        return bkOrderDao.update(orderId, bkOrder);
+    }
+
+    @Override
+    public List<BkOrder> findByStatus(String orderStatus) {
+        return bkOrderDao.findByStatus(orderStatus);
+    }
+
+    @Override
+    public List<BkOrder> findByStatusHandling(String orderStatus, String orderStatus2, String orderStatus3) {
+        return bkOrderDao.findByStatusHandling(orderStatus, orderStatus2, orderStatus3);
+    }
 }
