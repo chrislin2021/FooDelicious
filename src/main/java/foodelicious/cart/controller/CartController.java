@@ -50,7 +50,12 @@ public class CartController {
 
 		if (session.getAttribute("userID") != null) {
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+			Integer count = 0;
+			for (Integer i = 0; i < carts.size(); i++) {
+				count++;
+			}
 			session.setAttribute("carts", carts);
+			session.setAttribute("count", count);
 			session.setAttribute("coin", getGoldCoin());
 			session.setAttribute("priceTotal", originTotal());
 			return "app.ShoppingCart";
@@ -158,8 +163,8 @@ public class CartController {
 		return carts;
 	}
 
-	@GetMapping("/orders")
-	public String orders(@RequestBody String jS) {
+	@GetMapping("/cartToOrders")
+	public String orders() {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -173,7 +178,7 @@ public class CartController {
 		}
 		session.setAttribute("orders", ordersBean);
 
-		return "app.Orders";
+		return "app.CartToOrders";
 	}
 
 	@ResponseBody
@@ -210,22 +215,31 @@ public class CartController {
 	}
 
 	@ResponseBody
-	@GetMapping("/getContent/{discountName}")
-	public Integer getDiscountContent(@PathVariable(required = false) String discountName) {
+	@GetMapping("/getContent/{discountName}/{coin}")
+	public Integer getDiscountContent(@PathVariable(required = false) String discountName,
+			@PathVariable(required = false) String coin) {
 
 		List<DiscountBean> discounts = discountService.selectItem((Long) session.getAttribute("userID"));
 
-		Integer Temp = 0;
+		Integer currentCoin = Integer.parseInt(coin);
+
+		Integer discountContent = 0;
 
 		if (discountName != null) {
 			for (DiscountBean discount : discounts) {
 				if (discount.getDiscountName().equals(discountName)) {
-					Temp += discount.getDiscountContent();
+					discountContent += discount.getDiscountContent();
 					break;
 				}
 			}
 		}
-		return Temp;
+		if (currentCoin != 0) {
+			discountContent += currentCoin;
+		}
+
+		session.setAttribute("discountContent", discountContent);
+
+		return discountContent;
 	}
 
 	@ResponseBody

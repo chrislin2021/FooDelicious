@@ -133,17 +133,17 @@ function discountTotal() {
 				$("#freight").append(str);
 				$("#pay").attr("value", "NT$: " + priceTotal + " 元");
 			}
-			discountMoney(discounts);
+			discountMoney(discounts, coin);
 		}
 	})
 }
 
-function discountMoney(discounts) {
+function discountMoney(discounts, coin) {
 	$.ajax({
-		url: "/getContent/" + discounts,
+		url: "/getContent/" + discounts + "/" + coin,
 		type: "GET",
-		success: function(Temp) {
-			$("#discountPrice").attr("value", Temp);
+		success: function(discountContent) {
+			$("#discountPrice").attr("value", discountContent);
 		}
 	})
 

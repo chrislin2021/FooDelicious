@@ -30,7 +30,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/member/updatePage.jsp" />
 	</definition>
-	
+
 	<definition name="app.loginSuccess" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/member/loginSuccess.jsp" />
@@ -56,12 +56,11 @@
 			value="/WEB-INF/article/UpdateArticle.jsp" />
 	</definition>
 
-	
 	<definition name="app.CompanyDefault2"
 		template="/WEB-INF/compBackend/CompanyDefault.jsp">
 		<put-attribute name="title" value="backend main page" />
 	</definition>
-	
+
 	<definition name="app.websocket" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/article/websocket.jsp" />
@@ -71,7 +70,7 @@
 		template="/WEB-INF/companyBackend/CompanyDefault.jsp">
 		<put-attribute name="title" value="backend main page" />
 	</definition>
-	
+
 	<definition name="app.CompanyMain2"
 		extends="app.CompanyDefault2">
 		<put-attribute name="content"
@@ -83,7 +82,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/companyBackend/CompanyMain.jsp" />
 	</definition>
-	
+
 	<definition name="app.CompanyProduct2"
 		extends="app.CompanyDefault2">
 		<put-attribute name="content"
@@ -95,7 +94,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/companyBackend/CompanyProduct.jsp" />
 	</definition>
-	
+
 	<definition name="app.CompanyProductUpdate"
 		extends="app.CompanyDefault2">
 		<put-attribute name="content"
@@ -119,8 +118,6 @@
 		<put-attribute name="content"
 			value="/WEB-INF/companyBackend/CompanyAddProduct.jsp" />
 	</definition>
-
-
 
 	<definition name="app.Product" extends="app.default">
 		<put-attribute name="content"
@@ -148,6 +145,11 @@
 		<put-attribute name="title" value="/shoppingCart" />
 	</definition>
 
+	<definition name="app.CartToOrders"
+		template="/WEB-INF/orders/cartToOrders.jsp">
+		<put-attribute name="title" value="/cartToOrders"></put-attribute>
+	</definition>
+
 	<definition name="app.CustService" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/custService/CustService.jsp" />
@@ -164,17 +166,15 @@
 		<put-attribute name="content"
 			value="/WEB-INF/backend/memberPage/BackendMember.jsp" />
 	</definition>
-	
+
 	<definition name="app.CashflowList"
-		template="/WEB-INF/cashflow/CashflowList.jsp">		
-		<put-attribute name="title"
-			value="/CashflowList" />
+		template="/WEB-INF/cashflow/CashflowList.jsp">
+		<put-attribute name="title" value="/CashflowList" />
 	</definition>
 
-	<definition name="app.CashFlowAddress" 		
-		template="/WEB-INF/cashflow/CashflowList.jsp">		
-		<put-attribute name="title"
-			value="/CashflowList" />
+	<definition name="app.CashFlowAddress"
+		template="/WEB-INF/cashflow/CashflowList.jsp">
+		<put-attribute name="title" value="/CashflowList" />
 	</definition>
 
 	<definition name="app.BackendMemberUpdate"
@@ -195,46 +195,45 @@
 			value="/WEB-INF/backend/managerPage/BackendManagerUpdate.jsp" />
 	</definition>
 
-	<definition name="app.ListAllMembers"
-		extends="app.default">
+	<definition name="app.ListAllMembers" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/member/listAllMembers.jsp" />
 	</definition>
 
 	<definition name="app.BackendProduct"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/productPage/BackendProduct.jsp" />
+			value="/WEB-INF/backend/productPage/BackendProduct.jsp" />
 	</definition>
 
 	<definition name="app.BackendProductUpdate"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/productPage/BackendProductUpdate.jsp" />
+			value="/WEB-INF/backend/productPage/BackendProductUpdate.jsp" />
 	</definition>
 
 	<definition name="app.BackendReportAge"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/reportPage/AgeDistribution.jsp" />
+			value="/WEB-INF/backend/reportPage/AgeDistribution.jsp" />
 	</definition>
 
 	<definition name="app.BackendOrder"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/orderPage/BackendOrder.jsp" />
+			value="/WEB-INF/backend/orderPage/BackendOrder.jsp" />
 	</definition>
 
 	<definition name="app.BackendArticle"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/articlePage/BackendArticle.jsp" />
+			value="/WEB-INF/backend/articlePage/BackendArticle.jsp" />
 	</definition>
 
 	<definition name="app.BackendOrderUpdate"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/orderPage/BackendOrderUpdate.jsp" />
+			value="/WEB-INF/backend/orderPage/BackendOrderUpdate.jsp" />
 	</definition>
 
 </tiles-definitions>
