@@ -132,7 +132,8 @@
                      </select>
                      
 					 <h6 style="margin:5px;margin-top:10px;">問題描述:</h6>  
-					 <textarea name="problem-content" rows="8" cols="70" placeholder="please write here" id="problem-content" form="problemform"></textarea>                 
+					 <textarea name="problem-content" rows="8" cols="70" placeholder="請詳細描述問題:" id="problem-content" form="problemform"></textarea>                 
+					 </br><span id="textareaError" style="color:red"></span>
 					 
 <!-- 					 <span style="margin:4px;margin-top:10px;margin-bottom:10px">檔案上傳:</span> </br> -->
 <!-- 					 <input type="file" id="fileUpload" accept="application/msword"> -->
@@ -147,17 +148,7 @@
 
 		</div>
 	</div>
-	
-	<script>
-// 		function submitComplete(){
-// 			alert("Submit complete");
-// 			setTimeout(function(){
-// 				window.location.href="/companyMain2";
-// 			},2000);
-// 		}
-	
-	
-	</script>
+
 	
 	<script>
 //     =============傳送問題回報資料=============
@@ -166,32 +157,43 @@
     	event.preventDefault();
     	let now = new Date();
     	let companyId = $("#companyId").val();
-        let problemReport = {
-        	"companyId":$("#companyId").val(),
-            "problemCategory": $("#problemsCat").val(),
-            "problemContent": $("#problem-content").val(),
-            "problemStatus": "unresolved",
-          
-        };
-        let problemString = JSON.stringify(problemReport);
-        
-        $.ajax({
-        	url:"/companyProblemReport/"+companyId,
-        	type:"PUT",
-        	contentType:"application/json; charset=UTF-8",
-        	data: problemString,
-        	success:function(msg){
-        		alert(msg);
-        		setTimeout(function(){
-     				window.location.href="/companyMain2";
-     			},1000);
-        	}, error: function(){
-        		alert("fail");
-        		setTimeout(function(){
-     				window.location.href="/companyMain2";
-     			},1000);
-        	}
-        })
+    	if($("#problem-content").val() == ""){
+    		$("#textareaError").text("請詳述問題內容");
+    		return;
+    	}
+    	else{
+    		let problemReport = {
+    	        	"companyId":$("#companyId").val(),
+    	            "problemCategory": $("#problemsCat").val(),
+    	            "problemContent": $("#problem-content").val(),
+    	            "problemStatus": "unresolved",
+    	          
+    	        };
+    	        let problemString = JSON.stringify(problemReport);
+    	        
+    	        $.ajax({
+    	        	url:"/companyProblemReport/"+companyId,
+    	        	type:"PUT",
+    	        	contentType:"application/json; charset=UTF-8",
+    	        	data: problemString,
+    	        	success:function(msg){
+    	        		alert(msg);
+    	        		setTimeout(function(){
+    	     				window.location.href="/companyMain2";
+    	     			},1000);
+    	        	}, error: function(){
+    	        		alert("fail");
+    	        		setTimeout(function(){
+    	     				window.location.href="/companyMain2";
+    	     			},1000);
+    	        	}
+    	        })
+    	        
+    		
+    		
+    		
+    	}
+    	
         
 
   })

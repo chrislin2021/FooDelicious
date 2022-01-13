@@ -8,6 +8,11 @@
 	<h1 class="tableName">
 		商品列表<span class="smallFont">Product List</span>
 	</h1>
+	<form class="d-flex">
+        	<input class="form-control me-2" type="search" id="" placeholder="" aria-label="Search" value="" style="width:20%;margin-bottom:5px">
+			<button class="btn btn-secondary" type="submit" onclick="searchProduct()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>					
+	</form>				
+
 	<ul id="selectPage" class="nav nav-tabs">
 		<li class="nav-item"><a id="all" class="nav-link active"
 			aria-current="page" href="#">全部商品</a></li>
