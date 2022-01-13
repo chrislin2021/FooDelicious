@@ -230,6 +230,9 @@
 					</td>
 				</tr>
 				<tr>
+				<td>已折價：<input class="fw-bold totalPriceArea" id="discountPrice" type="text" readonly="readonly" value="0" />元				
+				</tr>
+				<tr>
 					<td colspan="2"><input class="fw-bold totalPriceArea" id="pay" type="text" readonly="readonly" value="NT$: ${priceTotal} 元" />&nbsp;<button type="button" class="btn btn-warning">去買單</button></td>
 				</tr>
 			</tbody>

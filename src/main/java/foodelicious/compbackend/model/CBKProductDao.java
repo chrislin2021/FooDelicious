@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.compbackend.repository.CBKProductRepository;
 import foodelicious.product.model.Product;
 
@@ -31,35 +31,37 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	// 找到所有的商品
+	@Override
 	public List<Product> getAllProducts(HttpSession session) {
 		Long id = (Long) session.getAttribute("userID");
 		List<Product> products = cbkProdRepository.findAllByProductCompanyId(id);
 		return products;
 
 	}
-	
-	
+
+	@Override
+	public List<Product> findByName(String productName) {
+
+		List<Product> products = cbkProdRepository.findByName(productName);
+
+		return products;
+	}
+
 	@Override
 	public Product findByProductId(Long productId) {
 		Product product = em.find(Product.class, productId);
 		return product;
 	}
-	
 
-	
 	@Override
 	public List<Product> findByType(Integer category, Long productCompanyId) {
 		List<Product> catProd = cbkProdRepository.findByType(category, productCompanyId);
 		return catProd;
 	}
-	
-	
-	
-
 
 	public String updateProduct(Long productId, Product product) {
 		Product newProduct = cbkProdRepository.findByProductId(productId);
-		if(newProduct != null) {
+		if (newProduct != null) {
 			newProduct.setProductCompany(product.getProductCompany());
 			newProduct.setProductName(product.getProductName());
 			newProduct.setProductCategories_name(newProduct.getProductCategories_name());
@@ -71,34 +73,25 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			newProduct.setProductKeywords(product.getProductKeywords());
 			cbkProdRepository.save(newProduct);
 			return "Product update successful!";
-		}else {
-			
+		} else {
+
 			return "Product update unsuccessful! Please try again.";
 		}
-	
+
 	}
-	
+
 	@Override
 	public String deleteProduct(Long productId) {
 		Product product = em.find(Product.class, productId);
 		if (product != null) {
 			em.remove(product);
 			return "Product deletion successful!";
-		}
-		else {
+		} else {
 			return "Product not found. Please try again.";
 		}
-		
+
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
 	// 刪除商品 (好像跟某個table有衝突 無法刪除)
 //	@Override
 //	public String deleteProduct(Long productId) {
@@ -108,9 +101,7 @@ public class CBKProductDao implements CBKProductDaoInterface {
 //		namedParameterJdbcTemplate.update(sql, map);
 //		return "刪除資料成功";
 //	}
-	
 
-	
 //	public List<Product> getAllProducts(Long id,HttpSession session){
 //		Query query = null;
 //		id = (Long)session.getAttribute("userID");

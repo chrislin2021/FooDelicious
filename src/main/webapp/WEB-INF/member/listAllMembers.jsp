@@ -71,7 +71,7 @@
 	<small><a href="<c:url value='/' />">回首頁</a></small>
 	</div>
 	<form method='POST'>
-	  <input type='hidden' name='_method'  value='GET' >
+	  <input type='hidden' name='_method'  value='DELETE' >
 	</form>
 </body>
 </html>

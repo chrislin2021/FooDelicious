@@ -100,10 +100,16 @@ div.path {
 	background-color: transparent;
 }
 
+#discountPrice {
+	width: 15%;
+	border: none;
+	text-align: left;
+	background-color: transparent;
+}
+
 .numCoin {
 	width: 2rem;
 	text-align: center;
 	border: none;
 	background-color: transparent;
 }
-

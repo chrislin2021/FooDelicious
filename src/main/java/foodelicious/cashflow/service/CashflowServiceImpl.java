@@ -1,4 +1,4 @@
-package foodelicious.cashflow.service.impl;
+package foodelicious.cashflow.service;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import foodelicious.cashflow.model.CashflowAddressBean;
 import foodelicious.cashflow.repository.CashAddressRepository;
-import foodelicious.cashflow.service.CashflowAddressService;
 
 @Service
 public class CashflowServiceImpl implements CashflowAddressService{

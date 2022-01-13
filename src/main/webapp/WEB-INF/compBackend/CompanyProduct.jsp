@@ -8,10 +8,15 @@
 	<h1 class="tableName">
 		商品列表<span class="smallFont">Product List</span>
 	</h1>
-	<form class="d-flex">
-        	<input class="form-control me-2" type="search" id="" placeholder="" aria-label="Search" value="" style="width:20%;margin-bottom:5px">
-			<button class="btn btn-secondary" type="submit" onclick="searchProduct()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>					
-	</form>				
+	<div class="searchArea">
+    <select id="selectVal" class="form-select selectBox" aria-label="Default select example" style="float:left; width:15%">
+        <option selected>全部商品</option>
+        <option value="食材">食材</option>
+        <option value="廚具">廚具</option>
+    </select>
+    <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入關鍵字...">
+    <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="Search" />
+</div>
 
 	<ul id="selectPage" class="nav nav-tabs">
 		<li class="nav-item"><a id="all" class="nav-link active"
@@ -46,10 +51,10 @@
 		</tbody>
 
 	</table>
-	
+
 	<nav aria-label="Page navigation example ">
-            <ul id="page" class="pagination justify-content-center"></ul>
-    </nav>
+		<ul id="page" class="pagination justify-content-center"></ul>
+	</nav>
 
 	<span id="total"> </span>
 
@@ -77,6 +82,47 @@
 				});
 			}
 		})
+	</script>
+	
+	
+	<script>
+    //=============名稱關鍵字查詢功能=============
+    $("#searchAcc").on("click",function(){
+       let keyword = $(".keyWord1").val();
+       let selectVal = $("#selectVal").val();
+       let urlData = "";
+       
+       if(selectVal === "全部商品"){
+           urlData = "http://localhost:8080/companyProducts/"+keyword;
+       }else if(selectVal === "廚具"){
+           selectVal = 0;
+           urlData = "http://localhost:8080/companyProducts/"+keyword+"/"+selectVal;
+       }else{
+           selectVal = 1;
+           urlData = "http://localhost:8080/companyProducts/"+keyword+"/"+selectVal;
+       }
+       $.ajax({
+           url: urlData,
+           type: "GET",
+           success:function(products){
+               let num = products.length;
+               //載入顯示功能
+               showData(0, num, products);
+
+               //載入分頁功能
+               if(num>=10){
+                   pages(10, products);
+               }else{
+                   pages(num, products);
+               }
+           }
+       })
+
+    });
+</script>
+
+
+
 	</script>
 
 	<script>
@@ -137,8 +183,8 @@
 
 		});
 	</script>
-	
-	
+
+
 
 	<script>
 		//=============顯示分頁設定=============
@@ -329,11 +375,11 @@
 			});
 		}
 	</script>
-	
+
 	<script>
     //=============顯示功能=============
     function showData(startItem,endItem,dataSource){
-    	alert(dataSource[0].productCategories);
+    	//alert(dataSource[0].productCategories);
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
             txt += "<td class='align-middle'>"+ (i+1)+"</td>"
@@ -383,6 +429,6 @@
 
 </script>
 
-	
+
 
 </body>
