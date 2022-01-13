@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import foodelicious.cashflow.model.CashflowAddressBean;
 import foodelicious.cashflow.repository.CashAddressRepository;
+import foodelicious.cashflow.service.CashflowAddressService;
 
 @Service
 public class CashflowServiceImpl implements CashflowAddressService{
@@ -29,6 +30,12 @@ public class CashflowServiceImpl implements CashflowAddressService{
 	@Override
 	public List<CashflowAddressBean> selectAddress(Long memberId){
 		return cashAddressRepository.findAllByFkmemberid(memberId);
+	}
+
+	@Override
+	public CashflowAddressBean getCashflowAddressBeanByMember(Long memberId) {
+		
+		return cashAddressRepository.findByMember(memberId);
 	}
 
 }

@@ -16,4 +16,7 @@ public interface CashflowAddressService {
 	
 	List<CashflowAddressBean> selectAddress(Long memberId);
 
+	CashflowAddressBean getCashflowAddressBeanByMember(Long memberId);
+		
+
 }

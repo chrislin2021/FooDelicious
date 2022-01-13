@@ -12,5 +12,8 @@ public interface CashAddressRepository extends JpaRepository<CashflowAddressBean
 	
 	List<CashflowAddressBean> findAllByFkmemberid(Long memberId);
 
+	CashflowAddressBean findByMember(Long memberId);
+	
+	
 	
 }
