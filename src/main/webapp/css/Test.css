@@ -338,6 +338,27 @@ h1.tableName{
     margin-bottom: 5px;
 }
 
+/* product search area */
+
+.searchArea{
+    width: 800px;
+    margin-bottom: 20px;
+}
+
+.searchBox{
+    width: 200px;
+    margin-left: 5px;
+}
+
+.searchBox2{
+    margin-left: 1px;
+}
+
+.selectBox{
+    float: left;
+    width: 150px;
+}
+
 
 
 

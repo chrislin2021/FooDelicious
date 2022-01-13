@@ -66,6 +66,17 @@ public class CompanyBackEndRestController {
 		return cbkServiceInterface.findByType(categories, productCompanyId);
 	}
 
+	@GetMapping("/companyProducts/{productName}")
+	public List<Product> findAllByName(@PathVariable String productName) {
+		List<Product> products = cbkProductDao.findByName(productName);
+		return products;
+	}
+
+	@GetMapping("/companyProducts/{productName}/{categories}")
+	public List<BkProduct> findByNameAndType(@PathVariable String productName, @PathVariable Integer categories) {
+		return null;
+	}
+
 	@GetMapping("companyProducts/update/{productId}")
 	public Product findByProductId(@PathVariable Long productId) {
 		// return cbkServiceInterface.findByProductId(productId);
