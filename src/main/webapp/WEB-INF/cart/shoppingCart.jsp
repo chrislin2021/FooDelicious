@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
@@ -12,6 +11,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/cart.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>FooDelicious</title>
 
@@ -32,7 +32,8 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="${contextRoot}/">好煮意</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -40,7 +41,7 @@
 
 					<li class="nav-item">
 						<div class="dropdown">
-							<button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">會員相關<span class="caret"></span>	</button>
+							<button class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">會員相關<span class="caret"></span></button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 								<li><a class="dropdown-item" href="${contextRoot}/LoginSystem">會員登入</a></li>
 								<li><a class="dropdown-item" href="${contextRoot}/RegisterPage">會員註冊</a></li>
@@ -50,12 +51,11 @@
 						</div>
 					</li>
 
-					<li class="nav-item"><a class="nav-link dropdown-toggle"
-						href="/Product">前往商城</a></li>
+					<li class="nav-item"><a class="nav-link dropdown-toggle" href="/Product">前往商城</a></li>
 					<li class="nav-item"><a class="nav-link" href="/goShareArea">前往分享區</a></li>
 					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
 					<li class="nav-item"><a class="nav-link" href="/custService">客服中心</a></li>
-					<li class="nav-item"><a class="nav-link" href="/shoppingCart"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
+					<li class="nav-item"><a class="nav-link" href="/shoppingCart"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 	class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
 					<li class="nav-item"><a class="nav-link" href="/backend/member">暫時的後台連結</a></li>
 				</ul>
 			</div>
@@ -67,15 +67,35 @@
 	<div>
 		<nav class="navbar navbar-light bg-light">
 			<div class="container-fluid">
-				<a class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag">
-						<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-						<line x1="3" y1="6" x2="21" y2="6"></line>	<path d="M16 10a4 4 0 0 1-8 0"></path></svg> 好煮意｜購物車</a>
+				<a class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg> 好煮意｜購物車</a>
 				<form class="d-flex">
-        			<input class="form-control me-2" type="search" id="appleNoSale" placeholder="蘋果，沒有打折！！" aria-label="Search" value="">
-					<button class="btn btn-secondary" type="submit" onclick="searchProduct()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>					
+					<input class="form-control me-2" type="search" id="appleNoSale" placeholder="蘋果，沒有打折！！" aria-label="Search" value="">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="searchProduct()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
 				</form>
 			</div>
 		</nav>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Smart Choice</h3>
+				</div>
+				<div class="modal-body">
+					<table class="table">
+						<tbody class="productInformation">
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<c:if test="${empty carts}">
@@ -142,8 +162,7 @@
 							</button> <input class="num" [type="number" ] readonly="readonly" value="${carts.quantity}" />
 							<button type="button" class="btn btn-primary btn-sm" onclick="changeNum(${carts.productId},${1})" id="add"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button></td>
 						<td>${carts.product.productPrice*carts.quantity}</td>
-						<td><button onclick="deleteItem(${carts.product.productId})" class="btn btn-dark btn-sm">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></td>
+						<td><button onclick="deleteItem(${carts.product.productId})" class="btn btn-dark btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -198,25 +217,20 @@
 				</tr>
 				<tr>
 					<td colspan="2">折扣金幣：
-						<button class="btn btn-outline-warning btn-sm" type="button" onclick="minusNum()" id="minus"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2 7.75A.75.75 0 012.75 7h10a.75.75 0 010 1.5h-10A.75.75 0 012 7.75z"></path></svg>
-						</button> <input class="numCoin" [type="number" ] readonly="readonly" id="goldCoin" value="0" min="0"><input type="hidden" id="hiddenCoin" value="${coin}">
+						<button class="btn btn-outline-warning btn-sm" type="button" onclick="minusNum()" id="minus"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" 	width="16" height="16"><path fill-rule="evenodd" d="M2 7.75A.75.75 0 012.75 7h10a.75.75 0 010 1.5h-10A.75.75 0 012 7.75z"></path></svg></button> 
+						<input class="numCoin" [type="number" ] readonly="readonly" id="goldCoin" value="0" min="0"><input type="hidden" id="hiddenCoin" value="${coin}">
 						<button type="button" class="btn btn-outline-warning btn-sm" onclick="addNum()" id="add"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"></path></svg></button>
 					</td>
 				</tr>
 			</thead>
 			<tbody id="total">
 				<tr>
-					<td colspan="2" id="freight">運費：<c:if test="${priceTotal < 1000}">
-							<span>100 元</span>
-						</c:if>
-						<c:if test="${priceTotal >= 1000}">
-							<del style="color: red;">100 元</del>&nbsp;&nbsp;<span>0 元</span>
-						</c:if>
+					<td colspan="2" id="freight">運費：<c:if test="${priceTotal < 1000}"><span>100 元</span></c:if> 
+						<c:if test="${priceTotal >= 1000}"><del style="color: red;">100 元</del>&nbsp;&nbsp;<span>0 元</span></c:if>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><input class="fw-bold totalPriceArea" id="pay" type="text" readonly="readonly" value="NT$: ${priceTotal} 元" />&nbsp;
-						<button type="button" class="btn btn-warning">去買單</button></td>
+					<td colspan="2"><input class="fw-bold totalPriceArea" id="pay" type="text" readonly="readonly" value="NT$: ${priceTotal} 元" />&nbsp;<button type="button" class="btn btn-warning">去買單</button></td>
 				</tr>
 			</tbody>
 		</table>
@@ -240,6 +254,8 @@
 	<script src="../../js/cart.js"></script>
 	<script src="../../js/bootstrap.bundle.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

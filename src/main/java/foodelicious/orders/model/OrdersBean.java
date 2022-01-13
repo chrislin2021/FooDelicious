@@ -1,7 +1,9 @@
 package foodelicious.orders.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,12 +14,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import foodelicious.member.model.Member;
 
 @Entity
 @Table(name = "orders")
+@Component
 public class OrdersBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,10 +40,17 @@ public class OrdersBean implements Serializable {
 	private Long memberId;
 
 	@Column(name = "orders_date")
-	private LocalDateTime ordersDate;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private java.sql.Timestamp orderDate;
 
-	@Column(name = "orders_note")
-	private String ordersNote;
+	@Column(name = "orders_name")
+	private String orderName;
+
+	@Column(name = "orders_phone")
+	private String orderPhone;
+
+	@Column(name = "orders_address")
+	private String orderAddress;
 
 	@Column(name = "orders_state")
 	private String ordersState;
@@ -42,24 +58,32 @@ public class OrdersBean implements Serializable {
 	@Column(name = "orders_total")
 	private Integer ordersTotal;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
+
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ordersBean", cascade = CascadeType.ALL)
+	private Set<OrdersDetailBean> orderDetail = new LinkedHashSet<OrdersDetailBean>();
 
 	public OrdersBean() {
 		super();
 	}
 
-	public OrdersBean(Long ordersId, Long memberId, LocalDateTime ordersDate, String ordersNote, String ordersState,
-			Integer ordersTotal, Member member) {
+	public OrdersBean(Long ordersId, Long memberId, Timestamp orderDate, String orderName, String orderPhone,
+			String orderAddress, String ordersState, Integer ordersTotal, Member member,
+			Set<OrdersDetailBean> orderDetail) {
 		super();
 		this.ordersId = ordersId;
 		this.memberId = memberId;
-		this.ordersDate = ordersDate;
-		this.ordersNote = ordersNote;
+		this.orderDate = orderDate;
+		this.orderName = orderName;
+		this.orderPhone = orderPhone;
+		this.orderAddress = orderAddress;
 		this.ordersState = ordersState;
 		this.ordersTotal = ordersTotal;
 		this.member = member;
+		this.orderDetail = orderDetail;
 	}
 
 	public Long getOrdersId() {
@@ -78,20 +102,36 @@ public class OrdersBean implements Serializable {
 		this.memberId = memberId;
 	}
 
-	public LocalDateTime getOrdersDate() {
-		return ordersDate;
+	public java.sql.Timestamp getOrderDate() {
+		return orderDate;
 	}
 
-	public void setOrdersDate(LocalDateTime ordersDate) {
-		this.ordersDate = ordersDate;
+	public void setOrderDate(java.sql.Timestamp orderDate) {
+		this.orderDate = orderDate;
 	}
 
-	public String getOrdersNote() {
-		return ordersNote;
+	public String getOrderName() {
+		return orderName;
 	}
 
-	public void setOrdersNote(String ordersNote) {
-		this.ordersNote = ordersNote;
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
+	}
+
+	public String getOrderPhone() {
+		return orderPhone;
+	}
+
+	public void setOrderPhone(String orderPhone) {
+		this.orderPhone = orderPhone;
+	}
+
+	public String getOrderAddress() {
+		return orderAddress;
+	}
+
+	public void setOrderAddress(String orderAddress) {
+		this.orderAddress = orderAddress;
 	}
 
 	public String getOrdersState() {
@@ -116,6 +156,14 @@ public class OrdersBean implements Serializable {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public Set<OrdersDetailBean> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(Set<OrdersDetailBean> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 }
