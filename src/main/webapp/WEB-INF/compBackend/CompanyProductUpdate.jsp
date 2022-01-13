@@ -10,21 +10,21 @@
 	</h1>
 
 	<table class="table table-hover" style='text-align: center'>
-		<thead class="table table-dark table-striped">
+		<thead class="table table-striped table-dark">
 			<tr>
-				<th class="col table-success">商品編號</th>
-                    <th class="col table-success">商品類別</th>
-                    <th class="col table-success">商品公司</th>
-                    <th class="col table-success">上架狀態</th>
-                    <th class="col table-success">商品名稱</th>
-                    <th class="col table-success">商品概述</th>
-                    <th class="col table-success">商品價格</th>
-                    <th class="col table-success">商品庫存</th>
-                    <th class="col table-success">銷售量</th>
-                    <th class="col table-success">關鍵字</th>
-                    <th class="col table-success">新增日期</th>
-                    <th class="col table-success">更新</th>
-                    <th class="col table-success">取消</th>
+					<th class="col">商品編號</th>
+                    <th class="col">商品類別</th>
+                    <th class="col">商品公司</th>
+                    <th class="col">上架狀態</th>
+                    <th class="col">商品名稱</th>
+                    <th class="col">商品概述</th>
+                    <th class="col">商品價格</th>
+                    <th class="col">商品庫存</th>
+                    <th class="col">銷售量</th>
+                    <th class="col">關鍵字</th>
+                    <th class="col">新增日期</th>
+                    <th class="col">更新</th>
+                    <th class="col">取消</th>
 			</tr>
 		</thead>
 		 <tbody>
@@ -145,15 +145,20 @@
     //=============更新資料=============
     $("#comUpdateBtn").on("click",function(){
         let comProductId = $("#comProductId").val();
+        
+        alert($("#comProdCategories").val());
+     
         let updatedProduct = {
-            "categories": $("#comProdCategories").val(),
+            "productCategories": $("#comProdCategories").val(),
             "productCompany": $("#comProductCompany").val(),
             "productName": $("#comProductName").val(),
             "productContent": $("#comProductContent").val(),
             "productPrice": $("#comProductPrice").val(),
+            "productStatus" : $("#comProductStatus").val(),
             "productStock": $("#comProductStock").val(),
             "productSalesFigures": $("#comProductSalesFigures").val(),
             "productKeywords": $("#comProductKeywords").val()
+            
         };
         
         //When sending data to a web server, the data has to be a string.

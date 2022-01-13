@@ -16,8 +16,7 @@ public interface CBKProductDaoInterface {
 	Product findByProductId(Long productId);
 	
 	String updateProduct(Long productId, Product product);
-	
 
-	
+	List<Product> findByType(Integer category, Long productCompanyId);
 
 }
