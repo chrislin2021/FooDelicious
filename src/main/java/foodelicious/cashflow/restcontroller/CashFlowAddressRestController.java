@@ -40,8 +40,7 @@ public class CashFlowAddressRestController {
 	private MemberRepositoryImpl memberRepositoryImpl;
 
 	
-	public CashFlowAddressRestController(CashflowAddressService cashflowAddressService,EntityManager em, HttpSession session, 
-			Member member,MemberRepositoryImpl memberRepositoryImpl, MailService mailService,MemberService memberService,MemberValidator memberValidator) {
+	public CashFlowAddressRestController(CashflowAddressService cashflowAddressService,MemberRepositoryImpl memberRepositoryImpl, MailService mailService) {
 //		super();
 //		this.session = session;
 		this.cashflowAddressService = cashflowAddressService;

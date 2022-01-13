@@ -77,7 +77,7 @@ public class CompanyBackEndRestController {
 		return null;
 	}
 
-	@GetMapping("companyProducts/update/{productId}")
+	@GetMapping("/companyProducts/update/{productId}")
 	public Product findByProductId(@PathVariable Long productId) {
 		// return cbkServiceInterface.findByProductId(productId);
 		return cbkServiceInterface.findByProductId(productId);

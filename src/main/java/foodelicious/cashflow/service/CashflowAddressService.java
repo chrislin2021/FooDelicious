@@ -2,12 +2,14 @@ package foodelicious.cashflow.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import foodelicious.cashflow.model.CashflowAddressBean;
 
 
 
 
-//@Service
+@Service
 public interface CashflowAddressService {
 	
 	CashflowAddressBean insertAndUpdateAddress(CashflowAddressBean cashflowBean);
