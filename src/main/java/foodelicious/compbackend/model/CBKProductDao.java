@@ -44,6 +44,17 @@ public class CBKProductDao implements CBKProductDaoInterface {
 		Product product = em.find(Product.class, productId);
 		return product;
 	}
+	
+
+	
+	@Override
+	public List<Product> findByType(Integer category, Long productCompanyId) {
+		List<Product> catProd = cbkProdRepository.findByType(category, productCompanyId);
+		return catProd;
+	}
+	
+	
+	
 
 
 	public String updateProduct(Long productId, Product product) {
@@ -79,7 +90,8 @@ public class CBKProductDao implements CBKProductDaoInterface {
 		}
 		
 	}
-	
+
+
 	
 	
 	

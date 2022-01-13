@@ -31,10 +31,10 @@ public class CBKProblemDao {
 			 
 			 cbkProblemRepository.save(problem);
 			 
-			 return "Problem insert successful!";
+			 return "問題回報成功! 我們將盡快與您聯繫。";
 		 }else {
 			 
-			 return "Problem insert fail!";
+			 return "問題回報失敗。請重新再試一次";
 		 }
 		 
 		

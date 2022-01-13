@@ -84,11 +84,10 @@
 
 		$("#comProducts").on("click","#updateBtnCom",function() {
 			let productId = $(this).data("id");
-			alert(productId);
-
+			//alert(productId);
 			$.ajax({
 
-				url : "http://localhost:8080/companyProducts/update/"+ productId,
+				url : "/companyProducts/update/"+ productId,
 				type : "GET",
 				success : function(product) {
 
@@ -97,7 +96,7 @@
 				 //將資料存到localStorage，給另一個頁面使用
 				 localStorage.setItem("comProductData",productString);
 				 //跳轉頁面
-				 window.location.href = "http://localhost:8080/companyProduct2/update";
+				 window.location.href = "/companyProduct2/update";
 				 },
 				 error : function() {
 						alert("fail");
@@ -112,7 +111,7 @@
 
 	<script>
 		//顯示所有資料
-		const productUrl = "http://localhost:8080/companyProducts";
+		const productUrl = "/companyProducts";
 		let productData;
 		let productLen;
 
@@ -138,6 +137,8 @@
 
 		});
 	</script>
+	
+	
 
 	<script>
 		//=============顯示分頁設定=============
@@ -145,7 +146,7 @@
 		$("#all").on("click", function() {
 			$("#selectPage a").prop("class", "nav-link");
 			$("#all").prop("class", "nav-link active");
-			urlString = "http://localhost:8080/companyProducts";
+			urlString = "/companyProducts";
 			// alert(urlString);
 			$.ajax({
 				url : urlString,
@@ -165,41 +166,41 @@
 		$("#food").on("click", function() {
 			$("#selectPage a").prop("class", "nav-link");
 			$("#food").prop("class", "nav-link active");
-			urlString = "";
+			urlString = "/companyProducts/search/1";
 			// alert(urlString);
 			$.ajax({
 				url : urlString,
 				type : "GET",
-				success : function(productAll) {
-					//將值傳到全域
-					productData = productAll;
-					let num = productAll.length;
-					if (num >= 10) {
-						pages(10, productData);
-					} else {
-						pages(num, productData);
-					}
-				}
+				success: function(productFood){
+	                $("#products").html("");
+	                $("#page").html(" ");
+	                let num = productFood.length;
+	                if(num >= 10){
+	                    pages(10,productFood);
+	                }else{
+	                    pages(num,productFood);
+	                }
+	            }
 			});
 		})
 		$("#tool").on("click", function() {
 			$("#selectPage a").prop("class", "nav-link");
 			$("#tool").prop("class", "nav-link active");
-			urlString = "";
+			urlString = "/companyProducts/search/0";
 			// alert(urlString);
 			$.ajax({
 				url : urlString,
 				type : "GET",
-				success : function(productAll) {
-					//將值傳到全域
-					productData = productAll;
-					let num = productAll.length;
-					if (num >= 10) {
-						pages(10, productData);
-					} else {
-						pages(num, productData);
-					}
-				}
+				success: function(productTool){
+	                $("#products").html("");
+	                $("#page").html("");
+	                let num = productTool.length;
+	                if(num >= 10){
+	                    pages(10,productTool);
+	                }else{
+	                    pages(num,productTool);
+	                }
+	            }
 			});
 		})
 	</script>
@@ -332,17 +333,21 @@
 	<script>
     //=============顯示功能=============
     function showData(startItem,endItem,dataSource){
+    	alert(dataSource[0].productCategories);
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
             txt += "<td class='align-middle'>"+ (i+1)+"</td>"
-            let cate = dataSource[i].categories;
-            let type = ""
-            if( cate == 0){type = "廚具";
-            }else{ type = "食材";}
+            let cate = dataSource[i].productCategories;
+            let type = "";
+            if(cate == 0){
+            	type = "廚具";
+            }else{ 
+            	type = "食材";
+            }
             txt += "<td class='align-middle'>"+type+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].productCompany+"</td>"
-            let st = dataSource[i].product_status;
-            let status = ""
+            let st = dataSource[i].productStatus;
+            let status = "";
             if( st == 1){
                 status = "上架中";
             }else{
