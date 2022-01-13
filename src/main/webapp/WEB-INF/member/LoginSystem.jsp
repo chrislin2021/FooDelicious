@@ -84,7 +84,7 @@
 			let profile = googleUser.getBasicProfile();
 			document.getElementById("memberName").value = profile.getName();
 			document.getElementById("memberMail").value = profile.getEmail();
-			document.forms[1].submit();
+			document.forms[2].submit();
 		}
 	}
 </script>
