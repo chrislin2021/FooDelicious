@@ -152,7 +152,7 @@
 							<h6 class="my-0">總折扣金額：</h6>
 						</div><span class="text-success">−NT$:110元</span>
 					</li>
-					<li class="list-group-item d-flex justify-content-between"><span>總金額：</span><strong>NT$:7895元</strong></li>
+					<li class="list-group-item d-flex justify-content-between"><span>總金額：</span><strong>NT$:7785元</strong></li>
 				</ul>
 			</div>
 
