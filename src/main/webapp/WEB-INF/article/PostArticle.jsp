@@ -144,7 +144,6 @@
         ClassicEditor
             .create(document.querySelector('#editor'), {
                 extraPlugins: [MyCustomUploadAdapterPlugin],
-                // plugins: [ Image, ImageResize],
                 language: "zh",
 
 

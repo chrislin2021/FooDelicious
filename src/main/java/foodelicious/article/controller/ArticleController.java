@@ -26,32 +26,32 @@ import foodelicious.article.service.ArticleService;
 
 @Controller
 public class ArticleController {
-	
-	
+
 	ArticleService articleService;
 	HttpSession session;
-	
+
 	public ArticleController(ArticleService articleService, HttpSession session) {
 		this.articleService = articleService;
 		this.session = session;
 	}
-	//測試中
+
+	// 測試中
 	@GetMapping("/websocket")
 	public String webSocket() {
 		return "app.websocket";
 	}
-	
-	//圖像綁定使用 用於CKEditor
+
+	// 圖像綁定使用 用於CKEditor
 	@ResponseBody
 	@RequestMapping(path = "/imgArticle", consumes = "multipart/form-data", method = RequestMethod.POST)
 	public Map<String, String> imgArticle(@RequestPart("upload") MultipartFile file, HttpServletRequest request) {
-//		System.out.println("輸出測試");
-//		System.out.println("file測試：" + file.getOriginalFilename());
+//			System.out.println("輸出測試");
+//			System.out.println("file測試：" + file.getOriginalFilename());
 
 		return new Attachment().ckEditorUploadImage(file, request);
 	}
-	
-	//新增文章 儲存用
+
+	// 新增文章 儲存用
 	@PostMapping("/postarticle.controller")
 	public void postArticle(@RequestBody Map<String, String> params, HttpSession session) {
 
@@ -63,16 +63,18 @@ public class ArticleController {
 //		System.out.println(id);
 		articleService.pushArticle(params, id);
 	}
-	//所有食譜相關
+
+	// 所有食譜相關
 	@ResponseBody
 	@GetMapping("/totalRecipeData")
 	public Map<String, Object> totalRecipeData() {
 		Map<String, Object> data = new HashMap<>();
 		data.put("session", session.getAttribute("userID"));
 		data.put("title", articleService.findRecipe());
-		return data;			
+		return data;
 	}
-	//所有廚具相關
+
+	// 所有廚具相關
 	@ResponseBody
 	@GetMapping("/totalKitchenwareData")
 	public Map<String, Object> totalKitchenwareData() {
@@ -81,8 +83,8 @@ public class ArticleController {
 		data.put("title", articleService.findKitchenware());
 		return data;
 	}
-	
-	//顯示所有文章
+
+	// 顯示所有文章
 	@ResponseBody
 	@GetMapping("/totalArticleData")
 	public Map<String, Object> totalArticleData() {
@@ -92,40 +94,41 @@ public class ArticleController {
 		data.put("title", articleService.findAll());
 		return data;
 	}
-	
-	//使用id顯示文章所有內容
+
+	// 使用id顯示文章所有內容
 	@ResponseBody
 	@GetMapping("/responseArticle")
-	public Map<String, Object> useIdFinfAll(){
+	public Map<String, Object> useIdFinfAll() {
 		int id = (int) session.getAttribute("ArticleId");
-		//System.out.println("ArticleId2：　" + id);
+		// System.out.println("ArticleId2： " + id);
 		Map<String, Object> data = new HashMap<>();
 		data.put("LoginId", session.getAttribute("userID"));
 		data.put("title", articleService.useIdFindShareArea(id));
-		data.put("article", articleService.useIdFindArticleArea(id));		
-		
-		return data;		
+		data.put("article", articleService.useIdFindArticleArea(id));
+
+		return data;
 	}
-	//儲存ArticleId
+
+	// 儲存ArticleId
 	@GetMapping("/intIDFindAll/{id}")
 	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id) {
 		session.setAttribute("ArticleId", id);
-		//System.out.println("ArticleId：　" + id);
+		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";
 	}
-	
-	//透過id刪除文章
+
+	// 透過id刪除文章
 	@DeleteMapping("/deleteData/{id}")
-	public void deleteAtricle(@PathVariable(value="id", required = false ) Integer id) {
-		
+	public void deleteAtricle(@PathVariable(value = "id", required = false) Integer id) {
+
 		articleService.useArticleIdDelete(id);
-		
+
 		Map<String, Object> data = new HashMap<>();
 		data.put("session", session.getAttribute("userID"));
 		data.put("title", articleService.findAll());
 	}
 
-	//前往修改頁面 同時使用model 將資料轉移
+	// 前往修改頁面 同時使用model 將資料轉移
 	@GetMapping("/goUpdatePage")
 	public String goUpdatePage(Model model) {
 		int id = (int) session.getAttribute("ArticleId");
@@ -133,24 +136,23 @@ public class ArticleController {
 		model.addAttribute("title", articleService.useIdFindShareArea(id));
 		model.addAttribute("article", articleService.useIdFindArticleArea(id));
 		model.addAttribute("article", articleService.useIdFindArticleArea(id));
-		
+
 		return "app.UpdateArticle";
 	}
-	
-	//文章更新用
+
+	// 文章更新用
 	@PutMapping("/articleUpdate/{id}")
-	public void updateArticle(@RequestBody Map<String, String> params,
-								@PathVariable("id")Integer shareId) {		
+	public void updateArticle(@RequestBody Map<String, String> params, @PathVariable("id") Integer shareId) {
 		articleService.UpdateArticle(params, shareId);
 	}
-	
-	//動態搜尋
+
+	// 動態搜尋
 	@ResponseBody
 	@GetMapping("/fuzzySearch/{clasify}/{AssociateString}")
-	public Map<String, Object> FuzzySearch(@PathVariable("clasify")String clasify,
-										   @PathVariable("AssociateString")String AssociateString) {
+	public Map<String, Object> FuzzySearch(@PathVariable("clasify") String clasify,
+			@PathVariable("AssociateString") String AssociateString) {
 		Map<String, Object> data = new HashMap<>();
-		System.out.println(clasify+"&"+AssociateString);
+		System.out.println(clasify + "&" + AssociateString);
 		data.put("session", session.getAttribute("userID"));
 		data.put("title", articleService.articleFuzzySearch(clasify, AssociateString));
 		return data;

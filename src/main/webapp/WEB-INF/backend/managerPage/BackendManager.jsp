@@ -40,7 +40,7 @@
             </nav>
     </div>
 </section>
-</div>
+
 <script>
     //=============E-mail關鍵字查詢功能=============
     $("#searchAcc").on("click",function(){
