@@ -36,11 +36,15 @@ public class MemberCreateController {
 	
 	MemberValidator memberValidator;
 
-//	@Autowired
+	@Autowired
 	public MemberCreateController(MemberService memberService, MemberValidator memberValidator) {
 		super();
 		this.memberService = memberService;
 		this.memberValidator = memberValidator;
+	}
+	public MemberCreateController(MemberService memberService) {
+		super();
+		this.memberService = memberService;
 	}
 
 	@GetMapping({"/listAllMembers", "/members"})

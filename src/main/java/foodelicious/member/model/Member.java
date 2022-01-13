@@ -61,16 +61,16 @@ public class Member implements Serializable {
 	private String memberName;
 
 	@Column(name = "member_gender")
-	@NotBlank(message = "請選擇性別")
+//	@NotBlank(message = "請選擇性別")
 	private String memberGender;
 
 	@Column(name = "member_birth")
-	@NotBlank(message = "生日不得空白")
+//	@NotBlank(message = "生日不得空白")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private String memberBirth;
 
 	@Column(name = "member_phone")
-	@NotBlank(message = "手機號碼不得空白")
+//	@NotBlank(message = "手機號碼不得空白")
 	@Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤")
 	private String memberPhone;
 

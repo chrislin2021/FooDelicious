@@ -111,7 +111,7 @@
 			<!-- 			</div> -->
 
 			<button type="submit" class="btn btn-outline-primary"
-				value="register">註冊</button>
+				value="register" onclick="success()">註冊</button>
 		</form:form>
 		
 	</div>
@@ -127,11 +127,22 @@
 			$("#memberMail").val('eeit13711@gmail.com');
 			$("#pwd").val('$$$$happy13711');
 			$("#memberName").val('石六六');
-			$("#member_gender_m").val('男');
+			$("#member_gender_m").val('MALE');
 			$("#memberBirth").val('2011-11-29');
 			$("#memberPhone").val('0911222666');
 			$("#memberAddress").val('台北市大安區信義路100號');
 		})
 	});
+	
+// 	function success(){
+// 			Swal.fire({
+// 		  position: 'top-end',
+// 		  icon: 'success',
+// 		  title: 'Your work has been saved',
+// 		  showConfirmButton: false,
+// 		  timer: 1500
+// 		})
+// 	}
+
 
 </script>

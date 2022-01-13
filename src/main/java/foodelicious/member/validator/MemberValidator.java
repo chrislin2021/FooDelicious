@@ -10,9 +10,6 @@ import foodelicious.member.model.Member;
 @Component
 public class MemberValidator implements Validator {
 	
-//	@Autowired
-//	MemberService memberService;
-
 	@Override
 	public boolean supports(Class<?> clazz) {//如果方法執行不是Member的子子孫孫就不行
 		return Member.class.isAssignableFrom(clazz);
@@ -25,9 +22,10 @@ public class MemberValidator implements Validator {
 //		if(target instanceof Product)因上面的support已過濾故不需要此行
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberName", "member.memberName.empty", "姓名欄不能為空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberGender", "member.memberGender.empty", "性別欄不能為空白");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberMail", "member.memberMail.empty", "帳號欄不能為空白");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pwd", "member.pwd.empty", "密碼欄不能為空白");
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberBirth", "member.memberBirth.empty", "生日欄不能為空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pwd", "member.pwd.empty", "密碼欄不能為空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberBirth", "member.memberBirth.empty", "生日欄不能為空白");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memberAddress", "member.memberAddress.empty", "地址欄不能為空白");
 		
 		if (!errors.hasFieldErrors("memberMail")) {
