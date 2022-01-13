@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,7 +46,7 @@ public class MemberUpdateController {
 	
 	
 	//刪除會員
-		@GetMapping("/members/{memberId}")
+		@DeleteMapping("/members/{memberId}")
 		public String deleteById(@PathVariable(value="memberId", required = false ) Long memberId) {
 			memberService.deleteByMemberId(memberId);
 			return "redirect:/members";
