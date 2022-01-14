@@ -82,7 +82,7 @@
                                     <p class="lead text-danger fs-4 text fw-bold">$${pro.productPrice}</p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-danger" href="/ProductDetail">加入購物車</a>
+                                    <button class="add-to-cart btn btn-primary" type="button" onclick="addToCart(${pro.productId})">加入購物車</button>
                                 </div>
                                 
                             </div>
@@ -95,15 +95,27 @@
       </div>
      
 	<script type="text/javascript">
-		function check(productId) {
-			if (confirm("確定刪除?")) {
-				window.location.href = "DeletePro?productId=" + productId;
-			} else {
-			}
+	
+		function addToCart(productId) {
+			var quantity = ""+1;
+			var postData = { "pid": productId, "qty": quantity };
+			$.ajax({
+				url: "/shoppingCart/insert",
+				type: "POST",
+				data: JSON.stringify(postData),
+				contentType: "application/json; charset=utf-8",
+				success: function() {
+					alert("讚讚");
+				}
+			})
 		}
+		
 		$(document).ready(function() {
             $('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
             $('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
         });
+		
+
+		
 	</script>
 </body>
