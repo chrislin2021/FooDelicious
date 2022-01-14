@@ -10,7 +10,7 @@
 		<h2>新增商品</h2>
 		<p>請在此新增您的商品</p> 
 		商品分類：
-		<form action="bkproducts" enctype="multipart/form-data"
+		<form action="/backend/product" enctype="multipart/form-data"
 			method="post">
 			<select class="form-select form-select-sm"
 				aria-label=".form-select-sm example"
@@ -35,6 +35,12 @@
 				<label for="productCompany" class="col-sm-2 col-form-label">商品公司：</label>
 				<div class="col-sm-3">
 					<input type="text" class="form-control" name="productCompany" placeholder="商品公司"/>
+				</div>
+			</div>
+			<div class="row mb-2">
+				<label for="productCompanyId" class="col-sm-2 col-form-label">公司編號：</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="productCompanyId" placeholder="公司編號"/>
 				</div>
 			</div>
 			<div class="row mb-2">
@@ -64,7 +70,7 @@
 
 			商品狀態：<select class="form-select form-select-sm"
 				aria-label=".form-select-sm example"
-				name="productCategories">
+				name="productStatus">
 				<option selected>選擇商品上架狀態</option>
 				<option value="0">下架</option>
 				<option value="1">上架</option>
@@ -74,6 +80,13 @@
 				<div class="col-sm-3">
 					<input type="text" class="form-control" name="productKeywords"
 						placeholder="商品關鍵字"/>
+				</div>
+			</div>
+			<div class="row mb-2">
+				<label for="productSalesFigures" class="col-sm-2 col-form-label"></label>
+				<div class="col-sm-3">
+					<input type="hidden" class="form-control" value="0" name="productSalesFigures"
+						placeholder="銷貨量"/>
 				</div>
 			</div>
 

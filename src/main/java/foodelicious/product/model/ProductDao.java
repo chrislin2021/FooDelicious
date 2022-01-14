@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 public interface ProductDao extends JpaRepository<Product, Integer> {
 
 //	@Query("select product_id from productNum product_id where productId like ?1")
-	List<Product> findByProductId(Integer productId);
+	List<Product> findByProductId(Long productId);
 	
 	Product findByProductName(String productName);
 	
-	void deleteByProductId(Integer productId);
+	void deleteByProductId(Long productId);
 	
 //	void saveProduct(Product product);
 	

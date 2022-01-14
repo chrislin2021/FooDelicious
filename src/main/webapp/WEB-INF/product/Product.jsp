@@ -14,11 +14,9 @@
 	<div class="row" id="rowSelect">
 		<div class="col-12 col-md-2">
 			<div class="list-group">
-				<a href="/LoginSystem" class="list-group-item list-group-item-action">會員登入</a>
-                    <a href="/Product" class="list-group-item list-group-item-action">前往商城</a>
-                    <a href="#" class="list-group-item list-group-item-action">前往分享區</a>
-                    <a href="/postArticle" class="list-group-item list-group-item-action">發表新文章</a>
-                    <a href="/custService" class="list-group-item list-group-item-action">客服中心</a>
+				<a href="#" class="list-group-item list-group-item-warning">廚具</a>
+                <a href="#" class="list-group-item list-group-item-warning">食材</a>
+                    
 			</div>
 		</div>
 	</div>

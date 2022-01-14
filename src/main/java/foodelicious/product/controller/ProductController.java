@@ -11,6 +11,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,8 @@ public class ProductController {
 	//show all data
 	@GetMapping("/Product")
 	public String  productlist(String productName,Model m) {
-		List<Product> pros = productService.findAll();
+		Page<Product> page = productService.findAll();
+		List<Product> pros = page.getContent();
 		m.addAttribute("pros", pros);
 		return "app.Product";
 	}
@@ -53,7 +55,7 @@ public class ProductController {
 	
 	//show datadetail
 	@GetMapping("/Product/{productId}")
-    public String findproduct(@PathVariable Integer productId, Model model) {
+    public String findproduct(@PathVariable Long productId, Model model) {
 		List<Product> prod = productService.findByProductId(productId);
 		model.addAttribute("prod",prod);
         return "app.ProductDetail";
