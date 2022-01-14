@@ -46,12 +46,15 @@
 						<h2 class="product-conpany">${pro.productCompany}</h2>
 						<h3 class="product-title">${pro.productName}</h3>
 						<p class="product-description">${pro.productContent}</p>
+						<hr>
+						<input id="pdQty" type="number" value = 1 min=1 max='${pro.productStock}'>
+						<hr>						
 						<h4 class="price">
 							商品甜甜價 : <span>$${pro.productPrice}</span>
 							</h4>
 
 						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button">新增至購物車</button>
+							<button class="add-to-cart btn btn-default" type="button" onclick="addToCart(${pro.productId})">新增至購物車</button>
 							<button class="like btn btn-default" type="button">
 								<span class="fa fa-heart"></span>
 							</button>
@@ -63,5 +66,25 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+function addToCart(productId) {
+	var quantity = $("#pdQty").val();
+	var postData = { "pid": productId, "qty": quantity };
+	$.ajax({
+		url: "/shoppingCart/insert",
+		type: "POST",
+		data: JSON.stringify(postData),
+		contentType: "application/json; charset=utf-8",
+		success: function() {
+			console('新增成功');
+		}
+	})
+}
+
+</script>
+
+
 </body>
 
