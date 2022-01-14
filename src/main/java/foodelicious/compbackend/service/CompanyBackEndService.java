@@ -56,11 +56,11 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 	@Override
 	public String deleteProduct(Long productId) {
 
-		List<CartBean> carts = cartService.selectProduct();
+		List<CartBean> carts = cartService.selectAll();
 
 		for (CartBean cart : carts) {
 			if (cart.getProductId() == productId) {
-				cartService.deleteItem(productId);
+				cartService.deleteProduct(productId);
 				break;
 			}
 		}

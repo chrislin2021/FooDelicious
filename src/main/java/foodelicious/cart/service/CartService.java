@@ -10,8 +10,10 @@ public interface CartService {
 
 	void deleteItem(Long productId);
 
+	void deleteProduct(Long productId);
+
 	List<CartBean> selectItem(Long memberId);
 
-	List<CartBean> selectProduct();
+	List<CartBean> selectAll();
 
 }
