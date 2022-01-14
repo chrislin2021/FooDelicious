@@ -47,7 +47,7 @@ public class CartBean implements Serializable {
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id", insertable = false, updatable = false)
 	private Product product;
 
