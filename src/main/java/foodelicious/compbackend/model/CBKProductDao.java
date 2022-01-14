@@ -101,6 +101,17 @@ public class CBKProductDao implements CBKProductDaoInterface {
 
 	}
 
+	public boolean saveProduct(Product product) {
+		Product theSavedProduct = cbkProdRepository.save(product);
+		if(theSavedProduct != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+
 	// 刪除商品 (好像跟某個table有衝突 無法刪除)
 //	@Override
 //	public String deleteProduct(Long productId) {

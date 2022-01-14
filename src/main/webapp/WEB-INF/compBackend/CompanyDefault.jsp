@@ -46,7 +46,7 @@
 				<ul class="sub-menu">
 					<li><a class="link_name" href="#">商品管理</a></li>
 					<li><a href="/companyProduct2">所有商品</a></li>
-					<li><a href="#">新增商品</a></li>
+					<li><a href="/companyProductsAdd">新增商品</a></li>
 
 				</ul>
 			</li>
@@ -102,7 +102,7 @@
 	</div>
 	<section class="home-section">
 		<div class="home-content">
-			<i class='bx bx-menu'></i> <span class="text brandName" style="color:EFF966">好煮意<small style="color:black">admin</small></span>
+			<i class='bx bx-menu' style="color:black"></i> <span class="text brandName" style="color:black">好煮意<small style="color:black">admin</small></span>
 		</div>
 	</section>
 
