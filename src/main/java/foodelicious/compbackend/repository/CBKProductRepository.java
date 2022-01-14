@@ -24,10 +24,10 @@ public interface CBKProductRepository extends JpaRepository<Product, Long> {
 	List<Product> findByType(Integer categories, Long productCompanyId);
 
 
-	@Query(value = "SELECT * FROM productNum WHERE product_keywords LIKE %?%", nativeQuery = true)
+	@Query(value = "SELECT * FROM productNum WHERE product_name LIKE %?%", nativeQuery = true)
 	List<Product> findByName(String productName);
 
-	@Query(value = "SELECT * FROM productNum WHERE product_keywords LIKE %?% AND categories =?", nativeQuery = true)
-	List<Product> findByNameAndType(String productName, Integer categories);
+	@Query(value = "SELECT * FROM productNum WHERE product_name LIKE %?% AND categories =? AND product_company_id =?", nativeQuery = true)
+	List<Product> findByNameAndType(String productName, Integer categories,Long productCompanyId);
 
 }

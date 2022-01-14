@@ -73,8 +73,10 @@ public class CompanyBackEndRestController {
 	}
 
 	@GetMapping("/companyProducts/{productName}/{categories}")
-	public List<BkProduct> findByNameAndType(@PathVariable String productName, @PathVariable Integer categories) {
-		return null;
+	public List<Product> findByNameAndType(@PathVariable String productName, @PathVariable Integer categories, HttpSession session) {
+		Long productCompanyId = (Long) session.getAttribute("userID");
+		List<Product> products = cbkProductDao.findByNameAndType(productName, categories, productCompanyId);
+		return products;
 	}
 
 	@GetMapping("/companyProducts/update/{productId}")
