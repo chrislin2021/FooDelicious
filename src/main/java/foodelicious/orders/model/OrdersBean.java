@@ -44,13 +44,13 @@ public class OrdersBean implements Serializable {
 	private java.sql.Timestamp orderDate;
 
 	@Column(name = "orders_name")
-	private String orderName;
+	private String ordersName;
 
 	@Column(name = "orders_phone")
-	private String orderPhone;
+	private String ordersPhone;
 
 	@Column(name = "orders_address")
-	private String orderAddress;
+	private String ordersAddress;
 
 	@Column(name = "orders_state")
 	private String ordersState;
@@ -70,16 +70,16 @@ public class OrdersBean implements Serializable {
 		super();
 	}
 
-	public OrdersBean(Long ordersId, Long memberId, Timestamp orderDate, String orderName, String orderPhone,
+	public OrdersBean(Long ordersId, Long memberId, Timestamp ordersDate, String ordersName, String ordersPhone,
 			String orderAddress, String ordersState, Integer ordersTotal, Member member,
 			Set<OrdersDetailBean> orderDetail) {
 		super();
 		this.ordersId = ordersId;
 		this.memberId = memberId;
-		this.orderDate = orderDate;
-		this.orderName = orderName;
-		this.orderPhone = orderPhone;
-		this.orderAddress = orderAddress;
+		this.orderDate = ordersDate;
+		this.ordersName = ordersName;
+		this.ordersPhone = ordersPhone;
+		this.ordersAddress = orderAddress;
 		this.ordersState = ordersState;
 		this.ordersTotal = ordersTotal;
 		this.member = member;
@@ -110,28 +110,28 @@ public class OrdersBean implements Serializable {
 		this.orderDate = orderDate;
 	}
 
-	public String getOrderName() {
-		return orderName;
+	public String getOrdersName() {
+		return ordersName;
 	}
 
-	public void setOrderName(String orderName) {
-		this.orderName = orderName;
+	public void setOrdersName(String ordersName) {
+		this.ordersName = ordersName;
 	}
 
-	public String getOrderPhone() {
-		return orderPhone;
+	public String getOrdersPhone() {
+		return ordersPhone;
 	}
 
-	public void setOrderPhone(String orderPhone) {
-		this.orderPhone = orderPhone;
+	public void setOrdersPhone(String ordersPhone) {
+		this.ordersPhone = ordersPhone;
 	}
 
-	public String getOrderAddress() {
-		return orderAddress;
+	public String getOrdersAddress() {
+		return ordersAddress;
 	}
 
-	public void setOrderAddress(String orderAddress) {
-		this.orderAddress = orderAddress;
+	public void setOrdersAddress(String ordersAddress) {
+		this.ordersAddress = ordersAddress;
 	}
 
 	public String getOrdersState() {

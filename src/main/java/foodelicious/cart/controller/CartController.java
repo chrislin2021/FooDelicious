@@ -49,15 +49,20 @@ public class CartController {
 	public String shoppingCart() {
 
 		if (session.getAttribute("userID") != null) {
+
 			List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
 			Integer count = 0;
+
 			for (Integer i = 0; i < carts.size(); i++) {
 				count++;
 			}
+
 			session.setAttribute("carts", carts);
 			session.setAttribute("count", count);
 			session.setAttribute("coin", getGoldCoin());
 			session.setAttribute("priceTotal", originTotal());
+
 			return "app.ShoppingCart";
 		} else {
 			return "app.LoginSystem";
@@ -78,6 +83,7 @@ public class CartController {
 		if (session.getAttribute("userID") == null) {
 			return "{\"ans\":\"請先登入會員!!\"}";
 		}
+
 //		判斷購物車是否有重複商品
 		Boolean same = false;
 
@@ -172,9 +178,9 @@ public class CartController {
 
 		for (CartBean cart : carts) {
 			ordersBean.setMemberId(cart.getMemberId());
-			ordersBean.setOrderName(cart.getMember().getMemberName());
-			ordersBean.setOrderPhone(cart.getMember().getMemberPhone());
-			ordersBean.setOrderAddress(cart.getMember().getMemberAddress());
+			ordersBean.setOrdersName(cart.getMember().getMemberName());
+			ordersBean.setOrdersPhone(cart.getMember().getMemberPhone());
+			ordersBean.setOrdersAddress(cart.getMember().getMemberAddress());
 		}
 		session.setAttribute("orders", ordersBean);
 
@@ -209,7 +215,7 @@ public class CartController {
 			discountTotal = 0;
 		}
 
-		session.setAttribute("priceTotal", discountTotal);
+		session.setAttribute("totalPrice", discountTotal);
 
 		return discountTotal;
 	}
