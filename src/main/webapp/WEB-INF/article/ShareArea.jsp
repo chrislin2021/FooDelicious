@@ -293,10 +293,11 @@
                 $.ajax({
                     url: "/deleteData/" + id,
                     type: "DELETE",
-                    success: function () {
-                        searchShareDate("/totalArticleData");
+                    success:function(){
+                        searchShareDate("/totalArticleData", "GET");
                     }
                 })
+                
             }
         }
         //上面分類選擇器
@@ -330,7 +331,7 @@
         //==================模糊搜尋==================
         var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
         var alertTrigger = document.getElementById('articleSearch')
-        
+
         $("#articleSearch").on("click", function () {
             let clasify = $("#clasify").val();
             //console.log(clasify)
@@ -341,7 +342,7 @@
                 //console.log("請輸入資料喔")
                 alertMsg('搜尋內容不能空白喔', 'success')
                 return;
-            }else{
+            } else {
                 //document.createElement('div').innerHTML="";
                 $("#liveAlertPlaceholder").html("");
             }
