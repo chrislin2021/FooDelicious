@@ -12,6 +12,6 @@ public interface CartService {
 
 	List<CartBean> selectItem(Long memberId);
 
-	
+	List<CartBean> selectProduct();
 
 }
