@@ -59,7 +59,6 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		List<CartBean> carts = cartService.selectProduct();
 
 		for (CartBean cart : carts) {
-			System.out.println(cart.getProductId());
 			if (cart.getProductId() == productId) {
 				cartService.deleteItem(productId);
 				break;
