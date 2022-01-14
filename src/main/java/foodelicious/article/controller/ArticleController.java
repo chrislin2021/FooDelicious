@@ -118,14 +118,14 @@ public class ArticleController {
 	}
 
 	// 透過id刪除文章
+	@ResponseBody
 	@DeleteMapping("/deleteData/{id}")
 	public void deleteAtricle(@PathVariable(value = "id", required = false) Integer id) {
-
+		System.out.println(id);
 		articleService.useArticleIdDelete(id);
-
-		Map<String, Object> data = new HashMap<>();
-		data.put("session", session.getAttribute("userID"));
-		data.put("title", articleService.findAll());
+//		Map<String, Object> data = new HashMap<>();
+//		data.put("session", session.getAttribute("userID"));
+//		data.put("title", articleService.findAll());
 	}
 
 	// 前往修改頁面 同時使用model 將資料轉移
