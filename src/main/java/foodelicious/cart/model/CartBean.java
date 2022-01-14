@@ -43,7 +43,7 @@ public class CartBean implements Serializable {
 	private Integer quantity;
 
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
 
