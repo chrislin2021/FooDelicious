@@ -12,12 +12,7 @@
                     文章列表
                     <span class="littleName">Article List</span>
                 </h1>
-                <!--                 <form action=""> -->
-                <!--                     <div class="col-sm-2"> -->
-                <!--                         <input class="keyWord keyWord1" type="text" name="accKeyWord" placeholder="請輸入文章標題關鍵字..."> -->
-                <!--                         <input id="searchAcc" class="keyWord btn btn-outline-secondary" type="button" value="查詢" /> -->
-                <!--                     </div> -->
-                <!--                 </form> -->
+
                 <div class="w-50 p-3 input-group mb-3">
                     <select class="btn btn-outline-secondary dropdown" id="clasify">
                         <option selected>全部文章</option>
@@ -36,7 +31,6 @@
                                     <th class="col col1 table-danger">文章編號</th>
                                     <th class="col col2 table-danger">文章分類</th>
                                     <th class="col col4 table-danger">文章標題</th>
-                                    <th class="col col5 table-danger">發文者</th>
                                     <th class="col col10 table-danger">點擊次數</th>
                                     <th class="col col13 table-danger">發布日期</th>
                                     <th class="col col15 table-danger">刪除</th>
@@ -51,52 +45,48 @@
                 </section>
 
                 <script>
-                    //載入視窗先執行區域
                     window.addEventListener('load', function() {
-                                searchShareDate("/totalArticleData", "GET");
-                </script>
-
-                <script>
-                    //=============刪除確認=============
-
-                    $("#members").on("click", "#delBtn", function() {
-                        let deleteId = $(this).data("id");
-
-                        if (confirm("確定要刪除嗎")) {
-                            $.ajax({
-                                url: "/deleteData/" + id,
-                                type: "DELETE",
-                                success: function() {
-                                    searchShareDate("/totalArticleData");
-                                }
-                            });
-                        }
+                        searchShareDate("/totalArticleData", "GET");
                     })
                 </script>
 
                 <script>
-                    //=============文章 關鍵字查詢功能=============
-                    $("#searchAcc").on("click", function() {
-                        let data = $(".keyWord1").val();
+                    let startItem = 0;
+                    let maxPage;
+                    //每頁最大筆數
+                    let maxItems = 10;
+                    //ajax function
+                    function searchShareDate(url, type) {
                         $.ajax({
-                            url: "http://localhost:8080/bkmembers/" + data,
-                            type: "GET",
-                            success: function(accountAll) {
-                                let num = accountAll.length;
-                                let accountData = accountAll;
-                                //載入顯示功能
-                                showData(0, num, accountData);
+                            url: url,
+                            type: type,
+                            contentType: "application/json; charset=utf-8",
+                            success: function(articles) {
+                                ShareData = articles
 
-                                //載入分頁功能
-                                if (num >= 10) {
-                                    pages(10, accountAll);
-                                } else {
-                                    pages(num, accountAll);
-                                }
+                                UserId = articles.session;
+
+                                //得到格式：{session: null, title: Array(18)}        
+                                //console.log(ShareData)
+                                //=================分頁功能================
+                                endItem = (articles.title.length <= 10) ? articles.title.length : 10;
+                                //讀回資料時就先顯示
+                                showData(startItem, endItem, articles);
+                                //計算出最大頁數。
+                                maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
+
+                                //動態生成頁數
+                                let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+                                for (let i = 0; i < maxPage; i++) {
+                                    let pageNum = i + 1;
+                                    pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
+                                };
+                                pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+                                $("#page").html(pageHtml);
+
                             }
-                        })
-
-                    });
+                        });
+                    };
                 </script>
 
                 <script>
@@ -106,16 +96,12 @@
 
                     $("#articleSearch").on("click", function() {
                         let clasify = $("#clasify").val();
-                        //console.log(clasify)
                         let titleKeyWord = $("#titleKeyWord").val()
-                            //console.log(titleKeyWord.length == 0)
 
                         if (titleKeyWord == "" || titleKeyWord.length == 0) {
-                            //console.log("請輸入資料喔")
                             alertMsg('搜尋內容不能空白喔', 'success')
                             return;
                         } else {
-                            //document.createElement('div').innerHTML="";
                             $("#liveAlertPlaceholder").html("");
                         }
 
@@ -133,11 +119,11 @@
                             success: function(articles) {
                                 ShareData = articles
                                     //得到格式：{session: null, title: Array(18)}        
-                                    //console.log(ShareData)
-                                    //=================分頁功能================
+
+                                //=================分頁功能================
                                 endItem = (articles.title.length <= 10) ? articles.title.length : 10;
                                 //讀回資料時就先顯示
-                                showData(startItem, endItem);
+                                showData(startItem, endItem, articles);
                                 //計算出最大頁數。
                                 maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
 
@@ -289,33 +275,38 @@
                     function showData(startItem, endItem, dataSource) {
                         let txt = "<tr>";
                         for (let i = startItem; i < endItem; i++) {
-                            txt += "<td class='align-middle'>" + dataSource[i].memberId + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].memberMail + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].memberStatus + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].memberName + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].memberGender + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].memberBirth + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].memberPhone + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].memberAddress + "</td>"
+                            txt += "<td class='align-middle'>" + dataSource.title[i].share_id + "</td>"
+                            txt += "<td class='align-middle'>" + dataSource.title[i].article_clallify + "</td>"
+                            txt += "<td class='align-middle'><a href='/intIDFindAll/" + dataSource.title[i].share_id + "'>" + dataSource.title[i].article_title + "</a></td>";
+                            txt += "<td class='align-middle'>" + dataSource.title[i].viewNum + "</td>"
 
-                            txt += "<td class='align-middle'>" + dataSource[i].memberCoin + "</td>"
-                            txt += "<td class='align-middle'>" + dataSource[i].discount + "</td>"
-                            let newDate = new Date(dataSource[i].registerDate);
+                            let newDate = dataSource.title[i].postTime;
                             let register = newDate.toLocaleString();
                             txt += "<td class='align-middle'>" + register + "</td>"
-                            txt += '<td class="align-middle">' +
-                                '<form method="" >' +
-                                '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id=' + dataSource[i].memberId + '>' +
-                                '</form>' +
-                                '</td>'
+
                             txt += '<td class="mdata">' +
                                 '<form method="" action="">' +
                                 '<input type="hidden" type="text" name="empdel" value=?>' +
-                                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id=' + dataSource[i].memberId + '>' +
+                                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" onclick="delfun(' + dataSource.title[i].share_id + ')">' +
                                 '</form>' +
                                 '</td></tr>'
                         }
                         $("#members").html(txt);
+                    }
+                </script>
+                <script>
+                    //=============刪除確認=============
+
+                    function delfun(id) {
+                        if (confirm("確定刪除此筆紀錄嗎 ?")) {
+                            $.ajax({
+                                url: "/adminDeleteData/" + id,
+                                type: "DELETE",
+                                success: function() {
+                                    searchShareDate("/totalArticleData", "GET");
+                                }
+                            })
+                        }
                     }
                 </script>
             </body>

@@ -9,6 +9,7 @@
             padding: 20px;
         }
     </style>
+    <link href="/css/CKEditor.css" rel="stylesheet" />
     <div class="row" id="rowSelect">
         <div class="col-12 col-md-2">
             <br>

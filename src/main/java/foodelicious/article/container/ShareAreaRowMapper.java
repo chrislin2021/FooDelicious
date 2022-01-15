@@ -16,6 +16,8 @@ public class ShareAreaRowMapper implements RowMapper<ShareArea> {
 		shareArea.setArticle_clallify(rs.getString("article_clallify"));
 		shareArea.setArticle_title(rs.getString("article_title"));
 		shareArea.setFk_account_id(rs.getLong("fk_account_id"));
+		shareArea.setArticle_likes(rs.getInt("article_likes"));
+		shareArea.setViewNum(rs.getInt("viewNum"));
 		shareArea.setPostTime(rs.getDate("postTime"));
 		return shareArea;
 	}

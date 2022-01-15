@@ -110,28 +110,7 @@
 		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 66%">66%</div>
 	</div>
 	<br>
-	<!-- 		<table class="table table-striped"> -->
-	<!-- 			<thead> -->
-	<!-- 				<tr> -->
-	<!-- 					<th scope="col">圖片</th> -->
-	<!-- 					<th scope="col">商品</th> -->
-	<!-- 					<th scope="col">單價</th> -->
-	<!-- 					<th scope="col">數量</th> -->
-	<!-- 					<th scope="col">小計</th> -->
-	<!-- 				</tr> -->
-	<!-- 			</thead> -->
-	<!-- 			<tbody id="cartList"> -->
-	<%-- 				<c:forEach var="carts" items="${carts}"> --%>
-	<!-- 					<tr> -->
-	<!-- 						<th scope="row"></th> -->
-	<%-- 						<td>${carts.product.productName}</td> --%>
-	<%-- 						<td>${carts.product.productPrice}</td> --%>
-	<%-- 						<td><input class="num" [type="number" ] readonly="readonly" value="${carts.quantity}" /> --%>
-	<%-- 						<td>${carts.product.productPrice*carts.quantity}</td> --%>
-	<!-- 					</tr> -->
-	<%-- 				</c:forEach> --%>
-	<!-- 			</tbody> -->
-	<!-- 		</table> -->
+
 	<div class="container">
 		<div class="row g-5">
 			<div class="col-md-5 col-lg-4 order-md-last">
@@ -150,9 +129,9 @@
 					<li class="list-group-item d-flex justify-content-between bg-light">
 						<div class="text-success">
 							<h6 class="my-0">總折扣金額：</h6>
-						</div><span class="text-success">−NT$:110元</span>
+						</div><span class="text-success">−NT$:${discountContent}元</span>
 					</li>
-					<li class="list-group-item d-flex justify-content-between"><span>總金額：</span><strong>NT$:7785元</strong></li>
+					<li class="list-group-item d-flex justify-content-between"><span>總金額：</span><strong>NT$:${totalPrice}元</strong></li>
 				</ul>
 			</div>
 
@@ -161,18 +140,18 @@
 				<form class="needs-validation" novalidate>
 					<div class="row g-3">
 						<div class="col-sm-6">
-							<label for="firstName" class="form-label">收件人姓名<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="name" placeholder="高遵" value="" required>
+							<label for="firstName" class="form-label">收件人姓名<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="name" placeholder="高遵" value="${orders.ordersName}" required>
 							<div class="invalid-feedback">請填寫收件人姓名喔！！</div>
 						</div>
 
 						<div class="col-sm-6">
-							<label for="lastName" class="form-label">收件人電話<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="phone" placeholder="02 2311 3731" value="" required>
+							<label for="lastName" class="form-label">收件人電話<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="phone" placeholder="02 2311 3731" value="${orders.ordersPhone}" required>
 							<div class="invalid-feedback">請填寫收件人電話喔！！</div>
 						</div>
 					</div>
 
 					<div class="col-12">
-						<label for="address" class="form-label">收件人地址<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="address" placeholder="台北市中正區重慶南路一段122號" 	required>
+						<label for="address" class="form-label">收件人地址<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="address" placeholder="台北市中正區重慶南路一段122號" value="${orders.ordersAddress}"	required>
 						<div class="invalid-feedback">請填寫收件人電話喔！！</div>
 					</div>
 

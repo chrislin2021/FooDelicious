@@ -24,8 +24,12 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	@PersistenceContext
 	EntityManager em;
 
-	@Autowired
+	
 	private CBKProductRepository cbkProdRepository;
+	
+	public CBKProductDao(final CBKProductRepository cbkProdRepository) {
+		this.cbkProdRepository= cbkProdRepository;
+	}
 
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -44,6 +48,11 @@ public class CBKProductDao implements CBKProductDaoInterface {
 
 		List<Product> products = cbkProdRepository.findByName(productName);
 
+		return products;
+	}
+	
+	public List<Product> findByNameAndType(String productName, Integer categories,Long productCompanyId){
+		List<Product> products = cbkProdRepository.findByNameAndType(productName, categories, productCompanyId);
 		return products;
 	}
 
@@ -65,11 +74,11 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			newProduct.setProductCompany(product.getProductCompany());
 			newProduct.setProductName(product.getProductName());
 			newProduct.setProductCategories_name(newProduct.getProductCategories_name());
-			newProduct.setProductCategories(newProduct.getProductCategories());
+			newProduct.setProductCategories(product.getProductCategories());
 			newProduct.setProductPrice(product.getProductPrice());
 			newProduct.setProductContent(product.getProductContent());
 			newProduct.setProductStock(product.getProductStock());
-			newProduct.setProductStock(product.getProductStock());
+			newProduct.setProductStatus(product.getProductStatus());
 			newProduct.setProductKeywords(product.getProductKeywords());
 			cbkProdRepository.save(newProduct);
 			return "Product update successful!";
@@ -90,6 +99,17 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			return "Product not found. Please try again.";
 		}
 
+	}
+
+	public boolean saveProduct(Product product) {
+		Product theSavedProduct = cbkProdRepository.save(product);
+		if(theSavedProduct != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 
 	// 刪除商品 (好像跟某個table有衝突 無法刪除)

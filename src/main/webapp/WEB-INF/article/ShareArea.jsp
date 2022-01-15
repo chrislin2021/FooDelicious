@@ -4,11 +4,11 @@
         .topDIV {
             margin-top: 16px;
         }
-
+        
         #inputGroupSelect01 {
             width: 1em;
         }
-
+        
         .messageArea {
             border: 1px rgb(165, 162, 162) solid;
             width: 100%;
@@ -25,8 +25,7 @@
             <option selected>全部文章</option>
             <option>廚具開箱</option>
             <option>食譜分享</option>
-        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button"
-            id="titleKeyWord">
+        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
         <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
     </div>
     <div class="container-fluid">
@@ -38,8 +37,7 @@
 
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active"
-                                aria-current="page">全部文章</button></li>
+                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page">全部文章</button></li>
                         <li class="nav-item"><button id="navKitchenware" type="button" class="nav-link">廚具開箱</button>
                         </li>
                         <li class="nav-item"><button id="navRecipe" type="button" class="nav-link">食譜分享</button></li>
@@ -56,8 +54,7 @@
             <div class="col" id="messageDIV" style="visibility:hidden ">
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容"
-                        aria-describedby="button-addon2">
+                    <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" id="sendToChatRoom2">傳送</button>
                 </div>
                 <div class="messageArea">
@@ -102,7 +99,7 @@
         //let endItem = maxItems;
         let endItem;
         //螢幕載入時 先執行的區域
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             document.getElementById("messageDIV").style.visibility = 'hidden';
             searchShareDate("/totalArticleData", "GET");
         })
@@ -118,7 +115,7 @@
                 url: url,
                 type: type,
                 contentType: "application/json; charset=utf-8",
-                success: function (articles) {
+                success: function(articles) {
                     ShareData = articles
 
                     UserId = articles.session;
@@ -145,13 +142,13 @@
                     //======================== websocked ========================
                     var socket = new SockJS(webSocketUrl);
                     stompClient = Stomp.over(socket);
-                    stompClient.connect({}, function (frame) {
+                    stompClient.connect({}, function(frame) {
                         console.log('Connected: ' + frame);
-                        stompClient.subscribe('/topic/messages', function (messageOutput) {
+                        stompClient.subscribe('/topic/messages', function(messageOutput) {
                             showMessageOutput(JSON.parse(messageOutput.body));
                         });
                     });
-                    inputMessageArea.onkeyup = function () {
+                    inputMessageArea.onkeyup = function() {
                         if (event.keyCode === 13) {
                             let text = inputMessageArea.value;
                             if (text.length > 0) {
@@ -165,7 +162,7 @@
                             }
                         }
                     };
-                    btnSendToChatRoom2.onclick = function () {
+                    btnSendToChatRoom2.onclick = function() {
                         let text = inputMessageArea.value;
                         if (text.length > 0) {
                             //console.log(text.length);
@@ -206,13 +203,13 @@
         }
 
         //綁定click事件
-        $("#page").on("click", ".page", function () {
+        $("#page").on("click", ".page", function() {
             //alert(ShareData);
             nowPage = ($(this).prop("id")) * 1; //強制轉成數字型態
             $(".pageNum").prop("class", "page-item page pageNum")
             $(this).prop("class", "page-item page pageNum active")
-            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
-            //恢復上、下頁的功能
+                // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+                //恢復上、下頁的功能
             $(".previous").prop("class", "page-item previous");
             $(".next").prop("class", "page-item next");
             // alert("nowPage："+nowPage+"maxPage："+maxPage);
@@ -233,7 +230,7 @@
             showData(startItem, endItem);
         });
         //=======上一頁設定========
-        $("#page").on("click", ".previous", function () {
+        $("#page").on("click", ".previous", function() {
 
             //恢復下一頁的功能
             $(".next").prop("class", "page-item next");
@@ -257,7 +254,7 @@
         });
 
         //========下一頁設定============
-        $("#page").on("click", ".next", function () {
+        $("#page").on("click", ".next", function() {
 
             //恢復上一頁的功能
             $(".previous").prop("class", "page-item previous");
@@ -293,14 +290,16 @@
                 $.ajax({
                     url: "/deleteData/" + id,
                     type: "DELETE",
-                    success: function () {
-                        searchShareDate("/totalArticleData");
+                    success: function() {
+                        searchShareDate("/totalArticleData", "GET");
                     }
                 })
+
+                //window.location.href = "/goShareArea";
             }
         }
         //上面分類選擇器
-        $("#navTotal").click(function () {
+        $("#navTotal").click(function() {
             searchShareDate("/totalArticleData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -308,7 +307,7 @@
             $("#navKitchenware").prop("class", "nav-link")
             $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navKitchenware").click(function () {
+        $("#navKitchenware").click(function() {
             searchShareDate("/totalKitchenwareData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -316,7 +315,7 @@
             $("#navKitchenware").prop("class", "nav-link active")
             $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navRecipe").click(function () {
+        $("#navRecipe").click(function() {
             searchShareDate("/totalRecipeData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -330,18 +329,18 @@
         //==================模糊搜尋==================
         var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
         var alertTrigger = document.getElementById('articleSearch')
-        
-        $("#articleSearch").on("click", function () {
+
+        $("#articleSearch").on("click", function() {
             let clasify = $("#clasify").val();
             //console.log(clasify)
             let titleKeyWord = $("#titleKeyWord").val()
-            //console.log(titleKeyWord.length == 0)
+                //console.log(titleKeyWord.length == 0)
 
             if (titleKeyWord == "" || titleKeyWord.length == 0) {
                 //console.log("請輸入資料喔")
                 alertMsg('搜尋內容不能空白喔', 'success')
                 return;
-            }else{
+            } else {
                 //document.createElement('div').innerHTML="";
                 $("#liveAlertPlaceholder").html("");
             }
@@ -357,11 +356,11 @@
                 type: "GET",
                 //data: JSON.stringify(fuzzySearch),
                 contentType: "application/json; charset=utf-8",
-                success: function (articles) {
+                success: function(articles) {
                     ShareData = articles
-                    //得到格式：{session: null, title: Array(18)}        
-                    //console.log(ShareData)
-                    //=================分頁功能================
+                        //得到格式：{session: null, title: Array(18)}        
+                        //console.log(ShareData)
+                        //=================分頁功能================
                     endItem = (articles.title.length <= 10) ? articles.title.length : 10;
                     //讀回資料時就先顯示
                     showData(startItem, endItem);
@@ -380,6 +379,7 @@
             })
 
         })
+
         function showMessageOutput(messageOutput) {
             let line = "";
             JSONData = JSON.stringify(messageOutput);

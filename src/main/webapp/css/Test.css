@@ -211,7 +211,7 @@
   padding-left:25px;
   padding-right:25px;
   position: relative;
-  background: white;
+  background: F5F5AF;
   height: fit-content;
   left: 260px;
   width: calc(100% - 260px);
@@ -230,7 +230,7 @@
   height: 60px;
   display: flex;
   align-items: center;
-  background-color:black;
+  background-color:none;
   max-width:100%;
 }
 .home-section .home-content .bx-menu,

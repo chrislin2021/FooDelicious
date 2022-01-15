@@ -27,7 +27,7 @@ public class ArticleData implements Serializable {
 	@Column(name = "article_id")
 	private int article_id;
 	
-	@Size(min = 15, max = 255, message = "內容不得小於15個字唷")
+	@Size(min = 15, message = "內容不得小於15個字唷")
 	@Column(name = "article")
 	private String article;
 
