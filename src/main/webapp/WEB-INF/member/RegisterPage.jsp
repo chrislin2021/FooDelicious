@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
 .error {
@@ -113,9 +114,9 @@
 			<button type="submit" class="btn btn-outline-primary"
 				value="register" onclick="success()">註冊</button>
 		</form:form>
-		
+
 	</div>
-		<button class="C1" style="width: 100px; height: 30px;" id="button">一鍵送出</button> 
+	<button class="C1" style="width: 100px; height: 30px;" id="button">一鍵送出</button>
 
 </body>
 <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
@@ -133,16 +134,10 @@
 			$("#memberAddress").val('台北市大安區信義路100號');
 		})
 	});
-	
-// 	function success(){
-// 			Swal.fire({
-// 		  position: 'top-end',
-// 		  icon: 'success',
-// 		  title: 'Your work has been saved',
-// 		  showConfirmButton: false,
-// 		  timer: 1500
-// 		})
-// 	}
-
 
 </script>
+<!-- <script> -->
+// function success(){ Swal.fire({ position: 'top-end', icon: 'success',
+// title: 'Your work has been saved', showConfirmButton: false, timer: 50000
+// }) }
+<!-- </script> -->

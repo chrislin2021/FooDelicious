@@ -8,13 +8,6 @@ import foodelicious.member.model.Member;
 public interface MemberService {
 
 	
-//	Member checkLogin(String member);
-//
-//	Member findId(String memberMail);
-//
-//
-//	Member findByMemberMailAndPwd(String memberMail, String pwd);
-
 	Member findByMemberMail(String memberMail);
 
 	Member save(Member member);
@@ -26,12 +19,6 @@ public interface MemberService {
 	void update(Member member);
 
 	void deleteByMemberId(Long memberId);
-
-
-
-	
-	
-	
 
 
 }

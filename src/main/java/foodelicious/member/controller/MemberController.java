@@ -48,6 +48,7 @@ public class MemberController {
 	public String googleLoginPage(Member member, @RequestParam String memberMail,HttpSession session) {
 
 		if (memberService.findByMemberMail(member.getMemberMail()) != null) {
+			session.setAttribute("memberId", member.getMemberId());
 			return "app.loginSuccess";
 		}
 		member.setMemberDiscountId("none");
