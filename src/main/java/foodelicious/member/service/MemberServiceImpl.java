@@ -30,29 +30,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.save(member);
 	}
 
-//	@Override
-//	public boolean save(Member member) {
-//		memberRepository.save(member);
-//		return true;
-////		System.out.println("memberService" + member);
-//	}
-
-//	@Override
-//	public Member checkLogin(String member) {
-//		return memberRepository.checkLogin(member);
-//	}
-//
-//
-//	@Override
-//	public  Member findId(String memberMail) {
-//		return memberRepository.findByMemberMail(memberMail);
-//	}
-//
-//	@Override
-//	public Member findByMemberMailAndPwd(String memberMail, String pwd) {
-//		return memberRepository.findByMemberMailAndPwd(memberMail, pwd);
-//	}
-
 	@Override
 	public List<Member> findAll() {
 		return memberRepository.findAll();

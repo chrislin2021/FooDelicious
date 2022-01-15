@@ -38,11 +38,8 @@
 								</div>
 
 								<!-- Checkbox -->
-								<div class="form-check d-flex justify-content-start mb-4">
-									<input class="form-check-input" type="checkbox" value=""
-										id="form1Example3" /> <label class="form-check-label"
-										for="form1Example3">記住密碼</label>
-								</div>
+								<a href="pwdForgetPage" class="link-info">忘記密碼</a><br>
+								
 								<a href="RegisterPage" class="link-info">立即註冊</a><br>
 								<button class="btn btn-primary btn-lg btn-block" type="submit">送出</button>
 
