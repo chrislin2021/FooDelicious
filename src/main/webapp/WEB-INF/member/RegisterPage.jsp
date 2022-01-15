@@ -17,7 +17,8 @@
 <body>
 
 	<div align='center'>
-		<h3>註冊會員</h3>
+		<h3>會員註冊</h3>
+		
 
 		<c:set var='updateurl'
 			value='${pageContext.request.contextPath}/members/${memberId}' />
@@ -112,19 +113,19 @@
 			<!-- 			</div> -->
 
 			<button type="submit" class="btn btn-outline-primary"
-				value="register" onclick="success()">註冊</button>
+				value="register" onclick="success()">註冊</button><br>
+				<button class="btn btn-outline-danger" id="C1">一鍵送出</button>
+				
 		</form:form>
-
 	</div>
-	<button class="C1" style="width: 100px; height: 30px;" id="button">一鍵送出</button>
-
+	
 </body>
 <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
 <script src="${contextRoot}/js/jquery-ui.js"></script>
 <script type="text/javascript">
 	//自動填入資料
 	$(document).ready(function() {
-		$(".C1").click(function() {
+		$("#C1").click(function() {
 			$("#memberMail").val('eeit13711@gmail.com');
 			$("#pwd").val('$$$$happy13711');
 			$("#memberName").val('石六六');
@@ -136,8 +137,3 @@
 	});
 
 </script>
-<!-- <script> -->
-// function success(){ Swal.fire({ position: 'top-end', icon: 'success',
-// title: 'Your work has been saved', showConfirmButton: false, timer: 50000
-// }) }
-<!-- </script> -->

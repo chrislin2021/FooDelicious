@@ -19,17 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainUpdateController {
 
 	TotalUseEMDaoService EMDaoService;
-	
+
 	MemberService memberService;
-	
-	
 
 	public MainUpdateController(TotalUseEMDaoService eMDaoService, MemberService memberService) {
 		this.EMDaoService = eMDaoService;
 		this.memberService = memberService;
 	}
-
-
 
 	@PostMapping(path = "/checklogin.controller")
 	public String processAction(@RequestParam("memberMail") String memberMail, @RequestParam("pwd") String pwd, Model m,
@@ -54,10 +50,10 @@ public class MainUpdateController {
 			Long EMid = EMDaoService.findId(new Member(memberMail, pwd));
 			session.setAttribute("memberMail", memberMail);
 			session.setAttribute("pwd", pwd);
-			session.setAttribute("userID", EMid);//findByMemberId
+			session.setAttribute("userID", EMid);// findByMemberId
 			session.setAttribute("userName", memberService.findByMemberId(EMid).getMemberName());
-//			System.out.println("userName：" + session.getAttribute("userName"));
-//			System.out.println("EMid：" + session.getAttribute("userID"));
+			System.out.println("userName：" + session.getAttribute("userName"));
+			System.out.println("EMid：" + session.getAttribute("userID"));
 
 			// 查詢成功登入的會員身份
 			String level = EMDaoService.findId2(EMid);
@@ -72,7 +68,7 @@ public class MainUpdateController {
 			}
 		}
 
-		errors.put("msg", "Please Input Correct Username or Password");
+		errors.put("msg", "請輸入正確的帳號密碼");
 		return "app.LoginSystem";
 	}
 

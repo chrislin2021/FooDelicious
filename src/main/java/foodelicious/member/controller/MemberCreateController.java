@@ -61,9 +61,6 @@ public class MemberCreateController {
 	@GetMapping("/RegisterPage")
 	public String getMemberForm(Model model) {
 		Member m = new Member();
-		m.setMemberName("石七七");
-		m.setPwd("${}13711");
-		m.setMemberAddress("大安路1號");
 		model.addAttribute("member", new Member());
 		return "app.RegisterPage";
 	}
@@ -90,7 +87,7 @@ public class MemberCreateController {
 
 		
 		member.setMemberDiscountId("none");
-		member.setMemberCoin(0);
+		member.setMemberCoin(10);
 		member.setMember_status("customer");
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		member.setRegister_date(now);

@@ -24,23 +24,18 @@ public class TotalUseEMDao {
 
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	
+
 	// 管理登入
 	public boolean checkLogin(Member users) {
-		TypedQuery<Member> member = null;
-		String hqlstr = "FROM member_data2 WHERE member_mail =:user AND pwd = :pwd";
-		member = em.createQuery(hqlstr, Member.class)
-				    .setParameter("user", users.getMemberMail())
-					.setParameter("pwd", users.getPwd());
-		
-		List<Member> accountData = member.getResultList();
-		if (accountData != null) {
-			em.close();
-			return true;
-		}
-		em.close();
-		return false;
-	}
+		  TypedQuery<Member> member = null;
+		  String hqlstr = "FROM member_data2 WHERE member_mail =:user AND pwd = :pwd";
+		  member = em.createQuery(hqlstr, Member.class);
+		  member.setParameter("user", users.getMemberMail());
+		  member.setParameter("pwd", users.getPwd());
+		  List<Member> accountData = member.getResultList();
+		  boolean result = (accountData.size() != 0) ? true : false;
+		  return result;
+		 }
 
 	public Long findId(Member users) {
 		TypedQuery<Member> query = null;
@@ -49,7 +44,7 @@ public class TotalUseEMDao {
 		query.setParameter("user", users.getMemberMail());
 		query.setParameter("pwd", users.getPwd());
 
-		Member account =  query.getSingleResult();
+		Member account = query.getSingleResult();
 		em.close();
 		return account.getMemberId();
 	}
@@ -60,12 +55,13 @@ public class TotalUseEMDao {
 		map.put("memberId", id);
 
 		List<Member> list = namedParameterJdbcTemplate.query(sql, map, new AdminRowMapper());
-		if(list.size() > 0){
+		if (list.size() > 0) {
 			String memberStatus = list.get(0).getMember_status();
 			return memberStatus;
-		}else{
-			return "null";		}
+		} else {
+			return "null";
+		}
 
 	}
-	
+
 }

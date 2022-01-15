@@ -20,11 +20,12 @@
 						<div class="card-body p-5 text-center">
 
 							<h3 class="mb-5">會員登入</h3>
+							<span id="loginSpan">${errors.msg}</span>
 							<form action="checklogin.controller" method="post">
 								<div class="form-outline mb-4">
 									<input type="text" 
 										class="form-control form-control-lg" name="memberMail" 
-										placeholder="memberMail" /> <label
+										placeholder="請輸入mail" /> <label
 										class="form-label" for="memberMail"></label><span
 										id="loginSpan">${errors.memberMail}</span>
 								</div>
@@ -32,32 +33,30 @@
 								<div class="form-outline mb-4">
 									<input type="password" id="typePasswordX-2"
 										class="form-control form-control-lg" name="pwd" 
-										placeholder="pwd" /> <label
+										placeholder="請輸入密碼" /> <label
 										class="form-label" for="typePasswordX-2"></label><span
 										id="loginSpan">${errors.pwd}</span>
 								</div>
+								
+								<div align="center" class="g-signin2 social_signin" onclick="ClickLogin()"
+								data-onsuccess="onSignIn"></div>
 
 								<!-- Checkbox -->
+								<a href="RegisterPage" class="link-info">立即註冊</a>
 								<a href="pwdForgetPage" class="link-info">忘記密碼</a><br>
 								
-								<a href="RegisterPage" class="link-info">立即註冊</a><br>
 								<button class="btn btn-primary btn-lg btn-block" type="submit">送出</button>
 
 								<hr class="my-4">
 
-								<!--             <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;" type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button> -->
-
-
 							</form>
-							<%-- 							<span id="loginSpan">${errors.msg}</span> --%>
-
-							<div class="g-signin2 social_signin" onclick="ClickLogin()"
-								data-onsuccess="onSignIn"></div>
+							
+							
+							
 
 							<form method="post" action="${contextRoot}/googleLogin">
 								<input type="hidden" id="memberName" name="memberName">
 								<input type="hidden" id="memberMail" name="memberMail">
-								
 							</form>
 						</div>
 					</div>
