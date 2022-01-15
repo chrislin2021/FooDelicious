@@ -27,9 +27,8 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
-	
-	MemberValidator memberValidator;
 
+	MemberValidator memberValidator;
 
 	public MemberController(MemberService memberService, MemberValidator memberValidator) {
 		super();
@@ -45,18 +44,25 @@ public class MemberController {
 
 	// GOOGLE登入
 	@PostMapping("/googleLogin")
-	public String googleLoginPage(Member member, @RequestParam String memberMail,HttpSession session) {
+	public String googleLoginPage(Member member, @RequestParam String memberMail, HttpSession session) {
 
 		if (memberService.findByMemberMail(member.getMemberMail()) != null) {
-			session.setAttribute("memberId", member.getMemberId());
+			List<Member> EMid = memberService.findByMemberMailJpa(memberMail);
+			for (Member members : EMid) {
+				if (members.getMemberMail().equals(memberMail)) {
+					session.setAttribute("userID", members.getMemberId());
+					break;
+				}
+			}
+
 			return "app.loginSuccess";
 		}
 		member.setMemberDiscountId("none");
 		member.setMemberCoin(10);
 		member.setMember_status("customer");
 		memberService.save(member);
-		session.setAttribute("memberId", member.getMemberId());
+		session.setAttribute("userID", member.getMemberId());
 		return "app.updatePage";
 	}
-	
+
 }

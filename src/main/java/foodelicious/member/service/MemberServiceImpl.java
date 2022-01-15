@@ -39,6 +39,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member findByMemberId(Long memberId) {
 		return memberRepository.findByMemberId(memberId);
 	}
+	
+	@Override
+	public List <Member> findByMemberMailJpa (String memberMail){
+		return jpa.findByMemberMail(memberMail);
+	}
 
 	@Override
 	public void update(Member member) {

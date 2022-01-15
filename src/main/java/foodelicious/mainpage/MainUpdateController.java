@@ -52,8 +52,8 @@ public class MainUpdateController {
 			session.setAttribute("pwd", pwd);
 			session.setAttribute("userID", EMid);// findByMemberId
 			session.setAttribute("userName", memberService.findByMemberId(EMid).getMemberName());
-			System.out.println("userName：" + session.getAttribute("userName"));
-			System.out.println("EMid：" + session.getAttribute("userID"));
+//			System.out.println("userName：" + session.getAttribute("userName"));
+//			System.out.println("EMid：" + session.getAttribute("userID"));
 
 			// 查詢成功登入的會員身份
 			String level = EMDaoService.findId2(EMid);

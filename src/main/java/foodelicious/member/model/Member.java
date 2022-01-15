@@ -112,6 +112,15 @@ public class Member implements Serializable {
 			register_date = new Date();
 		}
 	}
+	
+	
+
+	public Member(@Email String memberMail) {
+		super();
+		this.memberMail = memberMail;
+	}
+
+
 
 	public Member(String memberMail, String pwd) {
 		this.memberMail = memberMail;

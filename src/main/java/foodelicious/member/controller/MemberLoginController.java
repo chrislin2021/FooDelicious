@@ -89,7 +89,7 @@ public class MemberLoginController {
 				result = "電子郵件認證成功";
 			}
 		}
-		System.out.println("result:" + result);
+//		System.out.println("result:" + result);
 		m.addAttribute("result", result);
 		return "app.pwdChange";
 	}

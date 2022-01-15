@@ -20,5 +20,8 @@ public interface MemberService {
 
 	void deleteByMemberId(Long memberId);
 
+	List<Member> findByMemberMailJpa(String memberMail);
+	
+
 
 }

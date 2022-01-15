@@ -25,7 +25,7 @@
     		    別擔心，請輸入註冊時的email帳號，<br>
 				我們將發送驗證信至您的信箱
     		    <form target="_blank" action="/pwdForgetAction.controller" method="POST" enctype="multipart/form-data" class="mt-3">
-    		        <input class="form-control form-control-lg" type="email" placeholder="Your email address" name="memberMail" value="yolandabestone@gmail.com">
+    		        <input class="form-control form-control-lg" type="email" placeholder="Your email address" name="memberMail" value="">
     		        
     		        <div class="text-right my-3">
     		            <button type="submit" id="button" class="btn btn-lg btn-success">送出</button>
