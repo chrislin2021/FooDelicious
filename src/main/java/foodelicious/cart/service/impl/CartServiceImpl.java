@@ -23,8 +23,13 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void deleteItem(Long productId) {
-		cartRepository.deleteById(productId);
+	public void deleteItem(Long cartId) {
+		cartRepository.deleteById(cartId);
+	}
+
+	@Override
+	public void deleteProduct(Long productId) {
+		cartRepository.deleteByProductId(productId);
 	}
 
 	@Override
@@ -32,6 +37,9 @@ public class CartServiceImpl implements CartService {
 		return cartRepository.findAllByMemberId(memberId);
 	}
 
-	
+	@Override
+	public List<CartBean> selectAll() {
+		return cartRepository.findAll();
+	}
 
 }
