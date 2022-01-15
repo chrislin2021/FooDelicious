@@ -8,8 +8,9 @@
             </head>
 
             <body>
-                <h1 class="tableName">
+                <h1 class="tableName titleName2">
                     文章列表
+                    <br>
                     <span class="littleName">Article List</span>
                 </h1>
 

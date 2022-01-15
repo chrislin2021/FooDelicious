@@ -3,7 +3,17 @@
 }
 
 .titleName{
-    padding: 5px;
+    width: 150px;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    background-color: #182740;
+    color: #D3B884;
+    border-radius: 5px;
+}
+
+.titleName2{
+    margin-top: 10px;
     width: 300px;
     font-size: 30px;
     font-weight: bolder;
@@ -13,15 +23,16 @@
     border-radius: 5px;
 }
 
-#report1{
+.report1{
     float: left;
     margin-left: 50px;
     box-shadow: 0 10px 50px 0px gray;
     border-radius: 10px;
 }
 
-#report2{
+.report2{
     margin-left: 120px;
+    padding: 10px;
     display: inline-block;
     box-shadow: 0 10px 50px 1px gray;
     border-radius: 10px;
@@ -54,4 +65,13 @@ table{
 
 h1{
     margin: 20px 0 10px 0;
+}
+
+.foodArea{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.total{
+    text-align: right;
 }

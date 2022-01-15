@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li id="1" class="colLi">
-                            <a class="colLi" href="" style="text-decoration: none">
+                            <a class="colLi" href="/backend/report/product" style="text-decoration: none">
                                 <i class="fa fa-circle-o"></i>
                                 <span class="listName">暢銷商品</span>
                             </a>
@@ -125,14 +125,14 @@
 
 
         <!-- 管理員名單 -->
-        <li id="BanList" class="list-group-item funName">
+        <li id="AdminList" class="list-group-item funName">
             <a href="/backend/manager" style="text-decoration: none">
                 <i class="text-secondary fas fa-crown"></i> <span class="listName">管理名單</span>
             </a>
         </li>
 
         <!-- 問題回報 -->
-        <li id="BanList" class="list-group-item funName">
+        <li id="QuestList" class="list-group-item funName">
             <a href="" style="text-decoration: none">
                 <i class="text-secondary fas fa-question-circle"></i> <span class="listName">問題回報</span>
             </a>

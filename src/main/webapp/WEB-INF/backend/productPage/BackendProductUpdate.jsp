@@ -7,8 +7,9 @@
 </head>
 <body>
 <div>
-    <h1 class="tableName">
+    <h1 class="tableName titleName2">
         商品列表
+        <br>
         <span class="littleName">Product List</span>
     </h1>
 

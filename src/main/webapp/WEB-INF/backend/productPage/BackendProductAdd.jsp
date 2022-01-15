@@ -7,7 +7,7 @@
 <html>
 <body>
 	<div class="container mt-3">
-		<h2>新增商品</h2>
+		<h2 class="titleName2">新增商品</h2>
 		<p>請在此新增您的商品</p> 
 		商品分類：
 		<form action="/backend/product" enctype="multipart/form-data"

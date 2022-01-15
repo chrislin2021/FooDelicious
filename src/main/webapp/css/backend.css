@@ -95,3 +95,25 @@
 .fork{
     font-size: 32px;
 }
+
+.titleName{
+    padding: 5px;
+    width: 300px;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    background-color: #182740;
+    color: #D3B884;
+    border-radius: 5px;
+}
+
+.titleName2{
+    margin-top: 10px;
+    width: 300px;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    background-color: #182740;
+    color: #D3B884;
+    border-radius: 5px;
+}

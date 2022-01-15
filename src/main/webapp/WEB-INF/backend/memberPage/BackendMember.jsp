@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="../../../css/BackendMember.css">
 </head>
 <body>
-<h1 class="tableName">
+<h1 class="tableName titleName2">
     會員列表
+    <br>
     <span class="littleName">Member List</span>
 </h1>
 <form action="">
@@ -34,7 +35,7 @@
                     <th class="col col7 table-primary">會員折扣</th>
                     <th class="col col13 table-primary">註冊日期</th>
                     <th class="col col14 table-primary">更新</th>
-                    <th class="col col15 table-primary">刪除</th>
+<%--                    <th class="col col15 table-primary">刪除</th>--%>
                 </tr>
                 </thead>
                 <tbody id="members"></tbody>
@@ -268,12 +269,12 @@
                 '<form method="" >'+
                 '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].memberId+'>'+
                 '</form>'+
-                '</td>'
-            txt += '<td class="mdata">'+
-                '<form method="" action="">'+
-                '<input type="hidden" type="text" name="empdel" value=?>'+
-                '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].memberId+'>'+
-                '</form>'+
+            //     '</td>'
+            // txt += '<td class="mdata">'+
+            //     '<form method="" action="">'+
+            //     '<input type="hidden" type="text" name="empdel" value=?>'+
+            //     '<input id="delBtn" class="btn btn-outline-danger" type="button" value="刪除" data-id='+dataSource[i].memberId+'>'+
+            //     '</form>'+
                 '</td></tr>'
         }
         $("#members").html(txt);

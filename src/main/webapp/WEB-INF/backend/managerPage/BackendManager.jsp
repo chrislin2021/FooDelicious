@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="../../../css/backendManager.css">
 </head>
 <body>
-<h1 class="tableName">
+<h1 class="tableName titleName2">
     管理員列表
+    <br>
     <span class="littleName">Manager List</span>
 </h1>
 <form action="">

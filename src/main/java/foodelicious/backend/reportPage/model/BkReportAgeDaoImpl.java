@@ -1,6 +1,8 @@
 package foodelicious.backend.reportPage.model;
 
+import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.backend.reportPage.repository.BkReportAgeRepository;
+import foodelicious.backend.reportPage.repository.BkReportBestsellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,10 +19,16 @@ public class BkReportAgeDaoImpl implements BkReportAgeDao{
     @Autowired
     private BkReportAgeRepository bkReportAgeRepository;
 
-    public BkReportAgeDaoImpl(BkReportAgeRepository bkReportAgeRepository) {
+    @Autowired
+    private BkReportBestsellerRepository bkReportBestsellerRepository;
+
+    public BkReportAgeDaoImpl(BkReportAgeRepository bkReportAgeRepository, BkReportBestsellerRepository bkReportBestsellerRepository) {
         this.bkReportAgeRepository = bkReportAgeRepository;
+        this.bkReportBestsellerRepository = bkReportBestsellerRepository;
     }
 
+    public BkReportAgeDaoImpl() {
+    }
 
     @Override
     public List countByAge(){
@@ -77,6 +85,22 @@ public class BkReportAgeDaoImpl implements BkReportAgeDao{
         System.out.println("age11："+age11+"，age12"+age12);
         return list;
 
+    }
+
+    @Override
+    public List<BkProduct> topFood() {
+
+        List<BkProduct> foods = bkReportBestsellerRepository.topFood();
+
+        return foods;
+    }
+
+    @Override
+    public List<BkProduct> topTool() {
+
+        List<BkProduct> tools = bkReportBestsellerRepository.topTool();
+
+        return tools;
     }
 
 
