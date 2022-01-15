@@ -41,7 +41,7 @@ public class OrdersBean implements Serializable {
 
 	@Column(name = "orders_date")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private java.sql.Timestamp orderDate;
+	private Timestamp orderDate;
 
 	@Column(name = "orders_name")
 	private String ordersName;
@@ -63,7 +63,7 @@ public class OrdersBean implements Serializable {
 	private Member member;
 
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ordersBean", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ordersBean")
 	private Set<OrdersDetailBean> orderDetail = new LinkedHashSet<OrdersDetailBean>();
 
 	public OrdersBean() {

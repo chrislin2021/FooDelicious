@@ -33,15 +33,12 @@ public class OrdersDetailBean implements Serializable {
 	private Long orderDetailId;
 
 	@Column(name = "orders_id")
-	@Transient
 	private Long orderId;
 
 	@Column(name = "member_id")
-	@Transient
 	private Long memberId;
 
 	@Column(name = "product_id")
-	@Transient
 	private Long productId;
 
 	@Column(name = "quantity")
@@ -49,17 +46,17 @@ public class OrdersDetailBean implements Serializable {
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "orders_id")
+	@JoinColumn(name = "orders_id", insertable = false, updatable = false)
 	private OrdersBean ordersBean;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "member_id")
+	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "product_id", insertable = false, updatable = false)
 	private Product product;
 
 	public OrdersDetailBean() {

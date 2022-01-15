@@ -95,8 +95,8 @@ public class CartController {
 				Product product = cart.getProduct();
 				if (sum > product.getProductStock()) {
 					sum = product.getProductStock();
-
-					return "{\"ans\":\"已經到達庫存最大數量了\\n (目前庫存共有 " + product.getProductStock() + " 件)" + "\"}";
+					String errorMessage = "已經到達庫存最大數量了(目前庫存共有 " + product.getProductStock() + " 件)";
+					return errorMessage;
 				}
 
 				cart.setCartId(cart.getCartId());
@@ -215,7 +215,7 @@ public class CartController {
 			discountTotal = 0;
 		}
 
-		session.setAttribute("totalPrice", discountTotal);
+		session.setAttribute("priceTotal", discountTotal);
 
 		return discountTotal;
 	}

@@ -11,4 +11,5 @@ import foodelicious.product.model.Product;
 public interface SearchRepository extends JpaRepository<Product, Long> {
 
 	List<Product> findByProductNameLike(String name);
+
 }

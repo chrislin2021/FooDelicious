@@ -35,7 +35,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/member/loginSuccess.jsp" />
 	</definition>
-	
+
 	<definition name="app.PostArticle" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/article/PostArticle.jsp" />
@@ -100,7 +100,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/CompanyProductUpdate.jsp" />
 	</definition>
-	
+
 	<definition name="app.CompanyProductAdd"
 		extends="app.CompanyDefault2">
 		<put-attribute name="content"
@@ -156,6 +156,11 @@
 		<put-attribute name="title" value="/cartToOrders"></put-attribute>
 	</definition>
 
+	<definition name="app.OrdersEnd"
+		template="/WEB-INF/orders/ordersEnd.jsp">
+		<put-attribute name="title" value="/ordersEnd"></put-attribute>
+	</definition>
+
 	<definition name="app.CustService" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/custService/CustService.jsp" />
@@ -205,22 +210,23 @@
 		<put-attribute name="content"
 			value="/WEB-INF/member/listAllMembers.jsp" />
 	</definition>
-	
+
 	<definition name="app.pwdForgetPage" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/member/pwdForgetPage.jsp" />
 	</definition>
-	
+
 	<definition name="app.pwdChange" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/member/pwdChange.jsp" />
 	</definition>
-	
-	<definition name="app.pwdForgetSuccess" extends="app.default">
+
+	<definition name="app.pwdForgetSuccess"
+		extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/member/pwdForgetSuccess.jsp" />
 	</definition>
-	
+
 
 	<definition name="app.BackendProduct"
 		extends="app.BackendDefault">
@@ -251,7 +257,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/backend/articlePage/BackendArticle.jsp" />
 	</definition>
-	
+
 	<definition name="app.BackendArticleContent"
 		extends="app.BackendDefault">
 		<put-attribute name="content"
@@ -265,9 +271,9 @@
 	</definition>
 
 	<definition name="app.BackendReportProduct"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/reportPage/Bestseller.jsp" />
+			value="/WEB-INF/backend/reportPage/Bestseller.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -131,27 +131,27 @@
 							<h6 class="my-0">總折扣金額：</h6>
 						</div><span class="text-success">−NT$:${discountContent}元</span>
 					</li>
-					<li class="list-group-item d-flex justify-content-between"><span>總金額：</span><strong>NT$:${totalPrice}元</strong></li>
+					<li class="list-group-item d-flex justify-content-between"><span>總金額：</span><strong>NT$:${priceTotal}元</strong></li>
 				</ul>
 			</div>
 
 			<div class="col-md-7 col-lg-8">
 				<h4 class="mb-3">填寫地址</h4>
-				<form class="needs-validation" novalidate>
+				<form class="needs-validation" novalidate method="post" id="shipping">
 					<div class="row g-3">
 						<div class="col-sm-6">
-							<label for="firstName" class="form-label">收件人姓名<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="name" placeholder="高遵" value="${orders.ordersName}" required>
+							<label for="firstName" class="form-label">收件人姓名<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="name" value="${orders.ordersName}" required>
 							<div class="invalid-feedback">請填寫收件人姓名喔！！</div>
 						</div>
 
 						<div class="col-sm-6">
-							<label for="lastName" class="form-label">收件人電話<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="phone" placeholder="02 2311 3731" value="${orders.ordersPhone}" required>
+							<label for="lastName" class="form-label">收件人電話<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="phone" value="${orders.ordersPhone}" required>
 							<div class="invalid-feedback">請填寫收件人電話喔！！</div>
 						</div>
 					</div>
 
 					<div class="col-12">
-						<label for="address" class="form-label">收件人地址<span class="text-muted">(必填)</span></label> <input type="text" class="form-control" id="address" placeholder="台北市中正區重慶南路一段122號" value="${orders.ordersAddress}"	required>
+						<label for="address" class="form-label">收件人地址<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="address" value="${orders.ordersAddress}"	required>
 						<div class="invalid-feedback">請填寫收件人電話喔！！</div>
 					</div>
 
@@ -166,7 +166,7 @@
 
 					<hr class="my-4">
 
-					<button class="w-100 btn btn-info btn-lg" type="submit">去買單！</button>
+					<button class="w-100 btn btn-info btn-lg checkout" type="button">去買單！</button>
 				</form>
 			</div>
 		</div>
@@ -187,7 +187,7 @@
 	</div>
 
 	<script src="/js/jquery-3.6.0.min.js"></script>
-	<script src="../../js/cart.js"></script>
+	<script src="../../js/orders.js"></script>
 	<script src="../../js/bootstrap.bundle.min.js"></script>
 	<script src="form-validation.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

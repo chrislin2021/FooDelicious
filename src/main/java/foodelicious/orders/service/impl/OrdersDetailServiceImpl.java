@@ -7,11 +7,11 @@ import foodelicious.orders.repository.OrdersDetailRepository;
 import foodelicious.orders.service.OrdersDetailService;
 
 @Service
-public class OrderDetailServiceImpl implements OrdersDetailService {
+public class OrdersDetailServiceImpl implements OrdersDetailService {
 
 	OrdersDetailRepository ordersDetailRepository;
 
-	public OrderDetailServiceImpl(OrdersDetailRepository ordersDetailRepository) {
+	public OrdersDetailServiceImpl(OrdersDetailRepository ordersDetailRepository) {
 		super();
 		this.ordersDetailRepository = ordersDetailRepository;
 	}
