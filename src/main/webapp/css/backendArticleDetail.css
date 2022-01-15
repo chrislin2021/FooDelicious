@@ -1,5 +1,9 @@
 @charset "BIG5";
 
+.littleName{
+    color: #D3B884;
+}
+
 .main{
     margin: auto;
     margin-top: 40px;

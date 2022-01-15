@@ -7,8 +7,9 @@
 </head>
 <body>
 <div>
-    <h1 class="tableName">
+    <h1 class="tableName titleName2">
         會員列表
+        <br>
         <span class="littleName">Member List</span>
     </h1>
 

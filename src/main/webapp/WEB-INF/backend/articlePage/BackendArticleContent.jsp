@@ -6,6 +6,11 @@
 </head>
 
 <body>
+<h1 class="tableName titleName2">
+    文章詳細內容
+    <br>
+    <span class="littleName">Article Content</span>
+</h1>
 <div class="main">
     <form class="border col-md-12 rounded">
         <div class="input-group textSet">
@@ -44,7 +49,7 @@
             </div>
 
             <div class="col-md-8">
-                <input type="text" class="form-control" readonly id="title" hidden value="">
+                <input type="text" class="form-control" readonly id="" hidden value="">
             </div>
 
         </div>

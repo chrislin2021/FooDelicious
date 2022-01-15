@@ -61,4 +61,9 @@ public class BkPageController {
     public String BackendOrderUpdate(){
         return "app.BackendOrderUpdate";
     }
+
+    @GetMapping("/backend/report/product")
+    public String BackendReportProduct(){
+        return "app.BackendReportProduct";
+    }
 }

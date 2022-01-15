@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="../../../css/backendOrder.css">
 </head>
 <body>
-<h1 class="tableName">
+<h1 class="tableName titleName2">
     訂單列表
+    <br>
     <span class="littleName">Order List</span>
 </h1>
 <div class="searchArea">

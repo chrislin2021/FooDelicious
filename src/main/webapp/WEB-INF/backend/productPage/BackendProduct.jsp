@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="../../../css/backendProduct.css">
 </head>
 <body>
-<h1 class="tableName">
+<h1 class="tableName titleName2">
     商品列表
+    <br>
     <span class="littleName">Product List</span>
 </h1>
 <div class="searchArea">
@@ -363,7 +364,9 @@
                 status = "下架中";
             }
             txt += "<td class='align-middle'>"+status+"</td>"
-            txt += "<td class='align-middle'>"+dataSource[i].productName+"</td>"
+            let nameObj = new String(dataSource[i].productName);
+            let nameString = nameObj.substring(0,15);
+            txt += "<td class='align-middle'>"+nameString+"</td>"
             let contentObj = new String(dataSource[i].productContent);
             let context = contentObj.substring(0,10);
             txt += "<td class='align-middle'>"+context+"</td>"
