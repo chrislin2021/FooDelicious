@@ -23,16 +23,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 import foodelicious.article.model.ShareArea;
 import foodelicious.article.service.ArticleService;
+import foodelicious.mail.service.MailService;
+import foodelicious.member.service.MemberService;
 
 @Controller
 public class ArticleController {
 
 	ArticleService articleService;
 	HttpSession session;
+	MemberService memberService;
+	MailService mailService;
 
-	public ArticleController(ArticleService articleService, HttpSession session) {
+	public ArticleController(ArticleService articleService, 
+							 HttpSession session, 
+							 MemberService memberService,
+							 MailService mailService) {
 		this.articleService = articleService;
 		this.session = session;
+		this.memberService = memberService;
+		this.mailService = mailService;
 	}
 
 	// 測試中
@@ -126,6 +135,18 @@ public class ArticleController {
 //		Map<String, Object> data = new HashMap<>();
 //		data.put("session", session.getAttribute("userID"));
 //		data.put("title", articleService.findAll());
+	}
+	// 管理者透過id刪除文章
+	@ResponseBody
+	@DeleteMapping("/adminDeleteData/{id}")
+	public void adminDeleteAtricle(@PathVariable(value = "id", required = false) Integer id) {
+		//System.out.println(id);
+		Long userID = articleService.useIdFindShareArea(id).get(0).getFk_account_id();
+		String title = articleService.useIdFindShareArea(id).get(0).getArticle_title();
+		String userMail = memberService.findByMemberId(userID).getMemberMail();
+		articleService.useArticleIdDelete(id);
+		mailService.prepareAndSend(userMail,"違反版規通知信件" ,
+				"敬愛的貴賓您好 \n 您的文章『"+title+"』 \n 已違反版規 \n 該文章已刪除");		
 	}
 
 	// 前往修改頁面 同時使用model 將資料轉移

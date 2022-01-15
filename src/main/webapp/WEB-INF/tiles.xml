@@ -229,6 +229,12 @@
 		<put-attribute name="content"
 			value="/WEB-INF/backend/articlePage/BackendArticle.jsp" />
 	</definition>
+	
+	<definition name="app.BackendArticleContent"
+		extends="app.BackendDefault">
+		<put-attribute name="content"
+			value="/WEB-INF/backend/articlePage/BackendArticleContent.jsp" />
+	</definition>
 
 	<definition name="app.BackendOrderUpdate"
 		extends="app.BackendDefault">

@@ -149,4 +149,5 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		System.out.println(list);
 		return list;		
 	}
+
 }
