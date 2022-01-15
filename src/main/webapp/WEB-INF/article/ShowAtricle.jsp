@@ -52,20 +52,7 @@
 
                 }
             })
-            //修改按鈕功能 這邊好像不太需要呢
         $("#updateBTN").click(function() {
-            //             console.log(articleId)
-            //             var postData = {
-            //                 "articleId": articleId
-            //             };
-
-            //             $.ajax({
-            //                 url: "/takeArticleData",
-            //                 type: "POST",
-            //                 data: JSON.stringify(postData),
-            //                 contentType: "application/json;charset=utf-8",
-            //                 cache: false
-            //             }).done()
             window.location.href = "/goUpdatePage"
         })
     </script>

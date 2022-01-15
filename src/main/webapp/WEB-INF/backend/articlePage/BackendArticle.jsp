@@ -277,7 +277,7 @@
                         for (let i = startItem; i < endItem; i++) {
                             txt += "<td class='align-middle'>" + dataSource.title[i].share_id + "</td>"
                             txt += "<td class='align-middle'>" + dataSource.title[i].article_clallify + "</td>"
-                            txt += "<td class='align-middle'><a href='/intIDFindAll/" + dataSource.title[i].share_id + "'>" + dataSource.title[i].article_title + "</a></td>";
+                            txt += "<td class='align-middle'><a href='/adminIDFindAll/" + dataSource.title[i].share_id + "'>" + dataSource.title[i].article_title + "</a></td>";
                             txt += "<td class='align-middle'>" + dataSource.title[i].viewNum + "</td>"
 
                             let newDate = dataSource.title[i].postTime;

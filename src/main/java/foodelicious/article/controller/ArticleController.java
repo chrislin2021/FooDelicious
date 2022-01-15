@@ -1,7 +1,6 @@
 package foodelicious.article.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import foodelicious.article.model.ShareArea;
 import foodelicious.article.service.ArticleService;
 import foodelicious.mail.service.MailService;
 import foodelicious.member.service.MemberService;
@@ -118,19 +116,21 @@ public class ArticleController {
 		return data;
 	}
 
-	// 儲存ArticleId
+	// 儲存ArticleId並轉往文章顯示區域
 	@GetMapping("/intIDFindAll/{id}")
 	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id) {
 		session.setAttribute("ArticleId", id);
 		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";
 	}
-	// 儲存ArticleId
+	// 儲存ArticleId並轉往管理者文章顯示區域
 	@GetMapping("/adminIDFindAll/{id}")
-	public String goAdminSpecifyArticle(@PathVariable(value = "id", required = false) Integer id) {
+	public String goAdminSpecifyArticle(@PathVariable(value = "id", required = false) Integer id,
+										Model model) {
 		session.setAttribute("ArticleId", id);
+		model.addAttribute("ArticleId", id);
 		// System.out.println("ArticleId： " + id);
-		return "app.ShowAtricle";
+		return "app.BackendArticleContent";
 	}
 
 	// 透過id刪除文章
