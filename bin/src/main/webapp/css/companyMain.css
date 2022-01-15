@@ -143,3 +143,15 @@ input {
 }
 
 
+/* companyProduct 樣式 */
+
+.tableName{
+	color:grey;
+}
+
+.smallFont{
+    color: #D3B884;
+    font-size:24px;
+}
+
+

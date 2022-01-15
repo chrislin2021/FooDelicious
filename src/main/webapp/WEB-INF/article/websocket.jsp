@@ -7,8 +7,8 @@
         <head>
             <title>Chat WebSocket</title>
             <link rel='stylesheet' href="../../css/websocketstyle.css" />
-            <script src="../../js/sockjs.min.js"></script>
-            <script src="../../js/stomp.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+          <script type="application/javascript" src="http://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
 
             <script type="text/javascript">
                 let stompClient = null;
@@ -44,7 +44,7 @@
                         } else {
                             promptArea.innerHTML = "";
                         }
-                        var socket = new SockJS(url);
+                        var socket = new SockJS('/chatting');
                         stompClient = Stomp.over(socket);
                         stompClient.connect({}, function(frame) {
                             setConnected(true);

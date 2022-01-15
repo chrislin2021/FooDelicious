@@ -3,13 +3,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<h1>${account}</h1>
+<h1>${memberMail}</h1>
 
 
 
-<c:forEach items="${account}" var="session">
-${session}
-</c:forEach>
 
-<c:set var="account" value="${account}"/>
-${account}
+
+<%-- <c:forEach items="${userID}" var="session"> --%>
+<%-- ${userID} --%>
+<%-- </c:forEach> --%>
+
+<c:set var="mail" value="${memberMail}"/>
+${mail}
+
+<c:set var="userID" value="${userID}"/>
+${userID}
+

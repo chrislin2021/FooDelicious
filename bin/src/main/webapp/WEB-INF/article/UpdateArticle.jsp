@@ -5,9 +5,9 @@
         <link href="/css/CKEditor.css" rel="stylesheet" />
         <div class="row" id="rowSelect">
             <!--版面配置左方-->
-            <div div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-2"></div>
             <!--版面配置右方-->
-            <div div class="col-12 col-md-9">
+            <div class="col-12 col-md-9">
                 <h3>文章修改</h3>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="inputGroup-sizing-default">分類</span>
@@ -26,12 +26,14 @@
                 </div>
                 <br> <input type='button' value='確認修改' id="submit">
             </div>
+
         </div>
-        <script src="/js/ckeditor.js"></script>
-        <script src="/js/jquery-3.6.0.min.js"></script>
-        <script src="/translations/zh.js"></script>
+        <script src="${contextRoot}/js/ckeditor.js"></script>
+        <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
+        <script src="${contextRoot}/translations/zh.js"></script>
 
         <script>
+            let shareID;
             //歡樂的CKEditor圖片固定區域
             class MyUploadAdapter {
                 constructor(loader) {
@@ -142,10 +144,7 @@
             ClassicEditor
                 .create(document.querySelector('#editor'), {
                     extraPlugins: [MyCustomUploadAdapterPlugin],
-                    // plugins: [ Image, ImageResize],
                     language: "zh",
-
-
                 })
                 .then(newEditor => {
                     editor = newEditor;
@@ -153,7 +152,7 @@
                 .catch(error => {
                     console.log(error)
                 });
-
+            //點擊btn事件
             document.querySelector('#submit').addEventListener('click', () => {
                 const editorData = editor.getData();
 
@@ -164,10 +163,10 @@
                 };
 
                 $.ajax({
-                    url: "/postarticle.controller",
+                    url: "/articleUpdate",
                     data: JSON.stringify(postData),
-                    type: "POST",
-                    //contentType: "application/json;charset=utf-8",
+                    type: "PUT",
+                    contentType: "application/json;charset=utf-8",
                 });
 
                 window.location.href = "/goShareArea";
@@ -182,6 +181,7 @@
                     console.log(data.article[0].article);
                     $("#classify").val(data.title[0].article_clallify);
                     $("#title").val(data.title[0].article_title);
+                    shareID = data.title[0].share_id;
                 }
             })
             document.querySelector('#submit').addEventListener('click', () => {
@@ -194,11 +194,14 @@
                 };
 
                 $.ajax({
-                    url: "/articleUpdate",
-                    data: JSON.stringify(postData),
-                    type: "POST",
+                    url: "/articleUpdate/" + shareID,
+                    type: "PUT",
+                    dataType: 'json',
                     contentType: "application/json;charset=utf-8",
+                    data: JSON.stringify(postData),
+                    success: function() {
+                        window.location.href = "/goShareArea"
+                    }
                 });
-                window.location.href = "/goShareArea"
             });
         </script>

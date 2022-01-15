@@ -12,12 +12,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/websocket/chatting").withSockJS();
+		 // 新增一個WebSocket節點，並啟用對SockJS的支援。
+		registry.addEndpoint("/chatting").withSockJS();
 	}
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("topic");
+		// 設定一個Message broke的filter，也就是Client端訂閱Message broker的路徑前墜
+		registry.enableSimpleBroker("/topic");
+		// 設定Client發送訊息給Message broker的@MessageMapping的路徑前墜
 		registry.setApplicationDestinationPrefixes("/app");
 	}
 	

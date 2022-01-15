@@ -4,13 +4,26 @@
 }
 
 th{
-    font-size: 18px;
+    font-size:18px;
 }
 
 td{
     font-size: 14px;
 }
 
+table{
+    box-shadow: 2px 5px 20px 5px gray;
+}
+
 .littleName{
     color: #D3B884;
+}
+
+.keyWord{
+    height: 35px;
+    margin-bottom: 5px;
+}
+
+h1{
+    margin: 20px 0 10px 0;
 }
