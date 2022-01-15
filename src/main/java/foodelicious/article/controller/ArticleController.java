@@ -125,6 +125,13 @@ public class ArticleController {
 		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";
 	}
+	// 儲存ArticleId
+	@GetMapping("/adminIDFindAll/{id}")
+	public String goAdminSpecifyArticle(@PathVariable(value = "id", required = false) Integer id) {
+		session.setAttribute("ArticleId", id);
+		// System.out.println("ArticleId： " + id);
+		return "app.ShowAtricle";
+	}
 
 	// 透過id刪除文章
 	@ResponseBody
