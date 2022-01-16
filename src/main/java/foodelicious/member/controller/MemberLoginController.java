@@ -58,7 +58,12 @@ public class MemberLoginController {
 	@PostMapping("/pwdForgetAction.controller")
 	public String MemberForgetAction(Model m, HttpSession session, @RequestParam String memberMail) {
 		Member findemail = memberService.findByMemberMail(memberMail);
+		
+		Map<String, String> errors = new HashMap<String, String>();
+		m.addAttribute("errors", errors);
+		
 		if (findemail == null) {
+			errors.put("msg", "您尚未是會員，請註冊會員，謝謝!");
 			return "app.LoginSystem";
 		}
 		Map<String, String> map = (Map<String, String>) session.getAttribute("randomCode");

@@ -7,7 +7,9 @@
 <title>登入成功</title>
 </head>
 <body>
-${param.memberName}/你好<br>
+這裡是會員中心
+ 歡迎來到會員中心, ${userName}<br>
+
 
 </body>
 </html>

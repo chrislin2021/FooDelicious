@@ -126,12 +126,12 @@
 	//自動填入資料
 	$(document).ready(function() {
 		$("#C1").click(function() {
-			$("#memberMail").val('eeit13711@gmail.com');
-			$("#pwd").val('$$$$happy13711');
-			$("#memberName").val('石六六');
-			$("#member_gender_m").val('MALE');
-			$("#memberBirth").val('2011-11-29');
-			$("#memberPhone").val('0911222666');
+			$("#memberMail").val('yolandabestone@gmail.com');
+			$("#pwd").val('$happy13711');
+			$("#memberName").val('石悠悠');
+			$("#member_gender_f").val('FEMALE');
+			$("#memberBirth").val('1990-11-29');
+			$("#memberPhone").val('0912520520');
 			$("#memberAddress").val('台北市大安區信義路100號');
 		})
 	});

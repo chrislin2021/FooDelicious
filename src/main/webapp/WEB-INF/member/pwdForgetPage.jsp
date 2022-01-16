@@ -24,9 +24,10 @@
     		    <h2 class="font-weight-light">忘記密碼?</h2>
     		    別擔心，請輸入註冊時的email帳號，<br>
 				我們將發送驗證信至您的信箱
-    		    <form target="_blank" action="/pwdForgetAction.controller" method="POST" enctype="multipart/form-data" class="mt-3">
+    		    <form target="_blank" action="/pwdForgetAction.controller" method="POST" class="mt-3">
     		        <input class="form-control form-control-lg" type="email" placeholder="Your email address" name="memberMail" value="">
     		        
+    		        <span id="loginSpan">${errors.msg}</span>
     		        <div class="text-right my-3">
     		            <button type="submit" id="button" class="btn btn-lg btn-success">送出</button>
 						
@@ -35,24 +36,6 @@
     		</div>
     	</div>
     </div>
-<!-- <h1></h1>
-<form action="/pwdForgetAction.controller" method="POST" enctype="multipart/form-data">
-	<div class="login-wrap">
-	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">發送驗證信</label>
-		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
-		<div class="login-form">
-			<div class="sign-in-htm">
-				<div class="group">
-					<label for="pass" class="label" >請輸入註冊時的email帳號 </label>
-					<input id="pass" type="text" class="input"  name="memberMail" value="yolandabestone@gmail.com">
-	</div>
-	<div class="group">
-		<input type="submit" class="button" value="送出">
-	</div>
-</div>
-
-</form> -->
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

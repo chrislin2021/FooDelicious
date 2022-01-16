@@ -51,18 +51,18 @@ public class MemberController {
 			for (Member members : EMid) {
 				if (members.getMemberMail().equals(memberMail)) {
 					session.setAttribute("userID", members.getMemberId());
+					session.setAttribute("userName", members.getMemberName());
 					break;
 				}
 			}
-
-			return "app.loginSuccess";
+			return "app.home";
 		}
 		member.setMemberDiscountId("none");
 		member.setMemberCoin(10);
 		member.setMember_status("customer");
 		memberService.save(member);
-		session.setAttribute("userID", member.getMemberId());
-		return "app.updatePage";
+		session.setAttribute("memberId", member.getMemberId());
+		return "redirect:/";
 	}
 
 }
