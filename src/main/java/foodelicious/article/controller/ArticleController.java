@@ -108,6 +108,7 @@ public class ArticleController {
 	public Map<String, Object> useIdFinfAll() {
 		int id = (int) session.getAttribute("ArticleId");
 		// System.out.println("ArticleId2： " + id);
+		articleService.viewNumUpdate(id);
 		Map<String, Object> data = new HashMap<>();
 		data.put("LoginId", session.getAttribute("userID"));
 		data.put("title", articleService.useIdFindShareArea(id));
@@ -115,6 +116,7 @@ public class ArticleController {
 
 		return data;
 	}
+	
 
 	// 儲存ArticleId並轉往文章顯示區域
 	@GetMapping("/intIDFindAll/{id}")
