@@ -1,25 +1,17 @@
 package foodelicious.product.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import foodelicious.member.model.Member;
 
 @Entity
 @Table(name = "productNum")
@@ -70,6 +62,13 @@ public class Product implements Serializable {
 //	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "product_insert_date")
 	private Date productInsertDate;
+	
+	@PrePersist
+	private void onCreate() {
+		if(productInsertDate == null) {
+			productInsertDate = new Date ();
+		}
+	}
 
 	@Column(name = "product_sales_figures")
 	private Integer productSalesFigures;

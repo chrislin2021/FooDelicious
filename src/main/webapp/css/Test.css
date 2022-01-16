@@ -359,6 +359,33 @@ h1.tableName{
     width: 150px;
 }
 
+.bottom-container-left{
+	margin: 4px;
+	padding :5px;
+	border: 1px black solid;
+	border-radius: 10px;
+	width:45%;
+	float:left;
+	
+}
 
+.bottom-container-right{
+	margin: 4px;
+	margin-right:15px;
+	
+	border-radius: 10px;
+	width:45%;
+	float:right;
+	
+}
 
+#logout{
+	
+	cursor: pointer;
+}
+
+form i {
+    margin-left: 93%;
+    cursor: pointer;
+}
 

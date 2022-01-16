@@ -92,7 +92,7 @@
 
 					<div class="profile-content">
 
-						<i class='bx bxs-log-out' onclick="logout('${account}')"></i>
+						<i class='bx bxs-log-out' id="logout" onclick="logout('${account}')"></i>
 					</div>
 					
 
