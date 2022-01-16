@@ -107,73 +107,11 @@
 	</table>
 
 	<div class="progress">
-		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 66%">66%</div>
+		<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%">100%</div>
 	</div>
 	<br>
-
-	<div class="container">
-		<div class="row g-5">
-			<div class="col-md-5 col-lg-4 order-md-last">
-				<h4 class="d-flex justify-content-between align-items-center mb-3">
-					<span class="text-primary">訂單商品</span><span class="badge bg-primary rounded-pill"><c:out value="${count}"></c:out></span>
-				</h4>
-				<ul class="list-group mb-3">
-					<c:forEach var="carts" items="${carts}">
-						<li class="list-group-item d-flex justify-content-between lh-sm">
-							<div>
-								<h6 class="my-0" id="a">${carts.product.productName}</h6>
-								<div class="productId" hidden>${carts.productId}</div>
-								<div class="quantity" hidden>${carts.quantity}</div>
-								<small class="text-muted">單價：${carts.product.productPrice}</small><small class="text-muted">｜</small><small class="text-muted" >數量：${carts.quantity}</small>
-							</div><span class="text-muted">NT$:${carts.product.productPrice*carts.quantity}元</span>
-						</li>
-					</c:forEach>
-					<li class="list-group-item d-flex justify-content-between bg-light">
-						<div class="text-success">
-							<h6 class="my-0">總折扣金額：</h6>
-						</div><span class="text-success">−NT$:${discountContent}元</span>
-					</li>
-					<li class="list-group-item d-flex justify-content-between"><span>總金額：</span><strong>NT$:${priceTotal}元</strong></li>
-				</ul>
-			</div>
-
-			<div class="col-md-7 col-lg-8">
-				<h4 class="mb-3">填寫地址</h4>
-				<form class="needs-validation" novalidate method="post" id="shipping">
-					<div class="row g-3">
-						<div class="col-sm-6">
-							<label for="firstName" class="form-label">收件人姓名<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="name" value="${orders.ordersName}" required>
-							<div class="invalid-feedback">請填寫收件人姓名喔！！</div>
-						</div>
-
-						<div class="col-sm-6">
-							<label for="lastName" class="form-label">收件人電話<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="phone" value="${orders.ordersPhone}" required>
-							<div class="invalid-feedback">請填寫收件人電話喔！！</div>
-						</div>
-					</div>
-
-					<div class="col-12">
-						<label for="address" class="form-label">收件人地址<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="address" value="${orders.ordersAddress}"	required>
-						<div class="invalid-feedback">請填寫收件人電話喔！！</div>
-					</div>
-
-					<hr class="my-4">
-
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"><label class="form-check-label" for="flexRadioDefault1"> 貨到付款 </label>
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked> <label class="form-check-label" for="flexRadioDefault2"> 金融支付 </label>
-					</div>
-
-					<hr class="my-4">
-
-					<button class="w-100 btn btn-info btn-lg checkout" type="button">去買單！</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
+	<h1>訂單完成</h1>
+	
 	<div class="container">
 		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
 			<div class="col-md-4 d-flex align-items-center">
@@ -195,6 +133,6 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
+	
 </body>
-
 </html>

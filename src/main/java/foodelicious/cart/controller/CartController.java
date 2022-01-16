@@ -162,6 +162,8 @@ public class CartController {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
+		session.setAttribute("carts", carts);
+
 		return carts;
 	}
 
