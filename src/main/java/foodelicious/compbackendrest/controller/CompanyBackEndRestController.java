@@ -110,6 +110,18 @@ public class CompanyBackEndRestController {
 	public String updateProduct(@PathVariable Long productId, @RequestBody Product product) {
 		return cbkServiceInterface.updateProduct(productId, product);
 	}
+	
+	@PutMapping("/companyDetailUpdate/{companyId}")
+	public String updateCompanyDetail(@PathVariable Long companyId, @RequestBody Member company) {
+		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+		return cbkDetailDao.updateCompanyDetail(companyId, company);
+	}
+	
+	@GetMapping("/companyDetailUpdate/{companyId}")
+	public Member getCompanyDetail(@PathVariable Long companyId) {
+		System.out.println("in gettttt");
+		return cbkDetailDao.findByCompanyId(companyId);
+	}
 
 	@PutMapping("/companyProblemReport/{companyId}")
 	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {

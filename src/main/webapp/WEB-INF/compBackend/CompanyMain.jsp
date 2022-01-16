@@ -57,10 +57,14 @@
 					<div class="app-card app-card-settings shadow p-3 mb-5 bg-body rounded">
 
 						<div class="app-card-body">
-							<form class="settings-form">
+							<form>
 								<div class="mb-3">
 									<label for="setting-input-1" class="form-label"><strong>公司名稱</strong></label> 
-									<input type="text" class="form-control" id="setting-input-1 companyName" value="${userName}">
+									<input type="text" class="form-control" id="companyName" value="${userName}">
+								</div>
+								<div class="mb-3">
+									<label for="setting-input-3" class="form-label"><strong>地址</strong></label> 
+									<input type="text" class="form-control" id="companyAddress" value="${memberAddress}">
 								</div>
 								<div class="mb-3">
 									<label for="setting-input-2" class="form-label"><strong>電子信箱</strong></label> 
@@ -73,14 +77,13 @@
 								</div>
 								<div class="mb-3">
 									<label for="setting-input-3" class="form-label"><strong>密碼</strong></label> 
-									<input type="password" class="form-control" id="companyPassword" value="${pwd}" style="margin-bottom:-33px"/>
-									<i class="bi bi-eye-slash" id="togglePassword"></i>
-
+									<input type="password" class="form-control" id="companyPassword" value="${pwd}" readonly/>
+									<input type="checkbox" onclick="showPassword()" style="cursor:pointer;margin-top:10px">顯示密碼
 								</div>
 								<div class="mb-3">
 									<input type="hidden" class="form-control" id="companyId" value="${userID}">
 								</div>
-								<button type="submit" class="btn btn-primary" style="margin-left:85%;margin-top:5px" id="companyDetailUpdate">儲存</button>
+								<input id="companyDetailUpdate" class="btn btn-outline-primary" type="button" value="儲存" style="margin-left:85%;margin-top:5px" onclick="alert1()">
 							</form>
 						</div>
 						<!--//app-card-body-->
@@ -98,49 +101,69 @@
 
 <script>
 	// toggle password visibility
-	 const togglePassword = document.querySelector("#togglePassword");
-     const password = document.querySelector("#companyPassword");
+	function showPassword() {
 
-     togglePassword.addEventListener("click", function () {
-            
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-            this.classList.toggle("bi-eye");
-        });
-	
-	
-	
+  		var x = document.getElementById("companyPassword");
+  		if (x.type === "password") {
+   			 x.type = "text";
+  		} else {
+    		x.type = "password";
+  }
+}
+
+</script>
+<script>
+
 	$("#companyDetailUpdate").on("click",function(){
-		let companyId = $("#companyId").val();
-		let pwd = $("#companyPassword").val();
-		alert(pwd);
-// 		let updateCompanyDetail = {
-// 			"memberId":$("#companyId").val();
-// 			"memberName" : $("#companyName").val(),
-// 			"memberMail": $("#companyEmail").val(),
-// 			"memberPhone" : $("#companyPhone").val(),
-// 			"pwd" : $("#companyPassword").val(),
-// 		}
+		let companyId =  $("#companyId").val();
+		 //alert(companyId);
+		 
+		 let updateCompanyDetail = {
+					"memberId":$("#companyId").val(),
+					"memberName" : $("#companyName").val(),
+					"memberMail": $("#companyEmail").val(),
+					"memberPhone" : $("#companyPhone").val(),
+					"memberAddress" :$("#companyAddress").val(),
+		 };
+
+		let detailString = JSON.stringify(updateCompanyDetail);
+		alert(detailString);
 		
-// 		let detailString = JSON.stringify(updateCompanyDetail);
-		
-// 		$.ajax({
-// 			url:"/companyDetailUpdate",
-// 			type:"PUT",
-// 			contentType:'application/json; charset=UTF-8',
-//             data: detailString,
-//             success : function(msg){
-//             	alert(msg);
-//             	window.location.href="/companyMain2";
-//             }
-// 			error : function(msg){
-// 				alert("Detail update fail!");
-// 				window.location.href="/companyMain2";
-// 			}
-// 		})
+		$.ajax({
+		 url:"/companyDetailUpdate/"+companyId,
+		 type:"PUT",
+		 contentType:"application/json; charset=UTF-8",
+		 data: detailString,
+		 success: function(msg){
+			alert(msg);
+			$.ajax({
+				url:"/companyDetailUpdate/"+companyId,
+				type:"GET",
+				success: function(companyDetails){
+					alert(companyDetails.memberName);
+					$("#companyName").val(companyDetails.memberName);
+					$("#companyEmail").val(companyDetails.memberMail);
+					$("#companyPhone").val(companyDetails.memberPhone);
+					$("#companyAddress").val(companyDetails.memberAddress);
+					window.location.href="/companyMain2";
+					
+					//無法在頁面顯示更新的資料 但資料庫有更新
+				}
+			})
+		 }
 		
 	})
 
-	
+
+		 
+		
+})
+
+
+
+
+
+
+
 
 </script>

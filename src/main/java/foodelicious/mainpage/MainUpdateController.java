@@ -53,6 +53,7 @@ public class MainUpdateController {
 			session.setAttribute("userID", EMid);// findByMemberId
 			session.setAttribute("userName", memberService.findByMemberId(EMid).getMemberName());
 			session.setAttribute("memberPhone",memberService.findByMemberId(EMid).getMemberPhone());
+			session.setAttribute("memberAddress", memberService.findByMemberId(EMid).getMemberAddress());
 //			System.out.println("userName：" + session.getAttribute("userName"));
 //			System.out.println("EMid：" + session.getAttribute("userID"));
 

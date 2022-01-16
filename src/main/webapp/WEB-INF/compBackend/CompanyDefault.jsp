@@ -32,19 +32,19 @@
 		<div class="logo-details"></div>
 		<ul class="nav-links">
 			<li><a href="/companyMain2"> <i class='bx bx-user-circle'></i> <span
-					class="link_name">管理員</span>
+					class="link_name">管理</span>
 			</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="/companyMain2">管理員</a></li>
+					<li><a class="link_name" href="/companyMain2">管理</a></li>
 				</ul></li>
 			<li>
 				<div class="iocn-link">
-					<a href="#"> <i class='bx bx-cart'></i> <span
+					<a href="/companyProduct2"> <i class='bx bx-cart'></i> <span
 						class="link_name">商品管理</span>
 					</a> <i class='bx bxs-chevron-down arrow'></i>
 				</div>
 				<ul class="sub-menu">
-					<li><a class="link_name" href="#">商品管理</a></li>
+					<li><a class="link_name" href="/companyProduct2">商品管理</a></li>
 					<li><a href="/companyProduct2">所有商品</a></li>
 					<li><a href="/companyProductsAdd">新增商品</a></li>
 
