@@ -151,9 +151,9 @@
 		<put-attribute name="title" value="/shoppingCart" />
 	</definition>
 
-	<definition name="app.CartToOrders"
-		template="/WEB-INF/orders/cartToOrders.jsp">
-		<put-attribute name="title" value="/cartToOrders"></put-attribute>
+	<definition name="app.Orders"
+		template="/WEB-INF/orders/orders.jsp">
+		<put-attribute name="title" value="/orders"></put-attribute>
 	</definition>
 
 	<definition name="app.OrdersEnd"

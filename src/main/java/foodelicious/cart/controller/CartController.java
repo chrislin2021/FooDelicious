@@ -136,18 +136,14 @@ public class CartController {
 	}
 
 	@ResponseBody
-	@PutMapping("/shoppingCart/{pid}/{pqty}")
-	public void updateItem(@PathVariable String pid, @PathVariable String pqty) {
-
-		Long id = Long.parseLong(pid);
-
-		Integer qty = Integer.parseInt(pqty);
+	@PutMapping("/shoppingCart/{productId}/{quantity}")
+	public void updateItem(@PathVariable Long productId, @PathVariable Integer quantity) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
-			if (cart.getProductId() == id) {
-				cart.setQuantity(cart.getQuantity() + qty);
+			if (cart.getProductId() == productId) {
+				cart.setQuantity(cart.getQuantity() + quantity);
 				if (cart.getQuantity() > cart.getProduct().getProductStock()) {
 					cart.setQuantity(cart.getProduct().getProductStock());
 				} else if (cart.getQuantity() > 0) {
@@ -162,7 +158,7 @@ public class CartController {
 
 	@ResponseBody
 	@GetMapping("/shoppingCart/show")
-	public List<CartBean> selectItem() {
+	public List<CartBean> showItem() {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
@@ -184,7 +180,7 @@ public class CartController {
 		}
 		session.setAttribute("orders", ordersBean);
 
-		return "app.CartToOrders";
+		return "app.Orders";
 	}
 
 	@ResponseBody
