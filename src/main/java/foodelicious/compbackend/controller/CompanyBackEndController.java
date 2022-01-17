@@ -20,25 +20,14 @@ import foodelicious.product.model.Product;
 @Controller
 public class CompanyBackEndController {
 
+
 	@GetMapping(path = "/companyMain")
-	public String companyMain() {
-
-		return "app.CompanyMain";
-	}
-
-	@GetMapping(path = "/companyMain2")
 	public String companyMain2() {
 
 		return "app.CompanyMain2";
 	}
 
 	@GetMapping(path = "/companyProduct")
-	public String companyProduct() {
-
-		return "app.CompanyProduct";
-	}
-
-	@GetMapping(path = "/companyProduct2")
 	public String companyProduct2() {
 
 		return "app.CompanyProduct2";
@@ -52,10 +41,10 @@ public class CompanyBackEndController {
 	@GetMapping(path = "/companyOrder")
 	public String companyOrder() {
 
-		return "app.CompanyOrder";
+		return "app.CompanyOrder2";
 	}
 
-	@GetMapping(path = "/companyProduct2/update")
+	@GetMapping(path = "/companyProduct/update")
 	public String companyProductUpdate() {
 
 		return "app.CompanyProductUpdate";
@@ -67,18 +56,15 @@ public class CompanyBackEndController {
 		return "app.home";
 	}
 
-	@GetMapping(path = "/test")
-	public String test() {
-
-		return "app.Test";
-	}
 	
 	private final CBKProductDao cbkProductDao;
 
 	public CompanyBackEndController(final CBKProductDao cbkProductDao) {
-		super();
+		
 		this.cbkProductDao = cbkProductDao;
 	}
+	
+	//==============Product Insert (有時間再改成mvc)==============================
 
 	// 新增商品與圖片
 	@PostMapping("/companyProductsAdd")
@@ -124,11 +110,12 @@ public class CompanyBackEndController {
 
 		if (insertStatus == true) {
 			// 如何在這邊加alert說商品insert成功
-			return "redirect:/companyProducts2";
+			
+			return "app.CompanyProduct2";
 
 		} else {
 			// 如何在這邊加alert說商品insert失敗
-			return "redirect:/companyProductsAdd";
+			return "app.CompanyProductAdd";
 		}
 
 	}

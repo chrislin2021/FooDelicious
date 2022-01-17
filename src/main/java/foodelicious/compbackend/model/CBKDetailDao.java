@@ -36,11 +36,13 @@ public class CBKDetailDao implements CBKDetailDaoInterface {
 		return null;
 	}
 	
+	
+	// companyMain.jsp 更新公司資料
 	public String updateCompanyDetail(Long companyId, Member company) {
-		System.out.println("在這");
+		//System.out.println("在這");
 		
 		Member updatedCompanyDetail = cbkDetailRepository.findById(companyId).orElse(null);
-		System.out.println(updatedCompanyDetail.getPwd());
+		//System.out.println(updatedCompanyDetail.getPwd());
 		if (updatedCompanyDetail != null) {
 			updatedCompanyDetail.setMemberMail(company.getMemberMail());
 			updatedCompanyDetail.setMemberName(company.getMemberName());
