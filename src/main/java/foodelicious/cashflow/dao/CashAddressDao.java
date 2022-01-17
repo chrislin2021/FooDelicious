@@ -20,7 +20,7 @@ public class CashAddressDao {
 	
 	public List<CashflowAddressBean> findById(Long id) {
 		
-		List<CashflowAddressBean> cashflowAB = cashAR.findAllByFkmemberid(id);
+	List<CashflowAddressBean> cashflowAB = cashAR.findAllByFkmemberid(id);
 		return cashflowAB;
 		
 	}

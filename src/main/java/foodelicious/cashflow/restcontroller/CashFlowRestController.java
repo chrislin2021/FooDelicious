@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
+import foodelicious.cashflow.service.CashflowAddressService;
 import foodelicious.mail.service.MailService;
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
@@ -50,10 +51,11 @@ public class CashFlowRestController {
 	@GetMapping(path = "/shoppingCart/CashflowList2")
 	public HashMap<Object, Object> CashFlowTable(Model m, Long productId, Long memberId) {
 		HashMap<Object, Object> table = new HashMap<Object, Object>();
-//		System.out.println(session.getAttribute("userID"));
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-		List<OrdersBean> orders = ordersService.selectOrders((Long) session.getAttribute("userID"));
-//		Member member = em.find(Member.class, memberId);
+		
+//		Long userID = CashflowAddressService.useIdFindShareArea(id).get(0).getFk_account_id();
+//		String title = articleService.useIdFindShareArea(id).get(0).getArticle_title();
+//		String userMail = memberService.findByMemberId(userID).getMemberMail();
 		
 		for (CartBean cart : carts) {
 			Product product = null;
@@ -61,20 +63,18 @@ public class CashFlowRestController {
 				product = cart.getProduct();
 			}
 
-//			table.put("totalprice", order.getordersTotal());
+
 
 			table.put("memberId", cart.getMemberId());
 			table.put("memberName", cart.getMember().getMemberName());
-			table.put("memberName", cart.getMember().getMemberPhone());
-			table.put("memberName", cart.getMember().getMemberMail());
-			table.put("memberName", cart.getMember().getMemberAddress());
-//			table.put("memberId", member.getMemberId());
+			table.put("memberPhone", cart.getMember().getMemberPhone());
+			table.put("memberMail", cart.getMember().getMemberMail());
+			table.put("memberAddress", cart.getMember().getMemberAddress());
 			table.put("productId", cart.getProductId());
 			table.put("productName", cart.getProduct().getProductName());
 			table.put("quantity", cart.getQuantity());
 			table.put("productprice", cart.getProduct().getProductPrice());
-//			System.out.println(table);
-			mailService.prepareAndSend("請輸入信箱@gmail.com", "title", "Sample mail subject");
+//			mailService.prepareAndSend(userMail,"請輸入信箱@gmail.com", "title", "Sample mail subject");
 			em.close();
 
 		}

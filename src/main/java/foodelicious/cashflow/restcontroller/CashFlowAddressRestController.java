@@ -1,64 +1,90 @@
 package foodelicious.cashflow.restcontroller;
 
-
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
+import foodelicious.cart.model.CartBean;
 import foodelicious.cashflow.model.CashflowAddressBean;
+import foodelicious.cashflow.model.EcPayBean;
 import foodelicious.cashflow.service.CashflowAddressService;
 import foodelicious.mail.service.MailService;
 import foodelicious.member.model.Member;
 import foodelicious.member.repository.MemberRepositoryImpl;
 import foodelicious.member.service.MemberService;
-import foodelicious.member.validator.MemberValidator;
-
+import foodelicious.orders.model.OrdersBean;
+import foodelicious.orders.service.OrdersService;
 
 @RestController
 @Transactional
-public class CashFlowAddressRestController {
-	
-	
+public class CashFlowAddressRestController{
+
 	@PersistenceContext
 	EntityManager em;
-	
-//	private HttpSession session;
+
+	private HttpSession session;
 	private CashflowAddressService cashflowAddressService;
 	private MailService mailService;
-//	private Member member;
 	private MemberRepositoryImpl memberRepositoryImpl;
 
-	
-	public CashFlowAddressRestController(CashflowAddressService cashflowAddressService,MemberRepositoryImpl memberRepositoryImpl, MailService mailService) {
-//		super();
-//		this.session = session;
+	public CashFlowAddressRestController(CashflowAddressService cashflowAddressService,
+			MemberRepositoryImpl memberRepositoryImpl, MailService mailService, HttpSession session) {
+
 		this.cashflowAddressService = cashflowAddressService;
 		this.mailService = mailService;
-//		this.member = member;
 		this.memberRepositoryImpl = memberRepositoryImpl;
+		this.session = session;
 	}
 
-	
+//	@GetMapping("/address")
+//	public String address() {
+//		
+//		if (session.getAttribute("userID") != null) {
+//			List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
+//			
+//			session.setAttribute("commonAddress", CommonAddress)
+//			}
+//	}
+
 	@ResponseBody
-	@GetMapping(path = "/member/CashflowAddress")
+	@GetMapping(path = "/address/CashflowAddress")
 	public HashMap<Object, Object> CashFlowAddressTable(Model m, Long productId, Long memberId, HttpSession session) {
 		HashMap<Object, Object> table = new HashMap<Object, Object>();
-				
-		CashflowAddressBean cfab = cashflowAddressService.getCashflowAddressBeanByMember((Long)session.getAttribute("userID"));
+
+		CashflowAddressBean cfab = cashflowAddressService
+				.getCashflowAddressBeanByMember((Long) session.getAttribute("userID"));
 		Member members = memberRepositoryImpl.findByMemberId(memberId);
 
-			
+//		session.setAttribute("commonAddress", cfab.getCommonAddress());
+
+		cfab.setCommonAddress(cfab.getCommonAddress());
+
 		table.put("memberMail", members.getMemberMail());
 		table.put("memberId", members.getMemberName());
 		table.put("memberAddress", members.getMemberAddress());
@@ -68,124 +94,199 @@ public class CashFlowAddressRestController {
 
 		return table;
 	}
-}	
+
+	@ResponseBody
+	@PostMapping("/address/insert")
+	public String insertAddress(@RequestBody String jS) {
+
+		JSONObject obj = JSON.parseObject(jS);
+		Object pid = obj.get("pid");
+		String pidTemp = "" + pid;
+		Long addressId = Long.parseLong(pidTemp);
+		String memberAddress = null;
+		String commonAddress = null;
+
+		if (session.getAttribute("userID") == null) {
+			return "{\\\"ans\\\":\\\"請先登入會員!!\\\"}";
+		}
+		Boolean same = false;
+
+		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
+
+		for (CashflowAddressBean CashfAdd : cfab) {
+			if (CashfAdd.getAddressId() == addressId) {
+				Long member = CashfAdd.getAddressId();
+			}
+			CashfAdd.setFk_member_id(CashfAdd.getFk_member_id());
+			CashfAdd.setAddressId(CashfAdd.getAddressId());
+			CashfAdd.setMemberAddress(CashfAdd.getMemberAddress());
+			CashfAdd.setCommonAddress(CashfAdd.getCommonAddress());
+			cashflowAddressService.insertAndUpdateAddress(CashfAdd);
+
+			same = true;
+			break;
+		}
+		if (same != true) {
+			CashflowAddressBean cashflowAddressBean = new CashflowAddressBean();
+			cashflowAddressBean.setFk_member_id((Long) session.getAttribute("userID"));
+			cashflowAddressBean.setAddressId(addressId);
+			cashflowAddressBean.setMemberAddress(memberAddress);
+			cashflowAddressBean.setCommonAddress(commonAddress);
+			cashflowAddressService.insertAndUpdateAddress(cashflowAddressBean);
+		}
+
+		return "{\"ans\":\"" + "此地址 " + commonAddress + " 已加入寄貨地址" + "\"}";
+	}
+
+	@ResponseBody
+	@DeleteMapping("/address/{addressId}")
+	public void deleteAddress(@PathVariable Long addressId) {
+
+		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
+
+		for (CashflowAddressBean CashfAdd : cfab) {
+			if (CashfAdd.getAddressId() == addressId) {
+				cashflowAddressService.deleteAddress(CashfAdd.getAddressId());
+				break;
+			}
+		}
+	}
+
+	@ResponseBody
+	@PutMapping("/address/{pid}")
+	public void updateAddress(@PathVariable String pid) {
+
+		Long addressId = Long.parseLong(pid);
+
+		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
+
+		for (CashflowAddressBean CashfAdd : cfab) {
+			if (CashfAdd.getAddressId() == addressId) {
+				cashflowAddressService.insertAndUpdateAddress(CashfAdd);
+			}
+			break;
+		}
+
+	}
+
+	@ResponseBody
+	@GetMapping("/address/show")
+	public List<CashflowAddressBean> selectAddress() {
+
+		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
+
+		return cfab;
+	}
 
 
-//	
+
+
+//	// 發送請求給綠界
+//	@PostMapping(value = "/toPayECpay", consumes = MediaType.APPLICATION_JSON_VALUE)
 //	@ResponseBody
-//	@GetMapping(path = "/shoppingCart/Address")	
-//	public String insertAddress(@RequestBody Long addressId, @RequestBody String commonAddress) {
-//		
-//		if (HttpSession.getAttribute("userID") == null) {
-//			return "{\"ans\":\"請先登入會員!!\"}";
-//		}		
-//		List<CashflowAddressBean> CfB = cashflowAddressService.selectAddress((Long) session.getAttribute("addressId"));
-//		
-//		for (CashflowAddressBean CfBs : CfB) {
-//			if(CfBs.getAddressId() == addressId) {
-//				Long address = CfBs.getAddressId();
+//	public EcPayBean aioCheckOutALL(HttpServletRequest request) {
+//		AioCheckOutALL aio = new AioCheckOutALL();
+//		AllInOne aioOne = new AllInOne("");
+//		EcPayBean ecpay = new EcPayBean();
+//		Cookie[] cookieList = request.getCookies();
+//		String memberCookieID = null;
+//		if (cookieList != null) {
+//			for (Cookie cookie : cookieList) {
+//				if (cookie.getName().equals("userId")) {
+//					memberCookieID = cookie.getValue();
+//				}
 //			}
-//			CfBs.setAddressId(CfBs.getAddressId());
-//			CfBs.setMemberAddress(CfBs.getMemberAddress());
-//			CfBs.setCommonAddress(CfBs.getCommonAddress());
-//			
-//			cashflowAddressService.insertAndUpdateAddress(CfBs);
-//				
 //		}
-//		return commonAddress;
-//	}
-
-//	public Long findId(Member users) {
-//		TypedQuery<Member> query = null;
-//		String hqlstr = "FROM member_data2 WHERE member_address =:user AND pwd = :pwd";
-//		query = em.createQuery(hqlstr, Member.class);
-//		query.setParameter("user", users.getMemberAddress());
-//		query.setParameter("pwd", users.getPwd());
-//
-//		Member account =  query.getSingleResult();
-//		mailService.prepareAndSend("請輸入信箱@gmail.com", "title", "Sample mail subject");
-//		em.close();
-//		return account.getMemberId();
-//	}
-//	
-//	public List<CashflowAddressBean> findById(HttpSession session){
-//		Long id = (Long)
-//				session.getAttribute("userID");
-//		List<CashflowAddressBean> cashflowAB = cashAddressDao.findById(id);
-//		return cashflowAB;
-//	}	
-//	@GetMapping("/CashFlowAddress2/updatePage") // 和網址相同
-//	public String sendMemberDataToModified(Model model,
-//			@RequestParam(value = ("MemberId"), required = true) Long memberId) {// spring會讀三種： 請求參數、路徑變數、表單綁定
-//		Member member = memberService.findByMemberId(memberId);
-//		model.addAttribute("member", member);
-//		model.addAttribute("memberId", memberId);
-//
-//		return "app.updatePage";
+//		Optional<Member> memberID = memberService.getMamberById(Integer.valueOf(memberCookieID));
+//		Optional<OrdersBean> orderBean = orderservice.getNewestOrderByMember(memberID.get());
+//		aio.setMerchantID("2000132");
+//		aio.setMerchantTradeNo("NeverStarveYY" + String.valueOf(orderBean.get().getPkOrderId()));
+//		aio.setMerchantTradeDate(
+//				String.valueOf(orderBean.get().getOrderDate()).substring(0, 19).replace("T", " ").replace("-", "/"));
+//		aio.setTotalAmount(String.valueOf(orderBean.get().getTotalCost().intValue()));
+//		aio.setTradeDesc("test shopping");
+//		aio.setItemName(orderBean.get().getOrdersName());
+//		aio.setReturnURL("http://localhost:8080/Order/returnURL");
+//		aio.setOrderResultURL("http://localhost:8080/Order/order/EcpayOrder");
+//		ecpay.setHi(aioOne.aioCheckOut(aio, null));
+//		return ecpay;
 //	}
 //
-//	@ResponseBody
-//	@GetMapping("/CashFlowAddress2")
-//	public Map<String, Object> totalAddress() {
-//		Map<String, Object> data = new HashMap<>();
-//		data.put("session", session.getAttribute("userID"));
-//		return data;
-//	}
-//	@PostMapping("/CashFlowAddress2/members/{memberId}") // {}為路徑變數
-//	public String updateMemberData(
-//			@Valid @ModelAttribute Member member, 
-//			BindingResult result, 
-//			@PathVariable Long memberId,
-//			Model model,
-//			RedirectAttributes ra) {
-//		System.out.println("pmember=" + member);
+//	// 0707訂單的展示
+//	@GetMapping("order/NowOrder")
+//	public String getNowOrder(Model model, @CookieValue(value = "userId") String userid) {
 //
-//		List<ObjectError> errors = result.getAllErrors();
-//		for (ObjectError oe : errors) {
-//			System.out.println(oe.getCode() + "," + oe.getDefaultMessage() + "," + oe.getObjectName());
+//		Member m = null;
+//		m = MemberService.getMemberById(Integer.valueOf(userid)).get();
+//		if (m != null) {
+//			List<OrdersBean> order = OrdersService.findOrderByMemberBean(m);
+//			model.addAttribute("id", m);
+//			model.addAttribute("orderSet", order);
+//			System.out.println("找到你囉" + order);
 //		}
-//
-//		System.out.println("==============================");
-//
-//		memberValidator.validate(member, result);// bindingResult的父介面就是Errors
-//		errors = result.getAllErrors();
-//		for(ObjectError oe: errors) {
-////			System.out.println(oe.getCode()+ "," + oe.getDefaultMessage()+ ","+ oe.getObjectName());
-//			System.out.println("oe=>" + oe);
-//		}
-//		if (result.hasErrors()) {
-//			System.out.println("XXXXXXXXXXXXXXx");
-//			return "app.updatePage";
-//		}
-//			memberService.update(member);
-//			System.out.println("OOOOOOOOOOOOOOOOOOO");
-//			ra.addFlashAttribute("insertSuccess", "更新成功");
-//			return "redirect:/members";
-//	}
-//	@InitBinder
-//	public void initBinder(WebDataBinder binder, WebRequest request) {
-//		// java.util.Date
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		dateFormat.setLenient(false);
-//		CustomDateEditor ce = new CustomDateEditor(dateFormat, true);
-//		binder.registerCustomEditor(java.util.Date.class, ce);
-//		// java.sql.Date
-//		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-//		dateFormat2.setLenient(false);
-//		CustomDateEditor ce2 = new CustomDateEditor(dateFormat2, true);
-//		binder.registerCustomEditor(java.sql.Date.class, ce2);
+//		return "order/OrderMember";
 //	}
 //
-//	@ModelAttribute("member")
-//	public void findMember(@PathVariable(required = false) Long memberId, Model model) {// 為避免有15個欄位但只有6個更新且剩9個變成null，所以可使用此方法做前置，
-////		先用pathVariable去讀所有欄位，用這個讀取的物件去接前端的6個更新欄位
-//		Member member;
-//		if (memberId != null) {
-//			member = memberService.findByMemberId(memberId);
+//	// 0709給綠界的
+//	@PostMapping("order/EcpayOrder")
+//	public String getEcpayOrder(Model model, @RequestParam("RtnCode") int RtnCode,
+//			@RequestParam("MerchantTradeNo") String MerchantTradeNo, HttpServletResponse response,
+//			HttpServletRequest request) {
+//		Member member = (Member) session.getAttribute("member");
+//		Member memberCookie = null;
+//		String userid = null;
+//		Cookie[] cookieList = request.getCookies();
+//
+//		if (cookieList != null) {
+//			for (Cookie cookie : cookieList) {
+//				if (cookie.getName().equals("userId")) {
+//					userid = cookie.getValue();
+//				}
+//			}
+//		}
+//		if (userid != null) {
+//
+//			memberCookie = memberService.getMamberById(Integer.valueOf(userid)).get();
+//		}
+//		if (memberCookie != null) {
+//			System.out.println("08是餅乾啦耖");
+//			List<OrdersBean> order = OrdersService.findOrderByMemberBean(memberCookie);
+//			model.addAttribute("id", memberCookie);
+//			model.addAttribute("orderSet", order);
+//		} else if (member != null) {
+//			System.out.println("08是Session啦");
+//			List<OrdersBean> order = OrdersService.findOrderByMemberBean(member);
+//			model.addAttribute("id", member);
+//			model.addAttribute("orderSet", order);
 //		} else {
-//			member = new Member();
+//			System.out.println("08是死人啦");
+//			member = memberService.getMamberById(1).get();
+//			List<OrdersBean> order = OrdersService.findOrderByMemberBean(member);
+//			model.addAttribute("id", member);
+//			model.addAttribute("orderSet", order);
 //		}
+//		if (RtnCode == 1) {
+//			System.out.println("^_^凸，抓到你囉字串" + MerchantTradeNo);
+//			String mno = MerchantTradeNo.replace("NeverStarveYY", "");
+//			int ino = Integer.valueOf(mno);
+//			OrdersBean findorder = orderservice.findByPkOrderId(ino).get();
+//			findorder.setTrading(1);
+//			System.out.println("抓" + findorder);
+//			OrdersBean.update(findorder);
+//
+//		}
+//
+//		return "order/OrderMember";
 //	}
 //
-//}
+//	@GetMapping("list/{id}")
+//	public String getliString(@PathVariable int id, Model model) {
+//		Optional<OrdersBean> order = orderservice.findByPkOrderId(id);
+//		OrdersBean o = order.get();
+//		Set<OrderListBean> list = o.getOrderListBean();
+//		model.addAttribute("orderList", list);
+//		return "order/OrderList";
 //
+//	}
+//
+}

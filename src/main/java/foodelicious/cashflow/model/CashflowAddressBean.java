@@ -96,6 +96,12 @@ public class CashflowAddressBean implements Serializable{
 		this.member = member;
 	}
 	
+
+	@Override
+	public String toString() {
+		return "CashflowAddressBean [addressId=" + addressId + ", memberAddress=" + memberAddress + ",commonAddress=" 
+				+ commonAddress + ", fkmemberid=" + fkmemberid + ", member=" + member + "]";
+	}
 	
 	
 }

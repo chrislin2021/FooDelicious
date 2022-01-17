@@ -11,7 +11,7 @@ import foodelicious.member.model.Member;
 import foodelicious.member.repository.MemberRepositoryImpl;
 
 @Service
-public class CashflowServiceImpl implements CashflowAddressService{
+public class CashflowAddressServiceImpl implements CashflowAddressService{
 	
 	private CashAddressRepository cashAddressRepository;
 	
@@ -19,7 +19,7 @@ public class CashflowServiceImpl implements CashflowAddressService{
 	@Autowired
 	private MemberRepositoryImpl memberRepositoryImpl;
 	
-	public CashflowServiceImpl(CashAddressRepository cashAddressRepository) {
+	public CashflowAddressServiceImpl(CashAddressRepository cashAddressRepository) {
 		this.cashAddressRepository = cashAddressRepository;
 	}
 	
@@ -44,5 +44,16 @@ public class CashflowServiceImpl implements CashflowAddressService{
 		Member members = memberRepositoryImpl.findByMemberId(memberId);
 		return cashAddressRepository.findByMember(members);
 	}
+
+//	@Override
+//	public List<CashflowAddressBean> useIdFindMail(Long memberId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+//	@Override
+//	public List<CashflowAddressBean> useIdFindMail(Long memberId) {
+//		return cashAddressRepository.useIdFindMail();
+//	}
 
 }
