@@ -71,6 +71,16 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public List<ShareArea> OneArticleFuzzySearch(String associateString) {
 		return articleRepository.OneArticleFuzzySearch(associateString);
+	}
+
+	@Override
+	public void viewNumUpdate(Integer ArticleId) {
+		articleRepository.viewNumUpdate(ArticleId);
+	}
+
+	@Override
+	public String articleContent(Integer id) {
+		return articleRepository.articleContent(id);
 	}	
 	
 }

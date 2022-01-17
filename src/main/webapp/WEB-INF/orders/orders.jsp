@@ -121,8 +121,10 @@
 					<c:forEach var="carts" items="${carts}">
 						<li class="list-group-item d-flex justify-content-between lh-sm">
 							<div>
-								<h6 class="my-0">${carts.product.productName}</h6>
-								<small class="text-muted">單價：${carts.product.productPrice}</small><small class="text-muted">｜</small><small class="text-muted">數量：${carts.quantity}</small>
+								<h6 class="my-0" id="a">${carts.product.productName}</h6>
+								<div class="productId" hidden>${carts.productId}</div>
+								<div class="quantity" hidden>${carts.quantity}</div>
+								<small class="text-muted">單價：${carts.product.productPrice}</small><small class="text-muted">｜</small><small class="text-muted" >數量：${carts.quantity}</small>
 							</div><span class="text-muted">NT$:${carts.product.productPrice*carts.quantity}元</span>
 						</li>
 					</c:forEach>

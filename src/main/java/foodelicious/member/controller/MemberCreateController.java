@@ -84,7 +84,6 @@ public class MemberCreateController {
 			}
 			return "app.RegisterPage";
 		}
-
 		
 		member.setMemberDiscountId("none");
 		member.setMemberCoin(10);

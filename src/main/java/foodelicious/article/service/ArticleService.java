@@ -27,4 +27,8 @@ public interface ArticleService {
 	List<ShareArea> articleFuzzySearch(String clasify, String associateString);
 	
 	List<ShareArea> OneArticleFuzzySearch(String associateString);
+
+	void viewNumUpdate(Integer ArticleId);
+
+	String articleContent(Integer id);
 }

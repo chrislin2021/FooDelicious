@@ -150,4 +150,16 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		return list;		
 	}
 
+	@Override
+	public void viewNumUpdate(Integer ArticleId) {
+		ShareArea shareArea = em.find(ShareArea.class, ArticleId);
+		shareArea.setViewNum(shareArea.getViewNum()+1);		
+		em.merge(shareArea);
+	}
+
+	@Override
+	public String articleContent(Integer id) {
+		return em.find(ArticleData.class, id).getArticle();
+	}
+
 }

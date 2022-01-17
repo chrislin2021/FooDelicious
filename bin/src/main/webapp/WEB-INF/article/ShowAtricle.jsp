@@ -21,6 +21,7 @@
             <br>
             <table class="table table-hover">
                 <tbody id="clallifyAndTitle"></tbody>
+
             </table>
 
             <div class='textArea'></div>
@@ -32,26 +33,25 @@
         var articleId = "";
         let clallifyAndTitle = "";
         $.ajax({
-                url: "/responseArticle",
-                type: "Get",
-                success: function(data) {
+            url: "/responseArticle",
+            type: "Get",
+            success: function(data) {
 
-                    let accId = data.title[0].fk_account_id;
-                    let loginId = data.LoginId;
-                    articleId = data.title[0].share_id
-                    clallifyAndTitle += "<tr>";
-                    clallifyAndTitle += "<th>" + data.title[0].article_clallify + "</th>";
-                    clallifyAndTitle += "<th>" + data.title[0].article_title + "</th>";
-                    clallifyAndTitle += "</tr>";
-                    $("#clallifyAndTitle").html(clallifyAndTitle);
-                    $(".textArea").html(data.article[0].article);
-                    (loginId == accId) ? $("#updateBTN").prop("class", "btn btn-primary btn-lg"): $("#updateBTN").prop("class", "btn btn-primary btn-lg disabled");
-                    //$("#updateBTN").prop("href", "test");
-
-
-
-                }
-            })
+                let accId = data.title[0].fk_account_id;
+                let loginId = data.LoginId;
+                articleId = data.title[0].share_id
+                clallifyAndTitle += "<tr>";
+                clallifyAndTitle += "<th>" + data.title[0].article_clallify + "</th>";
+                clallifyAndTitle += "<th>" + data.title[0].article_title + "</th>";
+                clallifyAndTitle += "<th><span>閱覽數：" + data.title[0].viewNum + "</span></th>";
+                clallifyAndTitle += "</tr>";
+                $("#clallifyAndTitle").html(clallifyAndTitle);
+                $(".textArea").html(data.article[0].article);
+                document.getElementById("updateBTN").style.visibility = (loginId == accId) ? 'visible' : 'hidden';
+                //(loginId == accId) ? $("#updateBTN").prop("class", "btn btn-primary btn-lg"): $("#updateBTN").prop("class", "btn btn-primary btn-lg hidden");
+                //data.article[0].postTime
+            }
+        })
         $("#updateBTN").click(function() {
             window.location.href = "/goUpdatePage"
         })

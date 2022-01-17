@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,11 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import foodelicious.member.model.Member;
 
@@ -62,8 +61,8 @@ public class OrdersBean implements Serializable {
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
 
-	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ordersBean")
+	@Transient
+	@OneToMany(mappedBy = "ordersBean")
 	private Set<OrdersDetailBean> orderDetail = new LinkedHashSet<OrdersDetailBean>();
 
 	public OrdersBean() {

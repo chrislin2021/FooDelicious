@@ -108,6 +108,7 @@ public class ArticleController {
 	public Map<String, Object> useIdFinfAll() {
 		int id = (int) session.getAttribute("ArticleId");
 		// System.out.println("ArticleId2： " + id);
+		articleService.viewNumUpdate(id);
 		Map<String, Object> data = new HashMap<>();
 		data.put("LoginId", session.getAttribute("userID"));
 		data.put("title", articleService.useIdFindShareArea(id));
@@ -115,11 +116,15 @@ public class ArticleController {
 
 		return data;
 	}
+	
 
 	// 儲存ArticleId並轉往文章顯示區域
 	@GetMapping("/intIDFindAll/{id}")
-	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id) {
+	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id,
+			Model model) {
 		session.setAttribute("ArticleId", id);
+		System.out.println(articleService.articleContent(id));
+		model.addAttribute("articleContent", articleService.articleContent(id));
 		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";
 	}
@@ -129,6 +134,7 @@ public class ArticleController {
 										Model model) {
 		session.setAttribute("ArticleId", id);
 		model.addAttribute("ArticleId", id);
+		model.addAttribute("articleContent", articleService.articleContent(id));
 		// System.out.println("ArticleId： " + id);
 		return "app.BackendArticleContent";
 	}

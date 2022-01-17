@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import foodelicious.compbackend.model.CBKDetailDao;
 import foodelicious.compbackend.model.CBKProblemDao;
 import foodelicious.compbackend.model.CBKProductDao;
 import foodelicious.compbackend.model.ProblemsBean;
@@ -27,6 +28,7 @@ import foodelicious.compbackend.repository.CBKProblemRepository;
 import foodelicious.compbackend.repository.CBKProductRepository;
 import foodelicious.compbackend.service.CompanyBackEndServiceInterface;
 import foodelicious.mail.service.MailService;
+import foodelicious.member.model.Member;
 import foodelicious.product.model.Product;
 
 @RestController
@@ -43,6 +45,8 @@ public class CompanyBackEndRestController {
 	private final CBKProductDao cbkProductDao;
 
 	private final CBKProblemDao cbkProblemDao;
+	
+	private final CBKDetailDao cbkDetailDao;
 
 	@Autowired
 	private MailService mailService;
@@ -51,13 +55,23 @@ public class CompanyBackEndRestController {
 	// 跟spring DI有關 Search for spring DI 好的 壞的 醜的
 	public CompanyBackEndRestController(final CompanyBackEndServiceInterface cbkServiceInterface,
 			CBKProductRepository cbk, CBKProductDao cbkProductDao, CBKProblemRepository cpk,
-			CBKProblemDao cbkProblemDao) {
+			CBKProblemDao cbkProblemDao, CBKDetailDao cbkDetailDao) {
 		this.cbkServiceInterface = cbkServiceInterface;
 		this.cbk = cbk;
 		this.cpk = cpk;
 		this.cbkProductDao = cbkProductDao;
 		this.cbkProblemDao = cbkProblemDao;
+		this.cbkDetailDao = cbkDetailDao;
 	}
+	
+	@GetMapping("/companyDetails")
+	public Member findDetailByCompanyId(HttpSession session) {
+		Long companyId = (Long)session.getAttribute("userID");
+		Member companyDetails = cbkDetailDao.findByCompanyId(companyId);
+		return companyDetails;
+		
+	}
+	
 
 	@GetMapping("/companyProducts") // Important! /companyProduct is controller, /companyProducts is RESTController
 	public List<Product> findAllProducts(HttpSession session) {
@@ -96,6 +110,18 @@ public class CompanyBackEndRestController {
 	public String updateProduct(@PathVariable Long productId, @RequestBody Product product) {
 		return cbkServiceInterface.updateProduct(productId, product);
 	}
+	
+	@PutMapping("/companyDetailUpdate/{companyId}")
+	public String updateCompanyDetail(@PathVariable Long companyId, @RequestBody Member company) {
+		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+		return cbkDetailDao.updateCompanyDetail(companyId, company);
+	}
+	
+	@GetMapping("/companyDetailUpdate/{companyId}")
+	public Member getCompanyDetail(@PathVariable Long companyId) {
+		System.out.println("in gettttt");
+		return cbkDetailDao.findByCompanyId(companyId);
+	}
 
 	@PutMapping("/companyProblemReport/{companyId}")
 	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {
@@ -107,55 +133,7 @@ public class CompanyBackEndRestController {
 		return cbkProblemDao.insertProblem(problem);
 	}
 	
-	//新增商品與圖片
-	@PostMapping("/companyProductsAdd")
-	public String post(@RequestParam(name = "productCategories") Short productCategories, @RequestParam(name = "productCategoriesName") String productCategoriesName,
-			@RequestParam(name = "productName") String productName, @RequestParam(name = "productCompany") String productCompany,
-			@RequestParam(name = "productCompanyId") Long productCompanyId,@RequestParam(name = "productPrice") Integer productPrice,
-			@RequestParam(name = "productContent") String productContent,@RequestParam(name = "productStock") Integer productStock,
-			@RequestParam(name = "productStatus") String productStatus,@RequestParam(name = "productKeywords") String productKeywords,
-			@RequestParam(name = "productSalesFigures") Integer productSalesFigures,
-			MultipartFile photo, HttpSession session)
-			throws IllegalStateException, IOException, ParseException {
-
-		String fileName = photo.getOriginalFilename();
-		String saveFileDirPath = session.getServletContext().getRealPath("/") + "img\\";
-
-		String suffixName = fileName.substring(fileName.lastIndexOf("."));
-		String uuid = UUID.randomUUID().toString();
-		fileName = uuid + suffixName;
-		String finalPath = saveFileDirPath + File.separator + fileName;
-
-		File saveFileDestPath = new File(finalPath);
-		photo.transferTo(saveFileDestPath);
-
-		Product product = new Product();
-		product.setProductCategories(productCategories);
-		product.setProductCategories_name(productCategoriesName);
-		product.setProductName(productName);
-		product.setProductCompany(productCompany);
-		product.setProductCompanyId(productCompanyId);
-		product.setProductPrice(productPrice);
-		product.setProductPics(fileName);
-		product.setProductContent(productContent);
-		product.setProductStock(productStock);
-		product.setProductStatus(productStatus);
-		product.setProductKeywords(productKeywords);
-		product.setProductSalesFigures(productSalesFigures);
-		
-		boolean insertStatus = cbkProductDao.saveProduct(product);
-		
-		if(insertStatus == true) {
-			//如何在這邊加alert說商品insert成功
-			return "app.CompanyProduct2";
-		}
-		else {
-			//如何在這邊加alert說商品insert成功
-			return "app.CompanyProductAdd";
-		}
-
-		
-	}
+	
 
 	@DeleteMapping("/companyProducts/delete/{productId}")
 	public String deleteProduct(@PathVariable Long productId) {

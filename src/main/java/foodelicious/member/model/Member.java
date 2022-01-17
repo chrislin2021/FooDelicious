@@ -52,7 +52,7 @@ public class Member implements Serializable {
 	private String memberMail;
 
 	@Column(name = "pwd")
-	@Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
+	//@Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
 	private String pwd;
 
 	@Column(name = "member_name")

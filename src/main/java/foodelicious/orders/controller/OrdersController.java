@@ -3,17 +3,14 @@ package foodelicious.orders.controller;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
@@ -50,51 +47,44 @@ public class OrdersController {
 
 	@ResponseBody
 	@PostMapping("/orders/insert")
-	public String orders(@RequestBody String orders) {
-
-		JSONObject obj = JSON.parseObject(orders);
-		Object name = obj.get("ordersName");
-		Object phone = obj.get("ordersPhone");
-		Object address = obj.get("ordersAddress");
-		String mName = (String) name;
-		String mPhone = (String) phone;
-		String mAddress = (String) address;
+	public void orders(@RequestBody OrdersBean orders) {
 
 		Date date = new Date();
 
 		Timestamp timeStamp = new Timestamp(date.getTime());
 
 		ordersBean.setMemberId((Long) session.getAttribute("userID"));
-
 		ordersBean.setOrderDate(timeStamp);
-		ordersBean.setOrdersName(mName);
-		ordersBean.setOrdersPhone(mPhone);
-		ordersBean.setOrdersAddress(mAddress);
+		ordersBean.setOrdersName(orders.getOrdersName());
+		ordersBean.setOrdersPhone(orders.getOrdersPhone());
+		ordersBean.setOrdersAddress(orders.getOrdersAddress());
 		ordersBean.setOrdersState("訂單處理中");
 		ordersBean.setOrdersTotal((Integer) session.getAttribute("priceTotal"));
-		OrdersBean newOrders = ordersService.insertOrders(ordersBean);
 
-		Long ordersId = newOrders.getOrdersId();
+		ordersService.insertOrders(ordersBean);
 
-		Set<OrdersDetailBean> ordersSet = newOrders.getOrderDetail();
+	}
+
+	@ResponseBody
+	@PostMapping("/ordersDetail/insert")
+	public void ordersDetail(@RequestBody String ordersDetail) {
+
+		ordersDetailBean.setOrdersId(ordersBean.getOrdersId());
+		ordersDetailBean.setProductDetail(ordersDetail);
+
+		ordersDetailService.insertOrderDetail(ordersDetailBean);
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
-			ordersDetailBean.setOrderId(ordersId);
-			ordersDetailBean.setMemberId(cart.getMemberId());
-			ordersDetailBean.setProductId(cart.getProductId());
-			ordersDetailBean.setQuantity(cart.getQuantity());
-			ordersDetailService.insertOrderDetail(ordersDetailBean);
-			ordersSet.add(ordersDetailBean);
-		}
-
-		newOrders.setOrderDetail(ordersSet);
-
-		for (CartBean cart : carts) {
 			cartService.deleteItem(cart.getCartId());
+			session.removeAttribute("discountContent");
 		}
 
+	}
+
+	@GetMapping("/ordersEnd")
+	public String ordersEnd() {
 		return "app.OrdersEnd";
 	}
 

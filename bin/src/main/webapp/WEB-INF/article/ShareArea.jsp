@@ -68,14 +68,14 @@
     <nav aria-label="Page navigation example ">
         <ul id="page" class="pagination justify-content-center"></ul>
     </nav>
-    <script src="../../js/sockjs.min.js"></script>
-    <script src="../../js/stomp.min.js"></script>
+    <script src="/js/sockjs.min.js"></script>
+    <script src="/js/stomp.min.js"></script>
     <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
 
     <script>
         //websocket設定
         let stompClient = null;
-        let webSocketUrl = "http://" + window.location.host + '/websocket/chatting';
+        let webSocketUrl = "http://" + window.location.host + '/chatting';
         // 聊天訊息輸入區
         let inputMessageArea = null;
         //傳送訊息用
@@ -140,7 +140,7 @@
                     $("#page").html(pageHtml);
 
                     //======================== websocked ========================
-                    var socket = new SockJS(webSocketUrl);
+                    var socket = new SockJS("/chatting");
                     stompClient = Stomp.over(socket);
                     stompClient.connect({}, function(frame) {
                         console.log('Connected: ' + frame);
@@ -157,8 +157,8 @@
                                     'from': articles.userName,
                                     'text': text
                                 }));
-                                messageData += "<p>" + articles.userName + " : " + text + "</p>";
-                                $(".messageArea").html(messageData);
+//                                 messageData += "<p>" + articles.userName + " : " + text + "</p>";
+//                                 $(".messageArea").html(messageData);
                             }
                         }
                     };
@@ -170,8 +170,8 @@
                                 'from': articles.userName,
                                 'text': text
                             }));
-                            messageData += "<p>" + articles.userName + " : " + text + "</p>";
-                            $(".messageArea").html(messageData);
+//                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
+//                             $(".messageArea").html(messageData);
                         }
                     };
                 }
@@ -349,7 +349,7 @@
                 "clasify": clasify,
                 "AssociateString": titleKeyWord
             }
-            console.log(fuzzySearch)
+//             console.log(fuzzySearch)
 
             $.ajax({
                 url: "/fuzzySearch/" + clasify + "/" + titleKeyWord,
@@ -379,11 +379,15 @@
             })
 
         })
-
+		//websock顯示資料
         function showMessageOutput(messageOutput) {
             let line = "";
-            JSONData = JSON.stringify(messageOutput);
-            line += JSON.stringify(messageOutput) + "\n";
+            //JSONData = JSON.stringify(messageOutput);
+//             console.log(JSONData);
+            //line += JSON.stringify(messageOutput) + "\n";
+            //console.log(line);
+            messageData += "<p>" + messageOutput.from + " : " + messageOutput.text + "</p>";
+            $(".messageArea").html(messageData);
         }
         //模糊搜尋報錯
         function alertMsg(message, type) {
