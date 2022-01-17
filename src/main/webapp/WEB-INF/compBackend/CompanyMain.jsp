@@ -136,7 +136,12 @@
 		 data: detailString,
 		 success: function(msg){
 			alert(msg);
-			$.ajax({
+			
+		  }
+		
+		})
+	
+	$.ajax({
 				url:"/companyDetailUpdate/"+companyId,
 				type:"GET",
 				success: function(companyDetails){
@@ -145,14 +150,11 @@
 					$("#companyEmail").val(companyDetails.memberMail);
 					$("#companyPhone").val(companyDetails.memberPhone);
 					$("#companyAddress").val(companyDetails.memberAddress);
-					window.location.href="/companyMain2";
+					
 					
 					//無法在頁面顯示更新的資料 但資料庫有更新
 				}
 			})
-		 }
-		
-	})
 
 
 		 

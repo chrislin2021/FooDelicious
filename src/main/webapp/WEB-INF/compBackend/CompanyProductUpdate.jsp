@@ -96,11 +96,11 @@
 					type : "DELETE",
 					success : function() {
 						alert("刪除成功");
-						window.location.href = "/companyProduct2";
+						window.location.href = "/companyProduct";
 					}
 				});
 			}
-		})
+		});
 	</script>
 
 
@@ -169,7 +169,7 @@
             data: newProductString,
             success:function(msg){
                 alert(msg)
-                window.location.href="/companyProduct2";
+                window.location.href="/companyProduct";
             }
         })
     })
@@ -178,7 +178,7 @@
 <script>
     //=============跳回首頁=============
     function comCancel(){
-        window.location.href="/companyProduct2";
+        window.location.href="/companyProduct";
     }
 </script>
 

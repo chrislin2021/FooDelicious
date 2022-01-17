@@ -125,11 +125,10 @@ function discountTotal() {
 				$("#freight").empty();
 				str += ' 運費：<span>100 元</span>';
 				$("#freight").append(str);
-				priceTotal += 100;
 				$("#pay").attr("value", "NT$: " + priceTotal + " 元");
 			} else {
 				$("#freight").empty();
-				str += '運費：<del style="color: red;"> 100 元</del>&nbsp;&nbsp;<span>0 元</span>';
+				str += '運費：<del style="color: red;">100 元</del>&nbsp;&nbsp;<span>0 元</span>';
 				$("#freight").append(str);
 				$("#pay").attr("value", "NT$: " + priceTotal + " 元");
 			}

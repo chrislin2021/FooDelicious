@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 </head>
 <body>
-<h1 class="tableName titleName">
+<h1 class="titleName2 titleName">
     年齡層分析
     <br>
     <span class="littleName">Age Distribution</span>

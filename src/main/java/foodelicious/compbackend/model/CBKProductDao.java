@@ -24,11 +24,10 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	@PersistenceContext
 	EntityManager em;
 
-	
 	private CBKProductRepository cbkProdRepository;
-	
+
 	public CBKProductDao(final CBKProductRepository cbkProdRepository) {
-		this.cbkProdRepository= cbkProdRepository;
+		this.cbkProdRepository = cbkProdRepository;
 	}
 
 	@Autowired
@@ -43,31 +42,28 @@ public class CBKProductDao implements CBKProductDaoInterface {
 
 	}
 
+	// 刪除商品
 	@Override
-	public List<Product> findByName(String productName) {
+	public String deleteProduct(Long productId) {
+		Product product = em.find(Product.class, productId);
+		if (product != null) {
+			em.remove(product);
+			return "Product deletion successful!";
+		} else {
+			return "Product not found. Please try again.";
+		}
 
-		List<Product> products = cbkProdRepository.findByName(productName);
-
-		return products;
 	}
-	
-	public List<Product> findByNameAndType(String productName, Integer categories,Long productCompanyId){
-		List<Product> products = cbkProdRepository.findByNameAndType(productName, categories, productCompanyId);
-		return products;
-	}
 
+	// 商品id
 	@Override
 	public Product findByProductId(Long productId) {
 		Product product = em.find(Product.class, productId);
 		return product;
 	}
 
+	// 更新商品
 	@Override
-	public List<Product> findByType(Integer category, Long productCompanyId) {
-		List<Product> catProd = cbkProdRepository.findByType(category, productCompanyId);
-		return catProd;
-	}
-
 	public String updateProduct(Long productId, Product product) {
 		Product newProduct = cbkProdRepository.findByProductId(productId);
 		if (newProduct != null) {
@@ -89,27 +85,38 @@ public class CBKProductDao implements CBKProductDaoInterface {
 
 	}
 
+	// 分類找到商品
 	@Override
-	public String deleteProduct(Long productId) {
-		Product product = em.find(Product.class, productId);
-		if (product != null) {
-			em.remove(product);
-			return "Product deletion successful!";
-		} else {
-			return "Product not found. Please try again.";
-		}
-
+	public List<Product> findByType(Integer category, Long productCompanyId) {
+		List<Product> catProd = cbkProdRepository.findByType(category, productCompanyId);
+		return catProd;
 	}
 
+	// 名字
+	@Override
+	public List<Product> findByName(String productName) {
+
+		List<Product> products = cbkProdRepository.findByName(productName);
+
+		return products;
+	}
+
+	// 名字跟分類
+	@Override
+	public List<Product> findByNameAndType(String productName, Integer categories, Long productCompanyId) {
+		List<Product> products = cbkProdRepository.findByNameAndType(productName, categories, productCompanyId);
+		return products;
+	}
+	// insert商品
+	@Override
 	public boolean saveProduct(Product product) {
 		Product theSavedProduct = cbkProdRepository.save(product);
-		if(theSavedProduct != null) {
+		if (theSavedProduct != null) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
-		
+
 	}
 
 	// 刪除商品 (好像跟某個table有衝突 無法刪除)
