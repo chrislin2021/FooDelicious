@@ -15,7 +15,7 @@ import foodelicious.compbackend.repository.CBKProblemRepository;
 
 @Repository
 @Transactional
-public class CBKProblemDao {
+public class CBKProblemDao implements CBKProblemDaoInterface {
 	
 	@PersistenceContext
 	EntityManager em;

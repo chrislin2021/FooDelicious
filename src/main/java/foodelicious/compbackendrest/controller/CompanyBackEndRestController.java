@@ -1,34 +1,21 @@
 package foodelicious.compbackendrest.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import foodelicious.compbackend.model.CBKDetailDao;
-import foodelicious.compbackend.model.CBKProblemDao;
-import foodelicious.compbackend.model.CBKProductDao;
 import foodelicious.compbackend.model.ProblemsBean;
-import foodelicious.compbackend.repository.CBKProblemRepository;
-import foodelicious.compbackend.repository.CBKProductRepository;
 import foodelicious.compbackend.service.CompanyBackEndServiceInterface;
 import foodelicious.mail.service.MailService;
 import foodelicious.member.model.Member;
+import foodelicious.orders.model.OrdersDetailBean;
 import foodelicious.product.model.Product;
 
 @RestController
@@ -36,44 +23,20 @@ public class CompanyBackEndRestController {
 
 	private final CompanyBackEndServiceInterface cbkServiceInterface;
 
-	// 測試 記得最後輸入的是service interface
-	private final CBKProductRepository cbk;
-
-	private final CBKProblemRepository cpk;
-
-	// 測試 記得最後輸入的是service interface
-	private final CBKProductDao cbkProductDao;
-
-	private final CBKProblemDao cbkProblemDao;
-	
-	private final CBKDetailDao cbkDetailDao;
-
-	@Autowired
-	private MailService mailService;
+	private final MailService mailService;
 
 	// use the final method instead of @autowired. it's the GOOD Way of writing it
 	// 跟spring DI有關 Search for spring DI 好的 壞的 醜的
 	public CompanyBackEndRestController(final CompanyBackEndServiceInterface cbkServiceInterface,
-			CBKProductRepository cbk, CBKProductDao cbkProductDao, CBKProblemRepository cpk,
-			CBKProblemDao cbkProblemDao, CBKDetailDao cbkDetailDao) {
+			MailService mailService) {
 		this.cbkServiceInterface = cbkServiceInterface;
-		this.cbk = cbk;
-		this.cpk = cpk;
-		this.cbkProductDao = cbkProductDao;
-		this.cbkProblemDao = cbkProblemDao;
-		this.cbkDetailDao = cbkDetailDao;
+		this.mailService = mailService;
 	}
-	
-	@GetMapping("/companyDetails")
-	public Member findDetailByCompanyId(HttpSession session) {
-		Long companyId = (Long)session.getAttribute("userID");
-		Member companyDetails = cbkDetailDao.findByCompanyId(companyId);
-		return companyDetails;
-		
-	}
-	
 
-	@GetMapping("/companyProducts") // Important! /companyProduct is controller, /companyProducts is RESTController
+//==========CompanyProduct.jsp============================================	
+
+	// Important! /companyProduct is controller, /companyProducts is RESTController
+	@GetMapping("/companyProducts")
 	public List<Product> findAllProducts(HttpSession session) {
 
 		List<Product> products = cbkServiceInterface.getAllProducts(session);
@@ -89,20 +52,23 @@ public class CompanyBackEndRestController {
 
 	@GetMapping("/companyProducts/{productName}")
 	public List<Product> findAllByName(@PathVariable String productName) {
-		List<Product> products = cbkProductDao.findByName(productName);
+		List<Product> products = cbkServiceInterface.findByName(productName);
 		return products;
 	}
 
 	@GetMapping("/companyProducts/{productName}/{categories}")
-	public List<Product> findByNameAndType(@PathVariable String productName, @PathVariable Integer categories, HttpSession session) {
+	public List<Product> findByNameAndType(@PathVariable String productName, @PathVariable Integer categories,
+			HttpSession session) {
 		Long productCompanyId = (Long) session.getAttribute("userID");
-		List<Product> products = cbkProductDao.findByNameAndType(productName, categories, productCompanyId);
+		List<Product> products = cbkServiceInterface.findByNameAndType(productName, categories, productCompanyId);
 		return products;
 	}
 
+//============CompanyProductUpdate.jsp===========================
+
 	@GetMapping("/companyProducts/update/{productId}")
 	public Product findByProductId(@PathVariable Long productId) {
-		// return cbkServiceInterface.findByProductId(productId);
+
 		return cbkServiceInterface.findByProductId(productId);
 	}
 
@@ -110,35 +76,58 @@ public class CompanyBackEndRestController {
 	public String updateProduct(@PathVariable Long productId, @RequestBody Product product) {
 		return cbkServiceInterface.updateProduct(productId, product);
 	}
-	
-	@PutMapping("/companyDetailUpdate/{companyId}")
-	public String updateCompanyDetail(@PathVariable Long companyId, @RequestBody Member company) {
-		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-		return cbkDetailDao.updateCompanyDetail(companyId, company);
-	}
-	
-	@GetMapping("/companyDetailUpdate/{companyId}")
-	public Member getCompanyDetail(@PathVariable Long companyId) {
-		System.out.println("in gettttt");
-		return cbkDetailDao.findByCompanyId(companyId);
-	}
-
-	@PutMapping("/companyProblemReport/{companyId}")
-	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {
-		// System.out.println("in rest controller");
-		String sender = (String) session.getAttribute("memberMail");
-		String companyName = (String) session.getAttribute("userName");
-		String mailSentStatus = mailService.receiveProblemReports(sender, companyName);
-
-		return cbkProblemDao.insertProblem(problem);
-	}
-	
-	
 
 	@DeleteMapping("/companyProducts/delete/{productId}")
 	public String deleteProduct(@PathVariable Long productId) {
 
 		return cbkServiceInterface.deleteProduct(productId);
 	}
+
+	@PutMapping("/companyProblemReport/{companyId}")
+	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {
+
+		String sender = (String) session.getAttribute("memberMail");
+		String companyName = (String) session.getAttribute("userName");
+		String mailSentStatus = mailService.receiveProblemReports(sender, companyName);
+
+		return cbkServiceInterface.insertProblem(problem);
+	}
+
+//===========CompanyMain.jsp=========================================
+
+	@GetMapping("/companyDetails")
+	public Member findDetailByCompanyId(HttpSession session) {
+		Long companyId = (Long) session.getAttribute("userID");
+		Member companyDetails = cbkServiceInterface.findByCompanyId(companyId);
+		return companyDetails;
+
+	}
+
+	@PutMapping("/companyDetailUpdate/{companyId}")
+	public String updateCompanyDetail(@PathVariable Long companyId, @RequestBody Member company) {
+
+		return cbkServiceInterface.updateCompanyDetail(companyId, company);
+	}
+
+	@GetMapping("/companyDetailUpdate/{companyId}")
+	public Member getCompanyDetail(@PathVariable Long companyId, HttpSession session) {
+		Member member = cbkServiceInterface.findByCompanyId(companyId);
+
+		session.setAttribute("updatedCompany", member);
+		//傳新的資訊在jsp頁面
+		return cbkServiceInterface.findByCompanyId(companyId);
+	}
+
+//===============CompanyOrder.jsp=================================
+
+	// this is rest controller , /companyOrder is controller
+	@GetMapping("/companyOrders")
+	public List<OrdersDetailBean> findByCompanyProductId(HttpSession session) {
+		 Long productCompanyId = (Long) session.getAttribute("userID");
+		 return cbkServiceInterface.findByCompanyProductId(productCompanyId);
+	}
+	
+	
+
 
 }

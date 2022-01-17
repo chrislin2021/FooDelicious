@@ -79,11 +79,6 @@
 			value="/WEB-INF/compBackend/CompanyMain.jsp" />
 	</definition>
 
-	<definition name="app.CompanyMain"
-		extends="app.CompanyDefault">
-		<put-attribute name="content"
-			value="/WEB-INF/companyBackend/CompanyMain.jsp" />
-	</definition>
 
 	<definition name="app.CompanyProduct2"
 		extends="app.CompanyDefault2">
@@ -91,11 +86,6 @@
 			value="/WEB-INF/compBackend/CompanyProduct.jsp" />
 	</definition>
 
-	<definition name="app.CompanyProduct"
-		extends="app.CompanyDefault">
-		<put-attribute name="content"
-			value="/WEB-INF/companyBackend/CompanyProduct.jsp" />
-	</definition>
 
 	<definition name="app.CompanyProductUpdate"
 		extends="app.CompanyDefault2">
@@ -109,23 +99,12 @@
 			value="/WEB-INF/compBackend/CompanyProductAdd.jsp" />
 	</definition>
 
-	<definition name="app.CompanyOrder"
-		extends="app.CompanyDefault">
+	<definition name="app.CompanyOrder2"
+		extends="app.CompanyDefault2">
 		<put-attribute name="content"
-			value="/WEB-INF/companyBackend/CompanyOrder.jsp" />
+			value="/WEB-INF/compBackend/CompanyOrder.jsp" />
 	</definition>
 
-	<definition name="app.CompanyTest"
-		extends="app.CompanyDefault">
-		<put-attribute name="content"
-			value="/WEB-INF/companyBackend/CompanyTest.jsp" />
-	</definition>
-
-	<definition name="app.CompanyAddProduct"
-		extends="app.CompanyDefault">
-		<put-attribute name="content"
-			value="/WEB-INF/companyBackend/CompanyAddProduct.jsp" />
-	</definition>
 
 	<definition name="app.Product" extends="app.default">
 		<put-attribute name="content"
@@ -276,6 +255,12 @@
 		extends="app.BackendDefault">
 		<put-attribute name="content"
 			value="/WEB-INF/backend/reportPage/Bestseller.jsp" />
+	</definition>
+
+	<definition name="app.BackendReportArticle"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/reportPage/PopularArticles.jsp" />
 	</definition>
 
 </tiles-definitions>

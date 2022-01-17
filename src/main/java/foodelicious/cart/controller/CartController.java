@@ -44,7 +44,6 @@ public class CartController {
 		this.discountService = discountService;
 	}
 
-//	購物車主頁
 	@GetMapping("/shoppingCart")
 	public String shoppingCart() {
 
@@ -265,6 +264,10 @@ public class CartController {
 		for (CartBean cart : carts) {
 			Product product = cart.getProduct();
 			originTotal += product.getProductPrice() * cart.getQuantity();
+		}
+
+		if (originTotal < 1000) {
+			originTotal += 100;
 		}
 
 		return originTotal;

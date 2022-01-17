@@ -109,6 +109,8 @@
 
 .titleName2{
     margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
     width: 300px;
     font-size: 30px;
     font-weight: bolder;
@@ -116,4 +118,5 @@
     background-color: #182740;
     color: #D3B884;
     border-radius: 5px;
+    box-shadow: 5px 5px 5px 0px gray;
 }
