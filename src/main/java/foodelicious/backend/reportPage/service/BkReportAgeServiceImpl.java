@@ -2,6 +2,7 @@ package foodelicious.backend.reportPage.service;
 
 import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.backend.reportPage.model.BkReportAgeDao;
+import foodelicious.backend.reportPage.model.BkReportShare;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +29,15 @@ public class BkReportAgeServiceImpl implements BkReportAgeService{
     @Override
     public List<BkProduct> topTool() {
         return bkReportAgeDao.topTool();
+    }
+
+    @Override
+    public List<BkReportShare> topFoodArticle() {
+        return bkReportAgeDao.topFoodArticle();
+    }
+
+    @Override
+    public List<BkReportShare> topToolArticle() {
+        return bkReportAgeDao.topToolArticle();
     }
 }

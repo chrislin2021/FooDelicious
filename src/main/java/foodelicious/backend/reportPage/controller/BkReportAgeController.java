@@ -1,9 +1,8 @@
 package foodelicious.backend.reportPage.controller;
 
 import foodelicious.backend.productPage.model.BkProduct;
-import foodelicious.backend.reportPage.repository.BkReportAgeRepository;
+import foodelicious.backend.reportPage.model.BkReportShare;
 import foodelicious.backend.reportPage.service.BkReportAgeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,5 +30,19 @@ public class BkReportAgeController {
     @GetMapping("/report/product/tool")
     public List<BkProduct> topTool() {
         return bkReportAgeService.topTool();
+    }
+
+    @GetMapping("/report/article/food")
+    public List<BkReportShare> topFoodArticle(){
+
+        return bkReportAgeService.topFoodArticle();
+
+    }
+
+    @GetMapping("/report/article/tool")
+    public List<BkReportShare> topToolArticle(){
+
+        return bkReportAgeService.topToolArticle();
+
     }
 }
