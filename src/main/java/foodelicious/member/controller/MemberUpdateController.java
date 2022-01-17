@@ -62,11 +62,11 @@ public class MemberUpdateController {
 
 		return "app.updatePage";
 	}
-    
-	//更新會員
+	
+	//更新會員===前台
 	@PostMapping("/members/{memberId}") // {}為路徑變數
 	public String updateMemberData(
-			@Valid @ModelAttribute Member member, 
+			 Member member, 
 			BindingResult result, 
 			@PathVariable Long memberId,
 			Model model,
@@ -95,6 +95,39 @@ public class MemberUpdateController {
 			ra.addFlashAttribute("insertSuccess", "更新成功");
 			return "redirect:/members";
 	}
+    
+//	//更新會員
+//	@PostMapping("/members/{memberId}") // {}為路徑變數
+//	public String updateMemberData(
+//			@Valid @ModelAttribute Member member, 
+//			BindingResult result, 
+//			@PathVariable Long memberId,
+//			Model model,
+//			RedirectAttributes ra) {
+//		System.out.println("pmember=" + member);
+//
+//		List<ObjectError> errors = result.getAllErrors();
+//		for (ObjectError oe : errors) {
+//			System.out.println(oe.getCode() + "," + oe.getDefaultMessage() + "," + oe.getObjectName());
+//		}
+//
+//		System.out.println("==============================");
+//
+//		memberValidator.validate(member, result);// bindingResult的父介面就是Errors
+//		errors = result.getAllErrors();
+//		for(ObjectError oe: errors) {
+////			System.out.println(oe.getCode()+ "," + oe.getDefaultMessage()+ ","+ oe.getObjectName());
+//			System.out.println("oe=>" + oe);
+//		}
+//		if (result.hasErrors()) {
+//			System.out.println("XXXXXXXXXXXXXXx");
+//			return "app.updatePage";
+//		}
+//			memberService.update(member);
+//			System.out.println("OOOOOOOOOOOOOOOOOOO");
+//			ra.addFlashAttribute("insertSuccess", "更新成功");
+//			return "redirect:/members";
+//	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder, WebRequest request) {
@@ -120,4 +153,5 @@ public class MemberUpdateController {
 			member = new Member();
 		}
 	}
+	
 }

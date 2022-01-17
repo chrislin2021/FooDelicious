@@ -35,6 +35,12 @@ public class MemberController {
 	public String toMemberPage() {
 		return "app.LoginSystem";
 	}
+	
+	//會員中心
+		@GetMapping("/memberIndex")
+		public String toMemberIndex() {
+			return "app.memberIndex";
+		}
 
 	// GOOGLE登入
 	@PostMapping("/googleLogin")
@@ -46,6 +52,16 @@ public class MemberController {
 				if (members.getMemberMail().equals(memberMail)) {
 					session.setAttribute("userID", members.getMemberId());
 					session.setAttribute("userName", members.getMemberName());
+					session.setAttribute("memberMail", members.getMemberMail());
+					session.setAttribute("pwd", members.getPwd());
+					session.setAttribute("memberGender", members.getMemberGender());
+					session.setAttribute("memberBirth", members.getMemberBirth());
+					session.setAttribute("memberDiscountId", members.getMemberDiscountId());
+					session.setAttribute("member_status", members.getMember_status());
+					session.setAttribute("memberCoin", members.getMemberCoin());
+					session.setAttribute("register_date", members.getRegister_date());
+					session.setAttribute("memberPhone", members.getMemberPhone());
+					session.setAttribute("memberAddress", members.getMemberAddress());
 					break;
 				}
 			}
@@ -54,6 +70,7 @@ public class MemberController {
 		member.setMemberDiscountId("none");
 		member.setMemberCoin(10);
 		member.setMember_status("customer");
+		member.setMemberPic("defaultImg.jpg");
 		memberService.save(member);
 		session.setAttribute("memberId", member.getMemberId());
 		return "redirect:/";

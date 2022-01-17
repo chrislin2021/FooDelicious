@@ -88,6 +88,7 @@ public class MemberCreateController {
 		member.setMemberDiscountId("none");
 		member.setMemberCoin(10);
 		member.setMember_status("customer");
+		member.setMemberPic("defaultImg.jpg");
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		member.setRegister_date(now);
 		if(!result.hasErrors()) {

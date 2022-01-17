@@ -13,7 +13,7 @@
 }
 </style>
 
-<div align='center'>
+<div align='center'> 
 	<h3>更新會員資料</h3>
 	<font color='darkgreen'>&nbsp;${insertSuccess}</font>
 	<c:set var='updateurl'
