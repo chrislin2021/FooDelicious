@@ -107,7 +107,7 @@
                             </a>
                         </li>
                         <li id="ArticleTop10" class="colLi funName">
-                            <a class="colLi" href="" style="text-decoration: none">
+                            <a class="colLi" href="/backend/report/article" style="text-decoration: none">
                                 <i class="fa fa-circle-o"></i>
                                 <span class="listName">熱門文章</span>
                             </a>

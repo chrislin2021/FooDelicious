@@ -255,4 +255,10 @@
 			value="/WEB-INF/backend/reportPage/Bestseller.jsp" />
 	</definition>
 
+	<definition name="app.BackendReportArticle"
+				extends="app.BackendDefault">
+		<put-attribute name="content"
+					   value="/WEB-INF/backend/reportPage/PopularArticles.jsp" />
+	</definition>
+
 </tiles-definitions>

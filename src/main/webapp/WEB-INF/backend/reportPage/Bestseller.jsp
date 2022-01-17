@@ -14,7 +14,7 @@
     <span class="littleName">Top selling products</span>
 </h1>
 <div class="foodArea">
-    <p class="titleName"><i class="fas fa-hamburger"></i>食材類 </p>
+    <p class="textName "><i class="fas fa-hamburger"></i>食材類 </p>
     <div class="col-sm-5 report1">
         <canvas id="myChart" ></canvas>
     </div>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="toolArea">
-    <p class="titleName"><i class="fas fa-utensils"></i>餐廚類</p>
+    <p class="textName"><i class="fas fa-utensils"></i>餐廚類</p>
     <div class="col-sm-5 report1">
         <canvas id="myChart2" ></canvas>
     </div>

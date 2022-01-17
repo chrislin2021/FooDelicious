@@ -2,9 +2,9 @@ package foodelicious.backend.reportPage.model;
 
 import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.backend.reportPage.repository.BkReportAgeRepository;
+import foodelicious.backend.reportPage.repository.BkReportArticleRepository;
 import foodelicious.backend.reportPage.repository.BkReportBestsellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,9 +22,15 @@ public class BkReportAgeDaoImpl implements BkReportAgeDao{
     @Autowired
     private BkReportBestsellerRepository bkReportBestsellerRepository;
 
-    public BkReportAgeDaoImpl(BkReportAgeRepository bkReportAgeRepository, BkReportBestsellerRepository bkReportBestsellerRepository) {
+    @Autowired
+    private BkReportArticleRepository bkReportArticleRepository;
+
+    public BkReportAgeDaoImpl(BkReportAgeRepository bkReportAgeRepository,
+                              BkReportBestsellerRepository bkReportBestsellerRepository,
+                              BkReportArticleRepository bkReportArticleRepository) {
         this.bkReportAgeRepository = bkReportAgeRepository;
         this.bkReportBestsellerRepository = bkReportBestsellerRepository;
+        this.bkReportArticleRepository = bkReportArticleRepository;
     }
 
     public BkReportAgeDaoImpl() {
@@ -101,6 +107,22 @@ public class BkReportAgeDaoImpl implements BkReportAgeDao{
         List<BkProduct> tools = bkReportBestsellerRepository.topTool();
 
         return tools;
+    }
+
+    @Override
+    public List<BkReportShare> topFoodArticle() {
+
+        List<BkReportShare> foodArticle = bkReportArticleRepository.topFoodArticle();
+
+        return foodArticle;
+    }
+
+    @Override
+    public List<BkReportShare> topToolArticle() {
+
+        List<BkReportShare> toolArticle = bkReportArticleRepository.topToolArticle();
+
+        return toolArticle;
     }
 
 

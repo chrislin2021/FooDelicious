@@ -11,4 +11,8 @@ public interface BkReportAgeDao {
     public List<BkProduct> topFood();
 
     public List<BkProduct> topTool();
+
+    public List<BkReportShare> topFoodArticle();
+
+    public List<BkReportShare> topToolArticle();
 }
