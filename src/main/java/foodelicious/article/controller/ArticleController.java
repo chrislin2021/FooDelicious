@@ -1,6 +1,7 @@
 package foodelicious.article.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import foodelicious.article.model.MsgArea;
 import foodelicious.article.service.ArticleService;
+import foodelicious.article.service.MsgService;
 import foodelicious.mail.service.MailService;
 import foodelicious.member.service.MemberService;
 
@@ -31,15 +34,18 @@ public class ArticleController {
 	HttpSession session;
 	MemberService memberService;
 	MailService mailService;
+	MsgService msgService;
 
 	public ArticleController(ArticleService articleService, 
 							 HttpSession session, 
 							 MemberService memberService,
-							 MailService mailService) {
+							 MailService mailService,
+							 MsgService msgService) {
 		this.articleService = articleService;
 		this.session = session;
 		this.memberService = memberService;
 		this.mailService = mailService;
+		this.msgService = msgService;
 	}
 
 	// 測試中
@@ -191,4 +197,20 @@ public class ArticleController {
 		data.put("title", articleService.articleFuzzySearch(clasify, AssociateString));
 		return data;
 	}
+	
+	//文章留言板製作
+	@ResponseBody
+	@PostMapping("/insertMsg")
+	public void insertMsg(@RequestBody Map<String, String> params) {
+		msgService.insertMsg(params);
+	}
+	
+	//顯示所有留言
+	@ResponseBody
+	@GetMapping("/showAllMsg/{id}")
+	public List<MsgArea> showMessage(@PathVariable("id") Integer articleId) {
+		System.out.println("articleId："+articleId);
+		return msgService.useIdFindAllMSG(articleId);
+	}
+	
 }

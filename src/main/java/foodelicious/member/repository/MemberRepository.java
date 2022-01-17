@@ -20,4 +20,6 @@ public interface MemberRepository {
 
 	String useIdFindEmail(Long id);
 
+	String useIdFindName(Long id);
+
 }
