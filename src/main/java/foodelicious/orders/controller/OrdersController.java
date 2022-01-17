@@ -25,22 +25,18 @@ public class OrdersController {
 	private HttpSession session;
 
 	private CartService cartService;
-
+	
 	private OrdersBean ordersBean;
-
-	private OrdersDetailBean ordersDetailBean;
 
 	private OrdersService ordersService;
 
 	private OrdersDetailService ordersDetailService;
 
-	public OrdersController(HttpSession session, CartService cartService, OrdersBean ordersBean,
-			OrdersDetailBean ordersDetailBean, OrdersService ordersService, OrdersDetailService ordersDetailService) {
+	public OrdersController(HttpSession session, CartService cartService, OrdersService ordersService,
+			OrdersDetailService ordersDetailService) {
 		super();
 		this.session = session;
 		this.cartService = cartService;
-		this.ordersBean = ordersBean;
-		this.ordersDetailBean = ordersDetailBean;
 		this.ordersService = ordersService;
 		this.ordersDetailService = ordersDetailService;
 	}
@@ -48,6 +44,8 @@ public class OrdersController {
 	@ResponseBody
 	@PostMapping("/orders/insert")
 	public void orders(@RequestBody OrdersBean orders) {
+
+		OrdersBean ordersBean = new OrdersBean();
 
 		Date date = new Date();
 
@@ -62,12 +60,14 @@ public class OrdersController {
 		ordersBean.setOrdersTotal((Integer) session.getAttribute("priceTotal"));
 
 		ordersService.insertOrders(ordersBean);
-
+		this.ordersBean = ordersBean;
 	}
 
 	@ResponseBody
 	@PostMapping("/ordersDetail/insert")
 	public void ordersDetail(@RequestBody String ordersDetail) {
+
+		OrdersDetailBean ordersDetailBean = new OrdersDetailBean();
 
 		ordersDetailBean.setOrdersId(ordersBean.getOrdersId());
 		ordersDetailBean.setProductDetail(ordersDetail);

@@ -20,7 +20,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	public OrdersBean insertOrders(OrdersBean ordersBean) {
-		return ordersRepository.save(ordersBean);
+		return ordersRepository.saveAndFlush(ordersBean);
 	}
 
 	@Override
