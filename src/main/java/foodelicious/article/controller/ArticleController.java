@@ -120,8 +120,11 @@ public class ArticleController {
 
 	// 儲存ArticleId並轉往文章顯示區域
 	@GetMapping("/intIDFindAll/{id}")
-	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id) {
+	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id,
+			Model model) {
 		session.setAttribute("ArticleId", id);
+		System.out.println(articleService.articleContent(id));
+		model.addAttribute("articleContent", articleService.articleContent(id));
 		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";
 	}
@@ -131,6 +134,7 @@ public class ArticleController {
 										Model model) {
 		session.setAttribute("ArticleId", id);
 		model.addAttribute("ArticleId", id);
+		model.addAttribute("articleContent", articleService.articleContent(id));
 		// System.out.println("ArticleId： " + id);
 		return "app.BackendArticleContent";
 	}

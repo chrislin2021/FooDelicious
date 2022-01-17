@@ -157,4 +157,9 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		em.merge(shareArea);
 	}
 
+	@Override
+	public String articleContent(Integer id) {
+		return em.find(ArticleData.class, id).getArticle();
+	}
+
 }

@@ -76,6 +76,11 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public void viewNumUpdate(Integer ArticleId) {
 		articleRepository.viewNumUpdate(ArticleId);
+	}
+
+	@Override
+	public String articleContent(Integer id) {
+		return articleRepository.articleContent(id);
 	}	
 	
 }

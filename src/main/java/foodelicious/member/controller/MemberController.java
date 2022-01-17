@@ -62,8 +62,6 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping("/useIdFindEmail/{id}")
 	public String usdIdFindEmail(@PathVariable(value = "id") Long id) {	
-		System.out.println(id);
-		System.out.println(memberService.useIdFindEmail(id));
 		return memberService.useIdFindEmail(id);
 	}
 }

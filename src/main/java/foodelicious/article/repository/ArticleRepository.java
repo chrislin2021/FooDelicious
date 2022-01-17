@@ -30,4 +30,6 @@ public interface ArticleRepository {
 
 	void viewNumUpdate(Integer ArticleId);
 
+	String articleContent(Integer id);
+
 }

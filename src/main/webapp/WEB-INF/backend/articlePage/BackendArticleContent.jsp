@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 
     <head>
+
+        <link href="/css/CKEditor.css" rel="stylesheet" />
         <link rel="stylesheet" href="../../../css/backendArticleDetail.css">
+        <style>
+            #content {
+                pointer-events: none;
+            }
+        </style>
     </head>
 
     <body>
@@ -54,8 +61,7 @@
                 </div>
                 <hr/>
                 <div id="content" class="textArea" style="border: 0px;">
-                    <textarea class="content" name="content" rows="20" cols="100">
-                </textarea>
+                    <div id="editor">${articleContent}</div>
                 </div>
             </form>
             <div class="input-group textSet buttonArea">
@@ -68,7 +74,7 @@
             </div>
 
         </div>
-
+        <script src="/js/ckeditor.js"></script>
         <script>
             //=============跳回首頁=============
             function cancel() {
@@ -90,7 +96,7 @@
                     findMail(data.title[0].fk_account_id)
                     $("#viewNum").val(data.title[0].viewNum);
                     $("#title").val(data.title[0].article_title);
-                    $("#content").html(data.article[0].article);
+                    //$("#content").html(data.article[0].article);
                 }
             })
         </script>
@@ -122,5 +128,17 @@
 
                 }
             }
+        </script>
+        <script>
+            //ckeditor
+            ClassicEditor
+                .create(document.querySelector('#editor'), {})
+                .then(editor => {
+                    const toolbarElement = editor.ui.view.toolbar.element;
+                    toolbarElement.style.display = 'none';
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         </script>
     </body>
