@@ -77,16 +77,6 @@ div.path {
 						href="/backend/member">暫時的後台連結</a></li>
 				</ul>
 			</div>
-
-			<c:if test='${userName == null}'>
-				<span>您好，請登入會員</span>
-				<a class="text-dark" href="/LoginSystem">登入</a>
-			</c:if>
-
-			<c:if test='${userName != null}'>
-				<span><img src="/img/${memberPic}" width="30" height="30"
-					style="border-radius: 50%; border: 2px solid black;">
-					</div> 
 					
 					<c:if test='${userName == null}'>
 						<span>您好，請登入會員</span>
