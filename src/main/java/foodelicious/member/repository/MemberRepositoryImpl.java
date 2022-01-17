@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import foodelicious.member.model.Member;
-import foodelicious.member.service.MemberService;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {
@@ -65,6 +64,12 @@ public class MemberRepositoryImpl implements MemberRepository {
 			return null;
 		}
 	}
-	
 
+	@Override
+	public String useIdFindEmail(Long id) {
+		Member member = em.find(Member.class, id);		
+		return member.getMemberMail();
+	}
+	
+	
 }

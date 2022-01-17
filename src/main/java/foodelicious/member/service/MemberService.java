@@ -2,7 +2,6 @@ package foodelicious.member.service;
 
 import java.util.List;
 
-import foodelicious.backend.memberpage.model.BkMember;
 import foodelicious.member.model.Member;
 
 public interface MemberService {
@@ -21,7 +20,7 @@ public interface MemberService {
 	void deleteByMemberId(Long memberId);
 
 	List<Member> findByMemberMailJpa(String memberMail);
-	
 
+	String useIdFindEmail(Long id);
 
 }

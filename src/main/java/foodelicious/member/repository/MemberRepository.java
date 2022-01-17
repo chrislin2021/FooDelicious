@@ -18,4 +18,6 @@ public interface MemberRepository {
 
 	void deleteByMemberId(Long memberId);
 
+	String useIdFindEmail(Long id);
+
 }

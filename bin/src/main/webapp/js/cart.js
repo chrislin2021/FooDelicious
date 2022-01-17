@@ -119,19 +119,19 @@ function discountTotal() {
 	$.ajax({
 		url: "/shoppingCart/discountTotal/" + discounts + "/" + coin,
 		type: "GET",
-		success: function(totalPrice) {
+		success: function(priceTotal) {
 			var str = "";
-			if (totalPrice < 1000) {
+			if (priceTotal < 1000) {
 				$("#freight").empty();
 				str += ' 運費：<span>100 元</span>';
 				$("#freight").append(str);
-				totalPrice += 100;
-				$("#pay").attr("value", "NT$: " + totalPrice + " 元");
+				priceTotal += 100;
+				$("#pay").attr("value", "NT$: " + priceTotal + " 元");
 			} else {
 				$("#freight").empty();
 				str += '運費：<del style="color: red;"> 100 元</del>&nbsp;&nbsp;<span>0 元</span>';
 				$("#freight").append(str);
-				$("#pay").attr("value", "NT$: " + totalPrice + " 元");
+				$("#pay").attr("value", "NT$: " + priceTotal + " 元");
 			}
 			discountMoney(discounts, coin);
 		}
