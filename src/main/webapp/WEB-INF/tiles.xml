@@ -30,7 +30,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/member/updatePage.jsp" />
 	</definition>
-	
+
 	<definition name="app.memberIndex" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/member/memberIndex.jsp" />
@@ -142,6 +142,16 @@
 		<put-attribute name="title" value="/ordersEnd"></put-attribute>
 	</definition>
 
+	<definition name="app.ViewOrders"
+		template="/WEB-INF/orders/viewOrders.jsp">
+		<put-attribute name="title" value="/viewOrders"></put-attribute>
+	</definition>
+
+	<definition name="app.ViewOrdersDetail"
+		template="/WEB-INF/orders/viewOrdersDetail.jsp">
+		<put-attribute name="title" value="viewOrdersDetail"></put-attribute>
+	</definition>
+
 	<definition name="app.CustService" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/custService/CustService.jsp" />
@@ -159,9 +169,9 @@
 			value="/WEB-INF/backend/memberPage/BackendMember.jsp" />
 	</definition>
 
-	<definition name="app.CashflowList"
-		extends="app.default">
-		<put-attribute name="content" value="/WEB-INF/cashflow/CashflowList.jsp" />
+	<definition name="app.CashflowList" extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/cashflow/CashflowList.jsp" />
 	</definition>
 
 	<definition name="app.CashFlowAddress"
@@ -258,9 +268,9 @@
 	</definition>
 
 	<definition name="app.BackendReportArticle"
-				extends="app.BackendDefault">
+		extends="app.BackendDefault">
 		<put-attribute name="content"
-					   value="/WEB-INF/backend/reportPage/PopularArticles.jsp" />
+			value="/WEB-INF/backend/reportPage/PopularArticles.jsp" />
 	</definition>
 
 </tiles-definitions>

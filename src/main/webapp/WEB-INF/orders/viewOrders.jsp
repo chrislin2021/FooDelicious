@@ -96,110 +96,62 @@
 			</div>
 		</div>
 	</nav>
-
-	<!-- ===========================================分隔線=========================================== -->
-
-	<div>
-		<nav class="navbar navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg"
-						width="24" height="24" viewBox="0 0 24 24" fill="none"
-						stroke="currentColor" stroke-width="2" stroke-linecap="round"
-						stroke-linejoin="round" class="feather feather-shopping-bag">
-						<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-						<line x1="3" y1="6" x2="21" y2="6"></line>
-						<path d="M16 10a4 4 0 0 1-8 0"></path></svg> 好煮意｜訂單資料填寫</a>
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" id="appleNoSale"
-						placeholder="蘋果，沒有打折！！" aria-label="Search" value="">
-					<button type="button" class="btn btn-primary"
-						data-bs-toggle="modal" data-bs-target="#exampleModal"
-						onclick="searchProduct()">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-							viewBox="0 0 24 24" fill="none" stroke="currentColor"
-							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-search">
-							<circle cx="11" cy="11" r="8"></circle>
-							<line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-					</button>
-				</form>
+	<c:if test="${empty orders}">
+		<br />
+		<br />
+		<section class="py-1">
+			<div class="container"
+				style="display: flex; justify-content: center;">
+				<h1 class="display-7 fw-bold">目前沒有任何訂單</h1>
 			</div>
-		</nav>
-	</div>
+		</section>
+	</c:if>
 
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3>Smart Choice</h3>
-				</div>
-				<div class="modal-body">
-					<table class="table">
-						<tbody class="productInformation">
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-				</div>
+	<c:if test="${not empty orders}">
+		<!-- <p>有哦!!</p> -->
+
+		<section class="py-1">
+			<br>
+			<div class="container"
+				style="display: flex; justify-content: center;">
+				<h1 class="display-5 fw-bold">訂單查詢頁面</h1>
 			</div>
-		</div>
-	</div>
-
-	<table class="table">
-		<thead>
-			<tr>
-				<th scope="col">購物車</th>
-				<th scope="col">填寫資料</th>
-				<th scope="col">訂單確認</th>
-			</tr>
-		</thead>
-	</table>
-
-	<div class="progress">
-		<div class="progress-bar progress-bar-striped progress-bar-animated"
-			role="progressbar" aria-valuenow="75" aria-valuemin="0"
-			aria-valuemax="100" style="width: 100%">100%</div>
-	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<h1 id="center">
-		訂單完成！至<a href="/viewOrders">會員中心</a>查詢訂單
-	</h1>
-	<br />
-	<br />
-	<br />
-	<br />
-
-
-	<div class="container">
-		<footer
-			class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-			<div class="col-md-4 d-flex align-items-center">
-				<a href="/"
-					class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg
-						class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021
-					Company, Inc</span>
+			<hr />
+			<div class="container">
+				<table class="table table-hover">
+					<thead class="table-dark">
+						<tr>
+							<th scope="col">訂單編號</th>
+							<th scope="col">訂單日期</th>
+							<th scope="col">收件人</th>
+							<th scope="col">收件人電話</th>
+							<th scope="col">收件地址</th>
+							<th scope="col">訂購金額</th>
+							<th scope="col">訂單狀態</th>
+							<th scope="col">訂單明細</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="orders" items="${orders}">
+							<tr>
+								<td>${orders.ordersId}</td>
+								<td>${orders.orderDate}</td>
+								<td>${orders.ordersName}</td>
+								<td>${orders.ordersPhone}</td>
+								<td>${orders.ordersAddress}</td>
+								<td>${orders.ordersTotal}</td>
+								<td>${orders.ordersState}</td>
+								<td align="center" valign="middle">
+									<button type="button" class="btn btn-warning"
+										onclick="goDetail(${orders.ordersId})">訂單明細</button>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
-
-			<ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-				<li class="ms-3"><a class="text-muted" href="#"><svg
-							class="bi" width="24" height="24">
-							<use xlink:href="#twitter" /></svg></a></li>
-				<li class="ms-3"><a class="text-muted" href="#"><svg
-							class="bi" width="24" height="24">
-							<use xlink:href="#instagram" /></svg></a></li>
-				<li class="ms-3"><a class="text-muted" href="#"><svg
-							class="bi" width="24" height="24">
-							<use xlink:href="#facebook" /></svg></a></li>
-			</ul>
-		</footer>
-	</div>
+		</section>
+	</c:if>
 
 	<script src="/js/jquery-3.6.0.min.js"></script>
 	<script src="../../js/orders.js"></script>
@@ -210,7 +162,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
 		crossorigin="anonymous"></script>
-
-
 </body>
 </html>

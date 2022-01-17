@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +26,7 @@ public class OrdersController {
 	private HttpSession session;
 
 	private CartService cartService;
-	
+
 	private OrdersBean ordersBean;
 
 	private OrdersService ordersService;
@@ -86,6 +87,24 @@ public class OrdersController {
 	@GetMapping("/ordersEnd")
 	public String ordersEnd() {
 		return "app.OrdersEnd";
+	}
+
+	@GetMapping("/viewOrders")
+	public String viewOrders() {
+		List<OrdersBean> orders = ordersService.selectOrders((Long) session.getAttribute("userID"));
+
+		session.setAttribute("orders", orders);
+
+		return "app.ViewOrders";
+	}
+
+	@GetMapping("/toOrderDetailPage/{ordersId}")
+	public String toOrdersDetailPage(@PathVariable Long ordersId) {
+		List<OrdersDetailBean> details = ordersDetailService.selectOrdersDetail(ordersId);
+
+		session.setAttribute("details", details);
+
+		return "app.ViewOrdersDetail";
 	}
 
 }

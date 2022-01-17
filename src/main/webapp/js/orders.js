@@ -40,3 +40,13 @@ $(".checkout").on("click", function() {
 		}
 	}
 })
+
+function goDetail(ordersId) {
+	$.ajax({
+		url: "/toOrderDetailPage/" + ordersId,
+		type: "GET",
+		success: function() {
+			window.location.href = "/toOrderDetailPage/" + ordersId;
+		}
+	})
+}

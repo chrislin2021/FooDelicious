@@ -1,10 +1,3 @@
-function check_all(obj, cName) {
-	var checkboxs = document.getElementsByName(cName);
-	for (var i = 0; i < checkboxs.length; i++) {
-		checkboxs[i].checked = obj.checked;
-	}
-}
-
 function showItem() {
 	$.ajax({
 		url: "/shoppingCart/show",
@@ -16,7 +9,7 @@ function showItem() {
 				var str = "";
 				for (let cart of carts) {
 					str += '<tr>';
-					str += '<th scope="row"><input type="checkbox" name="c"></th>';
+					str += '<th scope="row"><img src="/img/' + cart.product.productPics + '"style="width:60px ;height:60px"></th>';
 					str += '<td>' + cart.product.productName + '</td>';
 					str += '<td>' + cart.product.productPrice + '</td>';
 					str += '<td><button type="button" class="btn btn-secondary btn-sm" onclick="changeNum(' + cart.productId + ',' + -1 + ')" id="minus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>'
@@ -73,7 +66,6 @@ function deleteItem(productId) {
 					toast.addEventListener('mouseleave', Swal.resumeTimer)
 				}
 			})
-
 			Toast.fire({
 				icon: 'success',
 				title: '刪除成功！！！'
@@ -121,7 +113,7 @@ function discountTotal() {
 		type: "GET",
 		success: function(priceTotal) {
 			var str = "";
-			if (priceTotal < 1000) {
+			if (priceTotal < 1100) {
 				$("#freight").empty();
 				str += ' 運費：<span>100 元</span>';
 				$("#freight").append(str);
@@ -145,7 +137,6 @@ function discountMoney(discounts, coin) {
 			$("#discountPrice").attr("value", discountContent);
 		}
 	})
-
 }
 
 function searchProduct() {
