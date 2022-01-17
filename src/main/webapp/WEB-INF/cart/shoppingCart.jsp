@@ -127,7 +127,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">購物車</th>
+					<th scope="col">　購物車</th>
 					<th scope="col">填寫資料</th>
 					<th scope="col">訂單確認</th>
 				</tr>
@@ -140,7 +140,7 @@
 		</div>
 		<br>
 
-		<table class="table table-striped">
+		<table class="table table-striped table align-middle">
 			<thead>
 				<tr>
 					<th scope="col"><input type="checkbox" id="all" onclick="check_all(this, 'c')"></th>
@@ -213,7 +213,7 @@
 		<table class="goToPay">
 			<thead>
 				<tr>
-					<th scope="col">結帳囉</th>
+					<th scope="col">購物車總計</th>
 				</tr>
 				<tr>
 					<td colspan="2">折扣金幣：<button class="btn btn-outline-warning btn-sm" type="button" onclick="minusNum()" id="minus"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2 7.75A.75.75 0 012.75 7h10a.75.75 0 010 1.5h-10A.75.75 0 012 7.75z"></path></svg></button> 
