@@ -72,4 +72,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 	}
 	
 	
+	@Override
+	public String useIdFindName(Long id) {
+		Member member = em.find(Member.class, id);		
+		return member.getMemberName();
+	}
 }

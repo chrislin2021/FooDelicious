@@ -102,7 +102,7 @@
         //  showData方法區域
         function showData(startItem, endItem) {
             let ArticleData = "";
-            for (let i = startItem; i < endItem; i++) {
+            for (let i = startItem; i < 5; i++) {
                 ArticleData += "<tr>";
                 ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
                 ArticleData += "<td>" + ShareData.title[i].article_clallify + "</td>";

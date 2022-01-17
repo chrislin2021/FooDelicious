@@ -65,6 +65,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.useIdFindEmail(id);
 	}
 
+	@Override
+	public String useIdFindName(Long memberId) {
+		return memberRepository.useIdFindName(memberId);
+	}
+
 
 
 

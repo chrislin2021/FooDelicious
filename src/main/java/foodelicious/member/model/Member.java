@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -24,13 +23,12 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import foodelicious.article.model.MsgArea;
 import foodelicious.article.model.ShareArea;
 import foodelicious.cashflow.model.CashflowAddressBean;
-import foodelicious.product.model.Product;
 
 @Entity(name = "member_data2")
 @Table(name = "member_data2")
@@ -41,7 +39,7 @@ public class Member implements Serializable {
 	public static final String PERSONID_REG = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
 	public static final String Password_REG = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*\\W).{8,}$";
 	public static final String NAME_REG = "^[\u4E00-\u9FA5]{2,}$";
-	
+
 	@Id
 	@Column(name = "member_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +50,7 @@ public class Member implements Serializable {
 	private String memberMail;
 
 	@Column(name = "pwd")
-	//@Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
+	// @Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
 	private String pwd;
 
 	@Column(name = "member_name")
@@ -90,17 +88,20 @@ public class Member implements Serializable {
 	@Column(name = "member_pic")
 	private String memberPic;
 	
+
 	// 與CashflowAddressBean是一對多關係
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
-	private Set<CashflowAddressBean> CashflowAddressBeans = new LinkedHashSet<CashflowAddressBean>();	
-
+	private Set<CashflowAddressBean> CashflowAddressBeans = new LinkedHashSet<CashflowAddressBean>();
 
 	// 與ShareArea是一對多關係
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
 	private Set<ShareArea> shareAreas = new LinkedHashSet<ShareArea>();
 
-	
-	//Join Product table
+	// 與MsgArea是一對多關係
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<MsgArea> msgAreas = new LinkedHashSet<MsgArea>();
+
+	// Join Product table
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
 //	private Set<Product> products = new LinkedHashSet<Product>();
 
@@ -110,22 +111,16 @@ public class Member implements Serializable {
 			register_date = new Date();
 		}
 	}
-	
-	
 
 	public Member(@Email String memberMail) {
 		super();
 		this.memberMail = memberMail;
 	}
 
-
-
 	public Member(String memberMail, String pwd) {
 		this.memberMail = memberMail;
 		this.pwd = pwd;
 	}
-	
-
 
 	public Member(@Email String memberMail, String memberName, Date register_date) {
 		super();
