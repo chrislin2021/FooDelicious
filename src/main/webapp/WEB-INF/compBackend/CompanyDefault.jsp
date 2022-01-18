@@ -179,12 +179,12 @@
     	        	success:function(msg){
     	        		alert(msg);
     	        		setTimeout(function(){
-    	     				window.location.href="/companyMain2";
+    	     				window.location.href="/companyMain";
     	     			},1000);
     	        	}, error: function(){
     	        		alert("fail");
     	        		setTimeout(function(){
-    	     				window.location.href="/companyMain2";
+    	     				window.location.href="/companyMain";
     	     			},1000);
     	        	}
     	        })

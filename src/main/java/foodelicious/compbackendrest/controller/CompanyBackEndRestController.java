@@ -112,9 +112,13 @@ public class CompanyBackEndRestController {
 	@GetMapping("/companyDetailUpdate/{companyId}")
 	public Member getCompanyDetail(@PathVariable Long companyId, HttpSession session) {
 		Member member = cbkServiceInterface.findByCompanyId(companyId);
-
-		session.setAttribute("updatedCompany", member);
+		
 		//傳新的資訊在jsp頁面
+		session.setAttribute("userName", member.getMemberName());
+		session.setAttribute("memberAddress", member.getMemberAddress());
+		session.setAttribute("memberMail", member.getMemberMail());
+		session.setAttribute("memberPhone", member.getMemberPhone());
+		
 		return cbkServiceInterface.findByCompanyId(companyId);
 	}
 

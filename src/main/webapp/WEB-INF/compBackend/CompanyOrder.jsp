@@ -13,7 +13,7 @@
 			<table id="" class='table table-striped table-hover '>
 				<thead>
 					<tr>
-					   
+
 						<th class="col table-warning smalW">訂單編號</th>
 						<th class="col table-warning midW">會員帳號</th>
 						<th class="col table-warning midW">收件人姓名</th>
@@ -31,87 +31,132 @@
 				<ul id="page" class="pagination justify-content-center"></ul>
 			</nav>
 			<input type="text" hidden id="companyId" value='${userID}'>
-			
+
 		</div>
 	</section>
 
 
 
 	<script>
+		//=============所有商品資料=============
 
-				//=============顯示所有商品資料=============
-		window.onload = function() {
-					
-			$.ajax({
-				url: "/companyProducts",
-				type: "GET",
-				success: function(allCompanyProducts){
-					
+		let companyId = $("#companyId").val();
+		let companyIdsGlobal;
+
+		$.ajax({
+			url : "/companyProducts",
+			type : "GET",
+			success : function(allCompanyProducts) {
+
+				let num = allCompanyProducts.length;
+
+				const productIdsLocal = new Array();
+
+				for (let z = 0; z < num; z++) {
+					if (allCompanyProducts[i].productCompanyId == companyId) {
+						productIdsLocal.unshift(allCompanyProducts[z].productId);
+						//alert(productIdsLocal);	
+					}
+
 				}
-			});
-					
-			let companyId = $("#companyId").val();
+				;
+				companyIdsGlobal = productIdsLocal;
+				//alert(companyIdsGlobal);
+				//alert(companyIdsGlobal.length);
+			}
+		});
 
-			
- 			$.ajax({
- 				url : "/companyOrders",
- 				type : "GET",
- 				success : function(allOrderDetails) {
- 					let len = allOrderDetails.length;
- 				
- 					alert(len);
- 					
-//   					for(let i = 0 ; i < len ; i ++){
-  						
-//   						let orderDetailJson = JSON.parse(allOrderDetails[i].productDetail);
-  						
-//   						let jsonLen = Object.keys(orderDetailJson).length;
-  						
-//   						for(let j = 0 ; j < jsonLen ; j ++){
-  							
-//   							let productId = orderDetail[j].id;
+		let productId;
+		let productIdArray;
+		let productQuantity;
+		let quantity;
+		let companyOrder;
+		let allCompanyOrders;
+
+		$.ajax({
+					url : "/companyOrders",
+					type : "GET",
+					success : function(allOrderDetails) {
+						let len = allOrderDetails.length;
+
+						//alert(len);
+
+						for (let i = 0; i < len; i++) {
+
+							
+							let productDetailJson = JSON.parse(allOrderDetails[i].productDetail);
+							
+							//alert(allOrderDetails[i].productDetail.length);
+
+							//alert(productDetailJson);
+
+							let jsonLen = Object.keys(productDetailJson).length;
+							
+							alert(jsonLen);
+							
+							
+							//nope
+							alert(productDetailJson.keys(productDetailJson)[0]);
+
+							
+
+							for (let j = 0; j < jsonLen; j++) {
+								
+								//這裡會抓到 more than one productId, 因為key都是 id
+								productId = productDetailJson[j].id;
+								
+								//alert(productId);
+								//how to access a specific value when the keys are the same?
+								//alert(productId[0]); //this doesn't work
 								
 								
-//   						}
-  						
-  						
-//   					}
+								//alert(productDetailJson[j].quantity);
+								//productIdArray.unshift(productId);
+								//alert(productIdArray);
+								//alert(productIdArray[1]);
+								//productQuantity = orderDetailJson[j].quantity;
+								//alert(productQuantity);
 
-   					alert(allOrderDetails[1].productDetail);
-   					
-   					let orderDetailJson = JSON.parse(allOrderDetails[1].productDetail);
-   					
-   					alert(orderDetailJson);
-   					
-   					alert(Object.keys(orderDetailJson).length)
-   					
-   					alert("productId: " +orderDetailJson[0].id);
-   					
-   					
-  					
-//   					alert(allOrderDetails[1].productDetail[1]["id"]);
-					
-//  					for (let i = 0 ; i < len ; i++){
- 						
-//  						//alert(Object.keys(allOrderDetails[i]));
-//  					}
- 					
- 					
- 					
- 					
- 					
- 					
-//  					if (len >= 10) {
-//  						pages(10, productData);
-// 					} else {
-//  						pages(len, productData);
-// 					}
- 				}
- 			});
- 		};
-		
-		
+								for (let k = 0; k < companyIdsGlobal.length; k++) {
 
+									if (productId == companyIdsGlobal[k]) {
+										//alert(productId[0])
+										//alert(productId[1]);
+										productQuantity = productDetailJson[j].quantity;
+
+										//alert(productQuantity);
+
+										//alert(allOrderDetails[i].ordersBean.ordersState);
+
+										companyOrder = {
+											"ordersId" : allOrderDetails[i].ordersId,
+											"memberId" : allOrderDetails[i].ordersBean.memberId,
+											"orderDate" : allOrderDetails[i].ordersBean.orderDate,
+											"ordersName" : allOrderDetails[i].ordersBean.ordersName,
+											"ordersPhone" : allOrderDetails[i].ordersBean.ordersPhone,
+											"ordersAddress" : allOrderDetails[i].ordersBean.ordersAddress,
+											"ordersState" : allOrderDetails[i].ordersBean.ordersState,
+											"quantity" : productQuantity,
+											"productId" : productId,
+
+										};
+
+										//alert("orderid: " +companyOrder.ordersId+ "productid: " +companyOrder.productId + "quantity" + companyOrder.quantity);
+
+										//allCompanyOrders.unshift(companyOrder);
+										//alert(companyOrder);
+										break;
+									}
+								}
+
+							}
+
+						}
+
+						//alert(allCompanyOrders);
+
+					},
+				});
 	</script>
 
 </body>

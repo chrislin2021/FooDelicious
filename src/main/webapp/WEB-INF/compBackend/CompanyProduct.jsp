@@ -384,7 +384,7 @@
     	//alert(dataSource[0].productCategories);
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
-            txt += "<td class='align-middle'>"+ (i+1)+"</td>"
+            txt += "<td class='align-middle'>"+ dataSource[i].productId+"</td>"
             let cate = dataSource[i].productCategories;
             let type = "";
             if(cate == 0){
