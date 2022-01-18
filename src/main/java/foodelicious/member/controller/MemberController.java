@@ -36,12 +36,6 @@ public class MemberController {
 		return "app.LoginSystem";
 	}
 	
-	//會員中心
-		@GetMapping("/memberIndex")
-		public String toMemberIndex() {
-			return "app.memberIndex";
-		}
-
 	// GOOGLE登入
 	@PostMapping("/googleLogin")
 	public String googleLoginPage(Member member, @RequestParam String memberMail, HttpSession session) {
@@ -51,6 +45,7 @@ public class MemberController {
 			for (Member members : EMid) {
 				if (members.getMemberMail().equals(memberMail)) {
 					session.setAttribute("userID", members.getMemberId());
+					session.setAttribute("memberId", members.getMemberId());
 					session.setAttribute("userName", members.getMemberName());
 					session.setAttribute("memberMail", members.getMemberMail());
 					session.setAttribute("pwd", members.getPwd());
