@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
+import foodelicious.cart.service.SearchService;
 import foodelicious.discount.service.DiscountService;
-import foodelicious.member.model.Member;
 import foodelicious.orders.model.OrdersBean;
 import foodelicious.orders.model.OrdersDetailBean;
 import foodelicious.orders.service.OrdersDetailService;
 import foodelicious.orders.service.OrdersService;
-import foodelicious.product.model.ProductService;
+import foodelicious.product.model.Product;
 
 @Controller
 public class OrdersController {
@@ -34,22 +34,22 @@ public class OrdersController {
 
 	private OrdersService ordersService;
 
-	private ProductService productService;
-
 	private DiscountService discountService;
+
+	private SearchService searchService;
 
 	private OrdersDetailService ordersDetailService;
 
 	public OrdersController(HttpSession session, CartService cartService, OrdersBean ordersBean,
-			OrdersService ordersService, ProductService productService, DiscountService discountService,
+			OrdersService ordersService, DiscountService discountService, SearchService searchService,
 			OrdersDetailService ordersDetailService) {
 		super();
 		this.session = session;
 		this.cartService = cartService;
 		this.ordersBean = ordersBean;
 		this.ordersService = ordersService;
-		this.productService = productService;
 		this.discountService = discountService;
+		this.searchService = searchService;
 		this.ordersDetailService = ordersDetailService;
 	}
 
@@ -81,16 +81,37 @@ public class OrdersController {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
+		List<Product> products = searchService.findAll();
+
 		for (CartBean cart : carts) {
 			OrdersDetailBean ordersDetailBean = new OrdersDetailBean();
 			ordersDetailBean.setOrdersId(ordersBean.getOrdersId());
 			ordersDetailBean.setProduct_id(cart.getProductId());
 			ordersDetailBean.setQuantity(cart.getQuantity());
 			ordersDetailService.insertOrderDetail(ordersDetailBean);
+			for (Product product : products) {
+				if (cart.getProductId() == product.getProductId()) {
+					product.setProductId(cart.getProductId());
+					product.setProductCategories(product.getProductCategories());
+					product.setProductCategories_name(product.getProductCategories_name());
+					product.setProductName(product.getProductName());
+					product.setProductCompany(product.getProductCompany());
+					product.setProductPrice(product.getProductPrice());
+					product.setProductPics(product.getProductPics());
+					product.setProductContent(product.getProductContent());
+					product.setProductStock(product.getProductStock() - cart.getQuantity());
+					product.setProductStatus(product.getProductStatus());
+					product.setProductKeywords(product.getProductKeywords());
+					product.setProductInsertDate(product.getProductInsertDate());
+					product.setProductSalesFigures(product.getProductSalesFigures());
+					product.setProductCompanyId(product.getProductCompanyId());
+					searchService.save(product);
+				}
+			}
+			discountService.deleteItem((Long) session.getAttribute("discountId"));
 			cartService.deleteItem(cart.getCartId());
 			session.removeAttribute("discountContent");
 		}
-
 	}
 
 	@GetMapping("/ordersEnd")

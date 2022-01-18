@@ -25,7 +25,7 @@ public class OrdersDetailBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ordersDetail_id")
+	@Column(name = "orders_Detail_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ordersDetailId;
 
