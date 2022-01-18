@@ -36,11 +36,8 @@ public class ArticleController {
 	MailService mailService;
 	MsgService msgService;
 
-	public ArticleController(ArticleService articleService, 
-							 HttpSession session, 
-							 MemberService memberService,
-							 MailService mailService,
-							 MsgService msgService) {
+	public ArticleController(ArticleService articleService, HttpSession session, MemberService memberService,
+			MailService mailService, MsgService msgService) {
 		this.articleService = articleService;
 		this.session = session;
 		this.memberService = memberService;
@@ -122,22 +119,20 @@ public class ArticleController {
 
 		return data;
 	}
-	
 
 	// 儲存ArticleId並轉往文章顯示區域
 	@GetMapping("/intIDFindAll/{id}")
-	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id,
-			Model model) {
+	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id, Model model) {
 		session.setAttribute("ArticleId", id);
 		System.out.println(articleService.articleContent(id));
 		model.addAttribute("articleContent", articleService.articleContent(id));
 		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";
 	}
+
 	// 儲存ArticleId並轉往管理者文章顯示區域
 	@GetMapping("/adminIDFindAll/{id}")
-	public String goAdminSpecifyArticle(@PathVariable(value = "id", required = false) Integer id,
-										Model model) {
+	public String goAdminSpecifyArticle(@PathVariable(value = "id", required = false) Integer id, Model model) {
 		session.setAttribute("ArticleId", id);
 		model.addAttribute("ArticleId", id);
 		model.addAttribute("articleContent", articleService.articleContent(id));
@@ -155,17 +150,17 @@ public class ArticleController {
 //		data.put("session", session.getAttribute("userID"));
 //		data.put("title", articleService.findAll());
 	}
+
 	// 管理者透過id刪除文章
 	@ResponseBody
 	@DeleteMapping("/adminDeleteData/{id}")
 	public void adminDeleteAtricle(@PathVariable(value = "id", required = false) Integer id) {
-		//System.out.println(id);
+		// System.out.println(id);
 		Long userID = articleService.useIdFindShareArea(id).get(0).getFk_account_id();
 		String title = articleService.useIdFindShareArea(id).get(0).getArticle_title();
 		String userMail = memberService.findByMemberId(userID).getMemberMail();
 		articleService.useArticleIdDelete(id);
-		mailService.prepareAndSend(userMail,"違反版規通知信件" ,
-				"敬愛的貴賓您好 \n 您的文章『"+title+"』 \n 已違反版規 \n 該文章已刪除");		
+		mailService.prepareAndSend(userMail, "違反版規通知信件", "敬愛的貴賓您好 \n 您的文章『" + title + "』 \n 已違反版規 \n 該文章已刪除");
 	}
 
 	// 前往修改頁面 同時使用model 將資料轉移
@@ -197,20 +192,27 @@ public class ArticleController {
 		data.put("title", articleService.articleFuzzySearch(clasify, AssociateString));
 		return data;
 	}
-	
-	//文章留言板製作
+
+	// 文章留言板製作
 	@ResponseBody
 	@PostMapping("/insertMsg")
 	public void insertMsg(@RequestBody Map<String, String> params) {
 		msgService.insertMsg(params);
 	}
-	
-	//顯示所有留言
+
+	// 顯示所有留言
 	@ResponseBody
 	@GetMapping("/showAllMsg/{id}")
 	public List<MsgArea> showMessage(@PathVariable("id") Integer articleId) {
-		System.out.println("articleId："+articleId);
+		System.out.println("articleId：" + articleId);
 		return msgService.useIdFindAllMSG(articleId);
 	}
-	
+
+	// 喜歡與否
+	@ResponseBody
+	@PostMapping("/likeOrNot")
+	public void likeOrNot(@RequestBody Map<String, String> params) {
+		System.out.println("userId：" + params.get("userId"));
+		msgService.likeOrNot(params);
+	}
 }

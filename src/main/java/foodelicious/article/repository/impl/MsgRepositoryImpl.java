@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import foodelicious.article.container.MessageRowMapper;
 import foodelicious.article.model.ArticleData;
+import foodelicious.article.model.LikeOrNot;
 import foodelicious.article.model.MsgArea;
+import foodelicious.article.model.ShareArea;
 import foodelicious.article.repository.MsgRepository;
 import foodelicious.member.model.Member;
 
@@ -53,6 +55,20 @@ public class MsgRepositoryImpl implements MsgRepository {
 		AllData.put("articleId", articleId);
 		List<MsgArea> list = namedParameterJdbcTemplate.query(hql, AllData, new MessageRowMapper());
 		return list;
+	}
+
+	@Override
+	public void likeOrNot(Map<String, String> params) {
+		//這邊會有一對一(share_id)和一對多(member_id)
+		//一對多
+		Member member = em.find(Member.class,Long.parseLong(params.get("userId")));
+		//一對一
+		ShareArea shareArea = em.find(ShareArea.class,Integer.parseInt(params.get("articleId")));
+		
+		LikeOrNot likeOrNot = new LikeOrNot();
+		likeOrNot.setMember(member);
+		likeOrNot.setShareArea(shareArea);
+		em.persist(likeOrNot);
 	}
 
 }

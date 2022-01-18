@@ -1,41 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <link rel='stylesheet' href="../../css/websocketstyle.css" />
+
     <style>
         .topDIV {
             margin-top: 16px;
         }
-
+        
         #inputGroupSelect01 {
             width: 1em;
+        }
+        
+        .messageArea {
+            border: 1px rgb(165, 162, 162) solid;
+            width: 100%;
+            height: 415px;
+            padding: 10px;
+            border-radius: 10px;
         }
     </style>
 
     <br />
-
-   
-
-
-    <div class="container-fluid row">
-         <div class="row" id="rowSelect"> 
-            <!--版面配置左方-->
-            <div class="col-12 col-md-1">111111</div>
-
-            <div class="col-12 col-md-9">
-                <div class="w-50 p-3 input-group mb-3">
-                    <select class="w-0 form-select dropdown-toggle" id="clasify">
-                        <option selected>全部文章</option>
-                        <option>廚具開箱</option>
-                        <option>食譜分享</option>
-                    </select> <input type="text" class="form-control" aria-label="Text input with dropdown button"
-                        id="titleKeyWord">
-                    <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
-                </div>
-
+    <div id="liveAlertPlaceholder"></div>
+    <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
+        <select class="btn btn-outline-secondary dropdown" id="clasify">
+            <option selected>全部文章</option>
+            <option>廚具開箱</option>
+            <option>食譜分享</option>
+        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
+        <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-2">
+                <!--版面配置左方-->
+            </div>
+            <div class="col-12 col-md-6">
 
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active"
-                                aria-current="page">全部文章</button></li>
+                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page">全部文章</button></li>
                         <li class="nav-item"><button id="navKitchenware" type="button" class="nav-link">廚具開箱</button>
                         </li>
                         <li class="nav-item"><button id="navRecipe" type="button" class="nav-link">食譜分享</button></li>
@@ -47,25 +49,40 @@
                     <tbody id="articleArea">
                     </tbody>
                 </table>
-
             </div>
-            <div class="col">
-                1111
+            <!--聊天室區域-->
+            <div class="col" id="messageDIV" style="visibility:hidden ">
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="sendToChatRoom2">傳送</button>
+                </div>
+                <div class="messageArea">
+
+                </div>
             </div>
-
-
-
-         </div> 
+        </div>
 
     </div>
 
     <nav aria-label="Page navigation example ">
         <ul id="page" class="pagination justify-content-center"></ul>
     </nav>
-    <script src="/websocket/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/websocket/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/js/sockjs.min.js"></script>
+    <script src="/js/stomp.min.js"></script>
     <script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
+
     <script>
+        //websocket設定
+        let stompClient = null;
+        let webSocketUrl = "http://" + window.location.host + '/chatting';
+        // 聊天訊息輸入區
+        let inputMessageArea = null;
+        //傳送訊息用
+        let btnSendToChatRoom2 = null;
+        //聊天室內容
+        let messageData = "";
+
         //使用者ID
         let UserId;
         //將值傳到全域
@@ -81,16 +98,29 @@
         //設定結束編號
         //let endItem = maxItems;
         let endItem;
-        searchShareDate("/totalArticleData", "GET");
+        //螢幕載入時 先執行的區域
+        window.addEventListener('load', function() {
+            document.getElementById("messageDIV").style.visibility = 'hidden';
+            searchShareDate("/totalArticleData", "GET");
+        })
+
+
 
         function searchShareDate(url, type) {
+            //輸入聊天訊息區域
+            inputMessageArea = document.getElementById('inputMessageArea');
+            //傳送訊息BTN
+            btnSendToChatRoom2 = document.getElementById('sendToChatRoom2');
             $.ajax({
                 url: url,
                 type: type,
                 contentType: "application/json; charset=utf-8",
-                success: function (articles) {
+                success: function(articles) {
                     ShareData = articles
+
                     UserId = articles.session;
+                    document.getElementById("messageDIV").style.visibility = (UserId != null) ? 'visible' : 'hidden';
+
                     //得到格式：{session: null, title: Array(18)}        
                     //console.log(ShareData)
                     //=================分頁功能================
@@ -109,6 +139,41 @@
                     pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
                     $("#page").html(pageHtml);
 
+                    //======================== websocked ========================
+                    var socket = new SockJS("/chatting");
+                    stompClient = Stomp.over(socket);
+                    stompClient.connect({}, function(frame) {
+                        console.log('Connected: ' + frame);
+                        stompClient.subscribe('/topic/messages', function(messageOutput) {
+                            showMessageOutput(JSON.parse(messageOutput.body));
+                        });
+                    });
+                    inputMessageArea.onkeyup = function() {
+                        if (event.keyCode === 13) {
+                            let text = inputMessageArea.value;
+                            if (text.length > 0) {
+                                //console.log(text.length);
+                                stompClient.send("/app/chat", {}, JSON.stringify({
+                                    'from': articles.userName,
+                                    'text': text
+                                }));
+//                                 messageData += "<p>" + articles.userName + " : " + text + "</p>";
+//                                 $(".messageArea").html(messageData);
+                            }
+                        }
+                    };
+                    btnSendToChatRoom2.onclick = function() {
+                        let text = inputMessageArea.value;
+                        if (text.length > 0) {
+                            //console.log(text.length);
+                            stompClient.send("/app/chat", {}, JSON.stringify({
+                                'from': articles.userName,
+                                'text': text
+                            }));
+//                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
+//                             $(".messageArea").html(messageData);
+                        }
+                    };
                 }
             });
         };
@@ -138,13 +203,13 @@
         }
 
         //綁定click事件
-        $("#page").on("click", ".page", function () {
+        $("#page").on("click", ".page", function() {
             //alert(ShareData);
             nowPage = ($(this).prop("id")) * 1; //強制轉成數字型態
             $(".pageNum").prop("class", "page-item page pageNum")
             $(this).prop("class", "page-item page pageNum active")
-            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
-            //恢復上、下頁的功能
+                // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+                //恢復上、下頁的功能
             $(".previous").prop("class", "page-item previous");
             $(".next").prop("class", "page-item next");
             // alert("nowPage："+nowPage+"maxPage："+maxPage);
@@ -165,7 +230,7 @@
             showData(startItem, endItem);
         });
         //=======上一頁設定========
-        $("#page").on("click", ".previous", function () {
+        $("#page").on("click", ".previous", function() {
 
             //恢復下一頁的功能
             $(".next").prop("class", "page-item next");
@@ -189,7 +254,7 @@
         });
 
         //========下一頁設定============
-        $("#page").on("click", ".next", function () {
+        $("#page").on("click", ".next", function() {
 
             //恢復上一頁的功能
             $(".previous").prop("class", "page-item previous");
@@ -225,14 +290,16 @@
                 $.ajax({
                     url: "/deleteData/" + id,
                     type: "DELETE",
-                    success: function () {
-                        searchShareDate("/totalArticleData");
+                    success: function() {
+                        searchShareDate("/totalArticleData", "GET");
                     }
                 })
+
+                //window.location.href = "/goShareArea";
             }
         }
         //上面分類選擇器
-        $("#navTotal").click(function () {
+        $("#navTotal").click(function() {
             searchShareDate("/totalArticleData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -240,7 +307,7 @@
             $("#navKitchenware").prop("class", "nav-link")
             $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navKitchenware").click(function () {
+        $("#navKitchenware").click(function() {
             searchShareDate("/totalKitchenwareData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -248,7 +315,7 @@
             $("#navKitchenware").prop("class", "nav-link active")
             $("#navRecipe").prop("class", "nav-link")
         })
-        $("#navRecipe").click(function () {
+        $("#navRecipe").click(function() {
             searchShareDate("/totalRecipeData", "GET");
             nowPage = 0;
             startItem = 0;
@@ -260,29 +327,40 @@
 
     <script>
         //==================模糊搜尋==================
-        $("#articleSearch").on("click", function () {
+        var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+        var alertTrigger = document.getElementById('articleSearch')
+
+        $("#articleSearch").on("click", function() {
             let clasify = $("#clasify").val();
             //console.log(clasify)
             let titleKeyWord = $("#titleKeyWord").val()
-            //console.log(titleKeyWord)
+                //console.log(titleKeyWord.length == 0)
 
-            //searchShareDate("/fuzzySearch/" + clasify + "/" + titleKeyWord, "GET")
+            if (titleKeyWord == "" || titleKeyWord.length == 0) {
+                //console.log("請輸入資料喔")
+                alertMsg('搜尋內容不能空白喔', 'success')
+                return;
+            } else {
+                //document.createElement('div').innerHTML="";
+                $("#liveAlertPlaceholder").html("");
+            }
+
             let fuzzySearch = {
                 "clasify": clasify,
                 "AssociateString": titleKeyWord
             }
-            console.log(fuzzySearch)
+//             console.log(fuzzySearch)
 
             $.ajax({
                 url: "/fuzzySearch/" + clasify + "/" + titleKeyWord,
                 type: "GET",
                 //data: JSON.stringify(fuzzySearch),
                 contentType: "application/json; charset=utf-8",
-                success: function (articles) {
+                success: function(articles) {
                     ShareData = articles
-                    //得到格式：{session: null, title: Array(18)}        
-                    //console.log(ShareData)
-                    //=================分頁功能================
+                        //得到格式：{session: null, title: Array(18)}        
+                        //console.log(ShareData)
+                        //=================分頁功能================
                     endItem = (articles.title.length <= 10) ? articles.title.length : 10;
                     //讀回資料時就先顯示
                     showData(startItem, endItem);
@@ -301,9 +379,21 @@
             })
 
         })
-    </script>
-    <!--WebSocket區域-->
-    <script type="text/javascript">
+		//websock顯示資料
+        function showMessageOutput(messageOutput) {
+            let line = "";
+            //JSONData = JSON.stringify(messageOutput);
+//             console.log(JSONData);
+            //line += JSON.stringify(messageOutput) + "\n";
+            //console.log(line);
+            messageData += "<p>" + messageOutput.from + " : " + messageOutput.text + "</p>";
+            $(".messageArea").html(messageData);
+        }
+        //模糊搜尋報錯
+        function alertMsg(message, type) {
+            var wrapper = document.createElement('div')
+            wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
 
-
+            alertPlaceholder.append(wrapper)
+        }
     </script>

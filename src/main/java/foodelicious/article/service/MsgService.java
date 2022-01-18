@@ -11,4 +11,6 @@ public interface MsgService {
 
 	List<MsgArea> useIdFindAllMSG(Integer articleId);
 
+	void likeOrNot(Map<String, String> params);
+
 }
