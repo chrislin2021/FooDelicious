@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import foodelicious.product.model.Product;
 
 @Entity
 @Table(name = "orders_detail")
@@ -29,23 +32,33 @@ public class OrdersDetailBean implements Serializable {
 	@Column(name = "orders_id")
 	private Long ordersId;
 
-	@Column(name = "productDetail")
-	private String productDetail;
+	@Column(name = "product_id")
+	private Long product_id;
+
+	@Column(name = "quantity")
+	private Integer quantity;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "orders_id", insertable = false, updatable = false)
 	private OrdersBean ordersBean;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "product_id", insertable = false, updatable = false)
+	private Product product;
+
 	public OrdersDetailBean() {
 		super();
 	}
 
-	public OrdersDetailBean(Long ordersDetailId, Long ordersId, String productDetail, OrdersBean ordersBean) {
+	public OrdersDetailBean(Long ordersDetailId, Long ordersId, Long product_id, Integer quantity,
+			OrdersBean ordersBean, Product product) {
 		super();
 		this.ordersDetailId = ordersDetailId;
 		this.ordersId = ordersId;
-		this.productDetail = productDetail;
+		this.product_id = product_id;
+		this.quantity = quantity;
 		this.ordersBean = ordersBean;
+		this.product = product;
 	}
 
 	public Long getOrdersDetailId() {
@@ -64,12 +77,20 @@ public class OrdersDetailBean implements Serializable {
 		this.ordersId = ordersId;
 	}
 
-	public String getProductDetail() {
-		return productDetail;
+	public Long getProduct_id() {
+		return product_id;
 	}
 
-	public void setProductDetail(String productDetail) {
-		this.productDetail = productDetail;
+	public void setProduct_id(Long product_id) {
+		this.product_id = product_id;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public OrdersBean getOrdersBean() {
@@ -78,6 +99,14 @@ public class OrdersDetailBean implements Serializable {
 
 	public void setOrdersBean(OrdersBean ordersBean) {
 		this.ordersBean = ordersBean;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 }

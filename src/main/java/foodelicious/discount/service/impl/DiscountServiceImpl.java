@@ -24,8 +24,8 @@ public class DiscountServiceImpl implements DiscountService {
 	}
 
 	@Override
-	public void deleteItem(Long memberId) {
-		discountRepository.deleteById(memberId);
+	public void deleteItem(Long discountId) {
+		discountRepository.deleteById(discountId);
 	}
 
 	@Override

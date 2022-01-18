@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
+import foodelicious.discount.service.DiscountService;
+import foodelicious.member.model.Member;
 import foodelicious.orders.model.OrdersBean;
 import foodelicious.orders.model.OrdersDetailBean;
 import foodelicious.orders.service.OrdersDetailService;
 import foodelicious.orders.service.OrdersService;
+import foodelicious.product.model.ProductService;
 
 @Controller
 public class OrdersController {
@@ -31,14 +34,22 @@ public class OrdersController {
 
 	private OrdersService ordersService;
 
+	private ProductService productService;
+
+	private DiscountService discountService;
+
 	private OrdersDetailService ordersDetailService;
 
-	public OrdersController(HttpSession session, CartService cartService, OrdersService ordersService,
+	public OrdersController(HttpSession session, CartService cartService, OrdersBean ordersBean,
+			OrdersService ordersService, ProductService productService, DiscountService discountService,
 			OrdersDetailService ordersDetailService) {
 		super();
 		this.session = session;
 		this.cartService = cartService;
+		this.ordersBean = ordersBean;
 		this.ordersService = ordersService;
+		this.productService = productService;
+		this.discountService = discountService;
 		this.ordersDetailService = ordersDetailService;
 	}
 
@@ -68,16 +79,14 @@ public class OrdersController {
 	@PostMapping("/ordersDetail/insert")
 	public void ordersDetail(@RequestBody String ordersDetail) {
 
-		OrdersDetailBean ordersDetailBean = new OrdersDetailBean();
-
-		ordersDetailBean.setOrdersId(ordersBean.getOrdersId());
-		ordersDetailBean.setProductDetail(ordersDetail);
-
-		ordersDetailService.insertOrderDetail(ordersDetailBean);
-
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 
 		for (CartBean cart : carts) {
+			OrdersDetailBean ordersDetailBean = new OrdersDetailBean();
+			ordersDetailBean.setOrdersId(ordersBean.getOrdersId());
+			ordersDetailBean.setProduct_id(cart.getProductId());
+			ordersDetailBean.setQuantity(cart.getQuantity());
+			ordersDetailService.insertOrderDetail(ordersDetailBean);
 			cartService.deleteItem(cart.getCartId());
 			session.removeAttribute("discountContent");
 		}
