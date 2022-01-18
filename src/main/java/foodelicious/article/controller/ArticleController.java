@@ -208,11 +208,21 @@ public class ArticleController {
 		return msgService.useIdFindAllMSG(articleId);
 	}
 
-	// 喜歡與否
+	// 喜歡文章
 	@ResponseBody
-	@PostMapping("/likeOrNot")
+	@PostMapping("/likeArticle")
 	public void likeOrNot(@RequestBody Map<String, String> params) {
 		System.out.println("userId：" + params.get("userId"));
 		msgService.likeOrNot(params);
+	}
+	
+	//取消喜歡
+	@ResponseBody
+	@PostMapping("/unlike")
+	public void unlike(@RequestBody Map<String, String> params) {
+		System.out.println("userId：" + params.get("userId"));
+		System.out.println("articleId：" + params.get("articleId"));
+		msgService.unlikeArticle(params);
+		
 	}
 }

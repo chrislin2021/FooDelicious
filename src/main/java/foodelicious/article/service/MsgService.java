@@ -13,4 +13,6 @@ public interface MsgService {
 
 	void likeOrNot(Map<String, String> params);
 
+	void unlikeArticle(Map<String, String> params);
+
 }

@@ -36,4 +36,9 @@ public class MsgServiceImpl implements MsgService {
 		msgRepository.likeOrNot(params);
 	}
 
+	@Override
+	public void unlikeArticle(Map<String, String> params) {
+		msgRepository.unlikeArticle(params);
+	}
+
 }

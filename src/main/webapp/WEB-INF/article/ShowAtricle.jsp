@@ -152,20 +152,23 @@
         <script>
             //按讚事件
             $("#likeBTN").on("click", function() {
-                let LON = {};
-                LON.userId = loginId;
-                LON.articleId = articleId;
-                console.log(LON);
-                $.ajax({
-                    url: "/likeOrNot",
-                    type: "Post",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(LON)
-                })
+                ajaxFunc("/likeArticle", "Post");
             })
 
             //一點也不讚事件
             $("#unlikeBTN").on("click", function() {
-                console.log("一點也不讚")
+                ajaxFunc("/unlike", "Post");
             })
+
+            function ajaxFunc(url, type) {
+                let LON = {};
+                LON.userId = loginId;
+                LON.articleId = articleId;
+                $.ajax({
+                    url: url,
+                    type: type,
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(LON)
+                })
+            }
         </script>

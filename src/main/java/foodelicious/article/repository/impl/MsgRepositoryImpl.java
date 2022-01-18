@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -69,6 +70,21 @@ public class MsgRepositoryImpl implements MsgRepository {
 		likeOrNot.setMember(member);
 		likeOrNot.setShareArea(shareArea);
 		em.persist(likeOrNot);
+	}
+
+	@Override
+	public void unlikeArticle(Map<String, String> params) {
+		String hql = "SELECT id FROM likeOrNot WHERE fk_memberID = :memberID AND fk_articleID = :atricleID";
+		Query query = em.createNativeQuery(hql);
+		query.setParameter("memberID", params.get("userId"));
+		query.setParameter("atricleID", params.get("articleId"));
+		Object id = query.getSingleResult();
+		//Object 轉 Long
+		Long likeID = Long.valueOf(String.valueOf(id));
+//		System.out.println("喜歡編號："+likeID);
+		LikeOrNot unlike = em.find(LikeOrNot.class, likeID);
+		em.remove(unlike);
+		
 	}
 
 }
