@@ -35,7 +35,7 @@ public class MemberController {
 	public String toMemberPage() {
 		return "app.LoginSystem";
 	}
-
+	
 	// GOOGLE登入
 	@PostMapping("/googleLogin")
 	public String googleLoginPage(Member member, @RequestParam String memberMail, HttpSession session) {
@@ -45,15 +45,28 @@ public class MemberController {
 			for (Member members : EMid) {
 				if (members.getMemberMail().equals(memberMail)) {
 					session.setAttribute("userID", members.getMemberId());
+					session.setAttribute("memberId", members.getMemberId());
 					session.setAttribute("userName", members.getMemberName());
+					session.setAttribute("memberMail", members.getMemberMail());
+					session.setAttribute("pwd", members.getPwd());
+					session.setAttribute("memberGender", members.getMemberGender());
+					session.setAttribute("memberBirth", members.getMemberBirth());
+					session.setAttribute("memberDiscountId", members.getMemberDiscountId());
+					session.setAttribute("member_status", members.getMember_status());
+					session.setAttribute("memberCoin", members.getMemberCoin());
+					session.setAttribute("register_date", members.getRegister_date());
+					session.setAttribute("memberPhone", members.getMemberPhone());
+					session.setAttribute("memberAddress", members.getMemberAddress());
+					session.setAttribute("memberPic", members.getMemberPic());
 					break;
 				}
 			}
 			return "app.home";
 		}
-		member.setMemberDiscountId("none");
+		member.setMemberDiscountId("TK888");
 		member.setMemberCoin(10);
 		member.setMember_status("customer");
+		member.setMemberPic("defaultImg.jpg");
 		memberService.save(member);
 		session.setAttribute("memberId", member.getMemberId());
 		return "redirect:/";
@@ -63,5 +76,11 @@ public class MemberController {
 	@GetMapping("/useIdFindEmail/{id}")
 	public String usdIdFindEmail(@PathVariable(value = "id") Long id) {	
 		return memberService.useIdFindEmail(id);
+	}
+	
+	@ResponseBody
+	@GetMapping("/getUserName/{id}")
+	public String getUserName(@PathVariable("id") Long memberId) {
+		return memberService.useIdFindName(memberId);
 	}
 }

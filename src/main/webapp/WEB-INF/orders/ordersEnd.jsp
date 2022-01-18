@@ -14,7 +14,8 @@
 <link href="css/cart.css" rel="stylesheet">
 <link href="css/form-validation.css" rel="stylesheet">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
 	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
 	crossorigin="anonymous">
 <meta charset="UTF-8">
@@ -151,7 +152,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">　購物車</th>
+				<th scope="col">購物車</th>
 				<th scope="col">填寫資料</th>
 				<th scope="col">訂單確認</th>
 			</tr>
@@ -167,7 +168,9 @@
 	<br />
 	<br />
 	<br />
-	<h1 id="center">訂單完成</h1>
+	<h1 id="center">
+		訂單完成！至<a href="/viewOrders">會員中心</a>查詢訂單
+	</h1>
 	<br />
 	<br />
 	<br />

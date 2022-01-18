@@ -31,4 +31,10 @@ public interface ArticleService {
 	void viewNumUpdate(Integer ArticleId);
 
 	String articleContent(Integer id);
+
+	List<ShareArea> findVNAll();
+
+	List<ShareArea> findVNRecipe();
+
+	List<ShareArea> findVNKitchenware();
 }

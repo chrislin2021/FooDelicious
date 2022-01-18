@@ -72,7 +72,7 @@
 
         //載入視窗先執行區域
         window.addEventListener('load', function() {
-            searchShareDate("/totalArticleData", "GET");
+            searchShareDate("/VNArticleData", "GET");
         })
 
         //  searchShareDate方法區域
@@ -102,7 +102,7 @@
         //  showData方法區域
         function showData(startItem, endItem) {
             let ArticleData = "";
-            for (let i = startItem; i < endItem; i++) {
+            for (let i = startItem; i < 5; i++) {
                 ArticleData += "<tr>";
                 ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
                 ArticleData += "<td>" + ShareData.title[i].article_clallify + "</td>";
@@ -114,7 +114,7 @@
 
         //上面分類選擇器
         $("#navTotal").click(function() {
-            searchShareDate("/totalArticleData", "GET");
+            searchShareDate("/VNArticleData", "GET");
             nowPage = 0;
             startItem = 0;
             $("#navTotal").prop("class", "nav-link active")
@@ -122,7 +122,7 @@
             $("#navRecipe").prop("class", "nav-link")
         })
         $("#navKitchenware").click(function() {
-            searchShareDate("/totalKitchenwareData", "GET");
+            searchShareDate("/VNKitchenwareData", "GET");
             nowPage = 0;
             startItem = 0;
             $("#navTotal").prop("class", "nav-link")
@@ -130,7 +130,7 @@
             $("#navRecipe").prop("class", "nav-link")
         })
         $("#navRecipe").click(function() {
-            searchShareDate("/totalRecipeData", "GET");
+            searchShareDate("/VNRecipeData", "GET");
             nowPage = 0;
             startItem = 0;
             $("#navTotal").prop("class", "nav-link")

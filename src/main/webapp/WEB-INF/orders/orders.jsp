@@ -88,9 +88,7 @@
 						href="${contextRoot}/RegisterPage">會員註冊</a></li>
 					<li><a class="dropdown-item"
 						href="${contextRoot}/listAllMembers">修改會員資料(暫放)</a></li>
-					<li>
-						<hr class="dropdown-divider">
-					</li>
+					<li><hr class="dropdown-divider"></li>
 					<li><a class="dropdown-item" href="normallogout">會員登出</a></li>
 				</ul>
 			</div>
@@ -152,7 +150,7 @@
 	<table class="table table align-middle">
 		<thead>
 			<tr>
-				<th scope="col">　購物車</th>
+				<th scope="col">購物車</th>
 				<th scope="col">填寫資料</th>
 				<th scope="col">訂單確認</th>
 			</tr>
@@ -188,6 +186,17 @@
 					</c:forEach>
 					<li class="list-group-item d-flex justify-content-between bg-light">
 						<div class="text-success">
+							<h6 class="my-0">運費：</h6>
+						</div>
+						<c:if test="${priceTotal < 1000}">
+							<span class="text-success">NT$:100元</span>
+						</c:if>
+						<c:if test="${priceTotal >= 1000}">
+							<span class="text-success">NT$:0元</span>
+						</c:if>
+					</li>
+					<li class="list-group-item d-flex justify-content-between bg-light">
+						<div class="text-success">
 							<h6 class="my-0">折扣金額：</h6>
 						</div> <span class="text-success">−NT$:${discountContent}元</span>
 					</li>
@@ -205,7 +214,7 @@
 								class="text-muted">(必填)</span></label><input type="text"
 								class="form-control" id="name" value="${orders.ordersName}"
 								required>
-							<div class="invalid-feedback">請填寫收件人姓名喔！！</div>
+							<div class="validate1 d-none" style="color: red">請填寫收件人姓名喔！！</div>
 						</div>
 
 						<div class="col-sm-6">
@@ -213,7 +222,7 @@
 								class="text-muted">(必填)</span></label><input type="text"
 								class="form-control" id="phone" value="${orders.ordersPhone}"
 								required>
-							<div class="invalid-feedback">請填寫收件人電話喔！！</div>
+							<div class="validate1 d-none" style="color: red">請填寫收件人電話喔！！</div>
 						</div>
 					</div>
 
@@ -222,7 +231,7 @@
 							class="text-muted">(必填)</span></label><input type="text"
 							class="form-control" id="address" value="${orders.ordersAddress}"
 							required>
-						<div class="invalid-feedback">請填寫收件人電話喔！！</div>
+						<div class="validate1 d-none" style="color: red">請填寫收件人地址喔！！</div>
 					</div>
 
 					<hr class="my-4">

@@ -23,4 +23,8 @@ public interface MemberService {
 
 	String useIdFindEmail(Long id);
 
+	String useIdFindName(Long memberId);
+
+	String update(Long memberId, Member member);
+
 }

@@ -31,34 +31,34 @@
 	<div class="sidebar close">
 		<div class="logo-details"></div>
 		<ul class="nav-links">
-			<li><a href="/companyMain2"> <i class='bx bx-user-circle'></i> <span
+			<li><a href="/companyMain"> <i class='bx bx-user-circle'></i> <span
 					class="link_name">管理</span>
 			</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="/companyMain2">管理</a></li>
+					<li><a class="link_name" href="/companyMain">管理</a></li>
 				</ul></li>
 			<li>
 				<div class="iocn-link">
-					<a href="/companyProduct2"> <i class='bx bx-cart'></i> <span
+					<a href="/companyProduct"> <i class='bx bx-cart'></i> <span
 						class="link_name">商品管理</span>
 					</a> <i class='bx bxs-chevron-down arrow'></i>
 				</div>
 				<ul class="sub-menu">
-					<li><a class="link_name" href="/companyProduct2">商品管理</a></li>
-					<li><a href="/companyProduct2">所有商品</a></li>
+					<li><a class="link_name" href="/companyProduct">商品管理</a></li>
+					<li><a href="/companyProduct">所有商品</a></li>
 					<li><a href="/companyProductsAdd">新增商品</a></li>
 
 				</ul>
 			</li>
 			<li>
 				<div class="iocn-link">
-					<a href="#"> <i class='bx bx-book-alt'></i> <span
+					<a href="/companyOrder"> <i class='bx bx-book-alt'></i> <span
 						class="link_name">訂單管理</span>
 					</a> <i class='bx bxs-chevron-down arrow'></i>
 				</div>
 				<ul class="sub-menu">
-					<li><a class="link_name" href="#">訂單管理</a></li>
-					<li><a href="#">所有訂單</a></li>
+					<li><a class="link_name" href="/companyOrder">訂單管理</a></li>
+					<li><a href="/companyOrder">所有訂單</a></li>
 					<li><a href="#">修改訂單</a></li>
 				</ul>
 			</li>
@@ -179,12 +179,12 @@
     	        	success:function(msg){
     	        		alert(msg);
     	        		setTimeout(function(){
-    	     				window.location.href="/companyMain2";
+    	     				window.location.href="/companyMain";
     	     			},1000);
     	        	}, error: function(){
     	        		alert("fail");
     	        		setTimeout(function(){
-    	     				window.location.href="/companyMain2";
+    	     				window.location.href="/companyMain";
     	     			},1000);
     	        	}
     	        })

@@ -23,4 +23,14 @@ public class SearchServiceImpl implements SearchService {
 		return searchRepository.findByProductNameLike("%" + productName + "%");
 	}
 
+	@Override
+	public List<Product> findAll() {
+		return searchRepository.findAll();
+	}
+
+	@Override
+	public Product save(Product product) {
+		return searchRepository.save(product);
+	}
+
 }

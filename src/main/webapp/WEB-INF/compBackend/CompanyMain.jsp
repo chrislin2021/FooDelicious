@@ -24,7 +24,7 @@
 				<div class="row gx-5 gy-3">
 					<div class="col-12 col-lg-9">
 
-						<div>最好給我賣東西喔</div>
+						<div>公司簡介</div>
 					</div>
 					<!--//col-->
 
@@ -113,6 +113,7 @@
 
 </script>
 <script>
+	
 
 	$("#companyDetailUpdate").on("click",function(){
 		let companyId =  $("#companyId").val();
@@ -127,7 +128,7 @@
 		 };
 
 		let detailString = JSON.stringify(updateCompanyDetail);
-		alert(detailString);
+		//alert(detailString);
 		
 		$.ajax({
 		 url:"/companyDetailUpdate/"+companyId,
@@ -140,29 +141,24 @@
 				url:"/companyDetailUpdate/"+companyId,
 				type:"GET",
 				success: function(companyDetails){
-					alert(companyDetails.memberName);
+					//alert(companyDetails.memberName);
 					$("#companyName").val(companyDetails.memberName);
 					$("#companyEmail").val(companyDetails.memberMail);
 					$("#companyPhone").val(companyDetails.memberPhone);
 					$("#companyAddress").val(companyDetails.memberAddress);
-					window.location.href="/companyMain2";
 					
-					//無法在頁面顯示更新的資料 但資料庫有更新
+					window.location.href="/companyMain";
+				
 				}
-			})
-		 }
+			});
+
+			
+		  }
 		
-	})
-
-
-		 
+		})
+	 
 		
 })
-
-
-
-
-
 
 
 

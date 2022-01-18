@@ -54,6 +54,14 @@ public class MainUpdateController {
 			session.setAttribute("userName", memberService.findByMemberId(EMid).getMemberName());
 			session.setAttribute("memberPhone",memberService.findByMemberId(EMid).getMemberPhone());
 			session.setAttribute("memberAddress", memberService.findByMemberId(EMid).getMemberAddress());
+			session.setAttribute("memberPic", memberService.findByMemberId(EMid).getMemberPic());
+			session.setAttribute("memberMail", memberService.findByMemberId(EMid).getMemberMail());
+			session.setAttribute("memberGender", memberService.findByMemberId(EMid).getMemberGender());
+			session.setAttribute("memberBirth", memberService.findByMemberId(EMid).getMemberBirth());
+			session.setAttribute("memberDiscountId", memberService.findByMemberId(EMid).getMemberDiscountId());
+			session.setAttribute("member_status", memberService.findByMemberId(EMid).getMember_status());
+			session.setAttribute("memberCoin", memberService.findByMemberId(EMid).getMemberCoin());
+			session.setAttribute("register_date", memberService.findByMemberId(EMid).getRegister_date());
 //			System.out.println("userName：" + session.getAttribute("userName"));
 //			System.out.println("EMid：" + session.getAttribute("userID"));
 

@@ -7,10 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import foodelicious.cart.model.CartBean;
-import foodelicious.cart.service.CartService;
+import foodelicious.compbackend.model.CBKDetailDaoInterface;
 import foodelicious.compbackend.model.CBKOrderDaoInterface;
+import foodelicious.compbackend.model.CBKProblemDaoInterface;
 import foodelicious.compbackend.model.CBKProductDaoInterface;
+import foodelicious.compbackend.model.ProblemsBean;
+import foodelicious.member.model.Member;
+import foodelicious.orders.model.OrdersDetailBean;
 import foodelicious.product.model.Product;
 
 @Service
@@ -20,33 +23,38 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 	private CBKProductDaoInterface cbkProductDaoInterface;
 
 	private CBKOrderDaoInterface cbkOrderDaoInterface;
+	
+	private CBKDetailDaoInterface cbkDetailDaoInterface;
 
-	private CartService cartService;
+	private CBKProblemDaoInterface cbkProblemDaoInterface;
 
 	public CompanyBackEndService(final CBKProductDaoInterface cbkProductDaoInterface,
-			CBKOrderDaoInterface cbkOrderDaoInterface, CartService cartService) {
+			CBKOrderDaoInterface cbkOrderDaoInterface,CBKDetailDaoInterface cbkDetailDaoInterface,CBKProblemDaoInterface cbkProblemDaoInterface) {
 		this.cbkProductDaoInterface = cbkProductDaoInterface;
 		this.cbkOrderDaoInterface = cbkOrderDaoInterface;
-		this.cartService = cartService;
+		this.cbkDetailDaoInterface = cbkDetailDaoInterface;
+		this.cbkProblemDaoInterface = cbkProblemDaoInterface;
 	}
+	
+//============Product Dao============================================
 
+	@Override
 	public List<Product> getAllProducts(HttpSession session) {
-		List<Product> products = cbkProductDaoInterface.getAllProducts(session);
-		return products;
+		
+		return cbkProductDaoInterface.getAllProducts(session);
+	}
+	
+	@Override
+	public String deleteProduct(Long productId) {
+		return cbkProductDaoInterface.deleteProduct(productId);
 	}
 
 	@Override
 	public Product findByProductId(Long productId) {
-		Product product = cbkProductDaoInterface.findByProductId(productId);
-		return product;
+		
+		return cbkProductDaoInterface.findByProductId(productId);
 	}
-
-	@Override
-	public List<Product> findByType(Integer categories, Long productCompanyId) {
-		List<Product> catProd = cbkProductDaoInterface.findByType(categories, productCompanyId);
-		return catProd;
-	}
-
+	
 	@Override
 	public String updateProduct(Long productId, Product product) {
 
@@ -54,19 +62,63 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 	}
 
 	@Override
-	public String deleteProduct(Long productId) {
-
-		List<CartBean> carts = cartService.selectAll();
-
-		for (CartBean cart : carts) {
-			if (cart.getProductId() == productId) {
-				cartService.deleteProduct(productId);
-				break;
-			}
-		}
-
-		return cbkProductDaoInterface.deleteProduct(productId);
-
+	public List<Product> findByType(Integer categories, Long productCompanyId) {
+		 
+		return cbkProductDaoInterface.findByType(categories, productCompanyId);
+	}
+	
+	@Override
+	public List<Product> findByName(String productName) {
+		
+		return cbkProductDaoInterface.findByName(productName);
 	}
 
+	@Override
+	public List<Product> findByNameAndType(String productName, Integer categories, Long productCompanyId) {
+		
+		return cbkProductDaoInterface.findByNameAndType(productName, categories, productCompanyId);
+	}
+	
+	@Override
+	public boolean saveProduct(Product product) {
+		
+		return cbkProductDaoInterface.saveProduct(product);
+	}
+	
+	
+//=============Detail Dao============================================================
+	
+	
+	@Override
+	public Member findByCompanyId(Long companyId) {
+		
+		return cbkDetailDaoInterface.findByCompanyId(companyId);
+	}
+
+	@Override
+	public String updateCompanyDetail(Long companyId, Member company) {
+		
+		return cbkDetailDaoInterface.updateCompanyDetail(companyId, company);
+	}
+	
+	
+//============Problem Dao==========================================================================
+	
+	@Override
+	public String insertProblem(ProblemsBean problem) {
+	
+		return cbkProblemDaoInterface.insertProblem(problem);
+	}
+	
+//============Order Dao=========================================================================
+
+	@Override
+	public List<OrdersDetailBean> findByCompanyProductId(Long productCompanyId) {
+		
+		return cbkOrderDaoInterface.findByCompanyProductId(productCompanyId);
+	}
+
+	
+
+	
 }

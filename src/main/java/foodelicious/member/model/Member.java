@@ -12,25 +12,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import foodelicious.article.model.LikeOrNot;
+import foodelicious.article.model.MsgArea;
 import foodelicious.article.model.ShareArea;
 import foodelicious.cashflow.model.CashflowAddressBean;
-import foodelicious.product.model.Product;
 
 @Entity(name = "member_data2")
 @Table(name = "member_data2")
@@ -41,7 +38,7 @@ public class Member implements Serializable {
 	public static final String PERSONID_REG = "^[A-Z]{1}[1-2]{1}[0-9]{8}$";
 	public static final String Password_REG = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*\\W).{8,}$";
 	public static final String NAME_REG = "^[\u4E00-\u9FA5]{2,}$";
-	
+
 	@Id
 	@Column(name = "member_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,30 +49,25 @@ public class Member implements Serializable {
 	private String memberMail;
 
 	@Column(name = "pwd")
-	//@Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
+	// @Pattern(regexp = Password_REG, message = "請輸入至少8個字包含一個英文及數字")
 	private String pwd;
 
 	@Column(name = "member_name")
-//	@NotBlank(message = "姓名欄不可為空白")
 //	@Pattern(regexp = NAME_REG, message = "請輸入2個字以上繁體中文")
 	private String memberName;
 
 	@Column(name = "member_gender")
-//	@NotBlank(message = "請選擇性別")
 	private String memberGender;
 
 	@Column(name = "member_birth")
-//	@NotBlank(message = "生日不得空白")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private String memberBirth;
 
 	@Column(name = "member_phone")
-//	@NotBlank(message = "手機號碼不得空白")
 	@Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤")
 	private String memberPhone;
 
 	@Column(name = "member_address")
-//	@NotBlank(message = "地址不得空白")
 	private String memberAddress;
 
 	@Column(name = "member_discount_id")
@@ -92,17 +84,27 @@ public class Member implements Serializable {
 	@Column(name = "register_date")
 	private Date register_date;
 	
+	@Column(name = "member_pic")
+	private String memberPic;
+	
+
 	// 與CashflowAddressBean是一對多關係
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
-	private Set<CashflowAddressBean> CashflowAddressBeans = new LinkedHashSet<CashflowAddressBean>();	
-
+	private Set<CashflowAddressBean> CashflowAddressBeans = new LinkedHashSet<CashflowAddressBean>();
 
 	// 與ShareArea是一對多關係
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
 	private Set<ShareArea> shareAreas = new LinkedHashSet<ShareArea>();
 
+	// 與MsgArea是一對多關係
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<MsgArea> msgAreas = new LinkedHashSet<MsgArea>();
 	
-	//Join Product table
+	// 與LikeOrNot是一對多關係
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<LikeOrNot> likeOrNots = new LinkedHashSet<LikeOrNot>();
+
+	// Join Product table
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
 //	private Set<Product> products = new LinkedHashSet<Product>();
 
@@ -112,22 +114,16 @@ public class Member implements Serializable {
 			register_date = new Date();
 		}
 	}
-	
-	
 
 	public Member(@Email String memberMail) {
 		super();
 		this.memberMail = memberMail;
 	}
 
-
-
 	public Member(String memberMail, String pwd) {
 		this.memberMail = memberMail;
 		this.pwd = pwd;
 	}
-	
-
 
 	public Member(@Email String memberMail, String memberName, Date register_date) {
 		super();
@@ -140,12 +136,12 @@ public class Member implements Serializable {
 
 	}
 
-	public Member(Long memberId, @Email String memberMail,
-			@Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*\\W).{8,}$", message = "請輸入至少8個字包含一個英文及數字") @NotBlank(message = "密碼不得空白") String pwd,
-			@Pattern(regexp = "^[一-龥]{2,}$", message = "請輸入2個字以上繁體中文") @Size(min = 2, max = 255, message = "名子不得低於兩個字") String memberName,
-			String memberGender, String memberBirth,
-			@Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤") String memberPhone, String memberAddress,
-			String memberDiscountId, Integer memberCoin, String member_status, Date register_date) {
+
+
+	public Member(Long memberId, @Email String memberMail, String pwd, String memberName, String memberGender,
+			String memberBirth, @Pattern(regexp = "^09[0-9]{8}$", message = "手機號碼格式有誤") String memberPhone,
+			String memberAddress, String memberDiscountId, Integer memberCoin, String member_status, Date register_date,
+			String memberPic, Set<CashflowAddressBean> cashflowAddressBeans, Set<ShareArea> shareAreas) {
 		super();
 		this.memberId = memberId;
 		this.memberMail = memberMail;
@@ -159,7 +155,12 @@ public class Member implements Serializable {
 		this.memberCoin = memberCoin;
 		this.member_status = member_status;
 		this.register_date = register_date;
+		this.memberPic = memberPic;
+		CashflowAddressBeans = cashflowAddressBeans;
+		this.shareAreas = shareAreas;
 	}
+
+
 
 	public Long getMemberId() {
 		return memberId;
@@ -277,13 +278,49 @@ public class Member implements Serializable {
 		return NAME_REG;
 	}
 
+	public String getMemberPic() {
+		return memberPic;
+	}
+
+	public void setMemberPic(String memberPic) {
+		this.memberPic = memberPic;
+	}
+
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", memberMail=" + memberMail + ", pwd=" + pwd + ", memberName="
-				+ memberName + ", memberGender=" + memberGender + ", memberBirth=" + memberBirth + ", memberPhone="
-				+ memberPhone + ", memberAddress=" + memberAddress + ", memberDiscountId=" + memberDiscountId
-				+ ", memberCoin=" + memberCoin + ", member_status=" + member_status + ", register_date=" + register_date
-				+ "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Member [memberId=");
+		builder.append(memberId);
+		builder.append(", memberMail=");
+		builder.append(memberMail);
+		builder.append(", pwd=");
+		builder.append(pwd);
+		builder.append(", memberName=");
+		builder.append(memberName);
+		builder.append(", memberGender=");
+		builder.append(memberGender);
+		builder.append(", memberBirth=");
+		builder.append(memberBirth);
+		builder.append(", memberPhone=");
+		builder.append(memberPhone);
+		builder.append(", memberAddress=");
+		builder.append(memberAddress);
+		builder.append(", memberDiscountId=");
+		builder.append(memberDiscountId);
+		builder.append(", memberCoin=");
+		builder.append(memberCoin);
+		builder.append(", member_status=");
+		builder.append(member_status);
+		builder.append(", register_date=");
+		builder.append(register_date);
+		builder.append(", CashflowAddressBeans=");
+		builder.append(CashflowAddressBeans);
+		builder.append(", shareAreas=");
+		builder.append(shareAreas);
+		builder.append("]");
+		return builder.toString();
 	}
+
+
 
 }

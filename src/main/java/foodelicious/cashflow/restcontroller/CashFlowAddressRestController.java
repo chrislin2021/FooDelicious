@@ -3,30 +3,31 @@ package foodelicious.cashflow.restcontroller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Map;
 import java.util.Optional;
+=======
+>>>>>>> c488114e5cd66dd286f2cb06086b448a05296ae2
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
-import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+=======
+>>>>>>> c488114e5cd66dd286f2cb06086b448a05296ae2
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,18 +35,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import ecpay.payment.integration.AllInOne;
-import ecpay.payment.integration.domain.AioCheckOutALL;
-import foodelicious.cart.model.CartBean;
 import foodelicious.cashflow.model.CashflowAddressBean;
-import foodelicious.cashflow.model.EcPayBean;
 import foodelicious.cashflow.service.CashflowAddressService;
 import foodelicious.mail.service.MailService;
 import foodelicious.member.model.Member;
 import foodelicious.member.repository.MemberRepositoryImpl;
-import foodelicious.member.service.MemberService;
-import foodelicious.orders.model.OrdersBean;
-import foodelicious.orders.service.OrdersService;
 
 @RestController
 @Transactional

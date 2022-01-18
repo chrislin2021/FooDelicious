@@ -21,8 +21,13 @@ public interface CBKProductDaoInterface {
 	List<Product> findByType(Integer category, Long productCompanyId);
 
 	
-	//using search box
+	// 商品分類搜尋 (using search box)
 	List<Product> findByName(String productName);
+
+	List<Product> findByNameAndType(String productName, Integer categories, Long productCompanyId);
+
+	//insert 商品
+	boolean saveProduct(Product product);
 
 	
 

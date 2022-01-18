@@ -85,9 +85,10 @@ public class MemberCreateController {
 			return "app.RegisterPage";
 		}
 		
-		member.setMemberDiscountId("none");
+		member.setMemberDiscountId("TK888");
 		member.setMemberCoin(10);
 		member.setMember_status("customer");
+		member.setMemberPic("defaultImg.jpg");
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		member.setRegister_date(now);
 		if(!result.hasErrors()) {

@@ -74,7 +74,7 @@
 					type : "DELETE",
 					success : function() {
 						alert("刪除成功");
-						window.location.href = "/companyProduct2";
+						window.location.href = "/companyProduct";
 					},
 					error : function() {
 						alert("失敗");
@@ -144,7 +144,7 @@
 				 //將資料存到localStorage，給另一個頁面使用
 				 localStorage.setItem("comProductData",productString);
 				 //跳轉頁面
-				 window.location.href = "/companyProduct2/update";
+				 window.location.href = "/companyProduct/update";
 				 },
 				 error : function() {
 						alert("fail");
@@ -384,7 +384,7 @@
     	//alert(dataSource[0].productCategories);
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
-            txt += "<td class='align-middle'>"+ (i+1)+"</td>"
+            txt += "<td class='align-middle'>"+ dataSource[i].productId+"</td>"
             let cate = dataSource[i].productCategories;
             let type = "";
             if(cate == 0){

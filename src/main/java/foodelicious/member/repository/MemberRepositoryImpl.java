@@ -51,25 +51,53 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	@Override
 	public Member findByMemberMail(String memberMail) {
-		String hql ="FROM member_data2 m WHERE m.memberMail = :mail";
-		List<Member> members = em.createQuery(hql, Member.class)
-				.setParameter("mail", memberMail)
-		.getResultList();
-		
-		if(members.size() > 0) {
+		String hql = "FROM member_data2 m WHERE m.memberMail = :mail";
+		List<Member> members = em.createQuery(hql, Member.class).setParameter("mail", memberMail).getResultList();
+
+		if (members.size() > 0) {
 			System.out.println(members.get(0));
 			return members.get(0);
-			
-		}else {
+
+		} else {
 			return null;
 		}
 	}
 
 	@Override
 	public String useIdFindEmail(Long id) {
-		Member member = em.find(Member.class, id);		
+		Member member = em.find(Member.class, id);
 		return member.getMemberMail();
 	}
-	
-	
+
+	@Override
+	public String useIdFindName(Long id) {
+		Member member = em.find(Member.class, id);
+		return member.getMemberName();
+	}
+
+	public String update(Long memberId, Member member) {
+		Member updatedMemberDetail = jpaa.findById(memberId).orElse(null);
+
+		if (updatedMemberDetail != null) {
+			updatedMemberDetail.setMemberId(member.getMemberId());
+			updatedMemberDetail.setMemberMail(member.getMemberMail());
+			updatedMemberDetail.setPwd(member.getPwd());
+			updatedMemberDetail.setMemberName(member.getMemberName());
+			updatedMemberDetail.setMemberBirth(member.getMemberBirth());
+			updatedMemberDetail.setMemberPhone(member.getMemberPhone());
+			updatedMemberDetail.setMemberAddress(member.getMemberAddress());
+
+			updatedMemberDetail.setMemberDiscountId(updatedMemberDetail.getMemberDiscountId());
+			updatedMemberDetail.setMember_status(updatedMemberDetail.getMember_status());
+			updatedMemberDetail.setMemberCoin(updatedMemberDetail.getMemberCoin());
+			updatedMemberDetail.setRegister_date(updatedMemberDetail.getRegister_date());
+
+			jpaa.save(updatedMemberDetail);
+
+			return "更新資料成功";
+		} else {
+			return "更新資料失敗";
+		}
+	}
+
 }
