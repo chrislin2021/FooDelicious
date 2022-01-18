@@ -187,7 +187,7 @@
 
 	<definition name="app.CashFlowAddress"
 		extends="app.default">
-		<put-attribute name="content" value="/WEB-INF/cashflow/CashFlowAddress.jsp" />
+		<put-attribute name="content" value="/WEB-INF/cashflow/CashFlowAddress2.jsp" />
 	</definition>
 	
 <!-- 	<definition name="app.CashFlowAddress" -->

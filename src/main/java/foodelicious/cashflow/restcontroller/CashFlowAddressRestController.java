@@ -72,7 +72,7 @@ public class CashFlowAddressRestController {
 		cashflowAddressService.pushAddress(params, id);
 	}
 
-	@ResponseBody
+	
 	@GetMapping(path = "/CashflowAddress")
 	public Map<String, Object> useIdfindAddress(Model m) {
 		Map<String, Object> data = new HashMap<>();

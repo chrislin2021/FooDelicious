@@ -7,50 +7,49 @@
 
 
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/jquery-3.6.0.min.js"></script>
 <script src="https://demeter.5fpro.com/tw/zipcode-selector.js"></script>
 <script src="../../js/cashflow.js"></script>
 <script src="../../js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+	crossorigin="anonymous"></script>
 </head>
 
 
 <body>
-	<div align="center">
+	<div>
 		<h2>您的寄貨資訊</h2>
 		<table class="table">
 			<thead>
 				<div class="input-group mb-3">
-					<span class="input-group-text">會員編號：</span>
-					
+					<span class="input-group-text" id="">會員編號：</span> <input
+						type="text" class="form-control" id="memberId">
+				</div>
 				<div class="input-group mb-3">
-					<span class="input-group-text">會員帳號：</span>
-
+					<span class="input-group-text">會員帳號：</span> <input type="text"
+						class="form-control" id="memberMail">
+				</div>
 				<div class="input-group mb-3">
-					<span class="input-group-text">會員姓名：</span>
-
+					<span class="input-group-text">會員姓名：</span> <input type="text"
+						class="form-control" id="memberName">
+				</div>
 				<div class="input-group mb-3">
-					<span class="input-group-text">會員地址：</span>
-
+					<span class="input-group-text">會員地址：</span> <input type="text"
+						class="form-control" id="memberAddress">
+				</div>
 				<div class="input-group mb-3">
-					<span class="input-group-text">出貨地址：</span>
-			
-			<tbody id="addrList">
-			<c:forEach var="data" items="${data}">
-				<tr  align="center">
-					<td>${data.memberId}</td>
-					<td>${data.memberName}</td>
-					<td>${data.memberMail}</td>
-					<td>${data.memberAddress}</td>
-					<td>${data.title[i].commonAddress}</td>
-				</tr>
-			</c:forEach>
-			</tbody>
-			
+					<span class="input-group-text">出貨地址：</span> <input type="text"
+						class="form-control" id="commonAddress">
+				</div>
 		</table>
 
 		<button type="submit" class="btn btn-outline-primary" id='sendData'>確認更改</button>

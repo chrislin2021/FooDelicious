@@ -112,25 +112,20 @@ function listComfirm() {
 	})
 }
 
-function showList() {
+window.onload = function() {
 	$.ajax({
-		url: "/address/CashflowAddress",
+		url: "/CashflowAddress",
 		type: "GET",
 		contentType: "application/json; charset=utf-8",
 		success: function(address) {
-			alert(address);
-			alert(address.size())
-			for (let i = 0; i < address.size(); i++) {
-				$("#addrList").empty();
-				str += '<tr>';
-				str += '<td>' + address.title[i].commonAddress + '</td>';
-				str += '<td>' + address.memberId + '</td>';
-				str += '<td>' + address.memberName + '</td>';
-				str += '<td>' + address.memberMail + '</td>';
-				str += '<td>' + address.memberAddress + '</td>';
-				str += '</tr>';
+			let str = "";
+			$("#memberMail").val(address.memberMail);
+			$("#memberName").val(address.userName);
+			$("#memberAddress").val(address.memberAddress);
+			for (let i = 0; i < address.title.length; i++) {
+				$("#memberId").val(address.title[i].memberId);
+				$("#commonAddress").val(address.title[i].commonAddress);
 			}
-			$("#addrList").html(str);
 		}
 	})
 }
