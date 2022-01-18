@@ -35,7 +35,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/member/memberIndex.jsp" />
 	</definition>
-	
+
 	<definition name="app.memberIndex1" extends="app.default">
 		<put-attribute name="content"
 			value="/WEB-INF/member/memberIndex1.jsp" />
@@ -130,6 +130,12 @@
 		extends="app.BackendDefault">
 		<put-attribute name="content"
 			value="/WEB-INF/backend/BackendMain.jsp" />
+	</definition>
+
+	<definition name="app.HesitantProduct"
+		extends="app.BackendDefault">
+		<put-attribute name="content"
+			value="/WEB-INF/cart/hesitantProduct.jsp" />
 	</definition>
 
 	<definition name="app.ShoppingCart"

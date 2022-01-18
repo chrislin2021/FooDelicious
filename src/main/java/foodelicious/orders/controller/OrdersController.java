@@ -103,12 +103,14 @@ public class OrdersController {
 					product.setProductStatus(product.getProductStatus());
 					product.setProductKeywords(product.getProductKeywords());
 					product.setProductInsertDate(product.getProductInsertDate());
-					product.setProductSalesFigures(product.getProductSalesFigures());
+					product.setProductSalesFigures(product.getProductSalesFigures() + cart.getQuantity());
 					product.setProductCompanyId(product.getProductCompanyId());
 					searchService.save(product);
 				}
 			}
-			discountService.deleteItem((Long) session.getAttribute("discountId"));
+			if ((Long) session.getAttribute("discountId") != null) {
+				discountService.deleteItem((Long) session.getAttribute("discountId"));
+			}
 			cartService.deleteItem(cart.getCartId());
 			session.removeAttribute("discountContent");
 		}
