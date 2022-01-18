@@ -289,4 +289,14 @@
 			value="/WEB-INF/backend/reportPage/PopularArticles.jsp" />
 	</definition>
 
+	<definition name="app.default3"
+				template="/WEB-INF/layout/default3.jsp">
+		<put-attribute name="title" value="spring boot demo" />
+	</definition>
+
+	<definition name="app.index" extends="app.default3">
+		<put-attribute name="content"
+					   value="/WEB-INF/homepage/index.jsp" />
+	</definition>
+
 </tiles-definitions>

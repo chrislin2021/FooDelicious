@@ -43,6 +43,17 @@ public class BkProduct implements Serializable {
     @Column(name = "product_insert_date")
     private Date productInsertDate;
 
+    @Column(name = "product_pics")
+    private String productImg;
+
+    public String getProductImg() {
+        return productImg;
+    }
+
+    public void setProductImg(String productImg) {
+        this.productImg = productImg;
+    }
+
     public Integer getProductId() {
         return productId;
     }

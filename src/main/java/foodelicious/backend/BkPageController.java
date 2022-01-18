@@ -80,4 +80,9 @@ public class BkPageController {
 	public String BackendReportCart() {
 		return "app.HesitantProduct";
 	}
+
+	@GetMapping("/backend/index")
+	public String index(){
+		return "app.index";
+	}
 }
