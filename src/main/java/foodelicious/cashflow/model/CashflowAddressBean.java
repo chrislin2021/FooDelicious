@@ -24,6 +24,9 @@ public class CashflowAddressBean implements Serializable{
 	//member_id
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="member_id")
+	private Long memberId;
+	
 	@Column(name = "address_id")
 	private Long addressId;
 	
@@ -34,7 +37,8 @@ public class CashflowAddressBean implements Serializable{
 	//member 新增的常用住址
 	@Column(name = "common_address")
 	private String commonAddress;
-		
+	
+	@Transient
 	@Column(name = "fk_member_id",insertable = false, updatable = false)
 	private Long fkmemberid;
 	
@@ -43,9 +47,10 @@ public class CashflowAddressBean implements Serializable{
 	private Member member;
 	
 	
-	public CashflowAddressBean(Long addressId, String memberAddress, String commonAddress, Long fkmemberid,
-			Member member) {
+	public CashflowAddressBean(Long memberId,Long addressId, String memberAddress, String commonAddress,
+			Long fkmemberid,Member member) {
 		super();
+		this.memberId = memberId;
 		this.addressId = addressId;
 		this.memberAddress = memberAddress;
 		this.commonAddress = commonAddress;
@@ -54,6 +59,14 @@ public class CashflowAddressBean implements Serializable{
 	}
 
 	public CashflowAddressBean() {		
+	}
+
+	public Long getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(Long memberId) {
+		this.memberId = memberId;
 	}
 
 	public Long getAddressId() {
@@ -97,11 +110,11 @@ public class CashflowAddressBean implements Serializable{
 	}
 	
 
-	@Override
-	public String toString() {
-		return "CashflowAddressBean [addressId=" + addressId + ", memberAddress=" + memberAddress + ",commonAddress=" 
-				+ commonAddress + ", fkmemberid=" + fkmemberid + ", member=" + member + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "CashflowAddressBean [addressId=" + addressId + ", memberAddress=" + memberAddress + ",commonAddress=" 
+//				+ commonAddress + ", fkmemberid=" + fkmemberid + ", member=" + member + "]";
+//	}
 	
 	
 }

@@ -1,7 +1,9 @@
 package foodelicious.cashflow.restcontroller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -21,9 +23,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -43,7 +49,7 @@ import foodelicious.orders.service.OrdersService;
 
 @RestController
 @Transactional
-public class CashFlowAddressRestController{
+public class CashFlowAddressRestController {
 
 	@PersistenceContext
 	EntityManager em;
@@ -52,134 +58,55 @@ public class CashFlowAddressRestController{
 	private CashflowAddressService cashflowAddressService;
 	private MailService mailService;
 	private MemberRepositoryImpl memberRepositoryImpl;
+	private MemberService memberService;
 
 	public CashFlowAddressRestController(CashflowAddressService cashflowAddressService,
-			MemberRepositoryImpl memberRepositoryImpl, MailService mailService, HttpSession session) {
+			MemberRepositoryImpl memberRepositoryImpl, MemberService memberService, MailService mailService,
+			HttpSession session) {
 
 		this.cashflowAddressService = cashflowAddressService;
 		this.mailService = mailService;
 		this.memberRepositoryImpl = memberRepositoryImpl;
 		this.session = session;
+		this.memberService = memberService;
 	}
 
-//	@GetMapping("/address")
-//	public String address() {
-//		
-//		if (session.getAttribute("userID") != null) {
-//			List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
-//			
-//			session.setAttribute("commonAddress", CommonAddress)
-//			}
-//	}
+	@PostMapping("/Address.controller")
+	public void postAddress(@RequestBody Map<String, String> params, HttpSession session) {
 
-	@ResponseBody
-	@GetMapping(path = "/address/CashflowAddress")
-	public HashMap<Object, Object> CashFlowAddressTable(Model m, Long productId, Long memberId, HttpSession session) {
-		HashMap<Object, Object> table = new HashMap<Object, Object>();
+		Long id = (Long) session.getAttribute("userID");
 
-		CashflowAddressBean cfab = cashflowAddressService
-				.getCashflowAddressBeanByMember((Long) session.getAttribute("userID"));
-		Member members = memberRepositoryImpl.findByMemberId(memberId);
-
-//		session.setAttribute("commonAddress", cfab.getCommonAddress());
-
-		cfab.setCommonAddress(cfab.getCommonAddress());
-
-		table.put("memberMail", members.getMemberMail());
-		table.put("memberId", members.getMemberName());
-		table.put("memberAddress", members.getMemberAddress());
-		table.put("CommonAddress", cfab.getCommonAddress());
-		em.close();
-		mailService.prepareAndSend("請輸入信箱@gmail.com", "title", "Sample mail subject");
-
-		return table;
+		cashflowAddressService.pushAddress(params, id);
 	}
 
 	@ResponseBody
-	@PostMapping("/address/insert")
-	public String insertAddress(@RequestBody String jS) {
+	@GetMapping(path = "/CashflowAddress")
+	public Map<String, Object> useIdfindAddress(Model m) {
+		Map<String, Object> data = new HashMap<>();
+		Member mem = memberService.findByMemberId((Long) session.getAttribute("userID"));
+		data.put("session", session.getAttribute("userID"));
+		data.put("userName", session.getAttribute("userName"));
+		data.put("memberId", mem.getMemberId());
+		data.put("memberMail", mem.getMemberMail());
+		data.put("memberId", mem.getMemberName());
+		data.put("memberAddress", mem.getMemberAddress());
+		data.put("title", cashflowAddressService.findAll());
 
-		JSONObject obj = JSON.parseObject(jS);
-		Object pid = obj.get("pid");
-		String pidTemp = "" + pid;
-		Long addressId = Long.parseLong(pidTemp);
-		String memberAddress = null;
-		String commonAddress = null;
-
-		if (session.getAttribute("userID") == null) {
-			return "{\\\"ans\\\":\\\"請先登入會員!!\\\"}";
-		}
-		Boolean same = false;
-
-		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
-
-		for (CashflowAddressBean CashfAdd : cfab) {
-			if (CashfAdd.getAddressId() == addressId) {
-				Long member = CashfAdd.getAddressId();
-			}
-			CashfAdd.setFk_member_id(CashfAdd.getFk_member_id());
-			CashfAdd.setAddressId(CashfAdd.getAddressId());
-			CashfAdd.setMemberAddress(CashfAdd.getMemberAddress());
-			CashfAdd.setCommonAddress(CashfAdd.getCommonAddress());
-			cashflowAddressService.insertAndUpdateAddress(CashfAdd);
-
-			same = true;
-			break;
-		}
-		if (same != true) {
-			CashflowAddressBean cashflowAddressBean = new CashflowAddressBean();
-			cashflowAddressBean.setFk_member_id((Long) session.getAttribute("userID"));
-			cashflowAddressBean.setAddressId(addressId);
-			cashflowAddressBean.setMemberAddress(memberAddress);
-			cashflowAddressBean.setCommonAddress(commonAddress);
-			cashflowAddressService.insertAndUpdateAddress(cashflowAddressBean);
-		}
-
-		return "{\"ans\":\"" + "此地址 " + commonAddress + " 已加入寄貨地址" + "\"}";
+		session.setAttribute("data", data);
+		return data;
 	}
 
 	@ResponseBody
-	@DeleteMapping("/address/{addressId}")
-	public void deleteAddress(@PathVariable Long addressId) {
-
-		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
-
-		for (CashflowAddressBean CashfAdd : cfab) {
-			if (CashfAdd.getAddressId() == addressId) {
-				cashflowAddressService.deleteAddress(CashfAdd.getAddressId());
-				break;
-			}
-		}
+	@DeleteMapping("/deleteAddress/{id}")
+	public void deleteAddress(@PathVariable(value = "id", required = false) Long id) {
+		System.out.println(id);
+		cashflowAddressService.useAddressIdDelete(id);
 	}
 
-	@ResponseBody
-	@PutMapping("/address/{pid}")
-	public void updateAddress(@PathVariable String pid) {
-
-		Long addressId = Long.parseLong(pid);
-
-		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
-
-		for (CashflowAddressBean CashfAdd : cfab) {
-			if (CashfAdd.getAddressId() == addressId) {
-				cashflowAddressService.insertAndUpdateAddress(CashfAdd);
-			}
-			break;
-		}
-
+	@PutMapping("/addressUpdate/{id}")
+	public void updateArticle(@RequestBody Map<String, String> params, @PathVariable("id") Long addressId) {
+		cashflowAddressService.UpdateAddress(params, addressId);
 	}
-
-	@ResponseBody
-	@GetMapping("/address/show")
-	public List<CashflowAddressBean> selectAddress() {
-
-		List<CashflowAddressBean> cfab = cashflowAddressService.selectAddress((Long) session.getAttribute("userID"));
-
-		return cfab;
-	}
-
-
-
 
 //	// 發送請求給綠界
 //	@PostMapping(value = "/toPayECpay", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -197,8 +124,8 @@ public class CashFlowAddressRestController{
 //				}
 //			}
 //		}
-//		Optional<Member> memberID = memberService.getMamberById(Integer.valueOf(memberCookieID));
-//		Optional<OrdersBean> orderBean = orderservice.getNewestOrderByMember(memberID.get());
+//		Member m = memberService.findByMemberId((Long) session.getAttribute("userID"));
+//		Optional<OrdersBean> orderBean = OrdersService.getNewestOrderByMember(memberID.get());
 //		aio.setMerchantID("2000132");
 //		aio.setMerchantTradeNo("NeverStarveYY" + String.valueOf(orderBean.get().getPkOrderId()));
 //		aio.setMerchantTradeDate(
@@ -217,7 +144,7 @@ public class CashFlowAddressRestController{
 //	public String getNowOrder(Model model, @CookieValue(value = "userId") String userid) {
 //
 //		Member m = null;
-//		m = MemberService.getMemberById(Integer.valueOf(userid)).get();
+//		m = memberService.findByMemberId((Long) session.getAttribute("userID"));
 //		if (m != null) {
 //			List<OrdersBean> order = OrdersService.findOrderByMemberBean(m);
 //			model.addAttribute("id", m);
@@ -288,5 +215,5 @@ public class CashFlowAddressRestController{
 //		return "order/OrderList";
 //
 //	}
-//
+
 }

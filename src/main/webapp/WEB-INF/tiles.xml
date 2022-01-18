@@ -184,9 +184,14 @@
 	</definition>
 
 	<definition name="app.CashFlowAddress"
-		template="/WEB-INF/cashflow/CashflowList.jsp">
-		<put-attribute name="title" value="/CashflowList" />
+		extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/cashflow/CashFlowAddress.jsp" />
 	</definition>
+	
+<!-- 	<definition name="app.CashFlowAddress" -->
+<!-- 		template="/WEB-INF/cashflow/CashFlowAddress.jsp"> -->
+<!-- 		<put-attribute name="title" value="/CashFlowAddress" /> -->
+<!-- 	</definition> -->
 
 	<definition name="app.BackendMemberUpdate"
 		extends="app.BackendDefault">

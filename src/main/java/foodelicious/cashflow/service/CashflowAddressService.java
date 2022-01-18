@@ -1,8 +1,10 @@
 package foodelicious.cashflow.service;
 
 import java.util.List;
+import java.util.Map;
 
 import foodelicious.cashflow.model.CashflowAddressBean;
+import foodelicious.member.model.Member;
 
 
 
@@ -10,13 +12,19 @@ import foodelicious.cashflow.model.CashflowAddressBean;
 //@Service
 public interface CashflowAddressService {
 	
-	CashflowAddressBean insertAndUpdateAddress(CashflowAddressBean cashflowBean);
-	
-	void deleteAddress(Long addressId);
-	
-	List<CashflowAddressBean> selectAddress(Long memberId);
+	List<CashflowAddressBean> findAll();
 
-	CashflowAddressBean getCashflowAddressBeanByMember(Long memberId);
+	List<CashflowAddressBean> deleteById(Long addressId);
+
+	List<CashflowAddressBean> useIdfindAddress(int id);
 		
-//	List<CashflowAddressBean> useIdFindMail(Long memberId);
+	List<CashflowAddressBean> insertAndUpdateAddress(Member members);
+
+	void useAddressIdDelete(Long id);
+
+	void UpdateAddress(Map<String, String> params, Long addressId);
+
+	void pushAddress(Map<String, String> params, Long id);
+	
+
 }
