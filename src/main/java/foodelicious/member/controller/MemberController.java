@@ -62,12 +62,13 @@ public class MemberController {
 					session.setAttribute("register_date", members.getRegister_date());
 					session.setAttribute("memberPhone", members.getMemberPhone());
 					session.setAttribute("memberAddress", members.getMemberAddress());
+					session.setAttribute("memberPic", members.getMemberPic());
 					break;
 				}
 			}
 			return "app.home";
 		}
-		member.setMemberDiscountId("none");
+		member.setMemberDiscountId("TK888");
 		member.setMemberCoin(10);
 		member.setMember_status("customer");
 		member.setMemberPic("defaultImg.jpg");

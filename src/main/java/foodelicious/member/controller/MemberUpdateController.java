@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,37 +40,41 @@ public class MemberUpdateController {
 		this.memberService = memberService;
 		this.memberValidator = memberValidator;
 	}
-	
+
 	public MemberUpdateController(MemberService memberService) {
 		this.memberService = memberService;
 	}
-	
-	
-	//刪除會員
-		@DeleteMapping("/members/{memberId}")
-		public String deleteById(@PathVariable(value="memberId", required = false ) Long memberId) {
-			memberService.deleteByMemberId(memberId);
-			return "redirect:/members";
-		}
-		
-		
-	@GetMapping("/updatePage") // 和網址相同
-	public String sendMemberDataToModified(Model model,
-			@RequestParam(value = ("MemberId"), required = true) Long memberId) {// spring會讀三種： 請求參數、路徑變數、表單綁定
-		Member member = memberService.findByMemberId(memberId);
-		model.addAttribute("member", member);
-		model.addAttribute("memberId", memberId);
 
-		return "app.updatePage";
+	// 刪除會員
+	@DeleteMapping("/members/{memberId}")
+	public String deleteById(@PathVariable(value = "memberId", required = false) Long memberId) {
+		memberService.deleteByMemberId(memberId);
+		return "redirect:/members";
 	}
 	
-	//更新會員===前台
-	@PostMapping("/members/{memberId}") // {}為路徑變數
-	public String updateMemberData(
-			 Member member, 
-			BindingResult result, 
-			@PathVariable Long memberId,
-			Model model,
+	//傳圖片檔
+	@PostMapping("/uploadPage.Controller")
+	public String uploadPage(@RequestParam("memberMail")String memberMail, HttpSession session, Model m) {
+		memberService.findByMemberMail(memberMail);
+		Member mb = memberService.findByMemberMail(memberMail);
+		session.setAttribute("member", mb);
+		m.addAttribute("圖片檔名" + mb.getMemberPic());
+		return "app.memberIndex";
+	}
+
+//	@GetMapping("/updatePage") // 和網址相同
+//	public String sendMemberDataToModified(Model model,
+//			@RequestParam(value = ("MemberId"), required = true) Long memberId) {// spring會讀三種： 請求參數、路徑變數、表單綁定
+//		Member member = memberService.findByMemberId(memberId);
+//		model.addAttribute("member", member);
+//		model.addAttribute("memberId", memberId);
+//
+//		return "app.updatePage";
+//	}
+
+	// 更新會員===前台
+	@PostMapping({"/members/{memberId}","/members/{userID}"}) // {}為路徑變數
+	public String updateMemberData(Member member, BindingResult result, @PathVariable Long memberId, Model model,
 			RedirectAttributes ra) {
 		System.out.println("pmember=" + member);
 
@@ -82,7 +87,7 @@ public class MemberUpdateController {
 
 		memberValidator.validate(member, result);// bindingResult的父介面就是Errors
 		errors = result.getAllErrors();
-		for(ObjectError oe: errors) {
+		for (ObjectError oe : errors) {
 //			System.out.println(oe.getCode()+ "," + oe.getDefaultMessage()+ ","+ oe.getObjectName());
 			System.out.println("oe=>" + oe);
 		}
@@ -90,12 +95,12 @@ public class MemberUpdateController {
 			System.out.println("XXXXXXXXXXXXXXx");
 			return "app.updatePage";
 		}
-			memberService.update(member);
-			System.out.println("OOOOOOOOOOOOOOOOOOO");
-			ra.addFlashAttribute("insertSuccess", "更新成功");
-			return "redirect:/members";
+		memberService.update(member);
+		System.out.println("OOOOOOOOOOOOOOOOOOO");
+		ra.addFlashAttribute("insertSuccess", "更新成功");
+		return "redirect:/memberIndex";
 	}
-    
+
 //	//更新會員
 //	@PostMapping("/members/{memberId}") // {}為路徑變數
 //	public String updateMemberData(
@@ -153,5 +158,5 @@ public class MemberUpdateController {
 			member = new Member();
 		}
 	}
-	
+
 }
