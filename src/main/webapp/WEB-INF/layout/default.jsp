@@ -88,7 +88,7 @@ div.path {
 						style="border-radius: 50%; border: 2px solid black;"> 
 
 						&ensp;${userName}&ensp;</span>
-						<a class="text-dark" href="normallogout">登出</a>
+						<a class="text-dark" href="/normallogout">登出</a>
 					</c:if>
 					
 					<div class="d-flex align-items-center">
