@@ -32,4 +32,10 @@ public interface ArticleRepository {
 
 	String articleContent(Integer id);
 
+	List<ShareArea> findVNAll();
+
+	List<ShareArea> findVNRecipe();
+
+	List<ShareArea> findVNKitchenware();
+
 }

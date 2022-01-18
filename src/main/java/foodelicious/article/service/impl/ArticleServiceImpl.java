@@ -81,6 +81,21 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public String articleContent(Integer id) {
 		return articleRepository.articleContent(id);
+	}
+
+	@Override
+	public List<ShareArea> findVNAll() {		
+		return articleRepository.findVNAll();
+	}
+
+	@Override
+	public List<ShareArea> findVNRecipe() {
+		return articleRepository.findVNRecipe();
+	}
+
+	@Override
+	public List<ShareArea> findVNKitchenware() {
+		return articleRepository.findVNKitchenware();
 	}	
 	
 }
