@@ -16,4 +16,6 @@ public interface OrdersService {
 
 	List<OrdersBean> selectAll();
 
+	List<OrdersBean> findByStatus(String orderStatus);
+
 }

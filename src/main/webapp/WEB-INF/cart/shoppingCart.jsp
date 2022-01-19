@@ -37,8 +37,7 @@
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item itembox"><a class="nav-link textCon"
-													aria-current="page" href="/">首頁</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" aria-current="page" href="/">首頁</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/Product">前往商城</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/goShareArea">前往分享區</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/postArticle">發表新文章</a></li>
@@ -163,8 +162,7 @@
 							<input class="num" [type="number" ] readonly="readonly" value="${carts.quantity}" />
 							<button type="button" class="btn btn-primary btn-sm" onclick="changeNum(${carts.productId},${1})" id="add"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button></td>
 						<td>${carts.product.productPrice*carts.quantity}</td>
-						<td><button onclick="deleteItem(${carts.product.productId})" class="btn btn-dark btn-sm">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></td>
+						<td><button onclick="deleteItem(${carts.product.productId})" class="btn btn-dark btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
