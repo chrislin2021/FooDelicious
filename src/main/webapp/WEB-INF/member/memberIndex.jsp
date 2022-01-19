@@ -27,15 +27,22 @@
 <title>登入成功</title>
 </head>
 <body>
-
+<br>
 	<c:if test="${userName == null}">
-		<span>您好，請先登入會員</span>
+		<p class="text-end" style="font-size: 24px;">您好，請先登入會員</p>
 		<c:redirect url="${pageContext.request.contextPath}/LoginSystem" />
 	</c:if>
 
 	<c:if test='${userName != null}'>
-		<span>歡迎來到會員中心, ${userName}</span>
+		<p class="text-center fw-bolder fs-3" style="background-color: #FCFCFC	;">歡迎來到會員中心</p>
 	</c:if>
+	
+       
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;" >
+        <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
+        <a class="nav-link" href="#" target="__blank">Billing</a>
+        <a class="nav-link" href="#" target="__blank">給柏翔連</a>
+       </nav>
 
 	<div>
 		<!-- Account page navigation-->
@@ -70,7 +77,7 @@
 						<!-- Form Group (username)-->
 						<div class="input-group mb-3">
 							<span class="input-group-text">會員編號：</span> <input
-								class="form-control" id="memberId" type="hidden" placeholder=""
+								class="form-control" id="memberId" type="text" placeholder=""
 								value="${userID}" readonly="readonly">
 						</div>
 
@@ -134,11 +141,11 @@
 								placeholder="" value="${memberDiscountId}" readonly="readonly">
 						</div>
 
-						<div class="input-group mb-3">
-							<span class="input-group-text">會員身份：</span> <input
-								class="form-control" id="member_status" type="hidden"
-								placeholder="" value="${member_status}" readonly="readonly">
-						</div>
+<!-- 						<div class="input-group mb-3"> -->
+<!-- 							<span class="input-group-text">會員身份：</span> <input -->
+<!-- 								class="form-control" id="member_status" type="hidden" -->
+<%-- 								placeholder="" value="${member_status}" readonly="readonly"> --%>
+<!-- 						</div> -->
 
 						<div class="input-group mb-3">
 							<span class="input-group-text">會員金幣：</span> <input
@@ -192,7 +199,7 @@
 						url:"/memberIndexes/"+memberId,
 						type:"GET",
 						success: function(memberDetails){
-							alert(memberDetails.memberName);
+// 							alert(memberDetails.memberName);
 							$("#userName").val(memberDetails.memberName);
 			// 				$("#memberGender").val(memberDetails.memberGender);//不確定
 							$("#memberBirth").val(memberDetails.memberBirth);
