@@ -71,7 +71,7 @@ public class BkPageController {
 		return "app.BackendReportProduct";
 	}
 
-<<<<<<< HEAD
+
     @GetMapping("/backend/report/article")
     public String BackendReportArticle(){
         return "app.BackendReportArticle";
@@ -81,12 +81,7 @@ public class BkPageController {
     public String BackendProblemReport() {
     	return "app.BackendProblemReport";
     }
-=======
-	@GetMapping("/backend/report/article")
-	public String BackendReportArticle() {
-		return "app.BackendReportArticle";
-	}
-
+	
 	@GetMapping("/backend/report/cart")
 	public String BackendReportCart() {
 		return "app.HesitantProduct";
@@ -96,5 +91,5 @@ public class BkPageController {
 	public String index(){
 		return "app.index";
 	}
->>>>>>> f9d723a1c69e73208f80ba30bdd74877fb856921
+
 }
