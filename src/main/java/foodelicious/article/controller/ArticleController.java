@@ -222,7 +222,13 @@ public class ArticleController {
 	public void unlike(@RequestBody Map<String, String> params) {
 		System.out.println("userId：" + params.get("userId"));
 		System.out.println("articleId：" + params.get("articleId"));
-		msgService.unlikeArticle(params);
-		
+		msgService.unlikeArticle(params);		
+	}
+	//判斷是否喜歡
+	@ResponseBody
+	@GetMapping("/checkLick")
+	public boolean checkLike(@RequestBody Map<String, String> params) {
+		boolean check = msgService.checkLike(params);
+		return false;
 	}
 }

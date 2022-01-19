@@ -87,4 +87,10 @@ public class MsgRepositoryImpl implements MsgRepository {
 		
 	}
 
+	@Override
+	public boolean checkLike(Map<String, String> params) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

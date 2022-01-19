@@ -41,4 +41,9 @@ public class MsgServiceImpl implements MsgService {
 		msgRepository.unlikeArticle(params);
 	}
 
+	@Override
+	public boolean checkLike(Map<String, String> params) {
+		return msgRepository.checkLike(params);
+	}
+
 }

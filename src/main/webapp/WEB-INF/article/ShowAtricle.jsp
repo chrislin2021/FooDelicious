@@ -171,4 +171,15 @@
                     data: JSON.stringify(LON)
                 })
             }
+
+            //判斷是否有按讚區域
+            function checkLike() {
+                if (loginId != null) {
+                    $.ajax({
+                        url: "/checkLick",
+                        type: "Get"
+                    })
+                }
+
+            }
         </script>
