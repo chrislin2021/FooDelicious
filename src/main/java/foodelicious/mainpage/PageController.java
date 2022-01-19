@@ -11,7 +11,7 @@ public class PageController {
 	// 首頁
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage() {
-		return "app.home";
+		return "app.index";
 	}
 
 

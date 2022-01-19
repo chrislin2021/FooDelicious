@@ -61,7 +61,7 @@ public class MemberController {
 					break;
 				}
 			}
-			return "app.home";
+			return "app.index";
 		}
 		member.setMemberDiscountId("TK888");
 		member.setMemberCoin(10);

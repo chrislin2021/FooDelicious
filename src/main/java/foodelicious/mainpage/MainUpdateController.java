@@ -74,7 +74,7 @@ public class MainUpdateController {
 				return "app.CompanyMain2";
 			} else {
 //				System.out.println("userID：" + session.getAttribute("userID"));
-				return "app.home";
+				return "app.index";
 			}
 		}
 

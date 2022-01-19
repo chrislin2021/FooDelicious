@@ -3,6 +3,7 @@
     <style>
         .topDIV {
             margin-top: 16px;
+            background-color: #f4f4f4;
         }
         
         #inputGroupSelect01 {
@@ -16,20 +17,25 @@
             padding: 10px;
             border-radius: 10px;
         }
+
+        .typeName{
+            width: 100px;
+        }
+
     </style>
 
     <br />
     <div id="liveAlertPlaceholder"></div>
     <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
-        <select class="btn btn-outline-secondary dropdown" id="clasify">
+        <select class="btn btn-outline-secondary dropdown" id="clasify" style="background-color: #f4f4f4">
             <option selected>全部文章</option>
             <option>廚具開箱</option>
             <option>食譜分享</option>
         </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
-        <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
+        <button class="btn btn-outline-secondary" type="button" id="articleSearch" >查詢文章</button>
     </div>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" >
             <div class="col-12 col-md-2">
                 <!--版面配置左方-->
             </div>
@@ -45,7 +51,7 @@
 
                 </div>
 
-                <table class="table table-hover">
+                <table class="table table-hover" style="background-color: #f4f4f4">
                     <tbody id="articleArea">
                     </tbody>
                 </table>
@@ -188,7 +194,7 @@
                 //console.log(ShareData.title[i].article_clallify);
                 ArticleData += "<tr>";
                 ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
-                ArticleData += "<td>" + ShareData.title[i].article_clallify + "</td>";
+                ArticleData += "<td class='typeName'>" + ShareData.title[i].article_clallify + "</td>";
                 ArticleData += "<td><a href='/intIDFindAll/" + ShareData.title[i].share_id + "'>" + ShareData.title[i].article_title + "</a></td>";
                 ArticleData += "<td>";
                 if (ShareData.session == ShareData.title[i].fk_account_id) {

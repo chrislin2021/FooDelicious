@@ -8,26 +8,26 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/default3.css">
+<link rel="stylesheet" href="../../css/default4.css">
 <meta charset="UTF-8">
 <title>FooDelicious</title>
 </head>
 
-<body>
-	<header id="0" class="border-bottom navArea">
+<body class="conImg">
+	<header class="navArea">
 		<nav class="container-fluid navbar fixed-top navbar-expand-lg navbar-light bg-lightd-grid gap-3 align-items-center navArea"
 			style="grid-template-columns: 1fr 2fr;">
-			<a class="navbar-brand textCon item" href="${contextRoot}/">好煮意</a>
+			<a class="navbar-brand textCon itembox" href="${contextRoot}/">好煮意</a>
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item item"><a class="nav-link textCon"
+					<li class="nav-item itembox"><a class="nav-link textCon"
 						aria-current="page" href="/" style="color: black">首頁</a></li>
-					<li class="nav-item item"><a class="nav-link textCon" href="/Product" style="color: black">前往商城</a></li>
-					<li class="nav-item item"><a class="nav-link textCon" href="/goShareArea" style="color: black">前往分享區</a></li>
-					<li class="nav-item item"><a class="nav-link textCon" href="/postArticle" style="color: black">發表新文章</a></li>
-					<li class="nav-item item"><a class="nav-link textCon" href="/#contactBox" style="color: black">客服中心</a></li>
-					<li class="nav-item item"><a class="nav-link textCon" href="/shoppingCart" style="color: black"><svg
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/Product" style="color: black">前往商城</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/goShareArea" style="color: black">前往分享區</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/postArticle" style="color: black">發表新文章</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/#contactBox" style="color: black">客服中心</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/shoppingCart" style="color: black"><svg
 								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -77,7 +77,7 @@
 		</nav>
 	</header>
 	<!--設定div class container代表標題以下是由tiles管理排版  -->
-	<div class="" id="tilesContainer">
+	<div class="container" id="tilesContainer">
 		<tiles:insertAttribute name="content" />
 	</div>
 

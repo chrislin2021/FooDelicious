@@ -11,6 +11,8 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/cart.css" rel="stylesheet">
+<link rel="stylesheet" href="../../css/default4.css">
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>FooDelicious</title>
@@ -29,20 +31,20 @@
 		<symbol id="twitter" viewBox="0 0 16 16">
 		<path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" /></symbol></svg>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light navArea">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="${contextRoot}/">好煮意</a>
+			<a class="navbar-brand itembox textCon" href="${contextRoot}/">好煮意</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="/">首頁</a></li>
-					<li class="nav-item"><a class="nav-link" href="/Product">前往商城</a></li>
-					<li class="nav-item"><a class="nav-link" href="/goShareArea">前往分享區</a></li>
-					<li class="nav-item"><a class="nav-link" href="/postArticle">發表新文章</a></li>
-					<li class="nav-item"><a class="nav-link" href="/custService">客服中心</a></li>
-					<li class="nav-item"><a class="nav-link" href="/shoppingCart"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
-					<li class="nav-item"><a class="nav-link" href="/backend/member">暫時的後台連結</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon"
+													aria-current="page" href="/">首頁</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/Product">前往商城</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/goShareArea">前往分享區</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/postArticle">發表新文章</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/#contactBox">客服中心</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/shoppingCart"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/backend/member">暫時的後台連結</a></li>
 				</ul>
 			</div>
 		</div>

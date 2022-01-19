@@ -3,13 +3,14 @@
 
 
     <link href="/css/CKEditor.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/default4.css">
     <!-- 開工啦!!! -->
     <div class="row" id="rowSelect">
         <div div class="col-12 col-md-2"></div>
 
 
-        <div div class="col-12 col-md-9">
-            <h3>發表新文章</h3>
+        <div div class="col-12 col-md-9" >
+            <label class="input-group-text mb-3 col-2" for="classify">發表新文章</label>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="classify">請選擇分類</label>
                 <select class="form-select" id="classify">
