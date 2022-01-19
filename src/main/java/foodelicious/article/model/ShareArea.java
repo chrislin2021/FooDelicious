@@ -75,6 +75,9 @@ public class ShareArea implements Serializable {
 
 	@OneToOne(mappedBy = "shareArea")
 	private ArticleData articleData;
+	
+	@OneToOne(mappedBy = "shareArea")
+	private LikeOrNot likeOrNot;
 
 	// 多對一 這邊沒有cascade連動 所以要注意
 
@@ -157,6 +160,14 @@ public class ShareArea implements Serializable {
 
 	public void setShare_id(int share_id) {
 		this.share_id = share_id;
+	}
+
+	public LikeOrNot getLikeOrNot() {
+		return likeOrNot;
+	}
+
+	public void setLikeOrNot(LikeOrNot likeOrNot) {
+		this.likeOrNot = likeOrNot;
 	}
 	
 	

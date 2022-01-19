@@ -36,6 +36,11 @@
 			value="/WEB-INF/member/memberIndex.jsp" />
 	</definition>
 
+	<definition name="app.memberIndex1" extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/member/memberIndex1.jsp" />
+	</definition>
+
 
 
 	<definition name="app.PostArticle" extends="app.default">
@@ -127,6 +132,12 @@
 			value="/WEB-INF/backend/BackendMain.jsp" />
 	</definition>
 
+	<definition name="app.HesitantProduct"
+		extends="app.BackendDefault">
+		<put-attribute name="content"
+			value="/WEB-INF/cart/hesitantProduct.jsp" />
+	</definition>
+
 	<definition name="app.ShoppingCart"
 		template="/WEB-INF/cart/shoppingCart.jsp">
 		<put-attribute name="title" value="/shoppingCart" />
@@ -175,9 +186,14 @@
 	</definition>
 
 	<definition name="app.CashFlowAddress"
-		template="/WEB-INF/cashflow/CashflowList.jsp">
-		<put-attribute name="title" value="/CashflowList" />
+		extends="app.default">
+		<put-attribute name="content" value="/WEB-INF/cashflow/CashFlowAddress2.jsp" />
 	</definition>
+	
+<!-- 	<definition name="app.CashFlowAddress" -->
+<!-- 		template="/WEB-INF/cashflow/CashFlowAddress.jsp"> -->
+<!-- 		<put-attribute name="title" value="/CashFlowAddress" /> -->
+<!-- 	</definition> -->
 
 	<definition name="app.BackendMemberUpdate"
 		extends="app.BackendDefault">
@@ -277,6 +293,16 @@
 		extends="app.BackendDefault">
 		<put-attribute name="content"
 			value="/WEB-INF/backend/reportPage/PopularArticles.jsp" />
+	</definition>
+
+	<definition name="app.default3"
+				template="/WEB-INF/layout/default3.jsp">
+		<put-attribute name="title" value="spring boot demo" />
+	</definition>
+
+	<definition name="app.index" extends="app.default3">
+		<put-attribute name="content"
+					   value="/WEB-INF/homepage/index.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -8,4 +8,8 @@ public interface SearchService {
 
 	List<Product> findByProductNameLike(String productName);
 
+	List<Product> findAll();
+
+	Product save(Product product);
+
 }

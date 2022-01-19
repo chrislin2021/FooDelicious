@@ -70,6 +70,13 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.useIdFindName(memberId);
 	}
 
+	@Override
+	public String update(Long memberId, Member member) {
+		return memberRepository.update(memberId, member);
+	}
+
+
+
 
 
 

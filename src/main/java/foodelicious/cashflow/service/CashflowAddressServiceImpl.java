@@ -1,6 +1,7 @@
 package foodelicious.cashflow.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,49 +12,49 @@ import foodelicious.member.model.Member;
 import foodelicious.member.repository.MemberRepositoryImpl;
 
 @Service
-public class CashflowAddressServiceImpl implements CashflowAddressService{
-	
+public class CashflowAddressServiceImpl implements CashflowAddressService {
+
 	private CashAddressRepository cashAddressRepository;
-	
-	
-	@Autowired
-	private MemberRepositoryImpl memberRepositoryImpl;
-	
+
 	public CashflowAddressServiceImpl(CashAddressRepository cashAddressRepository) {
 		this.cashAddressRepository = cashAddressRepository;
 	}
-	
+
 	@Override
-	public CashflowAddressBean insertAndUpdateAddress(CashflowAddressBean cashflowAddressBean) {
-		return cashAddressRepository.save(cashflowAddressBean);
-	}
-	
-	@Override
-	public void deleteAddress(Long addressId) {
-		cashAddressRepository.deleteById(addressId);
-	}
-	
-	@Override
-	public List<CashflowAddressBean> selectAddress(Long memberId){
-		return cashAddressRepository.findAllByFkmemberid(memberId);
+	public List<CashflowAddressBean> deleteById(Long addressId) {
+		return cashAddressRepository.deleteById(addressId);
 	}
 
 	@Override
-	public CashflowAddressBean getCashflowAddressBeanByMember(Long memberId) {
-		
-		Member members = memberRepositoryImpl.findByMemberId(memberId);
-		return cashAddressRepository.findByMember(members);
+	public List<CashflowAddressBean> useIdfindAddress(int id) {
+		return cashAddressRepository.useIdfindAddress(id);
 	}
 
-//	@Override
-//	public List<CashflowAddressBean> useIdFindMail(Long memberId) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<CashflowAddressBean> insertAndUpdateAddress(Member members) {
+		return cashAddressRepository.insertAndUpdateAddress(members);
+	}
 
-//	@Override
-//	public List<CashflowAddressBean> useIdFindMail(Long memberId) {
-//		return cashAddressRepository.useIdFindMail();
-//	}
+	@Override
+	public List<CashflowAddressBean> findAll() {
+		return cashAddressRepository.findAll();
+	}
+
+	@Override
+	public void useAddressIdDelete(Long id) {
+		cashAddressRepository.useAddressIdDelete(id);		
+	}
+
+	@Override
+	public void UpdateAddress(Map<String, String> params, Long addressId) {
+		cashAddressRepository.UpdateAddress(params,addressId);		
+
+	}
+
+	@Override
+	public void pushAddress(Map<String, String> params, Long id) {
+		cashAddressRepository.pushAddress(params,id);	
+	}
+
 
 }

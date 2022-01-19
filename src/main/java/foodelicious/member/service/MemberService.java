@@ -25,4 +25,6 @@ public interface MemberService {
 
 	String useIdFindName(Long memberId);
 
+	String update(Long memberId, Member member);
+
 }

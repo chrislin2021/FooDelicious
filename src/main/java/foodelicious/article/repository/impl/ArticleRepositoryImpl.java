@@ -34,7 +34,6 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		// =========引用到舊的Account先註解===========
 		Member member = em.find(Member.class, id);
 
-//		System.out.println("一對多測試：" + account.getAccount_id());
 
 		// ArticleData與 ShareArea的關係是「一對一」ArticleData(外來鍵)與 ShareArea(主鍵)
 		ArticleData articleData = new ArticleData();
@@ -44,7 +43,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		shareArea.setArticle_clallify(params.get("classify"));
 		shareArea.setArticle_title(params.get("title"));
 
-		// Account 與 ShareArea 的關係是一對多
+		// Member 與 ShareArea 的關係是一對多
 		// 在ArticleData與 ShareArea資料傳輸給SQL前 還要設定好一對多的部分
 
 		// =========引用到舊的Account先註解===========

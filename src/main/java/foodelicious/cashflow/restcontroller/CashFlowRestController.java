@@ -1,6 +1,8 @@
 package foodelicious.cashflow.restcontroller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -37,7 +39,7 @@ public class CashFlowRestController {
 	private MemberService memberService;
 
 	public CashFlowRestController(EntityManager em, HttpSession session, CartService cartService,
-			MailService mailService, OrdersService ordersService,MemberService memberService) {
+			MailService mailService, OrdersService ordersService, MemberService memberService) {
 		super();
 		this.em = em;
 		this.session = session;
@@ -45,40 +47,44 @@ public class CashFlowRestController {
 		this.mailService = mailService;
 		this.ordersService = ordersService;
 		this.memberService = memberService;
+
 	}
 
 	@ResponseBody
 	@GetMapping(path = "/shoppingCart/CashflowList2")
-	public HashMap<Object, Object> CashFlowTable(Model m, Long productId, Long memberId) {
-		HashMap<Object, Object> table = new HashMap<Object, Object>();
+	public List<HashMap<Object, Object>> CashFlowTable(Model m, Long productId, Long memberId) {
+		List<HashMap<Object, Object>> tables = new ArrayList<HashMap<Object, Object>>();
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-		
+		List<OrdersBean> orders = ordersService.selectOrders((Long) session.getAttribute("userID"));
 //		Long userID = CashflowAddressService.useIdFindShareArea(id).get(0).getFk_account_id();
 //		String title = articleService.useIdFindShareArea(id).get(0).getArticle_title();
 //		String userMail = memberService.findByMemberId(userID).getMemberMail();
-		
+
 		for (CartBean cart : carts) {
+			
 			Product product = null;
 			if (productId == cart.getProductId()) {
 				product = cart.getProduct();
 			}
-
-
-
-			table.put("memberId", cart.getMemberId());
-			table.put("memberName", cart.getMember().getMemberName());
-			table.put("memberPhone", cart.getMember().getMemberPhone());
-			table.put("memberMail", cart.getMember().getMemberMail());
-			table.put("memberAddress", cart.getMember().getMemberAddress());
-			table.put("productId", cart.getProductId());
-			table.put("productName", cart.getProduct().getProductName());
-			table.put("quantity", cart.getQuantity());
-			table.put("productprice", cart.getProduct().getProductPrice());
-//			mailService.prepareAndSend(userMail,"請輸入信箱@gmail.com", "title", "Sample mail subject");
-			em.close();
-
+			for (OrdersBean order : orders) {		
+				HashMap<Object, Object> table = new HashMap<Object, Object>();
+				table.put("memberId", cart.getMemberId());
+				table.put("memberName", cart.getMember().getMemberName());
+				table.put("memberPhone", cart.getMember().getMemberPhone());
+				table.put("memberMail", cart.getMember().getMemberMail());
+				table.put("memberAddress", cart.getMember().getMemberAddress());
+				table.put("productId", cart.getProductId());
+				table.put("productName", cart.getProduct().getProductName());
+				table.put("quantity", cart.getQuantity());
+				table.put("productprice", cart.getProduct().getProductPrice());
+				table.put("orderId", order.getOrdersId());
+				table.put("orderTotal", order.getOrdersTotal());
+				em.close();
+				tables.add(table);
+//				mailService.prepareAndSend(userMail,"請輸入信箱@gmail.com", "title", "Sample mail subject");
+			}
 		}
-		
-		return table;
+
+		return tables;
 	}
 }

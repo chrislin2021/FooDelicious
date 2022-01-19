@@ -112,8 +112,8 @@
                                 <span class="listName">熱門文章</span>
                             </a>
                         </li>
-                        <li id="" class="colLi">
-                            <a class="colLi" href="" style="text-decoration: none">
+                        <li id="cartLi" class="colLi">
+                            <a class="colLi" href="/backend/report/cart" style="text-decoration: none">
                                 <i class="fa fa-circle-o"></i>
                                 <span class="listName">猶豫商品</span>
                             </a>

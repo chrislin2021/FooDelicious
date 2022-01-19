@@ -31,4 +31,14 @@ public class MsgServiceImpl implements MsgService {
 		return msgRepository.useIdFindAllMSG(articleId);
 	}
 
+	@Override
+	public void likeOrNot(Map<String, String> params) {
+		msgRepository.likeOrNot(params);
+	}
+
+	@Override
+	public void unlikeArticle(Map<String, String> params) {
+		msgRepository.unlikeArticle(params);
+	}
+
 }

@@ -18,14 +18,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import foodelicious.article.model.LikeOrNot;
 import foodelicious.article.model.MsgArea;
 import foodelicious.article.model.ShareArea;
 import foodelicious.cashflow.model.CashflowAddressBean;
@@ -100,6 +99,10 @@ public class Member implements Serializable {
 	// 與MsgArea是一對多關係
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
 	private Set<MsgArea> msgAreas = new LinkedHashSet<MsgArea>();
+	
+	// 與LikeOrNot是一對多關係
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)
+	private Set<LikeOrNot> likeOrNots = new LinkedHashSet<LikeOrNot>();
 
 	// Join Product table
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.ALL)

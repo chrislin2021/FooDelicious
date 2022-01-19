@@ -199,6 +199,7 @@ public class CartController {
 			for (DiscountBean discount : discounts) {
 				if (discount.getDiscountName().equals(discountName)) {
 					discountTotal -= discount.getDiscountContent();
+					session.setAttribute("discountId", discount.getDiscountId());
 					break;
 				}
 			}
