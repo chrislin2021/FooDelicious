@@ -83,13 +83,14 @@ public class MemberUpdateController {
 			file.transferTo(dataFile);
 			//把檔名放在model裡，方便之後使用
 			m.addAttribute("fileName", fileName);
+			
 			//記錄在資料庫
 			memberService.findByMemberId(memberId);
 			Member mb = memberService.findByMemberId(memberId);
 			System.out.println(memberId +"========================================");
 			mb.setMemberPic(fileName);
 			memberService.update(mb);
-			session.setAttribute("Member", mb);
+			session.setAttribute("memberPic", fileName);
 		} catch(FileNotFoundException e){
 			e.printStackTrace();
 			return "上傳失敗" + e.getMessage();
@@ -100,7 +101,7 @@ public class MemberUpdateController {
 		return "app.memberIndex";
 	}
 	
-	//測試
+	//會員中心
 	@GetMapping("/memberIndex")
 	public String tomemberIndex() {
 		return "app.memberIndex";

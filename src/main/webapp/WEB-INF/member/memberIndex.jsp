@@ -51,9 +51,6 @@
 							<!-- Profile picture image-->
 							<img class="img-account-profile rounded-circle mb-2"
 								src="/img/${memberPic}" alt="">
-							<!-- Profile picture help block-->
-							<!-- 						<div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div> -->
-							<!-- Profile picture upload button-->
 							<input class="form-control" type="file" id="formFile"
 								accept="image/*" name="file">
 							<button type="submit" class="btn btn-primary">更新照片</button>
@@ -73,7 +70,7 @@
 						<!-- Form Group (username)-->
 						<div class="input-group mb-3">
 							<span class="input-group-text">會員編號：</span> <input
-								class="form-control" id="memberId" type="text" placeholder=""
+								class="form-control" id="memberId" type="hidden" placeholder=""
 								value="${userID}" readonly="readonly">
 						</div>
 
@@ -139,7 +136,7 @@
 
 						<div class="input-group mb-3">
 							<span class="input-group-text">會員身份：</span> <input
-								class="form-control" id="member_status" type="text"
+								class="form-control" id="member_status" type="hidden"
 								placeholder="" value="${member_status}" readonly="readonly">
 						</div>
 
