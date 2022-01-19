@@ -57,7 +57,7 @@
 
 		<div class="input-group mb-3">
 			<span class="input-group-text">會員帳號：</span>
-			<form:input type="text" readonly="true" class="form-control"
+			<form:input type="text" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id="memberMail"
 				path="memberMail" />
