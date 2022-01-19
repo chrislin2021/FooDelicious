@@ -7,7 +7,7 @@
 <html>
 <body>
 	<div class="container mt-3">
-		<h2 class="titleName2">新增商品</h2>
+		<h2>新增商品</h2>
 		<p>請在此新增您的商品</p> 
 		商品分類：
 		<form action="/backend/product" enctype="multipart/form-data"
@@ -67,6 +67,12 @@
 					<input type="text" class="form-control" name="productStock" placeholder="商品存量"/>
 				</div>
 			</div>
+			<div class="row mb-2">
+				<label for="productInsertDate" class="col-sm-2 col-form-label">商品存量：</label>
+				<div class="col-sm-3">
+					<input type="datetime-local" class="form-control" name="productInsertDate" placeholder="日期"/>
+				</div>
+			</div>
 
 			商品狀態：<select class="form-select form-select-sm"
 				aria-label=".form-select-sm example"
@@ -89,6 +95,7 @@
 						placeholder="銷貨量"/>
 				</div>
 			</div>
+		
 
 			&emsp;&emsp;
 			<button type="reset" class="btn btn-outline-primary mt-3">重製</button>

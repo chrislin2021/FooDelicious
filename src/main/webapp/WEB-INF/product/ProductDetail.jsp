@@ -55,9 +55,6 @@
 
 						<div class="action">
 							<button class="add-to-cart btn btn-default" type="button" onclick="addToCart(${pro.productId})">新增至購物車</button>
-							<button class="like btn btn-default" type="button">
-								<span class="fa fa-heart"></span>
-							</button>
 						</div>
 					</div>
 				  </c:forEach>
@@ -78,13 +75,29 @@ function addToCart(productId) {
 		data: JSON.stringify(postData),
 		contentType: "application/json; charset=utf-8",
 		success: function() {
-			console('新增成功');
+			Swal.fire({
+				  title: '確定新增至購物車?',
+				  text: "你絕對不會後悔的!",
+				  icon: 'question',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '加入購物車!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				    Swal.fire(
+				      '新增成功!',
+				      '已添加至購物車',
+				      'success'
+				    )
+				  }
+				})
 		}
 	})
 }
 
 </script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

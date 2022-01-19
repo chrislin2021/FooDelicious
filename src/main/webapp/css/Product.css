@@ -1,7 +1,12 @@
-.left{
- position:absolute;
+
+
+.left{ 
+ margin-top:50px;
+ position:fixed;
  float:left;
- width:80%;
+ width:12%;
+ font-size:large;
+ 
 }
 .right {
   float:right;
@@ -47,6 +52,7 @@
 .item.list-group-item .list-group-image
 {
     margin-right: 10px;
+    
 }
 .item.list-group-item .thumbnail
 {
@@ -69,7 +75,7 @@
 .item.list-group-item:after
 {
     clear: both;
-}
+} 	 
 .item-product-company 
 {
 	font-size:medium;
