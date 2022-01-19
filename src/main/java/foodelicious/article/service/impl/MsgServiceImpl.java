@@ -41,4 +41,9 @@ public class MsgServiceImpl implements MsgService {
 		msgRepository.unlikeArticle(params);
 	}
 
+	@Override
+	public boolean checkLike(Long userId, Integer articleId) {
+		return msgRepository.checkLike(userId, articleId);
+	}
+
 }

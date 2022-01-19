@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,12 +22,12 @@ import foodelicious.member.model.Member;
 
 @Repository
 public class MsgRepositoryImpl implements MsgRepository {
-	
+
 	@PersistenceContext
 	EntityManager em;
-	
+
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	
+
 	public MsgRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		super();
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -34,14 +35,14 @@ public class MsgRepositoryImpl implements MsgRepository {
 
 	@Override
 	public void insertMsg(Map<String, String> params) {
-		//文章編號
-		Integer articleId = Integer.parseInt(params.get("articleId"));		
+		// 文章編號
+		Integer articleId = Integer.parseInt(params.get("articleId"));
 		ArticleData articleData = em.find(ArticleData.class, articleId);
-		//會員編號
-		Long memberId = Long.parseLong(params.get("loginId"));		
+		// 會員編號
+		Long memberId = Long.parseLong(params.get("loginId"));
 		Member Member = em.find(Member.class, memberId);
-		
-		//做兩筆一對多的部分
+
+		// 做兩筆一對多的部分
 		MsgArea msgArea = new MsgArea(params.get("text"));
 		msgArea.setMemberName(Member.getMemberName());
 		msgArea.setArticleData(articleData);
@@ -60,12 +61,12 @@ public class MsgRepositoryImpl implements MsgRepository {
 
 	@Override
 	public void likeOrNot(Map<String, String> params) {
-		//這邊會有一對一(share_id)和一對多(member_id)
-		//一對多
-		Member member = em.find(Member.class,Long.parseLong(params.get("userId")));
-		//一對一
-		ShareArea shareArea = em.find(ShareArea.class,Integer.parseInt(params.get("articleId")));
-		
+		// 這邊會有一對一(share_id)和一對多(member_id)
+		// 一對多
+		Member member = em.find(Member.class, Long.parseLong(params.get("userId")));
+		// 一對一
+		ShareArea shareArea = em.find(ShareArea.class, Integer.parseInt(params.get("articleId")));
+
 		LikeOrNot likeOrNot = new LikeOrNot();
 		likeOrNot.setMember(member);
 		likeOrNot.setShareArea(shareArea);
@@ -79,12 +80,25 @@ public class MsgRepositoryImpl implements MsgRepository {
 		query.setParameter("memberID", params.get("userId"));
 		query.setParameter("atricleID", params.get("articleId"));
 		Object id = query.getSingleResult();
-		//Object 轉 Long
+		// Object 轉 Long
 		Long likeID = Long.valueOf(String.valueOf(id));
 //		System.out.println("喜歡編號："+likeID);
 		LikeOrNot unlike = em.find(LikeOrNot.class, likeID);
 		em.remove(unlike);
-		
+
+	}
+
+	@Override
+	public boolean checkLike(Long userId, Integer articleId) {
+		//HQL這邊的語法 table是用 model Bean Name
+		String hql = "FROM LikeOrNot WHERE fk_memberID = :memberID AND fk_articleID = :atricleID";
+		TypedQuery<LikeOrNot> Lon = em.createQuery(hql, LikeOrNot.class);
+		Lon.setParameter("memberID", userId);
+		Lon.setParameter("atricleID", articleId);
+		List<LikeOrNot> likeOrNotSet = Lon.getResultList();
+		boolean result = (likeOrNotSet.size() != 0) ? true : false;
+		System.out.println("result："+result);
+		return result;
 	}
 
 }

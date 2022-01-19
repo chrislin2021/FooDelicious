@@ -78,6 +78,7 @@
                     document.getElementById("updateBTN").style.visibility = (loginId == accId) ? 'visible' : 'hidden';
                     document.getElementById("sendMsg").style.visibility = (loginId != null) ? 'visible' : 'hidden';
                     msgShow();
+                    checkLike();
                 }
             })
             $("#updateBTN").click(function() {
@@ -170,5 +171,23 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(LON)
                 })
+            }
+
+            //判斷是否有按讚區域
+            function checkLike() {
+                console.log("loginId：" + loginId);
+                if (loginId != null) {
+                    let LON = {};
+                    LON.userId = loginId;
+                    LON.articleId = articleId;
+                    $.ajax({
+                        url: "/checkLick/" + loginId + "/" + articleId,
+                        type: "GET",
+                        success: function(cellback) {
+                            console.log("cellback：" + cellback)
+                        }
+                    })
+                }
+
             }
         </script>
