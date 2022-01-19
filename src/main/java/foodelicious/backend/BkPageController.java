@@ -71,17 +71,17 @@ public class BkPageController {
 		return "app.BackendReportProduct";
 	}
 
+
+    @GetMapping("/backend/report/article")
+    public String BackendReportArticle(){
+        return "app.BackendReportArticle";
+    }
     
     @GetMapping("/backend/problemReport")
     public String BackendProblemReport() {
     	return "app.BackendProblemReport";
     }
-
-	@GetMapping("/backend/report/article")
-	public String BackendReportArticle() {
-		return "app.BackendReportArticle";
-	}
-
+	
 	@GetMapping("/backend/report/cart")
 	public String BackendReportCart() {
 		return "app.HesitantProduct";
@@ -93,3 +93,4 @@ public class BkPageController {
 	}
 
 }
+
