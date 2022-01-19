@@ -222,7 +222,7 @@
 								class="text-muted">(必填)</span></label><input type="text"
 								class="form-control" id="phone" value="${orders.ordersPhone}"
 								required>
-							<div class="validate1 d-none" style="color: red">請填寫收件人電話喔！！</div>
+							<div class="validate2 d-none" style="color: red">請填寫收件人電話喔！！</div>
 						</div>
 					</div>
 
@@ -231,7 +231,7 @@
 							class="text-muted">(必填)</span></label><input type="text"
 							class="form-control" id="address" value="${orders.ordersAddress}"
 							required>
-						<div class="validate1 d-none" style="color: red">請填寫收件人地址喔！！</div>
+						<div class="validate3 d-none" style="color: red">請填寫收件人地址喔！！</div>
 					</div>
 
 					<hr class="my-4">

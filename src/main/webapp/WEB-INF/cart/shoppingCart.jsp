@@ -143,7 +143,7 @@
 		<table class="table table-striped table align-middle">
 			<thead>
 				<tr>
-					<th scope="col"><input type="checkbox" id="all" onclick="check_all(this, 'c')"></th>
+					<th scope="col">圖片</th>
 					<th scope="col">商品</th>
 					<th scope="col">單價</th>
 					<th scope="col">數量</th>
