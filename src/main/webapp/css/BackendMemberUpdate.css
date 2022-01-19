@@ -4,11 +4,11 @@
 }
 
 th{
-    font-size: 18px;
+    font-size: 16px;
 }
 
 td{
-    font-size: 14px;
+    font-size: 12px;
 }
 
 table{
@@ -30,19 +30,19 @@ table{
 }
 
 .upInput{
-    width: 100px;
-}
-
-.upInputSm{
     width: 80px;
 }
 
+.upInputSm{
+    width: 50px;
+}
+
 .upInputMd{
-    width: 120px;
+    width: 80px;
 }
 
 .upInputBig{
-    width: 170px;
+    width: 100px;
 }
 
 .text-middle{

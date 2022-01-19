@@ -18,16 +18,16 @@
             <table id="" class='table table-striped table-hover'>
                 <thead>
                 <tr>
-                    <th class="col col1 table-primary">會員編號</th>
-                    <th class="col col2 table-primary">會員email</th>
+                    <th class="col col1 table-primary">編號</th>
+                    <th class="col col2 table-primary">E-mail</th>
                     <th class="col col4 table-primary">帳號狀態</th>
-                    <th class="col col5 table-primary">會員姓名</th>
-                    <th class="col col6 table-primary">會員性別</th>
-                    <th class="col col12 table-primary">會員生日</th>
-                    <th class="col col10 table-primary">會員電話</th>
-                    <th class="col col11 table-primary">會員地址</th>
-                    <th class="col col8 table-primary">會員coin</th>
-                    <th class="col col7 table-primary">會員折扣</th>
+                    <th class="col col5 table-primary">姓名</th>
+                    <th class="col col6 table-primary">性別</th>
+                    <th class="col col12 table-primary">生日</th>
+                    <th class="col col10 table-primary">電話</th>
+                    <th class="col col11 table-primary">地址</th>
+                    <th class="col col8 table-primary">coin</th>
+                    <th class="col col7 table-primary">折扣</th>
                     <th class="col col13 table-primary">註冊日期</th>
                     <th class="col col14 table-primary">更新</th>
                     <th class="col col15 table-primary">取消</th>
@@ -43,7 +43,7 @@
                                 <input class="upInput upInputBig readonly" type="text" value="" readonly id="memberMail">
                             </td>
                             <td class='align-middle'>
-                                <select id="memberStatus" class="form-select upInput text-middle upInputMd">
+                                <select id="memberStatus" class="form-select upInput text-middle upInputBig">
                                     <option value="" id="status" selected></option>
                                     <option value="admin">admin</option>
                                     <option value="company">company</option>
@@ -54,7 +54,7 @@
                                 <input class="upInput" type="text" value="" id="memberName">
                             </td>
                             <td class='align-middle'>
-                                <select id="memberGender" class="form-select upInput upInputMd">
+                                <select id="memberGender" class="form-select upInput upInputBig">
                                     <option value="" id="gender" selected></option>
                                     <option value="MALE">MALE</option>
                                     <option value="FEMALE">FEMALE</option>

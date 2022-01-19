@@ -38,7 +38,7 @@
 	</c:if>
 	
        
-        <nav class="navbar navbar-light" style="background-color: #e3f2fd;" >
+        <nav class="nav justify-content-end" style="background-color: #e3f2fd;" >
         <a class="nav-link active ms-0" href="#" target="__blank">Profile</a>
         <a class="nav-link" href="#" target="__blank">Billing</a>
         <a class="nav-link" href="#" target="__blank">給柏翔連</a>

@@ -4,7 +4,7 @@
 }
 
 th{
-    font-size: 18px;
+    font-size: 14px;
 }
 
 td{
@@ -48,15 +48,15 @@ h1{
 }
 
 .larW{
-    width: 300px;
+    width: 250px;
 }
 
 .midW{
-    width: 200px;
+    width: 150px;
 }
 
 .smalW{
-    width: 100px;
+    width: 70px;
 }
 
 .readonly{

@@ -18,7 +18,7 @@
             <table id="" class='table table-striped table-hover'>
                 <thead>
                 <tr>
-                    <th class="col table-warning smalW">訂單編號</th>
+                    <th class="col table-warning smalW">編號</th>
                     <th class="col table-warning midW">會員帳號</th>
                     <th class="col table-warning midW">收件人姓名</th>
                     <th class="col table-warning midW">收件人電話</th>

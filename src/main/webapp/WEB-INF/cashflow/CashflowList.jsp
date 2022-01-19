@@ -25,7 +25,7 @@
 		<h2>付款完成!!</h2>
 		<table class="table">
 			<thead>
-			<tbody id="cartList">
+			<tbody id="cartList" style="background-color: #f4f4f4">
 				<c:forEach var="carts" items="${carts}" begin="0" end="0">
 					<span style="margin: 250px">
 						<th>
