@@ -212,7 +212,7 @@ public class ArticleController {
 	@ResponseBody
 	@PostMapping("/likeArticle")
 	public void likeOrNot(@RequestBody Map<String, String> params) {
-		System.out.println("userId：" + params.get("userId"));
+		System.out.println("@RequestBody userId：" + params.get("userId"));
 		msgService.likeOrNot(params);
 	}
 	
@@ -220,15 +220,17 @@ public class ArticleController {
 	@ResponseBody
 	@PostMapping("/unlike")
 	public void unlike(@RequestBody Map<String, String> params) {
-		System.out.println("userId：" + params.get("userId"));
-		System.out.println("articleId：" + params.get("articleId"));
+//		System.out.println("userId：" + params.get("userId"));
+//		System.out.println("articleId：" + params.get("articleId"));
 		msgService.unlikeArticle(params);		
 	}
 	//判斷是否喜歡
 	@ResponseBody
-	@GetMapping("/checkLick")
-	public boolean checkLike(@RequestBody Map<String, String> params) {
-		boolean check = msgService.checkLike(params);
+	@GetMapping("/checkLick/{userId}/{articleId}")
+	public boolean checkLike(@PathVariable(value = "userId") Long userId, @PathVariable(value = "articleId") Integer articleId) {
+		//System.out.println("userId：" + userId);
+		//System.out.println("articleId!!：" + articleId);
+		boolean check = msgService.checkLike(userId, articleId);
 		return false;
 	}
 }

@@ -42,8 +42,8 @@ public class MsgServiceImpl implements MsgService {
 	}
 
 	@Override
-	public boolean checkLike(Map<String, String> params) {
-		return msgRepository.checkLike(params);
+	public boolean checkLike(Long userId, Integer articleId) {
+		return msgRepository.checkLike(userId, articleId);
 	}
 
 }

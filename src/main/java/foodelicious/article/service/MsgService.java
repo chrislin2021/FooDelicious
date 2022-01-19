@@ -15,6 +15,6 @@ public interface MsgService {
 
 	void unlikeArticle(Map<String, String> params);
 
-	boolean checkLike(Map<String, String> params);
+	boolean checkLike(Long userId, Integer articleId);
 
 }
