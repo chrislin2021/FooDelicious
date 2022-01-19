@@ -204,7 +204,7 @@ public class ArticleController {
 	@ResponseBody
 	@GetMapping("/showAllMsg/{id}")
 	public List<MsgArea> showMessage(@PathVariable("id") Integer articleId) {
-		System.out.println("articleId：" + articleId);
+//		System.out.println("articleId：" + articleId);
 		return msgService.useIdFindAllMSG(articleId);
 	}
 
@@ -231,6 +231,6 @@ public class ArticleController {
 		//System.out.println("userId：" + userId);
 		//System.out.println("articleId!!：" + articleId);
 		boolean check = msgService.checkLike(userId, articleId);
-		return false;
+		return check;
 	}
 }

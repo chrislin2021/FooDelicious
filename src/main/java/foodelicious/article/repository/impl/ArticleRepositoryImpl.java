@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,7 @@ import foodelicious.article.container.ShareAreaRowMapper;
 import foodelicious.article.model.ArticleData;
 import foodelicious.article.model.ShareArea;
 import foodelicious.article.repository.ArticleRepository;
+import foodelicious.article.service.MsgService;
 import foodelicious.member.model.Member;
 
 @Repository
@@ -23,9 +25,14 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 	EntityManager em;
 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	MsgService msgService;
+	HttpSession session;
 
-	public ArticleRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+	public ArticleRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, MsgService msgService,
+			HttpSession session) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+		this.msgService = msgService;
+		this.session = session;
 	}
 
 	@Override
@@ -33,7 +40,6 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		// 用session.get的方法 用id 去找到對應的Account.class 並且將其命名為 account 參數
 		// =========引用到舊的Account先註解===========
 		Member member = em.find(Member.class, id);
-
 
 		// ArticleData與 ShareArea的關係是「一對一」ArticleData(外來鍵)與 ShareArea(主鍵)
 		ArticleData articleData = new ArticleData();
@@ -91,9 +97,18 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
 	@Override
 	public void useArticleIdDelete(int id) {
-		ArticleData articleData = em.find(ArticleData.class, id);
-		// System.out.println(articleData.getArticle());
-		em.remove(articleData);
+		String hql;
+		Long userID = (Long) session.getAttribute("userID");
+		//判斷有沒有喜歡的 有的話先刪除所有有喜歡的
+		if (msgService.checkLike(userID, id)) {
+			hql = "DELETE FROM LikeOrNot WHERE fk_articleID = :articleID";
+			em.createQuery(hql).setParameter("articleID", id).executeUpdate();
+		}
+		hql = "DELETE FROM ArticleData WHERE article_id = :articleID";
+		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
+		
+		hql = "DELETE FROM ShareArea WHERE share_id = :articleID";
+		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
 	}
 
 	@Override

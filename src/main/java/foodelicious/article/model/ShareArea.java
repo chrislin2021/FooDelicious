@@ -76,7 +76,7 @@ public class ShareArea implements Serializable {
 	@OneToOne(mappedBy = "shareArea")
 	private ArticleData articleData;
 	
-	@OneToOne(mappedBy = "shareArea")
+	@OneToOne(mappedBy = "shareArea", fetch = FetchType.LAZY)
 	private LikeOrNot likeOrNot;
 
 	// 多對一 這邊沒有cascade連動 所以要注意

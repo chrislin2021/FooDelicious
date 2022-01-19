@@ -53,7 +53,6 @@
                 </div>
             </div>
         </div>
-        </div>
         <script src="/js/ckeditor.js"></script>
         <script src="/js/jquery-3.6.0.min.js"></script>
         <script>
@@ -154,11 +153,15 @@
             //按讚事件
             $("#likeBTN").on("click", function() {
                 ajaxFunc("/likeArticle", "Post");
+                $("#unlikeBTN").show();
+                $("#likeBTN").hide();
             })
 
             //一點也不讚事件
             $("#unlikeBTN").on("click", function() {
                 ajaxFunc("/unlike", "Post");
+                $("#unlikeBTN").hide();
+                $("#likeBTN").show();
             })
 
             function ajaxFunc(url, type) {
@@ -185,9 +188,27 @@
                         type: "GET",
                         success: function(cellback) {
                             console.log("cellback：" + cellback)
+                                //(cellback) ? ckickUnLike() : cliclLike();
+                                //如果已經喜歡了
+                            if (cellback) {
+                                $("#unlikeBTN").show();
+                                $("#likeBTN").hide();
+                            } else {
+                                $("#unlikeBTN").hide();
+                                $("#likeBTN").show();
+                            }
                         }
                     })
+                } else {
+                    $("#unlikeBTN").hide();
+                    $("#likeBTN").hide();
                 }
+
+            }
+        </script>
+        <script>
+            //cellback=true，是已經處於喜歡該文章的階段 所以點再點擊的話 要觸發不喜歡事件
+            function ckickUnLike() {
 
             }
         </script>
