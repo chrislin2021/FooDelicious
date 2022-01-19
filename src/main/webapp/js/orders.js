@@ -1,6 +1,5 @@
-$(".checkout").on("click", function() {
-	if ($("#flexRadioDefault1").is(":checked")) {
-
+$(".checkout").on("click", function() {	
+	if ($("#flexRadioDefault1").is(":checked")) {	// 金流服務請寫在else
 		if ($("#name").val().length == 0) {
 			$(".validate1").removeClass("d-none");
 		} else if ($("#phone").val().length == 0) {
@@ -51,6 +50,8 @@ $(".checkout").on("click", function() {
 				}
 			})
 		}
+	}else{
+		alert("金流服務")
 	}
 })
 

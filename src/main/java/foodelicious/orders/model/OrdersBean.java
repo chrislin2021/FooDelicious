@@ -40,7 +40,7 @@ public class OrdersBean implements Serializable {
 
 	@Column(name = "orders_date")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Timestamp orderDate;
+	private Timestamp ordersDate;
 
 	@Column(name = "orders_name")
 	private String ordersName;
@@ -75,7 +75,7 @@ public class OrdersBean implements Serializable {
 		super();
 		this.ordersId = ordersId;
 		this.memberId = memberId;
-		this.orderDate = ordersDate;
+		this.ordersDate = ordersDate;
 		this.ordersName = ordersName;
 		this.ordersPhone = ordersPhone;
 		this.ordersAddress = orderAddress;
@@ -101,12 +101,12 @@ public class OrdersBean implements Serializable {
 		this.memberId = memberId;
 	}
 
-	public java.sql.Timestamp getOrderDate() {
-		return orderDate;
+	public java.sql.Timestamp getOrdersDate() {
+		return ordersDate;
 	}
 
-	public void setOrderDate(java.sql.Timestamp orderDate) {
-		this.orderDate = orderDate;
+	public void setOrderDate(Timestamp ordersDate) {
+		this.ordersDate = ordersDate;
 	}
 
 	public String getOrdersName() {

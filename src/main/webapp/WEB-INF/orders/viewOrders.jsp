@@ -1,36 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
 <head>
+
 <link rel="stylesheet" href="../../../css/backendOrder.css">
 <link rel="stylesheet" href="../../css/backend.css">
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="../../fontawesome/css/all.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap"
-	rel="stylesheet">
+<link href="../../fontawesome/css/all.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap" rel="stylesheet">
 <script src="../../js/jquery-3.6.0.min.js"></script>
+
 </head>
+
 <body>
-	<h1 class="tableName titleName2">
-		會員訂單列表 <br> <span class="littleName">Order List</span>
-	</h1>
+
+	<h1 class="tableName titleName2">會員訂單列表 <br> <span class="littleName">Order List</span></h1>
 	<ul id="selectPage" class="nav nav-tabs">
-		<li class="nav-item" style="background: #f0f8ff"><a id="all"
-			class="nav-link active" aria-current="page" href="#">全部訂單</a></li>
-		<li class="nav-item" style="background: #f0f8ff"><a id="success"
-			class="nav-link" href="#">完成</a></li>
-		<li class="nav-item" style="background: #f0f8ff"><a id="handling"
-			class="nav-link" href="#">處理中</a></li>
-		<li class="nav-item" style="background: #f0f8ff"><a id="failed"
-			class="nav-link" href="#">失敗</a></li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="all" class="nav-link active" aria-current="page" href="#">全部訂單</a></li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="success" class="nav-link" href="#">完成</a></li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="handling" class="nav-link" href="#">處理中</a></li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="failed" class="nav-link" href="#">失敗</a></li>
 	</ul>
 
 	<section class="content">
 		<div class="col-xs-12">
-			<table id="" class='table table-striped table-hover'
-				style="background: white">
+			<table id="" class='table table-striped table-hover' style="background: white">
 				<thead>
 					<tr>
 						<th class="col table-warning smalW">訂單編號</th>
@@ -294,7 +289,7 @@
 						+ "</td>"
 				txt += "<td class='align-middle'>" + dataSource[i].ordersTotal
 						+ "</td>"
-				let newDate = new Date(dataSource[i].orderDate);
+				let newDate = new Date(dataSource[i].ordersDate);
 				let register = newDate.toLocaleString();
 				txt += "<td class='align-middle'>" + register + "</td>"
 				txt += '<td class="align-middle">'
@@ -306,6 +301,7 @@
 			$("#orders").html(txt);
 		}
 	</script>
+	
 	<script src="../../js/bootstrap.min.js"></script>
 
 </body>
