@@ -22,7 +22,7 @@ public interface CashflowAddressService {
 
 	void useAddressIdDelete(Long id);
 
-	void UpdateAddress(Map<String, String> params, Long addressId);
+	void UpdateAddress(Map<String, String> params, String commonaddress);
 
 	void pushAddress(Map<String, String> params, Long id);
 	

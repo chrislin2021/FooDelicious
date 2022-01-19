@@ -1,34 +1,6 @@
-//$.ajax({
-//	url: "/orders/insert",
-//	type: "POST",
-//	contentType: "application/json; charset=utf-8",
-//	data: JSON.stringify(orders),
-//	success: function() {
-//		$.ajax({
-//			url: "/ordersDetail/insert",
-//			type: "POST",
-//			contentType: "application/json;charset=utf-8;",
-//			data: JSON.stringify(ordersDetail),
-//			success: function() {
-//				if (orders != null) {
-//
-//
-//					for (let order of orders) {
-//						str += '<tr>';
-//						str += '<td>' + order.ordersId + '</td>';
-//						str += '<td>' + order.ordersTotal + '</td>';
-//						strorde += '</tr>';
-//
-//					}
-//				}
-//			}
-//		})
-//	}
-//})
-
 function showList() {
 	$.ajax({
-		url: "/shoppingCart/show",
+		url: "/shoppingCart/CashflowList2",
 		type: "GET",
 		contentType: "application/json; charset=utf-8",
 		success: function(carts) {
@@ -49,7 +21,7 @@ function showList() {
 					str += '<td>' + cart.member.memberMail + '</td>';
 					str += '<td>' + cart.member.memberAddress + '</td>';
 					str += '<td>' + cart.member.memberId + '</td>';
-
+					str += '<td>' + cart.order.ordersId + '</td>'
 				}
 				$("#cartList").html(str);
 			}
@@ -129,3 +101,23 @@ window.onload = function() {
 		}
 	})
 }
+//window.onload = function() {
+//	$.ajax({
+//		url: "/shoppingCart/CashflowList2",
+//		type: "GET",
+//		contentType: "application/json; charset=utf-8",
+//		success: function(list) {
+//			let str = "";
+//			$("memberId").val(list.memberId);
+//			$("orderId").val(list.ordersId);
+//			$("orderTotal").val(list.priceTotal);
+//			$("productName").val(list.productName);
+//			$("quantity").val(list.quantity);
+//			$("productPrice").val(list.productPrice);
+//			$("memberName").val(list.memberName);
+//			$("memberPhone").val(list.memberPhone);
+//			$("memberMail").val(list.memberMail);
+//			$("memberAddress").val(list.memberAddress);
+//		}
+//	})
+//}

@@ -46,14 +46,14 @@ public class CashflowAddressServiceImpl implements CashflowAddressService {
 	}
 
 	@Override
-	public void UpdateAddress(Map<String, String> params, Long addressId) {
-		cashAddressRepository.UpdateAddress(params,addressId);		
-
+	public void pushAddress(Map<String, String> params, Long id) {
+		cashAddressRepository.pushAddress(params,id);	
 	}
 
 	@Override
-	public void pushAddress(Map<String, String> params, Long id) {
-		cashAddressRepository.pushAddress(params,id);	
+	public void UpdateAddress(Map<String, String> params, String commonaddress) {
+		cashAddressRepository.UpdateAddress(params,commonaddress);
+		
 	}
 
 

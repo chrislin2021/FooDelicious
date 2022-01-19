@@ -29,6 +29,7 @@
 	<div>
 		<h2>您的寄貨資訊</h2>
 		<table class="table">
+		
 			<thead>
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="">會員編號：</span> <input
@@ -55,6 +56,14 @@
 		<button type="submit" class="btn btn-outline-primary" id='sendData'>確認更改</button>
 
 		<a href="<c:url value='/listAllMembers'/> ">回前頁</a>
+	</div>
+	<div class="container">
+		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+			<div class="col-md-4 d-flex align-items-center">
+				<a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 Company, Inc</span>
+			</div>
+			
+		</footer>
 	</div>
 
 </body>

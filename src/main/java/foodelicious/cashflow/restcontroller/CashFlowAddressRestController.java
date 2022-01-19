@@ -97,8 +97,8 @@ public class CashFlowAddressRestController {
 	}
 
 	@PutMapping("/addressUpdate/{id}")
-	public void updateArticle(@RequestBody Map<String, String> params, @PathVariable("id") Long addressId) {
-		cashflowAddressService.UpdateAddress(params, addressId);
+	public void updateArticle(@RequestBody Map<String, String> params, @PathVariable("id") String commonaddress) {
+		cashflowAddressService.UpdateAddress(params, commonaddress);
 	}
 
 //	// 發送請求給綠界
