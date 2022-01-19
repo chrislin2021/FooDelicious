@@ -139,18 +139,33 @@ public class CompanyBackEndRestController {
 //=================BackendProblemReport.jsp===================================
 	
 	@GetMapping("/companyProblems")
-	public List<ProblemsBean> findAllProblems(HttpSession session) {
-		Long problemCompanyId = (Long) session.getAttribute("userID");
-		List<ProblemsBean> problems = cbkServiceInterface.getAllProblems(problemCompanyId);
+	public List<ProblemsBean> findAllProblems() {
+		
+		List<ProblemsBean> problems = cbkServiceInterface.getAllProblems();
+		System.out.println("================================");
 		return problems;
 
 	}
 	
-	@GetMapping("/companyProblems/{status}")
-    public List<BkProduct> findAllProblemsByStatus(@PathVariable String status, HttpSession session){
-		Long problemCompanyId = (Long) session.getAttribute("userID");
-        return cbkServiceInterface.findAllProblemsByStatus(status, problemCompanyId);
+	@GetMapping("/companyProblems/status/{statusNum}")
+    public List<ProblemsBean> findAllProblemsByStatus(@PathVariable Integer statusNum){
+		String status;
+		if(statusNum == 0) {
+			status = "unresolved";
+		}else {
+			status = "resolved";
+		}
+		
+        return cbkServiceInterface.findAllProblemsByStatus(status);
     }
+	
+	@GetMapping("/companyProblems/category/{catNum}")
+    public List<ProblemsBean> findAllProblemsByCategory(@PathVariable Integer catNum){
+		
+	
+        return cbkServiceInterface.findAllProblemsByCategory(catNum);
+    }
+	
 	
 	
 	

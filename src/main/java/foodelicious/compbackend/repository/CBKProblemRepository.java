@@ -11,7 +11,15 @@ import foodelicious.compbackend.model.ProblemsBean;
 @Repository
 public interface CBKProblemRepository extends JpaRepository<ProblemsBean, Integer> {
 
-	@Query(value = "SELECT * FROM problem_report WHERE company_id = ?", nativeQuery = true)
-	List<ProblemsBean> findAll(Long problemCompanyId);
+	@Query(value = "SELECT * FROM problem_report", nativeQuery = true)
+	List<ProblemsBean> findAll();
+	
+	
+	@Query(value = "SELECT * FROM problem_report WHERE problem_status = ?", nativeQuery = true)
+	List<ProblemsBean> findProblemsByStatus(String status);
+
+	@Query(value = "SELECT * FROM problem_report WHERE problem_category = ?", nativeQuery = true)
+	List<ProblemsBean> findAllProblemsByCategory(Integer catNum);
+
 
 }
