@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.compbackend.model.CBKDetailDaoInterface;
 import foodelicious.compbackend.model.CBKOrderDaoInterface;
 import foodelicious.compbackend.model.CBKProblemDaoInterface;
@@ -116,6 +117,21 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 	public List<OrdersDetailBean> findByCompanyProductId(Long productCompanyId) {
 		
 		return cbkOrderDaoInterface.findByCompanyProductId(productCompanyId);
+	}
+	
+	
+//=========Problem Dao================================================
+
+	@Override
+	public List<ProblemsBean> getAllProblems(Long problemCompanyId) {
+		
+		return cbkProblemDaoInterface.getAllProblems(problemCompanyId);
+	}
+
+	@Override
+	public List<BkProduct> findAllProblemsByStatus(String status, Long problemCompanyId) {
+		
+		return cbkProblemDaoInterface.findAllProblemsByStatus(status,problemCompanyId);
 	}
 
 	

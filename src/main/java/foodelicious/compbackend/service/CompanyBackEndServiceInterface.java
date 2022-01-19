@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import foodelicious.backend.memberpage.model.BkMember;
+import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.compbackend.model.ProblemsBean;
 import foodelicious.member.model.Member;
 import foodelicious.orders.model.OrdersBean;
@@ -49,6 +50,13 @@ public interface CompanyBackEndServiceInterface {
 
 	//product dao for /companyOrder
 	public List<OrdersDetailBean> findByCompanyProductId(Long productCompanyId);
+	
+	
+	
+	//problem dao for /companyProblems
+	public List<ProblemsBean> getAllProblems(Long problemCompanyId);
+
+	public List<BkProduct> findAllProblemsByStatus(String status, Long problemCompanyId);
 	
 	
 	
