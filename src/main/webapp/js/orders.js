@@ -1,10 +1,17 @@
 $(".checkout").on("click", function() {
 	if ($("#flexRadioDefault1").is(":checked")) {
+
 		if ($("#name").val().length == 0) {
 			$(".validate1").removeClass("d-none");
 		} else if ($("#phone").val().length == 0) {
 			$(".validate2").removeClass("d-none");
 		} else if ($("#address").val().length == 0) {
+			$(".validate3").removeClass("d-none");
+		}
+
+		if ($("#name").val().length == 0 && $("#phone").val().length == 0 && $("#address").val().length == 0) {
+			$(".validate1").removeClass("d-none");
+			$(".validate2").removeClass("d-none");
 			$(".validate3").removeClass("d-none");
 		}
 
@@ -38,7 +45,7 @@ $(".checkout").on("click", function() {
 						contentType: "application/json;charset=utf-8;",
 						data: JSON.stringify(ordersDetail),
 						success: function() {
-							window.location.href = "https://ecservice.okmart.com.tw/ECMapInquiry/ShowStore?userip=&cvsid=1642573635290&cvstemp=http://localhost:8080/cartToOrders"
+							window.location.href = "/ordersEnd"
 						}
 					})
 				}
