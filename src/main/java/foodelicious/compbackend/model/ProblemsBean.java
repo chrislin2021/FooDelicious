@@ -39,6 +39,9 @@ public class ProblemsBean implements Serializable {
 	
 	@Column(name = "company_id")
 	private Long companyId;
+	
+	@Column(name = "company_name")
+	private String companyName;
 
 	public Integer getProblemId() {
 		return problemId;
@@ -88,6 +91,15 @@ public class ProblemsBean implements Serializable {
 		this.companyId = companyId;
 	}
 
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	
 	
 
 	

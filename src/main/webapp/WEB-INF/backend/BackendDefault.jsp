@@ -133,7 +133,7 @@
 
         <!-- 問題回報 -->
         <li id="QuestList" class="list-group-item funName">
-            <a href="" style="text-decoration: none">
+            <a href="/backend/problemReport" style="text-decoration: none">
                 <i class="text-secondary fas fa-question-circle"></i> <span class="listName">問題回報</span>
             </a>
         </li>

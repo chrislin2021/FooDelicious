@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.compbackend.model.ProblemsBean;
 import foodelicious.compbackend.service.CompanyBackEndServiceInterface;
 import foodelicious.mail.service.MailService;
@@ -82,6 +83,9 @@ public class CompanyBackEndRestController {
 
 		return cbkServiceInterface.deleteProduct(productId);
 	}
+	
+	
+//================CompanyDefault.jsp (Problem report)===================================================
 
 	@PutMapping("/companyProblemReport/{companyId}")
 	public String companyProblem(@RequestBody ProblemsBean problem, HttpSession session) {
@@ -130,6 +134,26 @@ public class CompanyBackEndRestController {
 		 Long productCompanyId = (Long) session.getAttribute("userID");
 		 return cbkServiceInterface.findByCompanyProductId(productCompanyId);
 	}
+	
+	
+//=================BackendProblemReport.jsp===================================
+	
+	@GetMapping("/companyProblems")
+	public List<ProblemsBean> findAllProblems(HttpSession session) {
+		Long problemCompanyId = (Long) session.getAttribute("userID");
+		List<ProblemsBean> problems = cbkServiceInterface.getAllProblems(problemCompanyId);
+		return problems;
+
+	}
+	
+	@GetMapping("/companyProblems/{status}")
+    public List<BkProduct> findAllProblemsByStatus(@PathVariable String status, HttpSession session){
+		Long problemCompanyId = (Long) session.getAttribute("userID");
+        return cbkServiceInterface.findAllProblemsByStatus(status, problemCompanyId);
+    }
+	
+	
+	
 	
 	
 

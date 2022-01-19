@@ -141,6 +141,7 @@
 					 </br></br></br></br></br></br></br>
 					 <c:set var="userID" value="${userID}"/>
 					 <input type="text" hidden id="companyId" value='${userID}'>
+					 <input type="text" hidden id="companyName" value='${userName}'>
 					 <input type="button" id="submitComplete" class="btn btn-outline-danger" value="submit">
 				</form>
 
@@ -164,6 +165,7 @@
     	else{
     		let problemReport = {
     	        	"companyId":$("#companyId").val(),
+    	        	"companyName": $("#companyName").val(),
     	            "problemCategory": $("#problemsCat").val(),
     	            "problemContent": $("#problem-content").val(),
     	            "problemStatus": "unresolved",
