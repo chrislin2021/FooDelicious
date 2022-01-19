@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <head>
@@ -6,26 +7,30 @@
 <link rel="stylesheet" href="../../css/backend.css">
 <link href="../../css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../fontawesome/css/all.css">
-<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap"
+	rel="stylesheet">
 <script src="../../js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<h1 class="tableName titleName2">會員訂單列表 <br> <span class="littleName">Order List</span></h1>
-
+	<h1 class="tableName titleName2">
+		會員訂單列表 <br> <span class="littleName">Order List</span>
+	</h1>
 	<ul id="selectPage" class="nav nav-tabs">
-		<li class="nav-item"><a id="all" class="nav-link active"
-			aria-current="page" href="#">全部訂單</a></li>
-		<li class="nav-item"><a id="success" class="nav-link" href="#">完成</a>
-		</li>
-		<li class="nav-item"><a id="handling" class="nav-link" href="#">處理中</a>
-		</li>
-		<li class="nav-item"><a id="failed" class="nav-link" href="#">失敗</a>
-		</li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="all"
+			class="nav-link active" aria-current="page" href="#">全部訂單</a></li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="success"
+			class="nav-link" href="#">完成</a></li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="handling"
+			class="nav-link" href="#">處理中</a></li>
+		<li class="nav-item" style="background: #f0f8ff"><a id="failed"
+			class="nav-link" href="#">失敗</a></li>
 	</ul>
 
 	<section class="content">
 		<div class="col-xs-12">
-			<table id="" class='table table-striped table-hover '>
+			<table id="" class='table table-striped table-hover'
+				style="background: white">
 				<thead>
 					<tr>
 						<th class="col table-warning smalW">訂單編號</th>
@@ -34,7 +39,7 @@
 						<th class="col table-warning large">收件人地址</th>
 						<th class="col table-warning smalW">訂單狀態</th>
 						<th class="col table-warning smalW">訂單金額</th>
-						<th class="col table-warning midW">新增日期</th>
+						<th class="col table-warning midW">成立時間</th>
 						<th class="col table-warning smalW">訂單明細</th>
 					</tr>
 				</thead>
@@ -91,7 +96,6 @@
 			$("#selectPage a").prop("class", "nav-link");
 			$("#success").prop("class", "nav-link active");
 			urlString = "/viewOrders/pages/完成";
-			// alert(urlString);
 			$.ajax({
 				url : urlString,
 				type : "GET",
@@ -112,8 +116,7 @@
 		$("#handling").on("click", function() {
 			$("#selectPage a").prop("class", "nav-link");
 			$("#handling").prop("class", "nav-link active");
-			urlString = "/viewOrders/pages/訂單處理中/待出貨/運送中";
-			// alert(urlString);
+			urlString = "/viewOrders/pages/訂單處理中";
 			$.ajax({
 				url : urlString,
 				type : "GET",
@@ -135,7 +138,6 @@
 			$("#selectPage a").prop("class", "nav-link");
 			$("#failed").prop("class", "nav-link active");
 			urlString = "/viewOrders/pages/失敗";
-			// alert(urlString);
 			$.ajax({
 				url : urlString,
 				type : "GET",
@@ -174,12 +176,9 @@
 			//計算出最大頁數。
 			if (dataSource.length % maxItems == 0) {
 				maxPage = Math.floor(dataSource.length / maxItems);
-				// alert("最大頁數1：" + maxPage);
 			} else {
 				maxPage = (Math.floor(dataSource.length / maxItems)) + 1;
-				// alert("最大頁數2：" + maxPage);
 			}
-			// alert("最大頁數：" + maxPage);
 			//生成前先清空
 			$("#page").html(" ");
 			//動態生成頁數
@@ -200,11 +199,9 @@
 				nowPage = ($(this).prop("id")) * 1;//強制轉成數字型態
 				$(".pageNum").prop("class", "page-item page pageNum")
 				$(this).prop("class", "page-item page pageNum active")
-				// alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
 				//恢復上、下頁的功能
 				$(".previous").prop("class", "page-item previous");
 				$(".next").prop("class", "page-item next");
-				// alert("nowPage："+nowPage+"maxPage："+maxPage);
 				//計算是否是最後一頁
 				if ((nowPage) + 1 >= maxPage) {
 					startItem = nowPage * maxItems;
@@ -218,7 +215,6 @@
 					startItem = nowPage * maxItems;
 					endItem = startItem + maxItems;
 				}
-				// alert("開始："+startItem+"結束："+endItem);
 				showData(startItem, endItem, dataSource);
 			});
 
@@ -298,7 +294,7 @@
 						+ "</td>"
 				txt += "<td class='align-middle'>" + dataSource[i].ordersTotal
 						+ "</td>"
-				let newDate = new Date(dataSource[i].ordersDate);
+				let newDate = new Date(dataSource[i].orderDate);
 				let register = newDate.toLocaleString();
 				txt += "<td class='align-middle'>" + register + "</td>"
 				txt += '<td class="align-middle">'
@@ -306,6 +302,7 @@
 						+ '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="訂單明細" data-id='+dataSource[i].ordersId+'>'
 						+ '</form>' + '</td></tr>'
 			}
+
 			$("#orders").html(txt);
 		}
 	</script>

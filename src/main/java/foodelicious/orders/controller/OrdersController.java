@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import foodelicious.backend.orderPage.model.BkOrder;
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
 import foodelicious.cart.service.SearchService;
@@ -133,9 +132,10 @@ public class OrdersController {
 		return ordersService.selectOrders((Long) session.getAttribute("userID"));
 	}
 
+	@ResponseBody
 	@GetMapping("/viewOrders/pages/{orderStatus}")
 	public List<OrdersBean> findByStatus(@PathVariable String orderStatus) {
-		return ordersService.findByStatus(orderStatus);
+		return ordersService.selectIdAndStatus((Long) session.getAttribute("userID"), orderStatus);
 	}
 
 	@GetMapping("/toOrderDetailPage/{ordersId}")

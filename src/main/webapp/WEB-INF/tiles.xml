@@ -153,9 +153,9 @@
 		<put-attribute name="title" value="/ordersEnd"></put-attribute>
 	</definition>
 
-	<definition name="app.ViewOrders"
-		template="/WEB-INF/orders/viewOrders.jsp">
-		<put-attribute name="title" value="/viewOrders"></put-attribute>
+	<definition name="app.ViewOrders" extends="app.default4">
+		<put-attribute name="content"
+			value="/WEB-INF/orders/viewOrders.jsp"></put-attribute>
 	</definition>
 
 	<definition name="app.ViewOrdersDetail"
@@ -187,13 +187,14 @@
 
 	<definition name="app.CashFlowAddress"
 		extends="app.default4">
-		<put-attribute name="content" value="/WEB-INF/cashflow/CashFlowAddress2.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/cashflow/CashFlowAddress2.jsp" />
 	</definition>
-	
-<!-- 	<definition name="app.CashFlowAddress" -->
-<!-- 		template="/WEB-INF/cashflow/CashFlowAddress.jsp"> -->
-<!-- 		<put-attribute name="title" value="/CashFlowAddress" /> -->
-<!-- 	</definition> -->
+
+	<!-- <definition name="app.CashFlowAddress" -->
+	<!-- template="/WEB-INF/cashflow/CashFlowAddress.jsp"> -->
+	<!-- <put-attribute name="title" value="/CashFlowAddress" /> -->
+	<!-- </definition> -->
 
 	<definition name="app.BackendMemberUpdate"
 		extends="app.BackendDefault">
@@ -212,7 +213,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/backend/managerPage/BackendManagerUpdate.jsp" />
 	</definition>
-	
+
 	<definition name="app.BackendProblemReport"
 		extends="app.BackendDefault">
 		<put-attribute name="content"
@@ -296,17 +297,17 @@
 	</definition>
 
 	<definition name="app.default3"
-				template="/WEB-INF/layout/default3.jsp">
+		template="/WEB-INF/layout/default3.jsp">
 		<put-attribute name="title" value="spring boot demo" />
 	</definition>
 
 	<definition name="app.index" extends="app.default3">
 		<put-attribute name="content"
-					   value="/WEB-INF/homepage/index.jsp" />
+			value="/WEB-INF/homepage/index.jsp" />
 	</definition>
 
 	<definition name="app.default4"
-				template="/WEB-INF/layout/default4.jsp">
+		template="/WEB-INF/layout/default4.jsp">
 		<put-attribute name="title" value="spring boot demo" />
 	</definition>
 
