@@ -41,8 +41,6 @@
 			value="/WEB-INF/member/memberIndex1.jsp" />
 	</definition>
 
-
-
 	<definition name="app.PostArticle" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/article/PostArticle.jsp" />
@@ -84,13 +82,11 @@
 			value="/WEB-INF/compBackend/CompanyMain.jsp" />
 	</definition>
 
-
 	<definition name="app.CompanyProduct2"
 		extends="app.CompanyDefault2">
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/CompanyProduct.jsp" />
 	</definition>
-
 
 	<definition name="app.CompanyProductUpdate"
 		extends="app.CompanyDefault2">
@@ -109,7 +105,6 @@
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/CompanyOrder.jsp" />
 	</definition>
-
 
 	<definition name="app.Product" extends="app.default4">
 		<put-attribute name="content"
@@ -156,11 +151,6 @@
 	<definition name="app.ViewOrders" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/orders/viewOrders.jsp"></put-attribute>
-	</definition>
-
-	<definition name="app.ViewOrdersDetail"
-		template="/WEB-INF/orders/viewOrdersDetail.jsp">
-		<put-attribute name="title" value="viewOrdersDetail"></put-attribute>
 	</definition>
 
 	<definition name="app.CustService" extends="app.default4">
@@ -240,7 +230,6 @@
 		<put-attribute name="content"
 			value="/WEB-INF/member/pwdForgetSuccess.jsp" />
 	</definition>
-
 
 	<definition name="app.BackendProduct"
 		extends="app.BackendDefault">

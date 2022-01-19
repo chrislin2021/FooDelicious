@@ -40,6 +40,35 @@
 				</thead>
 				<tbody id="orders"></tbody>
 			</table>
+
+			<!-- Modal -->
+			<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+				<div class="modal-dialog modal-dialog-centered modal-dialog modal-lg row justify-content-start">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3>訂單明細</h3>
+						</div>
+						<div class="modal-body">
+							<table class="table align-middle table-striped table-hover">
+								<thead>
+									<tr>
+										<th scope="col">產品圖片</th>
+										<th scope="col">產品名稱</th>
+										<th scope="col">產品價格</th>
+										<th scope="col">產品數量</th>
+									</tr>
+								</thead>
+								<tbody class="ordersDetail">
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<nav aria-label="Page navigation example ">
 				<ul id="page" class="pagination justify-content-center"></ul>
 			</nav>
@@ -151,6 +180,7 @@
 	</script>
 
 	<script>
+	
 		//=============分頁程式=============
 		function pages(maxNum, dataSource) { //輸入單頁最大筆數和資料來源
 			//=================分頁功能================
@@ -273,6 +303,7 @@
 	</script>
 
 	<script>
+	
 		//=============顯示功能=============
 		function showData(startItem, endItem, dataSource) {
 			let txt = "<tr>";
@@ -292,16 +323,42 @@
 				let newDate = new Date(dataSource[i].ordersDate);
 				let register = newDate.toLocaleString();
 				txt += "<td class='align-middle'>" + register + "</td>"
-				txt += '<td class="align-middle">'
-						+ '<form method="" >'
-						+ '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="訂單明細" data-id='+dataSource[i].ordersId+'>'
-						+ '</form>' + '</td></tr>'
+				txt += '<td class="align-middle"><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showDetail('+dataSource[i].ordersId+')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button></td></tr>'
 			}
-
 			$("#orders").html(txt);
 		}
+
+	function showDetail(ordersId) {
+			$.ajax({
+				url: "/toOrderDetailPage/" + ordersId,
+				type: "GET",
+				contentType: "application/json; charset=utf-8",
+				success: function(details) {
+					var orders = "";
+					var total = 0;
+					if (details != null) {
+						$(".ordersDetail").empty();
+						for (let detail of details) {
+							orders += '<tr>';
+							orders += '<td><img src=/img/' + detail.product.productPics + ' style="width:100px ;height:100px"></td>';
+							orders += '<td>' + detail.product.productName + '</td>';
+							orders += '<td>' + detail.product.productPrice + '</td>';
+							orders += '<td>' + detail.quantity + '</td>';
+							orders += '</tr>';
+							total+= detail.product.productPrice*detail.quantity;
+						}
+						if (orders != ""){
+							orders += '<tr><td colspan="4">訂單已折扣 NT$:110元</td></tr>';
+							orders += '<tr><td colspan="4">訂單總金額 NT$:' + total + '元</td></tr>';						
+						}
+					}
+					$(".ordersDetail").html(orders);
+				}
+			})
+		}	
+
 	</script>
-	
+
 	<script src="../../js/bootstrap.min.js"></script>
 
 </body>

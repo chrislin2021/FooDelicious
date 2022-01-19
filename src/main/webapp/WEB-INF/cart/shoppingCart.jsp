@@ -71,20 +71,20 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center">
+		<div class="modal-dialog modal-dialog-centered modal-dialog modal-lg row justify-content-start">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3>Smart Choice</h3>
+					<h3>明智的選擇！</h3>
 				</div>
 				<div class="modal-body">
-					<table class="table">
+					<table class="table align-middle table-striped table-hover">
 						<tbody class="productInformation">
 						</tbody>
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
 				</div>
 			</div>
 		</div>
@@ -121,7 +121,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">購物車</th>
+					<th scope="col">　購物車</th>
 					<th scope="col">填寫資料</th>
 					<th scope="col">訂單確認</th>
 				</tr>
@@ -147,7 +147,7 @@
 			<tbody id="cartList">
 				<c:forEach var="carts" items="${carts}">
 					<tr>
-						<th scope="row"><img src="/img/${carts.product.productPics}" style="width: 60px; height: 60px"></th>
+						<th scope="row"><img src="/img/${carts.product.productPics}" style="width: 100px; height: 100px"></th>
 						<td>${carts.product.productName}</td>
 						<td>${carts.product.productPrice}</td>
 						<td><button type="button" class="btn btn-secondary btn-sm" onclick="changeNum(${carts.productId},${-1})" id="minus"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button> 
@@ -233,7 +233,7 @@
 	<div class="container">
 		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
 			<div class="col-md-4 d-flex align-items-center">
-				<a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 Company, Inc</span>
+				<a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 FooDelicious, Inc</span>
 			</div>
 
 			<ul class="nav col-md-4 justify-content-end list-unstyled d-flex">

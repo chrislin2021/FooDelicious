@@ -89,6 +89,7 @@ public class OrdersController {
 			ordersDetailBean.setProduct_id(cart.getProductId());
 			ordersDetailBean.setQuantity(cart.getQuantity());
 			ordersDetailService.insertOrderDetail(ordersDetailBean);
+
 			for (Product product : products) {
 				if (cart.getProductId() == product.getProductId()) {
 					product.setProductId(cart.getProductId());
@@ -108,22 +109,14 @@ public class OrdersController {
 					searchService.save(product);
 				}
 			}
+
 			if ((Long) session.getAttribute("discountId") != null) {
 				discountService.deleteItem((Long) session.getAttribute("discountId"));
 			}
+
 			cartService.deleteItem(cart.getCartId());
 			session.removeAttribute("discountContent");
 		}
-	}
-
-	@GetMapping("/ordersEnd")
-	public String ordersEnd() {
-		return "app.OrdersEnd";
-	}
-
-	@GetMapping("/memberOrders")
-	public String memberOrders() {
-		return "app.ViewOrders";
 	}
 
 	@ResponseBody
@@ -138,13 +131,22 @@ public class OrdersController {
 		return ordersService.selectIdAndStatus((Long) session.getAttribute("userID"), orderStatus);
 	}
 
+	@ResponseBody
 	@GetMapping("/toOrderDetailPage/{ordersId}")
-	public String toOrdersDetailPage(@PathVariable Long ordersId) {
+	public List<OrdersDetailBean> toOrdersDetailPage(@PathVariable Long ordersId) {
 		List<OrdersDetailBean> details = ordersDetailService.selectOrdersDetail(ordersId);
 
-		session.setAttribute("details", details);
+		return details;
+	}
 
-		return "app.ViewOrdersDetail";
+	@GetMapping("/ordersEnd")
+	public String ordersEnd() {
+		return "app.OrdersEnd";
+	}
+
+	@GetMapping("/memberOrders")
+	public String memberOrders() {
+		return "app.ViewOrders";
 	}
 
 }

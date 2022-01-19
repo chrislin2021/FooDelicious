@@ -9,7 +9,7 @@ function showItem() {
 				var str = "";
 				for (let cart of carts) {
 					str += '<tr>';
-					str += '<th scope="row"><img src="/img/' + cart.product.productPics + '"style="width:60px ;height:60px"></th>';
+					str += '<th scope="row"><img src="/img/' + cart.product.productPics + '"style="width:100px ;height:100px"></th>';
 					str += '<td>' + cart.product.productName + '</td>';
 					str += '<td>' + cart.product.productPrice + '</td>';
 					str += '<td><button type="button" class="btn btn-secondary btn-sm" onclick="changeNum(' + cart.productId + ',' + -1 + ')" id="minus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>'
@@ -152,7 +152,7 @@ function searchProduct() {
 					$(".productInformation").empty();
 					for (let productPolymer of productPolymers) {
 						product += '<tr>';
-						product += '<td><img src=/img/' + productPolymer.productPics + ' style="width:30px ;height:30px"></td>';
+						product += '<td><img src=/img/' + productPolymer.productPics + ' style="width:100px ;height:100px"></td>';
 						product += '<td>' + productPolymer.productName + '</td>';
 						product += '<td>NT$:' + productPolymer.productPrice + '元</td>';
 						product += '<td><input id="pdQty" type="number" value = 1 min=1 max=' + productPolymer.productStock + '></td>';

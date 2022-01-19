@@ -20,7 +20,8 @@
 
 <body>
 
-<header class="navArea">	
+<header class="navArea">
+	
 		<nav class="container-fluid navbar fixed-top navbar-expand-lg navbar-light bg-lightd-grid gap-3 align-items-center navArea" style="grid-template-columns: 1fr 2fr;">
 			<a class="navbar-brand textCon itembox" href="${contextRoot}/">好煮意</a>
 
@@ -49,7 +50,7 @@
 
 			<div class="d-flex align-items-center">
 				<div class="flex-shrink-0 dropstart">
-					<a href="/memberIndex"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16" class="rounded-circle"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" /></svg></a>
+					<a href="/memberIndex"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16" class="rounded-circle"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" /></svg></a>
 				</div>
 			</div>
 		</nav>
@@ -71,19 +72,19 @@
 
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-dialog-centered modal-dialog modal-lg row justify-content-start">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3>Smart Choice</h3>
+					<h3>明智的選擇！</h3>
 				</div>
 				<div class="modal-body">
-					<table class="table">
+					<table class="table align-middle table-striped table-hover">
 						<tbody class="productInformation">
 						</tbody>
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
 				</div>
 			</div>
 		</div>
@@ -92,7 +93,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">購物車</th>
+				<th scope="col">　購物車</th>
 				<th scope="col">填寫資料</th>
 				<th scope="col">訂單確認</th>
 			</tr>
@@ -116,7 +117,7 @@
 	<div class="container">
 		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
 			<div class="col-md-4 d-flex align-items-center">
-				<a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 Company, Inc</span>
+				<a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 FooDelicious, Inc</span>
 			</div>
 
 			<ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
@@ -129,6 +130,7 @@
 
 	<script src="/js/jquery-3.6.0.min.js"></script>
 	<script src="../../js/orders.js"></script>
+	<script src="../../js/cart.js"></script>
 	<script src="../../js/bootstrap.bundle.min.js"></script>
 	<script src="form-validation.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
