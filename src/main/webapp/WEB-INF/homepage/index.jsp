@@ -26,7 +26,7 @@
             <!--商品1-->
             <div class="special">
                 <div class="special-img">
-                    <a href="/Product"><img id="pho0" src="" /></a>
+                    <a id="product0" href=""><img id="pho0" src="" /></a>
                 </div>
                 <div class="special-items">
                     <h2 id="productName0"></h2>
@@ -37,7 +37,7 @@
             <!--商品2-->
             <div class="special">
                 <div class="special-img">
-                    <a href="/Product"><img id="pho1" src="" /></a>
+                    <a id="product1" href=""><img id="pho1" src="" /></a>
                 </div>
                 <div class="special-items">
                     <h2 id="productName1"></h2>
@@ -48,7 +48,7 @@
             <!--商品3-->
             <div class="special">
                 <div class="special-img">
-                    <a href="/Product"><img id="pho2" src="" /></a>
+                    <a id="product2" href=""><img id="pho2" src="" /></a>
                 </div>
                 <div class="special-items">
                     <h2 id="productName2"></h2>
@@ -64,7 +64,7 @@
                     <span id="productPrice3"></span>
                 </div>
                 <div class="special-img">
-                    <a href="/Product"><img id="pho3" src="" /></a>
+                    <a id="product3" href=""><img id="pho3" src="" /></a>
                 </div>
             </div>
             <!--商品5-->
@@ -75,7 +75,7 @@
                     <span id="productPrice4"></span>
                 </div>
                 <div class="special-img">
-                    <a href="/Product"><img id="pho4" src="" /></a>
+                    <a id="product4" href=""><img id="pho4" src="" /></a>
                 </div>
             </div>
             <!--商品6-->
@@ -86,7 +86,7 @@
                     <span id="productPrice5"></span>
                 </div>
                 <div class="special-img">
-                    <a href="/Product"><img id="pho5" src="" /></a>
+                    <a id="product5" href=""><img id="pho5" src="" /></a>
                 </div>
             </div>
         </div>
@@ -207,6 +207,7 @@
                 for (let i=0; i<3; i++){
                     $("#pho"+i).prop("src","../../img/"+foods[i].productImg);
                     $("#productName"+i).text(foods[i].productName);
+                    $("#product"+i).prop("href","/Product/"+foods[i].productId);
                     let contentObj = new String(foods[i].productContent);
                     let productContent = contentObj.substring(0,20);
                     $("#productContent"+i).text(productContent);
@@ -223,6 +224,7 @@
                     let j=i+3
                     $("#pho"+j).prop("src","../../img/"+tool[i].productImg);
                     $("#productName"+j).text(tool[i].productName);
+                    $("#product"+j).prop("href","/Product/"+tool[i].productId);
                     let contentObj2 = new String(tool[i].productContent);
                     let productContent2 = contentObj2.substring(0,20);
                     $("#productContent"+j).text(productContent2);
