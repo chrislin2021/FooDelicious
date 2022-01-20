@@ -1,4 +1,4 @@
-$(".checkout").on("click", function() {	
+$(".checkout").on("click", function() {
 	if ($("#flexRadioDefault1").is(":checked")) {	// 金流服務請寫在else
 		if ($("#name").val().length == 0) {
 			$(".validate1").removeClass("d-none");
@@ -50,7 +50,7 @@ $(".checkout").on("click", function() {
 				}
 			})
 		}
-	}else{
+	} else {
 		alert("金流服務")
 	}
 })

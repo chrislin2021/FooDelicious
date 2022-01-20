@@ -110,9 +110,9 @@ public class OrdersController {
 				}
 			}
 
-			if ((Long) session.getAttribute("discountId") != null) {
-				discountService.deleteItem((Long) session.getAttribute("discountId"));
-			}
+//			if ((Long) session.getAttribute("discountId") != null) {
+//				discountService.deleteItem((Long) session.getAttribute("discountId"));
+//			}
 
 			cartService.deleteItem(cart.getCartId());
 			session.removeAttribute("discountContent");
