@@ -214,6 +214,12 @@
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/BackendProblemReport.jsp" />
 	</definition>
+	
+	<definition name="app.BackendProblemReportUpdate"
+		extends="app.BackendDefault">
+		<put-attribute name="content"
+			value="/WEB-INF/compBackend/BackendProblemReportUpdate.jsp" />
+	</definition>
 
 	<definition name="app.ListAllMembers" extends="app.default4">
 		<put-attribute name="content"

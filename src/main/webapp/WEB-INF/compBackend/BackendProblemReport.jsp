@@ -48,8 +48,8 @@
 						<th class="col table-success">新增日期</th>
 						<th class="col table-success">問題狀態</th>
 						<th class="col table-success">廠商名稱</th>
-						<th class="col table-success">回覆</th>
 						<th class="col table-success">更新</th>
+						<th class="col table-success">回覆</th>
 					</tr>
 				</thead>
 				<tbody id="problemReport"></tbody>
@@ -59,6 +59,30 @@
 			</nav>
 		</div>
 	</section>
+	
+	<script>
+    //=============更新問題回報資料功能=============
+
+    //更新前先查詢出資料
+    $("#problemReport").on("click","#updateBtn",function(){
+        let id = $(this).attr("data-id");
+         alert("id："+id);
+        $.ajax({
+            url:"/companyProblems/find/"+id,
+            type: "GET",
+            success:function(problem){
+            	//alert(problem.problemContent);
+                //將json字串化
+                let problemString = JSON.stringify(problem);
+                //將資料存到localStorage，給另一個頁面使用
+                localStorage.setItem("problemData",problemString);
+                //跳轉頁面
+                window.location.href="/backend/problemReportUpdate";
+            }
+        })
+
+    });
+</script>
 
 	<script>
 		//=============顯示所有商品資料=============
@@ -465,12 +489,12 @@
 						+ "</td>"
 				txt += '<td class="align-middle">'
 						+ '<form method="" >'
-						+ '<input id="responseBtn" class="btn btn-outline-success" type="button" value="回覆" data-id='+dataSource[i].problemId+'>'
+						+ '<input id="updateBtn" class="btn btn-outline-success" type="button" value="更新" data-id='+dataSource[i].problemId+'>'
 						+ '</form>' + '</td>'
 
 				txt += '<td class="align-middle">'
 						+ '<form method="" >'
-						+ '<input id="updateBtn" class="btn btn-outline-primary" type="button" value="更新" data-id='+dataSource[i].problemId+'>'
+						+ '<input id="responseBtn" class="btn btn-outline-primary" type="button" value="回覆" data-id='+dataSource[i].problemId+'>'
 						+ '</form>' + '</td></tr>'
 
 			}

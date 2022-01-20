@@ -173,6 +173,16 @@ public class CompanyBackEndRestController {
         return cbkServiceInterface.findAllProblemsByKeywords(keywords);
     }
 	
+	@GetMapping("/companyProblems/find/{problemId}")
+	public ProblemsBean findProblemById(@PathVariable Integer problemId) {
+		return cbkServiceInterface.findProblemById(problemId);
+	}
+	
+	@PutMapping("/companyProblems/update/{problemId}")
+	public String updateCompanyProblem(@PathVariable Integer problemId, @RequestBody ProblemsBean problem) {
+		return cbkServiceInterface.updateCompanyProblem(problemId, problem);
+	}
+	
 	
 	
 	

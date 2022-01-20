@@ -77,10 +77,10 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			newProduct.setProductStatus(product.getProductStatus());
 			newProduct.setProductKeywords(product.getProductKeywords());
 			cbkProdRepository.save(newProduct);
-			return "Product update successful!";
+			return "商品更新成功!";
 		} else {
 
-			return "Product update unsuccessful! Please try again.";
+			return "商品更新失敗。請重新再試一次。";
 		}
 
 	}

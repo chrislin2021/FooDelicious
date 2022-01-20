@@ -66,5 +66,24 @@ public class CBKProblemDao implements CBKProblemDaoInterface {
 		return cbkProblemRepository.findAllProblemsByKeywords(keywords);
 	}
 
+	//更新問題狀態存入資料庫中
+	@Override
+	public String updateCompanyProblem(Integer problemId, ProblemsBean problem) {
+		ProblemsBean updatedProblem = em.find(ProblemsBean.class, problemId);
+		if(updatedProblem != null) {
+			updatedProblem.setProblemStatus(problem.getProblemStatus());
+			cbkProblemRepository.save(updatedProblem);
+			return "問題回報狀態更新成功!";
+		}
+		return "找不到問題，請重新來過。";
+	}
+	
+	//更新問題狀態前先找到更新前的資料
+	@Override
+	public ProblemsBean findProblemById(Integer problemId) {
+		ProblemsBean problem = em.find(ProblemsBean.class, problemId);
+		return problem;
+	}
+
 
 }

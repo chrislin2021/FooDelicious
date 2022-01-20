@@ -59,6 +59,10 @@ public interface CompanyBackEndServiceInterface {
 	public List<ProblemsBean> findAllProblemsByCategory(Integer catNum);
 
 	public List<ProblemsBean> findAllProblemsByKeywords(String keywords);
+
+	public String updateCompanyProblem(Integer problemId, ProblemsBean problem);
+
+	public ProblemsBean findProblemById(Integer problemId);
 	
 	
 	
