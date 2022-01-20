@@ -17,7 +17,7 @@ public class BkOrderDaoImpl implements BkOrderDao{
     @Override
     public List<BkOrder> findAllOrder() {
 
-        List<BkOrder> orders = (List<BkOrder>) bkOrderRepository.findAll();
+        List<BkOrder> orders = (List<BkOrder>) bkOrderRepository.findAllByDesc();
 
         return orders;
     }
