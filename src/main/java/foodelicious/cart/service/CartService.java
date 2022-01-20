@@ -16,4 +16,6 @@ public interface CartService {
 
 	List<CartBean> selectAll();
 
+	List<CartBean> hesitantProduct();
+
 }

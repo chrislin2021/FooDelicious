@@ -34,6 +34,7 @@ public class OrdersController {
 
 	private OrdersService ordersService;
 
+	@SuppressWarnings("unused")
 	private DiscountService discountService;
 
 	private SearchService searchService;
@@ -110,6 +111,7 @@ public class OrdersController {
 				}
 			}
 
+//			===============a lot of problems===============
 //			if ((Long) session.getAttribute("discountId") != null) {
 //				discountService.deleteItem((Long) session.getAttribute("discountId"));
 //			}
