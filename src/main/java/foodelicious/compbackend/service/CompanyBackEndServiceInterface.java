@@ -44,8 +44,7 @@ public interface CompanyBackEndServiceInterface {
 	
 
 	//order dao for /companyOrder
-	public List<OrdersDetailBean> findByCompanyProductId(Long productCompanyId);
-	
+	public List<OrdersDetailBean> findAllOrders();
 	
 	
 	//problem dao for /companyProblemReport/{companyId}
@@ -63,6 +62,8 @@ public interface CompanyBackEndServiceInterface {
 	public String updateCompanyProblem(Integer problemId, ProblemsBean problem);
 
 	public ProblemsBean findProblemById(Integer problemId);
+
+	
 	
 	
 	

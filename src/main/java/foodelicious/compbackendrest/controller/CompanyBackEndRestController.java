@@ -129,10 +129,10 @@ public class CompanyBackEndRestController {
 //===============CompanyOrder.jsp=================================
 
 	// this is rest controller , /companyOrder is controller
-	@GetMapping("/companyOrders")
-	public List<OrdersDetailBean> findByCompanyProductId(HttpSession session) {
-		 Long productCompanyId = (Long) session.getAttribute("userID");
-		 return cbkServiceInterface.findByCompanyProductId(productCompanyId);
+	@GetMapping("/companyOrderDetails")
+	public List<OrdersDetailBean> findAllOrders() {
+		
+	return cbkServiceInterface.findAllOrders();
 	}
 	
 	

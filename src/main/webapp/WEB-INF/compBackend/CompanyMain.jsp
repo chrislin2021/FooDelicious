@@ -20,11 +20,11 @@
 	<div class="app-card shadow p-3 mb-5 bg-body rounded">
 		<div class="">
 			<div class="app-card-body p-3 p-lg-4">
-				<h3 class="mb-3">Welcome, ${userName}!</h3>
+				<h3 class="mb-3">Welcome, ${userName} !</h3>
 				<div class="row gx-5 gy-3">
 					<div class="col-12 col-lg-9">
 
-						<div>公司簡介</div>
+						<div>我們提供來自於歐洲新鮮直運的產品。</div>
 					</div>
 					<!--//col-->
 

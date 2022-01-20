@@ -59,7 +59,7 @@
 					}
 
 				}
-				;
+				
 				companyIdsGlobal = productIdsLocal;
 				//alert(companyIdsGlobal);
 				//alert(companyIdsGlobal.length);

@@ -95,13 +95,13 @@
        let urlData = "";
        
        if(selectVal === "全部商品"){
-           urlData = "http://localhost:8080/companyProducts/"+keyword;
+           urlData = "/companyProducts/"+keyword;
        }else if(selectVal === "廚具"){
            selectVal = 0;
-           urlData = "http://localhost:8080/companyProducts/"+keyword+"/"+selectVal;
+           urlData = "/companyProducts/"+keyword+"/"+selectVal;
        }else{
            selectVal = 1;
-           urlData = "http://localhost:8080/companyProducts/"+keyword+"/"+selectVal;
+           urlData = "/companyProducts/"+keyword+"/"+selectVal;
        }
        $.ajax({
            url: urlData,

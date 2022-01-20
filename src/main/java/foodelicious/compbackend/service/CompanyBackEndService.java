@@ -155,9 +155,9 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 //============Order Dao=========================================================================
 
 	@Override
-	public List<OrdersDetailBean> findByCompanyProductId(Long productCompanyId) {
+	public List<OrdersDetailBean> findAllOrders() {
 		
-		return cbkOrderDaoInterface.findByCompanyProductId(productCompanyId);
+		return cbkOrderDaoInterface.findAllOrders();
 	}
 
 	

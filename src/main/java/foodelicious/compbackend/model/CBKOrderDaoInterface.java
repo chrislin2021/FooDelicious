@@ -8,6 +8,6 @@ import foodelicious.orders.model.OrdersDetailBean;
 public interface CBKOrderDaoInterface {
 	
 
-	public List<OrdersDetailBean> findByCompanyProductId(Long productCompanyId);
+	public List<OrdersDetailBean> findAllOrders();
 
 }

@@ -20,24 +20,9 @@ public class CBKOrderDao implements CBKOrderDaoInterface {
 	}
 
 
-
 	@Override
-	public List <OrdersDetailBean> findByCompanyProductId(Long productCompanyId) {
+	public List<OrdersDetailBean> findAllOrders() {
 		List<OrdersDetailBean> allOrderDetails = cbkOrderRepository.findAll();
-		
-//		List<OrdersDetailBean> bean = null;
-//		for(int i = 0 ; i < allOrderDetails.size() ; i ++) {
-//			OrdersDetailBean orderDetailBean = allOrderDetails.get(i);
-//			Object productDetail = orderDetailBean.getProductDetail();
-//			
-//		}
-		
-		
-		
-		
-		
-		
-		
 		return allOrderDetails;
 	}
 	
