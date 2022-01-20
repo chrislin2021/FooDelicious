@@ -16,12 +16,12 @@
             height: 415px;
             padding: 10px;
             border-radius: 10px;
+            overflow: scroll;
         }
-
-        .typeName{
+        
+        .typeName {
             width: 100px;
         }
-
     </style>
 
     <br />
@@ -32,10 +32,10 @@
             <option>廚具開箱</option>
             <option>食譜分享</option>
         </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
-        <button class="btn btn-outline-secondary" type="button" id="articleSearch" >查詢文章</button>
+        <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
     </div>
     <div class="container-fluid">
-        <div class="row" >
+        <div class="row">
             <div class="col-12 col-md-2">
                 <!--版面配置左方-->
             </div>
@@ -63,7 +63,7 @@
                     <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" id="sendToChatRoom2">傳送</button>
                 </div>
-                <div class="messageArea">
+                <div class="messageArea" id="messageArea">
 
                 </div>
             </div>
@@ -163,8 +163,8 @@
                                     'from': articles.userName,
                                     'text': text
                                 }));
-//                                 messageData += "<p>" + articles.userName + " : " + text + "</p>";
-//                                 $(".messageArea").html(messageData);
+                                //                                 messageData += "<p>" + articles.userName + " : " + text + "</p>";
+                                //                                 $(".messageArea").html(messageData);
                             }
                         }
                     };
@@ -176,8 +176,8 @@
                                 'from': articles.userName,
                                 'text': text
                             }));
-//                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
-//                             $(".messageArea").html(messageData);
+                            //                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
+                            //                             $(".messageArea").html(messageData);
                         }
                     };
                 }
@@ -337,63 +337,64 @@
         var alertTrigger = document.getElementById('articleSearch')
 
         $("#articleSearch").on("click", function() {
-            let clasify = $("#clasify").val();
-            //console.log(clasify)
-            let titleKeyWord = $("#titleKeyWord").val()
-                //console.log(titleKeyWord.length == 0)
+                let clasify = $("#clasify").val();
+                //console.log(clasify)
+                let titleKeyWord = $("#titleKeyWord").val()
+                    //console.log(titleKeyWord.length == 0)
 
-            if (titleKeyWord == "" || titleKeyWord.length == 0) {
-                //console.log("請輸入資料喔")
-                alertMsg('搜尋內容不能空白喔', 'success')
-                return;
-            } else {
-                //document.createElement('div').innerHTML="";
-                $("#liveAlertPlaceholder").html("");
-            }
-
-            let fuzzySearch = {
-                "clasify": clasify,
-                "AssociateString": titleKeyWord
-            }
-//             console.log(fuzzySearch)
-
-            $.ajax({
-                url: "/fuzzySearch/" + clasify + "/" + titleKeyWord,
-                type: "GET",
-                //data: JSON.stringify(fuzzySearch),
-                contentType: "application/json; charset=utf-8",
-                success: function(articles) {
-                    ShareData = articles
-                        //得到格式：{session: null, title: Array(18)}        
-                        //console.log(ShareData)
-                        //=================分頁功能================
-                    endItem = (articles.title.length <= 10) ? articles.title.length : 10;
-                    //讀回資料時就先顯示
-                    showData(startItem, endItem);
-                    //計算出最大頁數。
-                    maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
-
-                    //動態生成頁數
-                    let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
-                    for (let i = 0; i < maxPage; i++) {
-                        let pageNum = i + 1;
-                        pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
-                    };
-                    pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
-                    $("#page").html(pageHtml);
+                if (titleKeyWord == "" || titleKeyWord.length == 0) {
+                    //console.log("請輸入資料喔")
+                    alertMsg('搜尋內容不能空白喔', 'success')
+                    return;
+                } else {
+                    //document.createElement('div').innerHTML="";
+                    $("#liveAlertPlaceholder").html("");
                 }
-            })
 
-        })
-		//websock顯示資料
+                let fuzzySearch = {
+                        "clasify": clasify,
+                        "AssociateString": titleKeyWord
+                    }
+                    //             console.log(fuzzySearch)
+
+                $.ajax({
+                    url: "/fuzzySearch/" + clasify + "/" + titleKeyWord,
+                    type: "GET",
+                    //data: JSON.stringify(fuzzySearch),
+                    contentType: "application/json; charset=utf-8",
+                    success: function(articles) {
+                        ShareData = articles
+                            //得到格式：{session: null, title: Array(18)}        
+                            //console.log(ShareData)
+                            //=================分頁功能================
+                        endItem = (articles.title.length <= 10) ? articles.title.length : 10;
+                        //讀回資料時就先顯示
+                        showData(startItem, endItem);
+                        //計算出最大頁數。
+                        maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
+
+                        //動態生成頁數
+                        let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+                        for (let i = 0; i < maxPage; i++) {
+                            let pageNum = i + 1;
+                            pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
+                        };
+                        pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+                        $("#page").html(pageHtml);
+                    }
+                })
+
+            })
+            //websock顯示資料
         function showMessageOutput(messageOutput) {
             let line = "";
             //JSONData = JSON.stringify(messageOutput);
-//             console.log(JSONData);
+            //             console.log(JSONData);
             //line += JSON.stringify(messageOutput) + "\n";
             //console.log(line);
             messageData += "<p>" + messageOutput.from + " : " + messageOutput.text + "</p>";
             $(".messageArea").html(messageData);
+            document.getElementById("messageArea").scrollTop = document.getElementById("messageArea").scrollHeight;
         }
         //模糊搜尋報錯
         function alertMsg(message, type) {

@@ -233,4 +233,10 @@ public class ArticleController {
 		boolean check = msgService.checkLike(userId, articleId);
 		return check;
 	}
+	
+	@GetMapping("/userFocusePage")
+	public String userFocusePage() {
+		
+		return "app.userFocusePage";
+	}
 }

@@ -43,6 +43,16 @@
                 </div>
                 <!--留言區-->
                 <div id="msgArea">
+                    <!--摺疊區域
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Button with data-bs-target
+                      </button>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                        </div>
+                    </div>
+                    -->
                     <div>
                         <table class="table table-hover table-sm" id="showMSG">
 
@@ -188,8 +198,6 @@
                         type: "GET",
                         success: function(cellback) {
                             console.log("cellback：" + cellback)
-                                //(cellback) ? ckickUnLike() : cliclLike();
-                                //如果已經喜歡了
                             if (cellback) {
                                 $("#unlikeBTN").show();
                                 $("#likeBTN").hide();
@@ -203,12 +211,6 @@
                     $("#unlikeBTN").hide();
                     $("#likeBTN").hide();
                 }
-
-            }
-        </script>
-        <script>
-            //cellback=true，是已經處於喜歡該文章的階段 所以點再點擊的話 要觸發不喜歡事件
-            function ckickUnLike() {
 
             }
         </script>

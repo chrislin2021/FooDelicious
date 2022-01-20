@@ -50,6 +50,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/article/ShowAtricle.jsp" />
 	</definition>
+	
+	<definition name="app.userFocusePage" extends="app.default4">
+		<put-attribute name="content"
+			value="/WEB-INF/article/userFocusePage.jsp" />
+	</definition>
 
 	<definition name="app.ShareArea" extends="app.default4">
 		<put-attribute name="content"
