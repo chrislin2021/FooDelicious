@@ -21,5 +21,8 @@ public interface CBKProblemRepository extends JpaRepository<ProblemsBean, Intege
 	@Query(value = "SELECT * FROM problem_report WHERE problem_category = ?", nativeQuery = true)
 	List<ProblemsBean> findAllProblemsByCategory(Integer catNum);
 
+	@Query(value = "SELECT * FROM problem_report WHERE problem_content LIKE %?%", nativeQuery = true)
+	List<ProblemsBean> findAllProblemsByKeywords(String keywords);
+
 
 }

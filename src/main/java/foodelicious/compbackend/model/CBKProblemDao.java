@@ -60,5 +60,11 @@ public class CBKProblemDao implements CBKProblemDaoInterface {
 		return cbkProblemRepository.findAllProblemsByCategory(catNum);
 	}
 
+	@Override
+	public List<ProblemsBean> findAllProblemsByKeywords(String keywords) {
+		
+		return cbkProblemRepository.findAllProblemsByKeywords(keywords);
+	}
+
 
 }

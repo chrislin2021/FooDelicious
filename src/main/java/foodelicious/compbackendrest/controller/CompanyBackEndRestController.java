@@ -166,6 +166,12 @@ public class CompanyBackEndRestController {
         return cbkServiceInterface.findAllProblemsByCategory(catNum);
     }
 	
+	@GetMapping("/companyProblems/{keywords}")
+    public List<ProblemsBean> findAllProblemsByKeywords(@PathVariable String keywords){
+		
+	
+        return cbkServiceInterface.findAllProblemsByKeywords(keywords);
+    }
 	
 	
 	

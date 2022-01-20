@@ -29,6 +29,9 @@ public class ProblemsBean implements Serializable {
 	@Column(name = "problem_content")
 	private String problemContent;
 	
+	@Column(name = "problem_response")
+	private String problemResponse;
+	
 	//@Transient
 	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "problem_submit_time")
@@ -73,6 +76,16 @@ public class ProblemsBean implements Serializable {
 
 	public void setProblemContent(String problemContent) {
 		this.problemContent = problemContent;
+	}
+	
+	
+
+	public String getProblemResponse() {
+		return problemResponse;
+	}
+
+	public void setProblemResponse(String problemResponse) {
+		this.problemResponse = problemResponse;
 	}
 
 	public Date getProblemSubmitDate() {

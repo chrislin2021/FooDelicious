@@ -57,6 +57,8 @@ public interface CompanyBackEndServiceInterface {
 	public List<ProblemsBean> findAllProblemsByStatus(String status);
 
 	public List<ProblemsBean> findAllProblemsByCategory(Integer catNum);
+
+	public List<ProblemsBean> findAllProblemsByKeywords(String keywords);
 	
 	
 	

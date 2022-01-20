@@ -39,7 +39,7 @@
 	</ul>
 	<section class="content">
 		<div class="col-xs-12">
-			<table id="" class='table table-striped table-hover '>
+			<table id="" class='table table-striped table-hover' style="text-align:center">
 				<thead>
 					<tr>
 						<th class="col table-success">問題編號</th>
@@ -48,7 +48,7 @@
 						<th class="col table-success">新增日期</th>
 						<th class="col table-success">問題狀態</th>
 						<th class="col table-success">廠商名稱</th>
-
+						<th class="col table-success">回覆</th>
 						<th class="col table-success">更新</th>
 					</tr>
 				</thead>
@@ -84,31 +84,31 @@
 			});
 		}
 	</script>
-	
+
 	<script>
-    //=============E-mail關鍵字查詢功能=============
-    $("#searchProb").on("click",function(){
-       let keyword = $(".keyWord1").val();
-       $.ajax({
-           url:"/companyProblems/"+keyword,
-           type: "GET",
-           success:function(problems){
-               let num = problems.length;
-               
-               //載入顯示功能
-               showData(0, num, problems);
+		//=============關鍵字查詢功能=============
+		$("#searchProb").on("click", function() {
+			let keyword = $(".keyWord1").val();
+			$.ajax({
+				url : "/companyProblems/" + keyword,
+				type : "GET",
+				success : function(problems) {
+					let num = problems.length;
 
-               //載入分頁功能
-               if(num>=10){
-                   pages(10, problems);
-               }else{
-                   pages(num, problems);
-               }
-           }
-       })
+					//載入顯示功能
+					showData(0, num, problems);
 
-    });
-</script>
+					//載入分頁功能
+					if (num >= 10) {
+						pages(10, problems);
+					} else {
+						pages(num, problems);
+					}
+				}
+			})
+
+		});
+	</script>
 
 
 	<script>
@@ -463,6 +463,10 @@
 
 				txt += "<td class='align-middle'>" + dataSource[i].companyName
 						+ "</td>"
+				txt += '<td class="align-middle">'
+						+ '<form method="" >'
+						+ '<input id="responseBtn" class="btn btn-outline-success" type="button" value="回覆" data-id='+dataSource[i].problemId+'>'
+						+ '</form>' + '</td>'
 
 				txt += '<td class="align-middle">'
 						+ '<form method="" >'

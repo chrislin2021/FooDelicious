@@ -131,6 +131,12 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		return cbkProblemDaoInterface.findAllProblemsByCategory(catNum);
 	}
 	
+	@Override
+	public List<ProblemsBean> findAllProblemsByKeywords(String keywords) {
+		
+		return cbkProblemDaoInterface.findAllProblemsByKeywords(keywords);
+	}
+	
 //============Order Dao=========================================================================
 
 	@Override
@@ -138,6 +144,8 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		
 		return cbkOrderDaoInterface.findByCompanyProductId(productCompanyId);
 	}
+
+	
 
 	
 	
