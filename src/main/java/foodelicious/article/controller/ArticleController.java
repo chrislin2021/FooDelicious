@@ -243,10 +243,14 @@ public class ArticleController {
 	}
 	@ResponseBody
 	@GetMapping("/focuseData")
-	public List<ShareArea> focuseData() {
+	public Map<String, Object> focuseData() {
 		Long userID = (Long) session.getAttribute("userID");
-		System.out.println(userID);
-		List<ShareArea> focuseData = articleService.focuseData(userID);
-		return focuseData;
+		
+		Map<String, Object> data = new HashMap<>();
+		data.put("session", session.getAttribute("userID"));
+		data.put("userName", session.getAttribute("userName"));
+		data.put("title", articleService.focuseData(userID));
+		
+		return data;
 	}
 }

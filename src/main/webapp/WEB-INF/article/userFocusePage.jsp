@@ -35,10 +35,8 @@
 
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page">全部文章</button></li>
-                        <li class="nav-item"><button id="navKitchenware" type="button" class="nav-link">廚具開箱</button>
-                        </li>
-                        <li class="nav-item"><button id="navRecipe" type="button" class="nav-link">食譜分享</button></li>
+                        <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page" disabled>全部文章</button></li>
+
                     </ul>
 
                 </div>
@@ -92,30 +90,30 @@
                 url: url,
                 type: type,
                 contentType: "application/json; charset=utf-8",
-                success: function() {
-                    /*
-                     ShareData = articles
+                success: function(articles) {
 
-                     UserId = articles.session;
+                    ShareData = articles
 
-                     //得到格式：{session: null, title: Array(18)}        
-                     //console.log(ShareData)
-                     //=================分頁功能================
-                     endItem = (articles.title.length <= 10) ? articles.title.length : 10;
-                     //讀回資料時就先顯示
-                     showData(startItem, endItem);
-                     //計算出最大頁數。
-                     maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
+                    UserId = articles.session;
 
-                     //動態生成頁數
-                     let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
-                     for (let i = 0; i < maxPage; i++) {
-                         let pageNum = i + 1;
-                         pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
-                     };
-                     pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
-                     $("#page").html(pageHtml);
-                     */
+                    //得到格式：{session: null, title: Array(18)}        
+                    //console.log(ShareData)
+                    //=================分頁功能================
+                    endItem = (articles.title.length <= 10) ? articles.title.length : 10;
+                    //讀回資料時就先顯示
+                    showData(startItem, endItem);
+                    //計算出最大頁數。
+                    maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
+
+                    //動態生成頁數
+                    let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+                    for (let i = 0; i < maxPage; i++) {
+                        let pageNum = i + 1;
+                        pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
+                    };
+                    pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+                    $("#page").html(pageHtml);
+
                 }
             });
         };
