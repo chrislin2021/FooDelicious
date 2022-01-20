@@ -38,4 +38,6 @@ public interface ArticleRepository {
 
 	List<ShareArea> findVNKitchenware();
 
+	List<ShareArea> focuseData(Long userID);
+
 }

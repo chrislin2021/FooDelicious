@@ -1,11 +1,14 @@
 package foodelicious.article.repository.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -198,6 +201,36 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		String hql = "SELECT * FROM share_area WHERE article_clallify = '廚具開箱' ORDER BY viewNum DESC";
 		Map<String, Object> AllData = new HashMap<>();
 		List<ShareArea> list = namedParameterJdbcTemplate.query(hql, AllData, new ShareAreaRowMapper());
+		return list;
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ShareArea> focuseData(Long userID) {
+		String hql = " SELECT sare.share_id, sare.article_clallify, sare.article_title "
+				+ " FROM LikeOrNot JOIN ShareArea sare ON fk_articleID = share_id "
+				+ " WHERE fk_memberID = :userID"
+				+ " ORDER BY share_id DESC";
+		
+		Query query = em.createQuery(hql);
+		query.setParameter("userID", userID);
+		List<Object[]> shareAres = query.getResultList();
+		List<ShareArea> list= new ArrayList<ShareArea>();
+		
+		Iterator it = shareAres.iterator();
+		while(it.hasNext()) {
+			Object[] line = (Object[]) it.next();
+			ShareArea share = new ShareArea();
+//			System.out.println(line[0]);
+//			System.out.println(line[1]);
+//			System.out.println(line[2]);
+			share.setShare_id((int) line[0]);
+			share.setArticle_clallify((String)line[1]);
+			share.setArticle_title((String)line[2]);
+			list.add(share);
+		}
+		
 		return list;
 	}
 

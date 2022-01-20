@@ -37,4 +37,6 @@ public interface ArticleService {
 	List<ShareArea> findVNRecipe();
 
 	List<ShareArea> findVNKitchenware();
+
+	List<ShareArea> focuseData(Long userID);
 }

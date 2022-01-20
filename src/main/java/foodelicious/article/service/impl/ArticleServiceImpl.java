@@ -96,6 +96,11 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public List<ShareArea> findVNKitchenware() {
 		return articleRepository.findVNKitchenware();
+	}
+
+	@Override
+	public List<ShareArea> focuseData(Long userID) {
+		return articleRepository.focuseData(userID);
 	}	
 	
 }

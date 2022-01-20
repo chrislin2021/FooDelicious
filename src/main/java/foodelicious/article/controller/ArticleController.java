@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import foodelicious.article.model.MsgArea;
+import foodelicious.article.model.ShareArea;
 import foodelicious.article.service.ArticleService;
 import foodelicious.article.service.MsgService;
 import foodelicious.mail.service.MailService;
@@ -234,9 +235,18 @@ public class ArticleController {
 		return check;
 	}
 	
+	//轉跳頁面用的
 	@GetMapping("/userFocusePage")
 	public String userFocusePage() {
 		
 		return "app.userFocusePage";
+	}
+	@ResponseBody
+	@GetMapping("/focuseData")
+	public List<ShareArea> focuseData() {
+		Long userID = (Long) session.getAttribute("userID");
+		System.out.println(userID);
+		List<ShareArea> focuseData = articleService.focuseData(userID);
+		return focuseData;
 	}
 }
