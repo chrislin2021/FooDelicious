@@ -348,7 +348,7 @@
 							total+= detail.product.productPrice*detail.quantity;
 						}
 						if (orders != ""){
-							orders += '<tr><td colspan="4">訂單已折扣 NT$:110元</td></tr>';
+							orders += '<tr><td colspan="4">訂單已折扣 NT$:210元</td></tr>';
 							orders += '<tr><td colspan="4">訂單總金額 NT$:' + total + '元</td></tr>';						
 						}
 					}
