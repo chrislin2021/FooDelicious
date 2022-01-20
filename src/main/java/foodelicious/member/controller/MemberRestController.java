@@ -29,15 +29,18 @@ public class MemberRestController {
 		this.memberValidator = memberValidator;
 	}
 	
-	@GetMapping("/memberIndexes")
-	public Member findDetailByCompanyId(HttpSession session) {
-		Long memberId = (Long) session.getAttribute("userID");
-		Member memberDetails = memberService.findByMemberId(memberId);
+	@GetMapping("/memberIndexes/{memberId}")
+	public Member findDetailByMemberId(HttpSession session, Long memberId) {
+		Long Id = (Long) session.getAttribute("userID");
+		Member memberDetails = memberService.findByMemberId(Id);//
+		session.setAttribute("userName", memberDetails.getMemberName());
+		session.setAttribute("memberBirth", memberDetails.getMemberBirth());
+		session.setAttribute("memberPhone", memberDetails.getMemberPhone());
+		session.setAttribute("memberAddress", memberDetails.getMemberAddress());
 		return memberDetails;
 	}
 	
-	
-	@PostMapping("/memberDetailUpdate/{memberId}")
+	@PutMapping("/memberDetailUpdate/{memberId}")
 	public String updateMemberDetail(@PathVariable Long memberId, @RequestBody Member member) {
 
 		return memberService.update(memberId, member);

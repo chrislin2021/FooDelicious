@@ -99,13 +99,13 @@
         <h1 class="textAreaTxt textSet">Hot-articles</h1>
 
         <ul class="menu-navigation" data-tabs data-match-height="true" id="example-tabs">
-            <li id="foodArticle" class="tabs-title active"><a class="m-anim" data-text="Main Dishes">食譜類</a></li>
+            <li id="foodArticle" class="tabs-title active"><a class="m-aim" data-text="Main Dishes">食譜類</a></li>
             <li id="toolArticle" class="tabs-title"><a class="m-anim" data-text="Main Dishes">餐廚類</a></li>
         </ul>
 
         <div class="tabs-content articleArea" data-tabs-content="example-tabs">
             <div class="tabs-panel is-active" id="panel1">
-                <table>
+                <table class="">
                     <thead>
                         <th>#</th>
                         <th>文章編號</th>
@@ -140,7 +140,7 @@
 <%--回報頁面--%>
 <footer class="footArea">
     <a href="#0" class="arrowTop"><i class="fas fa-arrow-alt-circle-up"></i></a>
-    <div id="contactBox" class="contactBox">
+    <div class="contactBox" >
         <h2>客戶反應中心</h2>
         <p>請留下您的問題與敘述，我們會於24小時內回覆給您</p>
 
@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="row">
+                <div class="row" >
                     <input type="submit" value="送出" style="height:50px;width:100px">
                     <input type="button" value="清除" onclick="clearText();" style="height:50px;width:100px">
                     <input type="submit" value="一鍵輸入" style="height:50px;width:100px">
@@ -192,7 +192,7 @@
             </form>
         </div>
     </div>
-    <p class="author">Made 2022 © by EEIT137 Team 1</p>
+    <p id="contactBox" class="author">Made 2022 © by EEIT137 Team 1</p>
 </footer>
 
 
@@ -250,7 +250,7 @@ function foodPage(){
             //=========統計數據=========
             let foodHtml="";
             for(let i=0; i<foods.length; i++){
-                foodHtml +='<tr><td scope="row">'+(i+1)+'</td>';
+                foodHtml +='<tr class="trHover"><td scope="row">'+(i+1)+'</td>';
                 foodHtml += '<td>'+foodList[i].shareId+'</td>';
                 let nameObj = new String(foodList[i].article_title);
                 let nameString = nameObj.substring(0,20);
@@ -285,7 +285,7 @@ function toolPage() {
             //=========統計數據=========
             let toolHtml = "";
             for (let i = 0; i < tools.length; i++) {
-                toolHtml += '<tr><td scope="row">' + (i + 1) + '</td>';
+                toolHtml += '<tr class="trHover"><td scope="row">' + (i + 1) + '</td>';
                 toolHtml += '<td>' + toolList[i].shareId + '</td>';
                 let nameObj = new String(toolList[i].article_title);
                 let nameString = nameObj.substring(0, 20);

@@ -4,7 +4,7 @@
 }
 
 th{
-    font-size:18px;
+    font-size:14px;
 }
 
 td{
@@ -26,4 +26,8 @@ table{
 
 h1{
     margin: 20px 0 10px 0;
+}
+
+.memberId{
+    width: 50px;
 }

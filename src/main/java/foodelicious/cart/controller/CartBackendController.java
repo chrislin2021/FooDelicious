@@ -20,7 +20,8 @@ public class CartBackendController {
 
 	@GetMapping("/report/cart")
 	public List<CartBean> findAll() {
-		return cartService.selectAll();
+		List<CartBean> carts = cartService.selectAll();
+		return carts;
 	}
 
 }

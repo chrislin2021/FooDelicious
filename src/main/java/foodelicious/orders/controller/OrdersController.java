@@ -89,6 +89,7 @@ public class OrdersController {
 			ordersDetailBean.setProduct_id(cart.getProductId());
 			ordersDetailBean.setQuantity(cart.getQuantity());
 			ordersDetailService.insertOrderDetail(ordersDetailBean);
+
 			for (Product product : products) {
 				if (cart.getProductId() == product.getProductId()) {
 					product.setProductId(cart.getProductId());
@@ -108,12 +109,34 @@ public class OrdersController {
 					searchService.save(product);
 				}
 			}
+
 			if ((Long) session.getAttribute("discountId") != null) {
 				discountService.deleteItem((Long) session.getAttribute("discountId"));
 			}
+
 			cartService.deleteItem(cart.getCartId());
 			session.removeAttribute("discountContent");
 		}
+	}
+
+	@ResponseBody
+	@GetMapping("/viewOrders")
+	public List<OrdersBean> viewOrders() {
+		return ordersService.selectOrders((Long) session.getAttribute("userID"));
+	}
+
+	@ResponseBody
+	@GetMapping("/viewOrders/pages/{orderStatus}")
+	public List<OrdersBean> findByStatus(@PathVariable String orderStatus) {
+		return ordersService.selectIdAndStatus((Long) session.getAttribute("userID"), orderStatus);
+	}
+
+	@ResponseBody
+	@GetMapping("/toOrderDetailPage/{ordersId}")
+	public List<OrdersDetailBean> toOrdersDetailPage(@PathVariable Long ordersId) {
+		List<OrdersDetailBean> details = ordersDetailService.selectOrdersDetail(ordersId);
+
+		return details;
 	}
 
 	@GetMapping("/ordersEnd")
@@ -121,22 +144,9 @@ public class OrdersController {
 		return "app.OrdersEnd";
 	}
 
-	@GetMapping("/viewOrders")
-	public String viewOrders() {
-		List<OrdersBean> orders = ordersService.selectOrders((Long) session.getAttribute("userID"));
-
-		session.setAttribute("orders", orders);
-
+	@GetMapping("/memberOrders")
+	public String memberOrders() {
 		return "app.ViewOrders";
-	}
-
-	@GetMapping("/toOrderDetailPage/{ordersId}")
-	public String toOrdersDetailPage(@PathVariable Long ordersId) {
-		List<OrdersDetailBean> details = ordersDetailService.selectOrdersDetail(ordersId);
-
-		session.setAttribute("details", details);
-
-		return "app.ViewOrdersDetail";
 	}
 
 }

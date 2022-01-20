@@ -16,4 +16,6 @@ public interface OrdersService {
 
 	List<OrdersBean> selectAll();
 
+	List<OrdersBean> selectIdAndStatus(Long ordersId, String ordersState);
+
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +13,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,9 +42,11 @@ public class CashFlowRestController {
 	private MailService mailService;
 	private OrdersService ordersService;
 	private MemberService memberService;
+	private CashflowAddressService cashflowAddressService;
 
 	public CashFlowRestController(EntityManager em, HttpSession session, CartService cartService,
-			MailService mailService, OrdersService ordersService, MemberService memberService) {
+			MailService mailService, OrdersService ordersService, MemberService memberService,
+			CashflowAddressService cashflowAddressService) {
 		super();
 		this.em = em;
 		this.session = session;
@@ -47,6 +54,7 @@ public class CashFlowRestController {
 		this.mailService = mailService;
 		this.ordersService = ordersService;
 		this.memberService = memberService;
+		this.cashflowAddressService = cashflowAddressService;
 
 	}
 
@@ -84,7 +92,10 @@ public class CashFlowRestController {
 //				mailService.prepareAndSend(userMail,"請輸入信箱@gmail.com", "title", "Sample mail subject");
 			}
 		}
-
 		return tables;
+	}
+	@PostMapping("/address/insert")
+	public void updateAddress(@RequestBody Map<String, String> params, @PathVariable("commonAddress")String commonaddress) {
+		cashflowAddressService.UpdateAddress(params, commonaddress);
 	}
 }

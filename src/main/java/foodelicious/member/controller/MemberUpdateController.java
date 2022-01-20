@@ -70,6 +70,7 @@ public class MemberUpdateController {
 	@PostMapping("/upload")
 	public String upload(HttpServletRequest request, @RequestParam("file") MultipartFile file, Model m,
 			HttpSession session, @RequestParam("memberId") Long memberId){
+		System.out.println("====================================");
 		try {
 			//根據時間建立新的檔名，即便是二次上傳相同名稱的檔案，也不會覆蓋
 			String fileName = System.currentTimeMillis() + file.getOriginalFilename();
@@ -82,13 +83,14 @@ public class MemberUpdateController {
 			file.transferTo(dataFile);
 			//把檔名放在model裡，方便之後使用
 			m.addAttribute("fileName", fileName);
+			
 			//記錄在資料庫
 			memberService.findByMemberId(memberId);
 			Member mb = memberService.findByMemberId(memberId);
 			System.out.println(memberId +"========================================");
 			mb.setMemberPic(fileName);
 			memberService.update(mb);
-			session.setAttribute("Member", mb);
+			session.setAttribute("memberPic", fileName);
 		} catch(FileNotFoundException e){
 			e.printStackTrace();
 			return "上傳失敗" + e.getMessage();
@@ -99,37 +101,7 @@ public class MemberUpdateController {
 		return "app.memberIndex";
 	}
 	
-//	//會員中心
-//	@GetMapping("/memberIndex")
-//	public String sendMemberDataToModifiedFront(Model model,
-//			@RequestParam(value = ("memberMail"), required = true) String memberMail) {// spring會讀三種： 請求參數、路徑變數、表單綁定
-//		Member member = memberService.findByMemberMail(memberMail);
-//		model.addAttribute("member", member);
-//		model.addAttribute("memberMail", memberMail);
-//		return "app.memberIndex";
-//	}
-	
-//	//會員中心
-//	@GetMapping("/memberIndex")
-//	public String tomemberIndex() {
-//		return "app.memberIndex";
-//	}
-	
-//	//會員中心
-//	@GetMapping("/memberIndex/{memberId}") // 和網址相同
-//	public String sendMemberDataToModifiedFront(Model model,
-//			@PathVariable(value = ("userID"), required = true) Long memberId, HttpSession session) {
-//		Member member = memberService.findByMemberId(memberId);
-////		Long MemberId = (Long)session.getAttribute("userID");
-//		System.out.println(session.getAttribute("userID")+"=========================================================");
-//		System.out.println(member+"==========================================================");
-//		model.addAttribute("member", member);
-//		model.addAttribute("memberId", memberId);
-//		
-//		return "app.memberIndex";
-//	}
-	
-	//測試
+	//會員中心
 	@GetMapping("/memberIndex")
 	public String tomemberIndex() {
 		return "app.memberIndex";
@@ -145,61 +117,32 @@ public class MemberUpdateController {
 		return "app.updatePage";
 	}
 	
-//	//更新會員==後台
-//		@PostMapping({"/members/{memberId}","/members/{userID}"}) 
-//		public String updateMemberDataBack(
-//				@Valid @ModelAttribute Member member, 
-//				BindingResult result, 
-//				@PathVariable Long memberId,
-//				Model model,
-//				RedirectAttributes ra) {
-//			System.out.println("pmember=" + member);
-//
-//			List<ObjectError> errors = result.getAllErrors();
-//			for (ObjectError oe : errors) {
-//				System.out.println(oe.getCode() + "," + oe.getDefaultMessage() + "," + oe.getObjectName());
-//			}
-//			memberValidator.validate(member, result);// bindingResult的父介面就是Errors
-//			errors = result.getAllErrors();
-//			for(ObjectError oe: errors) {
-//				System.out.println("oe=>" + oe);
-//			}
-//			if (result.hasErrors()) {
-//				return "app.updatePage";
-//			}
-//				memberService.update(member);
-//				ra.addFlashAttribute("insertSuccess", "更新成功");
-//				return "redirect:/members";
-//		}
-	
-//	// 更新會員===前台
-//	@PostMapping("/memberIndex/{memberId}") 
-//	public String updateMemberDataFront(
-//			@Valid @ModelAttribute Member member, 
-//			BindingResult result, 
-//			@PathVariable Long memberId, 
-//			Model model) {
-//		System.out.println("pmember=" + member);
-//		
-//		System.out.println("==============================================");
-//
-//		List<ObjectError> errors = result.getAllErrors();
-//		for (ObjectError oe : errors) {
-//			System.out.println(oe.getCode() + "," + oe.getDefaultMessage() + "," + oe.getObjectName());
-//		}
-//		memberValidator.validate(member, result);// bindingResult的父介面就是Errors
-//		errors = result.getAllErrors();
-//		for (ObjectError oe : errors) {
-//			System.out.println("oe=>" + oe);
-//		}
-//		if (result.hasErrors()) {
-//			return "app.updatePage";
-//		}
-//		memberService.update(member);
-//		return "redirect:/";
-//	}
-//	
-	
+	//更新會員==後台
+		@PostMapping({"/members/{memberId}","/members/{userID}"}) 
+		public String updateMemberDataBack(
+				@Valid @ModelAttribute Member member, 
+				BindingResult result, 
+				@PathVariable Long memberId,
+				Model model,
+				RedirectAttributes ra) {
+			System.out.println("pmember=" + member);
+
+			List<ObjectError> errors = result.getAllErrors();
+			for (ObjectError oe : errors) {
+				System.out.println(oe.getCode() + "," + oe.getDefaultMessage() + "," + oe.getObjectName());
+			}
+			memberValidator.validate(member, result);// bindingResult的父介面就是Errors
+			errors = result.getAllErrors();
+			for(ObjectError oe: errors) {
+				System.out.println("oe=>" + oe);
+			}
+			if (result.hasErrors()) {
+				return "app.updatePage";
+			}
+				memberService.update(member);
+				ra.addFlashAttribute("insertSuccess", "更新成功");
+				return "redirect:/members";
+		}
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder, WebRequest request) {

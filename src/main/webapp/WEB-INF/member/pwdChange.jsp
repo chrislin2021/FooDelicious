@@ -24,7 +24,7 @@
 				<img src="https://scocre.com/assets/img/forgot.png"
 					class="img-fluid" alt="">
 			</div>
-			<div class="col-md-9" style="padding-top: 100px">
+			<div class="col-md-6" style="padding-top: 100px">
 				<h2 class="font-weight-light">修改密碼</h2>
 
 				<form target="_blank" action="/pwdForgetSuccess.controller" method="POST" enctype="multipart/form-data" class="mt-3">

@@ -381,7 +381,7 @@
 	<script>
     //=============顯示功能=============
     function showData(startItem,endItem,dataSource){
-    	//alert(dataSource[0].productCategories);
+    	//alert(dataSource[0].productInsertDate);
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
             txt += "<td class='align-middle'>"+ dataSource[i].productId+"</td>"

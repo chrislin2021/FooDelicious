@@ -1,8 +1,20 @@
-$(".checkout").on("click", function() {
-	if ($("#flexRadioDefault1").is(":checked")) {
-		if ($("#name").val().length == 0 || $("#phone").val().length == 0 || $("#address").val().length == 0) {
+$(".checkout").on("click", function() {	
+	if ($("#flexRadioDefault1").is(":checked")) {	// 金流服務請寫在else
+		if ($("#name").val().length == 0) {
 			$(".validate1").removeClass("d-none");
-		} else {
+		} else if ($("#phone").val().length == 0) {
+			$(".validate2").removeClass("d-none");
+		} else if ($("#address").val().length == 0) {
+			$(".validate3").removeClass("d-none");
+		}
+
+		if ($("#name").val().length == 0 && $("#phone").val().length == 0 && $("#address").val().length == 0) {
+			$(".validate1").removeClass("d-none");
+			$(".validate2").removeClass("d-none");
+			$(".validate3").removeClass("d-none");
+		}
+
+		if ($("#name").val().length != 0 && $("#phone").val().length != 0 && $("#address").val().length != 0) {
 			let proId = document.getElementsByClassName("productId");
 			let proQuantity = document.getElementsByClassName("quantity");
 			var ordersData = {};
@@ -32,12 +44,14 @@ $(".checkout").on("click", function() {
 						contentType: "application/json;charset=utf-8;",
 						data: JSON.stringify(ordersDetail),
 						success: function() {
-							window.location.href = "/ordersEnd";
+							window.location.href = "/ordersEnd"
 						}
 					})
 				}
 			})
 		}
+	}else{
+		alert("金流服務")
 	}
 })
 

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class ProblemsBean implements Serializable {
 	
 	@Id
-	@Column(name = "problem_id ")
+	@Column(name = "problem_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer problemId;
 	
@@ -28,10 +29,17 @@ public class ProblemsBean implements Serializable {
 	@Column(name = "problem_content")
 	private String problemContent;
 	
-	@Transient
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	//@Transient
+	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "problem_submit_time")
 	private Date problemSubmitDate;
+	
+	@PrePersist
+	private void onCreate() {
+		if(problemSubmitDate == null) {
+			problemSubmitDate = new Date ();
+		}
+	}
 	
 	
 	@Column(name = "problem_status")

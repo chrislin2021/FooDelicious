@@ -12,7 +12,7 @@
     <span class="littleName">Manager List</span>
 </h1>
 <form action="">
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <input class="keyWord keyWord1" type="text" name="accKeyWord" placeholder="請輸入Email關鍵字...">
         <input id="searchAcc" class="keyWord btn btn-outline-secondary" type="button" value="查詢" />
     </div>

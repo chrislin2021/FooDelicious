@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.product.model.Product;
 import foodelicious.product.model.ProductService;
 
@@ -32,10 +35,24 @@ public class ProductController {
 	//show all data
 	@GetMapping("/Product")
 	public String  productlist(String productName,Model m) {
-		Page<Product> page = productService.findAll();
-		List<Product> pros = page.getContent();
+		List<Product> pros = productService.findAll();
 		m.addAttribute("pros", pros);
 		return "app.Product";
+	}
+	@ResponseBody
+	@GetMapping("/Products")
+	public List<Product>  productlist2(String productName,Model m) {
+		  return productService.findAll();
+	}
+	@ResponseBody
+	@GetMapping("/ProductsKitchenware")
+	public List<Product>  productKitchenware(String productName,Model m) {
+		return productService.findAll();
+	}
+	@ResponseBody
+	@GetMapping("/ProductsIngredient ")
+	public List<Product>  productIngredient(String productName,Model m) {
+		return productService.findAll();
 	}
 	
 	//create model Attribute to bind for data
@@ -68,7 +85,7 @@ public class ProductController {
 			@RequestParam(name = "productName") String productName, @RequestParam(name = "productCompany") String productCompany,
 			@RequestParam(name = "productCompanyId") Long productCompanyId,@RequestParam(name = "productPrice") Integer productPrice,
 			@RequestParam(name = "productContent") String productContent,@RequestParam(name = "productStock") Integer productStock,
-			@RequestParam(name = "productStatus") String productStatus,@RequestParam(name = "productKeywords") String productKeywords,
+			@RequestParam(name = "productStatus") String productStatus,@RequestParam(name = "productKeywords") String productKeywords,@RequestParam(name = "productInsertDate") Date productInsertDate,
 			@RequestParam(name = "productSalesFigures") Integer productSalesFigures,
 			MultipartFile photo, HttpSession session)
 			throws IllegalStateException, IOException, ParseException {
@@ -96,13 +113,29 @@ public class ProductController {
 		t.setProductStock(productStock);
 		t.setProductStatus(productStatus);
 		t.setProductKeywords(productKeywords);
-//		t.setProductInsertDate(productInsertDate);
+		t.setProductInsertDate(productInsertDate);
 		t.setProductSalesFigures(productSalesFigures);
 		
 		productService.saveProduct(t);
 
 		return "redirect:/backend/product";
 	}
+	
+//	@GetMapping("/Product/{productName}")
+//    public List<Product> findAllByName(@PathVariable String productName){
+//        return productService.findAllByName(productName);
+//    }
+
+    @GetMapping("/Product/{productName}/{categories}")
+    public List<Product> findByNameAndType(@PathVariable String productName,
+                                             @PathVariable Integer categories){
+        return  productService.findByNameAndType(productName, categories);
+    }
+
+    @GetMapping("/Product/search/{categories}")
+    public List<Product> findAllByName(@PathVariable Integer categories){
+        return productService.findByType(categories);
+    }
 
 
 }

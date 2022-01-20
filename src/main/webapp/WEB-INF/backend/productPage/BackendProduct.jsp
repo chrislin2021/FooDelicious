@@ -37,15 +37,15 @@
         <table id="" class='table table-striped table-hover '>
             <thead>
                 <tr>
-                    <th class="col table-success">商品編號</th>
-                    <th class="col table-success">商品類別</th>
-                    <th class="col table-success">商品公司</th>
+                    <th class="col table-success">編號</th>
+                    <th class="col table-success">類別</th>
+                    <th class="col table-success">公司</th>
                     <th class="col table-success">上架狀態</th>
                     <th class="col table-success">商品名稱</th>
                     <th class="col table-success">商品概述</th>
-                    <th class="col table-success">商品價格</th>
-                    <th class="col table-success">商品庫存</th>
-                    <th class="col table-success">商品銷售量</th>
+                    <th class="col table-success">價格</th>
+                    <th class="col table-success">庫存</th>
+                    <th class="col table-success">銷售量</th>
                     <th class="col table-success">查詢關鍵字</th>
                     <th class="col table-success">新增日期</th>
                     <th class="col table-success">更新</th>

@@ -30,19 +30,19 @@ table{
 }
 
 .upInput{
-    width: 100px;
-}
-
-.upInputSm{
     width: 80px;
 }
 
+.upInputSm{
+    width: 50px;
+}
+
 .upInputMd{
-    width: 120px;
+    width: 100px;
 }
 
 .upInputBig{
-    width: 170px;
+    width: 120px;
 }
 
 .text-middle{

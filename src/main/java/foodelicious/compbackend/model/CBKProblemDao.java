@@ -42,15 +42,22 @@ public class CBKProblemDao implements CBKProblemDaoInterface {
 	}
 
 	@Override
-	public List<ProblemsBean> getAllProblems(Long problemCompanyId) {
-		List<ProblemsBean> problems = cbkProblemRepository.findAll(problemCompanyId);
+	public List<ProblemsBean> getAllProblems() {
+		List<ProblemsBean> problems = cbkProblemRepository.findAll();
 		return problems;
 	}
 
+	
 	@Override
-	public List<BkProduct> findAllProblemsByStatus(String status, Long problemCompanyId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProblemsBean> findAllProblemsByStatus(String status) {
+		
+		return cbkProblemRepository.findProblemsByStatus(status);
+	}
+
+	@Override
+	public List<ProblemsBean> findAllProblemsByCategory(Integer catNum) {
+		
+		return cbkProblemRepository.findAllProblemsByCategory(catNum);
 	}
 
 

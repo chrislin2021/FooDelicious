@@ -111,6 +111,26 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		return cbkProblemDaoInterface.insertProblem(problem);
 	}
 	
+	@Override
+	public List<ProblemsBean> getAllProblems() {
+		
+		return cbkProblemDaoInterface.getAllProblems();
+	}
+
+	
+	@Override
+	public List<ProblemsBean> findAllProblemsByStatus(String status) {
+		
+		return cbkProblemDaoInterface.findAllProblemsByStatus(status);
+	}
+	
+
+	@Override
+	public List<ProblemsBean> findAllProblemsByCategory(Integer catNum) {
+		
+		return cbkProblemDaoInterface.findAllProblemsByCategory(catNum);
+	}
+	
 //============Order Dao=========================================================================
 
 	@Override
@@ -118,21 +138,9 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		
 		return cbkOrderDaoInterface.findByCompanyProductId(productCompanyId);
 	}
+
 	
 	
-//=========Problem Dao================================================
-
-	@Override
-	public List<ProblemsBean> getAllProblems(Long problemCompanyId) {
-		
-		return cbkProblemDaoInterface.getAllProblems(problemCompanyId);
-	}
-
-	@Override
-	public List<BkProduct> findAllProblemsByStatus(String status, Long problemCompanyId) {
-		
-		return cbkProblemDaoInterface.findAllProblemsByStatus(status,problemCompanyId);
-	}
 
 	
 

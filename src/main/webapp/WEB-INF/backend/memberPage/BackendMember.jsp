@@ -12,7 +12,7 @@
     <span class="littleName">Member List</span>
 </h1>
 <form action="">
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入Email關鍵字...">
         <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox" type="button" value="查詢" />
     </div>
@@ -23,16 +23,16 @@
             <table id="" class='table table-striped table-hover '>
                 <thead>
                 <tr>
-                    <th class="col col1 table-primary">會員編號</th>
-                    <th class="col col2 table-primary">會員email</th>
+                    <th class="col col1 table-primary memberId">編號</th>
+                    <th class="col col2 table-primary">E-mail</th>
                     <th class="col col4 table-primary">帳號狀態</th>
-                    <th class="col col5 table-primary">會員姓名</th>
-                    <th class="col col6 table-primary">會員性別</th>
-                    <th class="col col12 table-primary">會員生日</th>
-                    <th class="col col10 table-primary">會員電話</th>
-                    <th class="col col11 table-primary">會員地址</th>
-                    <th class="col col8 table-primary">會員coin</th>
-                    <th class="col col7 table-primary">會員折扣</th>
+                    <th class="col col5 table-primary">姓名</th>
+                    <th class="col col6 table-primary">性別</th>
+                    <th class="col col12 table-primary">生日</th>
+                    <th class="col col10 table-primary">電話</th>
+                    <th class="col col11 table-primary">地址</th>
+                    <th class="col col8 table-primary">coin</th>
+                    <th class="col col7 table-primary">折扣</th>
                     <th class="col col13 table-primary">註冊日期</th>
                     <th class="col col14 table-primary">更新</th>
 <%--                    <th class="col col15 table-primary">刪除</th>--%>

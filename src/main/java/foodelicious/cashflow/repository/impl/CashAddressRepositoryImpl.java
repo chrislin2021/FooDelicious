@@ -75,8 +75,8 @@ public class CashAddressRepositoryImpl implements CashAddressRepository {
 
 
 	@Override
-	public void UpdateAddress(Map<String, String> params, Long addressId) {
-		CashflowAddressBean cashflowAddressBean = em.find(CashflowAddressBean.class, addressId);
+	public void UpdateAddress(Map<String, String> params, String commonaddress) {
+		CashflowAddressBean cashflowAddressBean = em.find(CashflowAddressBean.class, commonaddress);
 		cashflowAddressBean.setCommonAddress(params.get("commonAddress"));
 		em.merge(cashflowAddressBean);
 	}

@@ -25,9 +25,9 @@
             <thead>
             <tr>
                 <th scope="col" class="table-danger">名次</th>
-                <th scope="col" class="table-danger">商品編號</th>
+                <th scope="col" class="table-danger">編號</th>
                 <th scope="col" class="table-danger">商品名稱</th>
-                <th scope="col" class="table-danger">商品庫存</th>
+                <th scope="col" class="table-danger">庫存</th>
                 <th scope="col" class="table-danger">銷售數量</th>
                 <th scope="col" class="table-danger">總銷售額</th>
             </tr>
@@ -50,9 +50,9 @@
             <thead>
             <tr>
                 <th scope="col" class="table-secondary">名次</th>
-                <th scope="col" class="table-secondary">商品編號</th>
+                <th scope="col" class="table-secondary">編號</th>
                 <th scope="col" class="table-secondary">商品名稱</th>
-                <th scope="col" class="table-secondary">商品庫存</th>
+                <th scope="col" class="table-secondary">庫存</th>
                 <th scope="col" class="table-secondary">銷售數量</th>
                 <th scope="col" class="table-secondary">總銷售額</th>
             </tr>

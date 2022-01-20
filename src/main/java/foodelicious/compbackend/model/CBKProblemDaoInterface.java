@@ -8,7 +8,10 @@ public interface CBKProblemDaoInterface {
 
 	public String insertProblem(ProblemsBean problem);
 
-	public List<ProblemsBean> getAllProblems(Long problemCompanyId);
+	public List<ProblemsBean> getAllProblems();
 
-	public List<BkProduct> findAllProblemsByStatus(String status, Long problemCompanyId);
+
+	public List<ProblemsBean> findAllProblemsByStatus(String status);
+
+	public List<ProblemsBean> findAllProblemsByCategory(Integer catNum);
 }

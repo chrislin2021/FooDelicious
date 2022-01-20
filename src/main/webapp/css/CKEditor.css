@@ -406,7 +406,6 @@ header nav ul li + li {
 }
 
 header nav ul li a {
-	font-weight: bold;
 	text-decoration: none;
 	color: #2D3A4A;
 }

@@ -43,4 +43,9 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersRepository.findAll();
 	}
 
+	@Override
+	public List<OrdersBean> selectIdAndStatus(Long memberId, String ordersState) {
+		return ordersRepository.findAllByMemberIdAndOrdersState(memberId, ordersState);
+	}
+
 }

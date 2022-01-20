@@ -15,7 +15,7 @@
 
 <!-- Boxiocns CDN Link -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
-	  rel='stylesheet'>
+	rel='stylesheet'>
 <link
 	href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap"
 	rel="stylesheet">
@@ -31,8 +31,8 @@
 	<div class="sidebar close">
 		<div class="logo-details"></div>
 		<ul class="nav-links">
-			<li><a href="/companyMain"> <i class='bx bx-user-circle'></i> <span
-					class="link_name">管理</span>
+			<li><a href="/companyMain"> <i class='bx bx-user-circle'></i>
+					<span class="link_name">管理</span>
 			</a>
 				<ul class="sub-menu blank">
 					<li><a class="link_name" href="/companyMain">管理</a></li>
@@ -74,14 +74,14 @@
 					<li><a href="#">銷售總額</a></li>
 				</ul>
 			</li>
-			<li><a href="#" class="problem"> <i class='bx bx-error-alt'></i> <span
-					class="link_name">問題回報</span>
+			<li><a href="#" class="problem"> <i class='bx bx-error-alt'></i>
+					<span class="link_name">問題回報</span>
 			</a>
 				<ul class="sub-menu blank">
-					<li><a class="problem" href="#" >問題回報</a></li>
+					<li><a class="problem" href="#">問題回報</a></li>
 				</ul></li>
 
-			<li><a href="#"> <i class='bx bxs-inbox'></i> <span 
+			<li><a href="#"> <i class='bx bxs-inbox'></i> <span
 					class="link_name">訊息</span>
 			</a>
 				<ul class="sub-menu blank">
@@ -92,9 +92,10 @@
 
 					<div class="profile-content">
 
-						<i class='bx bxs-log-out' id="logout" onclick="logout('${account}')"></i>
+						<i class='bx bxs-log-out' id="logout"
+							onclick="logout('${account}')"></i>
 					</div>
-					
+
 
 				</div>
 			</li>
@@ -102,7 +103,9 @@
 	</div>
 	<section class="home-section">
 		<div class="home-content">
-			<i class='bx bx-menu' style="color:black"></i> <span class="text brandName" style="color:black">好煮意<small style="color:black">admin</small></span>
+			<i class='bx bx-menu' style="color: black"></i> <span
+				class="text brandName" style="color: black">好煮意<small
+				style="color: black">admin</small></span>
 		</div>
 	</section>
 
@@ -119,30 +122,43 @@
 			<div class="popup-closing">+</div>
 
 			<div>
-				<h3 style="text-align:center"><strong>問題回報</strong></h3>
-				<form style="text-align:left;margin:5px" id="problemform">
-					<h6 style="margin:5px">問題類型:</h6>
-					<select id="problemsCat" class="form-select upInput text-middle upInputMd" style="width:20%">
-                                    <option value="" id="probStatus" selected></option>
-                                    <option value="0">商品</option>
-                                    <option value="1">訂單</option>
-                                    <option value="2">系統</option>
-                                    <option value="3">會員</option>
-                                    <option value="4">其他</option>
-                     </select>
-                     
-					 <h6 style="margin:5px;margin-top:10px;">問題描述:</h6>  
-					 <textarea name="problem-content" rows="8" cols="70" placeholder="請詳細描述問題:" id="problem-content" form="problemform"></textarea>                 
-					 </br><span id="textareaError" style="color:red"></span>
-					 
-<!-- 					 <span style="margin:4px;margin-top:10px;margin-bottom:10px">檔案上傳:</span> </br> -->
-<!-- 					 <input type="file" id="fileUpload" accept="application/msword"> -->
-					
-					 </br></br></br></br></br></br></br>
-					 <c:set var="userID" value="${userID}"/>
-					 <input type="text" hidden id="companyId" value='${userID}'>
-					 <input type="text" hidden id="companyName" value='${userName}'>
-					 <input type="button" id="submitComplete" class="btn btn-outline-danger" value="submit">
+				<h3 style="text-align: center">
+					<strong>問題回報</strong>
+				</h3>
+				<form style="text-align: left; margin: 5px" id="problemform">
+					<h6 style="margin: 5px">問題類型:</h6>
+					<select id="problemsCat"
+						class="form-select upInput text-middle upInputMd"
+						style="width: 20%">
+						<option value="" id="probStatus" selected></option>
+						<option value="0">商品</option>
+						<option value="1">訂單</option>
+						<option value="2">系統</option>
+						<option value="3">會員</option>
+						<option value="4">其他</option>
+					</select>
+
+					<h6 style="margin: 5px; margin-top: 10px;">問題描述:</h6>
+					<textarea name="problem-content" rows="8" cols="70"
+						placeholder="請詳細描述問題:" id="problem-content" form="problemform"></textarea>
+					</br>
+					<span id="textareaError" style="color: red"></span>
+
+					<!-- 					 <span style="margin:4px;margin-top:10px;margin-bottom:10px">檔案上傳:</span> </br> -->
+					<!-- 					 <input type="file" id="fileUpload" accept="application/msword"> -->
+
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					<c:set var="userID" value="${userID}" />
+					<input type="text" hidden id="companyId" value='${userID}'>
+					<input type="text" hidden id="companyName" value='${userName}'>
+					<input type="button" id="submitComplete"
+						class="btn btn-outline-danger" value="submit">
 				</form>
 
 			</div>
@@ -150,7 +166,7 @@
 		</div>
 	</div>
 
-	
+
 	<script>
 //     =============傳送問題回報資料=============
     	<!-- 確認問題回報單沒有空白 -->

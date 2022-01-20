@@ -45,7 +45,7 @@ public class MemberLoginController {
 		status.setComplete();
 		session.invalidate(); // session.invalidate()讓SESSION失效.
 
-		return "app.home";
+		return "app.index";
 	}
 	
 	// 到忘記密碼頁面

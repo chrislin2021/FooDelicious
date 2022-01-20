@@ -42,21 +42,21 @@ public interface CompanyBackEndServiceInterface {
 	
 	public String updateCompanyDetail(Long companyId, Member company);
 	
-	
-	//problem dao for /companyProblemReport/{companyId}
-	public String insertProblem(ProblemsBean problem);
-	
-	
 
-	//product dao for /companyOrder
+	//order dao for /companyOrder
 	public List<OrdersDetailBean> findByCompanyProductId(Long productCompanyId);
 	
 	
 	
+	//problem dao for /companyProblemReport/{companyId}
+	public String insertProblem(ProblemsBean problem);
+		
 	//problem dao for /companyProblems
-	public List<ProblemsBean> getAllProblems(Long problemCompanyId);
+	public List<ProblemsBean> getAllProblems();
 
-	public List<BkProduct> findAllProblemsByStatus(String status, Long problemCompanyId);
+	public List<ProblemsBean> findAllProblemsByStatus(String status);
+
+	public List<ProblemsBean> findAllProblemsByCategory(Integer catNum);
 	
 	
 	

@@ -77,6 +77,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	public String update(Long memberId, Member member) {
 		Member updatedMemberDetail = jpaa.findById(memberId).orElse(null);
+		System.out.println(member.getMemberId()+ "=================================");
+		System.out.println(updatedMemberDetail.getMemberMail()+"==========================");
 
 		if (updatedMemberDetail != null) {
 			updatedMemberDetail.setMemberId(member.getMemberId());
