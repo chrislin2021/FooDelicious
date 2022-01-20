@@ -255,6 +255,21 @@ public class CartController {
 		return productPolymers;
 	}
 
+	@ResponseBody
+	@GetMapping("/shoppingCart/insertDis")
+	public String insertDis() {
+
+		DiscountBean discountBean = new DiscountBean();
+
+		discountBean.setMemberId((Long) session.getAttribute("userID"));
+		discountBean.setDiscountName("TK888");
+		discountBean.setDiscountContent(200);
+
+		discountService.insertItem(discountBean);
+
+		return "TK888";
+	}
+
 //	顯示初始金額
 	public Integer originTotal() {
 

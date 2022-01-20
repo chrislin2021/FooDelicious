@@ -201,6 +201,11 @@
 					</th>
 				</tr>
 			</tbody>
+			<tfoot>
+			<tr>
+			<th>免費領取NT$:200元折價券　<button type="button" class="btn btn-outline-dark btn-sm" onclick="insertDis()">點我領取</button></th>
+			</tr>
+			</tfoot>
 		</table>
 
 		<table class="goToPay">

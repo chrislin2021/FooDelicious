@@ -42,9 +42,4 @@ public class CartServiceImpl implements CartService {
 		return cartRepository.findAll();
 	}
 
-	@Override
-	public List<CartBean> hesitantProduct() {
-		return cartRepository.hesitantProduct();
-	}
-
 }

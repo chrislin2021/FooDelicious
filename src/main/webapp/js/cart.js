@@ -139,6 +139,21 @@ function discountMoney(discounts, coin) {
 	})
 }
 
+function insertDis() {
+	$.ajax({
+		url: "/shoppingCart/insertDis",
+		type: "GET",
+		success: function(dis) {
+			Swal.fire(
+				'已領取二百元折價券!!',
+				'請點選使用進行折價!',
+				'success'
+			)
+			$("#discount").attr("value", dis);
+		}
+	})
+}
+
 function searchProduct() {
 	var name = $("#appleNoSale").val();
 	if (name != null) {
@@ -156,7 +171,7 @@ function searchProduct() {
 						product += '<td>' + productPolymer.productName + '</td>';
 						product += '<td>NT$:' + productPolymer.productPrice + '元</td>';
 						product += '<td><input id="pdQty" type="number" value = 1 min=1 max=' + productPolymer.productStock + '></td>';
-						product += '<td><button type="button" class="btn btn-danger btn-sm" onclick="addToCart(' + productPolymer.productId + ')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zoom-in"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></button></td>';
+						product += '<td><button type="button" class="btn btn-danger btn-sm" onclick="addToCart(' + productPolymer.productId + ')">加入購物車</button></td>';
 						product += '</tr>';
 					}
 				}
