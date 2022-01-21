@@ -22,25 +22,26 @@
         .typeName {
             width: 100px;
         }
+        #pushArticle{
+            margin: 0.75em auto;
+        }
     </style>
 
     <br />
-    <div id="liveAlertPlaceholder"></div>
-    <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
-        <select class="btn btn-outline-secondary dropdown" id="clasify" style="background-color: #f4f4f4">
-            <option selected>全部文章</option>
-            <option>廚具開箱</option>
-            <option>食譜分享</option>
-        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
-        <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
-    </div>
+   
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-2">
-                <!--版面配置左方-->
-            </div>
-            <div class="col-12 col-md-6">
-
+            <div class="col-12 col-md-8">
+                <div id="liveAlertPlaceholder"></div>
+                <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
+                    <select class="btn btn-outline-secondary dropdown" id="clasify" style="background-color: #f4f4f4">
+                        <option selected>全部文章</option>
+                        <option>廚具開箱</option>
+                        <option>食譜分享</option>
+                    </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
+                    <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
+                    
+                </div>
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
                         <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page">全部文章</button></li>
@@ -58,7 +59,7 @@
             </div>
             <!--聊天室區域-->
             <div class="col" id="messageDIV" style="visibility:hidden ">
-
+                <button id="pushArticle" type="button" class="btn btn-primary btn-lg">發表文章</button>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" id="sendToChatRoom2">傳送</button>
@@ -88,6 +89,8 @@
         let btnSendToChatRoom2 = null;
         //聊天室內容
         let messageData = "";
+        //發表文章
+        let pushArticle = null;
 
         //使用者ID
         let UserId;
@@ -117,6 +120,9 @@
             inputMessageArea = document.getElementById('inputMessageArea');
             //傳送訊息BTN
             btnSendToChatRoom2 = document.getElementById('sendToChatRoom2');
+            //發表文章功能
+            pushArticle = document.getElementById('pushArticle');
+
             $.ajax({
                 url: url,
                 type: type,
@@ -126,7 +132,7 @@
 
                     UserId = articles.session;
                     document.getElementById("messageDIV").style.visibility = (UserId != null) ? 'visible' : 'hidden';
-
+                    pushArticle.style.visibility = (UserId != null) ? 'visible' : 'hidden';
                     //得到格式：{session: null, title: Array(18)}        
                     //console.log(ShareData)
                     //=================分頁功能================
@@ -179,7 +185,7 @@
                             }));
                             //                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
                             //                             $(".messageArea").html(messageData);
-                            inputMessageArea.value = "";
+                            
                         }
                     };
                 }
@@ -405,4 +411,11 @@
 
             alertPlaceholder.append(wrapper)
         }
+    </script>
+
+    <script>
+        $("#pushArticle").click(function(){
+            //console.log("YOOOOOOOOOOOOO");
+            window.location.href="/postArticle";
+        })
     </script>

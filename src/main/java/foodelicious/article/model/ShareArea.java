@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import foodelicious.orders.model.OrdersDetailBean;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import foodelicious.member.model.Member;

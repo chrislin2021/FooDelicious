@@ -8,7 +8,13 @@
             #sendMsg {
                 margin-bottom: 1.5em;
             }
+
+            .align-right {
+
+                float: right;
+            }
         </style>
+
         <link href="/css/CKEditor.css" rel="stylesheet" />
         <div class="row" id="rowSelect">
             <div class="col-12 col-md-2">
@@ -173,7 +179,10 @@
 
                     $("#foldBTN").html("一共有 " + msg.length + " 筆留言")
                     for (let i = 0; i < msg.length; i++) {
-                        msgData += "<tr><td><div>" + msg[i].memberName + "：</div><div>" + msg[i].text + "</div></td></tr>"
+                        msgData += "<tr><td><div>" + msg[i].memberName +"： ";
+                        msgData += "<button class='align-right'>更新</button></div>";
+                        msgData += "<div><button class='align-right'>刪除</button></div>";
+                        msgData += "<div>" + msg[i].text + "</div></td></tr>";
                     }
                     msgData += "</table>";
                     $("#foldMSG").html(msgData);
@@ -181,7 +190,10 @@
                 } else {
                     $("#foldArea").hide();
                     for (let i = 0; i < msg.length; i++) {
-                        msgData += "<tr><td><div>" + msg[i].memberName + "：</div><div>" + msg[i].text + "</div></td></tr>"
+                        msgData += "<tr><td><div>" + msg[i].memberName +"： ";
+                        msgData += "<button class='align-right'>更新</button></div>";
+                        msgData += "<div><button class='align-right'>刪除</button></div>";
+                        msgData += "<div>" + msg[i].text + "</div></td></tr>";
                     }
                     $("#showMSG").html(msgData);
                     msgShow();
@@ -242,6 +254,13 @@
                     $("#unlikeBTN").hide();
                     $("#likeBTN").hide();
                 }
-
             }
+        </script>
+
+        <script>
+            //刪除留言
+        </script>
+
+        <script>
+            //新增留言
         </script>
