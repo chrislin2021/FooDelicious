@@ -38,7 +38,7 @@ public class LikeOrNot implements Serializable {
 	@JoinColumn(name = "fk_memberID")
 	private Member member;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_articleID", referencedColumnName = "share_id")
 	private ShareArea shareArea;
 	
