@@ -92,95 +92,11 @@
 	}
 // 	var today = monthString+" "+today.getDate()+", "+today.getFullYear();
 // 	var todayFormat = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-	
-	
-	
 
- 	today = monthString+" "+today.getDate()+", "+today.getFullYear();
-	$("#date").text(today);
-
-	</script>
-	
-	<script>
-    //=============顯示分頁設定=============
-    //=============全部訂單=============
-    let urlString = "";
-    $("#all").on("click",function(){
-        $("#selectPage a").prop("class","nav-link");
-        $("#all").prop("class","nav-link active");
-        urlString = "/companyOrderDetails";
-        $.ajax({
-            url: urlString,
-            type: "GET",
-            success: function(ordersAll){
-            	$("#orders").html("");
-                $("#page").html(" ");
-                let num = ordersAll.length;
-                if(num >= 10){
-                    pages(10,ordersAll);
-                }else{
-                    pages(num,ordersAll);
-                }
-            }
-        });
-    })
-
-    //=============完成=============
-    $("#todayOrders").on("click",function(){
-        $("#selectPage a").prop("class","nav-link");
-        $("#todayOrders").prop("class","nav-link active");
-        urlString = "/companyOrderDetails";
-        let todayOrders = new Array();
-        
-        $.ajax({
-            url: urlString,
-            type: "GET",
-            success: function(ordersAll){
-                $("#orders").html("");
-                $("#page").html(" ");
-                
-                
-                let num = ordersAll.length;
-                //alert(num)
-                
-                //alert(date.substring(0,10));
-                let todayDate = new Date();
-                let month = todayDate.getMonth()+1;
-                if(month < 10){
-                	month = "0"+month;
-                }
-                let todays = todayDate.getFullYear()+'-'+month+'-'+todayDate.getDate();
-                
-                for(let k = 0; k < num; k++){
-                	let date = ordersAll[k].ordersBean.ordersDate;
-                	let sub = date.substring(0,10);
-                	//alert(sub);
-                 	if(Object.is(sub,todays)){
-                 		todayOrders.push(ordersAll[k]);
-                 	}
-                }
-                if(num >= 10){
-                    pages(10,todayOrders);
-                }else{
-                    pages(num,todayOrders);
-                }
-            }
-        });
-    })
-
-
-
-
-</script>
-	
-
-
-	<script>
 		//=============顯示所有商品資料=============
 
 		let companyId = $("#companyId").val();
 		let companyProductIdsGlobal;
-		let totalProductsLength;
 		let allFoundCompanyOrders = new Array();
 		let allOrderDetailsLength;
 		
@@ -191,11 +107,12 @@
 				type : "GET",
 				success : function(allCompanyOrderDetails) {
 					//alert("here")
+					allFoundCompanyOrders.length=0;
 					let totalOrders = allCompanyOrderDetails.length;
 					
 					for (let j = 0; j < totalOrders; j++) {
 						if (allCompanyOrderDetails[j].product.productCompanyId == companyId) {
-							allFoundCompanyOrders.unshift(allCompanyOrderDetails[j]);
+							allFoundCompanyOrders.push(allCompanyOrderDetails[j]);
 						}
 					}
 					allOrderDetailsLength = allFoundCompanyOrders.length;
@@ -210,8 +127,112 @@
 			});
 		}
 
-	</script>
 
+
+	
+	
+	
+
+ 	today = monthString+" "+today.getDate()+", "+today.getFullYear();
+	$("#date").text(today);
+
+    //=============顯示分頁設定=============
+    //=============全部訂單=============
+    
+    
+   	let allOrders = new Array();
+    let todayOrder = new Array();
+
+    let urlString = "";
+    $("#all").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#all").prop("class","nav-link active");
+        urlString = "/companyOrderDetails";
+        
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(ordersAll){
+            	$("#orders").html("");
+                $("#page").html(" ");
+                allOrders.length = 0;
+                let num = ordersAll.length;
+                
+                for (let j = 0; j < num; j++) {
+					if (ordersAll[j].product.productCompanyId == companyId) {
+						allOrders.push(ordersAll[j]);
+					}
+				}
+           	
+               
+                if(num >= 10){
+                    pages(10,allOrders);
+                }else{
+                    pages(num,allOrders);
+                }
+            }
+        });
+    })
+    
+   
+    //=============完成=============
+    $("#todayOrders").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#todayOrders").prop("class","nav-link active");
+        urlString = "/companyOrderDetails";
+        
+        
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(ordersAll){
+                $("#orders").html("");
+                $("#page").html(" ");
+                todayOrder.length = 0;
+                //alert(allOrders[0])
+
+                let length = allOrders.length;
+                alert("length: "+length)
+//                 //alert(date.substring(0,10));
+                let todayDate = new Date();
+                let month = todayDate.getMonth()+1;
+                if(month < 10){
+                	month = "0"+month;
+                }
+                let todays = todayDate.getFullYear()+'-'+month+'-'+todayDate.getDate();
+                //alert(todays)
+                for(let k = 0; k < length; k++){
+                	
+                	let date = allOrders[k].ordersBean.ordersDate;
+                	
+                	let sub = date.substring(0,10);
+                	//alert(sub);
+                 	if(Object.is(sub,todays)){
+                 		//alert("true")
+                 		//alert(allOrders[k].ordersDetailId)
+                 		todayOrder.push(allOrders[k]);
+                 	}
+                }
+                let size = todayOrder.length;
+                //alert(size)
+                
+                if(size >= 10){
+                    pages(10,todayOrder);
+                }else{
+                    pages(size,todayOrder);
+                }
+            }
+        });
+    })
+
+
+
+
+</script>
+	
+
+
+	
 	<script>
 		//=============分頁程式=============
 		function pages(maxNum, dataSource) { //輸入單頁最大筆數和資料來源
