@@ -109,7 +109,7 @@
 	<br />
 	<br />
 	<br />
-	<h1 id="center">訂單完成！至<a href="/memberOrders">會員中心</a>查詢訂單
+	<h1 id="center">訂單完成！至<a href="/memberIndex">會員中心</a>查詢訂單
 	</h1>
 	<br />
 	<br />

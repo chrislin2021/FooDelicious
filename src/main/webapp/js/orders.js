@@ -1,4 +1,5 @@
 $(".checkout").on("click", function() {
+
 	if ($("#flexRadioDefault1").is(":checked")) {	// 金流服務請寫在else
 		if ($("#name").val().length == 0) {
 			$(".validate1").removeClass("d-none");
@@ -15,10 +16,6 @@ $(".checkout").on("click", function() {
 		}
 
 		if ($("#name").val().length != 0 && $("#phone").val().length != 0 && $("#address").val().length != 0) {
-			let proId = document.getElementsByClassName("productId");
-			let proQuantity = document.getElementsByClassName("quantity");
-			var ordersData = {};
-			var ordersDetail = [];
 
 			var orders = {
 				ordersName: $("#name").val(),
@@ -26,11 +23,28 @@ $(".checkout").on("click", function() {
 				ordersAddress: $("#address").val(),
 			}
 
-			for (let i = 0; i < proId.length; i++) {
-				ordersData.id = proId[i].innerHTML
-				ordersData.quantity = proQuantity[i].innerHTML
-				ordersDetail.push({ ...ordersData })
-			}
+			let timerInterval
+			Swal.fire({
+				title: '請稍後!!',
+				html: '',
+				timer: 8000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+					const b = Swal.getHtmlContainer().querySelector('b')
+					timerInterval = setInterval(() => {
+						b.textContent = Swal.getTimerLeft()
+					}, 100)
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			}).then((result) => {
+				/* Read more about handling dismissals below */
+				if (result.dismiss === Swal.DismissReason.timer) {
+					console.log('I was closed by the timer')
+				}
+			})
 
 			$.ajax({
 				url: "/orders/insert",
@@ -38,20 +52,12 @@ $(".checkout").on("click", function() {
 				contentType: "application/json;charset=utf-8;",
 				data: JSON.stringify(orders),
 				success: function() {
-					$.ajax({
-						url: "/ordersDetail/insert",
-						type: "POST",
-						contentType: "application/json;charset=utf-8;",
-						data: JSON.stringify(ordersDetail),
-						success: function() {
-							window.location.href = "/ordersEnd"
-						}
-					})
+					window.location.href = "/ordersEnd"
 				}
 			})
 		}
 	} else {
-		window.location.href="/ecpay";
+		window.location.href = "/ecpay";
 	}
 })
 
