@@ -64,6 +64,12 @@ public class CartBean implements Serializable {
 		this.product = product;
 	}
 
+	public CartBean(Integer quantity, Product product) {
+		super();
+		this.quantity = quantity;
+		this.product = product;
+	}
+
 	public Long getCartId() {
 		return cartId;
 	}

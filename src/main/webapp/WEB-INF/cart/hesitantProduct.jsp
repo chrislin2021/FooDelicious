@@ -73,7 +73,7 @@
 				//=========統計數據=========
 				let cartHtml = "";
 				for (let i = 0; i < carts.length; i++) {
-					cartHtml += '<tr><th scope="row">' + cartList[i].memberId
+					cartHtml += '<tr><th scope="row">' + "AAAAAAAAAAAAAA"
 							+ '</th>';
 					cartHtml += '<td>' + cartList[i].product.productCompany
 							+ '</td>';
@@ -123,40 +123,37 @@
 						}
 					}
 				});
-				
-	            let ctx2 = $('#myChart2');
-	            let myChart2 = new Chart(ctx2, {
-	                type: 'doughnut', //圖表類型
-	                data: {
-	                    //標題
-	                    labels: ['19歲以下', '20~29歲', '30~39歲', '40~49歲', '50~59歲', '60歲以上'],
-	                    datasets: [{
-	                        label: '會員年齡層分析', //標籤
-	                        data: [data1, data2, data3, data4, data5], //資料
-	                        //圖表背景色
-	                        backgroundColor: [
-	                            'rgba(255, 99, 132, 0.2)',
-	                            'rgba(54, 162, 235, 0.2)',
-	                            'rgba(255, 206, 86, 0.2)',
-	                            'rgba(75, 192, 192, 0.2)',
-	                            'rgba(153, 102, 255, 0.2)',
-	                            'rgba(255, 159, 64, 0.2)'
-	                        ],
-	                        //圖表外框線色
-	                        borderColor: [
-	                            'rgba(255, 99, 132, 1)',
-	                            'rgba(54, 162, 235, 1)',
-	                            'rgba(255, 206, 86, 1)',
-	                            'rgba(75, 192, 192, 1)',
-	                            'rgba(153, 102, 255, 1)',
-	                            'rgba(255, 159, 64, 1)'
-		],
-									//外框線寬度
-									borderWidth : 1
-								} ]
-							},
 
-						});
+				let ctx2 = $('#myChart2');
+				let myChart2 = new Chart(ctx2, {
+					type : 'doughnut', //圖表類型
+					data : {
+						//標題
+						labels : [ '19歲以下', '20~29歲', '30~39歲', '40~49歲',
+								'50~59歲', '60歲以上' ],
+						datasets : [ {
+							label : '會員年齡層分析', //標籤
+							data : [ data1, data2, data3, data4, data5 ], //資料
+							//圖表背景色
+							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(255, 206, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(255, 159, 64, 0.2)' ],
+							//圖表外框線色
+							borderColor : [ 'rgba(255, 99, 132, 1)',
+									'rgba(54, 162, 235, 1)',
+									'rgba(255, 206, 86, 1)',
+									'rgba(75, 192, 192, 1)',
+									'rgba(153, 102, 255, 1)',
+									'rgba(255, 159, 64, 1)' ],
+							//外框線寬度
+							borderWidth : 1
+						} ]
+					},
+
+				});
 
 			}
 		})

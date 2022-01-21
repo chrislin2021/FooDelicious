@@ -12,4 +12,6 @@ public interface SearchService {
 
 	Product save(Product product);
 
+	Product getLanjiao(Long productId);
+
 }
