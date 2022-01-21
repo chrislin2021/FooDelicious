@@ -40,9 +40,9 @@
        
         <nav class="nav justify-content-end" style="background-color: #e3f2fd;" >
         <a class="nav-link active ms-0" href="/memberIndex" target="__blank">修改會員資料</a>
-        <a class="nav-link" href="#" target="__blank">給漢彬連</a>
         <a class="nav-link" href="#" target="__blank">給柏翔連</a>
         <a class="nav-link" href="/userFocusePage" target="__blank">喜歡的文章</a>
+        <a class="nav-link" href="/CashFlowAddress" target="__blank">寄貨資訊</a>
        </nav>
 
 	<div>

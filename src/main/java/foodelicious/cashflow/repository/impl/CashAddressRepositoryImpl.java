@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,6 +17,7 @@ import foodelicious.cashflow.container.CashflowAddressRowMapper;
 import foodelicious.cashflow.model.CashflowAddressBean;
 import foodelicious.cashflow.repository.CashAddressRepository;
 import foodelicious.member.model.Member;
+import foodelicious.orders.model.OrdersBean;
 
 @Repository
 public class CashAddressRepositoryImpl implements CashAddressRepository {
@@ -23,9 +25,11 @@ public class CashAddressRepositoryImpl implements CashAddressRepository {
 	EntityManager em;
 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	HttpSession session;
 
-	public CashAddressRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+	public CashAddressRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate,HttpSession session) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+		this.session = session;
 	}
 
 
@@ -75,24 +79,45 @@ public class CashAddressRepositoryImpl implements CashAddressRepository {
 
 
 	@Override
-	public void UpdateAddress(Map<String, String> params, String commonaddress) {
+	public void UpdateAddress(String commonaddress) {
 		CashflowAddressBean cashflowAddressBean = em.find(CashflowAddressBean.class, commonaddress);
-		cashflowAddressBean.setCommonAddress(params.get("commonAddress"));
+		cashflowAddressBean.setCommonAddress(commonaddress);
 		em.merge(cashflowAddressBean);
 	}
 
 
 	@Override
-	public void pushAddress(Map<String, String> params, Long id) {
-		Member member = em.find(Member.class, id);
-		CashflowAddressBean cashflowAddressBean = new CashflowAddressBean();
-		cashflowAddressBean.setCommonAddress(params.get("commonAddress"));
+	public void pushAddress(Map<String, String> params) {
+		System.out.println("===================");
+		System.out.println(params.get("commonaddress"));
+				
+//		Long addressId = Long.parseLong(params.get("addressId"));
+//		CashflowAddressBean cashflowAddressBean = em.find(CashflowAddressBean.class, addressId);
 		
+		Long memberId = (Long) session.getAttribute("userID");
+		Member member = em.find(Member.class, memberId);
+		
+		CashflowAddressBean cashflowAddressBean = new CashflowAddressBean();
+
+		cashflowAddressBean.setCommonAddress(params.get("commonaddress"));
+		cashflowAddressBean.setMemberAddress(member.getMemberAddress());
 		cashflowAddressBean.setMember(member);
 		em.persist(cashflowAddressBean);
-		em.close();
+		
+		
 	}
 
 
+
+	@Override
+	public void save(String commonaddress) {
+		CashflowAddressBean cashflowAddressBean = new CashflowAddressBean();
+		cashflowAddressBean.setCommonAddress(commonaddress);
+		
+		em.persist(commonaddress);
+		
+	}
+
+	
 
 }

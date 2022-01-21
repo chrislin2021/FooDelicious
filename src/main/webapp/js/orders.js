@@ -51,7 +51,7 @@ $(".checkout").on("click", function() {
 			})
 		}
 	} else {
-		alert("金流服務")
+		window.location.href="/ecpay";
 	}
 })
 
