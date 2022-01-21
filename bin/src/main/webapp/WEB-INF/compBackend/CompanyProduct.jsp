@@ -74,7 +74,7 @@
 					type : "DELETE",
 					success : function() {
 						alert("刪除成功");
-						window.location.href = "/companyProduct2";
+						window.location.href = "/companyProduct";
 					},
 					error : function() {
 						alert("失敗");
@@ -95,13 +95,13 @@
        let urlData = "";
        
        if(selectVal === "全部商品"){
-           urlData = "http://localhost:8080/companyProducts/"+keyword;
+           urlData = "/companyProducts/"+keyword;
        }else if(selectVal === "廚具"){
            selectVal = 0;
-           urlData = "http://localhost:8080/companyProducts/"+keyword+"/"+selectVal;
+           urlData = "/companyProducts/"+keyword+"/"+selectVal;
        }else{
            selectVal = 1;
-           urlData = "http://localhost:8080/companyProducts/"+keyword+"/"+selectVal;
+           urlData = "/companyProducts/"+keyword+"/"+selectVal;
        }
        $.ajax({
            url: urlData,
@@ -144,7 +144,7 @@
 				 //將資料存到localStorage，給另一個頁面使用
 				 localStorage.setItem("comProductData",productString);
 				 //跳轉頁面
-				 window.location.href = "/companyProduct2/update";
+				 window.location.href = "/companyProduct/update";
 				 },
 				 error : function() {
 						alert("fail");
@@ -381,10 +381,10 @@
 	<script>
     //=============顯示功能=============
     function showData(startItem,endItem,dataSource){
-    	//alert(dataSource[0].productCategories);
+    	//alert(dataSource[0].productInsertDate);
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
-            txt += "<td class='align-middle'>"+ (i+1)+"</td>"
+            txt += "<td class='align-middle'>"+ dataSource[i].productId+"</td>"
             let cate = dataSource[i].productCategories;
             let type = "";
             if(cate == 0){

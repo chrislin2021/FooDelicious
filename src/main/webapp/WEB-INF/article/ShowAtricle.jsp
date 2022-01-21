@@ -4,13 +4,12 @@
             #contentArea {
                 pointer-events: none;
             }
-
+            
             #sendMsg {
                 margin-bottom: 1.5em;
             }
-
+            
             .align-right {
-
                 float: right;
             }
         </style>
@@ -20,8 +19,7 @@
             <div class="col-12 col-md-2">
                 <br>
 
-                <button type="button" id="updateBTN" class="btn btn-primary btn-lg" role="button"
-                    data-bs-toggle="button">修改</button>
+                <button type="button" id="updateBTN" class="btn btn-primary btn-lg" role="button" data-bs-toggle="button">修改</button>
             </div>
 
             <div class="col-12 col-md-9">
@@ -55,8 +53,7 @@
                 <div id="msgArea">
                     <!--摺疊-->
                     <div id="foldArea">
-                        <button id="foldBTN" class="container btn btn-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <button id="foldBTN" class="container btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 
                         </button>
                         <div class="collapse" id="collapseExample">
@@ -73,8 +70,7 @@
                         </table>
 
                     </div>
-                    <input id="sendMsg" type="text" class="form-control" placeholder="留言..." aria-label="Username"
-                        aria-describedby="addon-wrapping">
+                    <input id="sendMsg" type="text" class="form-control" placeholder="留言..." aria-label="Username" aria-describedby="addon-wrapping">
                 </div>
             </div>
         </div>
@@ -89,7 +85,7 @@
             $.ajax({
                 url: "/responseArticle",
                 type: "Get",
-                success: function (data) {
+                success: function(data) {
                     let accId = data.title[0].fk_account_id;
                     loginId = data.LoginId;
                     articleId = data.title[0].share_id
@@ -110,7 +106,7 @@
 
                 }
             })
-            $("#updateBTN").click(function () {
+            $("#updateBTN").click(function() {
                 window.location.href = "/goUpdatePage"
             })
         </script>
@@ -132,7 +128,7 @@
         </script>
         <script>
             //留言功能區域
-            $("#sendMsg").keydown(function () {
+            $("#sendMsg").keydown(function() {
                 if (event.keyCode === 13 & sendMsg.value.length != 0) {
                     //console.log(sendMsg.value)
                     let MsgData = {};
@@ -146,7 +142,7 @@
                         dataType: 'json',
                         contentType: "application/json;charset=utf-8",
                         data: JSON.stringify(MsgData),
-                        success: function () {
+                        success: function() {
                             msgShow();
                         }
                     })
@@ -163,7 +159,7 @@
                     url: "/showAllMsg/" + articleId,
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
-                    success: function (msg) {
+                    success: function(msg) {
                         expandMSG(msg);
                     }
                 })
@@ -172,46 +168,55 @@
         <script>
             //msg全部展開
             function expandMSG(msg) {
+                //console.log(msg[5].fk_member_id)
+                //console.log(loginId)
                 let msgData = "";
                 //console.log(msg.length)
                 if (msg.length >= 5) {
                     $("#shortArea").hide();
+                    //$(".updateInput").hide();
 
                     $("#foldBTN").html("一共有 " + msg.length + " 筆留言")
                     for (let i = 0; i < msg.length; i++) {
-                        msgData += "<tr><td><div>" + msg[i].memberName +"： ";
-                        msgData += "<button class='align-right'>更新</button></div>";
-                        msgData += "<div><button class='align-right'>刪除</button></div>";
-                        msgData += "<div>" + msg[i].text + "</div></td></tr>";
+                        msgData += "<tr><td><div>" + msg[i].memberName + "： ";
+                        if (loginId == msg[i].fk_member_id) {
+                            msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
+                            msgData += "<button class='delMsg align-right'>刪除</button></div>";
+                        }
+                        msgData += "<div id='msgNo" + msg[i].id + "'>" + msg[i].text + "</div></td></tr>";
                     }
                     msgData += "</table>";
                     $("#foldMSG").html(msgData);
-                    msgShow();
                 } else {
                     $("#foldArea").hide();
                     for (let i = 0; i < msg.length; i++) {
-                        msgData += "<tr><td><div>" + msg[i].memberName +"： ";
-                        msgData += "<button class='align-right'>更新</button></div>";
-                        msgData += "<div><button class='align-right'>刪除</button></div>";
-                        msgData += "<div>" + msg[i].text + "</div></td></tr>";
+                        msgData += "<tr><td><div>" + msg[i].memberName + "： ";
+                        if (loginId == msg[i].fk_member_id) {
+                            msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
+                            msgData += "<button class='align-right'>刪除</button></div>";
+                        }
+                        msgData += "<div id='msgNo" + msg[i].id + "'>" + msg[i].text + "</div></td></tr>";
+
                     }
+
                     $("#showMSG").html(msgData);
-                    msgShow();
+
                 }
+                $(".updateInput").hide();
             }
 
             //
         </script>
         <script>
             //按讚事件
-            $("#likeBTN").on("click", function () {
+            $("#likeBTN").on("click", function() {
                 ajaxFunc("/likeArticle", "Post");
                 $("#unlikeBTN").show();
                 $("#likeBTN").hide();
             })
 
             //一點也不讚事件
-            $("#unlikeBTN").on("click", function () {
+            $("#unlikeBTN").on("click", function() {
                 ajaxFunc("/unlike", "Post");
                 $("#unlikeBTN").hide();
                 $("#likeBTN").show();
@@ -239,7 +244,7 @@
                     $.ajax({
                         url: "/checkLick/" + loginId + "/" + articleId,
                         type: "GET",
-                        success: function (cellback) {
+                        success: function(cellback) {
                             console.log("cellback：" + cellback)
                             if (cellback) {
                                 $("#unlikeBTN").show();
@@ -262,5 +267,10 @@
         </script>
 
         <script>
-            //新增留言
+            //更新留言
+            function updataMsg(id) {
+                let updateMsg = "#msgNo" + id;
+                let inputChange = '<input type="text" class="form-control" placeholder="更新您的留言..." aria-label="Username" aria-describedby="addon-wrapping">';
+                console.log($(updateMsg).html(inputChange))
+            }
         </script>

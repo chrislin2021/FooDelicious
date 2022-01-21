@@ -20,11 +20,11 @@
 	<div class="app-card shadow p-3 mb-5 bg-body rounded">
 		<div class="">
 			<div class="app-card-body p-3 p-lg-4">
-				<h3 class="mb-3">Welcome, ${userName}!</h3>
+				<h3 class="mb-3">Welcome, ${userName} !</h3>
 				<div class="row gx-5 gy-3">
 					<div class="col-12 col-lg-9">
 
-						<div>最好給我賣東西喔</div>
+						<div>我們提供來自於歐洲新鮮直運的產品。以及一堆雜七雜八的</div>
 					</div>
 					<!--//col-->
 
@@ -113,6 +113,7 @@
 
 </script>
 <script>
+	
 
 	$("#companyDetailUpdate").on("click",function(){
 		let companyId =  $("#companyId").val();
@@ -127,7 +128,7 @@
 		 };
 
 		let detailString = JSON.stringify(updateCompanyDetail);
-		alert(detailString);
+		//alert(detailString);
 		
 		$.ajax({
 		 url:"/companyDetailUpdate/"+companyId,
@@ -140,29 +141,24 @@
 				url:"/companyDetailUpdate/"+companyId,
 				type:"GET",
 				success: function(companyDetails){
-					alert(companyDetails.memberName);
+					//alert(companyDetails.memberName);
 					$("#companyName").val(companyDetails.memberName);
 					$("#companyEmail").val(companyDetails.memberMail);
 					$("#companyPhone").val(companyDetails.memberPhone);
 					$("#companyAddress").val(companyDetails.memberAddress);
-					window.location.href="/companyMain2";
 					
-					//無法在頁面顯示更新的資料 但資料庫有更新
+					window.location.href="/companyMain";
+				
 				}
-			})
-		 }
+			});
+
+			
+		  }
 		
-	})
-
-
-		 
+		})
+	 
 		
 })
-
-
-
-
-
 
 
 

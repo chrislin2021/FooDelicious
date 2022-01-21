@@ -33,9 +33,9 @@
                             <td class='align-middle'>
                                 <input class="upInput readonly text-middle upInputSm" type="text" value="" readonly id="comProductId" style="width:80px;text-align:center" >
                             </td>
-                            <td class='align-middle'>
-                                <select id="comProdCategories" class="form-select upInput text-middle upInputMd" style="width:80px;text-align:center">
-                                    <option value="" id="comCate" selected></option>
+                             <td class='align-middle'>
+                                <select id="categories" class="form-select upInput text-middle upInputMd">
+                                    <option value="" id="cate" selected></option>
                                     <option value="1">食材</option>
                                     <option value="0">廚具</option>
                                 </select>
@@ -43,11 +43,12 @@
                             <td class='align-middle'>
                                 <input class="upInput upInputMd" type="text" value="" id="comProductCompany" style="width:100px;text-align:center">
                             </td>
-                            <td class='align-middle'>
-                                <select id="comProductStatus" class="form-select upInput text-middle upInputMd" style="width:100px;text-align:center">
-                                    <option value="" id="comStatus" selected></option>
-                                    <option value="0">下架中</option>
+                           <td class='align-middle'>
+                                <select id="productStatus" class="form-select upInput text-middle upInputMd">
+                                    <option value="" id="status" selected hidden></option>
                                     <option value="1">上架中</option>
+                                    <option value="0">下架中</option>
+                                    
                                 </select>
                             </td>
                             <td class='align-middle'>
@@ -96,11 +97,11 @@
 					type : "DELETE",
 					success : function() {
 						alert("刪除成功");
-						window.location.href = "/companyProduct2";
+						window.location.href = "/companyProduct";
 					}
 				});
 			}
-		})
+		});
 	</script>
 
 
@@ -117,19 +118,21 @@
     let type = ""
     if( cate == 0){type = "廚具";
     }else{ type = "食材";}
-    $("#comCate").val(cate);
-    $("#comCate").text(type);
-
-    $("#comProductCompany").val(comProductData.productCompany);
-    let initStatus = comProductData.productStatus;
-    let sta= ""
-    if( initStatus == 1){
-    	sta = "上架中";
+    $("#cate").val(cate);
+    $("#cate").text(type);
+    
+    let st = comProductData.productStatus;
+    let status = ""
+    if( st == 1){
+        status = "上架中";
     }else{
-    	sta = "下架中";
+        status = "下架中";
     }
-    $("#comStatus").val(initStatus);
-    $("#comStatus").text(sta);
+    $("#status").val(st);
+    $("#status").text(status);
+    
+    $("#comProductCompany").val(comProductData.productCompany);
+    
     $("#comProductName").val(comProductData.productName);
     $("#comProductContent").val(comProductData.productContent);
     $("#comProductPrice").val(comProductData.productPrice);
@@ -145,14 +148,15 @@
     //=============更新資料=============
     $("#comUpdateBtn").on("click",function(){
         let comProductId = $("#comProductId").val();
+        alert($("#productStatus").val());
      
         let updatedProduct = {
-            "productCategories": $("#comProdCategories").val(),
+            "productCategories": $("#categories").val(),
             "productCompany": $("#comProductCompany").val(),
             "productName": $("#comProductName").val(),
             "productContent": $("#comProductContent").val(),
             "productPrice": $("#comProductPrice").val(),
-            "productStatus" : $("#comProductStatus").val(),
+            "productStatus" : $("#productStatus").val(),
             "productStock": $("#comProductStock").val(),
             "productSalesFigures": $("#comProductSalesFigures").val(),
             "productKeywords": $("#comProductKeywords").val()
@@ -169,7 +173,7 @@
             data: newProductString,
             success:function(msg){
                 alert(msg)
-                window.location.href="/companyProduct2";
+                window.location.href="/companyProduct";
             }
         })
     })
@@ -178,7 +182,7 @@
 <script>
     //=============跳回首頁=============
     function comCancel(){
-        window.location.href="/companyProduct2";
+        window.location.href="/companyProduct";
     }
 </script>
 

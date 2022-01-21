@@ -14,7 +14,7 @@
     <span class="littleName">Top selling products</span>
 </h1>
 <div class="foodArea">
-    <p class="titleName"><i class="fas fa-hamburger"></i>食材類 </p>
+    <p class="textName "><i class="fas fa-hamburger"></i>食材類 </p>
     <div class="col-sm-5 report1">
         <canvas id="myChart" ></canvas>
     </div>
@@ -25,9 +25,9 @@
             <thead>
             <tr>
                 <th scope="col" class="table-danger">名次</th>
-                <th scope="col" class="table-danger">商品編號</th>
+                <th scope="col" class="table-danger">編號</th>
                 <th scope="col" class="table-danger">商品名稱</th>
-                <th scope="col" class="table-danger">商品庫存</th>
+                <th scope="col" class="table-danger">庫存</th>
                 <th scope="col" class="table-danger">銷售數量</th>
                 <th scope="col" class="table-danger">總銷售額</th>
             </tr>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="toolArea">
-    <p class="titleName"><i class="fas fa-utensils"></i>餐廚類</p>
+    <p class="textName"><i class="fas fa-utensils"></i>餐廚類</p>
     <div class="col-sm-5 report1">
         <canvas id="myChart2" ></canvas>
     </div>
@@ -50,9 +50,9 @@
             <thead>
             <tr>
                 <th scope="col" class="table-secondary">名次</th>
-                <th scope="col" class="table-secondary">商品編號</th>
+                <th scope="col" class="table-secondary">編號</th>
                 <th scope="col" class="table-secondary">商品名稱</th>
-                <th scope="col" class="table-secondary">商品庫存</th>
+                <th scope="col" class="table-secondary">庫存</th>
                 <th scope="col" class="table-secondary">銷售數量</th>
                 <th scope="col" class="table-secondary">總銷售額</th>
             </tr>

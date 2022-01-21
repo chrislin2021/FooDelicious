@@ -13,8 +13,29 @@
 }
 </style>
 
-<div align='center'>
+<div align='center'> 
 	<h3>更新會員資料</h3>
+	
+	<hr class="mt-0 mb-4">
+		<div class="row">
+			<div class="col-xl-4">
+				<!-- Profile picture card-->
+				
+				<div class="card mb-4 mb-xl-0">
+					<div class="card-header">大頭照</div>
+					<div class="card-body text-center">
+						<!-- Profile picture image-->
+						<img class="img-account-profile rounded-circle mb-2"
+							src="/img/${memberPic}" alt="">
+						<!-- Profile picture help block-->
+						<div class="small font-italic text-muted mb-4">JPG or PNG no
+							larger than 5 MB</div>
+						<!-- Profile picture upload button-->
+						<button class="btn btn-primary" type="">更新照片</button>
+					</div>
+				</div>
+			</div>
+
 	<font color='darkgreen'>&nbsp;${insertSuccess}</font>
 	<c:set var='updateurl'
 		value='${pageContext.request.contextPath}/members/${memberId}' />
@@ -36,7 +57,7 @@
 
 		<div class="input-group mb-3">
 			<span class="input-group-text">會員帳號：</span>
-			<form:input type="text" readonly="true" class="form-control"
+			<form:input type="text" class="form-control"
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" id="memberMail"
 				path="memberMail" />
@@ -142,7 +163,7 @@
 		<button type="submit" class="btn btn-outline-primary" id='sendData'>確認更改</button>
 
 	</form:form>
-	<a href="<c:url value='/listAllMembers'/> ">回前頁</a>
+	<a href="<c:url value='/'/> ">回首頁</a>
 </div>
 
 

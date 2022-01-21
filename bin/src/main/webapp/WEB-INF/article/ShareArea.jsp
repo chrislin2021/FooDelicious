@@ -3,6 +3,7 @@
     <style>
         .topDIV {
             margin-top: 16px;
+            background-color: #f4f4f4;
         }
         
         #inputGroupSelect01 {
@@ -15,26 +16,32 @@
             height: 415px;
             padding: 10px;
             border-radius: 10px;
+            overflow: scroll;
+        }
+        
+        .typeName {
+            width: 100px;
+        }
+        #pushArticle{
+            margin: 0.75em auto;
         }
     </style>
 
     <br />
-    <div id="liveAlertPlaceholder"></div>
-    <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
-        <select class="btn btn-outline-secondary dropdown" id="clasify">
-            <option selected>全部文章</option>
-            <option>廚具開箱</option>
-            <option>食譜分享</option>
-        </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
-        <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
-    </div>
+   
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-2">
-                <!--版面配置左方-->
-            </div>
-            <div class="col-12 col-md-6">
-
+            <div class="col-12 col-md-8">
+                <div id="liveAlertPlaceholder"></div>
+                <div class="w-50 p-3 input-group mb-3" style="margin: 0% auto;">
+                    <select class="btn btn-outline-secondary dropdown" id="clasify" style="background-color: #f4f4f4">
+                        <option selected>全部文章</option>
+                        <option>廚具開箱</option>
+                        <option>食譜分享</option>
+                    </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
+                    <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
+                    
+                </div>
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
                         <li class="nav-item"><button id="navTotal" type="button" class="nav-link active" aria-current="page">全部文章</button></li>
@@ -45,19 +52,19 @@
 
                 </div>
 
-                <table class="table table-hover">
+                <table class="table table-hover" style="background-color: #f4f4f4">
                     <tbody id="articleArea">
                     </tbody>
                 </table>
             </div>
             <!--聊天室區域-->
             <div class="col" id="messageDIV" style="visibility:hidden ">
-
+                <button id="pushArticle" type="button" class="btn btn-primary btn-lg">發表文章</button>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="inputMessageArea" placeholder="請輸入聊天內容" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" id="sendToChatRoom2">傳送</button>
                 </div>
-                <div class="messageArea">
+                <div class="messageArea" id="messageArea">
 
                 </div>
             </div>
@@ -82,6 +89,8 @@
         let btnSendToChatRoom2 = null;
         //聊天室內容
         let messageData = "";
+        //發表文章
+        let pushArticle = null;
 
         //使用者ID
         let UserId;
@@ -111,6 +120,9 @@
             inputMessageArea = document.getElementById('inputMessageArea');
             //傳送訊息BTN
             btnSendToChatRoom2 = document.getElementById('sendToChatRoom2');
+            //發表文章功能
+            pushArticle = document.getElementById('pushArticle');
+
             $.ajax({
                 url: url,
                 type: type,
@@ -120,7 +132,7 @@
 
                     UserId = articles.session;
                     document.getElementById("messageDIV").style.visibility = (UserId != null) ? 'visible' : 'hidden';
-
+                    pushArticle.style.visibility = (UserId != null) ? 'visible' : 'hidden';
                     //得到格式：{session: null, title: Array(18)}        
                     //console.log(ShareData)
                     //=================分頁功能================
@@ -157,9 +169,10 @@
                                     'from': articles.userName,
                                     'text': text
                                 }));
-//                                 messageData += "<p>" + articles.userName + " : " + text + "</p>";
-//                                 $(".messageArea").html(messageData);
+                                //                                 messageData += "<p>" + articles.userName + " : " + text + "</p>";
+                                //                                 $(".messageArea").html(messageData);
                             }
+                            inputMessageArea.value = "";
                         }
                     };
                     btnSendToChatRoom2.onclick = function() {
@@ -170,8 +183,9 @@
                                 'from': articles.userName,
                                 'text': text
                             }));
-//                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
-//                             $(".messageArea").html(messageData);
+                            //                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
+                            //                             $(".messageArea").html(messageData);
+                            
                         }
                     };
                 }
@@ -188,7 +202,7 @@
                 //console.log(ShareData.title[i].article_clallify);
                 ArticleData += "<tr>";
                 ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
-                ArticleData += "<td>" + ShareData.title[i].article_clallify + "</td>";
+                ArticleData += "<td class='typeName'>" + ShareData.title[i].article_clallify + "</td>";
                 ArticleData += "<td><a href='/intIDFindAll/" + ShareData.title[i].share_id + "'>" + ShareData.title[i].article_title + "</a></td>";
                 ArticleData += "<td>";
                 if (ShareData.session == ShareData.title[i].fk_account_id) {
@@ -331,63 +345,64 @@
         var alertTrigger = document.getElementById('articleSearch')
 
         $("#articleSearch").on("click", function() {
-            let clasify = $("#clasify").val();
-            //console.log(clasify)
-            let titleKeyWord = $("#titleKeyWord").val()
-                //console.log(titleKeyWord.length == 0)
+                let clasify = $("#clasify").val();
+                //console.log(clasify)
+                let titleKeyWord = $("#titleKeyWord").val()
+                    //console.log(titleKeyWord.length == 0)
 
-            if (titleKeyWord == "" || titleKeyWord.length == 0) {
-                //console.log("請輸入資料喔")
-                alertMsg('搜尋內容不能空白喔', 'success')
-                return;
-            } else {
-                //document.createElement('div').innerHTML="";
-                $("#liveAlertPlaceholder").html("");
-            }
-
-            let fuzzySearch = {
-                "clasify": clasify,
-                "AssociateString": titleKeyWord
-            }
-//             console.log(fuzzySearch)
-
-            $.ajax({
-                url: "/fuzzySearch/" + clasify + "/" + titleKeyWord,
-                type: "GET",
-                //data: JSON.stringify(fuzzySearch),
-                contentType: "application/json; charset=utf-8",
-                success: function(articles) {
-                    ShareData = articles
-                        //得到格式：{session: null, title: Array(18)}        
-                        //console.log(ShareData)
-                        //=================分頁功能================
-                    endItem = (articles.title.length <= 10) ? articles.title.length : 10;
-                    //讀回資料時就先顯示
-                    showData(startItem, endItem);
-                    //計算出最大頁數。
-                    maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
-
-                    //動態生成頁數
-                    let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
-                    for (let i = 0; i < maxPage; i++) {
-                        let pageNum = i + 1;
-                        pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
-                    };
-                    pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
-                    $("#page").html(pageHtml);
+                if (titleKeyWord == "" || titleKeyWord.length == 0) {
+                    //console.log("請輸入資料喔")
+                    alertMsg('搜尋內容不能空白喔', 'success')
+                    return;
+                } else {
+                    //document.createElement('div').innerHTML="";
+                    $("#liveAlertPlaceholder").html("");
                 }
-            })
 
-        })
-		//websock顯示資料
+                let fuzzySearch = {
+                        "clasify": clasify,
+                        "AssociateString": titleKeyWord
+                    }
+                    //             console.log(fuzzySearch)
+
+                $.ajax({
+                    url: "/fuzzySearch/" + clasify + "/" + titleKeyWord,
+                    type: "GET",
+                    //data: JSON.stringify(fuzzySearch),
+                    contentType: "application/json; charset=utf-8",
+                    success: function(articles) {
+                        ShareData = articles
+                            //得到格式：{session: null, title: Array(18)}        
+                            //console.log(ShareData)
+                            //=================分頁功能================
+                        endItem = (articles.title.length <= 10) ? articles.title.length : 10;
+                        //讀回資料時就先顯示
+                        showData(startItem, endItem);
+                        //計算出最大頁數。
+                        maxPage = (articles.title.length % maxItems == 0) ? Math.floor(articles.title.length / maxItems) : (Math.floor(articles.title.length / maxItems)) + 1;
+
+                        //動態生成頁數
+                        let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+                        for (let i = 0; i < maxPage; i++) {
+                            let pageNum = i + 1;
+                            pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
+                        };
+                        pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+                        $("#page").html(pageHtml);
+                    }
+                })
+
+            })
+            //websock顯示資料
         function showMessageOutput(messageOutput) {
             let line = "";
             //JSONData = JSON.stringify(messageOutput);
-//             console.log(JSONData);
+            //             console.log(JSONData);
             //line += JSON.stringify(messageOutput) + "\n";
             //console.log(line);
             messageData += "<p>" + messageOutput.from + " : " + messageOutput.text + "</p>";
             $(".messageArea").html(messageData);
+            document.getElementById("messageArea").scrollTop = document.getElementById("messageArea").scrollHeight;
         }
         //模糊搜尋報錯
         function alertMsg(message, type) {
@@ -396,4 +411,11 @@
 
             alertPlaceholder.append(wrapper)
         }
+    </script>
+
+    <script>
+        $("#pushArticle").click(function(){
+            //console.log("YOOOOOOOOOOOOO");
+            window.location.href="/postArticle";
+        })
     </script>
