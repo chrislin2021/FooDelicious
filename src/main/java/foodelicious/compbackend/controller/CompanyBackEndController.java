@@ -53,7 +53,7 @@ public class CompanyBackEndController {
 	@GetMapping(path = "/logout")
 	public String companyLogout(HttpSession session) {
 		session.invalidate();
-		return "app.home";
+		return "app.index";
 	}
 
 	

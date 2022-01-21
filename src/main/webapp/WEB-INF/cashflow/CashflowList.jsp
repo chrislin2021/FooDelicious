@@ -20,12 +20,12 @@
 <title>訂單資訊</title>
 
 <body >
-	<div align="center">
+	<div align="center" >
 		<h2>訂單資訊</h2>
 		<h2>付款完成!!</h2>
-		<table class="table">
+		<table class="table" style="background-color: white">
 			<thead>
-			<tbody id="cartList" style="background-color: #f4f4f4">
+			<tbody id="cartList">
 				<c:forEach var="carts" items="${carts}" begin="0" end="0">
 					<span style="margin: 250px">
 						<th>
@@ -41,7 +41,7 @@
 							
 				</c:forEach>
 				<c:forEach var="carts" items="${carts}" begin="0" end="0">
-					<th>訂單編號 : <td>${order.ordersId}
+					<th>訂單編號 : <td>${orderId}
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -57,7 +57,7 @@
 		</table>
 		<table class="table table-striped" align="center">
 			<thead>
-				<tr style="background-color: #D0D0D0"align="center">			
+				<tr style="background-color: white"align="center">			
 					<th>商品名稱					
 									
 					<th>商品數量					
@@ -70,7 +70,7 @@
 			</thead>
 			<tbody id="cartList">
 			<c:forEach var="carts" items="${carts}">
-				<tr  align="center">
+				<tr style="background-color: white" align="center">
 					<td>${carts.product.productName}</td>
 					
 					<td>${carts.quantity}</td>
@@ -87,7 +87,7 @@
 				
 				<tbody id="cartList">
 					<c:forEach var="carts" items="${carts}" begin="0" end="0">
-						<tr>
+						<tr >
 							<th>姓名&nbsp;<input id="ReceiverName" name="ReceiverName"
 								type="text" size="4" maxlength="120"
 								value="${carts.member.memberName}">
@@ -114,20 +114,15 @@
 				<tbody id="cartList">
 					<c:forEach var="carts" items="${carts}" begin="0" end="0">
 						<tr>
-							<th>寄送地址&nbsp; <input id="ReceiverAddr" name="ReceiverAddr"
+							<th>寄送地址&nbsp; <input id="commonaddress" name="ReceiverAddr"
 								type="text" size="30" maxlength="150"
-								value="${carts.member.memberAddress}">
-						
-						
+								value="${carts.member.memberAddress}">						
 						</tr>
-	
-			
-<!-- 	<input type="button" value="確定" -->
-<!-- 				onclick="javascript:location.href='http://localhost:8080'" /> -->
 					</c:forEach>
 				</tbody>
 			</table>
-			<input type="button" onclick="listComfirm()" value="確定"></input>
+			
+			<input type="button" onclick="listComfirm()" value="確定" ></input>
 			</div>
 	<div class="container">
 		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

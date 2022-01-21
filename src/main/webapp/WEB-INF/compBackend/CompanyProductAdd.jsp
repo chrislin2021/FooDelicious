@@ -11,8 +11,7 @@
 		<h2>新增商品</h2>
 		<p>請在此新增您的商品</p> 
 		商品分類：
-		<form action="/companyProductsAdd" enctype="multipart/form-data"
-			method="post">
+		<form action="/companyProductsAdd" enctype="multipart/form-data" method="post">
 			<select class="form-select form-select-sm"
 				aria-label=".form-select-sm example"
 				name="productCategories" style="width:20%">

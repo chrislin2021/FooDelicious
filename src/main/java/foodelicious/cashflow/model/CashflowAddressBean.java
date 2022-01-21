@@ -22,14 +22,15 @@ public class CashflowAddressBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	//member_id
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="member_id")
-	private Long memberId;
-	
 	@Column(name = "address_id")
 	private Long addressId;
-	
+
+	@Column(name="member_id")
+	private Long memberId;
+		
 	//member 原住址
 	@Column(name = "member_address")
 	private String memberAddress;
@@ -43,7 +44,7 @@ public class CashflowAddressBean implements Serializable{
 	private Long fkmemberid;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_member_id",insertable = false, updatable = false)
+	@JoinColumn(name = "fk_member_id")
 	private Member member;
 	
 	

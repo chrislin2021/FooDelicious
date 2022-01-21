@@ -52,8 +52,22 @@ function showList() {
 
 
 function listComfirm() {
+		
+	var postAddress = {		
+		commonaddress: $("#commonaddress").val()
+	};
+	console.log(postAddress)
 	$.ajax({
-		url: "/shoppingCart/show",
+		url: "/address.insert",
+		data: JSON.stringify(postAddress),
+		type: "POST",
+		contentType: "application/json;charset=utf-8",
+		success:function(){
+			alert("成功了")
+		}
+	});
+	$.ajax({
+		url: "/shoppingCart/CashflowList2",
 		type: "GET",
 		success: function() {
 			const Toast = Swal.mixin({
@@ -73,34 +87,22 @@ function listComfirm() {
 			showItem();
 		}
 	})
-	$.ajax({
-		url: "/shoppingCart/show",
-		type: "GET",
-		success: function countDown() {
-			setTimeout("location.href ='http://localhost:8080'", 2500)
-
-		}
-
-	})
+//	$.ajax({
+//		url: "/shoppingCart/CashflowList2",
+//		type: "GET",
+//		success: function countDown() {
+//			setTimeout("location.href ='http://localhost:8080'", 2500)			
+//		}
+//
+//	})
 }
 
-window.onload = function() {
-	$.ajax({
-		url: "/CashflowAddress",
-		type: "GET",
-		contentType: "application/json; charset=utf-8",
-		success: function(address) {
-			let str = "";
-			$("#memberMail").val(address.memberMail);
-			$("#memberName").val(address.userName);
-			$("#memberAddress").val(address.memberAddress);
-			for (let i = 0; i < address.title.length; i++) {
-				$("#memberId").val(address.title[i].memberId);
-				$("#commonAddress").val(address.title[i].commonAddress);
-			}
-		}
-	})
-}
+
+
+
+
+
+
 //window.onload = function() {
 //	$.ajax({
 //		url: "/shoppingCart/CashflowList2",

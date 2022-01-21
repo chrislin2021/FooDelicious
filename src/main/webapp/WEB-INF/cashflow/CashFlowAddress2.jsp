@@ -26,9 +26,10 @@
 
 
 <body>
-	<div>
-		<h2>您的寄貨資訊</h2>
-		<table class="table">
+
+	<div align="center">
+		<h2 >您的寄貨資訊</h2>
+		<table>
 		
 			<thead>
 				<div class="input-group mb-3">
@@ -53,19 +54,33 @@
 				</div>
 		</table>
 
-		<button type="submit" class="btn btn-outline-primary" id='sendData'>確認更改</button>
+		<button type="submit" class="btn btn-outline-primary" id='sendData' >確認更改</button>
 
-		<a href="<c:url value='/listAllMembers'/> ">回前頁</a>
+		<a href="<c:url value='/memberIndex'/> ">回前頁</a>
 	</div>
-	<div class="container">
-		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-			<div class="col-md-4 d-flex align-items-center">
-				<a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 Company, Inc</span>
-			</div>
-			
-		</footer>
-	</div>
+	
 
 </body>
 
 </html>
+
+<script>
+window.onload = function() {
+	$.ajax({
+		url: "/CashflowAddress",
+		type: "GET",
+		contentType: "application/json; charset=utf-8",
+		success: function(address) {
+			let str = "";
+			$("#memberId").val(address.memberId);
+			$("#memberMail").val(address.memberMail);
+			$("#memberName").val(address.userName);
+			$("#memberAddress").val(address.memberAddress);
+			for (let i = 0; i < address.title.length; i++) {
+// 				$("#memberId").val(address.title[i].memberId);
+				$("#commonAddress").val(address.title[i].commonAddress);
+			}
+		}
+	})
+}
+</script>

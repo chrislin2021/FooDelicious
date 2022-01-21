@@ -22,9 +22,13 @@ public interface CashAddressRepository {
 
 	void useAddressIdDelete(Long id);
 
-	void UpdateAddress(Map<String, String> params, String commonaddress);
+	void UpdateAddress(String commonaddress);
 
-	void pushAddress(Map<String, String> params, Long id);
+	void save(String commonaddress);
+
+	void pushAddress(Map<String, String> params);
+
+	
 
 	
 	
