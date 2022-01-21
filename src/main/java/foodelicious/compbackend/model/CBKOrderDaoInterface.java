@@ -8,6 +8,7 @@ import foodelicious.orders.model.OrdersDetailBean;
 public interface CBKOrderDaoInterface {
 	
 
-	public List<OrdersDetailBean> findAllOrders();
+
+	public List<OrdersDetailBean> findAllOrderByASC();
 
 }

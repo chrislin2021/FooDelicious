@@ -130,10 +130,11 @@ public class CompanyBackEndRestController {
 
 	// this is rest controller , /companyOrder is controller
 	@GetMapping("/companyOrderDetails")
-	public List<OrdersDetailBean> findAllOrders() {
+	public List<OrdersDetailBean> findAllOrderByASC() {
 		
-	return cbkServiceInterface.findAllOrders();
+	return cbkServiceInterface.findAllOrderByASC();
 	}
+
 	
 	
 //=================BackendProblemReport.jsp===================================
@@ -142,7 +143,7 @@ public class CompanyBackEndRestController {
 	public List<ProblemsBean> findAllProblems() {
 		
 		List<ProblemsBean> problems = cbkServiceInterface.getAllProblems();
-		System.out.println("================================");
+		//System.out.println("================================");
 		return problems;
 
 	}

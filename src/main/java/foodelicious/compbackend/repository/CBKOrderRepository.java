@@ -12,7 +12,8 @@ import foodelicious.orders.model.OrdersDetailBean;
 @Repository
 public interface CBKOrderRepository extends JpaRepository<OrdersDetailBean, Integer> {
 	
-//	@Query(value = "SELECT * FROM orders WHERE orders_state = ?", nativeQuery = true)
-//    List<OrdersDetailBean> findBy
+	@Query(value = "SELECT * FROM orders_detail ORDER BY orders_id DESC", nativeQuery = true)
+	List<OrdersDetailBean> findAllOrderByASC();
+	
 
 }

@@ -5,7 +5,7 @@
 
 <body>
 	<h1 class="tableName titleName2">
-		訂單列表<span class="smallFont">Order List</span>
+		訂單列表<span class="smallFont">Order List</span><span id="date" class="smallFont2"></span>
 	</h1>
 	<div class="searchArea">
 		<input class="keyWord keyWord1 searchBox" type="text"
@@ -16,6 +16,8 @@
 	<ul id="selectPage" class="nav nav-tabs">
 		<li class="nav-item"><a id="all" class="nav-link active"
 			aria-current="page" href="#">全部訂單</a></li>
+		<li class="nav-item"><a id="todayOrders" class="nav-link active"
+			aria-current="page" href="#">今日訂單</a></li>
 	</ul>
 	<section class="content">
 		<div class="col-xs-12">
@@ -45,6 +47,132 @@
 		</div>
 		<input type="text" hidden id="companyId" value='${userID}'>
 	</section>
+	
+	<script>
+	var today = new Date();
+	var month = today.getMonth()+1;
+	var monthString;
+	switch (month){
+		case 1:
+			monthString = "Jan";
+			break;
+		case 2:
+			monthString = "Feb";
+			break;
+		case 3:
+			monthString = "Mar";
+			break;
+		case 4:
+			monthString = "Apr";
+			break;
+		case 5:
+			monthString = "May";
+			break;
+		case 6:
+			monthString = "Jun";
+			break;
+		case 7:
+			monthString = "July";
+			break;
+		case 8:
+			monthString = "Aug";
+			break;
+		case 9:
+			monthString = "Sep";
+			break;
+		case 10:
+			monthString = "Oct";
+			break;
+		case 11:
+			monthString = "Nov";
+			break;
+		case 12:
+			monthString = "Dec";
+			break;
+	}
+// 	var today = monthString+" "+today.getDate()+", "+today.getFullYear();
+// 	var todayFormat = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	
+	
+	
+
+ 	today = monthString+" "+today.getDate()+", "+today.getFullYear();
+	$("#date").text(today);
+
+	</script>
+	
+	<script>
+    //=============顯示分頁設定=============
+    //=============全部訂單=============
+    let urlString = "";
+    $("#all").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#all").prop("class","nav-link active");
+        urlString = "/companyOrderDetails";
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(ordersAll){
+            	$("#orders").html("");
+                $("#page").html(" ");
+                let num = ordersAll.length;
+                if(num >= 10){
+                    pages(10,ordersAll);
+                }else{
+                    pages(num,ordersAll);
+                }
+            }
+        });
+    })
+
+    //=============完成=============
+    $("#todayOrders").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#todayOrders").prop("class","nav-link active");
+        urlString = "/companyOrderDetails";
+        let todayOrders = new Array();
+        
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(ordersAll){
+                $("#orders").html("");
+                $("#page").html(" ");
+                
+                
+                let num = ordersAll.length;
+                //alert(num)
+                
+                //alert(date.substring(0,10));
+                let todayDate = new Date();
+                let month = todayDate.getMonth()+1;
+                if(month < 10){
+                	month = "0"+month;
+                }
+                let todays = todayDate.getFullYear()+'-'+month+'-'+todayDate.getDate();
+                
+                for(let k = 0; k < num; k++){
+                	let date = ordersAll[k].ordersBean.ordersDate;
+                	let sub = date.substring(0,10);
+                	//alert(sub);
+                 	if(Object.is(sub,todays)){
+                 		todayOrders.push(ordersAll[k]);
+                 	}
+                }
+                if(num >= 10){
+                    pages(10,todayOrders);
+                }else{
+                    pages(num,todayOrders);
+                }
+            }
+        });
+    })
+
+
+
+
+</script>
+	
 
 
 	<script>
