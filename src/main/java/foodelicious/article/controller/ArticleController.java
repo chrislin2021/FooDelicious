@@ -215,6 +215,7 @@ public class ArticleController {
 	public void likeOrNot(@RequestBody Map<String, String> params) {
 		System.out.println("@RequestBody userId：" + params.get("userId"));
 		msgService.likeOrNot(params);
+		System.out.println("喜歡");
 	}
 	
 	//取消喜歡
@@ -223,7 +224,9 @@ public class ArticleController {
 	public void unlike(@RequestBody Map<String, String> params) {
 //		System.out.println("userId：" + params.get("userId"));
 //		System.out.println("articleId：" + params.get("articleId"));
-		msgService.unlikeArticle(params);		
+		System.out.println("取消喜歡");
+		msgService.unlikeArticle(params);	
+		System.out.println("取消喜歡");
 	}
 	//判斷是否喜歡
 	@ResponseBody
