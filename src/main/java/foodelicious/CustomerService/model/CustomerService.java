@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -26,18 +27,26 @@ public class CustomerService implements Serializable {
 	@Column(name = "Id")
 	private Long Id;
 	
-	@NotBlank(message="姓名不可為空白")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cstm_Id")
 	private Long cstm_Id;
+	
+	@NotBlank(message="姓名不可為空白")
+	@Column(name = "cstm_name")
+	private String cstm_name;
 
+	@Email
+	@NotBlank(message="Email不可為空白")
+	@Column(name = "cstm_email")
+	private String cstm_email;
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "vendor_Id")
 	private Long vendor_Id;
 	
-	@NotBlank(message="標題不可為空白")
-	@Column(name = "problem_Title")
-	private String problem_Title;
+	@NotBlank(message="請選擇問題類型")
+	@Column(name = "problem_Type")
+	private String problem_Type;
 
 	@NotBlank(message="內容不可為空白")
 	@Size(max = 500, message = "內容不得多於500個字")
@@ -47,24 +56,32 @@ public class CustomerService implements Serializable {
 	@Column(name = "problem_postTime")
 	private LocalDateTime problem_postTime;
 	
-	@Column(name="block_Img")
-	private String block_Img;
+//	@Column(name="block_Img")
+//	private String block_Img;
 	
 	public CustomerService() {
 	}
 	
-	public CustomerService(String problem_Title) {
-		this.problem_Title = problem_Title;
+	public CustomerService(String problem_Type) {
+		this.problem_Type = problem_Type;
 	}
 	
-	public CustomerService(@NotBlank(message = "標題不可為空白") String problem_Title,
+	public CustomerService(@NotBlank(message = "標題不可為空白") String problem_Type,
 			@NotBlank(message = "內容不可為空白") @Size(max = 500, message = "內容不得多於500個字") String problem_Text,
-			LocalDateTime problem_postTime, String block_Img) {
+			LocalDateTime problem_postTime) {
 		super();
-		this.problem_Title = problem_Title;
+		this.problem_Type = problem_Type;
 		this.problem_Text = problem_Text;
 		this.problem_postTime = problem_postTime;
-		this.block_Img = block_Img;
+		//this.block_Img = block_Img;
+	}
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
 	}
 
 	public Long getCstm_Id() {
@@ -75,6 +92,22 @@ public class CustomerService implements Serializable {
 		this.cstm_Id = cstm_Id;
 	}
 
+	public String getCstm_name() {
+		return cstm_name;
+	}
+
+	public void setCstm_name(String cstm_name) {
+		this.cstm_name = cstm_name;
+	}
+
+	public String getCstm_email() {
+		return cstm_email;
+	}
+
+	public void setCstm_email(String cstm_email) {
+		this.cstm_email = cstm_email;
+	}
+
 	public Long getVendor_Id() {
 		return vendor_Id;
 	}
@@ -83,12 +116,12 @@ public class CustomerService implements Serializable {
 		this.vendor_Id = vendor_Id;
 	}
 
-	public String getProblem_Title() {
-		return problem_Title;
+	public String getProblem_Type() {
+		return problem_Type;
 	}
 
-	public void setProblem_Title(String problem_Title) {
-		this.problem_Title = problem_Title;
+	public void setProblem_Type(String problem_Type) {
+		this.problem_Type = problem_Type;
 	}
 
 	public String getProblem_Text() {
@@ -107,16 +140,17 @@ public class CustomerService implements Serializable {
 		this.problem_postTime = problem_postTime;
 	}
 
-	public String getBlock_Img() {
-		return block_Img;
-	}
-
-	public void setBlock_Img(String block_Img) {
-		this.block_Img = block_Img;
-	}
+//	public String getBlock_Img() {
+//		return block_Img;
+//	}
+//
+//	public void setBlock_Img(String block_Img) {
+//		this.block_Img = block_Img;
+//	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	
 }

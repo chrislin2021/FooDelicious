@@ -99,6 +99,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/CustomerService.jsp" />
 	</definition>
+	
+	<definition name="app.MessageBoard" extends="app.default">
+		<put-attribute name="content"
+			value="/WEB-INF/customerService/MessageBoard.jsp" />
+	</definition>
 
 	<definition name="app.BackendProductAdd"
 				extends="app.BackendDefault">
