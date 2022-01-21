@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1 class="tableName titleName2">
-		廠商問題回報 <br> <span class="littleName">Problem Report</span>
+		問題回報 <br> <span class="littleName">Problem Report</span>
 	</h1>
 
 	<div class="searchArea">

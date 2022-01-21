@@ -40,9 +40,10 @@
 			<nav aria-label="Page navigation example ">
 				<ul id="page" class="pagination justify-content-center"></ul>
 			</nav>
-			<input type="text" hidden id="companyId" value='${userID}'>
+			
 
 		</div>
+		<input type="text" hidden id="companyId" value='${userID}'>
 	</section>
 
 
@@ -87,7 +88,6 @@
 		//=============分頁程式=============
 		function pages(maxNum, dataSource) { //輸入單頁最大筆數和資料來源
 			//=================分頁功能================
-			//alert("really here");
 		
 			//最大頁數
 			let maxPage;
@@ -104,113 +104,112 @@
 			showData(startItem, endItem, dataSource);
 
 			//計算出最大頁數。
-// 			if (dataSource.length % maxItems == 0) {
-// 				maxPage = Math.floor(dataSource.length / maxItems);
-// 				// alert("最大頁數1：" + maxPage);
-// 			} else {
-// 				maxPage = (Math.floor(dataSource.length / maxItems)) + 1;
-// 				// alert("最大頁數2：" + maxPage);
-// 			}
-// 			// alert("最大頁數：" + maxPage);
-// 			//生成前先清空
-// 			$("#page").html(" ");
-// 			//動態生成頁數
-// 			let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
-// 			for (let i = 0; i < maxPage; i++) {
-// 				let pageNum = i + 1;
-// 				pageHtml += `<li id=`+ i +` class="page-item page pageNum pageMove"><a class="page-link">`
-// 						+ pageNum + `</a></li>`;
-// 			}
-// 			;
-// 			pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
-// 			$("#page").html(pageHtml);
+			if (dataSource.length % maxItems == 0) {
+				maxPage = Math.floor(dataSource.length / maxItems);
+				 //alert("最大頁數1：" + maxPage);
+			} else {
+				maxPage = (Math.floor(dataSource.length / maxItems)) + 1;
+				 //alert("最大頁數2：" + maxPage);
+			}
+			
+			//alert("最大頁數：" + maxPage);
+			//生成前先清空
+			$("#page").html(" ");
+			
+			//動態生成頁數
+			let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+			for (let i = 0; i < maxPage; i++) {
+				let pageNum = i + 1;
+				pageHtml += `<li id=`+ i +` class="page-item page pageNum pageMove"><a class="page-link">`
+						+ pageNum + `</a></li>`;
+			}
+			;
+			pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+			$("#page").html(pageHtml);
 
-// 			//綁定前先清除綁定事件
-// 			$("#page").unbind("click");
-// 			//綁定click事件
-// 			$("#page").on("click", ".page", function() {
-// 				nowPage = ($(this).prop("id")) * 1;//強制轉成數字型態
-// 				$(".pageNum").prop("class", "page-item page pageNum")
-// 				$(this).prop("class", "page-item page pageNum active")
-// 				// alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
-// 				//恢復上、下頁的功能
-// 				$(".previous").prop("class", "page-item previous");
-// 				$(".next").prop("class", "page-item next");
-// 				// alert("nowPage："+nowPage+"maxPage："+maxPage);
-// 				//計算是否是最後一頁
-// 				if ((nowPage) + 1 >= maxPage) {
-// 					startItem = nowPage * maxItems;
-// 					if (dataSource.length % maxItems == 0) {
-// 						endItem = startItem + maxItems
-// 					} else {
-// 						endItem = startItem + dataSource.length % maxItems;
-// 					}
+			//綁定前先清除綁定事件
+			$("#page").unbind("click");
+			//綁定click事件
+			$("#page").on("click", ".page", function() {
+				nowPage = ($(this).prop("id")) * 1;//強制轉成數字型態
+				$(".pageNum").prop("class", "page-item page pageNum")
+				$(this).prop("class", "page-item page pageNum active")
+				// alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+				//恢復上、下頁的功能
+				$(".previous").prop("class", "page-item previous");
+				$(".next").prop("class", "page-item next");
+				// alert("nowPage："+nowPage+"maxPage："+maxPage);
+				//計算是否是最後一頁
+				if ((nowPage) + 1 >= maxPage) {
+					startItem = nowPage * maxItems;
+					if (dataSource.length % maxItems == 0) {
+						endItem = startItem + maxItems
+					} else {
+						endItem = startItem + dataSource.length % maxItems;
+					}
 
-// 				} else {
-// 					startItem = nowPage * maxItems;
-// 					endItem = startItem + maxItems;
-// 				}
-// 				// alert("開始："+startItem+"結束："+endItem);
-// 				showData(startItem, endItem, dataSource);
-// 			});
+				} else {
+					startItem = nowPage * maxItems;
+					endItem = startItem + maxItems;
+				}
+				// alert("開始："+startItem+"結束："+endItem);
+				showData(startItem, endItem, dataSource);
+			});
 
-// 			//=======上一頁設定========
-// 			$("#page").on(
-// 					"click",
-// 					".previous",
-// 					function() {
+			//=======上一頁設定========
+			$("#page").on("click",".previous",function() {
 
-// 						//恢復下一頁的功能
-// 						$(".next").prop("class", "page-item next");
+						//恢復下一頁的功能
+						$(".next").prop("class", "page-item next");
 
-// 						let page = nowPage - 1;
+						let page = nowPage - 1;
 
-// 						$(".pageNum").prop("class", "page-item page pageNum")
-// 						$("#" + page).prop("class",
-// 								"page-item page pageNum active")
+						$(".pageNum").prop("class", "page-item page pageNum")
+						$("#" + page).prop("class",
+								"page-item page pageNum active")
 
-// 						//判斷是否已經是第一頁了，取消上一頁功能
-// 						if (page <= 0) {
-// 							$(".previous").prop("class",
-// 									"page-item previous disabled");
-// 							startItem = 0 * maxItems;
-// 							endItem = startItem + maxItems;
-// 						} else {
-// 							startItem = page * maxItems;
-// 							endItem = startItem + maxItems;
-// 						}
-// 						showData(startItem, endItem, dataSource);
-// 						nowPage = page;
-// 					});
+						//判斷是否已經是第一頁了，取消上一頁功能
+						if (page <= 0) {
+							$(".previous").prop("class",
+									"page-item previous disabled");
+							startItem = 0 * maxItems;
+							endItem = startItem + maxItems;
+						} else {
+							startItem = page * maxItems;
+							endItem = startItem + maxItems;
+						}
+						showData(startItem, endItem, dataSource);
+						nowPage = page;
+					});
 
-// 			//=============下一頁設定=============
-// 			$("#page").on("click", ".next", function() {
+			//=============下一頁設定=============
+			$("#page").on("click", ".next", function() {
 
-// 				//恢復上一頁的功能
-// 				$(".previous").prop("class", "page-item previous");
+				//恢復上一頁的功能
+				$(".previous").prop("class", "page-item previous");
 
-// 				let page = nowPage + 1;
+				let page = nowPage + 1;
 
-// 				$(".pageNum").prop("class", "page-item page pageNum")
-// 				$("#" + page).prop("class", "page-item page pageNum active")
+				$(".pageNum").prop("class", "page-item page pageNum")
+				$("#" + page).prop("class", "page-item page pageNum active")
 
-// 				//計算是否是最後一頁，並取消下一頁功能
-// 				if (page >= (maxPage - 1)) {
-// 					$(".next").prop("class", "page-item next disabled")
-// 					startItem = page * maxItems;
-// 					if (dataSource.length % maxItems == 0) {
-// 						endItem = startItem + maxItems
-// 					} else {
-// 						endItem = startItem + dataSource.length % maxItems;
-// 					}
-// 				} else {
-// 					startItem = page * maxItems;
-// 					endItem = startItem + maxItems;
-// 				}
-// 				showData(startItem, endItem, dataSource);
-// 				nowPage = page;
-// 			});
-		}
+				//計算是否是最後一頁，並取消下一頁功能
+				if (page >= (maxPage - 1)) {
+					$(".next").prop("class", "page-item next disabled")
+					startItem = page * maxItems;
+					if (dataSource.length % maxItems == 0) {
+						endItem = startItem + maxItems
+					} else {
+						endItem = startItem + dataSource.length % maxItems;
+					}
+				} else {
+					startItem = page * maxItems;
+					endItem = startItem + maxItems;
+				}
+				showData(startItem, endItem, dataSource);
+				nowPage = page;
+			});
+ 		}
 	</script>
 	
 	<script>

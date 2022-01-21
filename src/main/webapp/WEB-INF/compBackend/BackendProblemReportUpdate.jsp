@@ -127,7 +127,7 @@
 		//=============更新資料=============
 		$("#updateBtn").on("click", function() {
 			let problemId = $("#problemId").val();
-			alert(problemId);
+			//alert(problemId);
 			let getStatus =  $("#problemStatus").val();
 			let updatedStatus = "";
 			if(getStatus == 0){
@@ -141,10 +141,10 @@
 
 			};
 			
-			alert(updatedStatus);
+			//alert(updatedStatus);
  			let problemString = JSON.stringify(problemObject);
  			
- 			alert(problemString);
+ 			//alert(problemString);
 
 			$.ajax({
 				url : "/companyProblems/update/"+ problemId,

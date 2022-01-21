@@ -24,7 +24,7 @@
 				<div class="row gx-5 gy-3">
 					<div class="col-12 col-lg-9">
 
-						<div>我們提供來自於歐洲新鮮直運的產品。</div>
+						<div>我們提供來自於歐洲新鮮直運的產品。以及一堆雜七雜八的</div>
 					</div>
 					<!--//col-->
 
