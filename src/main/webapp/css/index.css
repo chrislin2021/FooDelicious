@@ -50,9 +50,20 @@ img {
     padding-bottom: 100px;
 }
 
+.hotTopicArea{
+    margin: auto;
+    width: 1500px;
+    font-size: 20px;
+}
+
 .articleArea{
 
     height: 900px;
+}
+
+.menu-navigation li a{
+    font-size: 36px;
+    font-family: 'The Nautigal', cursive;
 }
 
 table{

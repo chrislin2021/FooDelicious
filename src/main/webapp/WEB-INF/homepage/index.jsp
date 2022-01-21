@@ -19,9 +19,9 @@
 </div>
 
 <%--熱銷商品--%>
-<section class="month-specials productArea">
+<section id="bestSeller" class="month-specials productArea">
     <div class="productBox">
-        <h1 class="textAreaTxt textSet">Best-seller</h1>
+        <h1 class="textAreaTxt textSet">Best-Seller</h1>
         <div class="specials-content">
             <!--商品1-->
             <div class="special">
@@ -94,13 +94,13 @@
 </section>
 
 <%--熱門文章--%>
-<section class="menu-cart articleArea">
-    <div class="container">
-        <h1 class="textAreaTxt textSet">Hot-articles</h1>
+<section id="hotTopics" class="menu-cart articleArea">
+    <div class="hotTopicArea">
+        <h1 class="textAreaTxt textSet">Hot-Topics</h1>
 
         <ul class="menu-navigation" data-tabs data-match-height="true" id="example-tabs">
-            <li id="foodArticle" class="tabs-title active"><a class="m-aim" data-text="Main Dishes">食譜類</a></li>
-            <li id="toolArticle" class="tabs-title"><a class="m-anim" data-text="Main Dishes">餐廚類</a></li>
+            <li id="foodArticle" class="tabs-title active "><a class="m-aim pageName" >食譜類</a></li>
+            <li id="toolArticle" class="tabs-title pageName"><a class="m-anim pageName" >餐廚類</a></li>
         </ul>
 
         <div class="tabs-content articleArea" data-tabs-content="example-tabs">

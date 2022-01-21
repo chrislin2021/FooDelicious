@@ -23,9 +23,10 @@
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item itembox"><a class="nav-link textCon"
 						aria-current="page" href="/" style="color: black">首頁</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/#bestSeller" style="color: black">暢銷商品</a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/#hotTopics" style="color: black">熱門文章</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/Product" style="color: black">前往商城</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/goShareArea" style="color: black">前往分享區</a></li>
-					<li class="nav-item itembox"><a class="nav-link textCon" href="/postArticle" style="color: black">發表新文章</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/#contactBox" style="color: black">客服中心</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/shoppingCart" style="color: black"><svg
 								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
