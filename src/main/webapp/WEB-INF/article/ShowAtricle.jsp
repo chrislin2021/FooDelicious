@@ -47,6 +47,7 @@
                 </div>
                 <!--留言區-->
                 <div id="msgArea">
+                    <!--摺疊-->
                     <div id="foldArea">
                         <button id="foldBTN" class="container btn btn-primary" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -59,6 +60,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--五筆留言以下-->
                     <div id="shortArea">
                         <table class="table table-hover table-sm" id="showMSG" style="background-color: whitesmoke;">
 
@@ -139,10 +141,10 @@
                         contentType: "application/json;charset=utf-8",
                         data: JSON.stringify(MsgData),
                         success: function () {
-                            sendMsg.value = "";
                             msgShow();
                         }
                     })
+                    sendMsg.value = "";
                 }
                 //msgShow();
             })
@@ -169,18 +171,20 @@
                 if (msg.length >= 5) {
                     $("#shortArea").hide();
 
-                    $("#foldBTN").html("文章一共有" + msg.length + "筆")
+                    $("#foldBTN").html("一共有 " + msg.length + " 筆留言")
                     for (let i = 0; i < msg.length; i++) {
                         msgData += "<tr><td><div>" + msg[i].memberName + "：</div><div>" + msg[i].text + "</div></td></tr>"
                     }
                     msgData += "</table>";
                     $("#foldMSG").html(msgData);
+                    msgShow();
                 } else {
                     $("#foldArea").hide();
                     for (let i = 0; i < msg.length; i++) {
                         msgData += "<tr><td><div>" + msg[i].memberName + "：</div><div>" + msg[i].text + "</div></td></tr>"
                     }
                     $("#showMSG").html(msgData);
+                    msgShow();
                 }
             }
 

@@ -166,6 +166,7 @@
                                 //                                 messageData += "<p>" + articles.userName + " : " + text + "</p>";
                                 //                                 $(".messageArea").html(messageData);
                             }
+                            inputMessageArea.value = "";
                         }
                     };
                     btnSendToChatRoom2.onclick = function() {
@@ -178,6 +179,7 @@
                             }));
                             //                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
                             //                             $(".messageArea").html(messageData);
+                            inputMessageArea.value = "";
                         }
                     };
                 }
