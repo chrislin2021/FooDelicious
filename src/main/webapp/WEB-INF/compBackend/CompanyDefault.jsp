@@ -59,7 +59,7 @@
 				<ul class="sub-menu">
 					<li><a class="link_name" href="/companyOrder">訂單管理</a></li>
 					<li><a href="/companyOrder">所有訂單</a></li>
-					<li><a href="#">修改訂單</a></li>
+					
 				</ul>
 			</li>
 			<li>
@@ -166,53 +166,6 @@
 
 		</div>
 	</div>
-	<script>
-	var today = new Date();
-	var month = today.getMonth()+1;
-	var monthString;
-	switch (month){
-		case 1:
-			monthString = "Jan";
-			break;
-		case 2:
-			monthString = "Feb";
-			break;
-		case 3:
-			monthString = "Mar";
-			break;
-		case 4:
-			monthString = "Apr";
-			break;
-		case 5:
-			monthString = "May";
-			break;
-		case 6:
-			monthString = "Jun";
-			break;
-		case 7:
-			monthString = "July";
-			break;
-		case 8:
-			monthString = "Aug";
-			break;
-		case 9:
-			monthString = "Sep";
-			break;
-		case 10:
-			monthString = "Oct";
-			break;
-		case 11:
-			monthString = "Nov";
-			break;
-		case 12:
-			monthString = "Dec";
-			break;
-	}
-	var date = monthString+" "+today.getDate()+", "+today.getFullYear();
-	
-	$("#date").text(date);
-	
-	</script>
 	
 
 

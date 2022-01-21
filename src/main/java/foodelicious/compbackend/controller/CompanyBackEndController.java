@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import foodelicious.compbackend.model.CBKProductDao;
@@ -51,7 +52,8 @@ public class CompanyBackEndController {
 	}
 
 	@GetMapping(path = "/logout")
-	public String companyLogout(HttpSession session) {
+	public String companyLogout(HttpSession session, SessionStatus status) {
+		status.setComplete();
 		session.invalidate();
 		return "app.index";
 	}
