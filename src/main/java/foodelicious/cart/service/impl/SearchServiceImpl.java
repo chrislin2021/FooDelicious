@@ -32,9 +32,9 @@ public class SearchServiceImpl implements SearchService {
 	public Product save(Product product) {
 		return searchRepository.save(product);
 	}
-	
+
 	@Override
-	public Product getLanjiao(Long productId) {
+	public Product getHesitantProduct(Long productId) {
 		return searchRepository.findById(productId).get();
 	}
 

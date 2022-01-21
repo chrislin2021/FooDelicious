@@ -1,14 +1,13 @@
 package foodelicious.cart.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import foodelicious.cart.model.CartBean;
-import foodelicious.cart.repository.Lanjiao;
+import foodelicious.cart.model.hesitantProduct;
 import foodelicious.cart.service.CartService;
 import foodelicious.cart.service.SearchService;
 
@@ -27,10 +26,10 @@ public class CartBackendController {
 
 	@GetMapping("/report/cart")
 	public List<CartBean> findAll() {
-		List<Lanjiao> carts = cartService.hesitantProduct();
+		List<hesitantProduct> carts = cartService.hesitantProduct();
 
 //		carts.forEach((v) -> System.out.println(v.getQuantity() + "===" + v.getProduct_id()));
-		return carts.stream().map(cart -> new CartBean(cart.getQuantity(), searchService.getLanjiao(Long.parseLong(cart.getProduct_id())))).collect(Collectors.toList());
+		return carts.stream().map(cart -> new CartBean(cart.getQuantity(), searchService.getHesitantProduct(Long.parseLong(cart.getProduct_id())))).collect(Collectors.toList());
 	}
 
 }

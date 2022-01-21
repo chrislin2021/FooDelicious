@@ -1,6 +1,6 @@
-package foodelicious.cart.repository;
+package foodelicious.cart.model;
 
-public interface Lanjiao {
+public interface hesitantProduct {
 
 	public String getProduct_id();
 

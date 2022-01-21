@@ -11,10 +11,10 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/cart.css" rel="stylesheet">
-<link rel="stylesheet" href="../../css/default4.css">
+<link href="../../css/default4.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <meta charset="UTF-8">
 <title>FooDelicious</title>
 
@@ -22,7 +22,7 @@
 
 <body>
 
-	<header class="navArea">	
+	<header class="navArea">
 		<nav class="container-fluid navbar fixed-top navbar-expand-lg navbar-light bg-lightd-grid gap-3 align-items-center navArea" style="grid-template-columns: 1fr 2fr;">
 			<a class="navbar-brand textCon itembox" href="${contextRoot}/">好煮意</a>
 
@@ -33,9 +33,8 @@
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/goShareArea" style="color: black">前往分享區</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/postArticle" style="color: black">發表新文章</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/#contactBox" style="color: black">客服中心</a></li>
-					<li class="nav-item itembox"><a class="nav-link textCon" href="/shoppingCart" style="color: black"><svg 	xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
+					<li class="nav-item itembox"><a class="nav-link textCon" href="/shoppingCart" style="color: black"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
 					<li class="nav-item item"><a class="nav-link textCon" href="/backend/member" style="color: black">暫時的後台連結</a></li>
-					<li class="nav-item item"><a class="nav-link textCon" href="/memberOrders" style="color: black">暫時的會員中心</a></li>
 				</ul>
 			</div>
 
@@ -65,7 +64,9 @@
 				<a class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line>	<path d="M16 10a4 4 0 0 1-8 0"></path></svg> 好煮意｜購物車</a>
 				<form class="d-flex">
 					<input class="form-control me-2" type="search" id="appleNoSale" placeholder="蘋果，沒有打折！！" aria-label="Search" value="">
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="searchProduct()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="searchProduct()">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+					</button>
 				</form>
 			</div>
 		</nav>
@@ -122,7 +123,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">　購物車</th>
+					<th scope="col">購物車</th>
 					<th scope="col">填寫資料</th>
 					<th scope="col">訂單確認</th>
 				</tr>
@@ -202,9 +203,11 @@
 				</tr>
 			</tbody>
 			<tfoot>
-			<tr>
-			<th>免費領取NT$:200元折價券　<button type="button" class="btn btn-outline-dark btn-sm" onclick="insertDis()">點我領取</button></th>
-			</tr>
+				<tr>
+					<th>免費領取NT$:200元折價券
+						<button type="button" class="btn btn-outline-dark btn-sm" onclick="insertDis()">點我領取</button>
+					</th>
+				</tr>
 			</tfoot>
 		</table>
 
@@ -223,7 +226,7 @@
 			</thead>
 			<tbody id="total">
 				<tr>
-					<td colspan="2" id="freight">運費：<c:if test="${priceTotal < 1000}"><span>100 元</span></c:if>
+					<td colspan="2" id="freight">運費：<c:if test="${priceTotal < 1000}"><span>100 元</span></c:if> 
 						<c:if test="${priceTotal >= 1000}"><del style="color: red;">100 元</del>&nbsp;&nbsp;<span>0 元</span></c:if></td>
 				</tr>
 				<tr>
@@ -241,7 +244,6 @@
 			<div class="col-md-4 d-flex align-items-center">
 				<a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 FooDelicious, Inc</span>
 			</div>
-
 			<ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
 				<li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter" /></svg></a></li>
 				<li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram" /></svg></a></li>

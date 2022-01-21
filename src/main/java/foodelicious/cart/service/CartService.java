@@ -1,10 +1,9 @@
 package foodelicious.cart.service;
 
 import java.util.List;
-import java.util.Map;
 
 import foodelicious.cart.model.CartBean;
-import foodelicious.cart.repository.Lanjiao;
+import foodelicious.cart.model.hesitantProduct;
 
 public interface CartService {
 
@@ -18,6 +17,6 @@ public interface CartService {
 
 	List<CartBean> selectAll();
 
-	List<Lanjiao> hesitantProduct();
+	List<hesitantProduct> hesitantProduct();
 
 }

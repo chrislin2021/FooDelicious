@@ -31,9 +31,6 @@ public class OrdersController {
 
 	private CartService cartService;
 
-	@SuppressWarnings("unused")
-	private OrdersBean ordersBean;
-
 	private MailService mailService;
 
 	private OrdersService ordersService;
@@ -44,13 +41,11 @@ public class OrdersController {
 
 	private OrdersDetailService ordersDetailService;
 
-	public OrdersController(HttpSession session, CartService cartService, OrdersBean ordersBean,
-			MailService mailService, OrdersService ordersService, MemberService memberService,
-			OrdersDetailService ordersDetailService) {
+	public OrdersController(HttpSession session, CartService cartService, MailService mailService,
+			OrdersService ordersService, MemberService memberService, OrdersDetailService ordersDetailService) {
 		super();
 		this.session = session;
 		this.cartService = cartService;
-		this.ordersBean = ordersBean;
 		this.mailService = mailService;
 		this.ordersService = ordersService;
 		this.memberService = memberService;
@@ -62,6 +57,8 @@ public class OrdersController {
 	public void orders(@RequestBody OrdersBean orders) {
 
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
+
+//		List<Product> products = searchService.findAll();
 
 		OrdersBean ordersBean = new OrdersBean();
 
@@ -79,14 +76,33 @@ public class OrdersController {
 
 		ordersService.insertOrders(ordersBean);
 
-		this.ordersBean = ordersBean;
-
 		for (CartBean cart : carts) {
 			OrdersDetailBean ordersDetailBean = new OrdersDetailBean();
 			ordersDetailBean.setOrdersId(ordersBean.getOrdersId());
 			ordersDetailBean.setProduct_id(cart.getProductId());
 			ordersDetailBean.setQuantity(cart.getQuantity());
 			ordersDetailService.insertOrderDetail(ordersDetailBean);
+
+//			==========very slow after use==========
+//			for (Product product : products) {
+//				if (cart.getProductId() == product.getProductId()) {
+//					product.setProductId(cart.getProductId());
+//					product.setProductCategories(product.getProductCategories());
+//					product.setProductCategories_name(product.getProductCategories_name());
+//					product.setProductName(product.getProductName());
+//					product.setProductCompany(product.getProductCompany());
+//					product.setProductPrice(product.getProductPrice());
+//					product.setProductPics(product.getProductPics());
+//					product.setProductContent(product.getProductContent());
+//					product.setProductStock(product.getProductStock() - cart.getQuantity());
+//					product.setProductStatus(product.getProductStatus());
+//					product.setProductKeywords(product.getProductKeywords());
+//					product.setProductInsertDate(product.getProductInsertDate());
+//					product.setProductSalesFigures(product.getProductSalesFigures() + cart.getQuantity());
+//					product.setProductCompanyId(product.getProductCompanyId());
+//					searchService.save(product);
+//				}
+//			}
 			cartService.deleteItem(cart.getCartId());
 			session.removeAttribute("discountContent");
 		}
@@ -105,6 +121,7 @@ public class OrdersController {
 				"親愛的" + memberName + "先生/小姐，感謝您的訂單！\n以下是您的訂單資訊：\n收件人姓名：" + ordersBean.getOrdersName() + "\n收件人電話："
 						+ ordersBean.getOrdersPhone() + "\n寄貨地址：" + orders.getOrdersAddress() + "\n訂單金額：NT$:"
 						+ ordersBean.getOrdersTotal() + "元\n前往查看訂單詳細資訊：" + url);
+
 	}
 
 	@ResponseBody

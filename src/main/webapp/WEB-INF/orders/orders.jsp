@@ -36,7 +36,6 @@
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/#contactBox" style="color: black">客服中心</a></li>
 					<li class="nav-item itembox"><a class="nav-link textCon" href="/shoppingCart" style="color: black"><svg 	xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a></li>
 					<li class="nav-item item"><a class="nav-link textCon" href="/backend/member" style="color: black">暫時的後台連結</a></li>
-					<li class="nav-item item"><a class="nav-link textCon" href="/memberOrders" style="color: black">暫時的會員中心</a></li>
 				</ul>
 			</div>
 
@@ -147,13 +146,11 @@
 							<label for="firstName" class="form-label">收件人姓名<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="name" value="${orders.ordersName}" required>
 							<div class="validate1 d-none" style="color: red">請填寫收件人姓名喔！！</div>
 						</div>
-
 						<div class="col-sm-6">
 							<label for="lastName" class="form-label">收件人電話<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="phone" value="${orders.ordersPhone}" required>
 							<div class="validate2 d-none" style="color: red">請填寫收件人電話喔！！</div>
 						</div>
 					</div>
-
 					<div class="col-12">
 						<label for="address" class="form-label">收件人地址<span class="text-muted">(必填)</span></label><input type="text" class="form-control" id="address" value="${orders.ordersAddress}" required>
 						<div class="validate3 d-none" style="color: red">請填寫收件人地址喔！！</div>
@@ -181,7 +178,6 @@
 			<div class="col-md-4 d-flex align-items-center">
 				<a href="/"  class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"><svg class="bi" width="30" height="24"></svg></a> <span class="text-muted">&copy;2021 FooDelicious, Inc</span>
 			</div>
-
 			<ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
 				<li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter" /></svg></a></li>
 				<li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram" /></svg></a></li>

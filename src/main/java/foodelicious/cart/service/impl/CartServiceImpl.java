@@ -1,13 +1,12 @@
 package foodelicious.cart.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import foodelicious.cart.model.CartBean;
+import foodelicious.cart.model.hesitantProduct;
 import foodelicious.cart.repository.CartRepository;
-import foodelicious.cart.repository.Lanjiao;
 import foodelicious.cart.service.CartService;
 
 @Service
@@ -45,7 +44,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public List<Lanjiao> hesitantProduct() {
+	public List<hesitantProduct> hesitantProduct() {
 		return cartRepository.hesitantProduct();
 	}
 
