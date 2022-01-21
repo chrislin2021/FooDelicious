@@ -108,7 +108,6 @@
                 <table class="">
                     <thead>
                         <th>#</th>
-                        <th>文章編號</th>
                         <th>文章標題</th>
                         <th>作者</th>
                         <th>瀏覽數</th>
@@ -253,7 +252,6 @@ function foodPage(){
             let foodHtml="";
             for(let i=0; i<foods.length; i++){
                 foodHtml +='<tr class="trHover"><td scope="row">'+(i+1)+'</td>';
-                foodHtml += '<td>'+foodList[i].shareId+'</td>';
                 let nameObj = new String(foodList[i].article_title);
                 let nameString = nameObj.substring(0,20);
                 foodHtml += '<td><a class="detail" href="" data-bs-toggle="modal" data-bs-target="#foodDrop" data-id='+i+'>'+nameString+'</a></td>';
@@ -288,7 +286,6 @@ function toolPage() {
             let toolHtml = "";
             for (let i = 0; i < tools.length; i++) {
                 toolHtml += '<tr class="trHover"><td scope="row">' + (i + 1) + '</td>';
-                toolHtml += '<td>' + toolList[i].shareId + '</td>';
                 let nameObj = new String(toolList[i].article_title);
                 let nameString = nameObj.substring(0, 20);
                 toolHtml += '<td><a class="detail" href="" data-bs-toggle="modal" data-bs-target="#foodDrop" data-id=' + i + '>' + nameString + '</a></td>';
