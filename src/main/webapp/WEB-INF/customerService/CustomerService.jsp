@@ -20,9 +20,7 @@
 	rel="stylesheet">
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="sweetalert2.all.min.js"></script>
-<script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+
 
 <style>
 * {
@@ -228,12 +226,12 @@ h2 {
 		<br />
 		<%-- 下方三個按鈕 --%>
 		<div class="pagination justify-content-md-center">
-			<input type="button" value="送出" onclick="sendData();"
-				style="height: 50px; width: 100px; background-color:#4CAF50; color: #fff; font-weight:bold"> 
+			<input type="button" id="sendButton" value="送出" onclick="sendData();"
+				style="height: 50px; width: 100px; background-color:#4CAF50; color: #fff; font-weight:bold"/> 
 			<input type="reset" value="清除" onclick="clearText();"
-				style="height: 50px; width: 100px; background-color:#999999; color: #000000; font-weight:bold"> 
+				style="height: 50px; width: 100px; background-color:#999999; color: #000000; font-weight:bold"/> 
 			<input type="button" value="一鍵輸入" onclick="enter();"
-				style="height: 50px; width: 100px; background-color:#FFD966; color: #000000; font-weight:bold">
+				style="height: 50px; width: 100px; background-color:#FFD966; color: #000000; font-weight:bold"/>
 		</div>
 	</form:form>
 
@@ -245,6 +243,7 @@ h2 {
 
 			$("#subject").val("服務真方便，期待回購!");
 		}
+		
 		function clearText() {
 			$("#name").val('');
 			$("#email").val('');
@@ -253,24 +252,25 @@ h2 {
 
 		$(document).ready(function() {
 			console.log("ready!");
-// 			$("#button").click(function(){
-// 		        if($("#name").val()==""){
-// 		            alert("您未填寫姓名");
-// 		            eval("document.form1['name'].focus()");       
-// 		        }else if($("#email").val()==""){
-// 		            alert("您未填寫Email");
-// 		            eval("document.form1['email'].focus()");    
-// 		        }else if($("#customRadioInline1").val()==""){
-// 		            alert("您未選擇類別");
-// 		            eval("document.form1['customRadioInline1'].focus()");       
-// 		        }else if($("#subject").val()==""){
-// 		            alert("您未填寫內容");
-// 		            eval("document.form1['subject'].focus()");       
-// 		        }else{
-// 		            document.form1.submitData();
-// 		        }
+			$("#sendButton").click(function(){
+		        if($("#name").val()==""){
+		            alert("您未填寫姓名");
+		            eval("document.form1['name'].focus()");       
+		        }else if($("#email").val()==""){
+		            alert("您未填寫Email");
+		            eval("document.form1['email'].focus()");    
+		        }else if($("#customRadioInline1").val()==""){
+		            alert("您未選擇類別");
+		            eval("document.form1['customRadioInline1'].focus()");       
+		        }else if($("#subject").val()==""){
+		            alert("您未填寫內容");
+		            eval("document.form1['subject'].focus()");       
+		        }else{
+		            document.form1.submitData();
+		        }
+			});
 		});
-
+		
 		function sendData() {
 				var ele = document.getElementsByName('customRadioInline1');
 				var checkedRadio = ''; 
@@ -310,17 +310,9 @@ h2 {
 				}
 			});
 
-			var formdata = $("#SearchFm").serialize();
 		}
 		
-// 		<script type ="text/javascript">
-// 		    document.getElementById("toMessageBoard").onclick = function () {
-// 		        location.href = "http://localhost:8080/customerService/MessageBoard";
-// 		    };
- 		</script>
-		
-
-	
+ 	</script>
 
 </body>
 </html>
