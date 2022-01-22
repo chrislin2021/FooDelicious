@@ -204,9 +204,10 @@ public class ArticleController {
 	// 顯示所有留言
 	@ResponseBody
 	@GetMapping("/showAllMsg/{id}")
-	public List<MsgArea> showMessage(@PathVariable("id") Integer articleId) {
-//		System.out.println("articleId：" + articleId);
-		return msgService.useIdFindAllMSG(articleId);
+	public Map<String, Object> showMessage(@PathVariable("id") Integer articleId) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("msg" , msgService.useIdFindAllMSG(articleId));
+		return data;
 	}
 
 	// 喜歡文章

@@ -127,7 +127,7 @@
                 });
         </script>
         <script>
-            //留言功能區域
+            //留言功能區域 新增留言
             $("#sendMsg").keydown(function() {
                 if (event.keyCode === 13 & sendMsg.value.length != 0) {
                     //console.log(sendMsg.value)
@@ -141,14 +141,12 @@
                         type: "Post",
                         dataType: 'json',
                         contentType: "application/json;charset=utf-8",
-                        data: JSON.stringify(MsgData),
-                        success: function() {
-                            msgShow();
-                        }
+                        data: JSON.stringify(MsgData)
                     })
+                    msgShow();
                     sendMsg.value = "";
+                    setTimeout(msgShow(), 500);
                 }
-                //msgShow();
             })
         </script>
 
@@ -160,25 +158,29 @@
                     type: "GET",
                     contentType: "application/json; charset=utf-8",
                     success: function(msg) {
-                        expandMSG(msg);
+                        console.log(msg.msg);
+                        expandMSG(msg.msg);
                     }
                 })
+
             }
         </script>
         <script>
+            let NumberOfMessages = "";
             //msg全部展開
             function expandMSG(msg) {
                 //console.log(msg[5].fk_member_id)
                 //console.log(loginId)
                 let msgData = "";
+
                 //console.log(msg.length)
                 if (msg.length >= 5) {
                     $("#shortArea").hide();
                     //$(".updateInput").hide();
-
+                    NumberOfMessages = msg.length;
                     $("#foldBTN").html("一共有 " + msg.length + " 筆留言")
                     for (let i = 0; i < msg.length; i++) {
-                        msgData += "<tr><td><div>" + msg[i].memberName + "： ";
+                        msgData += "<tr class= 'trNo" + msg[i].id + "'><td><div>" + msg[i].memberName + "： ";
                         if (loginId == msg[i].fk_member_id) {
                             msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
                             msgData += "<button class='delMsg align-right' onclick='delfun(" + msg[i].id + ")'>刪除</button></div>";
@@ -192,7 +194,7 @@
                 } else {
                     $("#foldArea").hide();
                     for (let i = 0; i < msg.length; i++) {
-                        msgData += "<tr><td><div>" + msg[i].memberName + "： ";
+                        msgData += "<tr class= 'trNo" + msg[i].id + "'><td><div>" + msg[i].memberName + "： ";
                         if (loginId == msg[i].fk_member_id) {
                             msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
                             msgData += "<button class='align-right' onclick='delfun(" + msg[i].id + ")'>刪除</button></div>";
@@ -268,14 +270,17 @@
         <script>
             //刪除留言
             function delfun(id) {
+
                 if (confirm("確定刪除此筆紀錄嗎 ?")) {
+                    NumberOfMessages = NumberOfMessages - 1;
+                    $("#foldBTN").html("一共有 " + NumberOfMessages + " 筆留言")
                     $.ajax({
-                        url: "/deleteMessage/" + id,
-                        type: "DELETE",
-                        success: function() {
-                            msgShow();
-                        }
-                    })
+                            url: "/deleteMessage/" + id,
+                            type: "DELETE"
+                        })
+                        //$(".trNo" + id).prop("hidden", "hidden");
+                    msgShow();
+                    setTimeout(msgShow(), 500);
                 }
             }
         </script>
@@ -298,16 +303,21 @@
                         }
 
                         $.ajax({
-                            url: "/updateMsg/" + id,
-                            type: "PUT",
-                            dataType: "json",
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify(updateMSG)
-                        })
-                        console.log($(msgNo).val());
-                        $(divClassNo).html($(msgNo).val());
-                        $(divClassNo).removeAttr("hidden");
-                        $(msgNo).prop("hidden", "hidden");
+                                url: "/updateMsg/" + id,
+                                type: "PUT",
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(updateMSG),
+                                success: function() {
+
+                                }
+                            })
+                            //console.log($(msgNo).val());
+                            /*$(divClassNo).html($(msgNo).val());
+                             $(divClassNo).removeAttr("hidden");
+                             $(msgNo).prop("hidden", "hidden");*/
+                        msgShow();
+                        setTimeout(msgShow(), 500);
                     }
                 })
             }

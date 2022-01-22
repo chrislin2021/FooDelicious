@@ -139,4 +139,11 @@ public class MsgArea implements Serializable {
 		this.memberName = memberName;
 	}
 
+	public MsgArea(Long id, Member member, String text) {
+		super();
+		this.id = id;
+		this.member = member;
+		this.text = text;
+	}
+
 }
