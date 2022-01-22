@@ -181,7 +181,7 @@
                         msgData += "<tr><td><div>" + msg[i].memberName + "： ";
                         if (loginId == msg[i].fk_member_id) {
                             msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
-                            msgData += "<button class='delMsg align-right'>刪除</button></div>";
+                            msgData += "<button class='delMsg align-right' onclick='delfun(" + msg[i].id + ")'>刪除</button></div>";
                         }
                         msgData += "<div class='divNO" + msg[i].id + "' >" + msg[i].text + "</div>";
                         msgData += '<div><input hidden id="msgNo' + msg[i].id + '" type="text" class="form-control" value="' + msg[i].text + '" aria-label="Username" aria-describedby="addon-wrapping"></div>';
@@ -195,7 +195,7 @@
                         msgData += "<tr><td><div>" + msg[i].memberName + "： ";
                         if (loginId == msg[i].fk_member_id) {
                             msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
-                            msgData += "<button class='align-right'>刪除</button></div>";
+                            msgData += "<button class='align-right' onclick='delfun(" + msg[i].id + ")'>刪除</button></div>";
                         }
                         msgData += "<div class='divNO" + msg[i].id + "' >" + msg[i].text + "</div>";
                         msgData += '<div><input hidden id="msgNo' + msg[i].id + '" type="text" class="form-control" value="' + msg[i].text + '" aria-label="Username" aria-describedby="addon-wrapping"></div>';
@@ -267,6 +267,17 @@
 
         <script>
             //刪除留言
+            function delfun(id) {
+                if (confirm("確定刪除此筆紀錄嗎 ?")) {
+                    $.ajax({
+                        url: "/deleteMessage/" + id,
+                        type: "DELETE",
+                        success: function() {
+                            msgShow();
+                        }
+                    })
+                }
+            }
         </script>
 
         <script>

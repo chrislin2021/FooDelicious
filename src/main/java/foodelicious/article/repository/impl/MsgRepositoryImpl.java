@@ -111,4 +111,10 @@ public class MsgRepositoryImpl implements MsgRepository {
 		
 	}
 
+	@Override
+	public void deleteMessage(Long id) {
+		MsgArea msgArea = em.find(MsgArea.class, id);
+		em.remove(msgArea);
+	}
+
 }

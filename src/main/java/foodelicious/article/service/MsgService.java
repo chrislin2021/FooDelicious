@@ -19,4 +19,6 @@ public interface MsgService {
 
 	void updateMessage(Long id, String string);
 
+	void deleteMessage(Long id);
+
 }

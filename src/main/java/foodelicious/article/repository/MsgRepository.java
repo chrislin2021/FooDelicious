@@ -19,4 +19,6 @@ public interface MsgRepository {
 
 	void updateMessage(Long id, String string);
 
+	void deleteMessage(Long id);
+
 }

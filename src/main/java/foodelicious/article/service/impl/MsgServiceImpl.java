@@ -51,4 +51,10 @@ public class MsgServiceImpl implements MsgService {
 		msgRepository.updateMessage(id, string);
 	}
 
+	@Override
+	public void deleteMessage(Long id) {
+		msgRepository.deleteMessage(id);
+		
+	}
+
 }

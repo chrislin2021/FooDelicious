@@ -258,9 +258,14 @@ public class ArticleController {
 	}
 	@ResponseBody
 	@PutMapping("/updateMsg/{id}")
-	public void updateMsg(@PathVariable Long id, @RequestBody Map<String, String> params) {
+	public void updateMsg(@PathVariable(value = "id") Long id, @RequestBody Map<String, String> params) {
 //		System.out.println("留言id："+id);
 //		System.out.println("newMsgData："+params.get("msgID"));
 		msgService.updateMessage(id, params.get("msgID"));
+	}
+	
+	@DeleteMapping("/deleteMessage/{id}")
+	public void deleteMessage(@PathVariable(value = "id") Long id) {
+		msgService.deleteMessage(id);
 	}
 }
