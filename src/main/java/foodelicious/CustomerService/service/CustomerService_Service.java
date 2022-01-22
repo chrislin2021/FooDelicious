@@ -1,5 +1,7 @@
 package foodelicious.CustomerService.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,22 @@ public class CustomerService_Service implements CustomerService_ServiceImpl{
 	public boolean addProblem(CustomerService customerService) {
 		var answer = customerServiceDao.addProblem(customerService);
 		return answer;
+	}
+
+	public List<CustomerService> queryProblem(String email) {
+		var queryAnswer = customerServiceDao.queryProblem(email);
+		return queryAnswer;
 	}	
+
+	public boolean deleteProblem(Long Id) {
+		var deleteAnswer = customerServiceDao.deleteProblem(Id);
+		return deleteAnswer;
+	}
+
+	public boolean updateProblem(CustomerService customerService) {
+		var updateAnswer = customerServiceDao.updateProblem(customerService);
+		return updateAnswer;
+	}
 
 
 }

@@ -8,6 +8,4 @@ import foodelicious.CustomerService.model.CustomerService;
 @Repository
 public interface CustomerServiceRepository extends CrudRepository<CustomerService, Long>{
 
-//	void addProblem(CustomerServiceRepository customerService);
-
 }

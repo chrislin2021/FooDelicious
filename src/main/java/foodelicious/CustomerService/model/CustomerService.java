@@ -152,5 +152,12 @@ public class CustomerService implements Serializable {
 		return serialVersionUID;
 	}
 
+	public void get(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	
 }

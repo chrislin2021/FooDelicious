@@ -19,6 +19,10 @@
 	href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap"
 	rel="stylesheet">
 <script src="../../js/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
 
 <style>
 * {
@@ -49,6 +53,16 @@ label {
 input[type=button] {
 	background-color: #4CAF50;
 	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	float: center;
+	margin: 15px;
+	position: center;
+}
+
+input[type=reset] {
 	padding: 12px 20px;
 	border: none;
 	border-radius: 4px;
@@ -92,8 +106,8 @@ h2 {
 	font-weight: bold;
 }
 
-<!--
-Clear floats after the columns -->.form:after {
+/* Clear floats after the columns */
+.form:after {
 	content: "";
 	display: table;
 	clear: both;
@@ -134,23 +148,32 @@ Clear floats after the columns -->.form:after {
 <body>
 	<br />
 
-	<div class="topDIV">
-		<ul class="nav nav-tabs">
-			<li class="nav items"><a class="nav-link active"
-				aria-current="page" href="#">客戶留言</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">問答紀錄</a></li>
-		</ul>
+<!-- 	<div class="topDIV"> -->
+<!-- 		<ul class="nav nav-tabs"> -->
+<!-- 			<li class="nav items"><a class="nav-link active" -->
+<!-- 				aria-current="page" href="#">客戶留言</a></li> -->
+<!-- 			<li class="nav-item"><a class="nav-link" href="#">問答紀錄</a></li> -->
+<!-- 		</ul> -->
 
-		<table class="table table-hover">
-			<tbody id="articleArea">
-			</tbody>
-		</table>
-	</div>
+<!-- 		<table class="table table-hover"> -->
+<!-- 			<tbody id="articleArea"> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
 
 	<h2>客戶反應中心</h2>
 	<p>請留下您的寶貴建議，我們會將盡速與您聯繫，謝謝您!</p>
-
-	<form:form class="form-horizontal" method="POST"
+	
+<!-- 		<input type="button" color="#FFD700" value="查詢問答紀錄" onclick="toMessageBoard();" -->
+<!-- 		style="height: 50px; width: 130px"> -->
+	<button onclick="location.href = 'http://localhost:8080/customerService/MessageBoard';" 
+	id="toMessageBoard" class="float-right" style="height: 42px; width: 130px; 
+	background-color:#B8DBFB; color:black; position:center; border-radius:4px; border:none; 
+	font-weight:bold">查詢問答紀錄</button>
+	
+	<br/>
+	<br/>
+	<form:form id="form1" class="form-horizontal" method="POST"
 		modelAttribute="customerService" autocomplete="on">
 		<!--  customerService是物件的型別-->
 		<div class="form-group">
@@ -194,9 +217,8 @@ Clear floats after the columns -->.form:after {
 			<div class="form-group">
 				<label class="control-label" for="subject">反應事項</label>
 				<div class="col-sm-8">
-					<textarea id="subject" name="problemText"
-						placeholder="請描述您的問題(限500字內)" rows="8" required>
-    </textarea>
+					<textarea id="subject" name="problemText" placeholder="請描述您的問題(限500字內)"
+					rows="8" required></textarea>           
 				</div>
 			</div>
 		</form:form>
@@ -206,12 +228,12 @@ Clear floats after the columns -->.form:after {
 		<br />
 		<%-- 下方三個按鈕 --%>
 		<div class="pagination justify-content-md-center">
-			<input type="button" color="#3CB371" value="送出" onclick="sendData();"
-				style="height: 50px; width: 100px"> <input type="reset"
-				color="#FAF0E6" value="清除" onclick="clearText();"
-				style="height: 50px; width: 100px"> <input type="button"
-				color="#FFD700" value="一鍵輸入" onclick="enter();"
-				style="height: 50px; width: 100px">
+			<input type="button" value="送出" onclick="sendData();"
+				style="height: 50px; width: 100px; background-color:#4CAF50; color: #fff; font-weight:bold"> 
+			<input type="reset" value="清除" onclick="clearText();"
+				style="height: 50px; width: 100px; background-color:#999999; color: #000000; font-weight:bold"> 
+			<input type="button" value="一鍵輸入" onclick="enter();"
+				style="height: 50px; width: 100px; background-color:#FFD966; color: #000000; font-weight:bold">
 		</div>
 	</form:form>
 
@@ -224,13 +246,29 @@ Clear floats after the columns -->.form:after {
 			$("#subject").val("服務真方便，期待回購!");
 		}
 		function clearText() {
-			$("#name").val(" ");
-			$("#email").val(" ");
-			$("#subject").val(" ");
+			$("#name").val('');
+			$("#email").val('');
+			$("#subject").val('');
 		}
 
 		$(document).ready(function() {
 			console.log("ready!");
+// 			$("#button").click(function(){
+// 		        if($("#name").val()==""){
+// 		            alert("您未填寫姓名");
+// 		            eval("document.form1['name'].focus()");       
+// 		        }else if($("#email").val()==""){
+// 		            alert("您未填寫Email");
+// 		            eval("document.form1['email'].focus()");    
+// 		        }else if($("#customRadioInline1").val()==""){
+// 		            alert("您未選擇類別");
+// 		            eval("document.form1['customRadioInline1'].focus()");       
+// 		        }else if($("#subject").val()==""){
+// 		            alert("您未填寫內容");
+// 		            eval("document.form1['subject'].focus()");       
+// 		        }else{
+// 		            document.form1.submitData();
+// 		        }
 		});
 
 		function sendData() {
@@ -252,7 +290,7 @@ Clear floats after the columns -->.form:after {
 
 			var ajaxRequest = $.ajax({
 				type : "POST",
-				url : "/customerService/add2",
+				url : "/customerService/add",
 				dataType : "json",
 				data : JSON.stringify(submitData), //formdata1 + '&' + formdata2
 				contentType : "application/json;charset=utf-8",
@@ -262,7 +300,8 @@ Clear floats after the columns -->.form:after {
 			// 				processData : false,
 			});
 
-			ajaxRequest.done(function(response) {
+			ajaxRequest.done(function(response)
+					{
 				if (response == true) {
 					alert("送出成功");
 					self.location= "/customerService";
@@ -273,7 +312,15 @@ Clear floats after the columns -->.form:after {
 
 			var formdata = $("#SearchFm").serialize();
 		}
-	</script>
+		
+// 		<script type ="text/javascript">
+// 		    document.getElementById("toMessageBoard").onclick = function () {
+// 		        location.href = "http://localhost:8080/customerService/MessageBoard";
+// 		    };
+ 		</script>
+		
+
+	
 
 </body>
 </html>

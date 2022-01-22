@@ -1,7 +1,15 @@
 package foodelicious.CustomerService.model;
 
+import java.util.List;
+
 public interface CustomerServiceDaoInterface {
 
 	public boolean addProblem(CustomerService customerService);
-	//以下新增功能
+	
+	public boolean updateProblem(CustomerService customerService);
+	
+	public boolean deleteProblem(Long Id);
+
+	public List<CustomerService> queryProblem(String email);
+
 }
