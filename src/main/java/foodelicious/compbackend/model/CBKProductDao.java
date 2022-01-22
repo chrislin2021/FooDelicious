@@ -1,8 +1,6 @@
 package foodelicious.compbackend.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,7 +11,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import foodelicious.backend.productPage.model.BkProduct;
+import foodelicious.cart.model.CartBean;
+import foodelicious.cart.service.CartService;
 import foodelicious.compbackend.repository.CBKProductRepository;
 import foodelicious.product.model.Product;
 
@@ -25,9 +24,12 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	EntityManager em;
 
 	private CBKProductRepository cbkProdRepository;
+	
+	private CartService cartService;
 
-	public CBKProductDao(final CBKProductRepository cbkProdRepository) {
+	public CBKProductDao(final CBKProductRepository cbkProdRepository, CartService cartService) {
 		this.cbkProdRepository = cbkProdRepository;
+		this.cartService = cartService;
 	}
 
 	@Autowired
@@ -46,6 +48,17 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	@Override
 	public String deleteProduct(Long productId) {
 		Product product = em.find(Product.class, productId);
+		
+		//先檢查購物車裡面有沒有此產品 有的話 先在購物車中刪除
+		List<CartBean>  carts = cartService.selectAll();
+		
+		for (CartBean cart : carts) {
+			if (cart.getProductId() == productId) {
+				cartService.deleteItem(cart.getCartId());
+				break;
+			}
+		}
+		
 		if (product != null) {
 			em.remove(product);
 			return "Product deletion successful!";
