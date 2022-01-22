@@ -4,28 +4,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <head>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="../../css/Product.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
-<!-- <div class="searchArea"> -->
-<!--     <select id="selectVal" class="form-select selectBox" aria-label="Default select example"> -->
-<!--         <option selected>全部商品</option> -->
-<!--         <option value="食材">食材</option> -->
-<!--         <option value="廚具">廚具</option> -->
-<!--     </select> -->
-<!--     <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入名稱關鍵字..."> -->
-<!--     <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="查詢" /> -->
-<!-- </div> -->
-
-<div class="list-group left ">
-  <a href="#" class="list-group-item active">全部商品</a>
-  <a href="#" class="list-group-item">廚具</a>
-  <a href="#" class="list-group-item">食材</a>
+<div class="w-50 p-3 input-group mb-3" style="float:right ;margin: 60px auto ;">
+    <select id="selectVal" class="form-select selectBox" aria-label="Default select example">
+        <option selected>全部商品</option>
+        <option value="食材">食材</option>
+        <option value="廚具">廚具</option>
+    </select>
+    <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入名稱關鍵字...">
+    <input id="searchPro" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="搜尋" />
 </div>
-     
+<div class="left">
+<ul class="list-group" id="">
+  <li class="list-group-item active d-flex justify-content-between align-items-center" id="allProduct">全部商品
+   <span class="badge rounded-pill" style="background-color:#00cc44">12</span></li>
+  <li class="list-group-item d-flex justify-content-between align-items-center" id="allKitchenware">廚具
+  <span class="badge rounded-pill" style="background-color:#00cc44">12</span></li>
+  <li class="list-group-item d-flex justify-content-between align-items-center" id="allFood">食材
+  <span class="badge rounded-pill" style="background-color:#00cc44">12</span></li>
+</ul>
+</div>
      
 <div class="right">
   <div class="container" >
@@ -56,12 +59,12 @@
                         	<h3 class="item-product-company text-secondary">${pro.productCompany}</h3>                       
                             <h4 class="group card-title inner list-group-item-heading fw-bolder">${pro.productName}</h4>
                             <p class="group inner list-group-item-text">${pro.productContent}</p>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
+                            <div class="row pandc">
+                                <div class="col-xs-6 col-md-6">
                                     <p class="lead text-danger fs-4 text fw-bold">$${pro.productPrice}</p>
                                 </div>
-                                <div class="col-xs-12 col-md-4">
-                                    <button class="add-to-cart btn btn-primary" type="button" onclick="addToCart(${pro.productId})">加入購物車</button>
+                                <div class="col-xs-6 col-md-6">
+                                    <button class="add-to-cart btn btn-default" type="button" onclick="addToCart(${pro.productId})">加入購物車</button>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +79,92 @@
 
 	  </div>
         
+<script>
+    //=============名稱關鍵字查詢功能=============
+    $("#searchPro").on("click",function(){
+       let inputData = $(".keyWord1").val();
+       let selectVal = $("#selectVal").val();
+       let urlData = "";
+        //alert("inputData："+inputData+", selectVal："+selectVal);
+       if(selectVal === "全部商品"){
+           urlData = "http://localhost:8080/Products/"+inputData;
+       }else if(selectVal === "廚具"){
+           selectVal = 0;
+           urlData = "http://localhost:8080/Products/"+inputData+"/"+selectVal;
+       }else{
+           selectVal = 1;
+           urlData = "http://localhost:8080/Products/"+inputData+"/"+selectVal;
+       }
+       $.ajax({
+           url: urlData,
+           type: "GET",
+           contentType: "application/json; charset=utf-8",
+           success:function(products){
+        	   ShareData = products
+        	 //console.log(ShareData)
+               //=================分頁功能================
+        	   endItem = (products.length <= 9) ? products.length : 9;
+               //顯示資料
 
+               console.log(showData);
+               showData(startItem, endItem);
+               //計算出最大頁數。
+               maxPage = (products.length % maxItems == 0) ? Math.floor(products.length / maxItems) : (Math.floor(products.length / maxItems)) + 1;
+
+               //動態生成頁數
+               let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
+               for (let i = 0; i < maxPage; i++) {
+                   let pageNum = i + 1;
+                   pageHtml += `<li id=` + i + ` class="page-item page pageNum pageMove"><a class="page-link">` + pageNum + `</a></li>`;
+               };
+               pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
+               $("#page").html(pageHtml);
+               
+             //顯示資料用
+               function showData(startItem, endItem) {
+                   let ProductData = "";
+                   //console.log(ShareData);
+                  	//console.log("endItem：" + endItem);
+                  	//console.log(showData);
+                   for (let i = startItem; i < endItem; i++) {
+                       //console.log(ShareData[i].productId);
+                       
+//                        ProductData += "<img src=" + /img/ + ShareData[i].productPics
+						
+                        ProductData += "<div class='item col-xs-4 col-lg-4' >"
+                        ProductData += "<div class='thumbnail card h-100' >"
+                        ProductData += "<div class='img-event'>"
+                        ProductData += "<a href='/Product/" + ShareData[i].productId + "'>"
+                        ProductData += "<img class='group list-group-image img-fluid' style='width:260px ;height:260px' src=" + /img/ + ShareData[i].productPics + "/>";
+                        ProductData += "</a>"
+                        ProductData += "</div>"
+                        ProductData += "<div class='caption card-body'>"
+                        ProductData += "<h3 class='item-product-company text-secondary'>" + ShareData[i].productCompany + "</h3>";                       
+                     	 ProductData += "<h4 class='group card-title inner list-group-item-heading fw-bolder'><a href='/Product/" + ShareData[i].productId + "'>" + ShareData[i].productName + "</a></h4>";
+                      	 ProductData += "<div class='group inner list-group-item-text justify-content-around mt-5 '" + ShareData[i].productContent + "</div>";
+                      	 ProductData += "<div class='row justify-content-around mt-3'>"
+                      	 ProductData += "<div class='col-xs-6 col-md-5'>"
+                      	 ProductData += "<div class='lead text-danger fs-5 text fw-bold'>$"+ ShareData[i].productPrice + "</div>";
+                      	 ProductData += "</div>"
+                      	 ProductData += "<div class='col-xs-6 col-md-7'>"
+                      	 ProductData += '<button class="add-to-cart btn btn-default" type="button" onclick="addToCart('+ ShareData[i].productId +')"><i class="bi bi-cart-plus"></i>加入購物車</button>';
+                      	 ProductData += "</div>"
+                      	 ProductData += "</div>"
+                      	 ProductData += "</div>"
+                      	 ProductData += "</div>"
+                      	 ProductData += "</div>" 
+                      	 ProductData += "</div>" 
+                      	 ProductData += "</div>" 
+
+
+                   }
+                   $("#products").html(ProductData);
+               }
+   			}
+
+		})
+	});
+</script>
 	<script type="text/javascript">
 	
 		function addToCart(productId) {
@@ -161,11 +249,11 @@
                     $("#page").html(pageHtml);
                     
                     //顯示資料用
-                    function showData(startItem, endItem,) {
+                    function showData(startItem, endItem) {
                         let ProductData = "";
-                        console.log(ShareData);
+                        //console.log(ShareData);
                        	//console.log("endItem：" + endItem);
-                       	//console.log(ShareData);
+                       	//console.log(showData);
                         for (let i = startItem; i < endItem; i++) {
                             //console.log(ShareData[i].productId);
                             
@@ -175,19 +263,19 @@
                              ProductData += "<div class='thumbnail card h-100' >"
                              ProductData += "<div class='img-event'>"
                              ProductData += "<a href='/Product/" + ShareData[i].productId + "'>"
-                             ProductData += "<img class='group list-group-image img-fluid' src=" + /img/ + ShareData[i].productPics + "/>";
+                             ProductData += "<img class='group list-group-image img-fluid' style='width:260px ;height:260px' src=" + /img/ + ShareData[i].productPics + "/>";
                              ProductData += "</a>"
                              ProductData += "</div>"
                              ProductData += "<div class='caption card-body'>"
                              ProductData += "<h3 class='item-product-company text-secondary'>" + ShareData[i].productCompany + "</h3>";                       
                           	 ProductData += "<h4 class='group card-title inner list-group-item-heading fw-bolder'><a href='/Product/" + ShareData[i].productId + "'>" + ShareData[i].productName + "</a></h4>";
-                           	 ProductData += "<p class='group inner list-group-item-text'" + ShareData[i].productContent + "/>";
-                           	 ProductData += "<div class='row'>"
-                           	 ProductData += "<div class='col-xs-12 col-md-6'>"
-                           	 ProductData += "<p class='lead text-danger fs-3 text fw-bold'>$"+ ShareData[i].productPrice + "</p>";
+                           	 ProductData += "<div class='group inner list-group-item-text justify-content-around mt-3'>" + ShareData[i].productContent + "</div>";
+                           	 ProductData += "<div class='row justify-content-around mt-5'>"
+                           	 ProductData += "<div class='col-xs-6 col-md-5'>"
+                           	 ProductData += "<div class='lead text-danger fs-5 text fw-bold'>$"+ ShareData[i].productPrice + "</div>";
                            	 ProductData += "</div>"
-                           	 ProductData += "<div class='col-xs-12 col-md-4'>"
-                           	 ProductData += '<button class="add-to-cart btn btn-primary" type="button" onclick="addToCart('+ ShareData[i].productId +')"><i class="bi bi-cart-plus"></i>加入購物車</button>';
+                           	 ProductData += "<div class='col-xs-6 col-md-7'>"
+                           	 ProductData += '<button class="add-to-cart btn btn-default" type="button" onclick="addToCart('+ ShareData[i].productId +')"><i class="bi bi-cart-plus"></i>加入購物車</button>';
                            	 ProductData += "</div>"
                            	 ProductData += "</div>"
                            	 ProductData += "</div>"
@@ -281,33 +369,34 @@
                 }
             })
    		 };
-   		//上面分類選擇器
-         $("#navTotal").click(function() {
-             searchShareDate("/Products", "GET");
-             nowPage = 0;
-             startItem = 0;
-             $("#navTotal").prop("class", "nav-link active")
-             $("#navKitchenware").prop("class", "nav-link")
-             $("#navIngredient").prop("class", "nav-link")
-         })
-         $("#navKitchenware").click(function() {
-             searchShareDate("/ProductsKitchenware", "GET");
-             nowPage = 0;
-             startItem = 0;
-             $("#navTotal").prop("class", "nav-link")
-             $("#navKitchenware").prop("class", "nav-link active")
-             $("#navIngredient").prop("class", "nav-link")
-         })
-         $("#navIngredient").click(function() {
-             searchShareDate("/ProductsIngredient", "GET");
-             nowPage = 0;
-             startItem = 0;
-             $("#navTotal").prop("class", "nav-link")
-             $("#navKitchenware").prop("class", "nav-link")
-             $("#navIngredient").prop("class", "nav-link active")
-         })
      </script>
-
+<script>
+//分類選擇
+$("#allProduct").click(function() {
+	searchProductDate("/Products", "GET");
+    nowPage = 0;
+    startItem = 0;
+    $("#allProduct").prop("class", "list-group-item d-flex justify-content-between align-items-center active")
+    $("#allKitchenware").prop("class", "list-group-item d-flex justify-content-between align-items-center")
+    $("#allFood").prop("class", "list-group-item d-flex justify-content-between align-items-center")
+})
+$("#allKitchenware").click(function() {
+	searchProductDate("/Products/search/0", "GET");
+    nowPage = 0;
+    startItem = 0;
+    $("#allProduct").prop("class", "list-group-item d-flex justify-content-between align-items-center")
+    $("#allKitchenware").prop("class", "list-group-item d-flex justify-content-between align-items-center active")
+    $("#allFood").prop("class", "list-group-item d-flex justify-content-between align-items-center")
+})
+$("#allFood").click(function() {
+	searchProductDate("/Products/search/1", "GET");
+    nowPage = 0;
+    startItem = 0;
+    $("#allProduct").prop("class", "list-group-item d-flex justify-content-between align-items-center")
+    $("#allKitchenware").prop("class", "list-group-item d-flex justify-content-between align-items-center")
+    $("#allFood").prop("class", "list-group-item d-flex justify-content-between align-items-center active")
+})
+</script>
 	
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

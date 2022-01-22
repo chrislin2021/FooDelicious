@@ -13,6 +13,8 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
 	rel="stylesheet">
 <link rel="stylesheet" href="../../css/ProductDetail.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -43,15 +45,17 @@
 						</div>
 					</div>
 					<div class="details col-md-6">
-						<h2 class="product-conpany">${pro.productCompany}</h2>
+						<h2 class="product-conpany" style="color:#7B7B7B">${pro.productCompany}</h2>
 						<h3 class="product-title">${pro.productName}</h3>
 						<p class="product-description">${pro.productContent}</p>
 						<hr>
-						<input id="pdQty" type="number" value = 1 min=1 max='${pro.productStock}'>
+						<div class="qty mt-2">
+                        <span class="minus bg-dark">-</span>
+                        <input type="number" class="count" id="pdQty" name="pdQty" value="1" min=1 max='${pro.productStock}'>
+                        <span class="plus bg-dark">+</span>
+                   		</div>
 						<hr>						
-						<h4 class="price">
-							商品甜甜價 : <span>$${pro.productPrice}</span>
-							</h4>
+						<h4 class="price">甜甜價 : <span>$${pro.productPrice}</span><span class="stock">剩餘 : ${pro.productStock}件</span></h4>
 
 						<div class="action">
 							<button class="add-to-cart btn btn-default" type="button" onclick="addToCart(${pro.productId})">新增至購物車</button>
@@ -96,6 +100,20 @@ function addToCart(productId) {
 	})
 }
 
+</script>
+<script>
+$(document).ready(function(){
+    $('.count').prop('disabled', true);
+		$(document).on('click','.plus',function(){
+		$('.count').val(parseInt($('.count').val()) + 1 );
+	});
+	$(document).on('click','.minus',function(){
+		$('.count').val(parseInt($('.count').val()) - 1 );
+			if ($('.count').val() == 0) {
+				$('.count').val(1);
+			}
+    	});
+	});
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
