@@ -50,7 +50,7 @@
                     <div id="editor">${articleContent}</div>
                 </div>
                 <!--留言區-->
-                <div id="msgArea">
+                <div id="msgArea" class="msgArea">
                     <!--摺疊-->
                     <div id="foldArea">
                         <button id="foldBTN" class="container btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -183,7 +183,9 @@
                             msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
                             msgData += "<button class='delMsg align-right'>刪除</button></div>";
                         }
-                        msgData += "<div id='msgNo" + msg[i].id + "'>" + msg[i].text + "</div></td></tr>";
+                        msgData += "<div class='divNO" + msg[i].id + "' >" + msg[i].text + "</div>";
+                        msgData += '<div><input hidden id="msgNo' + msg[i].id + '" type="text" class="form-control" value="' + msg[i].text + '" aria-label="Username" aria-describedby="addon-wrapping"></div>';
+                        msgData += "</td></tr>";
                     }
                     msgData += "</table>";
                     $("#foldMSG").html(msgData);
@@ -195,8 +197,9 @@
                             msgData += "<button class='updataMsg align-right' onclick='updataMsg(" + msg[i].id + ")'>更新</button>";
                             msgData += "<button class='align-right'>刪除</button></div>";
                         }
-                        msgData += "<div id='msgNo" + msg[i].id + "'>" + msg[i].text + "</div></td></tr>";
-
+                        msgData += "<div class='divNO" + msg[i].id + "' >" + msg[i].text + "</div>";
+                        msgData += '<div><input hidden id="msgNo' + msg[i].id + '" type="text" class="form-control" value="' + msg[i].text + '" aria-label="Username" aria-describedby="addon-wrapping"></div>';
+                        msgData += "</td></tr>"
                     }
 
                     $("#showMSG").html(msgData);
@@ -269,8 +272,17 @@
         <script>
             //更新留言
             function updataMsg(id) {
-                let updateMsg = "#msgNo" + id;
-                let inputChange = '<input type="text" class="form-control" placeholder="更新您的留言..." aria-label="Username" aria-describedby="addon-wrapping">';
-                console.log($(updateMsg).html(inputChange))
+                console.log(id)
+                let msgNo = "#msgNo" + id;
+                let divClassNo = ".divNO" + id;
+                $(divClassNo).prop("hidden", "hidden");
+                //console.log($(msgNo).val());
+                $(msgNo).removeAttr("hidden");
+                $(msgNo).keydown(function(event) {
+                    if (event.keyCode === 13) {
+                        console.log($(msgNo).val());
+
+                    }
+                })
             }
         </script>
