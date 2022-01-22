@@ -161,8 +161,7 @@
 					if (month < 10) {
 						month = "0" + month;
 					}
-					let todays = todayDate.getFullYear() + '-' + month
-							+ '-' + todayDate.getDate();
+					let todays = todayDate.getFullYear() + '-' + month + '-' + todayDate.getDate();
 					//alert(todays)
 					for (let k = 0; k < allOrderDetailsLength; k++) {
 
@@ -171,7 +170,7 @@
 						let sub = date.substring(0, 10);
 						//alert(sub);
 						if (Object.is(sub, todays)) {
-							//alert("true")
+							
 							//alert(allOrders[k].ordersDetailId)
 							todayOrder.push(allFoundCompanyOrders[k]);
 						}
