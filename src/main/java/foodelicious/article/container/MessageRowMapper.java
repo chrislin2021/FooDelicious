@@ -3,13 +3,9 @@ package foodelicious.article.container;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.jdbc.core.RowMapper;
 
 import foodelicious.article.model.MsgArea;
-import foodelicious.member.model.Member;
 
 
 public class MessageRowMapper implements RowMapper<MsgArea> {

@@ -272,16 +272,31 @@
         <script>
             //更新留言
             function updataMsg(id) {
-                console.log(id)
+                console.log("留言編號：" + id)
+
                 let msgNo = "#msgNo" + id;
                 let divClassNo = ".divNO" + id;
                 $(divClassNo).prop("hidden", "hidden");
                 //console.log($(msgNo).val());
                 $(msgNo).removeAttr("hidden");
-                $(msgNo).keydown(function(event) {
+                $(msgNo).keydown(function() {
                     if (event.keyCode === 13) {
-                        console.log($(msgNo).val());
+                        //console.log($(msgNo).val());
+                        let updateMSG = {
+                            "msgID": $(msgNo).val()
+                        }
 
+                        $.ajax({
+                            url: "/updateMsg/" + id,
+                            type: "PUT",
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(updateMSG)
+                        })
+                        console.log($(msgNo).val());
+                        $(divClassNo).html($(msgNo).val());
+                        $(divClassNo).removeAttr("hidden");
+                        $(msgNo).prop("hidden", "hidden");
                     }
                 })
             }

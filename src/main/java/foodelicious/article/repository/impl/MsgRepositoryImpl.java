@@ -101,4 +101,14 @@ public class MsgRepositoryImpl implements MsgRepository {
 		return result;
 	}
 
+	@Override
+	public void updateMessage(Long id, String string) {
+		System.out.println("留言id："+id);
+		System.out.println("newMsgData："+string);
+		MsgArea msgArea = em.find(MsgArea.class, id);
+		msgArea.setText(string);
+		em.merge(msgArea);
+		
+	}
+
 }

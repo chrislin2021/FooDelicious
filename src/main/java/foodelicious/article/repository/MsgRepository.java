@@ -17,4 +17,6 @@ public interface MsgRepository {
 
 	boolean checkLike(Long userId, Integer articleId);
 
+	void updateMessage(Long id, String string);
+
 }

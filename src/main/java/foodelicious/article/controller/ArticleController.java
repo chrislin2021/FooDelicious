@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import foodelicious.article.model.MsgArea;
-import foodelicious.article.model.ShareArea;
 import foodelicious.article.service.ArticleService;
 import foodelicious.article.service.MsgService;
 import foodelicious.mail.service.MailService;
@@ -177,6 +176,7 @@ public class ArticleController {
 	}
 
 	// 文章更新用
+	@ResponseBody
 	@PutMapping("/articleUpdate/{id}")
 	public void updateArticle(@RequestBody Map<String, String> params, @PathVariable("id") Integer shareId) {
 		articleService.UpdateArticle(params, shareId);
@@ -255,5 +255,12 @@ public class ArticleController {
 		data.put("title", articleService.focuseData(userID));
 		
 		return data;
+	}
+	@ResponseBody
+	@PutMapping("/updateMsg/{id}")
+	public void updateMsg(@PathVariable Long id, @RequestBody Map<String, String> params) {
+//		System.out.println("留言id："+id);
+//		System.out.println("newMsgData："+params.get("msgID"));
+		msgService.updateMessage(id, params.get("msgID"));
 	}
 }

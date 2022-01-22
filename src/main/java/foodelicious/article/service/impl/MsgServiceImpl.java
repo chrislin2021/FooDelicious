@@ -46,4 +46,9 @@ public class MsgServiceImpl implements MsgService {
 		return msgRepository.checkLike(userId, articleId);
 	}
 
+	@Override
+	public void updateMessage(Long id, String string) {
+		msgRepository.updateMessage(id, string);
+	}
+
 }
