@@ -391,4 +391,71 @@ h1.tableName{
 	cursor: pointer;
 }
 
+/* product add 2 */
+
+h1.tableNameProduct{
+	margin-top:10px;
+	margin-left:30%;
+	font-size:30px;
+	font-weight:bold;
+}
+
+.smallFontProduct{
+	color: #D3B884;
+    font-size:25px;
+    margin:5px;
+    font-weight:light;
+	
+}
+
+.main{
+    margin: auto;
+    margin-top: 40px;
+    width: 650px;
+    min-width: 650px;
+
+}
+
+form.addProduct{
+    border-radius: 50px; 
+    box-shadow: 2px 5px 5px 0px gray;
+	margin-top:5px;
+}
+
+
+.textSet{
+    vertical-align: middle;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.textArea{
+    margin: 10px;
+    text-align: left;
+}
+
+.content{
+    padding-top: 10px;
+    text-align:left;
+
+}
+
+.textArea{
+    border: solid 1px gray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.buttonArea{
+    margin-top: 50px;
+}
+
+#resetProduct{
+    box-shadow: 2px 5px 5px 0px gray;
+}
+
+#submitAddProduct{
+    box-shadow: 2px 5px 5px 0px gray;
+}
+
 
