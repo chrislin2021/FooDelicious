@@ -62,7 +62,7 @@
 							<input class="form-control" type="file" id="formFile"
 								accept="image/*" name="file">
 							<button type="submit" class="btn btn-primary">更新照片</button>
-							<input type="hidden" name="memberId" value="${memberId}">
+							<input type="hidden" name="memberMail" value="${memberMail}">
 						</div>
 					</div>
 				</div>

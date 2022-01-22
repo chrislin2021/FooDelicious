@@ -69,7 +69,7 @@ public class MemberUpdateController {
 	
 	@PostMapping("/upload")
 	public String upload(HttpServletRequest request, @RequestParam("file") MultipartFile file, Model m,
-			HttpSession session, @RequestParam("memberId") Long memberId){
+			HttpSession session, @RequestParam("memberMail") String memberMail){
 		System.out.println("====================================");
 		try {
 			//根據時間建立新的檔名，即便是二次上傳相同名稱的檔案，也不會覆蓋
@@ -85,9 +85,9 @@ public class MemberUpdateController {
 			m.addAttribute("fileName", fileName);
 			
 			//記錄在資料庫
-			memberService.findByMemberId(memberId);
-			Member mb = memberService.findByMemberId(memberId);
-			System.out.println(memberId +"========================================");
+			memberService.findByMemberMail(memberMail);
+			Member mb = memberService.findByMemberMail(memberMail);
+			System.out.println(memberMail +"========================================");
 			mb.setMemberPic(fileName);
 			memberService.update(mb);
 			session.setAttribute("memberPic", fileName);

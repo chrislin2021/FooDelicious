@@ -6,20 +6,20 @@
 <style>
 .success-message {
   text-align: center;
-  max-width: 500px;
+  max-width: 300px;
   position: absolute;
-  top: 80%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 .success-message__icon {
-  max-width: 75px;
+  max-width: 100px;
 }
 .success-message__title {
   color: #51bb7b;
   transform: translateY(25px);
   opacity: 0;
-  transition: all 200ms ease;
+  transition: all 100ms ease;
 }
 .active .success-message__title {
   transform: translateY(0);
@@ -54,8 +54,6 @@
 <title>Login</title>
 </head>
 <body>
-<h1></h1>
-
 <div class="success-message">
     <svg viewBox="0 0 76 76" class="success-message__icon icon-checkmark">
         <circle cx="38" cy="38" r="36"/>
@@ -63,7 +61,7 @@
     </svg>
     <h1 class="success-message__title">密碼修改成功</h1>
     <div class="success-message__content">
-        <a href="<c:url value='/LoginSystem' />">回登入頁面</a>
+        <a href="<c:url value='/LoginSystem' />">回登入</a>
     </div>
 </div>
 </body>
