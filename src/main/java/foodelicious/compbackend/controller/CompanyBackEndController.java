@@ -38,7 +38,17 @@ public class CompanyBackEndController {
 	public String companyProductAdd() {
 		return "app.CompanyProductAdd";
 	}
-
+	
+	@GetMapping(path = "/companyProductsAdd2")
+	public String companyProductAdd2() {
+		return "app.CompanyProductAdd2";
+	}
+	
+	@GetMapping(path = "/companyBestSeller")
+	public String companyBestSeller() {
+		return "app.CompanyBestSeller";
+	}
+	
 	@GetMapping(path = "/companyOrder")
 	public String companyOrder() {
 

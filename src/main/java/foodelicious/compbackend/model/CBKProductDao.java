@@ -61,9 +61,9 @@ public class CBKProductDao implements CBKProductDaoInterface {
 		
 		if (product != null) {
 			em.remove(product);
-			return "Product deletion successful!";
+			return "商品刪除成功!";
 		} else {
-			return "Product not found. Please try again.";
+			return "商品刪除失敗。請重新試一次。";
 		}
 
 	}

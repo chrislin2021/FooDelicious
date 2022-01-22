@@ -86,6 +86,12 @@ public class BkPageController {
     public String BackendProblemReportUpdate() {
     	return "app.BackendProblemReportUpdate";
     }
+    
+    @GetMapping("/backend/problemReportResponse")
+    public String BackendProblemReportResponse() {
+    	return "app.BackendProblemReportResponse";
+    }
+    
 	
 	@GetMapping("/backend/report/cart")
 	public String BackendReportCart() {

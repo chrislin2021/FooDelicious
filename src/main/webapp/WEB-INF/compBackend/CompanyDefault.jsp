@@ -70,7 +70,7 @@
 				</div>
 				<ul class="sub-menu">
 					<li><a class="link_name" href="#">分析報表</a></li>
-					<li><a href="#">暢銷商品</a></li>
+					<li><a href="/companyBestSeller">暢銷商品</a></li>
 					<li><a href="#">銷售總額</a></li>
 				</ul>
 			</li>

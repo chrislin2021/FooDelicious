@@ -149,6 +149,13 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		
 		return cbkProblemDaoInterface.findProblemById(problemId);
 	}
+	
+	@Override
+	public String updateCompanyResponse(Integer problemId, ProblemsBean problem) {
+		
+		return cbkProblemDaoInterface.updateCompanyResponse(problemId, problem);
+	}
+
 
 
 	
@@ -159,6 +166,7 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		
 		return cbkOrderDaoInterface.findAllOrderByASC();
 	}
+
 
 	
 	

@@ -85,5 +85,18 @@ public class CBKProblemDao implements CBKProblemDaoInterface {
 		return problem;
 	}
 
+	
+	//後臺回覆廠商問題
+	@Override
+	public String updateCompanyResponse(Integer problemId, ProblemsBean problem) {
+		ProblemsBean updatedProblemResponse = em.find(ProblemsBean.class, problemId);
+		if(updatedProblemResponse != null) {
+			updatedProblemResponse.setProblemResponse(problem.getProblemResponse());
+			cbkProblemRepository.save(updatedProblemResponse);
+			return "問題回覆成功";
+		}
+		return "問題回覆失敗。請重新來過。";
+	}
+
 
 }

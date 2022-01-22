@@ -64,6 +64,8 @@ public interface CompanyBackEndServiceInterface {
 
 	public ProblemsBean findProblemById(Integer problemId);
 
+	public String updateCompanyResponse(Integer problemId, ProblemsBean problem);
+
 	
 
 	

@@ -16,6 +16,7 @@
     </select>
     <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入關鍵字...">
     <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="Search" />
+    <span id="total" style="margin-left:100px"> </span>
 </div>
 
 	<ul id="selectPage" class="nav nav-tabs">
@@ -56,7 +57,7 @@
 		<ul id="page" class="pagination justify-content-center"></ul>
 	</nav>
 
-	<span id="total"> </span>
+	
 
 
 
@@ -424,7 +425,7 @@
                 '</td></tr>'
         }
         $("#comProducts").html(txt);
-		let sum = '<h1>共' + productLen + '個商品</h1>';
+		let sum = '<strong>共' + productLen + '個商品</strong>';
 		$("#total").html(sum);
        
     }

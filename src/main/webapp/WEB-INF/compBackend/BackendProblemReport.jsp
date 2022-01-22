@@ -5,6 +5,8 @@
 
 <head>
 <link rel="stylesheet" href="../../../css/backendProduct.css">
+<link rel="stylesheet" href="../../../css/backendProblemReport.css">
+
 </head>
 <body>
 	<h1 class="tableName titleName2">
@@ -39,7 +41,8 @@
 	</ul>
 	<section class="content">
 		<div class="col-xs-12">
-			<table id="" class='table table-striped table-hover' style="text-align:center">
+			<table id="" class='table table-striped table-hover'
+				style="text-align: center">
 				<thead>
 					<tr>
 						<th class="col table-success">問題編號</th>
@@ -60,29 +63,94 @@
 		</div>
 	</section>
 	
+	<!-- 問題回報地跳出視窗 -->
+
+	<div class="popup-modal">
+		<div class="popup-modal-contents">
+
+			<div class="popup-closing">+</div>
+
+			<div>
+				<h3 style="text-align: center">
+					<strong>問題內容</strong>
+				</h3>
+				<h6 style="margin: 5px">問題:</h6>
+				<textarea name="problem-content" rows="5" cols="50"
+						placeholder="" id="problem-content"></textarea>
+				<form style="text-align: left; margin: 5px" id="problemform">
+					<h6 style="margin: 5px">回覆:</h6>
+					<textarea name="problem-content" rows="5" cols="50"
+						placeholder="回覆:" id="problem-reponse" form="problemform"></textarea>
+					 <span id="textareaError" style="color: red"></span>
+
+					<c:set var="userID" value="${userID}" />
+					<input type="text" hidden id="companyId" value='${userID}'>
+					<input type="text" hidden id="companyName" value='${userName}'>
+					<input type="button" id="submitComplete"
+						class="btn btn-outline-danger" value="submit">
+				</form>
+
+			</div>
+
+		</div>
+	</div>
+
+
+	
+
+
 	<script>
-    //=============更新問題回報資料功能=============
+		//=============更新問題回報資料功能=============
 
-    //更新前先查詢出資料
-    $("#problemReport").on("click","#updateBtn",function(){
-        let id = $(this).attr("data-id");
-         alert("id："+id);
-        $.ajax({
-            url:"/companyProblems/find/"+id,
-            type: "GET",
-            success:function(problem){
-            	//alert(problem.problemContent);
-                //將json字串化
-                let problemString = JSON.stringify(problem);
-                //將資料存到localStorage，給另一個頁面使用
-                localStorage.setItem("problemData",problemString);
-                //跳轉頁面
-                window.location.href="/backend/problemReportUpdate";
-            }
-        })
+		//更新前先查詢出資料
+		$("#problemReport").on("click", "#updateBtn", function() {
+			let id = $(this).attr("data-id");
+			//alert("id：" + id);
+			$.ajax({
+				url : "/companyProblems/find/" + id,
+				type : "GET",
+				success : function(problem) {
+					//alert(problem.problemContent);
+					//將json字串化
+					let problemString = JSON.stringify(problem);
+					//將資料存到localStorage，給另一個頁面使用
+					localStorage.setItem("problemData", problemString);
+					//跳轉頁面
+					window.location.href = "/backend/problemReportUpdate";
+				}
+			})
 
-    });
-</script>
+		});
+	</script>
+	
+	<script>
+		//=============回覆問題功能=============
+
+		//回覆前先查詢出資料
+		$("#problemReport").on("click", "#responseBtn", function() {
+			let id = $(this).attr("data-id");
+			alert("id：" + id);
+			
+			$.ajax({
+				url : "/companyProblems/find/" + id,
+				type : "GET",
+				success : function(problem) {
+					//alert(problem.problemContent);
+					//將json字串化
+					let problemString = JSON.stringify(problem);
+					//將資料存到localStorage，給另一個頁面使用
+					localStorage.setItem("problem", problemString);
+					//跳轉頁面
+					window.location.href = "/backend/problemReportResponse";
+				}
+			})
+			
+			
+			
+		});
+		
+	
+	</script>
 
 	<script>
 		//=============顯示所有商品資料=============
@@ -479,6 +547,7 @@
 				let status = "";
 				if (st == "unresolved") {
 					status = "處理中";
+					
 				} else {
 					status = "完成";
 				}
@@ -491,12 +560,26 @@
 						+ '<form method="" >'
 						+ '<input id="updateBtn" class="btn btn-outline-success" type="button" value="更新" data-id='+dataSource[i].problemId+'>'
 						+ '</form>' + '</td>'
-
-				txt += '<td class="align-middle">'
+						
+				if (st == "unresolved") {
+					
+					txt += '<td class="align-middle">'
 						+ '<form method="" >'
 						+ '<input id="responseBtn" class="btn btn-outline-primary" type="button" value="回覆" data-id='+dataSource[i].problemId+'>'
 						+ '</form>' + '</td></tr>'
+					
+							
+					} else {
+						txt += '<td class="align-middle">'
+							+ '<form method="" >'
+							+ '<input id="responseBtn" class="btn btn-outline-primary" type="button" disabled value="回覆" data-id='+dataSource[i].problemId+'>'
+							+ '</form>' + '</td></tr>'
+					
+					
+					}
 
+				
+			
 			}
 			$("#problemReport").html(txt);
 

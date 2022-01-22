@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.compbackend.model.ProblemsBean;
 import foodelicious.compbackend.service.CompanyBackEndServiceInterface;
 import foodelicious.mail.service.MailService;
@@ -182,6 +181,11 @@ public class CompanyBackEndRestController {
 	@PutMapping("/companyProblems/update/{problemId}")
 	public String updateCompanyProblem(@PathVariable Integer problemId, @RequestBody ProblemsBean problem) {
 		return cbkServiceInterface.updateCompanyProblem(problemId, problem);
+	}
+	
+	@PutMapping("/companyProblemReport/response/{problemId}")
+	public String updateProblemResponse(@PathVariable Integer problemId, @RequestBody ProblemsBean problem) {
+		return cbkServiceInterface.updateCompanyResponse(problemId, problem);
 	}
 	
 	
