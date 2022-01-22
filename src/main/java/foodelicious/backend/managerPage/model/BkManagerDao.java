@@ -15,4 +15,6 @@ public interface BkManagerDao {
 
     public String update(Long memberId,BkMember bkMember);
 
+    public List<BkMember> findByStatus(String status);
+
 }

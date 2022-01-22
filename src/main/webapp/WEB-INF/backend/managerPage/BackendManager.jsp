@@ -17,7 +17,17 @@
         <input id="searchAcc" class="keyWord btn btn-outline-secondary" type="button" value="查詢" />
     </div>
 </form>
-
+<ul id="selectPage" class="nav nav-tabs">
+    <li class="nav-item">
+        <a id="all" class="nav-link active" aria-current="page" href="#">All</a>
+    </li>
+    <li class="nav-item">
+        <a id="admin" class="nav-link" href="#">Admin</a>
+    </li>
+    <li class="nav-item">
+        <a id="company" class="nav-link" href="#">Company</a>
+    </li>
+</ul>
 <section class="content">
         <div class="col-xs-12">
             <table id="" class='table table-striped table-hover '>
@@ -111,6 +121,71 @@
 </script>
 
 <script>
+    //=============顯示分頁設定=============
+    let urlString = "";
+    $("#all").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#all").prop("class","nav-link active");
+        urlString = "/bkmanagers";
+        // alert(urlString);
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(managerAll){
+                //將值傳到全域
+                managerData = managerAll;
+                let num = managerAll.length;
+                if(num >= 10){
+                    pages(10,managerData);
+                }else{
+                    pages(num,managerData);
+                }
+            }
+        });
+    })
+    $("#admin").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#admin").prop("class","nav-link active");
+        urlString = "/bkmanagers/find/admin";
+        // alert(urlString);
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(admins){
+                $("#products").html("");
+                $("#page").html(" ");
+                let num = admins.length;
+                if(num >= 10){
+                    pages(10,admins);
+                }else{
+                    pages(num,admins);
+                }
+            }
+        });
+    })
+    $("#company").on("click",function(){
+        $("#selectPage a").prop("class","nav-link");
+        $("#company").prop("class","nav-link active");
+        urlString = "/bkmanagers/find/company";
+        // alert(urlString);
+        $.ajax({
+            url: urlString,
+            type: "GET",
+            success: function(company){
+                $("#products").html("");
+                $("#page").html("");
+                let num = company.length;
+                if(num >= 10){
+                    pages(10,company);
+                }else{
+                    pages(num,company);
+                }
+            }
+        });
+    })
+</script>
+
+<script>
     //=============分頁程式=============
     function pages(maxNum, dataSource){ //輸入單頁最大筆數和資料來源
         //=================分頁功能================
@@ -146,6 +221,8 @@
         pageHtml += `<li class="page-item next pageMove"><a class="page-link" >下一頁</a></li>`;
         $("#page").html(pageHtml);
 
+        //綁定前先清除綁定事件
+        $("#page").unbind("click");
         //綁定click事件
         $("#page").on("click",".page", function(){
             nowPage = ($(this).prop("id"))*1;//強制轉成數字型態

@@ -13,4 +13,6 @@ public interface BkOrderDao {
     public List<BkOrder> findByStatus(String orderStatus);
 
     public List<BkOrder> findByStatusHandling(String orderStatus, String orderStatus2, String orderStatus3);
+
+    public List<BkOrderDetail> findByOrderId(Long orderId);
 }

@@ -1,6 +1,7 @@
 package foodelicious.backend.orderPage.controller;
 
 import foodelicious.backend.orderPage.model.BkOrder;
+import foodelicious.backend.orderPage.model.BkOrderDetail;
 import foodelicious.backend.orderPage.service.BkOrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +42,10 @@ public class BkOrderController {
                                               @PathVariable String orderStatus2,
                                               @PathVariable String orderStatus3){
         return bkOrderService.findByStatusHandling(orderStatus, orderStatus2, orderStatus3);
+    }
+
+    @GetMapping("/bkordersDetail/{orderId}")
+    public List<BkOrderDetail> findByOrderId(@PathVariable Long orderId){
+        return bkOrderService.findByOrderId(orderId);
     }
 }

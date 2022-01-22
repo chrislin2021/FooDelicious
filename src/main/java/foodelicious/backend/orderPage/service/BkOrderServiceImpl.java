@@ -2,6 +2,7 @@ package foodelicious.backend.orderPage.service;
 
 import foodelicious.backend.orderPage.model.BkOrder;
 import foodelicious.backend.orderPage.model.BkOrderDao;
+import foodelicious.backend.orderPage.model.BkOrderDetail;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,5 +39,10 @@ public class BkOrderServiceImpl implements BkOrderService{
     @Override
     public List<BkOrder> findByStatusHandling(String orderStatus, String orderStatus2, String orderStatus3) {
         return bkOrderDao.findByStatusHandling(orderStatus, orderStatus2, orderStatus3);
+    }
+
+    @Override
+    public List<BkOrderDetail> findByOrderId(Long orderId) {
+        return bkOrderDao.findByOrderId(orderId);
     }
 }

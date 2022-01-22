@@ -35,4 +35,9 @@ public class BkManagerServiceImpl implements BkManagerService{
     public String update(Long memberId, BkMember bkMember) {
         return bkManagerDao.update(memberId,bkMember);
     }
+
+    @Override
+    public List<BkMember> findByStatus(String status) {
+        return bkManagerDao.findByStatus(status);
+    }
 }

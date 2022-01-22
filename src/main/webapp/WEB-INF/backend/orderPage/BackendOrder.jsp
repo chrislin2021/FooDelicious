@@ -55,6 +55,36 @@
     </div>
 </section>
 
+<!-- Modal -->
+<div class="modal fade" id="orderDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">訂單內容</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12">
+                    <table class='table table-striped table-hover '>
+                        <thead>
+                        <tr>
+                            <th class="col table-warning midW">商品照片</th>
+                            <th class="col table-warning smalW">商品名稱</th>
+                            <th class="col table-warning smalW">商品價格</th>
+                            <th class="col table-warning large">購買數量</th>
+                        </tr>
+                        </thead>
+                        <tbody id="productDetail"></tbody>
+                        <tfoot>
+                            <td id="totalPric"></td>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     //=============顯示所有商品資料=============
     window.onload=function(){
@@ -85,7 +115,7 @@
            success:function(order){
                if(order){
                    let txt = "<tr>";
-                   txt += "<td class='align-middle'>"+order.ordersId+"</td>";
+                   txt += '<td class="align-middle"><a class="detail" href="" data-bs-toggle="modal" data-bs-target="#orderDetail" onclick="detailData('+order.ordersId+')">'+order.ordersId+'</a></td>';
                    txt += "<td class='align-middle'>"+order.bkMember.memberMail+"</td>";
                    txt += "<td class='align-middle'>"+order.ordersName+"</td>";
                    txt += "<td class='align-middle'>"+order.ordersPhone+"</td>";
@@ -350,7 +380,7 @@
     function showData(startItem,endItem,dataSource){
         let txt = "<tr>";
         for (let i = startItem; i < endItem; i++) {
-            txt += "<td class='align-middle'>"+dataSource[i].ordersId+"</td>"
+            txt += '<td class="align-middle"><a class="detail" href="" onclick="detailData('+dataSource[i].ordersId+')" data-bs-toggle="modal" data-bs-target="#orderDetail">'+dataSource[i].ordersId+'</a></td>'
             txt += "<td class='align-middle'>"+dataSource[i].bkMember.memberMail+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].ordersName+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].ordersPhone+"</td>"
@@ -369,6 +399,30 @@
         $("#orders").html(txt);
     }
 
+</script>
+<script>
+    //-------------------訂單內容-----------------
+    function detailData(orderId){
+
+        $.ajax({
+            url:"/bkordersDetail/"+orderId,
+            type:"GET",
+            success:function(detail){
+                let detailHtml = "<tr>";
+                let totalPrice = 0;
+                for(let i=0; i<detail.length; i++){
+                    detailHtml += "<td><img class='detailImg' src='../../../img/"+detail[i].bkProduct.productImg+"'/></td>";
+                    detailHtml += "<td>"+detail[i].bkProduct.productName+"</td>";
+                    detailHtml += "<td>"+detail[i].bkProduct.productPrice+"</td>";
+                    detailHtml += "<td>"+detail[i].quantity+"</td></tr>";
+                    totalPrice += ((detail[i].bkProduct.productPrice)*(detail[i].quantity));
+                }
+                $("#productDetail").html(detailHtml);
+                let total = totalPrice.toLocaleString('en-US');
+                $("#totalPric").text("總金額："+total+"NT");
+            }
+        })
+    }
 </script>
 </body>
 

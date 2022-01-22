@@ -14,4 +14,6 @@ public interface BkManagerService {
     public BkMember findById(Long memberId);
 
     public String update(Long memberId,BkMember bkMember);
+
+    public List<BkMember> findByStatus(String status);
 }

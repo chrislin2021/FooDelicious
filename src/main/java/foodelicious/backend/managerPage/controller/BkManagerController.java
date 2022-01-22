@@ -42,4 +42,9 @@ public class BkManagerController {
         return bkManagerService.update(memberId, bkMember);
     }
 
+    @GetMapping("/bkmanagers/find/{status}")
+    public List<BkMember> findByStatus(@PathVariable String status){
+        return bkManagerService.findByStatus(status);
+    }
+
 }

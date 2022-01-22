@@ -49,4 +49,12 @@ public class BkManagerDaoImpl implements BkManagerDao{
 
         return "更新資料成功";
     }
+
+    @Override
+    public List<BkMember> findByStatus(String status) {
+
+        List<BkMember> list = bkManagerRepository.findByStatus(status);
+
+        return list;
+    }
 }

@@ -1,12 +1,17 @@
 package foodelicious.backend.orderPage.model;
 
+import foodelicious.backend.orderPage.repository.BkOrderDetailRepository;
 import foodelicious.backend.orderPage.repository.BkOrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class BkOrderDaoImpl implements BkOrderDao{
+
+    @Autowired
+    private BkOrderDetailRepository bkOrderDetailRepository;
 
     private BkOrderRepository bkOrderRepository;
 
@@ -62,5 +67,13 @@ public class BkOrderDaoImpl implements BkOrderDao{
         List<BkOrder> orders = bkOrderRepository.findByStatusHandling(orderStatus, orderStatus2, orderStatus3);
 
         return orders;
+    }
+
+    @Override
+    public List<BkOrderDetail> findByOrderId(Long orderId) {
+
+        List<BkOrderDetail> list = bkOrderDetailRepository.findByOrderId(orderId);
+
+        return list;
     }
 }

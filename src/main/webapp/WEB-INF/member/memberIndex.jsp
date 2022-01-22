@@ -39,6 +39,8 @@
 	
        
         <nav class="nav justify-content-end" style="background-color: #e3f2fd;" >
+		<a id="company" class="nav-link" href="/companyMain" style="visibility:hidden">廠商管理系統</a>
+		<a id="backend" class="nav-link" href="/backend/member" style="visibility:hidden">後台管理系統</a>
         <a class="nav-link active ms-0" href="/memberIndex" target="__blank">修改會員資料</a>
         <a class="nav-link" href="/memberOrders" target="__blank">會員訂單查詢</a>
         <a class="nav-link" href="/userFocusePage" target="__blank">喜歡的文章</a>
@@ -210,14 +212,29 @@
 							window.location.href="/memberIndex";
 						}
 					});
-					
 				},
 			})
-			
-
 		})
 
 				
 			 
 	</script>
+<script>
+	window.onload = function(){
+		let memberId = $("#memberId").val();
+		$.ajax({
+			url:"/bkmembers/update/"+memberId,
+			type:"GET",
+			success:function(member){
+				let status = member.memberStatus;
+				if(status=="admin"){
+					$("#backend").prop("style","visibility","visible");
+				}else if(status=="company"){
+					$("#company").prop("style","visibility","visible");
+				}
+			}
+		})
+	}
+
+</script>
 </body>

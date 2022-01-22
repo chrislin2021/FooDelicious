@@ -40,7 +40,7 @@
                                 <input class="upInput upInputBig readonly" type="text" value="" readonly id="memberMail">
                             </td>
                             <td class='align-middle'>
-                                <select id="memberStatus" class="form-select upInput text-middle upInputMd">
+                                <select id="memberStatus" class="form-select upInput text-middle upInputBig">
                                     <option value="" id="status" selected></option>
                                     <option value="admin">admin</option>
                                     <option value="company">company</option>
@@ -48,7 +48,7 @@
                                 </select>
                             </td>
                             <td class='align-middle'>
-                                <input class="upInput" type="text" value="" id="memberName">
+                                <input class="upInput upInputBig" type="text" value="" id="memberName">
                             </td>
                             <td class='align-middle'>
                                 <input class="upInput" type="text" value="" id="memberPhone">
