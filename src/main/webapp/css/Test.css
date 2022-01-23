@@ -425,14 +425,6 @@ form.addProduct{
 	margin-top:5px;
 }
 
-.responseTable{
-	box-shadow: 2px 5px 5px 0px gray;
-	border-radius: 50px; 
-	margin:10px;
-	border:1px black solid;
-	width:fit-content;
-}
-
 
 .textSet{
     vertical-align: middle;
