@@ -1,19 +1,19 @@
 package foodelicious.compbackend.model;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import foodelicious.backend.productPage.model.BkProduct;
 import foodelicious.compbackend.repository.CBKProblemRepository;
+import foodelicious.mail.service.MailService;
+import foodelicious.member.service.MemberService;
 
 @Repository
 @Transactional
@@ -23,9 +23,15 @@ public class CBKProblemDao implements CBKProblemDaoInterface {
 	EntityManager em;
 
 	private CBKProblemRepository cbkProblemRepository;
+	
+	private MailService mailService;
+	
+	private MemberService memberService;
 
-	public CBKProblemDao(final CBKProblemRepository cbkProblemRepository) {
+	public CBKProblemDao(final CBKProblemRepository cbkProblemRepository, MailService mailService, MemberService memberService) {
 		this.cbkProblemRepository = cbkProblemRepository;
+		this.mailService = mailService;
+		this.memberService= memberService;
 	}
 
 	public String insertProblem(ProblemsBean problem) {
@@ -90,9 +96,24 @@ public class CBKProblemDao implements CBKProblemDaoInterface {
 	@Override
 	public String updateCompanyResponse(Integer problemId, ProblemsBean problem) {
 		ProblemsBean updatedProblemResponse = em.find(ProblemsBean.class, problemId);
+		Long companyId;
 		if(updatedProblemResponse != null) {
+			companyId = updatedProblemResponse.getCompanyId();
 			updatedProblemResponse.setProblemResponse(problem.getProblemResponse());
 			cbkProblemRepository.save(updatedProblemResponse);
+			
+			Date date = new Date();
+
+			Timestamp timeStamp = new Timestamp(date.getTime());
+
+			String mail = memberService.findByMemberId(companyId).getMemberMail();
+			
+			SimpleDateFormat dateFormatAll = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			 mailService.prepareAndSend(mail, "[FooDelicious 好煮意]\t" + dateFormatAll.format(timeStamp) + "\t已回覆您的問題",
+						 "\n問題：" + updatedProblemResponse.getProblemContent() + "\n回覆："
+						+ updatedProblemResponse.getProblemResponse());
+			
 			return "問題回覆成功";
 		}
 		return "問題回覆失敗。請重新來過。";

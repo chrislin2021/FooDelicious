@@ -11,7 +11,7 @@
 		新增商品 <span class="smallFontProduct">Add Product</span>
 	</h1>
 	<div class="main">
-		<form class="border col-md-12 rounded addProduct">
+		<form action="/companyProductsAdd" enctype="multipart/form-data" method="post" class="border col-md-12 rounded addProduct">
 
 			<div class="input-group textSet">
 				<label for="productCategories" class="col-md-2 col-form-label">商品分類
@@ -38,7 +38,7 @@
 			</div>
 			<hr />
 			<div class="input-group textSet">
-				<label for="" class="col-md-2 col-form-label">分類名稱 :</label>
+				<label for="productCategoriesName" class="col-md-2 col-form-label">分類名稱 :</label>
 				<div class="col-md-3">
 					<input type="text" class="form-control"
 						name="productCategoriesName" value="">
@@ -106,17 +106,25 @@
 						placeholder="公司編號" value="${userID}" />
 				</div>
 			</div>
-		</form>
-		<div class="input-group textSet buttonArea">
+			
+			<div class="row mb-2">
+				<label for="productSalesFigures" class="col-sm-2 col-form-label"></label>
+				<div class="col-sm-3">
+					<input type="hidden" class="form-control" value="0" name="productSalesFigures"
+						placeholder="銷貨量"/>
+				</div>
+			</div>
+		
+		<div class="input-group textSet buttonArea" style="margin:5px">
 			<div class="col-md-6">
-				<button type="reset" class="btn btn-outline-primary mt-3"
+				<button type="reset" class="btn btn-outline-danger mt-3"
 					id="resetProduct">重製</button>
 			</div>
 			<div class="col-md-6">
-				<button type="submit" class="btn btn-outline-danger mt-3"
+				<button type="submit" class="btn btn-outline-primary mt-3"
 					id="submitAddProduct">提交</button>
 			</div>
 		</div>
-
+	</form>
 	</div>
 </body>

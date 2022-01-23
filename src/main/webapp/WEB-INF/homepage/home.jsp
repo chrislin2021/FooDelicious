@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <div class="row" id="rowSelect">
-        <div class="col-12 col-md-2">
-            <div class="list-group">
-                <a href="/LoginSystem" class="list-group-item list-group-item-action">會員登入</a>
-                <a href="/Product" class="list-group-item list-group-item-action">前往商城</a>
-                <a href="#" class="list-group-item list-group-item-action">前往分享區</a>
-                <a href="/postArticle" class="list-group-item list-group-item-action">發表新文章</a>
-                <a href="/custService" class="list-group-item list-group-item-action">客服中心</a>
+        <div class="row" id="rowSelect">
+            <div class="col-12 col-md-2">
+                <div class="list-group">
+                    <a href="/LoginSystem" class="list-group-item list-group-item-action">會員登入</a>
+                    <a href="/Product" class="list-group-item list-group-item-action">前往商城</a>
+                    <a href="#" class="list-group-item list-group-item-action">前往分享區</a>
+                    <a href="/postArticle" class="list-group-item list-group-item-action">發表新文章</a>
+                    <a href="/customerService" class="list-group-item list-group-item-action">客服中心</a>
+                </div>
             </div>
         </div>
         <div class="col-12 col-md-9">

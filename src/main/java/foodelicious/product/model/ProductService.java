@@ -35,6 +35,10 @@ public class ProductService {
 		return productDao.findByType(categories);
 	}
 
+	public List<Product> findByProductKeywords(String productKeywords) {
+		return productDao.findByProductKeywords(productKeywords);
+	}
+	
 	//刪除
 	public void deleteByProductId(Long productId) {
 		productDao.deleteByProductId(productId);
@@ -43,7 +47,6 @@ public class ProductService {
 	public void saveProduct(Product product) {
 		 this.productDao.save(product);
 	}
-
 
 	
 }

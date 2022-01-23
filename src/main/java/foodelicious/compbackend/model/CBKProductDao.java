@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
 import foodelicious.compbackend.repository.CBKProductRepository;
+import foodelicious.mail.service.MailService;
 import foodelicious.product.model.Product;
 
 @Repository
@@ -26,10 +27,15 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	private CBKProductRepository cbkProdRepository;
 	
 	private CartService cartService;
+	
+	private MailService mailService;
+	
 
-	public CBKProductDao(final CBKProductRepository cbkProdRepository, CartService cartService) {
+	public CBKProductDao(final CBKProductRepository cbkProdRepository, CartService cartService, MailService mailService) {
 		this.cbkProdRepository = cbkProdRepository;
 		this.cartService = cartService;
+		this.mailService = mailService;
+	
 	}
 
 	@Autowired
@@ -78,8 +84,21 @@ public class CBKProductDao implements CBKProductDaoInterface {
 	// 更新商品
 	@Override
 	public String updateProduct(Long productId, Product product) {
+		
+		String message; 
 		Product newProduct = cbkProdRepository.findByProductId(productId);
+		
+		
+		
 		if (newProduct != null) {
+			
+			//舊價 vs 新價
+			if(newProduct.getProductPrice() > product.getProductPrice()) {
+				message = "在購物車的 "+ product.getProductName()+ " 商品價格降價了!! 趕快購買!";
+			}else {
+				message = "在購物車的 "+ product.getProductName()+ " 商品價格提高了! 還不快買?";
+			}
+
 			newProduct.setProductCompany(product.getProductCompany());
 			newProduct.setProductName(product.getProductName());
 			newProduct.setProductCategories_name(newProduct.getProductCategories_name());
@@ -90,6 +109,16 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			newProduct.setProductStatus(product.getProductStatus());
 			newProduct.setProductKeywords(product.getProductKeywords());
 			cbkProdRepository.save(newProduct);
+			
+			
+			List<CartBean> carts = cartService.selectAll();
+			for(CartBean cart: carts) {
+				if(cart.getProductId() == productId) {
+					String memberMail = cart.getMember().getMemberMail();
+					mailService.sendPriceChange(memberMail, message);
+				}
+			}
+			
 			return "商品更新成功!";
 		} else {
 

@@ -62,18 +62,18 @@
 					
 				</ul>
 			</li>
-			<li>
-				<div class="iocn-link">
-					<a href="#"> <i class='bx bx-bar-chart-alt-2'></i> <span
-						class="link_name">分析報表</span>
-					</a> <i class='bx bxs-chevron-down arrow'></i>
-				</div>
-				<ul class="sub-menu">
-					<li><a class="link_name" href="#">分析報表</a></li>
-					<li><a href="/companyBestSeller">暢銷商品</a></li>
-					<li><a href="#">銷售總額</a></li>
-				</ul>
-			</li>
+<!-- 			<li> -->
+<!-- 				<div class="iocn-link"> -->
+<!-- 					<a href="#"> <i class='bx bx-bar-chart-alt-2'></i> <span -->
+<!-- 						class="link_name">分析報表</span> -->
+<!-- 					</a> <i class='bx bxs-chevron-down arrow'></i> -->
+<!-- 				</div> -->
+<!-- 				<ul class="sub-menu"> -->
+<!-- 					<li><a class="link_name" href="#">分析報表</a></li> -->
+<!-- 					<li><a href="/companyBestSeller">暢銷商品</a></li> -->
+<!-- 					<li><a href="#">銷售總額</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</li> -->
 			<li><a href="#" class="problem"> <i class='bx bx-error-alt'></i>
 					<span class="link_name">問題回報</span>
 			</a>
@@ -81,18 +81,18 @@
 					<li><a class="problem" href="#">問題回報</a></li>
 				</ul></li>
 
-			<li><a href="#"> <i class='bx bxs-inbox'></i> <span
-					class="link_name">訊息</span>
-			</a>
-				<ul class="sub-menu blank">
-					<li><a class="link_name" href="#">訊息</a></li>
-				</ul></li>
-			<li>
+<!-- 			<li><a href="#"> <i class='bx bxs-inbox'></i> <span -->
+<!-- 					class="link_name">訊息</span> -->
+<!-- 			</a> -->
+<!-- 				<ul class="sub-menu blank"> -->
+<!-- 					<li><a class="link_name" href="#">訊息</a></li> -->
+<!-- 				</ul></li> -->
+<!-- 			<li> -->
 				<div class="profile-details">
 
 					<div class="profile-content">
 
-						<i class='bx bxs-log-out' id="logout"
+						<i style="cursor:pointer" class='bx bxs-log-out' id="logoutButton"
 							onclick="logout('${account}')"></i>
 					</div>
 

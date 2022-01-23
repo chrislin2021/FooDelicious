@@ -11,13 +11,13 @@
 	<h1 class="tableName titleName2" style="margin-left:10px">
 		問題回覆 <br> <span class="littleName">Problem Response</span>
 	</h1>
-	<div style="margin:10px; border:1px black solid; width:fit-content" >
+	<div class="responseTable">
 		<div style="margin: 10px">
 			<h4>
 				<strong>詳細問題內容:</strong>
 			</h4>
 			<textarea name="problem-content" rows="8" cols="70" placeholder=""
-				id="problem-content" readonly style="background-color: #DDF6FC"></textarea>
+				id="problem-content" readonly style="background-color: #FFFFCE"></textarea>
 
 
 		</div>

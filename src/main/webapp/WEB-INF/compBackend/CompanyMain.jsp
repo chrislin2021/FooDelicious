@@ -24,7 +24,7 @@
 				<div class="row gx-5 gy-3">
 					<div class="col-12 col-lg-9">
 
-						<div>&emsp;&emsp;我們提供來自於歐洲新鮮直運的產品。以及一堆雜七雜八的奇怪東東</div>
+						<div>&emsp;&emsp;&emsp;我們提供來自於歐洲新鮮直運的產品，以及台灣國產的限量廚具用品。</div>
 					</div>
 					<!--//col-->
 

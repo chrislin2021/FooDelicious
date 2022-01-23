@@ -36,7 +36,7 @@ public class CompanyBackEndController {
 
 	@GetMapping(path = "/companyProductsAdd")
 	public String companyProductAdd() {
-		return "app.CompanyProductAdd";
+		return "app.CompanyProductAdd2";
 	}
 	
 	@GetMapping(path = "/companyProductsAdd2")
