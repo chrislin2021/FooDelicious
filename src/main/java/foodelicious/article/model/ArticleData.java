@@ -1,24 +1,25 @@
 package foodelicious.article.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
-import org.springframework.stereotype.Component;
-
 @Entity
 @Table(name = "article_data")
-@Component
 public class ArticleData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,17 +28,16 @@ public class ArticleData implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "article_id")
 	private int article_id;
-	
-	@Size(min = 15, max = 255, message = "內容不得小於15個字唷")
+
+	@Size(min = 15, message = "內容不得小於15個字唷")
 	@Column(name = "article")
 	private String article;
 
-
-	//目前沒用到
+	// 目前沒用到
 	@Column(name = "tag_name")
 	private String tag_name;
 
-	//沒用到 但先寫
+	// 沒用到 但先寫
 //	@Column(name = "releaseOrder")
 //	private int releaseOrder;// 該討論串的發布順序 編號1為第一篇文章
 
@@ -48,6 +48,10 @@ public class ArticleData implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_share_id", referencedColumnName = "share_id")
 	private ShareArea shareArea;
+
+	// 與MsgArea是一對多關係
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "articleData", cascade = CascadeType.ALL)
+	private Set<MsgArea> msgAreas = new LinkedHashSet<MsgArea>();
 
 	public ArticleData() {
 	}
@@ -99,6 +103,5 @@ public class ArticleData implements Serializable {
 	public void setArticle_id(int article_id) {
 		this.article_id = article_id;
 	}
-	
-	
+
 }

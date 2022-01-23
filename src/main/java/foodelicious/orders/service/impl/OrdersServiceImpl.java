@@ -20,7 +20,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	public OrdersBean insertOrders(OrdersBean ordersBean) {
-		return ordersRepository.save(ordersBean);
+		return ordersRepository.saveAndFlush(ordersBean);
 	}
 
 	@Override
@@ -29,17 +29,23 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public List<OrdersBean> selectOrders(Long memberId) {
-		return ordersRepository.findAllByMemberId(memberId);
-	}
-
 	public OrdersBean selectOrdersId(Long ordersId) {
 		return ordersRepository.findByOrdersId(ordersId);
 	}
 
 	@Override
+	public List<OrdersBean> selectOrders(Long memberId) {
+		return ordersRepository.findAllByMemberId(memberId);
+	}
+
+	@Override
 	public List<OrdersBean> selectAll() {
 		return ordersRepository.findAll();
+	}
+
+	@Override
+	public List<OrdersBean> selectIdAndStatus(Long memberId, String ordersState) {
+		return ordersRepository.findAllByMemberIdAndOrdersState(memberId, ordersState);
 	}
 
 }

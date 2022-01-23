@@ -10,10 +10,12 @@ public interface OrdersService {
 
 	OrdersBean updateOrders(OrdersBean ordersBean);
 
-	List<OrdersBean> selectOrders(Long memberId);
-
 	OrdersBean selectOrdersId(Long ordersId);
 
+	List<OrdersBean> selectOrders(Long memberId);
+
 	List<OrdersBean> selectAll();
+
+	List<OrdersBean> selectIdAndStatus(Long ordersId, String ordersState);
 
 }

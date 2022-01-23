@@ -41,7 +41,7 @@ public class CartBean implements Serializable {
 	@Column(name = "quantity")
 	private Integer quantity;
 
-	@JsonIgnore // 不寫會互相對應變成無限迴圈
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
@@ -61,6 +61,12 @@ public class CartBean implements Serializable {
 		this.productId = productId;
 		this.quantity = quantity;
 		this.member = member;
+		this.product = product;
+	}
+
+	public CartBean(Integer quantity, Product product) {
+		super();
+		this.quantity = quantity;
 		this.product = product;
 	}
 

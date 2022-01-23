@@ -11,24 +11,9 @@ public class PageController {
 	// 首頁
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage() {
-		return "app.home";
+		return "app.index";
 	}
 
-	@GetMapping("/LoginSystem")
-	public String toMemberPage() {
-		return "app.LoginSystem";
-	}
-	
-	@GetMapping("/RegisterPage")
-	public String registerPage() {
-		return "app.RegisterPage";
-	}
-
-	// 轉換頁面用 Login->register
-	@GetMapping("/goregister")
-	public String goRegistergepage() {
-		return "app.RegisterPage";
-	}
 
 	@GetMapping("/postArticle")
 	public String goPostArticle() {

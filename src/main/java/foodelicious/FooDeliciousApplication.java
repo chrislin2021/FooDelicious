@@ -28,5 +28,6 @@ public class FooDeliciousApplication {
 		tilesViewResolver.setViewClass(TilesView.class);
 		return tilesViewResolver;
 	}
-	
+
+
 }

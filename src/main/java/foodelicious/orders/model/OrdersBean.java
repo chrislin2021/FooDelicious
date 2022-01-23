@@ -1,9 +1,10 @@
 package foodelicious.orders.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,12 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import foodelicious.member.model.Member;
 
 @Entity
 @Table(name = "orders")
+@Component
 public class OrdersBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,36 +38,51 @@ public class OrdersBean implements Serializable {
 	@Column(name = "member_id")
 	private Long memberId;
 
-	@Column(name = "orders_note")
-	private String ordersNote;
-
 	@Column(name = "orders_date")
-	private LocalDateTime ordersDate;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private Timestamp ordersDate;
 
-	@Column(name = "orders_total")
-	private Integer ordersTotal;
+	@Column(name = "orders_name")
+	private String ordersName;
+
+	@Column(name = "orders_phone")
+	private String ordersPhone;
+
+	@Column(name = "orders_address")
+	private String ordersAddress;
 
 	@Column(name = "orders_state")
 	private String ordersState;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Column(name = "orders_total")
+	private Integer ordersTotal;
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "member_id", insertable = false, updatable = false)
 	private Member member;
+
+	@Transient
+	@OneToMany(mappedBy = "ordersBean")
+	private Set<OrdersDetailBean> orderDetail = new LinkedHashSet<OrdersDetailBean>();
 
 	public OrdersBean() {
 		super();
 	}
 
-	public OrdersBean(Long ordersId, Long memberId, String ordersNote, LocalDateTime ordersDate, Integer ordersTotal,
-			String ordersState, Member member) {
+	public OrdersBean(Long ordersId, Long memberId, Timestamp ordersDate, String ordersName, String ordersPhone,
+			String orderAddress, String ordersState, Integer ordersTotal, Member member,
+			Set<OrdersDetailBean> orderDetail) {
 		super();
 		this.ordersId = ordersId;
 		this.memberId = memberId;
-		this.ordersNote = ordersNote;
 		this.ordersDate = ordersDate;
-		this.ordersTotal = ordersTotal;
+		this.ordersName = ordersName;
+		this.ordersPhone = ordersPhone;
+		this.ordersAddress = orderAddress;
 		this.ordersState = ordersState;
+		this.ordersTotal = ordersTotal;
 		this.member = member;
+		this.orderDetail = orderDetail;
 	}
 
 	public Long getOrdersId() {
@@ -78,28 +101,36 @@ public class OrdersBean implements Serializable {
 		this.memberId = memberId;
 	}
 
-	public String getOrdersNote() {
-		return ordersNote;
-	}
-
-	public void setOrdersNote(String ordersNote) {
-		this.ordersNote = ordersNote;
-	}
-
-	public LocalDateTime getOrdersDate() {
+	public java.sql.Timestamp getOrdersDate() {
 		return ordersDate;
 	}
 
-	public void setOrdersDate(LocalDateTime ordersDate) {
+	public void setOrderDate(Timestamp ordersDate) {
 		this.ordersDate = ordersDate;
 	}
 
-	public Integer getOrdersTotal() {
-		return ordersTotal;
+	public String getOrdersName() {
+		return ordersName;
 	}
 
-	public void setOrdersTotal(Integer ordersTotal) {
-		this.ordersTotal = ordersTotal;
+	public void setOrdersName(String ordersName) {
+		this.ordersName = ordersName;
+	}
+
+	public String getOrdersPhone() {
+		return ordersPhone;
+	}
+
+	public void setOrdersPhone(String ordersPhone) {
+		this.ordersPhone = ordersPhone;
+	}
+
+	public String getOrdersAddress() {
+		return ordersAddress;
+	}
+
+	public void setOrdersAddress(String ordersAddress) {
+		this.ordersAddress = ordersAddress;
 	}
 
 	public String getOrdersState() {
@@ -110,6 +141,14 @@ public class OrdersBean implements Serializable {
 		this.ordersState = ordersState;
 	}
 
+	public Integer getOrdersTotal() {
+		return ordersTotal;
+	}
+
+	public void setOrdersTotal(Integer ordersTotal) {
+		this.ordersTotal = ordersTotal;
+	}
+
 	public Member getMember() {
 		return member;
 	}
@@ -118,11 +157,12 @@ public class OrdersBean implements Serializable {
 		this.member = member;
 	}
 
-	@Override
-	public String toString() {
-		return "OrdersBean [ordersId=" + ordersId + ", memberId=" + memberId + ", ordersNote=" + ordersNote
-				+ ", ordersDate=" + ordersDate + ", ordersTotal=" + ordersTotal + ", ordersState=" + ordersState
-				+ ", member=" + member + "]";
+	public Set<OrdersDetailBean> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(Set<OrdersDetailBean> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 }

@@ -2,27 +2,18 @@ package foodelicious.article.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import foodelicious.member.model.Account;
+import foodelicious.member.model.Member;
+
+
 
 //import foodelicious.member.model.Account;
 
@@ -73,11 +64,16 @@ public class ShareArea implements Serializable {
 
 	@OneToOne(mappedBy = "shareArea")
 	private ArticleData articleData;
+	
+	@OneToMany(mappedBy = "shareArea", fetch = FetchType.LAZY)
+	private Set<LikeOrNot> likeOrNot = new LinkedHashSet<LikeOrNot>();
 
-	// 多對一 這邊沒有casecade連動 所以要注意
+	// 多對一 這邊沒有cascade連動 所以要注意
+
+	//=========引用到舊的Account先註解===========
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_account_id")
-	private Account account;
+	private Member member;
 
 	public ShareArea() {
 	}
@@ -130,12 +126,13 @@ public class ShareArea implements Serializable {
 		this.articleData = articleData;
 	}
 
-	public Account getAccount() {
-		return account;
+	
+	public Member getMember() {
+		return member;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public int getShare_id() {
@@ -153,6 +150,12 @@ public class ShareArea implements Serializable {
 	public void setShare_id(int share_id) {
 		this.share_id = share_id;
 	}
-	
-	
+
+	public Set<LikeOrNot> getLikeOrNot() {
+		return likeOrNot;
+	}
+
+	public void setLikeOrNot(Set<LikeOrNot> likeOrNot) {
+		this.likeOrNot = likeOrNot;
+	}
 }
