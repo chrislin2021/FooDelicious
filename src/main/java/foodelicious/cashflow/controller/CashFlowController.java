@@ -10,5 +10,9 @@ public class CashFlowController {
 	public String CashflowList() {
 		return "app.CashflowList";
 	}
+//	@GetMapping(path="/ecpay")
+//	public String Ecpay() {
+//		return "app.Ecpay";
+//	}
 	
 }

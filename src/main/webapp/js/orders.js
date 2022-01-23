@@ -57,7 +57,8 @@ $(".checkout").on("click", function() {
 			})
 		}
 	} else {
-		window.location.href = "/ecpay";
+		window.location.href = "/CashflowList";
+//		window.location.href = "/Ecpay";
 	}
 })
 

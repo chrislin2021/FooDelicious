@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-<form id="idFormAioCheckOut" method="post" action="Ecpay.php">
+<form id="idFormAioCheckOut" method="get" action="Ecpay.java">
     <label>動作 (Action):<input type="text" name="ServiceURL" value="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" class="form-control"/></label>
     <label>編號 (MerchantTradeNo):
         <input type="text" name="MerchantTradeNo" value="oikidA0000001" class="form-control"/>
@@ -43,7 +43,7 @@
         商品名稱以符號 # 分
     </label>
     <label class="col-xs-12">回傳網址 (ReturnURL):
-        <input type="text" name="ReturnURL" value="http://tn.sly-ha.com.tw/demo/hoyo/ECPay.php" class="form-control"/>
+        <input type="text" name="ReturnURL" value="https://payment-stage.ecpay.com.tw/Cashier/" class="form-control"/>
     </label>
     <label class="col-xs-12">付款方式 (ChoosePayment):
         <input type="text" name="ChoosePayment" value="ALL"/>

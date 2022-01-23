@@ -1,63 +1,39 @@
 package foodelicious.cashflow.restcontroller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
-import org.springframework.http.MediaType;
+
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import ecpay.payment.integration.AllInOne;
-import ecpay.payment.integration.domain.AioCheckOutALL;
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
-import foodelicious.cashflow.model.CashflowAddressBean;
 import foodelicious.cashflow.model.EcPayBean;
 import foodelicious.cashflow.service.CashflowAddressService;
-
+import foodelicious.ecpay.payment.integration.AllInOne;
+import foodelicious.ecpay.payment.integration.domain.AioCheckOutALL;
+import foodelicious.ecpay.payment.integration.domain.AioCheckOutOneTime;
+import foodelicious.ecpay.payment.integration.domain.InvoiceObj;
 import foodelicious.mail.service.MailService;
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
 import foodelicious.orders.model.OrdersBean;
-import foodelicious.orders.model.OrdersDetailBean;
 import foodelicious.orders.service.OrdersDetailService;
 import foodelicious.orders.service.OrdersService;
 import foodelicious.product.model.Product;
@@ -66,34 +42,35 @@ import foodelicious.product.model.Product;
 @Transactional
 public class CashFlowRestController {
 
-	@PersistenceContext
-	EntityManager em;
-
 	private HttpSession session;
 	private CartService cartService;
 	private MailService mailService;
-//	private CashflowOrdersService cashflowordersService;
 	private OrdersService ordersService;
 	private MemberService memberService;
 	private OrdersDetailService ordersDetailService;
 	private CashflowAddressService cashflowAddressService;
-//	private CashflowOrdersListService cashflowOrdersListService;
-
-	public CashFlowRestController(EntityManager em, HttpSession session, CartService cartService,
-			MailService mailService,OrdersService ordersService,OrdersDetailService ordersDetailService,
-			 MemberService memberService,
-			CashflowAddressService cashflowAddressService) {
+	public static AllInOne all;
+	
+	public static void main(String[] args) {
+		initial();
+	}
+	private static void initial(){
+		all = new AllInOne("");
+	}
+	
+	public CashFlowRestController(HttpSession session, CartService cartService,
+			MailService mailService, OrdersService ordersService, OrdersDetailService ordersDetailService,
+			MemberService memberService, CashflowAddressService cashflowAddressService) {
 		super();
-		this.em = em;
+
 		this.session = session;
 		this.cartService = cartService;
 		this.mailService = mailService;
 		this.ordersService = ordersService;
-//		this.cashflowordersService = cashflowordersService;
 		this.memberService = memberService;
 		this.cashflowAddressService = cashflowAddressService;
-		this.ordersDetailService =ordersDetailService;
-//		this.cashflowOrdersListService = cashflowOrdersListService;
+		this.ordersDetailService = ordersDetailService;
+	
 	}
 
 	@ResponseBody
@@ -102,17 +79,13 @@ public class CashFlowRestController {
 		List<HashMap<Object, Object>> tables = new ArrayList<HashMap<Object, Object>>();
 		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
 		List<OrdersBean> orders = ordersService.selectOrders((Long) session.getAttribute("userID"));
-//		Long userID = CashflowAddressService.useIdFindShareArea(id).get(0).getFk_account_id();
-//		String title = articleService.useIdFindShareArea(id).get(0).getArticle_title();
-//		String userMail = memberService.findByMemberId(userID).getMemberMail();
 
 		for (CartBean cart : carts) {
-			
 			Product product = null;
 			if (productId == cart.getProductId()) {
 				product = cart.getProduct();
 			}
-			for (OrdersBean order : orders) {		
+			for (OrdersBean order : orders) {
 				HashMap<Object, Object> table = new HashMap<Object, Object>();
 				table.put("memberId", cart.getMemberId());
 				table.put("memberName", cart.getMember().getMemberName());
@@ -125,63 +98,80 @@ public class CashFlowRestController {
 				table.put("productprice", cart.getProduct().getProductPrice());
 				table.put("orderId", order.getOrdersId());
 				table.put("orderTotal", order.getOrdersTotal());
-				em.close();
 				tables.add(table);
-//				mailService.prepareAndSend(userMail,"請輸入信箱@gmail.com", "title", "Sample mail subject");
 			}
+
 		}
-		
 		return tables;
+	}
+
+	@PostMapping("/address.send")
+	public void sendmail() {
+		Member member = memberService.findByMemberId((Long) session.getAttribute("userID"));
 		
+		Date date = new Date();
+		Timestamp timeStamp = new Timestamp(date.getTime());
+		String memberName = member.getMemberName();
+
+		String memberMail = member.getMemberMail(); 
+		String memberPhone = member.getMemberPhone();
+		String memberAddress = member.getMemberAddress();
+	
+
+		String url = "http://localhost:8080/memberOrders";
+
+		SimpleDateFormat dateFormatAll = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		mailService.prepareAndSend(memberMail, "[FooDelicious]\t" + dateFormatAll.format(timeStamp) + "\t已收到您的訂單",
+				"親愛的" + memberName + "先生/小姐，感謝您的訂單！\n以下是您的訂單資訊：\n收件人姓名：" + memberName + "\n收件人電話："
+						+ memberPhone + "\n寄貨地址：" + memberAddress + "\n訂單金額：NT$:"
+						+ "元\n前往查看訂單詳細資訊：" + url);
 		
 	}
-	
+
 	@PostMapping("/address.insert")
 	public void postAddress(@RequestBody Map<String, String> params) {
-		System.out.println("======================================================");
-		System.out.println(params.get("commonaddress"));
+//		System.out.println("======================================================");
+//		System.out.println(params.get("commonaddress"));
 //		Long id = (Long) session.getAttribute("userID");
 //		System.out.println(id);
 		cashflowAddressService.pushAddress(params);
 	}
-	
-	
-//	@PostMapping("/address/insert")
-//	public String saveAddress(){
-//		List<CartBean> carts = cartService.selectItem((Long) session.getAttribute("userID"));
-//		
-//		
-//		for (CartBean cart : carts) {
-//		CashflowAddressBean cashflowAddressBean = new CashflowAddressBean();
-//		cashflowAddressBean.setMemberId((Long) session.getAttribute("userID"));
-//		cashflowAddressBean.setAddressId(addressId);
-//		cashflowAddressBean.setMemberAddress(cart.getMember().getMemberAddress());
-//		cashflowAddressBean.setCommonAddress(commonAddress);
-//		
-//		cashflowAddressService.save(commonAddress);
-//		}	
-//	}
-	
-	
-	@GetMapping("/ecpay")
-	public EcPayBean pay() {
+
+	@PostMapping("/Ecpay")
+	public EcPayBean  aioCheckOutALL(HttpServletRequest request) {
 		AioCheckOutALL aio = new AioCheckOutALL();
-		AllInOne aioOne = new AllInOne("");
+//		AllInOne aioOne = new AllInOne("");
 		EcPayBean ecpay = new EcPayBean();
+		
 		aio.setMerchantID("2000132");
-		aio.setMerchantTradeNo("FoodeliciousYY252" );
-		aio.setMerchantTradeDate("20220127");
-		aio.setTotalAmount(String.valueOf(session.getAttribute("priceTotal")));
+		aio.setMerchantTradeNo("foodelicious0001");
+		aio.setMerchantTradeDate("2022/01/27");
+		aio.setTotalAmount("1000");
 		aio.setTradeDesc("test shopping");
-		aio.setItemName("foodelicious");
-		aio.setReturnURL("http://localhost:8080/CashflowList");
-		aio.setOrderResultURL("http://localhost:8080/Order/order/EcpayOrder");
-		ecpay.setHi(aioOne.aioCheckOut(aio, null));
+		aio.setItemName("Product");
+		aio.setReturnURL("http://localhost:8080");
+		aio.setNeedExtraPaidInfo("N");
+		ecpay.setHi(all.aioCheckOut(aio, null));
+//		String form = all.aioCheckOut(aio, null);
 		return ecpay;
 		
+//		aio.setOrderResultURL("http://localhost:8080/Order/order/EcpayOrder");
+//		AioCheckOutOneTime obj = new AioCheckOutOneTime();
+////		obj.setMerchantTradeNo(orders.getUuid());
+//		Date date = new Date();
+//		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		System.out.println(dt1.format(date));
+//		
+//		InvoiceObj invoiceObj = new InvoiceObj();
+//	invoiceObj.setCustomerName(String.valueOf(session.getAttribute("memberName")));
+//	invoiceObj.setCustomerPhone(String.valueOf(session.getAttribute("memberPhone")));
+//	invoiceObj.setCustomerEmail(String.valueOf(session.getAttribute("memberEmail")));
+//	String form = aioOne.aioCheckOut(obj, invoiceObj);
+////	String form = aioOne.aioCheckOut(obj, null);
+//	return form;
 	}
-	
-	
+
 //	// 發送請求給綠界
 //	@PostMapping(value = "/toPayECpay", consumes = MediaType.APPLICATION_JSON_VALUE)
 //	@ResponseBody
@@ -203,10 +193,7 @@ public class CashFlowRestController {
 //		ecpay.setHi(aioOne.aioCheckOut(aio, null));
 //		return ecpay;
 //	}
-	
 
-	
-	
 //	// 0709給綠界的
 //	@PostMapping("order/EcpayOrder")
 //	public String getEcpayOrder(Model model, @RequestParam("RtnCode") int RtnCode,
@@ -269,5 +256,5 @@ public class CashFlowRestController {
 //		return "order/OrderList";
 //
 //	}
-	
+
 }

@@ -21,7 +21,7 @@ function showList() {
 					str += '<td>' + cart.member.memberMail + '</td>';
 					str += '<td>' + cart.member.memberAddress + '</td>';
 					str += '<td>' + cart.member.memberId + '</td>';
-					str += '<td>' + cart.order.ordersId + '</td>'
+					str += '<td>' + cart.orders.ordersId + '</td>'
 				}
 				$("#cartList").html(str);
 			}
@@ -52,18 +52,26 @@ function showList() {
 
 
 function listComfirm() {
-		
-	var postAddress = {		
+
+	var postAddress = {
 		commonaddress: $("#commonaddress").val()
 	};
-	console.log(postAddress)
+
 	$.ajax({
 		url: "/address.insert",
 		data: JSON.stringify(postAddress),
 		type: "POST",
 		contentType: "application/json;charset=utf-8",
-		success:function(){
-			alert("成功了")
+		success: function() {
+
+		}
+	});
+	$.ajax({
+		url: "/address.send",
+		type: "POST",
+		contentType: "application/json;charset=utf-8",
+		success: function() {
+
 		}
 	});
 	$.ajax({
@@ -87,14 +95,14 @@ function listComfirm() {
 			showItem();
 		}
 	})
-//	$.ajax({
-//		url: "/shoppingCart/CashflowList2",
-//		type: "GET",
-//		success: function countDown() {
-//			setTimeout("location.href ='http://localhost:8080'", 2500)			
-//		}
-//
-//	})
+	$.ajax({
+		url: "/shoppingCart/CashflowList2",
+		type: "GET",
+		success: function countDown() {
+			setTimeout("location.href ='http://localhost:8080'", 2500)
+		}
+
+	})
 }
 
 

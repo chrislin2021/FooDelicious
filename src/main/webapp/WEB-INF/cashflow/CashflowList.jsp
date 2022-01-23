@@ -39,9 +39,7 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							
-				</c:forEach>
-				<c:forEach var="carts" items="${carts}" begin="0" end="0">
-					<th>訂單編號 : <td>${orderId}
+
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -89,7 +87,7 @@
 					<c:forEach var="carts" items="${carts}" begin="0" end="0">
 						<tr >
 							<th>姓名&nbsp;<input id="ReceiverName" name="ReceiverName"
-								type="text" size="4" maxlength="120"
+								type="text" size="15" maxlength="120"
 								value="${carts.member.memberName}">
 							
 							
