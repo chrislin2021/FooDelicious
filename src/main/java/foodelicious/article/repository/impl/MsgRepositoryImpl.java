@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.article.container.MessageRowMapper;
 import foodelicious.article.model.ArticleData;
@@ -21,6 +22,7 @@ import foodelicious.article.repository.MsgRepository;
 import foodelicious.member.model.Member;
 
 @Repository
+@Transactional
 public class MsgRepositoryImpl implements MsgRepository {
 
 	@PersistenceContext

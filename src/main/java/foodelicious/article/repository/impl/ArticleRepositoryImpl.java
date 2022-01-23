@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.article.container.ArticleRowMapper;
 import foodelicious.article.container.ShareAreaRowMapper;
@@ -23,6 +24,7 @@ import foodelicious.article.service.MsgService;
 import foodelicious.member.model.Member;
 
 @Repository
+@Transactional
 public class ArticleRepositoryImpl implements ArticleRepository {
 	@PersistenceContext
 	EntityManager em;
@@ -110,7 +112,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 		hql = "DELETE FROM MsgArea WHERE fk_article_id = :articleID";
 		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
 		
-		hql = "DELETE FROM ArticleData WHERE article_id = :articleID";
+		hql = "DELETE FROM ArticleData WHERE fk_share_id = :articleID";
 		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
 		
 		hql = "DELETE FROM ShareArea WHERE share_id = :articleID";
@@ -179,7 +181,12 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
 	@Override
 	public String articleContent(Integer id) {
-		return em.find(ArticleData.class, id).getArticle();
+		String hql = "SELECT * FROM article_data WHERE fk_share_id = :id";		
+		Map<String, Object> AllData = new HashMap<>();
+		AllData.put("id", id);
+		List<ArticleData> list = namedParameterJdbcTemplate.query(hql, AllData, new ArticleRowMapper());
+		list.get(0).getArticle();
+		return list.get(0).getArticle();
 	}
 
 	@Override
