@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,10 +66,13 @@ public class CustomerServiceController {
 		return customerServiceServiceImpl.addProblem(requestObject); //回傳service層addProblem function處理的結果
 	}
 	
-	@ResponseBody
-	@PostMapping("/query") //查詢留言
-	public List<CustomerService> queryProblem(@RequestBody Map<String, String> params) { 
-		return customerServiceServiceImpl.queryProblem(params.get("email"));
+	@GetMapping("/query/{email}") //查詢留言
+	public String queryProblem(@PathVariable(value = "email", required = false) String email, Model model) { 
+		var cslist = customerServiceServiceImpl.queryProblem(email);
+		model.addAttribute("abc", cslist);
+//		System.out.println(cslist);
+//		System.out.println("hello");
+		return "app.MessageBoard";
 	}
 	
 	@ResponseBody

@@ -333,73 +333,8 @@ h1{
 	<h2>問答紀錄</h2>
 	<br />
 
-    <div class="container">
-        <!--Topic Section-->
-        <div class="topic-container">
-            <!--Original thread-->
-<!--             <div class="head"> -->
-<!--                 <div class="authors">Author</div> -->
-<!--                 <div class="content">Topic: random topic (Read 1325 Times)</div> -->
-<!--             </div> -->
-
-            <div class="body">
-<!--                 <div class="authors"> -->
-<!--                     <div class="username"><a href="">Username</a></div> -->
-<!--                     <div>Role</div> -->
-<!--                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt=""> -->
-<!--                 </div> -->
-                <div class="content">
-                    Just a random content of a random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
-                    <br>
-                    <div class="comment">
-                        <button onclick="showComment()">編輯留言</button>
-                        <button onclick="showComment()">刪除留言</button>
-                        <button onclick="location.href = 'http://localhost:8080/customerService/ReplyPage';">客服回覆</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Comment Area-->
-<!--         <div class="comment-area hide" id="comment-area"> -->
-<!--             <textarea name="comment" id="" placeholder="comment here ... "></textarea> -->
-<!--             <input type="submit" value="submit"> -->
-<!--         </div> -->
-
-        <!--Comments Section-->
-        <div class="comments-container">
-            <div class="body">
-<!--                 <div class="authors"> -->
-<!--                     <div class="username"><a href="">AnotherUser</a></div> -->
-<!--                     <div>Role</div> -->
-<!--                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt=""> -->
-<!--                 </div> -->
-                <div class="content">
-                    Just a comment of the above random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
-                    <br>
-                    <br>
-                    <div class="comment">
-                        <button onclick="showReply()">編輯留言</button>
-                        <button onclick="showComment()">刪除留言</button>
-                        <button onclick="location.href = 'http://localhost:8080/customerService/ReplyPage';">客服回覆</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!--Reply Area-->
-<!--         <div class="comment-area hide" id="reply-area"> -->
-<!--             <textarea name="reply" id="" placeholder="reply here ... "></textarea> -->
-<!--             <input type="submit" value="submit"> -->
-<!--         </div> -->
-
         <!--Another Comment With replies-->
+        <c:forEach var="message" items="${abc}">
         <div class="comments-container">
             <div class="body">
 <!--                 <div class="authors"> -->
@@ -408,12 +343,15 @@ h1{
 <!--                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt=""> -->
 <!--                 </div> -->
                 <div class="content">
-                    Just a comment of the above random topic.
-                    <br>To see how it looks like.
-                    <br><br>
-                    Nothing more and nothing less.
-                    <br>
-                    <br>
+                    
+                        ${message.getCstm_name()}
+                        <br />
+                        ${message.getProblem_Type()}
+                        <br />
+                        ${message.getProblem_Text()}
+                        <br />
+                        ${message.getProblem_postTime()}
+                    
                     <div class="comment">
                         <button onclick="showReply()">編輯留言</button>
                     	<button onclick="showComment()">刪除留言</button>
@@ -422,7 +360,7 @@ h1{
                 </div>
             </div>
         </div>
-        
+        </c:forEach>
         <!--Reply Area-->
 <!--         <div class="comment-area hide" id="reply-area"> -->
 <!--             <textarea name="reply" id="" placeholder="reply here ... "></textarea> -->

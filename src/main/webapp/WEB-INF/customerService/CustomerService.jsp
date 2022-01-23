@@ -164,7 +164,7 @@ h2 {
 	
 <!-- 		<input type="button" color="#FFD700" value="查詢問答紀錄" onclick="toMessageBoard();" -->
 <!-- 		style="height: 50px; width: 130px"> -->
-	<button onclick="location.href = 'http://localhost:8080/customerService/MessageBoard';" 
+	<button onclick="queryMessageHistory();" 
 	id="toMessageBoard" class="float-right" style="height: 42px; width: 130px; 
 	background-color:#B8DBFB; color:black; position:center; border-radius:4px; border:none; 
 	font-weight:bold">查詢問答紀錄</button>
@@ -309,7 +309,35 @@ h2 {
 					alert("送出失敗，請重新輸入");
 				}
 			});
-
+			
+		}
+		
+		
+		function queryMessageHistory(){
+			var email = $("#email").val();
+			location.href = "/customerService/query/" + email;
+// 			var queryData = {
+// 					"email" : email,
+// 				};
+			
+// 			var ajaxRequest2 = $.ajax({
+// 				type : "POST",
+// 				url : "/customerService/query",
+// 				dataType : "json",
+// 				data : JSON.stringify(queryData), //formdata1 + '&' + formdata2
+// 				contentType : "application/json;charset=utf-8",
+// 			// 				async : false,
+// 			// 				cache : false,
+// 			// 				contentType : false,
+// 			// 				processData : false,
+// 			});
+			
+// 			ajaxRequest2.done(function(response){
+// 				console.log("post ok");
+// 				console.log(response);
+		
+// 				$(document.body).text(response);
+// 			});
 		}
 		
  	</script>
