@@ -65,12 +65,7 @@ public class ArticleController {
 	@PostMapping("/postarticle.controller")
 	public void postArticle(@RequestBody Map<String, String> params, HttpSession session) {
 
-//		System.out.println(params);
-//		System.out.println(params.get("article"));
-//		System.out.println(params.get("classify"));
 		Long id = (Long) session.getAttribute("userID");
-//		System.out.println(articleEMDaoService.findAll());
-//		System.out.println(id);
 		articleService.pushArticle(params, id);
 	}
 

@@ -34,8 +34,8 @@ public class ArticleData implements Serializable {
 	private String article;
 
 	// 目前沒用到
-	@Column(name = "tag_name")
-	private String tag_name;
+//	@Column(name = "tag_name")
+//	private String tag_name;
 
 	// 沒用到 但先寫
 //	@Column(name = "releaseOrder")
@@ -64,13 +64,13 @@ public class ArticleData implements Serializable {
 		this.article = article;
 	}
 
-	public String getTag_name() {
-		return tag_name;
-	}
-
-	public void setTag_name(String tag_name) {
-		this.tag_name = tag_name;
-	}
+//	public String getTag_name() {
+//		return tag_name;
+//	}
+//
+//	public void setTag_name(String tag_name) {
+//		this.tag_name = tag_name;
+//	}
 
 //	public int getReleaseOrder() {
 //		return releaseOrder;

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import foodelicious.article.container.ArticleRowMapper;
 import foodelicious.article.container.ShareAreaRowMapper;
@@ -24,7 +23,6 @@ import foodelicious.article.service.MsgService;
 import foodelicious.member.model.Member;
 
 @Repository
-@Transactional
 public class ArticleRepositoryImpl implements ArticleRepository {
 	@PersistenceContext
 	EntityManager em;
