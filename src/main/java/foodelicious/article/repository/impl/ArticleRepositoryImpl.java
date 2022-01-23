@@ -107,6 +107,9 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 			hql = "DELETE FROM LikeOrNot WHERE fk_articleID = :articleID";
 			em.createQuery(hql).setParameter("articleID", id).executeUpdate();
 		}
+		hql = "DELETE FROM MsgArea WHERE fk_article_id = :articleID";
+		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
+		
 		hql = "DELETE FROM ArticleData WHERE article_id = :articleID";
 		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
 		

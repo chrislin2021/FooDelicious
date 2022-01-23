@@ -124,7 +124,7 @@ public class ArticleController {
 	@GetMapping("/intIDFindAll/{id}")
 	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id, Model model) {
 		session.setAttribute("ArticleId", id);
-		System.out.println(articleService.articleContent(id));
+		//System.out.println(articleService.articleContent(id));
 		model.addAttribute("articleContent", articleService.articleContent(id));
 		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";
