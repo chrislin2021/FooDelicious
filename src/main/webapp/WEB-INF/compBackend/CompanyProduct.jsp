@@ -16,7 +16,7 @@
     </select>
     <input class="keyWord keyWord1 searchBox" type="text" name="accKeyWord" placeholder="請輸入關鍵字...">
     <input id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 " type="button" value="Search" />
-    <span id="total" style="margin-left:100px"> </span>
+    <span id="total" style="margin-left:30px"> </span>
 </div>
 
 	<ul id="selectPage" class="nav nav-tabs">

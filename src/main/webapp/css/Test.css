@@ -180,7 +180,8 @@
 .sidebar .profile-details .profile-content{
   display: flex;
   align-items: center;
-  margin-left:34%;
+  margin-left:45%;
+ 
 }
 .sidebar .profile-details .profile_name,
 .sidebar .profile-details .job{
@@ -386,16 +387,18 @@ h1.tableName{
 	
 }
 
-#logout{
+#logoutButton{
+	color:white;
+	cursor: url;
 	
-	cursor: pointer;
+	
 }
 
 /* product add 2 */
 
 h1.tableNameProduct{
 	margin-top:10px;
-	margin-left:30%;
+	margin-left:10%;
 	font-size:30px;
 	font-weight:bold;
 }
@@ -409,7 +412,7 @@ h1.tableNameProduct{
 }
 
 .main{
-    margin: auto;
+    margin-left:10%;
     margin-top: 40px;
     width: 650px;
     min-width: 650px;

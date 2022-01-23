@@ -81,18 +81,18 @@
 					<li><a class="problem" href="#">問題回報</a></li>
 				</ul></li>
 
-			<li><a href="#"> <i class='bx bxs-inbox'></i> <span
-					class="link_name">訊息</span>
-			</a>
-				<ul class="sub-menu blank">
-					<li><a class="link_name" href="#">訊息</a></li>
-				</ul></li>
-			<li>
+<!-- 			<li><a href="#"> <i class='bx bxs-inbox'></i> <span -->
+<!-- 					class="link_name">訊息</span> -->
+<!-- 			</a> -->
+<!-- 				<ul class="sub-menu blank"> -->
+<!-- 					<li><a class="link_name" href="#">訊息</a></li> -->
+<!-- 				</ul></li> -->
+<!-- 			<li> -->
 				<div class="profile-details">
 
 					<div class="profile-content">
 
-						<i class='bx bxs-log-out' id="logout"
+						<i class='bx bxs-log-out' id="logoutButton"
 							onclick="logout('${account}')"></i>
 					</div>
 
