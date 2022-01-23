@@ -101,8 +101,8 @@ public class CompanyBackEndRestController {
 	@GetMapping("/companyDetails")
 	public Member findDetailByCompanyId(HttpSession session) {
 		Long companyId = (Long) session.getAttribute("userID");
-		Member companyDetails = cbkServiceInterface.findByCompanyId(companyId);
-		return companyDetails;
+		
+		return cbkServiceInterface.findByCompanyId(companyId);
 
 	}
 
@@ -142,7 +142,7 @@ public class CompanyBackEndRestController {
 	public List<ProblemsBean> findAllProblems() {
 		
 		List<ProblemsBean> problems = cbkServiceInterface.getAllProblems();
-		//System.out.println("================================");
+		
 		return problems;
 
 	}
@@ -168,8 +168,6 @@ public class CompanyBackEndRestController {
 	
 	@GetMapping("/companyProblems/{keywords}")
     public List<ProblemsBean> findAllProblemsByKeywords(@PathVariable String keywords){
-		
-	
         return cbkServiceInterface.findAllProblemsByKeywords(keywords);
     }
 	

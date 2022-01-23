@@ -26,10 +26,7 @@ import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
 import foodelicious.cashflow.model.EcPayBean;
 import foodelicious.cashflow.service.CashflowAddressService;
-import foodelicious.ecpay.payment.integration.AllInOne;
-import foodelicious.ecpay.payment.integration.domain.AioCheckOutALL;
-import foodelicious.ecpay.payment.integration.domain.AioCheckOutOneTime;
-import foodelicious.ecpay.payment.integration.domain.InvoiceObj;
+
 import foodelicious.mail.service.MailService;
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
