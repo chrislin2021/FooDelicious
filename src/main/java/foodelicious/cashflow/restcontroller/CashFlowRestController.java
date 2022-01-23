@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -24,12 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import foodelicious.cart.model.CartBean;
 import foodelicious.cart.service.CartService;
-import foodelicious.cashflow.model.EcPayBean;
+
 import foodelicious.cashflow.service.CashflowAddressService;
-import foodelicious.ecpay.payment.integration.AllInOne;
-import foodelicious.ecpay.payment.integration.domain.AioCheckOutALL;
-import foodelicious.ecpay.payment.integration.domain.AioCheckOutOneTime;
-import foodelicious.ecpay.payment.integration.domain.InvoiceObj;
+
 import foodelicious.mail.service.MailService;
 import foodelicious.member.model.Member;
 import foodelicious.member.service.MemberService;
@@ -124,8 +118,8 @@ public class CashFlowRestController {
 
 		mailService.prepareAndSend(memberMail, "[FooDelicious]\t" + dateFormatAll.format(timeStamp) + "\t已收到您的訂單",
 				"親愛的" + memberName + "先生/小姐，感謝您的訂單！\n以下是您的訂單資訊：\n收件人姓名：" + memberName + "\n收件人電話："
-						+ memberPhone + "\n寄貨地址：" + memberAddress + "\n訂單金額：NT$:"
-						+ "元\n前往查看訂單詳細資訊：" + url);
+						+ memberPhone + "\n寄貨地址：" + memberAddress 
+						+ "前往查看訂單詳細資訊：" + url);
 		
 	}
 
