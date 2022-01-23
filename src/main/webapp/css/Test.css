@@ -389,7 +389,7 @@ h1.tableName{
 
 #logoutButton{
 	color:white;
-	cursor: url;
+/* 	cursor: url;  放這裡居然沒用? */
 	
 	
 }

@@ -94,9 +94,9 @@ public class CBKProductDao implements CBKProductDaoInterface {
 			
 			//舊價 vs 新價
 			if(newProduct.getProductPrice() > product.getProductPrice()) {
-				message = "在購物車的 "+ product.getProductName()+ " 商品價格降價了!!趕快購買!";
+				message = "在購物車的 "+ product.getProductName()+ " 商品價格降價了!! 趕快購買!";
 			}else {
-				message = "在購物車的 "+ product.getProductName()+ "商品價格提高了!還不快買?";
+				message = "在購物車的 "+ product.getProductName()+ " 商品價格提高了! 還不快買?";
 			}
 
 			newProduct.setProductCompany(product.getProductCompany());
