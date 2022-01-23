@@ -45,50 +45,52 @@
 #messColumn {
 	width: 300px;
 }
+
+input[type=text], textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 0px;
+	margin-bottom: 15px;
+	resize: vertical;
+}
 </style>
 
 </head>
 <body>
 
-	<h2>客服回覆</h2>
-	<br/>
-	<form:form class="form-horizontal" method="POST"
-		modelAttribute="customerService" autocomplete="on">
-		<!--  customerService是物件的型別-->
-		<div class="form-group">
-			<label class="control-label" for="type">問題類別</label>
-			<div class="col-sm-8">
-				<input type="text" class="form-control" id="problem_Type" name="problemType"
-					value="" disabled>
-			</div>
+<body>
+	<h2>問答紀錄</h2>
+	<br />
 
-			<label class="control-label" for="problem_Text">欲回覆之留言</label>
-			<div class="col-sm-8">
-				<input type="text" class="form-control" id="problem_Text" name="problemText"
-					value="" disabled>
-			</div>
-		</div>
-		<form:form>
-			<div class="form-group">
-				<label class="control-label" for="replyText">回覆內容</label>
-				<div class="col-sm-8">
-					<textarea id="reply_Text" name="replyText"
-						placeholder="請站在客戶角度思考並理性回應" rows="8" required>
-    				</textarea>
-				</div>
-			</div>
-		</form:form>
+        <!--Another Comment With replies-->
+        <c:forEach var="message" items="${abc}">
+        <div class="comments-container">
+            <div class="body">
 
-		<%-- 下方三個按鈕 --%>
-		<div class="pagination justify-content-md-center">
-			<input type="button" color="#3CB371" value="送出" onclick="sendData();"
-				style="height: 50px; width: 100px"> <input type="reset"
-				color="#FAF0E6" value="清除" onclick="clearText();"
-				style="height: 50px; width: 100px"> <input type="button"
-				color="#FFD700" value="一鍵輸入" onclick="enter();"
-				style="height: 50px; width: 100px">
-		</div>
-	</form:form>
+                <div class="content">
+                    
+                        客戶姓名：${message.getCstm_name()}
+                        <br />
+                        問題類型：${message.getProblem_Type()}
+                        <br />
+                        <label>問題內容：${message.getProblem_Text()}</label>
+                        <input value="${message.getProblem_Text()}"></input>
+                        <br />
+                        留言時間：${message.getProblem_postTime()}
+                    
+                    <div class="comment">
+                    	<textarea id="replyToCustomer" name="replyText" placeholder="請站在客戶角度並理性回應"
+					     rows="8" required></textarea> 
+                        <button onclick="">編輯留言</button>
+                        <button onclick="location.href = 'http://localhost:8080/customerService/ReplyPage';">客服回覆</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </c:forEach>
 	
 		<script>
 

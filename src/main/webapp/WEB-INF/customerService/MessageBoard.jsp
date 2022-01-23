@@ -337,36 +337,26 @@ h1{
         <c:forEach var="message" items="${abc}">
         <div class="comments-container">
             <div class="body">
-<!--                 <div class="authors"> -->
-<!--                     <div class="username"><a href="">AnotherUser</a></div> -->
-<!--                     <div>Role</div> -->
-<!--                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt=""> -->
-<!--                 </div> -->
+
                 <div class="content">
                     
-                        ${message.getCstm_name()}
+                        客戶姓名：${message.getCstm_name()}
                         <br />
-                        ${message.getProblem_Type()}
+                        問題類型：${message.getProblem_Type()}
                         <br />
-                        ${message.getProblem_Text()}
+                        <label id="customerProblemText${message.getId()}">問題內容：${message.getProblem_Text()}</label>
+                        <input type=hidden id="labelId${message.getId()}" value="${message.getProblem_Text()}"></input>
                         <br />
-                        ${message.getProblem_postTime()}
+                        留言時間：${message.getProblem_postTime()}
                     
                     <div class="comment">
-                        <button onclick="showReply()">編輯留言</button>
-                    	<button onclick="showComment()">刪除留言</button>
-                        <button onclick="location.href = 'http://localhost:8080/customerService/ReplyPage';">客服回覆</button>
+                        <button onclick="showCommentEditor()">編輯留言</button>
+                    	<button onclick="showComment()">刪除留言</button>                     
                     </div>
                 </div>
             </div>
         </div>
         </c:forEach>
-        <!--Reply Area-->
-<!--         <div class="comment-area hide" id="reply-area"> -->
-<!--             <textarea name="reply" id="" placeholder="reply here ... "></textarea> -->
-<!--             <input type="submit" value="submit"> -->
-<!--         </div> -->
-    </div>
 
 </body>
 </html>

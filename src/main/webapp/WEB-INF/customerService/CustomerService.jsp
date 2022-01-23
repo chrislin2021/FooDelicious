@@ -139,7 +139,6 @@ h2 {
 		margin-right: 50px;
 		font-size: 20px;
 		font-weight: bold;
-	}
 }
 </style>
 </head>
