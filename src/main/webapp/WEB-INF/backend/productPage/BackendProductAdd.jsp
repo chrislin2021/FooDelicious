@@ -15,14 +15,16 @@
 		<p>請在此新增您的商品</p> 
 		<form action="/backend/product" enctype="multipart/form-data"
 			method="post" class="needs-validation" novalidate>
-			<div class="col-md-2">
-		商品分類：
+			<div class="row mb-1">
+			<label for="productCategories" class="col-sm-2 col-form-label">商品分類：</label>
+			<div class="col-md-3">
 			<select class="form-select form-select-sm" aria-label=".form-select-sm example"
 				name="productCategories" required>
 				<option selected>選擇您的商品分類</option>
 				<option value="0">廚具</option>
 				<option value="1">食材</option>
-			</select><br>
+			</select>
+			</div>
 			</div>
 			<div class="row mb-2">
 				<label for="productCategoriesName" class="col-sm-2 col-form-label">分類名稱 :</label>
@@ -35,7 +37,7 @@
 				<label for="productName" class="col-sm-2 col-form-label">商品名稱 :</label>
 				<div class="col-sm-3">
 					<input type="text" class="form-control" name="productName" placeholder="商品名稱" required/>
-				<div class="invalid-feedback">請輸入商品名稱</div>
+				<div class="invalid-feedback">請輸入商品名稱(不得少於3個字)</div>
 				<div class="valid-feedback ">感覺會熱賣唷</div>
 				</div>
 			</div>
@@ -71,7 +73,7 @@
 				<label for="productContent" class="col-sm-2 col-form-label">商品內容：</label>
 				<div class="col-sm-3">
 					<textarea class="form-control" cols="10" rows="3" name="productContent" placeholder="商品內容" required></textarea>
-					<div class="invalid-feedback">請輸入商品內容</div>
+					<div class="invalid-feedback">請輸入商品內容(不得少於5個字)</div>
 				</div>
 			</div>
 			<div class="row mb-2">
@@ -88,12 +90,16 @@
 					<div class="invalid-feedback">請輸入新增日期</div>
 				</div>
 			</div>
-			<div class="col-md-2">商品狀態：<select class="form-select form-select-sm"	aria-label=".form-select-sm example"
+			<div class="row mb-1">
+			<label for="productStatus" class="col-sm-2 col-form-label">商品狀態：</label>
+			<div class="col-md-3">
+			<select class="form-select form-select-sm"	aria-label=".form-select-sm example"
 				name="productStatus" required>
 				<option selected>選擇商品上架狀態</option>
 				<option value="0">下架</option>
 				<option value="1">上架</option>
-			</select><br>
+			</select>
+			</div>
 			</div>
 			<div class="invalid-feedback">請選擇上架狀態</div>
 			<div class="row mb-2">
