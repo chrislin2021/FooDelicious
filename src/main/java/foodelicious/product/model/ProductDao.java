@@ -27,7 +27,7 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT * FROM productNum WHERE product_name LIKE %?% AND categories =?",nativeQuery = true)
     List<Product> findByNameAndType(String productName,Integer categories);
 
-    @Query(value = "SELECT * FROM productNum WHERE categories =?",nativeQuery = true)
+    @Query(value = "SELECT * FROM productNum WHERE product_status=1 AND categories =?",nativeQuery = true)
     List<Product> findByType(Integer categories);
     
     @Query(value = "SELECT * FROM productNum WHERE product_keywords LIKE %?%",nativeQuery = true)
