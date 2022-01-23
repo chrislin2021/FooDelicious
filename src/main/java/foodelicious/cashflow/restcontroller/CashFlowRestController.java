@@ -49,14 +49,14 @@ public class CashFlowRestController {
 	private MemberService memberService;
 	private OrdersDetailService ordersDetailService;
 	private CashflowAddressService cashflowAddressService;
-	public static AllInOne all;
-	
-	public static void main(String[] args) {
-		initial();
-	}
-	private static void initial(){
-		all = new AllInOne("");
-	}
+//	public static AllInOne all;
+//	
+//	public static void main(String[] args) {
+//		initial();
+//	}
+//	private static void initial(){
+//		all = new AllInOne("");
+//	}
 	
 	public CashFlowRestController(HttpSession session, CartService cartService,
 			MailService mailService, OrdersService ordersService, OrdersDetailService ordersDetailService,
@@ -138,24 +138,24 @@ public class CashFlowRestController {
 		cashflowAddressService.pushAddress(params);
 	}
 
-	@PostMapping("/Ecpay")
-	public EcPayBean  aioCheckOutALL(HttpServletRequest request) {
-		AioCheckOutALL aio = new AioCheckOutALL();
-//		AllInOne aioOne = new AllInOne("");
-		EcPayBean ecpay = new EcPayBean();
-		
-		aio.setMerchantID("2000132");
-		aio.setMerchantTradeNo("foodelicious0001");
-		aio.setMerchantTradeDate("2022/01/27");
-		aio.setTotalAmount("1000");
-		aio.setTradeDesc("test shopping");
-		aio.setItemName("Product");
-		aio.setReturnURL("http://localhost:8080");
-		aio.setNeedExtraPaidInfo("N");
-		ecpay.setHi(all.aioCheckOut(aio, null));
-//		String form = all.aioCheckOut(aio, null);
-		return ecpay;
-		
+//	@PostMapping("/Ecpay")
+//	public EcPayBean  aioCheckOutALL(HttpServletRequest request) {
+//		AioCheckOutALL aio = new AioCheckOutALL();
+////		AllInOne aioOne = new AllInOne("");
+//		EcPayBean ecpay = new EcPayBean();
+//		
+//		aio.setMerchantID("2000132");
+//		aio.setMerchantTradeNo("foodelicious0001");
+//		aio.setMerchantTradeDate("2022/01/27");
+//		aio.setTotalAmount("1000");
+//		aio.setTradeDesc("test shopping");
+//		aio.setItemName("Product");
+//		aio.setReturnURL("http://localhost:8080");
+//		aio.setNeedExtraPaidInfo("N");
+//		ecpay.setHi(all.aioCheckOut(aio, null));
+////		String form = all.aioCheckOut(aio, null);
+//		return ecpay;
+//		
 //		aio.setOrderResultURL("http://localhost:8080/Order/order/EcpayOrder");
 //		AioCheckOutOneTime obj = new AioCheckOutOneTime();
 ////		obj.setMerchantTradeNo(orders.getUuid());
@@ -170,7 +170,7 @@ public class CashFlowRestController {
 //	String form = aioOne.aioCheckOut(obj, invoiceObj);
 ////	String form = aioOne.aioCheckOut(obj, null);
 //	return form;
-	}
+//	}
 
 //	// 發送請求給綠界
 //	@PostMapping(value = "/toPayECpay", consumes = MediaType.APPLICATION_JSON_VALUE)
