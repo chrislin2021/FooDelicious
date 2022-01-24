@@ -32,7 +32,7 @@
 				<tr>
 					<th scope="col" class="table-danger">商品品牌</th>
 					<th scope="col" class="table-danger">商品名稱</th>
-					<th scope="col" class="table-danger">商品價格</th>
+					<th scope="col" class="table-danger">商品銷售數</th>
 					<th scope="col" class="table-danger">購物車數量</th>
 				</tr>
 			</thead>

@@ -23,19 +23,16 @@
 							<span id="loginSpan">${errors.msg}</span>
 							<form action="checklogin.controller" method="post">
 								<div class="form-outline mb-4">
-									<input type="text" 
-										class="form-control form-control-lg" name="memberMail" 
-										placeholder="請輸入mail" /> <label
-										class="form-label" for="memberMail"></label><span
-										id="loginSpan">${errors.memberMail}</span>
+									<input type="text" class="form-control form-control-lg" name="memberMail" id="memberMail"
+										placeholder="請輸入mail" /> 
+										<label class="form-label" for="memberMail"></label>
+										<span id="loginSpan">${errors.memberMail}</span>
 								</div>
 
 								<div class="form-outline mb-4">
-									<input type="password" id="typePasswordX-2"
-										class="form-control form-control-lg" name="pwd" 
-										placeholder="請輸入密碼" /> <label
-										class="form-label" for="typePasswordX-2"></label><span
-										id="loginSpan">${errors.pwd}</span>
+									<input type="password" 	class="form-control form-control-lg" name="pwd" id="pwd" placeholder="請輸入密碼" /> 
+										<label class="form-label" for="typePasswordX-2"></label>
+										<span id="loginSpan">${errors.pwd}</span>
 								</div>
 								
 								<div align="center" class="g-signin2 social_signin" onclick="ClickLogin()"
@@ -45,18 +42,21 @@
 								<a href="RegisterPage" class="link-info">立即註冊</a>
 								<a href="pwdForgetPage" class="link-info">忘記密碼</a><br>
 								
-								<button class="btn btn-primary btn-lg btn-block" type="submit">送出</button>
+								<button class="btn btn-primary btn-lg btn-block" type="submit">送出</button><br>
 
 								<hr class="my-4">
+								
+							<button class="btn btn-info" id="Ricky" >P.H. Wang</button>
+							<button class="btn btn-secondary" id="oldLee" >老李</button>
+							<button class="btn btn-warning" id="chris">胖胖</button>
+							<button class="btn btn-success" id="kevin" >彌豆子</button>
+							<button class="btn btn-danger" id="drew" >歐洲食品</button>
 
 							</form>
 							
-							
-							
-
 							<form method="post" action="${contextRoot}/googleLogin">
 								<input type="hidden" id="memberName" name="memberName">
-								<input type="hidden" id="memberMail" name="memberMail">
+								<input type="hidden" id="memberMailGoogle" name="memberMail">
 							</form>
 						</div>
 					</div>
@@ -66,7 +66,8 @@
 	</section>
 
 </body>
-
+<script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
+<script src="${contextRoot}/js/jquery-ui.js"></script>
 <script>
 	var clicked = false;
 	function ClickLogin() {
@@ -77,8 +78,34 @@
 		if (clicked) {
 			let profile = googleUser.getBasicProfile();
 			document.getElementById("memberName").value = profile.getName();
-			document.getElementById("memberMail").value = profile.getEmail();
+			document.getElementById("memberMailGoogle").value = profile.getEmail();
 			document.forms[1].submit();
 		}
 	}
+	
+	$("#Ricky").on("click",function() {
+		$("#memberMail").val('krisding7774@gmail.com');
+		$("#pwd").val('$Q123456');
+	});
+	
+	$("#oldLee").on("click",function() {
+		$("#memberMail").val('xc1zt1x2005@gmail.com');
+		$("#pwd").val('@lee0704');
+	});
+	
+	$("#chris").on("click",function() {
+		$("#memberMail").val('panpan@gmail.com');
+		$("#pwd").val('333333');
+	});
+	
+	$("#kevin").on("click",function() {
+		$("#memberMail").val('kevin.wang629@gmail.com');
+		$("#pwd").val('123456');
+	});
+	
+	$("#drew").on("click",function() {
+		$("#memberMail").val('jinglu.sw@gmail.com');
+		$("#pwd").val('111111');
+	});
+	
 </script>

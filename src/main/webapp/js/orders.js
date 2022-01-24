@@ -27,7 +27,7 @@ $(".checkout").on("click", function() {
 			Swal.fire({
 				title: '請稍後!!',
 				html: '',
-				timer: 8000,
+				timer: 10000,
 				timerProgressBar: true,
 				didOpen: () => {
 					Swal.showLoading()
@@ -57,7 +57,8 @@ $(".checkout").on("click", function() {
 			})
 		}
 	} else {
-		window.location.href = "/ecpay";
+		window.location.href = "/CashflowList";
+		//		window.location.href = "/Ecpay";
 	}
 })
 
@@ -69,4 +70,10 @@ function goDetail(ordersId) {
 			window.location.href = "/toOrderDetailPage/" + ordersId;
 		}
 	})
+}
+
+function oneClick(){
+	$("#name").val("Ace哥");
+	$("#phone").val("0960072527");
+	$("#address").val("桃園市龍潭區經華路444號(透天厝)");
 }

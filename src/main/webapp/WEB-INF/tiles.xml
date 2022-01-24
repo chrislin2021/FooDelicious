@@ -50,7 +50,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/article/ShowAtricle.jsp" />
 	</definition>
-	
+
 	<definition name="app.userFocusePage" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/article/userFocusePage.jsp" />
@@ -104,7 +104,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/CompanyProductAdd.jsp" />
 	</definition>
-	
+
 	<definition name="app.CompanyProductAdd2"
 		extends="app.CompanyDefault2">
 		<put-attribute name="content"
@@ -116,7 +116,7 @@
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/CompanyOrder.jsp" />
 	</definition>
-	
+
 	<definition name="app.CompanyBestSeller"
 		extends="app.CompanyDefault2">
 		<put-attribute name="content"
@@ -159,17 +159,25 @@
 		template="/WEB-INF/orders/orders.jsp">
 		<put-attribute name="title" value="/orders"></put-attribute>
 	</definition>
-	
+
+	<definition name="app.OrdersEnd"
+		template="/WEB-INF/orders/ordersEnd.jsp">
+		<put-attribute name="title" value="/ordersEnd"></put-attribute>
+	</definition>
+
+	<definition name="app.ViewOrders" extends="app.default4">
+		<put-attribute name="content"
+			value="/WEB-INF/orders/viewOrders.jsp"></put-attribute>
+	</definition>
+
 	<definition name="app.CustomerService" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/CustomerService.jsp" />
 	</definition>
-	
 	<definition name="app.MessageBoard" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/MessageBoard.jsp" />
 	</definition>
-	
 	<definition name="app.ReplyPage" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/ReplyPage.jsp" />
@@ -226,14 +234,14 @@
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/BackendProblemReport.jsp" />
 	</definition>
-	
+
 	<definition name="app.BackendProblemReportUpdate"
 		extends="app.BackendDefault">
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/BackendProblemReportUpdate.jsp" />
 	</definition>
-	
-		<definition name="app.BackendProblemReportResponse"
+
+	<definition name="app.BackendProblemReportResponse"
 		extends="app.BackendDefault">
 		<put-attribute name="content"
 			value="/WEB-INF/compBackend/BackendProblemReportResponse.jsp" />

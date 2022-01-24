@@ -61,7 +61,7 @@ public class CBKProductDao implements CBKProductDaoInterface {
 		for (CartBean cart : carts) {
 			if (cart.getProductId() == productId) {
 				cartService.deleteItem(cart.getCartId());
-				break;
+				
 			}
 		}
 		

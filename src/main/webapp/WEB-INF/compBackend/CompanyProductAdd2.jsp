@@ -11,7 +11,8 @@
 		新增商品 <span class="smallFontProduct">Add Product</span>
 	</h1>
 	<div class="main">
-		<form action="/companyProductsAdd" enctype="multipart/form-data" method="post" class="border col-md-12 rounded addProduct">
+		<form action="/companyProductsAdd" enctype="multipart/form-data"
+			method="post" class="border col-md-12 rounded addProduct needs-validation" novalidate>
 
 			<div class="input-group textSet">
 				<label for="productCategories" class="col-md-2 col-form-label">商品分類
@@ -38,37 +39,43 @@
 			</div>
 			<hr />
 			<div class="input-group textSet">
-				<label for="productCategoriesName" class="col-md-2 col-form-label">分類名稱 :</label>
+				<label for="productCategoriesName" class="col-md-2 col-form-label">分類名稱
+					:</label>
 				<div class="col-md-3">
 					<input type="text" class="form-control"
-						name="productCategoriesName" value="">
+						name="productCategoriesName" value="" required>
+					 <div class="invalid-feedback">請輸入分類名稱</div>
 				</div>
 				<label for="productName" class="col-md-2 col-form-label">商品名稱
 					:</label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" name="productName" value="">
+					<input type="text" class="form-control" name="productName" value="" required>
+					<div class="invalid-feedback">請輸入商品名稱(不得少於3個字)</div>
 				</div>
 			</div>
 			<div class="input-group textSet ">
 				<label for="productCompany" class="col-md-2 col-form-label">商品公司：</label>
 				<div class="col-md-3">
 					<input type="text" class="form-control" name="productCompany"
-						value="">
+						value="" required>
+					<div class="invalid-feedback">請輸入商品公司</div>
 				</div>
 				<label for="productPrice" class="col-md-2 col-form-label">商品價格
 					:</label>
 				<div class="col-md-3">
 					<input type="text" class="form-control" name="productPrice"
-						value="">
+						value="" required>
+					<div class="invalid-feedback">請輸入商品價格</div>	
 				</div>
 			</div>
 
 			<div class="input-group textSet">
-				<label for="productStock" class="col-md-2 col-form-label">商品存量
+				<label for="productStock" class="col-md-2 col-form-label">商品庫存
 					:</label>
 				<div class="col-md-3">
 					<input type="text" class="form-control" name="productStock"
-						value="">
+						value="" required>
+					<div class="invalid-feedback">請輸入商品庫存</div>
 				</div>
 				<label for="productKeywords" class="col-md-2 col-form-label">關鍵字：</label>
 				<div class="col-md-3">
@@ -83,7 +90,8 @@
 				</div>
 				<div class="col-md-8">
 					<input type="file" class="form-control" name="photo"
-						placeholder="產品圖片" />
+						placeholder="產品圖片" required/>
+					<div class="invalid-feedback">請新增商品圖片</div>
 				</div>
 			</div>
 
@@ -91,12 +99,13 @@
 
 			<div class="input-group textSet">
 				<div class="col-md-2 ">
-					<label for="productContent" class="col-md-12 col-form-label">商品內容
+					<label for="productContent" class="col-md-12 col-form-label" required>商品內容
 						:</label>
 				</div>
 
 				<div class="col-md-8">
-					<input type="text" class="form-control" name="productContent">
+					<input type="text" class="form-control" name="productContent" required>
+					<div class="invalid-feedback">請輸入商品內容(不得少於5個字)</div>
 				</div>
 			</div>
 
@@ -106,25 +115,47 @@
 						placeholder="公司編號" value="${userID}" />
 				</div>
 			</div>
-			
+
 			<div class="row mb-2">
 				<label for="productSalesFigures" class="col-sm-2 col-form-label"></label>
 				<div class="col-sm-3">
-					<input type="hidden" class="form-control" value="0" name="productSalesFigures"
-						placeholder="銷貨量"/>
+					<input type="hidden" class="form-control" value="0"
+						name="productSalesFigures" placeholder="銷貨量" required/>
 				</div>
 			</div>
-		
-		<div class="input-group textSet buttonArea" style="margin:5px">
-			<div class="col-md-6">
-				<button type="reset" class="btn btn-outline-danger mt-3"
-					id="resetProduct">重製</button>
+
+			<div class="input-group textSet buttonArea" style="margin: 5px">
+				<div class="col-md-6">
+					<button type="reset" class="btn btn-outline-danger mt-3"
+						id="resetProduct">重製</button>
+				</div>
+				<div class="col-md-6">
+					<button type="submit" class="btn btn-outline-primary mt-3"
+						id="submitAddProduct">提交</button>
+				</div>
 			</div>
-			<div class="col-md-6">
-				<button type="submit" class="btn btn-outline-primary mt-3"
-					id="submitAddProduct">提交</button>
-			</div>
-		</div>
-	</form>
+		</form>
 	</div>
+
+	<script>
+		(function() {
+			'use strict';
+			window.addEventListener('load',
+					function() {
+						var forms = document
+								.getElementsByClassName("needs-validation");
+						var validation = Array.prototype.filter.call(forms,
+								function(forms) {
+									forms.addEventListener('submit', function(
+											event) {
+										if (forms.checkValidity() === false) {
+											event.preventDefault();
+											event.stopPropagation();
+										}
+										forms.classList.add('was-validated');
+									}, false);
+								});
+					}, false);
+		})();
+	</script>
 </body>

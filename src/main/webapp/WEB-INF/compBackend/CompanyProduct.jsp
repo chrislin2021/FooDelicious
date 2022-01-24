@@ -73,8 +73,8 @@
 				$.ajax({
 					url : "/companyProducts/delete/" + deleteProductId,
 					type : "DELETE",
-					success : function() {
-						alert("刪除成功");
+					success : function(msg) {
+						alert(msg);
 						window.location.href = "/companyProduct";
 					},
 					error : function() {
@@ -383,8 +383,9 @@
     //=============顯示功能=============
     function showData(startItem,endItem,dataSource){
     	//alert(dataSource[0].productInsertDate);
+    	//alert(endItem);
         let txt = "<tr>";
-        for (let i = startItem; i < endItem; i++) {
+        for (let i = (endItem-1); i >= startItem; i--) {
             txt += "<td class='align-middle'>"+ dataSource[i].productId+"</td>"
             let cate = dataSource[i].productCategories;
             let type = "";

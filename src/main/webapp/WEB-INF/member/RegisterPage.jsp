@@ -107,14 +107,9 @@
 				aria-label="Sizing example input"
 				aria-describedby="inputGroup-sizing-default" path="memberCoin" />
 
-			<!-- 		<div> -->
-			<!-- 				<label for="photoId">會員照片</label> <input type="file" -->
-			<!--					name="memberImage" id="photoId"><br><br> -->
-			<!-- 			</div> -->
-
 			<button type="submit" class="btn btn-outline-primary"
-				value="register" onclick="success()">註冊</button><br>
-				<button class="btn btn-outline-danger" id="C1">一鍵送出</button>
+				value="register" id="" onclick="success()">註冊</button><br>
+				<button type="button" class="btn btn-outline-danger" id="C1">一鍵送出</button>
 				
 		</form:form>
 	</div>
@@ -125,11 +120,11 @@
 <script type="text/javascript">
 	//自動填入資料
 	$(document).ready(function() {
-		$("#C1").click(function() {
+		$("#C1").on("click",function() {
 			$("#memberMail").val('yolandabestone@gmail.com');
 			$("#pwd").val('$happy13711');
 			$("#memberName").val('石悠悠');
-			$("#member_gender_f").val('FEMALE');
+			$("#member_gender_f").prop("checked",true);
 			$("#memberBirth").val('1990-11-29');
 			$("#memberPhone").val('0912520520');
 			$("#memberAddress").val('台北市大安區信義路100號');

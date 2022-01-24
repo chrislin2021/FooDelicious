@@ -18,8 +18,10 @@
         <div class="row" id="rowSelect">
             <div class="col-12 col-md-2">
                 <br>
-
                 <button type="button" id="updateBTN" class="btn btn-primary btn-lg" role="button" data-bs-toggle="button">修改</button>
+                <br>
+                <br>
+                <button type="button" id="delfun" class="btn btn-primary btn-lg" role="button" data-bs-toggle="button">刪除</button>
             </div>
 
             <div class="col-12 col-md-9">
@@ -79,6 +81,7 @@
         <script>
             $("#unlikeBTN").hide();
             $("#likeBTN").hide();
+
             var articleId = "";
             let clallifyAndTitle = "";
             let loginId = "";
@@ -99,7 +102,7 @@
                     $("#editor").html(data.article[0].article);
                     document.getElementById("updateBTN").style.visibility = (loginId == accId) ? 'visible' : 'hidden';
                     document.getElementById("sendMsg").style.visibility = (loginId != null) ? 'visible' : 'hidden';
-
+                    document.getElementById("delfun").style.visibility = (loginId == accId) ? 'visible' : 'hidden';
                     msgShow();
                     checkLike();
 
@@ -321,4 +324,21 @@
                     }
                 })
             }
+        </script>
+        <script>
+            //刪除
+            $("#delfun").on("click", function() {
+                if (confirm("確定刪除此筆紀錄嗎 ?")) {
+                    //console.log(articleId)
+                    window.location.href = "/goShareArea"
+
+                    $.ajax({
+                        url: "/deleteData/" + articleId,
+                        type: "DELETE",
+                        success: function() {
+                            window.location.href = "/goShareArea"
+                        }
+                    })
+                }
+            })
         </script>

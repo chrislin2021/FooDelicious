@@ -121,11 +121,11 @@ p {
 </style>
 <%--裝B大圖片--%>
 <div class="topPhoto">
-    <img src="../../img/hero01.png"/>
+    <img class="headPho" src="../../img/hero01.png"/>
     <div class="textArea">
         <h1 class="textAreaTxt">We make food easy <br> and delicious</h1>
     </div>
-    <img src="../../img/hero03.png"/>
+    <img class="headPho" src="../../img/hero03.png"/>
 </div>
 
 <%--熱銷商品--%>
@@ -247,7 +247,7 @@ p {
 </div>
 
 <%--回報頁面--%>
-<footer class="footArea">
+<div class="footArea">
     <a href="#0" class="arrowTop"><i class="fas fa-arrow-alt-circle-up"></i></a>
     <div class="contactBox" >
 		<h2>客戶反應中心</h2>
@@ -554,7 +554,112 @@ function toolPage() {
 
 </script>
 
+<script>
+    //---------客戶回報區----------------
+    function enter() {
+        $("#name").val("王小明");
+        $("#email").val("mingming11@gmail.com");
 
+        $("#subject").val("服務真方便，期待回購!");
+    }
+
+    function clearText() {
+        $("#name").val('');
+        $("#email").val('');
+        $("#subject").val('');
+    }
+
+    $(document).ready(function() {
+        console.log("ready!");
+        $("#sendButton").click(function(){
+            if($("#name").val()==""){
+                alert("您未填寫姓名");
+                eval("document.form1['name'].focus()");
+            }else if($("#email").val()==""){
+                alert("您未填寫Email");
+                eval("document.form1['email'].focus()");
+            }else if($("#customRadioInline1").val()==""){
+                alert("您未選擇類別");
+                eval("document.form1['customRadioInline1'].focus()");
+            }else if($("#subject").val()==""){
+                alert("您未填寫內容");
+                eval("document.form1['subject'].focus()");
+            }else{
+                document.form1.submitData();
+            }
+        });
+    });
+
+    function sendData() {
+        var ele = document.getElementsByName('customRadioInline1');
+        var checkedRadio = '';
+        for (i = 0; i < ele.length; i++) {
+            if (ele[i].checked) {
+                checkedRadio = ele[i].value;
+            }
+        }
+        var submitData = {
+            "Id" : "",
+            "cstm_name" : $("#name").val(),
+            "cstm_email" : $("#email").val(),
+            "problem_Type" : checkedRadio,
+            "problem_Text" : $("#subject").val(),
+
+        };
+
+        var ajaxRequest = $.ajax({
+            type : "POST",
+            url : "/customerService/add",
+            dataType : "json",
+            data : JSON.stringify(submitData), //formdata1 + '&' + formdata2
+            contentType : "application/json;charset=utf-8",
+            // 				async : false,
+            // 				cache : false,
+            // 				contentType : false,
+            // 				processData : false,
+        });
+
+        ajaxRequest.done(function(response)
+        {
+            if (response == true) {
+                alert("送出成功");
+                self.location= "/customerService";
+            } else {
+                alert("送出失敗，請重新輸入");
+            }
+        });
+
+    }
+
+
+    function queryMessageHistory(){
+        var email = $("#email").val();
+        location.href = "/customerService/query/" + email;
+// 			var queryData = {
+// 					"email" : email,
+// 				};
+
+// 			var ajaxRequest2 = $.ajax({
+// 				type : "POST",
+// 				url : "/customerService/query",
+// 				dataType : "json",
+// 				data : JSON.stringify(queryData), //formdata1 + '&' + formdata2
+// 				contentType : "application/json;charset=utf-8",
+// 			// 				async : false,
+// 			// 				cache : false,
+// 			// 				contentType : false,
+// 			// 				processData : false,
+// 			});
+
+// 			ajaxRequest2.done(function(response){
+// 				console.log("post ok");
+// 				console.log(response);
+
+// 				$(document.body).text(response);
+// 			});
+    }
+
+</script>
 
 
 </body>

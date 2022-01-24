@@ -107,7 +107,10 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 			hql = "DELETE FROM LikeOrNot WHERE fk_articleID = :articleID";
 			em.createQuery(hql).setParameter("articleID", id).executeUpdate();
 		}
-		hql = "DELETE FROM ArticleData WHERE article_id = :articleID";
+		hql = "DELETE FROM MsgArea WHERE fk_article_id = :articleID";
+		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
+		
+		hql = "DELETE FROM ArticleData WHERE fk_share_id = :articleID";
 		em.createQuery(hql).setParameter("articleID", id).executeUpdate();
 		
 		hql = "DELETE FROM ShareArea WHERE share_id = :articleID";
@@ -176,7 +179,12 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
 	@Override
 	public String articleContent(Integer id) {
-		return em.find(ArticleData.class, id).getArticle();
+		String hql = "SELECT * FROM article_data WHERE fk_share_id = :id";		
+		Map<String, Object> AllData = new HashMap<>();
+		AllData.put("id", id);
+		List<ArticleData> list = namedParameterJdbcTemplate.query(hql, AllData, new ArticleRowMapper());
+		list.get(0).getArticle();
+		return list.get(0).getArticle();
 	}
 
 	@Override

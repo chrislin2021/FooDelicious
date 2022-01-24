@@ -17,7 +17,6 @@ public class ArticleRowMapper implements RowMapper<ArticleData> {
 		articleData.setFk_share_id(rs.getInt("fk_share_id"));
 		
 		articleData.setArticle(rs.getString("article"));
-		articleData.setTag_name(rs.getString("tag_name"));
 		
 		return articleData;
 	}

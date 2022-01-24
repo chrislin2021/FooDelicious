@@ -65,12 +65,7 @@ public class ArticleController {
 	@PostMapping("/postarticle.controller")
 	public void postArticle(@RequestBody Map<String, String> params, HttpSession session) {
 
-//		System.out.println(params);
-//		System.out.println(params.get("article"));
-//		System.out.println(params.get("classify"));
 		Long id = (Long) session.getAttribute("userID");
-//		System.out.println(articleEMDaoService.findAll());
-//		System.out.println(id);
 		articleService.pushArticle(params, id);
 	}
 
@@ -124,7 +119,7 @@ public class ArticleController {
 	@GetMapping("/intIDFindAll/{id}")
 	public String goSpecifyArticle(@PathVariable(value = "id", required = false) Integer id, Model model) {
 		session.setAttribute("ArticleId", id);
-		System.out.println(articleService.articleContent(id));
+		System.out.println("ArticleId~~~~~~~~~~~~~~~~~~"+id);
 		model.addAttribute("articleContent", articleService.articleContent(id));
 		// System.out.println("ArticleId： " + id);
 		return "app.ShowAtricle";

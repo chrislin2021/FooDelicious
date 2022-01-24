@@ -7,7 +7,7 @@
 }
 
 
-img {
+.headPho {
     width: 100%;
 }
 
@@ -77,53 +77,81 @@ table{
 
 /*下面是回報區的css*/
 
-* {
-    box-sizing: border-box;
-}
-
-input[type=text], select, textarea {
+input[type=text], textarea {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 0px;
+    margin-bottom: 15px;
     resize: vertical;
 }
 
 label {
-    padding: 12px 12px 12px 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
     display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-input[type=submit] {
+input[type=button] {
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    float: center;
+    margin: 15px;
+    position: center;
 }
 
-input[type=submit]:hover {
+input[type=reset] {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 15px;
+    position: center;
+}
+
+input[type=button]:hover {
     background-color: #45a049;
 }
 
-
-
-.col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
+input[type=radio] {
+    width: 20px;
+    height: 20px;
 }
 
-.col-75 {
-    float: left;
-    width: 75%;
-    margin-top: 6px;
+.container {
+    border-radius: 15px;
+    padding: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: center;
+}
+
+.form {
+    border-radius: 15px;
+    padding: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: center;
+}
+
+.custom-control-label {
+    font-weight: normal;
+    padding: 5px;
+}
+
+h2 {
+    font-weight: bold;
 }
 
 /* Clear floats after the columns */
-.row:after {
+.form:after {
     content: "";
     display: table;
     clear: both;
@@ -131,9 +159,36 @@ input[type=submit]:hover {
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-    .col-25, .col-75, input[type=submit] {
+    .col-sm-10, .col-75, input[type=form] {
         width: 100%;
         margin-top: 0;
+    }
+
+    .topDIV {
+        margin-top: 16px;
+    }
+
+    .hero {
+        width: 80%;
+        height: 450px;
+        position: relative;
+        margin: 100px auto;
+    }
+
+    .btn-box {
+        display: flex;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .btn-box button {
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        margin-right: 50px;
+        font-size: 20px;
+        font-weight: bold;
     }
 }
 /*上面是回報區的css*/
@@ -148,7 +203,6 @@ input[type=submit]:hover {
 }
 
 .contactBox{
-    margin-top: 8%;
     margin-left: 45%;
     width: 800px;
 }
@@ -160,18 +214,21 @@ select{
 .author{
     margin-left: 45%;
     font-size: 24px;
-    position:absolute;
-    bottom: 0px;
+
 }
 
 .arrowTop{
     position: fixed;
-    right: 25px;
-    bottom: 50px;
+    right: 60px;
+    bottom: 150px;
     font-size: 48px;
     color: #D3B884;
 }
 
 .trHover:hover{
     background-color: #ECEBEB;
+}
+
+.image-inline{
+    width: 50px;
 }

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,11 +27,13 @@ public class MsgRepositoryImpl implements MsgRepository {
 	@PersistenceContext
 	EntityManager em;
 
+	HttpSession session;
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-	public MsgRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+	public MsgRepositoryImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate,HttpSession session) {
 		super();
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+		this.session = session;
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class MsgRepositoryImpl implements MsgRepository {
 	}
 
 	@Override
-	public void unlikeArticle(Map<String, String> params) {
+	public void unlikeArticle(Map<String, String> params) {		
 		String hql = "SELECT id FROM likeOrNot WHERE fk_memberID = :memberID AND fk_articleID = :atricleID";
 		Query query = em.createNativeQuery(hql);
 		query.setParameter("memberID", params.get("userId"));

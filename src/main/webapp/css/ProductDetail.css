@@ -1,3 +1,12 @@
+.left{ 
+ margin-top:50px;
+ position:fixed;
+ float:left;
+ width:12%;
+ font-size:large;
+ 
+}
+
 .stock{
 	color: #7B7B7B;
 	float:right;
@@ -11,9 +20,6 @@ body {
 img {
   max-width: 100%; }
 
-.left {
-  position: absolute;
-  width:80%; }
         
 .right {
   
