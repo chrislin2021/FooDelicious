@@ -165,6 +165,8 @@
 					</div>
 
 					<hr class="my-4">
+					
+					<button type="button" onclick="oneClick()">一鍵輸入</button>
 
 					<button class="w-100 btn btn-info btn-lg checkout" type="button">去買單！</button>
 				</form>
