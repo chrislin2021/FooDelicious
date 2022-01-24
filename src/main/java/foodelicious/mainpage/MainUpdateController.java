@@ -68,9 +68,7 @@ public class MainUpdateController {
 			// 查詢成功登入的會員身份
 			String level = EMDaoService.findId2(EMid);
 //			System.out.println("level：" + level);
-			if (level.equals("admin")) {
-				return "app.BackendMember";
-			} else if (level.equals("company")) {
+			if (level.equals("company")) {
 				return "app.CompanyMain2";
 			} else {
 //				System.out.println("userID：" + session.getAttribute("userID"));
