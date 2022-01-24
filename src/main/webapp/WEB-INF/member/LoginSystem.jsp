@@ -43,18 +43,16 @@
 								<a href="pwdForgetPage" class="link-info">忘記密碼</a><br>
 								
 								<button class="btn btn-primary btn-lg btn-block" type="submit">送出</button><br>
-								
 
 								<hr class="my-4">
+								
+							<button class="btn btn-info" id="Ricky" >P.H. Wang</button>
+							<button class="btn btn-secondary" id="oldLee" >老李</button>
+							<button class="btn btn-warning" id="chris">胖胖</button>
+							<button class="btn btn-success" id="kevin" >彌豆子</button>
+							<button class="btn btn-danger" id="drew" >歐洲食品</button>
 
 							</form>
-							
-							<button type="button" class="btn btn-info" id="Ricky" >P.H. Wang</button>
-							<button type="button" class="btn btn-secondary" id="oldLee" >老李</button>
-							<button type="button" class="btn btn-warning" id="chris" >胖胖</button>
-							<button type="button" class="btn btn-success" id="kevin" >彌豆子</button>
-							<button type="button" class="btn btn-danger" id="drew" >歐洲食品</button>
-							
 							
 							<form method="post" action="${contextRoot}/googleLogin">
 								<input type="hidden" id="memberName" name="memberName">
@@ -111,7 +109,3 @@
 	});
 	
 </script>
-
-<script type="text/javascript">
-
-	</script>
