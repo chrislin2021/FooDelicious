@@ -99,7 +99,7 @@
 	});
 	
 	$("#kevin").on("click",function() {
-		$("#memberMail").val('nezuko@gmail.com');
+		$("#memberMail").val('kevin.wang629@gmail.com');
 		$("#pwd").val('123456');
 	});
 	
