@@ -160,17 +160,17 @@
 		<put-attribute name="title" value="/orders"></put-attribute>
 	</definition>
 	
-	<definition name="app.CustomerService" extends="app.default">
+	<definition name="app.CustomerService" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/CustomerService.jsp" />
 	</definition>
 	
-	<definition name="app.MessageBoard" extends="app.default">
+	<definition name="app.MessageBoard" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/MessageBoard.jsp" />
 	</definition>
 	
-	<definition name="app.ReplyPage" extends="app.default">
+	<definition name="app.ReplyPage" extends="app.default4">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/ReplyPage.jsp" />
 	</definition>

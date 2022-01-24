@@ -79,94 +79,17 @@ input[type=submit]:hover {
 /*                 Global                      */
 /* ########################################### */
 html{
-    font-size: 14px;
+
     font-family: 'Titillium Web', sans-serif;
     background-color:rgb(0,0,0);
     color:#FFFFFF;
 }
 
-
 h1{
-    font-size:16px;
-    font-weight: bolder;
+    font-size:40px;
+	font-weight: bolder;
+	float:right;
 }
-
-
-/* ########################################### */
-/*           Forums.html                       */
-/* ########################################### */
-.container{
-    margin: 20px;
-    padding: 20px;
-}
-
-.subforum{
-    margin-top:20px;
-}
-
-.subforum-title{
-    background-color:#FFFFFF;
-    padding: 5px;
-    border-radius: 5px;
-    margin:4px;
-}
-
-.subforum-row{
-    display: grid;
-    grid-template-columns: 7% 60% 13% 20%;
-}
-
-.subforum-column{
-    padding: 10px;
-    margin:4px;
-    border-radius: 5px;
-    background-color:#FFFFFF;
-}
-
-.subforum-description *{
-    margin-block: 0;
-}
-
-.center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.subforum-icon i{
-    font-size: 45px;
-}
-
-.subforum-devider{
-    display: none;   
-}
-
-
-/* For the smartphones */
-@media screen and (max-width: 460px) {
-    .container{
-        margin: 10px;
-        padding: 10px;
-    }
-
-    .subforum-row{
-        display: grid;
-        grid-template-columns: 25% 75%;
-        grid-template-rows: 65% 35%;
-    }
-
-    .subforum-devider{
-        display: block;
-        border: 0;
-        height: 1px;
-        background-image: linear-gradient(to right, rgba(190, 190, 190, 0), rgba(255, 255, 255, 0.75), rgba(190, 190, 190, 0));
-    }
-
-}
-
-/* ########################################### */
-/*            posts.html                       */
-/* ########################################### */
 
 /* posts table's head  */
 .table-head{
@@ -268,15 +191,20 @@ h1{
 }
 
 .content{
-    flex: 80%;
+    flex: 50%;
+    font-size:24px;
+    margin:15px;
 }
+
 
 .body{
     display: flex;
-    background-color: #D9EAD3;
+    background-color: #FFFFFF;
+    box-shadow:2px 2px #979A9A;
     padding: 10px;
     margin-top: 5px;
-    border-radius: 4px;
+    border-radius: 6px;
+    border:1px solid #7B7D7D;
 }
 
 .body .authors .username{
@@ -299,10 +227,14 @@ h1{
     float: right;
     background-color: #4CAF50;
 }
+
 .body .content .comment button:hover{
     background-color:#45a049;
 }
 
+.body .content {
+	position:float-right;
+}
 /* comment section */
 .comment-area{
     margin-bottom:50px;
@@ -313,6 +245,11 @@ h1{
     min-height: 100px;
     padding: 10px;
     margin-block: 10px;
+}
+
+.comments-container {
+	width:75%;
+	position:relative;
 }
 
 .comment-area input{
@@ -330,7 +267,7 @@ h1{
 
 </head>
 <body>
-	<h2>問答紀錄</h2>
+	<h1>問答紀錄</h1>
 	<br />
 
         <!--Another Comment With replies-->

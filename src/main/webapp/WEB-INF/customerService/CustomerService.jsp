@@ -20,6 +20,7 @@
 	rel="stylesheet">
 <script src="../../js/jquery-3.6.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <style>
@@ -139,37 +140,21 @@ h2 {
 		margin-right: 50px;
 		font-size: 20px;
 		font-weight: bold;
+	}
 }
 </style>
 </head>
 <body>
 	<br />
-
-<!-- 	<div class="topDIV"> -->
-<!-- 		<ul class="nav nav-tabs"> -->
-<!-- 			<li class="nav items"><a class="nav-link active" -->
-<!-- 				aria-current="page" href="#">客戶留言</a></li> -->
-<!-- 			<li class="nav-item"><a class="nav-link" href="#">問答紀錄</a></li> -->
-<!-- 		</ul> -->
-
-<!-- 		<table class="table table-hover"> -->
-<!-- 			<tbody id="articleArea"> -->
-<!-- 			</tbody> -->
-<!-- 		</table> -->
-<!-- 	</div> -->
-
 	<h2>客戶反應中心</h2>
 	<p>請留下您的寶貴建議，我們會將盡速與您聯繫，謝謝您!</p>
-	
-<!-- 		<input type="button" color="#FFD700" value="查詢問答紀錄" onclick="toMessageBoard();" -->
-<!-- 		style="height: 50px; width: 130px"> -->
-	<button onclick="queryMessageHistory();" 
-	id="toMessageBoard" class="float-right" style="height: 42px; width: 130px; 
-	background-color:#B8DBFB; color:black; position:center; border-radius:4px; border:none; 
-	font-weight:bold">查詢問答紀錄</button>
-	
-	<br/>
-	<br/>
+
+	<button onclick="queryMessageHistory();" id="toMessageBoard"
+		class="float-right"
+		style="height: 42px; width: 130px; background-color: #B8DBFB; color: black; position: center; border-radius: 4px; border: none; font-weight: bold">查詢問答紀錄</button>
+
+	<br />
+	<br />
 	<form:form id="form1" class="form-horizontal" method="POST"
 		modelAttribute="customerService" autocomplete="on">
 		<!--  customerService是物件的型別-->
@@ -192,45 +177,46 @@ h2 {
 
 			<div class="custom-control custom-radio custom-control-inline">
 				<input type="radio" id="customRadioInline1"
-					name="customRadioInline1" class="custom-control-input" value="Orders"> <label
-					class="custom-control-label" for="customRadioInline1">訂單問題</label>
-				<input type="radio" id="customRadioInline1"
-					name="customRadioInline1" class="custom-control-input" value="Return/Maintenance"> <label
+					name="customRadioInline1" class="custom-control-input"
+					value="Orders"> <label class="custom-control-label"
+					for="customRadioInline1">訂單問題</label> <input type="radio"
+					id="customRadioInline1" name="customRadioInline1"
+					class="custom-control-input" value="Return/Maintenance"> <label
 					class="custom-control-label" for="customRadioInline1">退換貨/維修</label>
 				<input type="radio" id="customRadioInline1"
-					name="customRadioInline1" class="custom-control-input" value="Member"> <label
-					class="custom-control-label" for="customRadioInline1">會員相關</label>
+					name="customRadioInline1" class="custom-control-input"
+					value="Member"> <label class="custom-control-label"
+					for="customRadioInline1">會員相關</label> <input type="radio"
+					id="customRadioInline1" name="customRadioInline1"
+					class="custom-control-input" value="Refund/Receipt"> <label
+					class="custom-control-label" for="customRadioInline1">退款/發票</label>
 				<input type="radio" id="customRadioInline1"
-					name="customRadioInline1" class="custom-control-input" value="Refund/Receipt"> <label
-					class="custom-control-label" for="customRadioInline1" >退款/發票</label>
-				<input type="radio" id="customRadioInline1"
-					name="customRadioInline1" class="custom-control-input" value="Other"> <label
-					class="custom-control-label" for="customRadioInline1">其他</label>
+					name="customRadioInline1" class="custom-control-input"
+					value="Other"> <label class="custom-control-label"
+					for="customRadioInline1">其他</label>
 			</div>
 		</div>
 		<br />
-		<%-- method="POST" action="/addProblem" modelAttribute="customerService"> --%>
+
 		<form:form>
 			<div class="form-group">
 				<label class="control-label" for="subject">反應事項</label>
 				<div class="col-sm-8">
-					<textarea id="subject" name="problemText" placeholder="請描述您的問題(限500字內)"
-					rows="8" required></textarea>           
+					<textarea id="subject" name="problemText"
+						placeholder="請描述您的問題(限500字內)" rows="8" required></textarea>
 				</div>
 			</div>
 		</form:form>
-		<%-- 上傳檔案欄位 --%>
-<!-- 		<label for="formFileMultiple" class="control-label">上傳檔案</label> -->
-<!-- 		<input class="form-control" type="file" id="formFileMultiple" multiple /> -->
+
 		<br />
 		<%-- 下方三個按鈕 --%>
 		<div class="pagination justify-content-md-center">
 			<input type="button" id="sendButton" value="送出" onclick="sendData();"
-				style="height: 50px; width: 100px; background-color:#4CAF50; color: #fff; font-weight:bold"/> 
+				style="height: 50px; width: 100px; background-color: #4CAF50; color: #fff; font-weight: bold"/>
 			<input type="reset" value="清除" onclick="clearText();"
-				style="height: 50px; width: 100px; background-color:#999999; color: #000000; font-weight:bold"/> 
+				style="height: 50px; width: 100px; background-color: #999999; color: #000000; font-weight: bold"/>
 			<input type="button" value="一鍵輸入" onclick="enter();"
-				style="height: 50px; width: 100px; background-color:#FFD966; color: #000000; font-weight:bold"/>
+				style="height: 50px; width: 100px; background-color: #FFD966; color: #000000; font-weight: bold"/>
 		</div>
 	</form:form>
 
@@ -239,7 +225,6 @@ h2 {
 		function enter() {
 			$("#name").val("王小明");
 			$("#email").val("mingming11@gmail.com");
-
 			$("#subject").val("服務真方便，期待回購!");
 		}
 		
@@ -298,18 +283,28 @@ h2 {
 			// 				contentType : false,
 			// 				processData : false,
 			});
-
-			ajaxRequest.done(function(response)
-					{
+			
+			ajaxRequest.done(function(response){
 				if (response == true) {
-					alert("送出成功");
-					self.location= "/customerService";
+					alert("送出成功");						
+					self.location = "/customerService";
 				} else {
 					alert("送出失敗，請重新輸入");
 				}
 			});
-			
 		}
+
+	
+			
+// 				ajaxRequest.done(function(response){
+// 					if (response == true) {
+// 						alert("送出成功");
+// 			   	 	)};
+// 						self.location= "/customerService";
+// 					} else {
+// 						alert("送出失敗, 請重新輸入");
+// 					}
+
 		
 		
 		function queryMessageHistory(){
