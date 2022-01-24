@@ -56,7 +56,7 @@
 							
 							<form method="post" action="${contextRoot}/googleLogin">
 								<input type="hidden" id="memberName" name="memberName">
-								<input type="hidden" id="memberMail" name="memberMail">
+								<input type="hidden" id="memberMailGoogle" name="memberMail">
 							</form>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 		if (clicked) {
 			let profile = googleUser.getBasicProfile();
 			document.getElementById("memberName").value = profile.getName();
-			document.getElementById("memberMail").value = profile.getEmail();
+			document.getElementById("memberMailGoogle").value = profile.getEmail();
 			document.forms[1].submit();
 		}
 	}
