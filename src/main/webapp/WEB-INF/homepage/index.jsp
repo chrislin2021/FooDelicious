@@ -11,11 +11,11 @@
 <link rel="stylesheet" href="../../fontawesome/css/all.css">
 <%--裝B大圖片--%>
 <div class="topPhoto">
-    <img src="../../img/hero01.png"/>
+    <img class="headPho" src="../../img/hero01.png"/>
     <div class="textArea">
         <h1 class="textAreaTxt">We make food easy <br> and delicious</h1>
     </div>
-    <img src="../../img/hero03.png"/>
+    <img class="headPho" src="../../img/hero03.png"/>
 </div>
 
 <%--熱銷商品--%>
@@ -137,60 +137,87 @@
 </div>
 
 <%--回報頁面--%>
-<footer class="footArea">
+<div class="footArea">
     <a href="#0" class="arrowTop"><i class="fas fa-arrow-alt-circle-up"></i></a>
-    <div class="contactBox" >
+    <div class="container contactBox" >
         <h2>客戶反應中心</h2>
-        <p>請留下您的問題與敘述，我們會於24小時內回覆給您</p>
+        <p>請留下您的寶貴建議，我們會將盡速與您聯繫，謝謝您!</p>
 
-        <div class="container">
-            <form action="/action_page.php">
-                <div class="row">
-                    <div class="col-25">
-                        <label for="name">姓名</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="name" name="name" placeholder="輸入您的姓名" required>
+        <!-- 		<input type="button" color="#FFD700" value="查詢問答紀錄" onclick="toMessageBoard();" -->
+        <!-- 		style="height: 50px; width: 130px"> -->
+        <button onclick="queryMessageHistory();"
+                id="toMessageBoard" class="float-right" style="height: 42px; width: 130px;
+	background-color:#B8DBFB; color:black; position:center; border-radius:4px; border:none;
+	font-weight:bold">查詢問答紀錄</button>
+
+        <br/>
+        <br/>
+        <form:form id="form1" class="form-horizontal" method="POST"
+                   modelAttribute="customerService" autocomplete="on">
+            <!--  customerService是物件的型別-->
+            <div class="form-group">
+                <label class="control-label" for="name">姓名</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="name" name="name"
+                           placeholder="範例：王小明" required>
+                </div>
+
+                <label class="control-label" for="email">聯絡Email</label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" name="email"
+                           placeholder="範例：littleming11@gmail.com" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label class="control-label" >問題類別</label>
+
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1"
+                           name="customRadioInline1" class="custom-control-input" value="Orders"> <label
+                        class="custom-control-label" for="customRadioInline1">訂單問題</label>
+                    <input type="radio" id="customRadioInline2"
+                           name="customRadioInline1" class="custom-control-input" value="Return/Maintenance"> <label
+                        class="custom-control-label" for="customRadioInline1">退換貨/維修</label>
+                    <input type="radio" id="customRadioInline3"
+                           name="customRadioInline1" class="custom-control-input" value="Member"> <label
+                        class="custom-control-label" for="customRadioInline1">會員相關</label>
+                    <input type="radio" id="customRadioInline4"
+                           name="customRadioInline1" class="custom-control-input" value="Refund/Receipt"> <label
+                        class="custom-control-label" for="customRadioInline1" >退款/發票</label>
+                    <input type="radio" id="customRadioInline5"
+                           name="customRadioInline1" class="custom-control-input" value="Other"> <label
+                        class="custom-control-label" for="customRadioInline1">其他</label>
+                </div>
+            </div>
+            <br />
+            <%-- method="POST" action="/addProblem" modelAttribute="customerService"> --%>
+            <form:form>
+                <div class="form-group">
+                    <label class="control-label" for="subject">反應事項</label>
+                    <div class="col-sm-8">
+					<textarea id="subject" name="problemText" placeholder="請描述您的問題(限500字內)"
+                              rows="8" required></textarea>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="email">聯絡Email或電話</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="email" name="email" placeholder="輸入您的email" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="country">問題類別</label>
-                    </div>
-                    <div class="col-75">
-                        <select id="country" name="country">
-                            <option value="">訂單問題</option>
-                            <option value="">商品問題</option>
-                            <option value="">投訴</option>
-                            <option value="">其他</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="subject">問題(請盡量詳述)</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea id="subject" name="subject" placeholder="請描述您的問題" style="height:200px"></textarea>
-                    </div>
-                </div>
-                <br>
-                <div class="row" >
-                    <input type="submit" value="送出" style="height:50px;width:100px">
-                    <input type="button" value="清除" onclick="clearText();" style="height:50px;width:100px">
-                    <input type="submit" value="一鍵輸入" style="height:50px;width:100px">
-                </div>
-            </form>
-        </div>
+            </form:form>
+            <%-- 上傳檔案欄位 --%>
+            <!-- 		<label for="formFileMultiple" class="control-label">上傳檔案</label> -->
+            <!-- 		<input class="form-control" type="file" id="formFileMultiple" multiple /> -->
+            <br />
+            <%-- 下方三個按鈕 --%>
+            <div class="pagination justify-content-md-center">
+                <input type="button" id="sendButton" value="送出" onclick="sendData();"
+                       style="height: 50px; width: 100px; background-color:#4CAF50; color: #fff; font-weight:bold"/>
+                <input type="reset" value="清除" onclick="clearText();"
+                       style="height: 50px; width: 100px; background-color:#999999; color: #000000; font-weight:bold"/>
+                <input type="button" value="一鍵輸入" onclick="enter();"
+                       style="height: 50px; width: 100px; background-color:#FFD966; color: #000000; font-weight:bold"/>
+            </div>
+        </form:form>
     </div>
+</div>
+<footer >
     <p id="contactBox" class="author">Made 2022 © by EEIT137 Team 1</p>
 </footer>
 
@@ -306,7 +333,112 @@ function toolPage() {
 }
 </script>
 
+<script>
+    //---------客戶回報區----------------
+    function enter() {
+        $("#name").val("王小明");
+        $("#email").val("mingming11@gmail.com");
 
+        $("#subject").val("服務真方便，期待回購!");
+    }
+
+    function clearText() {
+        $("#name").val('');
+        $("#email").val('');
+        $("#subject").val('');
+    }
+
+    $(document).ready(function() {
+        console.log("ready!");
+        $("#sendButton").click(function(){
+            if($("#name").val()==""){
+                alert("您未填寫姓名");
+                eval("document.form1['name'].focus()");
+            }else if($("#email").val()==""){
+                alert("您未填寫Email");
+                eval("document.form1['email'].focus()");
+            }else if($("#customRadioInline1").val()==""){
+                alert("您未選擇類別");
+                eval("document.form1['customRadioInline1'].focus()");
+            }else if($("#subject").val()==""){
+                alert("您未填寫內容");
+                eval("document.form1['subject'].focus()");
+            }else{
+                document.form1.submitData();
+            }
+        });
+    });
+
+    function sendData() {
+        var ele = document.getElementsByName('customRadioInline1');
+        var checkedRadio = '';
+        for (i = 0; i < ele.length; i++) {
+            if (ele[i].checked) {
+                checkedRadio = ele[i].value;
+            }
+        }
+        var submitData = {
+            "Id" : "",
+            "cstm_name" : $("#name").val(),
+            "cstm_email" : $("#email").val(),
+            "problem_Type" : checkedRadio,
+            "problem_Text" : $("#subject").val(),
+
+        };
+
+        var ajaxRequest = $.ajax({
+            type : "POST",
+            url : "/customerService/add",
+            dataType : "json",
+            data : JSON.stringify(submitData), //formdata1 + '&' + formdata2
+            contentType : "application/json;charset=utf-8",
+            // 				async : false,
+            // 				cache : false,
+            // 				contentType : false,
+            // 				processData : false,
+        });
+
+        ajaxRequest.done(function(response)
+        {
+            if (response == true) {
+                alert("送出成功");
+                self.location= "/customerService";
+            } else {
+                alert("送出失敗，請重新輸入");
+            }
+        });
+
+    }
+
+
+    function queryMessageHistory(){
+        var email = $("#email").val();
+        location.href = "/customerService/query/" + email;
+// 			var queryData = {
+// 					"email" : email,
+// 				};
+
+// 			var ajaxRequest2 = $.ajax({
+// 				type : "POST",
+// 				url : "/customerService/query",
+// 				dataType : "json",
+// 				data : JSON.stringify(queryData), //formdata1 + '&' + formdata2
+// 				contentType : "application/json;charset=utf-8",
+// 			// 				async : false,
+// 			// 				cache : false,
+// 			// 				contentType : false,
+// 			// 				processData : false,
+// 			});
+
+// 			ajaxRequest2.done(function(response){
+// 				console.log("post ok");
+// 				console.log(response);
+
+// 				$(document.body).text(response);
+// 			});
+    }
+
+</script>
 
 
 </body>

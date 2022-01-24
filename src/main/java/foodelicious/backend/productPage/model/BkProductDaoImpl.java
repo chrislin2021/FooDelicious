@@ -1,14 +1,29 @@
 package foodelicious.backend.productPage.model;
 
 import foodelicious.backend.productPage.repository.BkProductRepository;
+import foodelicious.backend.productPage.repository.BkShopCartRepository;
+import foodelicious.backend.productPage.service.BkProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import foodelicious.backend.productPage.model.BkProduct;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BkProductDaoImpl implements BkProductDao{
 
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    @Autowired
+    private BkShopCartRepository bkShopCartRepository;
+
+    @Autowired
     private BkProductRepository bkProductRepository;
 
     public BkProductDaoImpl(BkProductRepository bkProductRepository) {
@@ -73,8 +88,16 @@ public class BkProductDaoImpl implements BkProductDao{
         }
     }
 
+
     @Override
     public String delete(Integer productId) {
+
+        List<BkShoppingCar> car = bkShopCartRepository.findByProductId(productId);
+
+        if(car != null){
+            bkShopCartRepository.deleteAll(car);
+        }
+
         bkProductRepository.deleteById(productId);
         return "資料刪除成功";
     }

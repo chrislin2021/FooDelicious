@@ -72,3 +72,8 @@ h1{
 .total{
     text-align: right;
 }
+
+figure img{
+    width: 450px;
+}
+
