@@ -286,14 +286,14 @@ p {
 					value="Orders"> <label class="custom-control-label"
 					for="customRadioInline1">訂單問題</label> <input type="radio"
 					id="customRadioInline1" name="customRadioInline1"
-					class="custom-control-input" value="Return/Maintenance"> <label
+					class="custom-control-input" value="ReturnMaintenance"> <label
 					class="custom-control-label" for="customRadioInline1">退換貨/維修</label>
 				<input type="radio" id="customRadioInline1"
 					name="customRadioInline1" class="custom-control-input"
 					value="Member"> <label class="custom-control-label"
 					for="customRadioInline1">會員相關</label> <input type="radio"
 					id="customRadioInline1" name="customRadioInline1"
-					class="custom-control-input" value="Refund/Receipt"> <label
+					class="custom-control-input" value="RefundReceipt"> <label
 					class="custom-control-label" for="customRadioInline1">退款/發票</label>
 				<input type="radio" id="customRadioInline1"
 					name="customRadioInline1" class="custom-control-input"

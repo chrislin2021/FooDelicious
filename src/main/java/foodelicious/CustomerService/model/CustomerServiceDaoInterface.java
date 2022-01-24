@@ -10,6 +10,7 @@ public interface CustomerServiceDaoInterface {
 	
 	public boolean deleteProblem(Long Id);
 
-	public List<CustomerService> queryProblem(String email);
+	public List<CustomerService> queryProblem(String email, String ptype);
 
+	public CustomerService getItem(Long Id);
 }

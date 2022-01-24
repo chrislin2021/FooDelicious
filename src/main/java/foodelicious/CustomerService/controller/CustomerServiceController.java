@@ -68,11 +68,37 @@ public class CustomerServiceController {
 	
 	@GetMapping("/query/{email}") //查詢留言
 	public String queryProblem(@PathVariable(value = "email", required = false) String email, Model model) { 
-		var cslist = customerServiceServiceImpl.queryProblem(email);
-		model.addAttribute("abc", cslist);
-//		System.out.println(cslist);
-//		System.out.println("hello");
+		var cslist = customerServiceServiceImpl.queryProblem(email, "");
+		model.addAttribute("cslist", cslist);
 		return "app.MessageBoard";
+	}
+	
+	@GetMapping("/reply/{ptype}") //
+	public String reply(@PathVariable(value = "ptype", required = false) String ptype, Model model) { 
+		System.out.println("Hi");
+		var cslist = customerServiceServiceImpl.queryProblem("", ptype);
+		model.addAttribute("cslist", cslist);
+		System.out.println(cslist);
+		return "app.ReplyPage";
+	}
+	
+	@GetMapping("/reply") //
+	public String reply2(Model model) { 
+		System.out.println("Hi");
+		var cslist = customerServiceServiceImpl.queryProblem("", "");
+		model.addAttribute("cslist", cslist);
+		System.out.println(cslist);
+		return "app.ReplyPage";
+	}
+	
+	@ResponseBody
+	@PostMapping("/saveResponseMessage") //
+	public boolean saveResponseMessage(@RequestBody Map<String, String> params) { 
+		var updateObject = customerServiceServiceImpl.getItem(Long.parseLong(params.get("Id")));
+		updateObject.setResponseMessage(params.get("responseMessage"));
+		// updateObject.setProblem_postTime(LocalDateTime.now());
+		
+		return customerServiceServiceImpl.updateProblem(updateObject);
 	}
 	
 	@ResponseBody
@@ -84,22 +110,10 @@ public class CustomerServiceController {
 	@ResponseBody
 	@PostMapping("/update") //編輯留言
 	public boolean updateProblem(@RequestBody Map<String, String> params) { 
-		var updateObject = new CustomerService();
-		updateObject.setId(Long.parseLong(params.get("Id")));
-		updateObject.setCstm_name(params.get("cstm_name"));
-		updateObject.setCstm_email(params.get("cstm_email"));
-		updateObject.setProblem_Type(params.get("problem_Type"));
+		var updateObject = customerServiceServiceImpl.getItem(Long.parseLong(params.get("Id")));
 		updateObject.setProblem_Text(params.get("problem_Text"));
 		updateObject.setProblem_postTime(LocalDateTime.now());
+		
 		return customerServiceServiceImpl.updateProblem(updateObject);
 	}
-	
-	//按送出後同步發送email到客服信箱
-//	@GetMapping("/mailto")
-//	@ResponseBody
-	public String hithere() {
-		//mailService.prepareAndSend("user's email", "email subject");
-		return "Mail Sent Successfully";
-	}
-    	
 }

@@ -27,10 +27,15 @@ public class CustomerService_Service implements CustomerService_ServiceImpl{
 		return answer;
 	}
 
-	public List<CustomerService> queryProblem(String email) {
-		var queryAnswer = customerServiceDao.queryProblem(email);
+	public List<CustomerService> queryProblem(String email, String ptype) {
+		var queryAnswer = customerServiceDao.queryProblem(email, ptype);
 		return queryAnswer;
-	}	
+	}
+	
+	public CustomerService getItem(Long Id) {
+		var item = customerServiceDao.getItem(Id);
+		return item;
+	}
 
 	public boolean deleteProblem(Long Id) {
 		var deleteAnswer = customerServiceDao.deleteProblem(Id);

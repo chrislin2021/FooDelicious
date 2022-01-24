@@ -53,6 +53,11 @@ public class CustomerService implements Serializable {
 	@Column(name = "problem_Text")
 	private String problem_Text;
 	
+	@NotBlank(message="內容不可為空白")
+	@Size(max = 500, message = "內容不得多於500個字")
+	@Column(name = "responseMessage")
+	private String responseMessage;
+	
 	@Column(name = "problem_postTime")
 	private LocalDateTime problem_postTime;
 	
@@ -157,7 +162,11 @@ public class CustomerService implements Serializable {
 		
 	}
 
+	public String getResponseMessage() {
+		return responseMessage;
+	}
 
-
-	
+	public void setResponseMessage(String responseMessage) {
+		this.responseMessage = responseMessage;
+	}
 }

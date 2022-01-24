@@ -271,7 +271,7 @@ h1{
 	<br />
 
         <!--Another Comment With replies-->
-        <c:forEach var="message" items="${abc}">
+        <c:forEach var="message" items="${cslist}">
         <div class="comments-container">
             <div class="body">
 
@@ -280,20 +280,79 @@ h1{
                         客戶姓名：${message.getCstm_name()}
                         <br />
                         問題類型：${message.getProblem_Type()}
-                        <br />
-                        <label id="customerProblemText${message.getId()}">問題內容：${message.getProblem_Text()}</label>
-                        <input type=hidden id="labelId${message.getId()}" value="${message.getProblem_Text()}"></input>
+                        <br />問題內容：
+                        <label id="customerProblemText${message.getId()}">${message.getProblem_Text()}</label>
+                        <input hidden='hidden' class="col-md-10" id="message${message.getId()}" value="${message.getProblem_Text()}"></input>
+                        <input hidden='hidden' id="email${message.getId()}" value="${message.getCstm_email()}"></input>
                         <br />
                         留言時間：${message.getProblem_postTime()}
+                        <br />
+                        客服回覆：${message.getResponseMessage()}
                     
                     <div class="comment">
-                        <button onclick="showCommentEditor()">編輯留言</button>
-                    	<button onclick="showComment()">刪除留言</button>                     
+                        <c:if test='${message.getResponseMessage() == Null}'>
+	                        <button id="editMessage${message.getId()}" onclick="hiddenOnOff(${message.getId()})">編輯留言</button>
+	                    	<button onclick="deleteComment(${message.getId()})">刪除留言</button> 
+                        </c:if>                    
                     </div>
                 </div>
             </div>
         </div>
         </c:forEach>
 
+	<script>
+		function deleteComment(id) {
+			var data = {
+				"Id" : id,
+			};
+			
+			var ajaxRequest = $.ajax({
+				type : "POST",
+				url : "/customerService/delete",
+				dataType : "json",
+				data : JSON.stringify(data),
+				contentType : "application/json;charset=utf-8",
+			});
+			
+			ajaxRequest.done(function(response){
+				if (response == true) {
+					alert("成功");						
+					self.location = "/customerService/query/" + $('#email'+id).val();
+				} else {
+					alert("失敗");
+				}
+			});
+		}
+	
+		function hiddenOnOff(id){
+			if ($('#message'+id).is(":hidden")) { // check labelId is hidden
+				$('#message'+id).removeAttr('hidden');
+				$('#customerProblemText'+id).attr("hidden",true);
+				$('#editMessage'+id).text('Update');
+			} else {
+				var submitData = {
+					"Id" : id,
+					"problem_Text" : $('#message'+id).val(),
+				};
+				
+				var ajaxRequest = $.ajax({
+					type : "POST",
+					url : "/customerService/update",
+					dataType : "json",
+					data : JSON.stringify(submitData),
+					contentType : "application/json;charset=utf-8",
+				});
+				
+				ajaxRequest.done(function(response){
+					if (response == true) {
+						alert("成功");						
+						self.location = "/customerService/query/" + $('#email'+id).val();
+					} else {
+						alert("失敗");
+					}
+				});
+			}
+		}
+	</script>
 </body>
 </html>

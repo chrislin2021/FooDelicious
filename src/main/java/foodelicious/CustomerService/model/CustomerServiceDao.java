@@ -38,18 +38,45 @@ public class CustomerServiceDao implements CustomerServiceDaoInterface {
 	private EntityManager em;
 	
 	@Override
-	public List<CustomerService> queryProblem(String email) {
+	public List<CustomerService> queryProblem(String email, String ptype) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         
         CriteriaQuery<CustomerService> cq = cb.createQuery(CustomerService.class); 
 
         Root<CustomerService> root = cq.from(CustomerService.class); 
 
-        Predicate predEmail = cb.equal(root.get("cstm_email"), email);
-        cq.where(predEmail); 
+        if (email != "")
+        {
+            Predicate predEmail = cb.equal(root.get("cstm_email"), email);
+            cq.where(predEmail);
+        } else {
+        	Predicate predResponseMessage = cb.isNull(root.get("responseMessage"));
+            cq.where(predResponseMessage);
+        }
+        
+        if (ptype != "")
+        {
+            Predicate predPtype = cb.equal(root.get("problem_Type"), ptype);
+            cq.where(predPtype);
+        } 
 
         TypedQuery<CustomerService> tq = em.createQuery(cq);
         return tq.getResultList();
+	}
+	
+	@Override
+	public CustomerService getItem(Long Id) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        
+        CriteriaQuery<CustomerService> cq = cb.createQuery(CustomerService.class); 
+
+        Root<CustomerService> root = cq.from(CustomerService.class); 
+
+        Predicate predId = cb.equal(root.get("Id"), Id);
+        cq.where(predId); 
+
+        TypedQuery<CustomerService> tq = em.createQuery(cq);
+        return tq.getSingleResult();
 	}
 
 	public boolean updateProblem(CustomerService customerService) {

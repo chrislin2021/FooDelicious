@@ -17,56 +17,268 @@
 	href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap"
 	rel="stylesheet">
 <script src="../../js/jquery-3.6.0.min.js"></script>
+
 <style>
 * {
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
 }
 
-#container {
-	width: 500px;
-	height: 500px;
+/* Style inputs */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
 }
 
-#sendMessage {
-	width: 500px;
-	height: 50px;
-	line-height: 50px;
-	margin-bottom: 30px;
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
 }
 
-#content {
-	width: 500px;
-	height: 400px;
-	border: 1px solid #808080;
-	overflow: scroll;
+input[type=submit]:hover {
+  background-color: #45a049;
 }
 
-#messColumn {
-	width: 300px;
+/* Style the container/contact section */
+.container {
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 10px;
 }
 
-input[type=text], textarea {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
-	margin-top: 0px;
-	margin-bottom: 15px;
-	resize: vertical;
+/* Create two columns that float next to eachother */
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
 }
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+	.column, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+/* ########################################### */
+/*                 Global                      */
+/* ########################################### */
+html{
+
+    font-family: 'Titillium Web', sans-serif;
+    background-color:rgb(0,0,0);
+    color:#FFFFFF;
+}
+
+h1{
+    font-size:40px;
+	font-weight: bolder;
+	float:right;
+}
+
+/* posts table's head  */
+.table-head{
+    display: flex;
+}
+
+.table-head div{
+    padding: 5px;
+    margin: 2px;
+    background-color: #B4A7D6;
+    font-weight: bold;
+}
+
+.table-head .status{
+    flex: 5%;
+}
+
+.table-head .subjects{
+    flex: 70%;
+}
+
+.table-head .replies{
+    flex: 10%;
+}
+
+.table-head .last-reply{
+    flex: 15%;
+}
+
+/* posts table's body  */
+
+.table-row{
+    display: flex;
+}
+
+.table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
+    padding: 5px;
+    margin: 2px;
+    background-color: #FFD966;
+}
+
+.table-row .status{
+    flex: 5%;
+    font-size: 30px;
+    text-align: center;
+}
+
+.table-row .subjects{
+    flex: 70%;
+}
+
+.table-row .replies{
+    flex: 10%;
+}
+
+.table-row .last-reply{
+    flex: 15%;
+}
+
+/* Pagination for post*/
+
+.pagination{
+    padding: 20px;
+    font-size: 15px;
+}
+
+.pagination a{
+    color: #fff;
+    margin-inline: 5px;
+    padding: 5px 10px;
+    border: solid 0.5px #fff;
+}
+
+.pagination a:hover{
+    opacity: 0.5;
+}
+
+.note{
+    background-color:#FFD966;
+    padding: 20px;
+    display: block;
+}
+
+.note span{
+    font-size: 20px;
+    margin-block: 5px;
+}
+
+.head{
+    display: flex;
+    background-color: #FFD966;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.authors{
+    flex: 20%;
+}
+
+.content{
+    flex: 50%;
+    font-size:24px;
+    margin:15px;
+}
+
+
+.body{
+    display: flex;
+    background-color: #FFFFFF;
+    box-shadow:2px 2px #979A9A;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border:1px solid #7B7D7D;
+}
+
+.body .authors .username{
+    font-size: 20px;
+}
+
+.body .authors img{
+    max-width: 50px;
+    max-height: 80px;
+}
+
+.body .content .comment button{
+    border:none;
+    border-radius: 4px;
+    margin: 5px;
+    padding:12px 20px;
+    font-color: #FFFFFF;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    background-color: #4CAF50;
+}
+
+.body .content .comment button:hover{
+    background-color:#45a049;
+}
+
+.body .content {
+	position:float-right;
+}
+/* comment section */
+.comment-area{
+    margin-bottom:50px;
+}
+
+.comment-area textarea{
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    margin-block: 10px;
+}
+
+.comments-container {
+	width:75%;
+	position:relative;
+}
+
+.comment-area input{
+    float: right;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.comment-area input:hover {
+    border: solid 1px #000000;}
+
+
 </style>
 
 </head>
 <body>
-
-<body>
 	<h2>問答紀錄</h2>
 	<br />
-
+		<select id='ptype'>
+		    <option value="">All</option>
+		    <option value="Orders">訂單問題</option>
+		    <option value="ReturnMaintenance">退換貨/維修</option>
+		    <option value="Member">會員相關</option>
+		    <option value="RefundReceipt">退款/發票</option>
+		    <option value="Other">其他</option>
+		</select>
         <!--Another Comment With replies-->
-        <c:forEach var="message" items="${abc}">
+        <c:forEach var="message" items="${cslist}">
         <div class="comments-container">
             <div class="body">
 
@@ -77,78 +289,48 @@ input[type=text], textarea {
                         問題類型：${message.getProblem_Type()}
                         <br />
                         <label>問題內容：${message.getProblem_Text()}</label>
-                        <input value="${message.getProblem_Text()}"></input>
                         <br />
                         留言時間：${message.getProblem_postTime()}
                     
                     <div class="comment">
-                    	<textarea id="replyToCustomer" name="replyText" placeholder="請站在客戶角度並理性回應"
-					     rows="8" required></textarea> 
-                        <button onclick="">編輯留言</button>
-                        <button onclick="location.href = 'http://localhost:8080/customerService/ReplyPage';">客服回覆</button>
+                    	<input class="col-md-8" id="replyToCustomer${message.getId()}" placeholder="請站在客戶角度並理性回應" required></input> 
+                        <button class="col-md-3" onclick="replyMessage(${message.getId()})">客服回覆</button>
                     </div>
                 </div>
             </div>
         </div>
         </c:forEach>
-	
-		<script>
-
-		function enter() {
-			//$("#name").val("王小明");
-			//$("#email").val("mingming11@gmail.com");
-			$("#reply_Text").val("謝謝您的留言，很抱歉造成困擾，我們立即幫您處理!");
-		}
-		function clearText() {
-			$("#name").val(" ");
-			$("#email").val(" ");
-			$("#subject").val(" ");
-		}
-
-		$(document).ready(function() {
-			console.log("ready!");
-		});
-
-		function sendData() {
-				var ele = document.getElementsByName('customRadioInline1');
-				var checkedRadio = ''; 
-				for (i = 0; i < ele.length; i++) {
-					if (ele[i].checked) {
-						checkedRadio = ele[i].value;	
-					}
-				}
-			var submitData = {
-				"Id" : "",
-				"cstm_name" : $("#name").val(),
-				"cstm_email" : $("#email").val(),
-				"problem_Type" : checkedRadio,
-				"problem_Text" : $("#subject").val(),
-
+        
+	<script>
+		function replyMessage(id){
+			var data = {
+				"Id" : id,
+				"responseMessage" : $('#replyToCustomer'+id).val(),
 			};
-
+			
 			var ajaxRequest = $.ajax({
 				type : "POST",
-				url : "/customerService/add2",
+				url : "/customerService/saveResponseMessage",
 				dataType : "json",
-				data : JSON.stringify(submitData), //formdata1 + '&' + formdata2
+				data : JSON.stringify(data),
 				contentType : "application/json;charset=utf-8",
-			// 				async : false,
-			// 				cache : false,
-			// 				contentType : false,
-			// 				processData : false,
 			});
-
-			ajaxRequest.done(function(response) {
+			
+			ajaxRequest.done(function(response){
 				if (response == true) {
-					alert("送出成功");
-					self.location= "/customerService";
+					alert("成功");						
+					self.location = "/customerService/reply/";
 				} else {
-					alert("送出失敗，請重新輸入");
+					alert("失敗");
 				}
 			});
-
-			var formdata = $("#SearchFm").serialize();
 		}
+		
+		$('#ptype').change(function() {
+			ptype = $('#ptype').val();
+			
+			self.location = "/customerService/reply/" + ptype;
+		});
 	</script>
-</body>
+	</body>
 </html>
