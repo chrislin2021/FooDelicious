@@ -22,13 +22,14 @@
         .typeName {
             width: 100px;
         }
-        #pushArticle{
+        
+        #pushArticle {
             margin: 0.75em auto;
         }
     </style>
 
     <br />
-   
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-8">
@@ -40,7 +41,7 @@
                         <option>食譜分享</option>
                     </select> <input type="text" class="form-control" aria-label="Text input with dropdown button" id="titleKeyWord">
                     <button class="btn btn-outline-secondary" type="button" id="articleSearch">查詢文章</button>
-                    
+
                 </div>
                 <div class="topDIV">
                     <ul class="nav nav-tabs">
@@ -185,7 +186,7 @@
                             }));
                             //                             messageData += "<p>" + articles.userName + " : " + text + "</p>";
                             //                             $(".messageArea").html(messageData);
-                            
+
                         }
                     };
                 }
@@ -204,13 +205,7 @@
                 ArticleData += "<th scope='row'>" + (i + 1) + "</th>";
                 ArticleData += "<td class='typeName'>" + ShareData.title[i].article_clallify + "</td>";
                 ArticleData += "<td><a href='/intIDFindAll/" + ShareData.title[i].share_id + "'>" + ShareData.title[i].article_title + "</a></td>";
-                ArticleData += "<td>";
-                if (ShareData.session == ShareData.title[i].fk_account_id) {
-                    ArticleData += "<button onclick='delfun(" + ShareData.title[i].share_id + ")'>刪除</button>"
-                } else {
-                    ArticleData += "<a hidden onclick='return confirm('確認刪除?');' href='#'>刪除</a>"
-                }
-                ArticleData += "</td>";
+
                 ArticleData += "</tr>";
             }
             $("#articleArea").html(ArticleData);
@@ -295,6 +290,7 @@
             nowPage = page;
         });
         //資料刪除
+        /*
         function delfun(id) {
             if (confirm("確定刪除此筆紀錄嗎 ?")) {
                 //var form = document.forms[0];
@@ -311,7 +307,7 @@
 
                 //window.location.href = "/goShareArea";
             }
-        }
+        }*/
         //上面分類選擇器
         $("#navTotal").click(function() {
             searchShareDate("/totalArticleData", "GET");
@@ -414,8 +410,8 @@
     </script>
 
     <script>
-        $("#pushArticle").click(function(){
+        $("#pushArticle").click(function() {
             //console.log("YOOOOOOOOOOOOO");
-            window.location.href="/postArticle";
+            window.location.href = "/postArticle";
         })
     </script>
