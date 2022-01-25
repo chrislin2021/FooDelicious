@@ -183,6 +183,10 @@ h1{
 	position:relative;
 }
 
+.comments-container .body .content{
+	font-size:20px;
+}
+
 .comment-area input{
     float: right;
     padding: 10px;
