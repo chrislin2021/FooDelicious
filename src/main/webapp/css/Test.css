@@ -469,4 +469,20 @@ form.addProduct{
     box-shadow: 2px 5px 5px 0px gray;
 }
 
+/* 分析報表頁面 */
+
+#report1{
+    float: left;
+    margin-left: 50px;
+    box-shadow: 0 10px 50px 0px gray;
+    border-radius: 10px;
+}
+
+#report2{
+    margin-left: 120px;
+    
+    display: inline-block;
+    box-shadow: 0 10px 50px 1px gray;
+    border-radius: 10px;
+}
 

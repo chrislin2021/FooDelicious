@@ -86,6 +86,14 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		return cbkProductDaoInterface.saveProduct(product);
 	}
 	
+
+
+	@Override
+	public List<Product> getCompanyTopTenSellingProduct(Long companyId) {
+		
+		return cbkProductDaoInterface.getCompanyTopTenSellingProduct(companyId);
+	}
+	
 	
 //=============Detail Dao============================================================
 	
@@ -166,6 +174,8 @@ public class CompanyBackEndService implements CompanyBackEndServiceInterface {
 		
 		return cbkOrderDaoInterface.findAllOrderByASC();
 	}
+
+
 
 
 	

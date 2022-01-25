@@ -71,7 +71,7 @@
 				<ul class="sub-menu">
 					<li><a class="link_name" href="#">分析報表</a></li>
 					<li><a href="/companyBestSeller">暢銷商品</a></li>
-					<li><a href="#">銷售總額</a></li>
+					
 				</ul>
 			</li>
 			<li><a href="#" class="problem"> <i class='bx bx-error-alt'></i>
@@ -161,7 +161,7 @@
 					<input type="button" id="submitComplete"
 						class="btn btn-outline-danger" value="submit">
 				</form>
-
+			<button type="button" onclick="autofill()">一鍵輸入</button>
 			</div>
 
 		</div>
@@ -170,6 +170,11 @@
 
 
 	<script>
+	
+	function autofill(){
+		$('#problem-content').val("商品下架有問題，需要緊急處理因為商品庫存不夠無法應付需求。")
+		$('#problemsCat').val("0")
+	}
 //     =============傳送問題回報資料=============
     	<!-- 確認問題回報單沒有空白 -->
     $("#submitComplete").on("click",function(){

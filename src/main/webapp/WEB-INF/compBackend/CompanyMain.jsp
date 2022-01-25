@@ -24,7 +24,7 @@
 				<div class="row gx-5 gy-3">
 					<div class="col-12 col-lg-9">
 
-						<div>&emsp;&emsp;&emsp;我們提供來自於歐洲新鮮直運的產品，以及台灣國產的限量廚具用品。</div>
+						<div>&emsp;&emsp;&emsp;我們提供來自於歐洲新鮮直運的產品，以及的限量平價廚具用品。</div>
 					</div>
 					<!--//col-->
 
@@ -49,9 +49,7 @@
 			<div class="row g-4 settings-section">
 				<div class="col-12 col-md-4">
 					<h3 class="section-title">General</h3>
-					<div class="section-intro">
-						基本資訊 <a href="help.html">Learn more</a>
-					</div>
+					
 				</div>
 				<div class="col-12 col-md-8">
 					<div class="app-card app-card-settings shadow p-3 mb-5 bg-body rounded">

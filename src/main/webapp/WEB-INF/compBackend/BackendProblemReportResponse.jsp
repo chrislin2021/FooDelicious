@@ -38,12 +38,17 @@
 				class="btn btn-outline-danger" value="submit">
 
 		</div>
+		<button type="button" onclick="autofill()">一鍵輸入</button>
 
 	</div>
 
 
 
 	<script>
+		function autofill(){
+			$('#problem-response').val("會馬上為您處理。請給2-3個小時的排除問題時間。")
+		}
+	
 		//=============抓取另一頁傳來的資料=============
 		let problemString = localStorage.getItem("problem");
 		//將字串json化

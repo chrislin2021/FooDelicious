@@ -14,6 +14,7 @@ public interface CBKOrderRepository extends JpaRepository<OrdersDetailBean, Inte
 	
 	@Query(value = "SELECT * FROM orders_detail ORDER BY orders_id DESC", nativeQuery = true)
 	List<OrdersDetailBean> findAllOrderByASC();
-	
+
+
 
 }

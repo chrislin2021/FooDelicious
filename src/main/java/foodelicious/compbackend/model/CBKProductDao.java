@@ -161,6 +161,13 @@ public class CBKProductDao implements CBKProductDaoInterface {
 
 	}
 
+
+	@Override
+	public List<Product> getCompanyTopTenSellingProduct(Long companyId) {
+		
+		return cbkProdRepository.getCompanyTopTenSellingProduct(companyId);
+	}
+
 	// 刪除商品 (好像跟某個table有衝突 無法刪除)
 //	@Override
 //	public String deleteProduct(Long productId) {

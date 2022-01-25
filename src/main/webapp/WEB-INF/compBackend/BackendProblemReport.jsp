@@ -61,6 +61,7 @@
 				<ul id="page" class="pagination justify-content-center"></ul>
 			</nav>
 		</div>
+		
 	</section>
 	
 	<!-- 問題回報地跳出視窗 -->
@@ -88,10 +89,11 @@
 					<input type="text" hidden id="companyName" value='${userName}'>
 					<input type="button" id="submitComplete"
 						class="btn btn-outline-danger" value="submit">
+					
 				</form>
-
+				
 			</div>
-
+			
 		</div>
 	</div>
 
@@ -129,7 +131,7 @@
 		//回覆前先查詢出資料
 		$("#problemReport").on("click", "#responseBtn", function() {
 			let id = $(this).attr("data-id");
-			alert("id：" + id);
+			//alert("id：" + id);
 			
 			$.ajax({
 				url : "/companyProblems/find/" + id,

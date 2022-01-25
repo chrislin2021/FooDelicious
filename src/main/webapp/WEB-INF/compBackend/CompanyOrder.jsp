@@ -5,13 +5,14 @@
 
 <body>
 	<h1 class="tableName titleName2">
-		訂單列表<span class="smallFont">Order List</span><span id="date" class="smallFont2"></span>
+		訂單列表<span class="smallFont">Order List</span><span id="date"
+			class="smallFont2"></span>
 	</h1>
 	<div class="searchArea">
 		<input class="keyWord keyWord1 searchBox" type="text"
-			name="accKeyWord" placeholder="請輸入關鍵字"> <input id="searchAcc"
-			class="keyWord btn btn-outline-secondary searchBox2 " type="button"
-			value="查詢" />
+			name="accKeyWord" placeholder="請輸入訂單編號.."> <input
+			id="searchAcc" class="keyWord btn btn-outline-secondary searchBox2 "
+			type="button" value="查詢" />
 	</div>
 	<ul id="selectPage" class="nav nav-tabs">
 		<li class="nav-item"><a id="all" class="nav-link active"
@@ -21,7 +22,8 @@
 	</ul>
 	<section class="content">
 		<div class="col-xs-12">
-			<table id="" class='table table-striped table-hover' style="text-align:center">
+			<table id="" class='table table-striped table-hover'
+				style="text-align: center">
 				<thead>
 					<tr>
 						<th class="col table-warning smalW">訂單編號</th>
@@ -42,12 +44,14 @@
 			<nav aria-label="Page navigation example ">
 				<ul id="page" class="pagination justify-content-center"></ul>
 			</nav>
-			
+
 
 		</div>
 		<input type="text" hidden id="companyId" value='${userID}'>
 	</section>
-	
+
+
+
 	<script>
 	var today = new Date();
 	var month = today.getMonth()+1;
@@ -99,6 +103,8 @@
 		
 		let allFoundCompanyOrders = new Array();
 		let allOrderDetailsLength;
+		let allOrderIds = new Array();
+		let allOrderIdsUnique = allOrderIds.filter((element, index, array) => array.indexOf(element) === index);
 		
 
 		window.onload = function() {
@@ -113,6 +119,8 @@
 					for (let j = 0; j < totalOrders; j++) {
 						if (allCompanyOrderDetails[j].product.productCompanyId == companyId) {
 							allFoundCompanyOrders.push(allCompanyOrderDetails[j]);
+							allOrderIds.push(allCompanyOrderDetails[j].ordersId)
+						
 						}
 					}
 					allOrderDetailsLength = allFoundCompanyOrders.length;
@@ -186,10 +194,51 @@
 
 				})
 	</script>
-	
+
+	<script>
+    //=============訂單編號查詢功能=============
+    $("#searchAcc").on("click",function(){
+    	
+       let searchOrder = new Array();	
+       let orderId = $(".searchBox").val();
+       
+       let txt;
+       for(let k = 0; k < allOrderDetailsLength; k++){
+    	   
+		   if(allFoundCompanyOrders[k].ordersId == orderId){
+			   txt += "<tr>";
+               txt += "<td class='align-middle'>"+allFoundCompanyOrders[k].ordersId+"</td>"
+               txt += "<td class='align-middle'>"+allFoundCompanyOrders[k].ordersBean.member.memberMail+"</td>"
+               txt += "<td class='align-middle'>"+allFoundCompanyOrders[k].ordersBean.ordersName+"</td>"
+               txt += "<td class='align-middle'>"+allFoundCompanyOrders[k].ordersBean.ordersPhone+"</td>"
+               txt += "<td class='align-middle'>"+allFoundCompanyOrders[k].ordersBean.ordersAddress+"</td>"
+               txt += "<td class='align-middle'>"+allFoundCompanyOrders[k].product.productName+"</td>"
+               txt += "<td class='align-middle'>"+allFoundCompanyOrders[k].product.productId+"</td>"
+               
+               let quantity = allFoundCompanyOrders[k].quantity;
+               txt += "<td class='align-middle'>"+quantity+"</td>"
+               let sumPrice = quantity*(allFoundCompanyOrders[k].product.productPrice);
+               
+               txt += "<td class='align-middle'>"+sumPrice+"</td>"
+               
+               let newDate = new Date(allFoundCompanyOrders[k].ordersBean.ordersDate);
+               let register = newDate.toLocaleString();
+               
+               txt += "<td class='align-middle'>"+register+"</td>"
+   	           txt += '</tr>'
+			   
+		    }
+	    }
+       $("#page").html("");
+       $("#orders").html(txt);
+     
+
+    });
+</script>
 
 
-	
+
+
 	<script>
 		//=============分頁程式=============
 		function pages(maxNum, dataSource) { //輸入單頁最大筆數和資料來源
@@ -317,7 +366,7 @@
 			});
  		}
 	</script>
-	
+
 	<script>
     //=============顯示功能=============
     function showData(startItem,endItem,dataSource){
@@ -342,8 +391,8 @@
             let register = newDate.toLocaleString();
             
             txt += "<td class='align-middle'>"+register+"</td>"
-            txt += '</tr>'
-        }
+	            txt += '</tr>'
+	        }
         $("#orders").html(txt);
     }
 
