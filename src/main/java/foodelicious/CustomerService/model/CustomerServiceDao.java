@@ -1,5 +1,6 @@
 package foodelicious.CustomerService.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -44,22 +45,31 @@ public class CustomerServiceDao implements CustomerServiceDaoInterface {
         CriteriaQuery<CustomerService> cq = cb.createQuery(CustomerService.class); 
 
         Root<CustomerService> root = cq.from(CustomerService.class); 
+        var list = new ArrayList<Predicate>();
 
         if (email != "")
         {
             Predicate predEmail = cb.equal(root.get("cstm_email"), email);
-            cq.where(predEmail);
+           // cq.where(predEmail);
+            list.add(predEmail);
+            
         } else {
+        	System.out.println("test response " + email);
         	Predicate predResponseMessage = cb.isNull(root.get("responseMessage"));
-            cq.where(predResponseMessage);
+            //cq.where(predResponseMessage);
+            list.add(predResponseMessage);
+
         }
         
         if (ptype != "")
         {
             Predicate predPtype = cb.equal(root.get("problem_Type"), ptype);
-            cq.where(predPtype);
-        } 
+            //cq.where(predPtype);
+            list.add(predPtype);
 
+        } 
+        Predicate[] arr = new Predicate[list.size()];
+        cq.where(list.toArray(arr));
         TypedQuery<CustomerService> tq = em.createQuery(cq);
         return tq.getResultList();
 	}
