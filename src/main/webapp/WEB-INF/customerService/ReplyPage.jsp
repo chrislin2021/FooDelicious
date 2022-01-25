@@ -89,64 +89,7 @@ h1{
     font-size:40px;
 	font-weight: bolder;
 	float:right;
-}
-
-/* posts table's head  */
-.table-head{
-    display: flex;
-}
-
-.table-head div{
-    padding: 5px;
-    margin: 2px;
-    background-color: #B4A7D6;
-    font-weight: bold;
-}
-
-.table-head .status{
-    flex: 5%;
-}
-
-.table-head .subjects{
-    flex: 70%;
-}
-
-.table-head .replies{
-    flex: 10%;
-}
-
-.table-head .last-reply{
-    flex: 15%;
-}
-
-/* posts table's body  */
-
-.table-row{
-    display: flex;
-}
-
-.table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
-    padding: 5px;
-    margin: 2px;
-    background-color: #FFD966;
-}
-
-.table-row .status{
-    flex: 5%;
-    font-size: 30px;
-    text-align: center;
-}
-
-.table-row .subjects{
-    flex: 70%;
-}
-
-.table-row .replies{
-    flex: 10%;
-}
-
-.table-row .last-reply{
-    flex: 15%;
+	padding-right:335px;
 }
 
 /* Pagination for post*/
@@ -218,18 +161,20 @@ h1{
 
 .body .content .comment button{
     border:none;
-    border-radius: 4px;
+    border-radius: 6px;
     margin: 5px;
     padding:12px 20px;
     font-color: #FFFFFF;
     font-weight: bold;
     cursor: pointer;
     float: right;
-    background-color: #4CAF50;
+    background-color: #FDD835;
+    height:60px;
+    width:140px
 }
 
 .body .content .comment button:hover{
-    background-color:#45a049;
+    background-color:#FFF176;
 }
 
 .body .content {
@@ -262,22 +207,21 @@ h1{
 .comment-area input:hover {
     border: solid 1px #000000;}
 
-
 </style>
 
 </head>
 <body>
-	<h2>問答紀錄</h2>
+	<h1>問答紀錄(客服專用)</h1>
 	<br />
-		<select id='ptype'>
-		    <option value="">All</option>
+		<select id='ptype' style="height:50px; width:980px; font-size:18px">
+		    <option value="">全部類別</option>
 		    <option value="Orders">訂單問題</option>
 		    <option value="ReturnMaintenance">退換貨/維修</option>
 		    <option value="Member">會員相關</option>
 		    <option value="RefundReceipt">退款/發票</option>
 		    <option value="Other">其他</option>
 		</select>
-        <!--Another Comment With replies-->
+        
         <c:forEach var="message" items="${cslist}">
         <div class="comments-container">
             <div class="body">
@@ -293,8 +237,8 @@ h1{
                         留言時間：${message.getProblem_postTime()}
                     
                     <div class="comment">
-                    	<input class="col-md-8" id="replyToCustomer${message.getId()}" placeholder="請站在客戶角度並理性回應" required></input> 
-                        <button class="col-md-3" onclick="replyMessage(${message.getId()})">客服回覆</button>
+                    	<input class="col-md-8" id="replyToCustomer${message.getId()}" placeholder="您的回應" required></input> 
+                        <button class="col-md-2" onclick="replyMessage(${message.getId()})">提交回覆</button>
                     </div>
                 </div>
             </div>

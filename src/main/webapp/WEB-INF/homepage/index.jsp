@@ -327,6 +327,8 @@ p {
     </div>
     <br/>
     <br/>
+  </div>
+<footer>
     <p id="contactBox" class="author">Made 2022 © by EEIT137 Team 1</p>
 </footer>
 

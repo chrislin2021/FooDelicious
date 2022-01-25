@@ -89,65 +89,9 @@ h1{
     font-size:40px;
 	font-weight: bolder;
 	float:right;
+	padding-right:350px;
 }
 
-/* posts table's head  */
-.table-head{
-    display: flex;
-}
-
-.table-head div{
-    padding: 5px;
-    margin: 2px;
-    background-color: #B4A7D6;
-    font-weight: bold;
-}
-
-.table-head .status{
-    flex: 5%;
-}
-
-.table-head .subjects{
-    flex: 70%;
-}
-
-.table-head .replies{
-    flex: 10%;
-}
-
-.table-head .last-reply{
-    flex: 15%;
-}
-
-/* posts table's body  */
-
-.table-row{
-    display: flex;
-}
-
-.table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
-    padding: 5px;
-    margin: 2px;
-    background-color: #FFD966;
-}
-
-.table-row .status{
-    flex: 5%;
-    font-size: 30px;
-    text-align: center;
-}
-
-.table-row .subjects{
-    flex: 70%;
-}
-
-.table-row .replies{
-    flex: 10%;
-}
-
-.table-row .last-reply{
-    flex: 15%;
-}
 
 /* Pagination for post*/
 
@@ -186,10 +130,6 @@ h1{
     font-size: 15px;
 }
 
-.authors{
-    flex: 20%;
-}
-
 .content{
     flex: 50%;
     font-size:24px;
@@ -207,19 +147,10 @@ h1{
     border:1px solid #7B7D7D;
 }
 
-.body .authors .username{
-    font-size: 20px;
-}
-
-.body .authors img{
-    max-width: 50px;
-    max-height: 80px;
-}
-
 .body .content .comment button{
     border:none;
     border-radius: 4px;
-    margin: 5px;
+    margin: 10px;
     padding:12px 20px;
     font-color: #FFFFFF;
     font-weight: bold;
@@ -269,8 +200,13 @@ h1{
 <body>
 	<h1>問答紀錄</h1>
 	<br />
-
-        <!--Another Comment With replies-->
+	<br/>
+	<button onclick="location.href = 'http://localhost:8080/customerService/reply';" 
+	id="goReplyPage" class="float-left submit-button" style="width:100px; height:50px;
+	background-color:#FFCA28; font-size:20px; font-weight:bold; color:#000000; 
+	border-radius:6px; float:right">客服回覆</button> 
+	<br/>
+	<br/>
         <c:forEach var="message" items="${cslist}">
         <div class="comments-container">
             <div class="body">
@@ -292,7 +228,7 @@ h1{
                     <div class="comment">
                         <c:if test='${message.getResponseMessage() == Null}'>
 	                        <button id="editMessage${message.getId()}" onclick="hiddenOnOff(${message.getId()})">編輯留言</button>
-	                    	<button onclick="deleteComment(${message.getId()})">刪除留言</button> 
+	                    	<button onclick="deleteComment(${message.getId()})" style="background-color:#E0E0E0">刪除留言</button> 
                         </c:if>                    
                     </div>
                 </div>
