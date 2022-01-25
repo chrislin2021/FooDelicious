@@ -197,6 +197,9 @@ h1{
 .comment-area input:hover {
     border: solid 1px #000000;}
 
+.rebtn{
+    margin-right: 350px;
+}
 
 </style>
 
@@ -205,11 +208,13 @@ h1{
 	<h1>問答紀錄</h1>
 	<br />
 	<br/>
+    <br/>
 	<button onclick="location.href = 'http://localhost:8080/customerService/reply';" 
-	id="goReplyPage" class="float-left submit-button" style="width:100px; height:50px;
+	id="goReplyPage" class="rebtn float-left submit-button" style="width:100px; height:50px;
 	background-color:#FFCA28; font-size:20px; font-weight:bold; color:#000000; 
 	border-radius:6px; float:right">客服回覆</button> 
 	<br/>
+    <br/>
 	<br/>
         <c:forEach var="message" items="${cslist}">
         <div class="comments-container">
