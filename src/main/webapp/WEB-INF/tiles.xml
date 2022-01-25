@@ -174,11 +174,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/CustomerService.jsp" />
 	</definition>
-	<definition name="app.MessageBoard" extends="app.default4">
+	<definition name="app.MessageBoard" extends="app.default5">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/MessageBoard.jsp" />
 	</definition>
-	<definition name="app.ReplyPage" extends="app.default4">
+	<definition name="app.ReplyPage" extends="app.default5">
 		<put-attribute name="content"
 			value="/WEB-INF/customerService/ReplyPage.jsp" />
 	</definition>
@@ -334,6 +334,11 @@
 
 	<definition name="app.default4"
 		template="/WEB-INF/layout/default4.jsp">
+		<put-attribute name="title" value="spring boot demo" />
+	</definition>
+
+	<definition name="app.default5"
+				template="/WEB-INF/layout/default5.jsp">
 		<put-attribute name="title" value="spring boot demo" />
 	</definition>
 
