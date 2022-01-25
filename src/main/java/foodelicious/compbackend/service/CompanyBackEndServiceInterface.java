@@ -66,6 +66,10 @@ public interface CompanyBackEndServiceInterface {
 
 	public String updateCompanyResponse(Integer problemId, ProblemsBean problem);
 
+	public List<Product> getCompanyTopTenSellingProduct(Long companyId);
+
+
+
 	
 
 	

@@ -133,6 +133,8 @@ public class CompanyBackEndRestController {
 		
 	return cbkServiceInterface.findAllOrderByASC();
 	}
+	
+
 
 	
 	
@@ -184,6 +186,14 @@ public class CompanyBackEndRestController {
 	@PutMapping("/companyProblemReport/response/{problemId}")
 	public String updateProblemResponse(@PathVariable Integer problemId, @RequestBody ProblemsBean problem) {
 		return cbkServiceInterface.updateCompanyResponse(problemId, problem);
+	}
+	
+	//=========CompanyBestSeller.jsp===================
+	
+	@GetMapping("/companyBestSeller/topten")
+	public List<Product> getCompanyTopTenSellingProduct(HttpSession session){
+		Long companyId = (Long)session.getAttribute("userID");
+		return cbkServiceInterface.getCompanyTopTenSellingProduct(companyId);
 	}
 	
 	

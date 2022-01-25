@@ -25,7 +25,9 @@ public class CBKOrderDao implements CBKOrderDaoInterface {
 		List<OrdersDetailBean> allOrderDetails = cbkOrderRepository.findAllOrderByASC();
 		return allOrderDetails;
 	}
-	
+
+
+
 	
 
 }

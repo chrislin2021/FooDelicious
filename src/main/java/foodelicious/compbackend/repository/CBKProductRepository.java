@@ -30,4 +30,7 @@ public interface CBKProductRepository extends JpaRepository<Product, Long> {
 	@Query(value = "SELECT * FROM productNum WHERE product_name LIKE %?% AND categories =? AND product_company_id =?", nativeQuery = true)
 	List<Product> findByNameAndType(String productName, Integer categories,Long productCompanyId);
 
+	@Query(value = "SELECT TOP 10  *FROM productNum WHERE product_company_id = ? ORDER BY product_sales_figures DESC", nativeQuery = true)
+	List<Product> getCompanyTopTenSellingProduct(Long companyId);
+
 }

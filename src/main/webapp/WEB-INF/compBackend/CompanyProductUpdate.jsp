@@ -148,7 +148,7 @@
     //=============更新資料=============
     $("#comUpdateBtn").on("click",function(){
         let comProductId = $("#comProductId").val();
-        alert($("#productStatus").val());
+        //alert($("#productStatus").val());
      
         let updatedProduct = {
             "productCategories": $("#categories").val(),

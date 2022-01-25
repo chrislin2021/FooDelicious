@@ -111,7 +111,7 @@ public class CBKProblemDao implements CBKProblemDaoInterface {
 			SimpleDateFormat dateFormatAll = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			
 			 mailService.prepareAndSend(mail, "[FooDelicious 好煮意]\t" + dateFormatAll.format(timeStamp) + "\t已回覆您的問題",
-						 "\n問題：" + updatedProblemResponse.getProblemContent() + "\n回覆："
+						 "\n廠商問題：" + updatedProblemResponse.getProblemContent() + "\n後台回覆："
 						+ updatedProblemResponse.getProblemResponse());
 			
 			return "問題回覆成功";

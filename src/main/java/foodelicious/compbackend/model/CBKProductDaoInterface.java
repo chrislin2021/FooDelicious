@@ -30,5 +30,9 @@ public interface CBKProductDaoInterface {
 	boolean saveProduct(Product product);
 
 	
+	//給top 5 product 分析報表
+	List<Product> getCompanyTopTenSellingProduct(Long companyId);
+
+	
 
 }
