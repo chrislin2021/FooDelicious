@@ -89,7 +89,13 @@ h1{
     font-size:40px;
 	font-weight: bolder;
 	float:right;
-	padding-right:335px;
+	padding-right:330px;
+}
+
+.message-count {
+	font-size:25px;
+	font-weight: bolder;
+	padding-left:780px;
 }
 
 /* Pagination for post*/
@@ -213,15 +219,20 @@ h1{
 <body>
 	<h1>問答紀錄(客服專用)</h1>
 	<br />
+	<br/>
+		<div class="message-count">
+        	共有：${cslist.size()}  筆資料
+        </div>
+    <br/>
 		<select id='ptype' style="height:50px; width:980px; font-size:18px">
-		    <option value="">全部類別</option>
+			<option value="" disabled selected hidden>請選擇類別</option>	
 		    <option value="Orders">訂單問題</option>
 		    <option value="ReturnMaintenance">退換貨/維修</option>
 		    <option value="Member">會員相關</option>
 		    <option value="RefundReceipt">退款/發票</option>
 		    <option value="Other">其他</option>
 		</select>
-        
+   
         <c:forEach var="message" items="${cslist}">
         <div class="comments-container">
             <div class="body">
@@ -237,7 +248,7 @@ h1{
                         留言時間：${message.getProblem_postTime()}
                     
                     <div class="comment">
-                    	<input class="col-md-8" id="replyToCustomer${message.getId()}" placeholder="您的回應" required></input> 
+                    	<input class="col-md-8" id="replyToCustomer${message.getId()}" placeholder="請在此輸入回應" required></input> 
                         <button class="col-md-2" onclick="replyMessage(${message.getId()})">提交回覆</button>
                     </div>
                 </div>
