@@ -46,28 +46,9 @@
 				success : function(topTenProducts) {
 
 					let topTenProductsList = topTenProducts;
-					alert(topTenProducts.length);
+					//alert(topTenProducts.length);
 
-					let data1 = topTenProductsList[0].quantity;
-					let data2 = topTenProductsList[1].quantity;
-					let data3 = topTenProductsList[2].quantity;
-					let data4 = topTenProductsList[3].quantity;
-					let data5 = topTenProductsList[4].quantity;
-					let data6 = topTenProductsList[5].quantity;
-					let data7 = topTenProductsList[6].quantity;
-					let data8 = topTenProductsList[7].quantity;
-					let data9 = topTenProductsList[8].quantity;
-				
-
-					let data11 = topTenProductsList[0].productSalesFigures;
-					let data12 = topTenProductsList[1].productSalesFigures;
-					let data13 = topTenProductsList[2].productSalesFigures;
-					let data14 = topTenProductsList[3].productSalesFigures;
-					let data15 = topTenProductsList[4].productSalesFigures;
-					let data16 = topTenProductsList[5].productSalesFigures;
-					let data17 = topTenProductsList[6].productSalesFigures;
-					let data18 = topTenProductsList[7].productSalesFigures;
-					let data19 = topTenProductsList[8].productSalesFigures;
+			
 					
 
 					//alert(topTenProductsList[0].productSalesFigures)
@@ -75,7 +56,7 @@
 					//=========統計數據=========
 					let topTenListHtml = "";
 					for (let i = 0; i < topTenProductsList.length; i++) {
-						alert(topTenProductsList[i].productId)
+						//alert(topTenProductsList[i].productId)
 						topTenListHtml += '<tr><th scope="row">' + (i + 1)
 								+ '</th>';
 						topTenListHtml += '<td>'

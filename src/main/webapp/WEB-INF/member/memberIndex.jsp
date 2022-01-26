@@ -231,6 +231,7 @@
 					$("#backend").prop("style","visibility","visible");
 					$("#company").prop("style","visibility","visible");
 				}else if(status=="company"){
+					$("#backend").prop("style","visibility","visible");
 					$("#company").prop("style","visibility","visible");
 				}
 			}
