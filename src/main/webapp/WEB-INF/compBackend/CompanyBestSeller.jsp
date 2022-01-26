@@ -46,7 +46,7 @@
 				success : function(topTenProducts) {
 
 					let topTenProductsList = topTenProducts;
-					alert(topTenProducts.length);
+					//alert(topTenProducts.length);
 
 			
 					
@@ -56,7 +56,7 @@
 					//=========統計數據=========
 					let topTenListHtml = "";
 					for (let i = 0; i < topTenProductsList.length; i++) {
-						alert(topTenProductsList[i].productId)
+						//alert(topTenProductsList[i].productId)
 						topTenListHtml += '<tr><th scope="row">' + (i + 1)
 								+ '</th>';
 						topTenListHtml += '<td>'
