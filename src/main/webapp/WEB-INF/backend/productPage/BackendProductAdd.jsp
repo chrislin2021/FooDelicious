@@ -151,14 +151,14 @@
 		$("#auto").click(function() {
 			$("#productCategories").val('1');
 			$("#productCategoriesName").val('蔬果');
-			$("#productName").val('台灣 高麗菜');
+			$("#productName").val('台灣新鮮高麗菜');
 			$("#productCompany").val('好蔬果');
 			$("#productCompanyId").val('22');
 			$("#productPrice").val('45');
 // 			$("#productPics").val('7.jpg');
 			$("#productContent").val('平地高麗菜外觀則為較扁的平頭狀。 口感：滋味甜脆、中肋細小，清炒、生食、涼拌醃漬、製作菜卷等都很適合。');
 			$("#productStock").val('200');
-			$("#productInsertDate").val('2022-01-27 09:40:28.000');
+			$("#productInsertDate").val('2022-01-27 09:41:28.000');
 			$("#productStatus").val('1');
 			$("#productKeywords").val('菜');
 		})
