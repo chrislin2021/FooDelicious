@@ -64,7 +64,6 @@
 
     $("#products").on("click","#delBtn",function() {
         let deleteId = $(this).data("id");
-        alert(deleteId);
         if (confirm("確定要刪除嗎")) {
             $.ajax({
                 url: "/bkproducts/delete/"+deleteId,
