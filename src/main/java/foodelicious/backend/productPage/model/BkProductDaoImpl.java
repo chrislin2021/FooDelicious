@@ -1,5 +1,7 @@
 package foodelicious.backend.productPage.model;
 
+import foodelicious.backend.orderPage.model.BkOrderDetail;
+import foodelicious.backend.orderPage.repository.BkOrderDetailRepository;
 import foodelicious.backend.productPage.repository.BkProductRepository;
 import foodelicious.backend.productPage.repository.BkShopCartRepository;
 import foodelicious.backend.productPage.service.BkProductService;
@@ -22,6 +24,9 @@ public class BkProductDaoImpl implements BkProductDao{
 
     @Autowired
     private BkShopCartRepository bkShopCartRepository;
+
+    @Autowired
+    private BkOrderDetailRepository bkOrderDetailRepository;
 
     @Autowired
     private BkProductRepository bkProductRepository;
@@ -93,9 +98,10 @@ public class BkProductDaoImpl implements BkProductDao{
     public String delete(Integer productId) {
 
         List<BkShoppingCar> car = bkShopCartRepository.findByProductId(productId);
-
-        if(car != null){
+        List<BkOrderDetail> orderDetails = bkOrderDetailRepository.findByProductId(productId);
+        if(car != null || orderDetails !=null){
             bkShopCartRepository.deleteAll(car);
+            bkOrderDetailRepository.deleteAll(orderDetails);
         }
 
         bkProductRepository.deleteById(productId);

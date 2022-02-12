@@ -64,13 +64,30 @@
 
     $("#products").on("click","#delBtn",function() {
         let deleteId = $(this).data("id");
+        alert(deleteId);
         if (confirm("確定要刪除嗎")) {
             $.ajax({
                 url: "/bkproducts/delete/"+deleteId,
                 type: "DELETE",
                 success: function(msg){
                     alert(msg);
-                    window.location.href="/backend/product";
+                    // window.location.href="/backend/product";
+                    const productUrl = "http://localhost:8080/bkproducts"
+
+                    $.ajax({
+                        url: productUrl,
+                        type: "GET",
+                        success: function(productData){
+                            $("#products").html("");
+                            $("#page").html("");
+                            let num = productData.length;
+                            if(num >= 10){
+                                pages(10,productData);
+                            }else{
+                                pages(num,productData);
+                            }
+                        }
+                    });
                 }
             });
         }
