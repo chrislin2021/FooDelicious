@@ -1,9 +1,11 @@
-package foodelicious.backend.memberpage.model;
+package foodelicious.backend.memberpage.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import foodelicious.backend.memberpage.dao.BkMemberDao;
+import foodelicious.backend.memberpage.model.BkMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -54,11 +56,6 @@ public class BkMemberDaoImpl implements BkMemberDao {
             return "資料更新失敗，查無此筆資料";
         }
     }
-//    @Override
-//    public void delete(Long memberId){
-//        bkcrud.deleteById(memberId);
-//
-//    }
 
     @Override
     public String delete(Long memberId){

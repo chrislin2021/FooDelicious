@@ -1,21 +1,20 @@
-package foodelicious.backend.memberpage.service;
+package foodelicious.backend.memberpage.service.impl;
 
 
 import java.util.List;
 
+import foodelicious.backend.memberpage.service.BkMemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import foodelicious.backend.memberpage.model.BkMember;
-import foodelicious.backend.memberpage.model.BkMemberDao;
+import foodelicious.backend.memberpage.dao.BkMemberDao;
 
 @Service
 public class BkMemberServiceImpl implements BkMemberService {
 
-    private final BkMemberDao bkMemberDao;
-
-    public BkMemberServiceImpl(BkMemberDao bkMemberDao) {
-        this.bkMemberDao = bkMemberDao;
-    }
+    @Autowired
+    private BkMemberDao bkMemberDao;
 
     @Override
     public List<BkMember> getAllData() {

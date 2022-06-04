@@ -93,7 +93,7 @@
 <script>
     //=============抓取另一頁傳來的資料=============
     let memberString = localStorage.getItem("memberData")
-    //將字串json化
+    //將json字串轉回js物件
     let memberData = JSON.parse(memberString);
     //填入資料
     $("#memberId").val(memberData.memberId);
@@ -133,7 +133,6 @@
             "discount": $("#discount").val()
         };
         let memberString = JSON.stringify(memberObj);
-        // alert(memberString);
 
         $.ajax({
             url:"http://localhost:8080/bkmembers/update/"+memberID,

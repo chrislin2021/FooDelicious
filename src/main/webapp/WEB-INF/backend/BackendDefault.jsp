@@ -24,7 +24,7 @@
 
 <div class="row">
     <div class="navbar col-md-12 rightBrand justify-content-end">
-        <ul class="nav nav-pills ">
+        <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link text-white" href="/"><i class="fas fa-utensils fork"></i></a>
             </li>
@@ -43,7 +43,7 @@
     <ul class="list-group list-group-flush functionBar">
 
         <!-- 會員列表 -->
-        <li id="member" class="list-group-item funName">
+        <li id="member" class="list-group-item ">
             <a href="/backend/member" style="text-decoration: none">
                 <i class="text-secondary far fa-address-card"></i>
                 <span class="listName">會員管理</span>
@@ -52,7 +52,7 @@
 
 
         <!-- 商品管理 -->
-        <li id="ProductList" class="list-group-item funName">
+        <li id="ProductList" class="list-group-item ">
             <a href="/backend/product" style="text-decoration: none">
                 <i class="text-secondary fas fa-archive"></i>
                 <span class="listName">商品管理</span>
@@ -60,7 +60,7 @@
         </li>
 
         <!-- 商品新增 -->
-        <li id="ProductAdd" class="list-group-item funName">
+        <li id="ProductAdd" class="list-group-item ">
             <a href="/backend/productAdd" style="text-decoration: none">
                 <i class="text-secondary fas fa-gift"></i>
                 <span class="listName">增加商品</span>
@@ -79,7 +79,7 @@
 
 
         <!-- 文章管理 -->
-        <li id="ArticleList" class="list-group-item funName">
+        <li id="ArticleList" class="list-group-item ">
             <a href="/backend/article" style="text-decoration: none">
                 <i class="text-secondary fas fa-scroll"></i>
                 <span class="listName">文章管理</span>
@@ -94,7 +94,7 @@
                 <span class="listName">分析報表</span>
                 <div class="collapse ulArea" id="collapseExample">
                     <ul id="collapseOne" class="accordion-collapse collapse show">
-                        <li id="AgeDistribution" class="colLi funName">
+                        <li id="AgeDistribution" class="colLi ">
                             <a class="colLi" href="/backend/report/age" style="text-decoration: none">
                                 <i class="fa fa-circle-o"></i>
                                 <span class="listName">年齡層分析</span>
@@ -106,7 +106,7 @@
                                 <span class="listName">暢銷商品</span>
                             </a>
                         </li>
-                        <li id="ArticleTop10" class="colLi funName">
+                        <li id="ArticleTop10" class="colLi ">
                             <a class="colLi" href="/backend/report/article" style="text-decoration: none">
                                 <i class="fa fa-circle-o"></i>
                                 <span class="listName">熱門文章</span>
@@ -125,14 +125,14 @@
 
 
         <!-- 管理員名單 -->
-        <li id="AdminList" class="list-group-item funName">
+        <li id="AdminList" class="list-group-item ">
             <a href="/backend/manager" style="text-decoration: none">
                 <i class="text-secondary fas fa-crown"></i> <span class="listName">管理名單</span>
             </a>
         </li>
 
         <!-- 問題回報 -->
-        <li id="QuestList" class="list-group-item funName">
+        <li id="QuestList" class="list-group-item ">
             <a href="/backend/problemReport" style="text-decoration: none">
                 <i class="text-secondary fas fa-question-circle"></i> <span class="listName">問題回報</span>
             </a>

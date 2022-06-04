@@ -19,7 +19,7 @@
 </form>
 
 <section class="content">
-        <div class="col-xs-12">
+        <div class="col-sm-12">
             <table id="" class='table table-striped table-hover '>
                 <thead>
                 <tr>
@@ -45,25 +45,7 @@
             </nav>
     </div>
 </section>
-</div>
-<script>
-    //=============刪除確認=============
 
-    $("#members").on("click","#delBtn",function() {
-        let deleteId = $(this).data("id");
-
-        if (confirm("確定要刪除嗎")) {
-            $.ajax({
-                url: "/bkmembers/delete/"+deleteId,
-                type: "DELETE",
-                success: function(msg){
-                    alert(msg);
-                    window.location.href="/backend/member";
-                }
-            });
-        }
-    })
-</script>
 <script>
     //=============E-mail關鍵字查詢功能=============
     $("#searchAcc").on("click",function(){
@@ -73,9 +55,6 @@
            type: "GET",
            success:function(accountAll){
                let num = accountAll.length;
-               let accountData = accountAll;
-               //載入顯示功能
-               showData(0, num, accountData);
 
                //載入分頁功能
                if(num>=10){
@@ -100,7 +79,7 @@
             url:"http://localhost:8080/bkmembers/update/"+data,
             type: "GET",
             success:function(accountAll){
-                //將json字串化
+                //將accountAll轉為json字串
                 let memberString = JSON.stringify(accountAll);
                 //將資料存到localStorage，給另一個頁面使用
                 localStorage.setItem("memberData",memberString);
@@ -134,7 +113,7 @@
     function pages(maxNum, dataSource){ //輸入單頁最大筆數和資料來源
         //=================分頁功能================
         //最大頁數
-        var maxPage;
+        let maxPage;
         //目前顯示頁數
         let nowPage = 0;
         //每頁最大筆數
@@ -142,20 +121,18 @@
         //設定起始編號
         let startItem = 0;
         //設定結束編號
-        let endItem = maxItems;
+        let endItem = maxNum;
 
         //讀回資料時就先顯示
         showData(startItem, endItem, dataSource);
 
         //計算出最大頁數。
         if(dataSource.length % maxItems == 0){
-            maxPage = Math.floor(dataSource.length / maxItems);
-            // alert("最大頁數1：" + maxPage);
+            maxPage = dataSource.length / maxItems;
         }else{
             maxPage = (Math.floor(dataSource.length / maxItems))+1;
-            // alert("最大頁數2：" + maxPage);
         }
-        // alert("最大頁數：" + maxPage);
+
         //動態生成頁數
         let pageHtml = `<li class="page-item previous disabled pageMove"><a class="page-link">上一頁</a></li>`;
         for(let i=0; i<maxPage; i++){
@@ -168,13 +145,13 @@
         //綁定click事件
         $("#page").on("click",".page", function(){
             nowPage = ($(this).prop("id"))*1;//強制轉成數字型態
-            $(".pageNum").prop("class","page-item page pageNum")
-            $(this).prop("class","page-item page pageNum active")
-            // alert("nawPage："+nowPage+ "資料型態："+typeof nowPage);
+            $(".pageNum").prop("class","page-item page pageNum")//將所有class有pageNum的都設定為內容值
+            $(this).prop("class","page-item page pageNum active")//將點選的值加入active效果
+
             //恢復上、下頁的功能
             $(".previous").prop("class", "page-item previous");
             $(".next").prop("class", "page-item next");
-            // alert("nowPage："+nowPage+"maxPage："+maxPage);
+
             //計算是否是最後一頁
             if((nowPage)+1 >= maxPage){
                 startItem = nowPage * maxItems;
@@ -188,7 +165,7 @@
                 startItem = nowPage * maxItems;
                 endItem = startItem + maxItems;
             }
-            // alert("開始："+startItem+"結束："+endItem);
+
             showData(startItem, endItem, dataSource);
         });
 
@@ -259,7 +236,6 @@
             txt += "<td class='align-middle'>"+dataSource[i].memberBirth+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberPhone+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].memberAddress+"</td>"
-
             txt += "<td class='align-middle'>"+dataSource[i].memberCoin+"</td>"
             txt += "<td class='align-middle'>"+dataSource[i].discount+"</td>"
             let newDate = new Date(dataSource[i].registerDate);
@@ -280,6 +256,25 @@
         $("#members").html(txt);
     }
 
+</script>
+
+<script>
+    //=============刪除確認=============
+
+    $("#members").on("click","#delBtn",function() {
+        let deleteId = $(this).data("id");
+
+        if (confirm("確定要刪除嗎")) {
+            $.ajax({
+                url: "/bkmembers/delete/"+deleteId,
+                type: "DELETE",
+                success: function(msg){
+                    alert(msg);
+                    window.location.href="/backend/member";
+                }
+            });
+        }
+    })
 </script>
 </body>
 

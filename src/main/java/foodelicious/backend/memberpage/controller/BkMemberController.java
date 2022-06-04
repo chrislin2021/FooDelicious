@@ -2,7 +2,6 @@ package foodelicious.backend.memberpage.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import foodelicious.backend.memberpage.model.BkMember;
-import foodelicious.backend.memberpage.repository.BkCrudRepository;
 import foodelicious.backend.memberpage.service.BkMemberService;
 
 
@@ -19,9 +17,6 @@ import foodelicious.backend.memberpage.service.BkMemberService;
 public class BkMemberController {
 
     private BkMemberService bkMemberService;
-
-    @Autowired
-    private BkCrudRepository bkCrudRepository;
 
     public BkMemberController(BkMemberService bkMemberService) {
         this.bkMemberService = bkMemberService;
